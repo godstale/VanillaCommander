@@ -1,8 +1,8 @@
 <p align="center"><img src="./design/brand/fortress-banner.svg" alt="Fortress — 내 PC에 맞는 로컬 LLM을 찾는 테스트 &amp; 모니터링 워크벤치" width="100%" /></p>
 
-# Fortress
+# VanillaCommander
 
-**Fortress**는 완전한 로컬 프라이버시를 보장하는 **Ollama 기반 로컬 AI 에이전트 데스크탑 워크스테이션**입니다.  
+**VanillaCommander**는 **Fortress**를 기반으로 만드는 **file commander 앱**입니다.  
 Tauri 2와 React 19로 구축되었으며, 외부 프레임워크 오버헤드(No LangChain) 없이 자체 경량 런타임(`pi` 아키텍처)을 통해 자율 에이전트 루프, 실시간 시각화, 파일 조작 도구, 그리고 하드웨어/추론 모니터링을 단일 데스크탑 앱에서 통합 제공합니다.
 
 ---
