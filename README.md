@@ -1,4 +1,5 @@
-<p align="center"><img src="./design/brand/fortress-banner.svg" alt="Fortress — 내 PC에 맞는 로컬 LLM을 찾는 테스트 &amp; 모니터링 워크벤치" width="100%" /></p>
+<p align="center"><img src="./design/brand/app-banner.jpg" alt="VanillaCommander" width="100%" /></p>
+<p align="right"><sub>사진: <a href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%ED%9D%91%EB%B0%B1-%EC%A7%81%EC%84%A0-GA6WtJ7DtSo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>의 <a href="https://unsplash.com/ko/@molnj?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jocelyn Morales</a></sub></p>
 
 # VanillaCommander
 
