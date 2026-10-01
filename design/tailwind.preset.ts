@@ -1,9 +1,9 @@
-// Tailwind v3 preset for the Fortress "Midnight Rampart" theme.
+// Tailwind v3 preset for the VanillaCommander "Vanilla" theme.
 // Pair it with design/theme.css (the CSS variables) — see DESIGN.md §6 for porting steps.
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
-const fortressPreset = {
+const themePreset = {
   darkMode: ['class'],
   theme: {
     extend: {
@@ -80,18 +80,29 @@ const fortressPreset = {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        // Workspace shell layers: darker toward the top/left edge of the window.
+        titlebar: 'hsl(var(--titlebar))',
+        activitybar: 'hsl(var(--activitybar))',
+        panel: 'hsl(var(--panel))',
+        tabbar: 'hsl(var(--tabbar))',
+        editor: 'hsl(var(--editor))',
       },
       fontFamily: {
-        sans: ['"Geist Variable"', '"IBM Plex Sans KR"', ...defaultTheme.fontFamily.sans],
+        sans: [
+          '"Geist Variable"',
+          '"IBM Plex Sans KR"',
+          ...defaultTheme.fontFamily.sans,
+        ],
         mono: ['"JetBrains Mono Variable"', ...defaultTheme.fontFamily.mono],
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        card: '1.25rem',
       },
     },
   },
 } satisfies Partial<Config>;
 
-export default fortressPreset;
+export default themePreset;
