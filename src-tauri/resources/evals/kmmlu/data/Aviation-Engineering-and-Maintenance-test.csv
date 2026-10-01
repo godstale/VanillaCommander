@@ -1,0 +1,1001 @@
+question,answer,A,B,C,D,Category,Human Accuracy
+"날개의 공기역학적 중심이 비행기의 무게중심 앞 0.05에 있고, 공기역학적 중심주위의 키놀이 모멘트계수는 -0.016이다. 양력계수가 0.46인 경우 무게중심 주위의 모멘트 계수는 얼마인가? (단, 공기역학적 중심과 무게중심은 같은 수평선상에 놓여 있다.)",4,0.45,0.05,0.0065,0.007,Aviation Engineering and Maintenance,0.0667
+"9기통 성형기관의 캠 로브수가 4개이며, 크랭크축의 회전속도가 2400rpm 일 떄 캠 판(cam plate)의 회전 속도는 몇 rpm인가?",2,300,400,1200,2400,Aviation Engineering and Maintenance,0.0667
+30°선회각으로 정상 수평 선회비행을 하는 비행기에 걸리는 하중배수는 얼마인가?,4,0.8,1.0,1.15,1.35,Aviation Engineering and Maintenance,0.0713999999999999
+헬리콥터 회전날개 깃의 면적을 정하는데 있어서 고려해야 할 사항이 아닌 것은?,4,무게,비용,정지비행시의 성능,재질,Aviation Engineering and Maintenance,0.0713999999999999
+항공용 왕복기관에서 윤활유를 채취하여 윤활유 분광시험을 한 결과 알루미늄합금 입자가 검출되었다면 어느 부분에 이상이 있는 것인가?,2,마스터 로드 실의 파손,피스톤 및 기관내부의 결함,밸브 스프링 및 베어링의 파손,부싱 및 밸브가이드 부분의 마멸,Aviation Engineering and Maintenance,0.0769
+프리즈 밸런스(frise balance)를 올바르게 설명한 것은?,2,조종면의 앞전을 길게 하여 조종력을 경감시키는 장치,연동되는 도움날개에서 발생되는 힌지 모멘트가 서로 상쇄되도록 하여 조종력을 경감,조종면의 힌지 모멘트를 감소시켜서 조종력을 0 으로 조정하는 장치,밸런스 역할을 하는 조종면을 플랩의 일부분에 집중시킨 장치,Aviation Engineering and Maintenance,0.0833
+헬리콥터의 진동중 저주파수 진동을 가장 올바르게 표현한 것은?,2,꼬리회전날개 1회전당 한번 일어나는 진동,주회전날개 1회전당 한번 일어나는 진동,꼬리회전날개 1회전당 두번 일어나는 진동,주회전날개 1회전당 두번 일어나는 진동,Aviation Engineering and Maintenance,0.0833
+"1,000kgf의 인장력을 받고 있고 리벳의 지름이 2㎝인 리벳 단면에서의 전단응력은?",4,250(kgf/cm2),318.5(kgf/cm2),330.5(kgf/cm2),350.5(kgf/cm2),Aviation Engineering and Maintenance,0.0833
+항공기 관(Tube)의 연결 계통에서 잦은 분리가 필요한 부분에 사용되는 연결 방식은?,4,플레어(flare)관 접합 방식,플레어리스(flareless) 접합기구 방식,비드(bead)에 의한 연결 방식,스웨이징(swaging)접합 기구 방식,Aviation Engineering and Maintenance,0.0833
+저출력 항공기의 왕복기관에 사용되는 베어링으로 크랭크축 또는 캠축에 주로 사용되는 것은?,4,볼 베어링,롤러 베어링,테이퍼롤러 베어링,평형 베어링,Aviation Engineering and Maintenance,0.0833
+면적이 일정한 날개에서 날개길이를 3배로 하고 양력계수를 1/2 로 줄이면 유도항력계수는 몇 배로 되는가?,4,3/2,2/3,1/12,1/36,Aviation Engineering and Maintenance,0.0833
+수평 비행하는 비행기가 받음각이 일정한 상태에서 고도가 높아지면 속도 V와 필요마력 Pr은 어떤 관계가 되는가?,2,V와 Pr가 감소,V와 Pr가 증가,"V는 증가, Pr는 감소","V는 감소, Pr는 증가",Aviation Engineering and Maintenance,0.0909
+가스터빈기관의 후기연소기에 관한 설명으로 옳은 것은?,2,연료공급은 주연료계통으로부터 공급받아 사용한다.,압력진동 방지를 위해 주름을 잡고 과열방지를 위해 스크리치 라이너를 사용한다.,효과적인 연소를 위해 터빈출구와 후기연소기 입구사이는 노즐구조로 한다.,후기연소기 입구의 속도감소를 위해 터빈 뒤에 테일콘을 장착하여 수축통로가 되도록 한다.,Aviation Engineering and Maintenance,0.0909
+쇠톱(hack saw) 사용법에 대한 설명중 가장 올바른 것은?,4,당길때 절삭되도록 한다.,톱날의 장력은 토큐 렌치로 정확히 주어야 한다.,가공물에 잇날이 최소한 4개이상 접해야 한다.,작업이 끝난후 톱날의 장력을 느슨하게 한 후 보관한다.,Aviation Engineering and Maintenance,0.1
+가스터빈기관의 추력에 영향을 미치는 요인 중 대기온도와 대기 압력에 대한 설명으로 가장 올바른 것은?,3,"대기온도가 증가하면 추력은 증가하고, 대기압이 증가하면 추력은 감소한다.","대기온도가 증가하면 추력은 감소하고, 대기압이 증가하면 밀도가 증가되어 추력이 증가한다.","대기온도가 증가하면 추력은 증가하고, 대기압이 증가하면 추력은 증가한다.","대기온도가 증가하면 추력은 감소하고, 대기압이 증가하면 밀도는 감소하여 추력이 감소한다.",Aviation Engineering and Maintenance,0.1
+비행중 프로펠러의 깃에 작용하는 응력은?,4,"전단응력, 압축응력, 비틀림응력","휨응력, 전단응력, 압축응력","전단응력, 인장응력, 압축응력","휨응력, 인장응력, 비틀림응력",Aviation Engineering and Maintenance,0.1
+헬리콥터의 구조 중 수평안전판과 꼬리회전날개가 부착되는 부분은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),2,파일론,회전날개 테드,테일붐,동체,Aviation Engineering and Maintenance,0.1
+스테인레스강으로 된 재료에 있어 드릴작업을 하려고 하는 경우 DRILL BIT 각도는 얼마로 하여야 하는가?,4,59°,90°,118°,140°,Aviation Engineering and Maintenance,0.1
+실린더의 행정체적이 960㎝3이고 연소실 체적이 160㎝3인 실린더의 압축비는?,2,6,7,8,9,Aviation Engineering and Maintenance,0.1
+가스터빈기관을 장착한 아음속 항공기의 공기 흡입관에서 아음속 공기 흐름 변화를 옳게 설명한 것은?,3,"온도 감소, 압력 감소","온도 상승, 압력 감소","속도 증가, 압력 상승","속도 감소, 압력 상승",Aviation Engineering and Maintenance,0.1052999999999999
+"터보제트 기관에서 저발열량이 12,000㎉ /㎏인 연료를 1초 동안에 0.13㎏씩 소모한다고 할 때, 추력 비연료소비율 (TSFC)은? (단, 진추력(Fn)= 6000kg.m/s2.N, 비행속도(Va)=200m/s)",4,추진효율= 0.76,추진효율= 0.16,추진효율= 0.20,추진효율= 0.08,Aviation Engineering and Maintenance,0.1110999999999999
+헬리콥터의 테일붐에 대한 설명 내용으로 가장 거리가 먼 것은?,4,이 구조는 알루미늄합금과 마그네슘합금으로 만들어 진다.,꼬리회전날개의 구동축은 테일붐 위쪽에 베어링으로 장착되어 덮개로 보호해 주고 있다.,안정판은 수평안정판과 수직안정판으로 구성되며 허니콤으로 되어 있다.,수평안정판은 테일붐 좌.우측에 각각 따로 설치한다.,Aviation Engineering and Maintenance,0.1110999999999999
+가스터빈기관에서 종이로 되어 있는 연료 여과기는?,2,디스크형,카트리지형,스크린형,스크린-디스크형,Aviation Engineering and Maintenance,0.1110999999999999
+"연장공구를 장착한 토크 렌치를 이용하여 볼트를 죌 때 토크 렌치의 유효 길이가 8인치, 연장공구의 유효길이가 7인치, 볼트에 가해져야 할 토크값이 900in-Ib라면 토크렌치의 눈금 지시값은 몇 in-Ib인가?",4,60,90,420,480,Aviation Engineering and Maintenance,0.1110999999999999
+4행정 사이클 기관에서 크랭크축 회전수가 2000rpm일 때 1분 동안 출력행정은 몇 회를 하였는가?,3,4000,2000,1000,500,Aviation Engineering and Maintenance,0.1153999999999999
+스타팅 바이브레이터(Starting Vibrator)의 구성품이 아닌 것은?,3,릴레이(Relay),콘덴서(Condenser),바이브레이터(Vibrator),브레이커 포인트(Breaker Point),Aviation Engineering and Maintenance,0.125
+헬리콥터의 좌우 방향을 조절하는데 사용되는 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),3,꼬리날개,동시 피치 제어간,방향페달,주기적 피치 제어간,Aviation Engineering and Maintenance,0.125
+항공기 부분품 중 일정한 사용시간이 되면 장탈하여 오버홀을 해야 하는 것을 무슨 품목이라 하는가?,4,시간 검사성 품목,시간 안전성 품목,시간 신뢰성 품목,시간 한계성 품목,Aviation Engineering and Maintenance,0.125
+복합소재의 수리 작업 시 압력을 가하는데 가장 효과적인 방법은?,3,숏백,클레코,진공백,스프링 클램프,Aviation Engineering and Maintenance,0.125
+피치 업(pitch up)이 발생 될 수 있는 원인으로 가장 관계가 먼 내용은?,3,뒤젖힘 날개의 날개 끝 실속,뒤젖힘 날개의 비틀림,승강키 효율의 증가,날개의 풍압중심이 앞으로 이동,Aviation Engineering and Maintenance,0.125
+"AN3~AN20으로 분류되고, 재질은 니켈강이며, 인장과 전단하중을 받는 구조 부분에 사용되는 볼트는?",2,아이볼트,클레비스볼트,육각볼트,인터널 렌칭 볼트,Aviation Engineering and Maintenance,0.125
+왕복기관의 실린더 내에서 피스톤이 이동한 거리를 무엇이라고 하는가?,2,보어,행정,사이클,배기량,Aviation Engineering and Maintenance,0.125
+왕복 기관 중 저온으로 작동되는 기관에 저온점화플러그를 사용하였다면 발생하는 현상은?,3,모두 정상적인 작동을 한다.,조기 점화 현상이 나타난다.,스파크플러그에 탄소 찌꺼기가 부착된다.,실린더 내부가 저온이 되어 열소비율이 증가한다.,Aviation Engineering and Maintenance,0.125
+지름이 12cm인 기관피스톤에 35kgf/cm의 가스압력이 작용하면 피스톤에 미치는 힘은 약 kgf 인가?,2,3560,3960,4260,4560,Aviation Engineering and Maintenance,0.125
+복합재료에 사용되는 모재는 어느 것인가?,4,유리섬유,탄소섬유,아라미드,열가소성 수지,Aviation Engineering and Maintenance,0.125
+헬리콥터의 주회전 날개의 회전면과 진행방향이 이루는 각을 무엇이라 하는가?,3,원추각,코닝각,받음각,피치각,Aviation Engineering and Maintenance,0.125
+실린더 안에 있는 연소가스가 피스톤에 작용하여 얻어진 동력을 무슨 마력이라 하는가?,4,축 마력,제동마력,기계마력,지시 마력,Aviation Engineering and Maintenance,0.125
+"큰날개와 꼬리날개에 의한 무게중심 주위의 키놀이모멘트 관계식은? (단, MC.G : 무게중심 주위의 키놀이 모멘트, MC.G WING : 큰날개에 의한 키놀이 모멘트, MC.G TAIL : 꼬리날개에 의한 키놀이 모멘트)",2,MC.G = MC.G WING - MC.G TAIL,MC.G = MC.G WING + MC.G TAIL,MC.G = MC.G WING x MC.G TAIL,MC.G = MC.G WING ÷ MC.G TAIL,Aviation Engineering and Maintenance,0.125
+가스터빈기관의 윤활계통에서 일반적으로 윤활유 압력을 감지하는 곳은?,2,압력펌프 입구,압력펌프 출구,윤활유 탱크입구,윤활유 탱크출구,Aviation Engineering and Maintenance,0.125
+항공기가 이륙하기 위하여 바퀴가 지면에서 떨어지는 시간부터 착륙하여 착지하는 순간까지의 시간으로 정비 분야에서 사용하는 시간은?,4,시험비행(test flight),비행시간(flight time),한계시간(time limit),사용시간(time in service),Aviation Engineering and Maintenance,0.125
+일의 기본단위인 1J과 같은 양을 나타낸 것은?,3,1㎏·m,1㎏/m2,1N·m,1N/m2,Aviation Engineering and Maintenance,0.125
+왕복기관에서 실린더의 압축시험을 할 때 필요한 공기의 압력은 약 몇 psi 인가?,3,60,70,80,90,Aviation Engineering and Maintenance,0.125
+불안전한 조건에서 발생되는 사고와 가장 관계가 먼 것은?,2,작업 상태의 불량,불안전한 습관,건물 상태의 불안정,정돈 불량,Aviation Engineering and Maintenance,0.125
+아르곤이나 헬륨가스 안에서 전극와이어를 일정한 속도로 토치에 공급하여 와이어와 모재 사이에 아크를 발생시켜 나심선을 스프레이 상태로 용융하여 용접을 하는 방법은?,4,아크용접,서브머지드 아크용접,가스용접,불활성가스 금속아크용접,Aviation Engineering and Maintenance,0.125
+항공용 왕복기관에서 기관작동 중 윤활유의 온도가 맞지 않는다면 무엇으로 조절해야 되는가?,4,윤활유 펌프에 있는 온도 조절 나사로 한다.,윤활유 탱크에 있는 온도 조절 나사로 한다.,윤활유 냉각기에 있는 온도 조절 밸브로 한다.,온도 조절 밸브에 있는 조절 나사로 한다.,Aviation Engineering and Maintenance,0.1333
+항공기 정비시 고장 난 부품이나 사용수명이 다되어 점검을 요하는 수리요구 부품에 붙이는 표찰의 색깔은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),4,노란색,빨간색,파란색,초록색,Aviation Engineering and Maintenance,0.1429
+가스터빈기관에 사용되는 원심식 압축기의 주요 구성품이 아닌 것은?,4,디퓨져,임펠러,매니폴드,회전자,Aviation Engineering and Maintenance,0.1429
+제트기관의 연료 노즐은?,2,분사식과 분무식,분무식과 증발식,분사식과 연소식,연소식과 증발식,Aviation Engineering and Maintenance,0.1429
+버펫트(BUFFET)에 대한 설명 내용으로 가장 올바른 것은?,3,박리(Separation)에 대한 효과가 주날개에 작용하여 상승성능을 좋게 한다.,박리(Separation)에 대한 영향이 동체에 작용하여 전진성능을 방해한다.,박리(Separation)에 대한 후류의 영향으로 날개나 꼬리날개를 진동시켜 발생하는 현상이다.,박리(Separation)에 의한 영향으로 최대 항속거리를 유지할 수 있다.,Aviation Engineering and Maintenance,0.1429
+고음만 차음할 수 있는 귀마개는 몇 종 인가?,2,제 1종,제 2종,제 3종,제 4종,Aviation Engineering and Maintenance,0.1429
+연료조절장치(FCU)의 기본 구성요소로 가장 거리가 먼 것은?,2,Computing section,Fuel section,Metering section,Sensing section,Aviation Engineering and Maintenance,0.1429
+흡입밸브가 열리는 시기를 상사점 전 10~25°로 하는 가장 주된 이유는?,3,배기가스가 안으로 들어오는 배출 관성 을 이용하여 출력 효과를 높이기 위하여,배기가스가 밖으로 나가는 배출관성을 이용하여 혼합비를 낮추기 위하여,배기가스가 밖으로 나가는 배출관성을 이용하여 흡입효과를 높이기 위하여,배기가스가 밖으로 나가는 배출관성을 이용하여 배기효과를 높이기 위하여,Aviation Engineering and Maintenance,0.1429
+헬리콥터가 비행기와 같은 고속도를 낼 수 없는 이유로서 가장 거리가 먼 내용은?,4,후퇴하는 깃의 날개끝 실속,후퇴하는 깃뿌리의 역풍범위의 영향,전진하는 깃끝의 마하수 영향,회전하는 날개깃의 수,Aviation Engineering and Maintenance,0.1429
+"실린더의 안지름이 15.5cm, 행정 거리가 0.160m, 실린더수가 6개인 기관의 총 행정 체적은 약 몇 L 인가?",3,14,16,18,20,Aviation Engineering and Maintenance,0.1429
+왕복기관에서 마그네토 점검을 수행할 때 무엇을 점검하여야 하는가?,3,프로펠러 조속기(Propeller governor)점검,연료 혼합비(Fuel mixture ratio)점검,회전수 낙차(RPM drop)점검,기관 진동(Engine vibration)점검,Aviation Engineering and Maintenance,0.1429
+"기체 판금 작업시 두께가 0.2cm인 판재를 굽힘 반지름 40cm로하여 60° 로 굽힐 때 굽힘여유(B.A)는 얼마인가? ( 단, π 는 3으로 계산한다 )",3,35.72cm,31.29cm,40.1cm,20.1cm,Aviation Engineering and Maintenance,0.1429
+이륙 활주 거리를 짧게 하기 위한 방법을 설명한 내용으로 가장 거리가 먼 것은?,4,비행기의 무게가 가벼워야한다.,기관의 추력이 커야한다.,항력이 작은 활주 자세로 이륙한다.,바람을 등지고 이륙한다.,Aviation Engineering and Maintenance,0.1429
+연료가 산소와 화학반응하여 연소한 후 열을 발생하여 온도가 높아졌다가 원래의 온도로 냉각시키면 외부로 열을 내보낸다. 이때 연소 생성물중 물이 액체상태로 존재하는 경우의 발열량에 해당되는 것은 무엇인가?,4,저 발열량,화학 발열량,물 발열량,고 발열량,Aviation Engineering and Maintenance,0.1429
+"흡입밸브가 상사점 전 15도에서 열리고 배기밸브가 상사점 후 20도 에서 닫힐 때, 밸브 오버랩은 몇도인가?",4,5,15,25,35,Aviation Engineering and Maintenance,0.1429
+"피스톤의 지름이 135㎜, 행정거리가 150㎜, 실린더수가 6개인 4행정 기관의 제동평균 유효압력이 7.5kgf/cm2, 회전수가 2600rpm일 때 제동마력은 약 몇 PS인가?",4,579,479,379,279,Aviation Engineering and Maintenance,0.1429
+다이얼 게이지의 용도가 아닌 것은?,4,평면의 상태 측정,원토의 진원 측정,축의 휘어진 상태나 편심 측정,"나사의 피치, 표면조도, 각도측정",Aviation Engineering and Maintenance,0.1429
+항공기 세척에 사용하는 솔벤트 세제 중의 하나로 페인트칠을 하기 직전에 표면을 세척하는데 사용되면 80℉에서 인화하므로 아크릴과 고무제품을 세척할 때는 주의해서 사용해야하는 세제는?,3,케로신,솔벤트 세제,지방족 나프타,건식 세척 솔벤트,Aviation Engineering and Maintenance,0.1429
+무게가 600㎏인 비행기가 이륙하여 1분 후에 고도 600m로 비행하고 있다면 이 비행기의 상승률은 몇 m/s인가?,2,1,10,60,600,Aviation Engineering and Maintenance,0.1429
+항공기 견인작업 (towing)에 대한 설명과 관계없는 것은?,2,견인속도는 5mph 를 초과해서는 안 된다.,항공기 견인 시에는 잭 포인트를 정확히 지정해야 한다.,견인봉은 견인차량으로부터 일단 분리하여 항공기에 장착한 다음 다시 견인봉을 견인 차량에 연결한다.,항공기의 유도선 (Taxing line)을 따라 견인 할 때에는 감독자의 판단에 따라 주변 감시자를 배치하지 않아도 무방하다.,Aviation Engineering and Maintenance,0.1429
+항공기의 동체구조 중 1차 구조 부재는?,3,SPAR,FAIRING,STRINGER,COVER,Aviation Engineering and Maintenance,0.1429
+흡입밸브가 상사점 전에 열리는 것을 무엇이라 하는가?,3,밸브 랩,밸브 지연,밸브 앞선,밸브 간극,Aviation Engineering and Maintenance,0.1429
+가스터빈 기관의 연료계통에서 연료 노즐 분사각도를 가장 올바르게 설명한 것은?,4,1차 연료보다 2차 연료 분사각도가 더 넓게 분사된다.,각도는 1차와 2차가 같고 압력은 2차 연료가 높다.,1차 연료보다 2차 연료 분사 온도가 높아 균등한 연소를 이룬다.,1차 연료 분사각도는 2차 연료보다 더 넓게 분사된다.,Aviation Engineering and Maintenance,0.1429
+"압축비가 7인 오토 사이클의 열효율은 약 몇 % 인가? (단, 가스의 비열비는 1.4이다.)",3,45.4,50.2,54.1,60.3,Aviation Engineering and Maintenance,0.1429
+"공구, 부품 등의 정밀도 측정에 사용되고 기계기구의 점검 그 밖에 길이의 기준용으로 사용되고 있는 측정원기 중의 하나인 측정기는?",4,두께 게이지,마이크로 미터,다이얼 게이지,블록 게이지,Aviation Engineering and Maintenance,0.1429
+동체의 구조에서 세미모노코크(semi-monocoque) 구조를 가장 옳게 설명한 것은?,3,다수의 부재를 연결하여 강체구조를 이루는 구조형이다.,공기역학적으로 효율적인 유선형의 박판을 접합시킨 구조형태로서 외피가 하중의 일부를 담당한다.,고강도 구조가 요구되는 현대 항공기의 구조 형태로서 구성되어 부분수리가 용이하게 되어 있다.,"높은 고도를 비행하는 대형 항공기에 적합한 형태의 구조로서 객실 여압 장치에 따른 것이며, 주로 다경로 구조이다.",Aviation Engineering and Maintenance,0.1538
+마이크로 스톱 카운터 싱크(Micro stop counter sink)의 용도로 옳은 것은?,3,리벳의 구멍을 늘리는데 사용,리벳이나 스크류를 절단하는데 사용,리벳의 구멍 언저리를 원추 모양으로 절삭하는데 사용,리벳팅하고 밖으로 튀어나온 부분을 연마하는데 사용,Aviation Engineering and Maintenance,0.1538
+항공기 유압계통에서 가요성 호스의 진동을 방지하기 위한 클램프의 일반적인 설치 간격은 약 몇 cm인가?,2,50,60,70,80,Aviation Engineering and Maintenance,0.1538
+가스터빈 연소실내에 사용되는 2차공기에 관한 설명중 가장 올바른 것은?,3,2차공기는 연소기 온도를 증가시킨다.,2차공기는 연소기 압력을 증가시킨다.,2차공기는 인너라인너를 냉각시킨다.,2차공기는 에너지를 더 많이 확보한다.,Aviation Engineering and Maintenance,0.1538
+고성능 왕복기관에 사용되는 배기밸브 면이나 밸브 스팁 부분에 마멸에 대한 저항을 증가시키기 위하여 제작 또는 얇게 입혀주는 재질은?,4,마그네슘 합금,황동,알루미늄 합금,스텔라이트,Aviation Engineering and Maintenance,0.1538
+공기의 점성 계수에는 Poise 라는 단위를 쓴다. 1 Poise의 단위는?,4,1 dyneㆍsec-1ㆍcm,1 dyneㆍsec2ㆍcm-2,1 dyneㆍsec2ㆍcm-1,1 dyneㆍsecㆍcm-2,Aviation Engineering and Maintenance,0.1538
+피스톤 헤드의 모양이 아닌 것은?,2,평형,원형,오목형,돔형,Aviation Engineering and Maintenance,0.1667
+왕복기관에서 밸브간극에 대하여 가장 옳게 설명한 것은?,4,밸브시트와 캠 로브 사이에 조금의 여유를 두는 것이다.,푸시로드와 캠 사이에 조금의 여유를 두는 것이다.,유압밸브리프트와 로커암사이에 조금의 여유를 두는 것이다.,로커암과 밸브스템사이에 조금의 여유를 두는 것이다.,Aviation Engineering and Maintenance,0.1667
+항공기 표피(Skin)와 같이 얇은 판재의 균열을 검사할 때 표면결함에 대한 검출감도가 가장 좋은 검사는?,4,자분탐상 검사,형광침투 검사,염색침투 검사,와전류 탐상 검사,Aviation Engineering and Maintenance,0.1667
+유도항력 (Induced Drag)에 대한 설명으로 가장 관계가 먼 내용은?,3,날개스팬 (Span)이 커지면 감소한다.,앙력계수가 커지면 증가한다.,가로세로비 (Aspect Ratio)가 커지면 증가한다.,날개면적 (S)이 커지면 증가한다.,Aviation Engineering and Maintenance,0.1667
+주 회전날개의 허브부분에 속하지 않는 구성부품은?,3,침하방지장치,플래핑방지장치,회전경사판,피치조종로드,Aviation Engineering and Maintenance,0.1667
+1500kgf 의 추력으로 속도 360km/h 로 나는 비행기가 있다. 이 비행기의 이용마력은?,2,"7,200 마력","2,000 마력",120 마력,312 마력,Aviation Engineering and Maintenance,0.1667
+항공기의 정비사항 중 대수리 작업에 해당하지 않는 것은?,4,예비품 검사대상 부품의 오버홀,기체의 일부 또는 전체의 오버홀,내부 부품의 복잡한 분해 작업,기관이나 장비의 그 성능이나 구조의 변경,Aviation Engineering and Maintenance,0.1667
+착륙장치(LANDING GEAR)의 구조에서 쇽크압서버 스트러트(SHOCK ABSORBER STRUT)의 역활은?,2,항공기 속도에 따라 BRAKE POWER를 자동제어한다.,TIRE(바퀴)의 BEARING을 지지한다.,착륙장치에 걸린 하중을 동체로 전달한다.,수직운동 충격에너지(ENERGY)를 흡수한다.,Aviation Engineering and Maintenance,0.1667
+공기의 밀도 단위가 ㎏-sec2/m4으로 주어질 때 ㎏단위의 의미는?,2,질량,중량,비중량,비중,Aviation Engineering and Maintenance,0.1667
+공랭식 왕복기관의 구성품에 대한 주된 역할의 설명으로 가장 적당한 것은?,4,라이너는 냉각공기의 흐름 방향을 유도한다.,카울플랩은 냉각공기가 넓게 흐르도록 유도한다.,배플은 기관으로 유입되는 냉각공기의 흐름량을 조절한다.,냉각핀의 재질은 실린더 헤드와 같은 재질로 제작 한다.,Aviation Engineering and Maintenance,0.1667
+축류식 압축기의 실속을 방지하기 위한 장치가 아닌 것은?,2,다축식 구조,원심식 압축기,블리이드 밸브,가변스테이터 깃,Aviation Engineering and Maintenance,0.1667
+피스톤에 작용하는 높은 압력의 힘을 커넥팅 로드에 전달하는 부분은?,2,크랭크 축,피스톤 핀,캠링,로커 암,Aviation Engineering and Maintenance,0.1667
+왕복기관의 나셀과 마운트에 대한 설명으로 틀린 것은?,3,나셀의 카울링은 기관을 냉각시키기 위한 냉각 공기의 양을 조절하는 기능을 말한다.,나셀의 카울링은 나셀의 공기저항을 감소시키는 역할을 한다.,기관 마운트는 일반적으로 카울플랩에 부착한다.,나셀의 앞쪽 카울링에는 공기 스쿠프가 있다.,Aviation Engineering and Maintenance,0.1667
+프로펠러에서 유효피치에 대한 설명으로 옳은 것은?,4,프로펠러 회전 속도에 대한 항공기의 전 진속도의 비율이다.,비행 중 프로펠러가 60회전하는 동안 항공기가 이론상 전진한 거리이다.,비행 중 프로펠러가 1회전하는 동안 증가 된 항공기의 속도이다.,비행 중 프로펠러가 1회전하는 동안에 항공기가 전진한 실제 거리이다.,Aviation Engineering and Maintenance,0.1667
+항공기 기체의 표면을 도장하는 주된 목적이 아닌 것은?,3,내식성,내유성,내구성,내약품성,Aviation Engineering and Maintenance,0.1739
+"압축비가 7인 오토사이클의 열효율은 몇 %인가? (단, 가스의 비열비는 1.2)",4,68.8,54.2,46.8,32.2,Aviation Engineering and Maintenance,0.1765
+볼트머리(Bolt head)에 R의 기호가 새겨져 있다. 무엇을 의미하는가?,4,정밀공차 볼트,내식성 볼트,알루미늄합금 볼트,열처리 볼트,Aviation Engineering and Maintenance,0.1818
+"항공기의 주요 부품 등의 검출이 곤란한 구멍 안쪽의 균열, 시험편 곡의 불순물, 도금 두께 등을 검사하는데 가장 많이 사용되는 비파괴 검사 방법은?",2,자분 탐상 검사,와전류 검사,침투 탐상 시험,방사선 검사,Aviation Engineering and Maintenance,0.1818
+왕복기관에서 밸브가이드의 마멸이 심할 때 기관 작동 중 발생하는 결함과 관계 없는 것은?,3,윤활유의 소모가 많아진다.,배기관에서 흰 연기가 발생한다.,배기관에서 검은 연기가 발생한다.,점화플러그에 카본이 많이 낀다.,Aviation Engineering and Maintenance,0.1818
+"한쪽 끝은 고정되어 있고, 다른 한쪽 끝은 자유단으로 되어있는, 지름이 3cm, 길이가 150cm 인 원기둥의 세장비는 약 얼마인가?",4,21.5,63.7,112,200,Aviation Engineering and Maintenance,0.186
+대형 항공기의 도장(Painting) 재료로 사용되는 열경화성 수지는?,4,PVC,폴리에틸렌,나일론,폴리우레탄,Aviation Engineering and Maintenance,0.1892
+헬리콥터가 이상적인 루프비행을 하는 과정 중 수직상승 할 때의 양력은?,3,2G,W+CF,CF,0,Aviation Engineering and Maintenance,0.1923
+유압 계통에 사용되는 릴리프 밸브의 특성 중 압력 오버라이드(Over Ride)란 무엇인가?,3,릴리프밸브가 열려 있을 때 정격유량의 압력 변화,릴리프밸브가 닫쳐서 정격유량을 유지할 때까지의 압력변화,크래킹 압력에서부터 정격유량이 흐를 때 까지의 압력 변화,크래킹 압력(Cracking Pressure)에서부터 릴리프 밸브가 닫힐 때까지의 압력변화,Aviation Engineering and Maintenance,0.2
+"날개의 공기역학적 중심이 비행기의 무게중심앞  에 있으며, 공기역학적 중심주위의 키놀이 모멘트 계수가 -0.016이다.양력계수 CL이 0.45인 경우 무게중심 주위의 모멘트 계수는 얼마인가?(단, 공기역학적 중심과 무게중심은 같은 수평선상에 놓여 있다.)",3,0.45,0.05,0.0065,-0.016,Aviation Engineering and Maintenance,0.2
+튜브 벤딩 시 몰드 라인 (mold line)의 측정은?,2,재료의 안쪽에서 측정한다.,재료의 바깥 쪽에서 측정한다.,재료의 중심에서 측정한다.,안쪽과 바깥쪽 측정값의 평균으로 정한다.,Aviation Engineering and Maintenance,0.2
+가스터빈 기관에서 압축기의 압력비가 클수록 열효율이 증가하나 일정수준 이상에서는 압력비 상승에 제한을 둔다. 그 이유로 가장 적당한 것은?,3,압력비 상승으로 인한 압축기 균열,연소실의 연소용량 초과,터빈입구 온도상승으로 인한 터빈재질의 손상,터빈출구 압력상승으로 인한 부압형성,Aviation Engineering and Maintenance,0.2
+철제용기에 저장된 기관은 습기 상태의 색깔이 어떠할 때 가장 안전한가?,4,흰색,붉은색,녹색,청색,Aviation Engineering and Maintenance,0.2
+터보제트 엔진(Turbo-jet engine)에서 가스압력이 가장 높은 곳은?,4,테일 파이프의 출구(Exit of the tail pipe)부분,테일 파이프의 입구(Inlet of the tail pipe)부분,공기흡입구(Air lnlet of duct)부분,연소실의 입구(Inlet of the burners)부분,Aviation Engineering and Maintenance,0.2
+항공기에 사용되는 니켈-카드뮴 축전지를 세척할 때의 주의사항 중 틀린 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),3,축전지를 세척할 때는 벤트 플러그를 막아야 한다.,와이어 브러쉬의 사용으로 심한 방전을 일으켜서는 않된다.,약한산으로 세척한다.,독성과 부식성이 없는 결정체는 브러쉬로 긁고 젖은 걸레로 닦아낸다.,Aviation Engineering and Maintenance,0.2
+볼트와 너트를 고정하고 풀 때 사용되는 공구의 사용법에 대한 설명 내용으로 틀린 것은?,2,볼트나 너트를 조일 때에는 손으로 어느 정도 조인 다음 렌치를 사용한다.,각종 렌치를 사용할 때에는 되도록 미는 방향으로 힘을 가하여야 한다.,작업 중에는 손을 다치지 않도록 주의한다.,익스텐션 바를 사용시는 한손으로 바를 잡고 작업한다.,Aviation Engineering and Maintenance,0.2
+"축류식 압축기의 1단당 압축비가 1.8 이고, 회전자 깃에 의한 압력 상승비가 1.4 일 때, 압축기의 반동도는(%)?",2,0,50,80,100,Aviation Engineering and Maintenance,0.2
+30° 선회각으로 정상 수평 선회비행을 하는 비행기에 걸리는 하중배수는 얼마인가?,3,0.8,1.0,1.15,1.35,Aviation Engineering and Maintenance,0.2
+"제트엔진(jet engine)에 가장 보편적으로 사용되며, 계통 내 릴리프 밸브가 하우징에 있어서 원하지 않는 오일을 펌프 입구로 리턴 시키는 오일펌프(oil pump)형식은?",3,피스톤식(piston type),베인식(vane type),기어식(gear type),원심력식(centrifugal type),Aviation Engineering and Maintenance,0.2
+동압(dynamic pressure)에 의해서 작동되는 계기가 아닌 것은?,3,대기 속도계,진대기 속도계,수직 속도계,마하계,Aviation Engineering and Maintenance,0.2
+가스터빈기관항공기에 사용되는 연료가 갖추어야할 조건으로 옳은 것은?,3,어는점이 높아야 한다.,인화점이 낮아야 한다.,증기압이 낮아야 한다.,무게당 발열량이 작아야 한다.,Aviation Engineering and Maintenance,0.2
+"지상진동 시험은 기체의 일부분 또는 기체구조 전체에 인위적인 진동을 주어 구조 자체의 고유진동수, 진폭을 측정하게 되는데 이 때 사용하는 측정계기는?",3,가진기(exciter),공진계(resonancemeter),가속도계(accelerometer),오실로스코프(oscilloscope),Aviation Engineering and Maintenance,0.2
+카르노 사이클에서 공급 열량이 100kcal 이고 방출열량이 40kcal일 때 열효율은?,3,0.4,0.5,0.6,0.7,Aviation Engineering and Maintenance,0.2
+가스터빈기관에서 연소효율에 대한 설명으로 옳은 것은?,4,고도가 높아질수록 연소 효율도 높아진다.,연소효율은 공기의 속도가 클수록 높아진다.,연소효율은 압력 및 온도가 낮을수록 높아진다.,공급된 열량과 공기의 실제 증가된 에너지(엔탈피)의 비를 말한다.,Aviation Engineering and Maintenance,0.2
+"날개의 공기역학적 중심이 비행기의 무게중심앞 0.05c에 있으며,공기역학적 중심주위의 키놀이 모멘트 계수가 -0.016이다.양력계수 CL이 0.45인 경우 무게중심 주위의 모멘트 계수는 얼마인가? (단, 공기역학적 중심과 무게중심은 같은 수평선상에 놓여 있다.)",2,0.45,0.05,0.0065,-0.016,Aviation Engineering and Maintenance,0.2
+비행중 비행기의 세로안정을 위해 마련되어 있으며 대형 고속 제트기의 경우 조종계통의 트림(Trim)장치에 의해 움직이도록 되어있는 것은?,4,수직안정판,방향키,수평안정판,승강키,Aviation Engineering and Maintenance,0.2
+왕복 기관에서 흡입밸브의 여닫힘은 실제로 언제 이루어지는가?,3,"피스톤이 상사점에 있을 때 열리고, 하사점에 있을 때 닫힌다.","피스톤이 하사점에 있을 때 열리고, 상사점에 있을 때 닫힌다.","피스톤이 상사점 전에 있을 때 열리고, 하사점 후에 닫힌다.","피스톤이 상사점 후에 있을 때 열리고, 하사점 전에 닫힌다.",Aviation Engineering and Maintenance,0.2
+"고도 10000m 에서의 온도를 구하면 얼마인가? (단, 해면고도 (sea-level)에서의 온도 이다.)",4,78K,115K,135K,223K,Aviation Engineering and Maintenance,0.2
+가스터빈기관에서 축류압축기의 압력비를 정의한 것으로 옳은 것은?,3,압축기 입구압력과 블레이드 입구압력의 비,압축기 출구압력과 블레이드 출구압력의 비,압축기 출구압력과 마지막 스테이터 베인의 전체압력과의 비,압축기 첫단 입구의 전 압력과 가장 마지막 단 출구의 전 압력의 비,Aviation Engineering and Maintenance,0.2
+대기 온도가 20℃ 일 때 공기(r = 104) 중의 음속은?,2,340 m/sec,343 m/sec,345 m/sec,347 m/sec,Aviation Engineering and Maintenance,0.2
+비행기의 날개중 삼각날개의 특징에 대한 설명 내용으로 가장 관계가 먼 것은?,2,초음속기에 적합한 날개모양이다.,날개 시위를 길게 할 수 없다.,두께비를 작게 할 수 있다.,최대 양력이 과히 크지 않다.,Aviation Engineering and Maintenance,0.2
+"압력분사식 기화기에서 챔버 A와 B 사이에 막이 파손되었다면, 어떤 현상이 나타날 수 있겠는가?",2,연료는 계속 공급될 것이다.,연료가 차단될 것이다.,연료의 압력이 증가할 것이다.,연료의 흐름이 증가할 것이다.,Aviation Engineering and Maintenance,0.2
+관속에서 공기의 맥동효과를 이용하여 공기를 압축하는 기관은?,2,램제트기관,펄스제트기관,터보제트기관,터보프롭기관,Aviation Engineering and Maintenance,0.2
+날개골의 공기력 중심에 있어서의 받음각에 대한 공기력 모멘트계수의 변화율은?,3,정(＋)의 값을 갖는다.,부(-)의 값을 갖는다.,거의 변화하지 않는다.,무한대의 값을 갖는다.,Aviation Engineering and Maintenance,0.2
+"헬리콥터의 총중량이 700kg, 회전 날개의 반지름이 2.5m, 회전 날개 깃수가 2개일 때의 원판 하중은 약 얼마인가?",2,30.65 ㎏/m2,35.65 ㎏/m2,61.30 ㎏/m2,142.60 ㎏/m2,Aviation Engineering and Maintenance,0.2
+헬리콥터 회전날개의 원판하중을 가장 올바르게 설명한 것은?,2,회전날개 깃 전체의 무게를 회전날개에 의해 만들어지는 회전면의 면적으로 나눈 값이다.,헬리콥터 전체의 무게를 회전날개에 의해 만들어지는 회전면의 면적으로 나눈 값이다.,회전날개에 의해 만들어지는 회전면의 면적을 헬리콥터 전체의 무게로 나눈 값이다.,헬리콥터 전체의 무게를 회전날개에 깃의 수로 나눈 값이다.,Aviation Engineering and Maintenance,0.2
+비행기가 정적중립인 상태일 때 가장 올바르게 설명한 것은?,2,받음각이 변화된 후 원래의 평형상태로 돌아간다.,"조종에 대해 과도하게 민감하며, 교란을 받게되면 평형상태로 되돌아 오지 않는다.",비행기의 자세와 속도를 변화시켜 평형을 유지시킨다.,반대 방향으로의 조종력이 작용되면 원래의 평형상태로 되돌아 간다.,Aviation Engineering and Maintenance,0.2
+"강(AISI 4340)으로 된 봉의 바깥지름이 1cm 이다. 인장하중 10t 이 작용할 때 이 봉의 인장강도에 대한 안전 여유는 얼마인가? (단, AISI 4340 의 인장강도 σT= 18,000kg/cm2 이다.)",3,0.16,0.37,0.41,0.72,Aviation Engineering and Maintenance,0.2
+연속 이송형 펌프(Constant Delivery Pump)를 장착한 유압계통에서 계통 내의 유압이 사용되지 않고 있다면 어떤 구성품에 의해 작동유가 순환되는가?,3,압력 릴리프 밸브,셔틀 밸브,압력 조정기,디브스터 밸브,Aviation Engineering and Maintenance,0.2069
+밸브지연과 밸브 앞섬은 무엇으로 표시하는가?,3,캠축의 회전속도,캠축의 회전각도,크랭크축의 회전각도,크랭크축과 캠축의 회전각도 차이,Aviation Engineering and Maintenance,0.2082999999999999
+"정하중시험 중 이론적으로 예측하기 어려운 많은 자료를 얻을 수 있으며, 시험하중이 대단히 높은 값을 가지는 시험은?",4,강성시험,한계하중시험,극한 하중시험,파괴시험,Aviation Engineering and Maintenance,0.2105
+가스용접에 사용하는 용접 토치에 대한 설명으로 틀린 것은?,2,분사식 토치는 산소압력에 비하여 매우 낮은 아세틸렌 압력으로 사용하도록 설계되어 있다.,토치에 사용하는 팁은 특수 내열합금으로 만들어져 있으며 그 크기는 문자로 표시한다.,밸런스형 압력식 토치는 산소와 아세틸렌이 똑같은 압력으로 토치에 공급된다.,토치에 사용하는 팁은 항상 팁 세제로 깨끗하게 청소해야 한다.,Aviation Engineering and Maintenance,0.2105
+항공기 견인작업(TOWING)에 대한 설명이 아닌 것은?,2,견인속도는 5mph를 초과해서는 안된다.,항공기 견인시 잭 포인트를 정확히 지정해야 한다.,견인봉은 경인차량으로부터 일단 분리하여 항공기에장착한 다음 다시 견인봉을 견인차량에 연결한다.,항공기의 유도선(taxing line)을 따라 견인할때에는 감독자의 판단에 따라주변 감시자를 배치하지 않아도 무방하다.,Aviation Engineering and Maintenance,0.2143
+고속 회전시 프로펠러의 원심력에 의하여 프로펠러 중앙 허브로 부터 브레이드를 밖으로 이탈 시키려는 응력이 발생하는데 이 응력을 무엇이라고 하는가?,2,굽힘응력,인장응력,비틀림응력,추력,Aviation Engineering and Maintenance,0.2143
+튜브를 튜브 접합기구에 연결하는 방법에서 지름이 3/8in 이하인 알루미늄 튜브에 일반적으로 적용하는 방식은?,4,단일 플레어리스(flareless) 방식,이중 플레어리스(flareless) 방식,단일 플레어링(flaring) 방식,이중 플레어링(flaring) 방식,Aviation Engineering and Maintenance,0.2143
+"가스터빈기관의 윤활계통에서 섬프(Sump) 안의 공기압이 높을 때, 탱크로 압력이 빠지게 하는 역할을 하는 것은?",4,드레인 밸브(Drain valve),릴리프 밸브(Relief valve),바이패스 밸브(Bypass valve),섬프 벤트 체크 밸브(Sump vent check valve),Aviation Engineering and Maintenance,0.2143
+가스터빈기관에서 축류 압축기에 대한 설명으로 틀린 것은?,2,전면 면적(Frontal Area)이 작아서 항력(Drag)이 작다.,원심 압축기에 비해 제작이 간단하고 비용이 저렴하다.,압축효율(High Peak Efficiency)이 높다.,스테이지(Stage)당 압력상승이 낮다.,Aviation Engineering and Maintenance,0.2143
+특수강의 식별방법에 사용되는 SAE 식별방법중 SAE 2330에 관한 설명중 가장 올바른 것은?,2,탄소강을 나타낸다.,니켈의 함유량이 23%이다.,크롬-바나듐강이다.,탄소의 함유량이 0.30%이다.,Aviation Engineering and Maintenance,0.2173999999999999
+일감의 모서리를 가공하기 위해서는 일감을 바이스에 고정시켜야한다. 이때 사용되는 바이스의 종류는?,2,V홈 바이스조,샤핑 바이스,클램프 바,핸들 바이스,Aviation Engineering and Maintenance,0.2221999999999999
+항공기 급유 및 배유시의 안전사항에 대한 설명 중 틀린 것은?,2,3점 접지는 급유 중 정전기로 인한 화재를 예방하기 위한 것이다.,"3점 접지란 항공기와 연료차, 항공기와 지면, 연료차와 사람의 접지를 말한다.",급유 및 배유 장소로부터 15m 이내에서 흡연이나 인화성 물질을 취급해서는 안된다.,반드시 3점 접지를 하고 연료차량은 항공기와 충분한 거리를 유지해야 한다.,Aviation Engineering and Maintenance,0.2221999999999999
+비행기에서 기수 내림 모멘트가 커질수록 조종력의 역작용은 조종사의 조종에 의한 수정을 어렵게 하기 때문에 이러한 현상을 자동적으로 수정할 수 있도록 보조 장치를 설치하고 있다. 주로 제트 수송기에 설치되어 있는 이 것은 무엇인가?,3,도살 핀(dorsal fin),플랩(flap),마하 트리머(mach trimmer),팬 리버서(fan reverser),Aviation Engineering and Maintenance,0.2221999999999999
+열처리 방법중 알루미늄 합금에 이용되는 열처리방법은?,3,담금질(Quenching),노오멀라이징(Normalizing),풀림(Annealing),뜨임(Tempering),Aviation Engineering and Maintenance,0.2221999999999999
+가스터빈 기관의 효율을 향상시키는 방법이 아닌 것은?,4,기관의 압축비를 높인다.,흡입 공기의 중량 유량을 증가시킨다.,압축기 및 터빈의 단열효율을 증가시킨다.,배기가스속도와 비행속도의 차를 크게 한다.,Aviation Engineering and Maintenance,0.2221999999999999
+왕복기관이 저속 운전 시 비정상적으로 작동한다면 그 원인으로 틀린 것은?,3,연료압력이 낮기 때문에,기화기의 저속혼합비 조절이 불량하기 때문,기화기 내부에 있는 가속 펌프가 불량하기 때문,"점화플러그에 이물질이 묻어있고, 간극상태가 불량하기 때문",Aviation Engineering and Maintenance,0.2221999999999999
+활공기가 활공각 읨로 활공비행 할 때 항력계수(CD)와 양력계수(CL)와의 관계를 올바르게 표현한 것은?,3,CD = CL sinθ,CD = CL cosθ,CD = CL tanθ,CD = CL secθ,Aviation Engineering and Maintenance,0.2221999999999999
+"실제 기관의 Ρ -ν 선도의 지시 선도에서 부의 일이 생기는 이유는 흡입 행정 때 실린더 안의 압력이 대기압보다 낮고, 배기 행정 때 대기압보다 높기 때문에 동력에 손실이 발생한다. 이것을 무슨 손실이라 하는가?",3,마찰 손실,동력 손실,펌프 손실,압력 손실,Aviation Engineering and Maintenance,0.2221999999999999
+"활공기가 고도 12000m 상공에서 활공을 하여 수평활공거리가 24000m를 비행하였다면, 이때 양항비(CL/CD)는 얼마인가?",4,1/10,10,1/20,20,Aviation Engineering and Maintenance,0.2221999999999999
+이륙이나 상승할 때와 같이 최대출력을 낼 때 카울플랩은 어떻게 하는 것이 가장 좋은가?,3,1/3정도 열어준다.,2/3정도 열어준다.,완전히 열어준다.,완전히 닫아준다.,Aviation Engineering and Maintenance,0.2221999999999999
+"왕복기관을 장비한 프로펠러 비행기에서 프로펠러 효율이 일정한 경우에, 제동마력(Brake horsepower)이 커지면?",1,이용마력도 증가한다.,이용마력이 감소한다.,필요마력이 감소한다.,이용마력과 필요마력이 증가한다.,Aviation Engineering and Maintenance,0.2221999999999999
+"왕복기관용 가솔린을 등급 별로 구분한 것 중 녹색이며, 4에틸 납이 최대 3.0mL/gal 포함된 것은?",4,80,100LL,100,A-1,Aviation Engineering and Maintenance,0.2221999999999999
+정밀 측정기기의 경우 규정된 기간 내에 정기적으로 공인기관에서 검∙교정을 받아야 한다. 검∙교정을 영문으로 옮기면?,3,Maintenance,Check,Calibration,Repair,Aviation Engineering and Maintenance,0.2221999999999999
+알루미늄 합금에서 용체화 처리 후 냉간 가공하고 인공시효 처리한 식별 기호는?,3,T6,T7,T8,T9,Aviation Engineering and Maintenance,0.2245
+궤도조건과 배치방식에 따른 위성통신방식과 가장 거리가 먼 것은?,3,랜덤 위성 방식,정지 위성 방식,위성 궤도 방식,위상 위성 방식,Aviation Engineering and Maintenance,0.2273
+"터빈 깃 안쪽에 공기통로를 만들고, 터빈 깃의 표면에 냉각면을 형성하게 하는 냉각방법은?",2,증발 냉각,공기막 냉각,충돌 냉각,대류 냉각,Aviation Engineering and Maintenance,0.2307999999999999
+기관작동 중 실린더 안에 있는 피스톤의 핀은 좌우 양쪽 방향으로 이동하면서 실린더의 벽을 손상시킬 수 있는데 이러한 손상을 막기 위하여 피스톤 핀 리테이너를 사용하는데 이 형식에 해당되지 않는 것은?,2,반지형,스톱 베럴,스프링 링,비철금속 플러그,Aviation Engineering and Maintenance,0.2307999999999999
+B747－400 항공기 기관의 이륙출력 작동 시 위험지역에서 배기제트의 속도 범위를 옳게 나타낸 것은?,2,56Knot 이상,56㎞/h 이상,65Knot 이상,65㎞/h 이상,Aviation Engineering and Maintenance,0.2307999999999999
+가스터빈기관 항공기에서 기관 추력을 결정하는 계기로 사용되는 것은?,3,FUEL FLOW INDICATOR,OIL PRESSURE INDICATOR,EPR(Engine Pressure Ratio),EGT(Exhaust Gas Temperature),Aviation Engineering and Maintenance,0.2307999999999999
+왕복기관의 저장방법에서 일시저장 일자로 가장 적합한 것은?,3,7일 이내,7∼14일 이내,14∼45일,45일 이상,Aviation Engineering and Maintenance,0.2307999999999999
+왕복기관에 사용되는 커넥팅로드(connecting rod)에 관한 내용으로 가장 관계가 먼 것은?,4,대향형기관에서는 크랭크축을 따라 각 커넥팅로드가 평행이 되도록 장착한다.,성형기관의 커넥팅로드는 여러개의 피스톤을 하나의 크랭크핀에 연결시키기 위하여 주ㆍ부 커넥팅로드를 사용한다.,성형기관에서 부 커넥팅로드의 중심은 크랭크핀의 중심에 대해 경사진방향으로 향하여 연결되어 있다.,성형기관에서 주 커넥팅로드의 큰끝 중심의 운동궤적은 피스톤핀의 연결에 의해 타원형을 이룬다.,Aviation Engineering and Maintenance,0.2307999999999999
+헬리콥터의 저주파수 진동에 속하는 사항중 주회전날개의 헤드나 회전날개 깃이 불평형상태가 되었을 때 발생하는 것은?,3,2/3회 진동,횡전진동,1회 진동,꼬리진동,Aviation Engineering and Maintenance,0.2307999999999999
+한 벤츄리관(Ventury tube)을 통과하는 이상유체의 정상 흐름이 있다. 각 위치에서의 전압(Total pressure)은?,3,위치에 관계 없이 같다.,해당 위치의 동압(Dynamic pressure)에 비례한다.,해당 위치의 정압(Static pressure)에 비례한다.,해당 위치의 동압의 제곱에 비례한다.,Aviation Engineering and Maintenance,0.2307999999999999
+항공기용 왕복기관의 흡입밸브 간격조절작업시 해당 실린더의 피스톤 위치로 옳은 것은?,1,출력행정 초기,흡입행정 초기,압축행정 초기,배기행정 초기,Aviation Engineering and Maintenance,0.2307999999999999
+왕복기관을 장비한 프로펠러 비행기의 이용마력(Pa)을 나타낸 것은?,2,Pa =비행기속도 ⒡ 이용추력 / 프로펠러효율,Pa = 제동마력 ⒡ 프로펠러효율,Pa = 항력 ⒡ 비행기속도/75,Pa = 항력 ⒡ 비행기속도/제동마력,Aviation Engineering and Maintenance,0.2307999999999999
+일반적인 아음속항고기 제트기관의 배기노즐 형상으로 가장 많이 사용되는 것은?,3,확산형 배기노즐,가변면적형 배기노즐,수축형 배기노즐,수축-확산형 배기노즐,Aviation Engineering and Maintenance,0.2307999999999999
+공 ㆍ 유압 계통에서 공압과 유압을 필요에 따라 선택할때에 사용되는 밸브는?,2,감압밸브,셔틀밸브,유압관 분리밸브,선택밸브,Aviation Engineering and Maintenance,0.2307999999999999
+방사선 투과검사(X-Ray)에 대한 설명 내용으로 가장 올바른 것은?,4,비금속재료의 결함은 검출하지 못한다.,검사재료 두께에 관계없이 일정량의 방사선 노출이 요구된다.,방사선의 침투력은 파장이 클 수록 크다.,방사선 투과검사는 표면결함을 검출할 수 있다.,Aviation Engineering and Maintenance,0.2307999999999999
+축류형 압축기에 실속방지를 위하여 블리이드 밸브가 장치 되었다면 열리는 시기는?,1,기관의 저속 회전시,기관의 고속 회전시,급격한 고속으로 변화시킬 때,고속에서 급격한 저속으로 변화시킬 때,Aviation Engineering and Maintenance,0.2307999999999999
+실속속도가 120km/h인 비행기를 240km/h의 속도로 수평비행시 조종간을 당겨 최대양력계수의 상태가 되었다면 이 때의 하중배수는?,3,2,3,4,5,Aviation Engineering and Maintenance,0.2307999999999999
+"압축비가 9인 오토사이클의 열효율은 얼마인가?(단, 여기서 가스의 비열비 K = 1.5로 한다.)",4,0.59,0.62,0.65,0.67,Aviation Engineering and Maintenance,0.2307999999999999
+항공기 응력 외피형 날개에 작용하는 하중의 대부분을 담당하여 휨하중과 전단력에 강한 구조 부재는?,2,스킨,스파,리브,스트링거,Aviation Engineering and Maintenance,0.2307999999999999
+최근의 터보팬기관에 사용되는 연료조절장치는?,3,전기식,유압전기식,전자식,유압기계식,Aviation Engineering and Maintenance,0.2307999999999999
+"내구성이 크고, 단단하며 내약품성이 좋아 고속, 고고도, 악조건에서 비행하는 항공기에 사용되는 도료는?",3,프라이머,아크릴 래커,폴리우레탄,합성 에나멜,Aviation Engineering and Maintenance,0.2307999999999999
+기체 판금작업에서 두께가 0.06in인 금속판재를 굽힘반지름 0.315in로 하여 90도로 굽힐 때 세트백은 몇 in인가?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),4,0.017,0.051,0.125,0.135,Aviation Engineering and Maintenance,0.2307999999999999
+YAW Damper system 의 목적이 아닌 것은?,4,YAW Damping 을 억제한다.,선회시에 선회율(Rate of turn)을 정하여 준다.,Localizer Beam에 의하여 항공기가 활주로 중앙선으로 착륙케 한다.,항공기 중심으로 부터 전후의 흔들림이 있을 시에 미세한 조정을 한다.,Aviation Engineering and Maintenance,0.2307999999999999
+"헬리콥터의 호버링(Hovering)조건을 옳게 나타낸 것은? (단, 항공기의 중력 W, 추력 T, 양력 L, 항력 D이다.)",2,L＝W,"L＝W, T＝D＝0(Zero)","L＞W, D＞T","L＝T, D＝L",Aviation Engineering and Maintenance,0.2380999999999999
+항공기에 복합소재(Composite)의 사용이 점차 확대되고 있는 가장 주된 이유는?,3,금속보다 가격이 저렴하기 때문,금속보다 오래 견디기 때문,금속보다 열에 강하기 때문,금속보다 가볍기 때문,Aviation Engineering and Maintenance,0.2380999999999999
+헬리곱터의 공회전(Free wheel)클러치에 대한 설명으로 틀린 것은?,3,오버러닝 클러치라고도 한다.,롤러형과 스프래그형이 있다.,기관의 회전이 주 회전 날개보다 빠를때 공회전 클러치가 분리된다.,다발헬리곱터의 작동되지 않는 기관을 회전날개와 분리하도록 한다.,Aviation Engineering and Maintenance,0.2414
+항공기 왕복엔진에 사용되는 가솔린 연료의 연소에서 열해리에 대한 설명으로 가장 올바른 것은?,2,열해리는 연료의 발열량으로 표시한다.,열해리가 발생하면 연소가스 온도는 저하된다.,열해리는 연소온도가 낮을 수록 많이 발생한다.,"열해리는 고온에서 CO 와 O2, 그리고 H2 와 O2 가 CO2 와 H2O 로 되며, 열을 방출하는 것이다.",Aviation Engineering and Maintenance,0.25
+원심력 압축기에 대한 설명중 틀린 것은?,2,단당 압력비가 높고 제작이 쉽다.,압축기 입구와 출구의 압력비가 높고 효율이 높다.,구조가 튼튼하고 값이 싸다.,추력에 비하여 기관의 전면 면적이 커서 항력이 크다.,Aviation Engineering and Maintenance,0.25
+헬리콥터의 회전날개에 대한 설명 내용으로 가장 관계가 먼 것은?,4,우수한 정지비행 성능을 위해서는 지름이 클 수록 좋다.,전진 비행시에 전진하는 깃의 저소음을 위해서는 깃의 속도가 느린 것이 좋다.,고속에서의 좋은 기동성을 위해서는 깃의 면적이 커야 한다.,저진동을 위해서는 깃의 수가 적어야 한다.,Aviation Engineering and Maintenance,0.25
+가스터빈 기관의 연료노즐 중 복식노즐에 대한 설명으로 가장 옳은 것은?,4,1차 연료는 시동이 이루어진 후 아이들 회전속도 이하에서만 비교적 넓은 각도로 분사한다.,1차 연료는 시동 시 연료 분사각도를 비교 적 좁게 하여 멀리 가게 한다.,2차 연료는 저속회전 작동 시 연소실 벽에 직접 연료가 닿게 분사한다.,2차 연료는 고속 회전 작동 시 연소실 벽 에 닿지 않게 비교적 좁은 각도로 멀리 분사한다.,Aviation Engineering and Maintenance,0.25
+항공기 계통과 배관색 표시가 옳게 연결된 것은?,2,연료계통 - 푸른색,산소계통 - 초록색,유압계통 - 회색,제빙계통 - 오렌지색,Aviation Engineering and Maintenance,0.25
+"비행기 무게가 2,000 kgf, 고도가 5,000m 상공에서 급강하 하고 있다. 항력계수(CD)= 0.03, 날개하중 w/s= 274 kgf/m2, ρ = 0.075 kgfㆍs2/m4일 때 급강하 속도를 구하면 얼마인가? (1m/s = 3.6 km/h)",4,1972.8 km/h,1233 km/h,1423 km/h,1776.6 km/h,Aviation Engineering and Maintenance,0.25
+항공기 프로펠러에 대한 설명으로 가장 올바른 것은?,2,프로펠러의 추력은 프로펠러의 지름의 3승에 비례한다.,프로펠러의 효율은 진행률 (advance ratio) 비례한다.,프로펠러의 추력은 회전속도의 3승에 비례한다.,"프로펠러의 효율은 회전속도와 지름에 비례하고, 속도에 반비례한다.",Aviation Engineering and Maintenance,0.25
+"제트엔진에 가장 보편적으로 사용되며, 계통 내 릴리프 밸브가 하우징에서 원하지 않는 오일을 펌프 입구로 리턴시키는 오일펌프형식은 주로 어떤 것을 사용하는가?",2,베인식,기어식,피스톤식,원심력식,Aviation Engineering and Maintenance,0.25
+엔진작동의 한계에 요구되는 엔진추력을 내기위하여 연소실로 공급되는 연료량을 조정하는 연료조절장치는?,3,컴퓨팅계통,연료펌프계통,메터링계통,드로틀밸브계통,Aviation Engineering and Maintenance,0.25
+가스터빈 기관의 열효율과 가장 관계 깊은 것은?,3,"주변온도, 항공기속도, 터빈효율","주변온도, 항공기속도, 압축기 단열효율","터빈입구온도, 터빈과 압축기 단열효율","터빈입구온도, 항공기속도, 터빈효율",Aviation Engineering and Maintenance,0.25
+항력발산마하수를 높게하기 위한 방법중 틀린 것은?,3,날개 표면에서의 속도 증가를 줄인다.,날개에 뒤젖힘각을 준다.,가로세로비가 큰 날개를 사용한다.,경계층을 제어한다.,Aviation Engineering and Maintenance,0.25
+프로펠러 비행기가 항속거리(Range)를 최대로 하기 위한 비행조건은?,2,필요마력을 최소로 한다.,양항비를 최대로 한다.,추력을 최대로 한다.,양항비를 최소로 한다.,Aviation Engineering and Maintenance,0.25
+비행기를 설명한 내용으로 가장 올바른 것은?,4,"인간이 탑승하여 공중을 비행할 수 있는 기기의 총칭이다. 공기보다 가벼운 것으로서는 기구, 비행선 등이 있으며, 공기보다 무거운 것으로는 글라이더 등이 있다.","글라이더를 포함하며, 공기보다 무거운 모든 항공기를 총칭한다.",동력장치를 가지고 있는 일반 항공기 및 회전익 항공기와 활공기 등을 포함한다.,"추진장치와 고정된 날개를 가지고, 공기의 동적작용에 의한 양력에 의해 중량을 지탱하여 나는 항공기를 말한다.",Aviation Engineering and Maintenance,0.25
+헬리콥터에서 어느 비행속도가 커지면 역풍지역(reverse flow region)이 커지겠는가?,2,수직하강 비행,전진비행,정지비행,선회비행,Aviation Engineering and Maintenance,0.25
+비행기가 운용 상승한계 고도에서 최대 상승률로 10초 동안 상승비행을 하였다면 그동안 상승한 고도는 약 몇 m인가?,3,10,15,25,35,Aviation Engineering and Maintenance,0.25
+"날개의 길이가 40m 이고 시위의 길이가 2m 이며 면적이 80m2 일때, 이 날개의 가로세로비는 얼마인가?",3,40,30,20,10,Aviation Engineering and Maintenance,0.25
+왕복기관 실린더에 있는 냉각핀을 더 많이 설치하여 간격을 좁게 했을 경우에 대한 설명으로 옳은 것은?,2,냉각면적이 감소하여 출력이 향상된다.,공기의 흐름을 방해하여 냉각효과가 감소한다.,냉각면적이 증가하고 공기의 흐름을 가속시킨다.,냉각면적이 감소하여 순항시 과냉각이 일어난다.,Aviation Engineering and Maintenance,0.25
+전자장비와 탐침으로 항공기의 중요 패스너 홀내부의 균열 등을 검사하는데 사용되는 비파괴 검사법은?,4,자분탐상 검사,형광침투 검사,초음파 검사,와전류 검사,Aviation Engineering and Maintenance,0.25
+프로펠러의 효율을 향상시키기 위하여 후퇴각을 준 여러개의 깃으로 이루어져 있는 프로펠러의 명칭은?,3,터보 팬 프로펠러,터보 제트 프로펠러,프롭 팬,펄스 팬,Aviation Engineering and Maintenance,0.25
+"비파괴 검사시 변환기, 증폭기, 발전기 등이 필요한 검사법은?",2,와전류 검사법,초음파 탐상법,침투탐상 검사,자분탐상 검사,Aviation Engineering and Maintenance,0.25
+"어떤 항공기가 5,000m 고도를 576km/h 로 비행하고 있다 날개면적은 135m2 이고, 이 때의 항력계수는 0.027 이다. 필요마력(ps)은 얼마인가? (단, 공기의 밀도 = 0.075 kgㆍs2/m4)",3,47,93,"7,456","14,930",Aviation Engineering and Maintenance,0.25
+비행기의 상승 비행에서 상승률에 대한 설명으로 가장 올바른 것은?,4,여유마력과 이용마력이 같을 때 상승률은 좋아진다.,여유마력과 필요마력이 같을 때 상승률은 좋아진다.,여유마력이 작을수록 상승률은 좋아진다.,여유마력이 클수록 상승률은 좋아진다.,Aviation Engineering and Maintenance,0.25
+구조상의 최대하중으로 기체의 영구변형이 일어나더라도  파괴되지 않는 하중을 무엇이라 하는가?,3,한계하중,최고하중,극한하중,돌풍하중,Aviation Engineering and Maintenance,0.25
+대향형 엔진 실린더 헤드의 원통형 연소실과 비교하여 반구형 연소실의 장점이 아닌 것은?,3,연소의 전파가 좋아 연소효율이 높다.,흡·배기 밸브의 직경을 크게하므로 체적효율이 증가한다.,실린더 헤드의 제작이 쉽고 밸브 작동기구가 간단하다.,동일 용적에 대해 표면적을 최소로 하기 때문에 냉각 손실이 적다.,Aviation Engineering and Maintenance,0.25
+실린더의 압축시험 목적과 관계없는 것은?,2,실린더의 기밀유지를 알기 위하여,연소실의 기밀유지를 알기 위하여,밸브와 밸브시트의 기밀유지를 알기 위하여,피스톤과 피스톤링의 기밀상태를 알기 위하여,Aviation Engineering and Maintenance,0.25
+9기통 성형 기관에서 회전 영구자석이 4극형이라면 회전 영구자석의 회전속도는 크랭크 축의 회전속도의 몇배가 되는가?,3,8/9,4/9,9/8,5/8,Aviation Engineering and Maintenance,0.25
+충격을 받은 날개 외피 밑의 스트링거(Stringer)를 수리하는데 대한 설명으로 가장 적합한 것은?,2,수리할 수 없다.,수리는 가능하나 강도면에서 위험하다.,수리는 가능하나 열역학적인 면에서 위험하다.,날개 앞전으로부터 6인치 이상의 수리는 불가능하다.,Aviation Engineering and Maintenance,0.25
+지름이 140mm인 피스톤에 60Kgf/cm2의 가스압력이 작용하면 피스톤에 미치는 힘은 얼마인가?,4,6232 Kgf,7232 Kgf,8232 Kgf,9232 Kgf,Aviation Engineering and Maintenance,0.25
+사고 방지의 마지막 단계는 시정책의 적용이며 3E를 완성함으로써 이루어진다 라고 하였는데 3E와 관계없는 것은?,3,교육,기술,숙련,규칙,Aviation Engineering and Maintenance,0.25
+헬리콥터의 회전날개중 허브에 플래핑힌지와 페더링힌지는 가지고 있으나 항력힌지가 없는 형식의 회전날개는?,2,관절형 회전날개,반고정형 회전날개,고정식 회전날개,베어링리스 회전날개,Aviation Engineering and Maintenance,0.25
+가스터빈 기관작동 중 연소실에 열점현상이 일어날 때 가장 큰 고장의 원인은 무엇인가?,2,연소실의 균열,연료노즐의 분사각도 결함,연료펌프의 결함,연소실의 냉각작용 이상,Aviation Engineering and Maintenance,0.25
+고도가 높아짐에 따라 공기 밀도가 감소하게 되는데 이때 이용마력과 필요마력은 어떻게 변화 하는가?,2,모두 증가한다.,모두 감소한다.,이용마력은 감소하고 필요마력은 증가한다.,이용마력은 증가하고 필요마력은 감소한다.,Aviation Engineering and Maintenance,0.25
+항공기의 이륙거리 단축과 이⦁착륙속도의 감소를 목적으로 날개골과 날개면적을 변화시키는 날개의 부착 장치는?,3,조종면,스포일러,고양력장치,방빙장치,Aviation Engineering and Maintenance,0.25
+"터보 제트기관에서 저발열량이 4,600㎉/㎏인 연료를 1초 동안에 2㎏씩 소모하여 발생한 진추력이 4,000㎏ 일 때 진추력 비연료소모율은 얼마인가?",2,1.5㎏f/㎏f-h,1.8㎏f/㎏f-h,2.0㎏f/㎏f-h,2.4㎏f/㎏f-h,Aviation Engineering and Maintenance,0.25
+"일정시간 작동된 기관에서 윤활유를 채취하여 윤활유에 함유되어 있는 금속성분을 분석하여 내부 부분품의 마모, 손상여부를 판독하는 방법은?",2,윤활유 필터링 검사,윤활유 분광시험,윤활유 솔더링 시험,윤활유 와전류 검사,Aviation Engineering and Maintenance,0.25
+터빈노즐 다이어프램의 역할로 가장 관계가 먼 것은?,4,연소가스의 흐름방향을 바꾼다.,연소가스의 속도를 증가시킨다.,압력과 온도를 감소시킨다.,엔진가속을 빨리시킨다.,Aviation Engineering and Maintenance,0.25
+가스터빈기관에서 블리이드 밸브의 주된 역할은 무엇인가?,3,분사연료의 윱입을 조절한다.,윤활계통의 압력을 조절한다.,압축기의 실속을 방지한다.,램 압력을 조절한다.,Aviation Engineering and Maintenance,0.25
+SELF-LOCKING 너트 사용방법 중 가장 올바른 것은?,3,비행후 정기적 정비를 위해 수시로 열고 닫는 악세스판넬에는 셀프락킹 너트를 반드시 사용한다.,셀프락킹 너트는 가공해서 사용한다.,회전력을 받는 곳에는 셀프락킹 너트를 사용해서는 안된다.,카드뮴 도금된 셀프락킹 너트는 티타늄 합금의 볼트에만 사용한다.,Aviation Engineering and Maintenance,0.25
+베르누이의 정리에 대한 설명으로 가장 올바른 것은?,4,전압과 동압의 합이 일정하다.,정압이 일정하다.,동압이 일정하다.,전압이 일정하다.,Aviation Engineering and Maintenance,0.25
+론저론 이란?,4,가벼운 판금에 강성을 주기 위해서 플랜지를 갖는 부재,날개의 스파를 결합하기 위한 세로방향 부재,기관이나 연소실을 객실로부터 분리시키기 위한 수직부재,"동체나 낫셀에 있어서 앞, 뒤 방향으로 쓰이는 장력부재",Aviation Engineering and Maintenance,0.25
+"해발고도에서 수평비행할 때 500HP의 필요마력이 요구되는 비행기가 동일한 받음각으로 운항고도를 동일한 수평비행 조건으로 비행하려는 경우, 필요마력은 몇 HP이어야 하는가? (단, 해면에서 공기 밀도(ρ0)와 운항고도에서의 공기밀도의 비(ρ)가 ρ0/ρ =1.44이다.)",4,550,623,750,600,Aviation Engineering and Maintenance,0.25
+What's the principle of the jet propulsion?,3,Newton's first law,Newton's second law,Newton's third law,Newton's forth law,Aviation Engineering and Maintenance,0.25
+비행기가 착륙 시 활주로 위의 일정한 높이에서 실속속도 이상의 속도로 강하하는데 그 이유로 옳은 것은?,4,주날개에서 발생하는 임계항력을 증가시키기 위해,꼬리날개에서 발생하는 유도항력을 일정하게 유지하기 위해,더욱 빠른 실속을 유도하여 착륙시간을 단축시키기 위해,지면 부근의 돌풍에 의한 비행기의 자세 교란을 방지하기 위해,Aviation Engineering and Maintenance,0.25
+원심형 압축기의 장점으로 가장 관계가 먼 것은?,4,단당 압력상승이 높다.,무게가 가볍다.,제작이 용이 하다.,많은 공기량을 처리할 수 있다.,Aviation Engineering and Maintenance,0.25
+"압력분사식 기화기(pressure injection type carburetor) 에서 ""D""챔버의 압력은 무슨 압력인가?",2,계량 연료 압력,계량 안된 연료 압력,벤투리 압력,임펙트 압력,Aviation Engineering and Maintenance,0.25
+헬리콥터의 동력 전달 장치에 대한 설명으로 옳은 것은?,1,기관의 동력은 변속기와 기관 출력 사이에 설치된 오버 러닝 클러치를 거쳐서 전달된다.,"주 회전 날개의 구동축은 한쪽이 프를라인(Spline)으로 되어 있어, 변속기의 출력축에 접속되고, 반대쪽은 테일 로터 구동축에 연결된다.",꼬리 회전 날개 구동축은 주 회전 날개 구동축과 꼬리 회전 날개 기어박스의 입력축 사이를 연결하는 축이다.,오버러닝 클러치는 기관 회전수가 주 회전 날개의 회전 수보다 클 때 자동으로 분리하여 파손을 방지한다.,Aviation Engineering and Maintenance,0.2557999999999999
+회전날개의 깃끝 속도(tip speed)는 공기 역학적인 한계와 소음한계가 주요변수가 되는데 일반적인 깃끝 속도의 제한범위는?,3,약 125m/s,약 175m/s,약 225m/s,약 375m/s,Aviation Engineering and Maintenance,0.2571
+양극 산화처리를 하기 전에 수행하여야할 전처리 작업이 아닌 것은?,4,래크작업,사전세척작업,마스크작업,스트링어 작업,Aviation Engineering and Maintenance,0.2609
+기체판금작업에서 두께가 0.06“인 금속판재를 굽힘반지름 0.135”로 하여 90°로 굽힐 때 세트백은 몇 인치인가?,4,0.017,0.051,0.125,0.195,Aviation Engineering and Maintenance,0.2609
+프로펠러가 항공기에 장착되어 있을 때 블레이드각을 측정할 수 있는 측정기구는?,3,다이얼 게이지,버어니어 캘리퍼스,유니버셜 플로펠러 프로트랙터,블레이드 앵글 섹터,Aviation Engineering and Maintenance,0.2632
+길이가 짧은 날개와 비교한 길이가 긴 날개의 장점으로 틀린 것은?,2,양력계수가 크다.,유도항력계수가 크다.,날개의 효율이 좋다.,날개 끝 와류가 적다.,Aviation Engineering and Maintenance,0.2632
+연강의 최대응력이 2.4× 106 kg/cm2 이고 사용응력이 1.2× 106 kg/cm2 일 때 안전여유는 얼마인가?,2,0.5,1,2,4,Aviation Engineering and Maintenance,0.2632
+얇은 날개이론에 의한 아음속 2차원 대칭날개의 받음각에 대한 양력계수 변화율은?,4,1/π,1,π,2π,Aviation Engineering and Maintenance,0.2632
+"공기에 압력을 가하면 공기의 체적이 감소되고, 체적이 감소되면 밀도는 체적에 반비례하므로 증가되는 성질의 관계식을 무엇이라 하는가?",2,운동 방정식,상태 방정식,연속 방정식,파스칼 방정식,Aviation Engineering and Maintenance,0.2632
+NACA 651 - 215 날개골에서 설계 양력계수 (design lift coefficient)는 얼마인가?,2,0.1,0.2,0.5,0.6,Aviation Engineering and Maintenance,0.2632
+항공기용 왕복기관의 밸브 기구 중 밸브 스프링에 관한 설명으로 틀린 것은?,3,밸브 스프링은 밸브를 닫아 주는 역할을 수행한다.,헬리컬 코일 스프링(Helical-coil spring) 모양이다.,밸브 스프링은 피치가 같고 직경이 다른 2개로 구성 되어 있다.,밸브 스프링이 2개 이상으로 되어 있는 이유는 기관 작동시 스프링 서지 진동을 급속히 완충시키기 위함 이다.,Aviation Engineering and Maintenance,0.2667
+"실제의 착륙상태, 또는 그 이상의 조건에서 착륙 장치의 완충능력 및 하중 전달 구조물의 강도를 확인하기 위한 시험 방법은?",2,정하중시험,낙하시험,피로시험,지상진동시험,Aviation Engineering and Maintenance,0.2667
+헬리콥터의 테일붐에 대한 설명 중 틀린 것은?,4,이 구조는 알루미늄합금과 마그네슘합금으로 만들어진다.,꼬리회전날개의 구동축은 테일붐 위쪽에 베어링으로 장착되어 덮개로 보호해 주고 있다.,안정판은 수평안정판과 수직안정판으로 구성되며 허니콤으로 되어 있다.,수평안정판은 테일붐 좌.우측에 각각 따로 설치한다.,Aviation Engineering and Maintenance,0.2667
+도체의 고유 저항 또는 비저항을 나타내는 단위는?,4,ohm - mil/in2,ohm - cir mil/in2,ohm - mil/ft,ohm - cir mil/ft,Aviation Engineering and Maintenance,0.2667
+실린더 배럴을 헤드에 접합하는 방법으로 가장 관계가 먼 것은?,4,나사접합(the threaded joint),스터드-너트접합(stud and nut fit),수축접합(shrink fit),압력접합(pressure fit),Aviation Engineering and Maintenance,0.2667
+가스터빈기관 작동 중 연소실에 열점(Hot spot)현상이 일어날 대의 고장 원인으로 가장 옳은 것은?,4,연소실의 균열,연소실의 냉각작용 이상,연료펌프의 결함,연료노즐의 분사각도 결함,Aviation Engineering and Maintenance,0.2667
+터보팬 기관에서의 바이패스 비를 옳게 설명한 것은?,4,흡인된 전체 공기유량과 배출된 전체 공기유량과의 비,압축기를 통과한 공기의 유량과 터빈을 통과한 공기 유량과의 비,팬에 흡인된 공기의 유량과 팬으로부터 유출된 공기 유량과의 비,가스발생기를 통과한 공기의 유량과 팬을 통과한 공기 유량과의 비,Aviation Engineering and Maintenance,0.2667
+고출력 작동 시 기화기 공기히터(Carburetor air heater)조종장치를 히터위치에 놓을 때 발생하는 현상이 아닌 것은?,3,뜨거워진 공기를 흡입한다.,기관 출력이 감소하게 된다.,흡입 공기의 밀도가 증가한다.,디토네이션(Detonation)이 발생 될 수 있다.,Aviation Engineering and Maintenance,0.2667
+압력을 일정하게 유지시키면서 단위질량을 단위온도로 올리는데 필요한 열량을 무엇이라 하는가?,2,비열비,정압비열,엔탈피,정적비열,Aviation Engineering and Maintenance,0.2692
+제빙장치에서 압력 매니폴드에 들어가기 전에 오일 분리기로 제거할 수 없는 여분의 오일을 제거하는 장치는?,2,안전밸브 (safety valve),콤비네이션 유닛(combination unit),흡입압력조절밸브(suction regulation valve),솔레노이드분배밸브(solenoid distributor valve),Aviation Engineering and Maintenance,0.2692
+무게가 2000kgf 인 항공기가 30˚로 선회하는 경우 이 항공기에 발생하는 양력은 약 몇 kgf인가?,3,1000,1732,2309,4000,Aviation Engineering and Maintenance,0.2708
+대류권에서 고도가 높아질 때 일어나는 현상에 대하여 옳게 설명한 것은?,4,압력과 밀도가 동시에 증가한다.,"압력은 증가하고, 밀도는 감소한다.","압력은 감소하고, 밀도는 증가한다.",압력과 밀도가 동시에 감소한다.,Aviation Engineering and Maintenance,0.2727
+항공기 브레이크(Brake)계통에서 브레이크로 가는 압력을 감소시키고 유압유의 흐르는 양을 증가시키는 역할과 관계되는 것은?,2,셔틀밸브(Shuttle valve),디부스터 실린더(Debooster cylinder),브레이크 제어밸브(Brake control valve),브레이크조절밸브(Brake Regulation valve),Aviation Engineering and Maintenance,0.2727
+유도항력의 크기에 관한 사항으로 틀린 것은?,2,양력계수의 제곱에 비례한다.,날개의 가로세로비에 비례한다.,양력의 크기에 비례한다.,날개의 길이에 반비례한다.,Aviation Engineering and Maintenance,0.2727
+가스터빈기관의 물 분사장치에서 알코올의 주 기능은 무엇인가?,4,공기의 밀도를 증가시키기 위하여,연소가스의 온도를 감소시키기 위하여,공기의 부피를 증가시키기 위하여,물이 어는 것을 방지하기 위하여,Aviation Engineering and Maintenance,0.2727
+상업용으로 생산되는 항공용 가솔린 중 등급80의 색은?,4,흰색,청색,녹색,빨간색,Aviation Engineering and Maintenance,0.2727
+항공기 왕복기관 작동 중 반드시 점검해야 할 사항이 아닌 것은?,2,오일 온도,라이너 온도,엔진 오일 압력,배기가스 온도,Aviation Engineering and Maintenance,0.2727
+유체의 흐름이 층류에서 난류로 변하는데 관계되는 요소에 속하지 않는 것은?,2,유체의 속도,유체의 양,유체의 점성,물체의 형상,Aviation Engineering and Maintenance,0.2727
+헬리콥터에서 페더링운동은 어떤 각을 변화 시키는가?,4,원추각,코닝각,받음각,피치각,Aviation Engineering and Maintenance,0.2727
+비행기가 항력을 이겨서 계속 비행하는데 필요한 마력을 무엇이라 하는가?,4,이용마력,제동마력,여유마력,필요마력,Aviation Engineering and Maintenance,0.2727
+"내부에너지가 25kcal 인 정지 상태의 물체에 열을 가했더니 50kcal 로 증가하고, 외부에 대해 854kg·m 의 일을 했다면 외부에서 공급된 열량은 몇 kcal 인가? (단, 열의 일당량은 427kg·m/kcal 이다.)",2,17,27,30,50,Aviation Engineering and Maintenance,0.2727
+"축류형 터빈에서 터빈입구의 압력이 8MPa, 터빈출구의 압력이 2MPa이고 반동도가 50%일 때 로터입구의 압력은 몇 MPa인가? (단, 공기의 비열비는 1.4이다.)",4,2,3,4,5,Aviation Engineering and Maintenance,0.2727
+반동터빈에 대한 설명으로 틀린 것은?,2,고정자 깃의 통로는 수축통로이다.,회전자 깃의 통로는 단면적이 일정하다.,반동도는 50%를 넘지 못한다.,회전자 깃의 통로는 수축통로이다.,Aviation Engineering and Maintenance,0.2727
+듀얼 스풀형 APU에서 전력을 공급하는 발전기는 무엇에 의해서 구동되는가?,4,시동기,압축기에서 만들어진 압축공기,저압터빈/저압 압축기축,고압터빈/고압 압축기축,Aviation Engineering and Maintenance,0.2727
+왕복기관에서 직접 연료분사장치의 구성요소가 아닌 것은?,2,분사노즐,프라이머,주 조정장치,연료분사펌프,Aviation Engineering and Maintenance,0.2727
+리벳 내부에 나사가 있는 리벳으로 보통 리벳보다 가볍고 진동에 강한 리벳은?,2,폭발 리벳,조 볼트,체리 리벳,리브 너트,Aviation Engineering and Maintenance,0.2727
+실용적으로 제한된 곡예비행만 적합한 항공기의 감항류는?,4,T류,A류,N류,U류,Aviation Engineering and Maintenance,0.2727
+가스터빈 엔진의 흡입계통에 대한 설명으로 틀린 것은?,4,기관으로 흡입되는 공기의 속도에너지를 압력에너지로 바꾸며 이것을 램압력이라 한다.,흡입덕트에서 와류나 압력분포의 차이가 있으면 압축기 실속을 일으키기 쉽다.,"외부물질에의한 기관손상을 F.O.D라하며, 이것을 방지하기위해 스크린을 설치하기고 한다.",흡입덕트 입구벽 내부에는 연소실에서 생성된 뜨거운 공기를 이용한 방빙장치가 있다.,Aviation Engineering and Maintenance,0.275
+산소-아세틸렌 용접에서 사용되는 아세틸렌 호스색은?,3,백색,녹색,적색,흑색,Aviation Engineering and Maintenance,0.2778
+터보팬기관에서 내측 기어박스(Inlet Gear Box)는 어떠한 구동축에 연결되어 있는가?,2,저압축기 축(N1 Shaft),고압축기 축(N2 Shaft),프리 터빈 축(Pre Turbine Shaft),LPT 축(Low Pressure Turbine Shaft),Aviation Engineering and Maintenance,0.2778
+비행기 실제의 착륙거리에 관한 설명으로 틀린 것은?,3,장애물 고도에서부터 정지시까지의 거리,지상활주거리와 착륙 진입거리를 합한 거리,비행기 바퀴의 접지 시부터 정지시까지의 거리,착륙 진입거리와 정지시까지의 거리를 합한 거리,Aviation Engineering and Maintenance,0.28
+"항공기 구조부재 중 지름이 10cm, 길이가 250cm인 원형기둥의 세장비는?",3,50,75,100,125,Aviation Engineering and Maintenance,0.2813
+한쪽 날개 끝에서 반대쪽 날개 끝까지 길이가 260cm 이고 날개뿌리 시위길이가 100cm 인 삼각형 날개의 가로세로비는?,3,1.0,2.6,5.2,6.0,Aviation Engineering and Maintenance,0.2819
+원심력식 압축기의 장점이 아닌 것은?,3,FOD에 대한 저항력이 있다.,경량이다.,단당 압축비가 작다.,"구조가 튼튼하고, 값이 싸다.",Aviation Engineering and Maintenance,0.2857
+터빈노즐의 주된 기능은?,4,테일콘으로 가스를 분배시킨다.,뜨거운 가스의 압력을 증가시킨다.,방향을 변화시켜 가스의 온도를 떨어뜨린다.,가스의 속도를 증가시키고 터빈 휠에 올바른 각도로 가스의 흐름을 안내한다.,Aviation Engineering and Maintenance,0.2857
+"외력을 받는 구조물이 그 지지점에서 반력이 생겨 평형을 유지한다면, 이 계에 작용하는 평형 방정식에서 포함되지 않는 항은? (단, 2차원 평면도로 가정함.)",4,모든 수평 분력의 합은 0 이다.,모든 수직 분력의 합은 0 이다.,임의의 점에 대한 모멘트의 합은 0 이다.,모든 인장 및 압축의 합은 0 이다.,Aviation Engineering and Maintenance,0.2857
+블록 게이지 측정작업에 관한 내용으로 가장 옳은 것은?,1,검사용은 B급(1급)등급을 이용한다.,표준측정온도는 15°정도이다.,블록 게이지의 측정력은 접촉면적과는 관계 없다.,블록 게이지를 다룰때는 손바닥에 올려놓은 상태에서 여러번 마찰시켜서 밀착시킨다.,Aviation Engineering and Maintenance,0.2857
+가스터빈 기관에서 점화에 사용되는 이그나이터에 대한 설명으로 틀리는 것은?,2,왕복기관 스파크 플러그보다 큰 에너지를 공급 받는다.,왕복기관 스파크 플러그보다 높은 압력에서 작동된다.,왕복기관 스파크 플러그보다 전극사이 간극이 크다.,애뉼러 간극형과 컨스트레인 간극형이 있다.,Aviation Engineering and Maintenance,0.2857
+"강(AISI 4340)으로 된 봉의 바깥지름이 1cm 이다. 인장하중 100kg이 작용할 때 이 봉의 안전여유는 약 얼마인가?(단, 강의 항복강도 (σy)는 14800kg/cm2이다.)",4,100,105,110,115,Aviation Engineering and Maintenance,0.2857
+브레이튼 사이클에 대한 설명으로 옳은 것은?,2,압축기의 이상적인 사이클이다.,가스터빈기관의 이상적인 사이클이다.,왕복기관의 이상적인 열팽창 사이클이다.,왕복기관과 가스터빈기관 등의 실제동력기관 사이클이다.,Aviation Engineering and Maintenance,0.2857
+공기보다 가벼운 항공기에 속하는 것은?,3,전환식 항공기,자이로 다인,비행선,활공기,Aviation Engineering and Maintenance,0.2857
+항공기 개조작업의 설명으로 틀리는 것은?,3,날개 형태의 변경작업,표피 및 조종능력의 변경작업,내부 부품의 복잡한 변경작업,중량 및 중심 한계의 변경작업,Aviation Engineering and Maintenance,0.2857
+팽창파에 대한 설명으로 가장 거리가 먼 것은?,3,초음속 흐름에서만 생긴다.,압력이 감소한다.,속도가 감소한다.,에너지의 변화는 없다.,Aviation Engineering and Maintenance,0.2857
+4행정기관의 스파크 플러그가 매분당 100번 점화된다면 크랭크 축의 회전속도는?,2,100 rpm,200 rpm,400 rpm,800 rpm,Aviation Engineering and Maintenance,0.2857
+후기연소기에 대한 설명으로 옳은 것은?,2,효과적인 연소를 위해 비기속도가 큰 것이 좋다.,과열방지를 위해 스크리치 라이너를 사용 한다.,연료공급은 주연료 계통으로부터 공급받아 사용한다.,후기연소기 작동 시에는 배기노즐 출구의 면적을 작게 한다.,Aviation Engineering and Maintenance,0.2857
+피스톤의 지름이 15cm인 피스톤에 60kgf/cm2 의 가스압력이 작용하면 피스톤에 미치는 힘은 얼마인가?,2,15.2t,10.6t,4.0t,3.6t,Aviation Engineering and Maintenance,0.2857
+측정기기의 구조에 따른 분류에 의해 아메스형과 칼마형으로 분류되는 측정기기는?,4,버니어 캘리퍼스,텔레스코핑 게이지,두께 게이지,실린더 게이지,Aviation Engineering and Maintenance,0.2857
+항공기 정비 기술 정보에 해당되는 필요한 기술자료는?,2,도해부품목록(IPC),정비교본(maintenance manual),정비지원기술정보(service bulletin),작동교본(operation manual),Aviation Engineering and Maintenance,0.2857
+압력식 연료 보급법의 특징으로 틀린 것은?,4,주유시간 절약,연료 오염 가능성 감소,항공기 표피 손상 가능성 감소,항공기 접지 불필요,Aviation Engineering and Maintenance,0.2857
+비행기의 조종성에 대한 설명 내용으로 가장 올바른 것은?,3,비행기가 일정한 비행상태를 유지하는 것을 말한다.,비행시에 조종사가 계속적인 조작을 하지 않는 것을 말한다.,비행기가 조종사의 조작에 따라 움직여 주는 것을 말한다.,돌풍과 같은 외부 영향에 대해 영향을 받지 않는 것을 말한다.,Aviation Engineering and Maintenance,0.2857
+굴곡작업에 관한 내용으로 가장 관계가 먼 것은?,3,작업표시는 유성펜을 사용한다.,굴곡부에 생기는 신축등 광혹한 조건을 받는곳에는 판의 그레인(Grain)방향에 일치시키는것이 좋다.,성형점(Mold point)은 접어 구부러진 재료의 안쪽에서 연장한 직선의 교점이다.,릴리프 홀(Relief Hole)의 위치는 릴리프 홀의 바깥 주위가 적어도 안쪽 굴곡 접선의 교차부분에 접해 있어야 한다.,Aviation Engineering and Maintenance,0.2857
+가스터빈엔진(GAS TURBINE ENGINE)의 추력에 대한 설명중 가장 관계가 먼 내용은?,2,추력은 대기압력이 증가함에 따라 증가한다.,추력은 고도11000m 이상에서는 급격히 증가한다.,추력은 대기온도 상승에 따라 감소한다.,추력은 배기속도의 증가에 따라 증가한다.,Aviation Engineering and Maintenance,0.2857
+활공기가 고도 1000m에서 20Km의 수평활공거리를 활공할 때 양항비는 얼마인가?,3,0.05,0.2,20,50,Aviation Engineering and Maintenance,0.2857
+항공기 정비에서 안전결선작업에 관한 유의사항으로 가장 올바른 것은?,2,안전 결선용 와이어는 2회까지 재사용이 가능하다.,와이어를 펼 때 피막에 손상을 입혀서는 안된다.,와이어는 최대한 세게 당기면서 꼬임 작업을 한다.,매듭을 만들기 위해 와이어를 자를 때는 절단면을 날카롭게 자른다.,Aviation Engineering and Maintenance,0.2857
+"고출력 왕복기관에 주로 사용되며, 축 방향으로 긴 흠이 나 있는 프로펠러 축은?",3,테이퍼축,맞대기축,스플라인축,플랜지축,Aviation Engineering and Maintenance,0.2857
+"항공기의 총 모멘트가 125,200 kgf·cm고 총무게가 500kgf일때, 이 항공기의 중심위치는 어디에 있는가?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.)",1,210.4cm,230.4cm,250.4cm,270.4cm,Aviation Engineering and Maintenance,0.2857
+일반적으로 가스터빈 기관 시동계통의 작동 설명 내용으로 가장 올바른 것은?,1,시동 스위치 접촉과 동시 점화 플러그는 작동되고 연료공급은 조금 늦는다.,시동 스위치 접촉과 동시 점화 플러그와 연료공급이 연소실에 동시 공급된다.,연료공급이 분무화 상태가 된 후 점화 플러그가 작동되어 쉽게 점화된다.,엔진 회전이 자립회전속도에 도달되면 점화동력과 연료가 공급된다.,Aviation Engineering and Maintenance,0.2857
+헬리콥터의 지면효과에 대한 설명으로 틀린 것은?,4,회전면의 고도가 회전 날개의 지름보다 더 크게 되면 지면 효과가 없어진다.,회전 날개 회전면의 고도가 회전 날개의 반지름 정도에 있을 때 생긴다.,지면효과가 있는 경우 날개 회전면에서의 유도 속도는 지면효과가 없는 경우에 비해 줄어든다.,지면효과가 있는 경우 같은 기관의 출력으로 더 많은 중량을 지탱할 수 없다.,Aviation Engineering and Maintenance,0.2857
+토크렌치에 사용자가 원하는 토크값을 미리 지정시킨 후 볼트를 죄면 정해진 토크값에서 소리가 나는 토크렌치의 종류는?,2,디플렉팅 - 빔형,오디블 인디케이팅형,리지드 프레임형,토션 바형,Aviation Engineering and Maintenance,0.2857
+"원형관에 공기가 흐를 때 입구와 출구에서 밀도가 각각 0.125㎏·s2/m4과 0.132㎏·s2/m4 이고, 지름 10㎝ 되는 입구 단면적에서의 속도가 200㎧ 일때 지름 20㎝ 되는 출구 단면적에서의 속도는 몇 ㎧ 인가?",2,25.28,47.35,72.65,87.35,Aviation Engineering and Maintenance,0.2857
+비행기의 속도가 200㎞/h이다. 상승각이 6° 이면 상승률은 약 몇 ㎞/h 인가?,3,12 .4,18 .7,20 .9,60.2,Aviation Engineering and Maintenance,0.2857
+"큰 날개와 꼬리날개에 의한 무게중심 주위의 키놀이 모멘트 관계식은? (단, MC.G : 큰 날개와 꼬리날개에 의한 무게중심 주위의 키놀이 모멘트, MC.G WING : 큰 날개만에 의한 키놀이 모멘트, MC.G TAIL : 수평 꼬리날개에 의한 키놀이 모멘트)",2,MC.G = MC.G WING - MC.G TAIL,MC.G = MC.G WING + MC.G TAIL,MC.G = MC.G WING × MC.G TAIL,MC.G = MC.G WING ÷ MC.G TAIL,Aviation Engineering and Maintenance,0.2857
+왕복기관의 실린더 번호 부여방법으로 가장 올바른 것은?,2,직렬형 기관은 앞쪽에서 부터 뒤쪽으로 번호를 부여 한다.,수평 대향형 기관은 맨 뒤쪽이 1번 실린더가 된다.,1렬 성형기관은 기관의 정상위치에서 제일 아랫쪽에 있는 실린더가 1번이다.,2렬 성형기관은 맨 뒷렬에 수평으로 있는것이 1번 실린더이다.,Aviation Engineering and Maintenance,0.2857
+"기체 m[kg]이 일정한 압력하에서 Q[kcal]의 열량을 공급 받아 온도가 T1에서 T2로 높아졌다. 관계식으로 가장 올바른 것은? (단, Cp :정압비열, Cv :정적 비열 U :내부에너지, H :엔탈피 )",2,Q = 1- Q2/Q1,Q = mCp(T2-T1) = H2-H1,Q = (T2-T1)/T1,Q = mCv(T2-T1) = U2-U1,Aviation Engineering and Maintenance,0.2857
+헬리콥터가 전진 비행을 할 때 수평 안정판이 하는 역할로 가장 올바른 것은?,2,전진 비행시 수평안정판의 공기력이 위로 작용하여 수평을 유지시킨다.,전진 비행시 수평 안정판의 공기력이 아래로 작용하여 수평을 유지시킨다.,주 회전날개의 수평을 유지시킨다.,꼬리회전날개가 손상되는 것을 방지한다.,Aviation Engineering and Maintenance,0.2857
+관성 시동기의 종류와 가장 관계가 먼 것은?,3,수동식 관성 시동기,전기식 관성 시동기,직접 구동식 시동기,복합식 관성 시동기,Aviation Engineering and Maintenance,0.2857
+부자식 기화기에 있는 드로틀 밸브는 어디에 위치해 있는 가?,1,연료 - 공기 혼합가스 흡입통로에,공기입구 분사노즐 바로전에,벤튜리관 주 분사노즐 사이에,가속기 바로전 흡입통로에,Aviation Engineering and Maintenance,0.2857
+볼트나 너트의 헤드 부위가 망가지지 않도록 6각형 혹은 12각형의 모양으로 되어 있으며 볼트나 너트를 조이거나 푸는데 사용하는 공구는?,4,조절렌치,토크렌치,오픈-엔드렌치,오프셋 박스렌치,Aviation Engineering and Maintenance,0.2857
+브로모클로로메탄 소화기에 대한 설명으로 틀린 것은?,3,무색이고 달콤한 냄새를 가진다.,소화력은 이산화탄소 소화기의 약 3배 이상으로 B급 및 C급 화재에 주로 사용된다.,방출시 하얗고 미세한 분말이 영하37도의 온도에서 높은 방출률로 방출되어 동상에 주의해야한다.,소화기 사용 시 주위에는 산소결핍이 생기기 때문에 질식되기 쉬우므로 주의해야 한다.,Aviation Engineering and Maintenance,0.2857
+"실속 속도가 160㎞/h인 비행기를 320㎞/h의 속도로 수평 비행을 하다가 갑자기 조종간을 당겨 최대 받음각의 자세를 취하여 CLmax인 상태로 하였다. 이때, 하중 배수는 얼마인가?",4,1/2,1/4,2,4,Aviation Engineering and Maintenance,0.2857
+도면의 주요 4요소와 관계가 없는 것은?,1,설계란,표제란,변경란,일반주석란,Aviation Engineering and Maintenance,0.2857
+"구리 도선을 통해서 저전압의 고전류를 용접할 금속에 흘려 보냄으로서 금속을 용해시켜 접합하는 것으로 버트, 스폿, 시임방법 등이 있는 용접법은?",3,가스 용접,전기아크 용접,전기저항 용접,피복아크 용접,Aviation Engineering and Maintenance,0.2880999999999999
+가스터빈기관의 연료조정장치에 대한 설명으로 옳은 것은?,1,수감요소 중 기관회전수가 증가하면 연료를 증가시킨다.,스로틀레버 급가속시 혼합비의 과희박으로 압축기 실속을 일으킬 수 있다.,연료조정장치는 유압기계식과 압력식이 주로 쓰인다.,수감요소 중 압축기 출구압력이 증가하면 연료를 증가시킨다.,Aviation Engineering and Maintenance,0.2887
+프로펠러 깃 자신만의 원심력으로 인해 발생하는 비틀림 모멘트의 특성으로 옳은 것은?,4,깃의 무게 중심을 깃 끝 방향으로 이동시키는 경향을 나타낸다.,깃의 무게 중심을 깃뿌리 방향으로 이동시키는 경향을 나타낸다.,깃의 깃각을 증가시키는 경향을 나타낸다.,깃의 깃각을 감소시키는 경향을 나타낸다.,Aviation Engineering and Maintenance,0.2909
+4행정 항공기용 왕복기관 중 대향형 기관의 캠축은 크랭크축 회전속도의 얼마인가?,2,1/4,1/2,2배,4배,Aviation Engineering and Maintenance,0.2941
+항공기 사용시간에 대한 설명으로 옳은 것은?,4,항공기가 비행을 목적으로 램프에서 자력으로 움직이기 시작한 순간부터 착륙하여 정지할 때까지의 시간,항공기가 비행을 목적으로 활주로에서 이륙한 순간부터 착륙하여 정지할 때까지의 시간,항공기가 비행을 목적으로 램프에서 자력으로 움직이기 시작한 순간부터 착륙하여 땅에 닿는 순간까지의 시간,항공기가 비행을 목적으로 이륙하여 바퀴가 떨어진 순간부터 착륙하여 땅에 닿는 순간까지의 시간,Aviation Engineering and Maintenance,0.2941
+정확한 피치의 나사를 이용하여 실제의 길이를 측정하는 측정용 기기는?,2,피치게이지,마이크로미터,높이게이지,버니어캘리퍼스,Aviation Engineering and Maintenance,0.2941
+"항공기가 400 mph 의 속도로 비행하는 동안 가스터빈엔진이 2340 lbf 의 진추력을 낼 때, 발생되는 추력마력은 약 몇 hp 인가?",4,1702,1896,2356,2496,Aviation Engineering and Maintenance,0.2953
+"항공기 표피(Skin)같이 얇은 판재의 균열을 검사할 때, 표면결함에 대한 검출감도가 가장 좋은 검사는?",4,자분탐상 검사,형광침투 검사,염색침투 검사,와전류 탐상 검사,Aviation Engineering and Maintenance,0.2963
+가스터빈 기관의 터빈깃에 직각으로 머리카락 모양의 균열형태로 나타날 때의 결함원인으로서 가장 올바른 것은?,2,과열,열응력,열팽창,고열,Aviation Engineering and Maintenance,0.2963
+미국표준규격(CS)에서 규정하는 항공기 도면 중 D 표준도면의 크기(inch)를 옳게 나타낸 것은?,3,11×17,17×22,22×34,34×44,Aviation Engineering and Maintenance,0.3
+금속 표면상의 손상중 뜨거운 가스나 모래 및 화학물질에 의해서 부분품의 재료가 떨어져 나간 현상을 무엇이라 하는가?,2,찌그러짐(brinelling),침식(erosion),쪼임(gouging),부품(bulge),Aviation Engineering and Maintenance,0.3
+가스터빈 기관의 추력에 미치는 영향으로 틀린 것은?,2,대기온도가 증가하면 추력은 감소하게 된다.,대기압이 증가하면 추력은 감소하게 된다.,비행고도가 높아짐에 따라 추력은 감소하게 된다.,대기밀도가 증가하면 추력은 증가하게 된다.,Aviation Engineering and Maintenance,0.3
+왕복기관 작동시 윤활유의 압력이 낮게 지시한다. 고장의 원인으로 맞지 않는 것은?,1,윤활유 펌프가 고장이다.,윤활유의 양이 부족하다.,윤활유 여과기에 이물질이 끼어있다.,릴리이프 밸브에 이물질이 끼어있다.,Aviation Engineering and Maintenance,0.3
+축류형 압축기에서 실속(STALL)방지를 위한 장치가 아닌 것은?,4,다축식 구조,가변 스테이터 깃,블리이드 밸브,가변동익 구조,Aviation Engineering and Maintenance,0.3
+항공기의 오버홀은 어느 정비방식에 속하는가?,3,신뢰성 정비,상태 정비,시한성 정비,감항성 정비,Aviation Engineering and Maintenance,0.3
+"직경 5㎝인 원형 단면봉에 1,000㎏f의 인장하중이 작용할 때 단면에서의 응력은 몇 ㎏f/㎝2 인가?",3,25.5,40.2,50.9,61.6,Aviation Engineering and Maintenance,0.3
+헬리콥터의 방향조종에 관한 설명으로 옳은 것은?,4,조종간을 당기거나 밀어 방향을 조종한다.,동체의 방향을 전환하기 위하여 동시피치 조종을 한다.,주회전 날개의 받음각을 조절하여 플랩핑을 감소시켜 방향을 변환한다.,주회전 날개의 회전으로 인해 동체에 발생하는 회전력을 꼬리 회전 날개를 이용하여 상쇄시켜 방향을 결정한다.,Aviation Engineering and Maintenance,0.3
+연료펌프(FUEL PUMP)의 내부윤활은 어느 것에 의하여 윤활작용을 하는가?,2,엔진오일,연료,구리스,별도로 비치된 윤활유,Aviation Engineering and Maintenance,0.3
+왕복기관의 직접 연료분사장치(direct fuel injection system)의 장점이 아닌 것은?,3,비행자세에 의한 영향을 받지 않는다.,흡입계통 내에는 공기만 존재하므로 역화 의 우려가 없다.,플로트식 기화기에 비하여 구조가 간단하다.,연료의 기화기 실린더 안에서 이루어지기 때문에 결빙의 위험이 거의 없다.,Aviation Engineering and Maintenance,0.3
+항력에 관한 설명으로 가장 관계가 먼 것은?,4,압력항력과 점성항력을 합쳐서 형상항력이라 한다.,양력에 관계하지 않고 비행을 방해하는 모든 항력을 유해항력이라 한다.,형상항력은 물체의 모양에 따라 달라진다.,유해항력이 클수록 비행기의 성능이 좋아진다.,Aviation Engineering and Maintenance,0.3
+"충격에 잘 견디는 성질이며, 찢어지거나 파괴가 되지 않는 금속의 성질을 무엇이라고 하는가?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.)",3,전성,취성,인성,연성,Aviation Engineering and Maintenance,0.3
+케이블 조종계통 정비에 대한 설명 중 가장 관계가 먼 내용은?,3,케이블 손상의 주원인은 풀리나 페어리드 및 케이블 드럼과의 접촉에 의한 것이다.,케이블 손상은 헝겊을 케이블에 감고 길이 방향으로 움직여 보아 알 수 있다.,부식된 케이블은 브러쉬로 부식을 제거한 후 솔벤트 등으로 깨끗이 세척한다.,케이블의 장력 점검은 조종계통이 완전히 조절된 상태에서 케이블이 제한된 장력범위 내에있는가를 검토하는 작업이다.,Aviation Engineering and Maintenance,0.3
+"고장이 난 부품이나 사용 수명이 다 되어 장탈한 부품으로, 이러한 부품에는 어떤 색깔의 표찰이 붙어 있는가?",2,파랑색,초록색,노랑색,빨간색,Aviation Engineering and Maintenance,0.3
+"대기권의 구조 중 전리층이라 하며 전파를 흡수, 반사하는 작용을 하여 통신에 영향을 끼치는 곳은?",3,대류권,중간권,열권,극외권,Aviation Engineering and Maintenance,0.3
+"선회계의 지시 방법에서 1 바늘폭이 90° /min의 선회 각 속도를 뜻하고, 2 바늘폭이 180° /min의 선회 각속도를 뜻하는 지시방법은?",4,1분계,2분계,3분계,4분계,Aviation Engineering and Maintenance,0.3
+항공기 및 관련 장비와 부품에 적용되는 정비 방식으로 가장 관계가 먼 것은?,3,시한성 정비,상태정비,감항성 정비,신뢰성 정비,Aviation Engineering and Maintenance,0.3
+0.040 인치 두께인 2개의 판을 접합하고자 한다. 이 때 리벳의 길이는 얼마인 것이 가장 적절할가?,4,0.080 인치,0.120 인치,0.160 인치,0.260 인치,Aviation Engineering and Maintenance,0.3043
+무게가 2000kgf 인 항공기가 30°로 선회하는 경우 이 항공기에 발생하는 양력은 약 몇 kgf 인가?,4,1214,1723,2000,2309,Aviation Engineering and Maintenance,0.3043
+"두 장의 금속판에 전위를 주었을 때 생기는 흡입력, 반발력을 이용한 것으로 소비전력이 극히 작고, 고 임피던스 회로의 전압측정에 가장 적합한 계기는?",1,정전형 계기,유도형 계기,정류형 계기,전력계형 계기,Aviation Engineering and Maintenance,0.3056
+항공기 도면의 종류에 대한 설명으로 틀린 것은?,2,설계배치도면은 생산도면의 기본이 될 수 있는 개력적인 배치 도면이다.,조립도면은 조립체를 항공기에 장착하는데 필요한 정보를 담고 있는 도면이다.,기본 배치도면은 항공기 부품의 기본 윤곽과 형상을 정의하는 종합적인 도면이다.,실물 모형도면은 실물 크기의 모형을 제작할 수 있도록 상세한 정보를 포함하고 있는 도면이다.,Aviation Engineering and Maintenance,0.3056
+헬리콥터 플래핑 힌지(flapping hinge)의 주 목적은?,3,회전날개의 깃이 회전면 안에서 앞뒤로 움직일 수 있도록 해주는데 있다.,회전날개의 깃이 회전면 안에서 앞 뒤 방향으로 과도하게 움직이는 것을 방지하는데 있다.,회전날개 면에서의 양력 불균형 현상을 제거하는데 있다.,회전날개의 깃이 상하 방향으로 움직이는 것을 방지하는데 있다.,Aviation Engineering and Maintenance,0.3077
+헬리콥터의 깃 비틀림각에 따른 비행성능의 설명으로 옳은 것은?,1,비틀림각을 크게 하면 정지비행 성능이 좋아진다.,비틀림각을 크게 하면 전진비행 성능이 좋아진다.,비틀림각을 작게 하면 추진력의 증가로 착륙비행이성능이 좋아진다.,비틀림각을 크게 하면 하중의 감소로 상 승비행성능이 좋아진다.,Aviation Engineering and Maintenance,0.3077
+2중 스풀 압축기(Dual Spool Compressor)에서 더 높은 출력을 얻기 위해 조절하는 것은?,3,온도비,밀도비,압력비,바이패스비,Aviation Engineering and Maintenance,0.3077
+비행중 항공기의 날개(Wing)에 걸리는 응력에 관해서 가장 올바르게 설명한 것은?,2,윗면에는 인장응력이 생기고 아랫면에는 압축응력이 생긴다.,윗면에는 압축응력이 생기고 아랫면에는 인장응력이 생긴다.,윗면과 아랫면 모두다 압축응력이 생긴다.,윗면과 아랫면 모두다 인장응력이 생긴다.,Aviation Engineering and Maintenance,0.3077
+기관 마운트를 날개에 장착할 경우 발생하는 영향이 아닌 것은?,2,저항의 증가,날개의 강도 증가,공기 역학적 성능 저하,파일론으로 인한 무게의 증가,Aviation Engineering and Maintenance,0.3077
+"날개면사에 초음속 흐름이 형성되면 충격파가 발생하게 되는데 이때 충격파 전·후에서의 압력, 밀도, 속도의 관계로 옳은 것은?",3,충격파 앞의 압력과 속도는 충격파 뒤보다 크다.,충격파 앞의 밀도와 속도는 충격파 뒤보다 작다.,충격파 앞의 압력과 밀도는 충격파 뒤보다 작다.,"충격파 앞의 압력, 밀도 및 속도는 충격파 뒤보다 크다.",Aviation Engineering and Maintenance,0.3077
+열역학 사이클에서 가정들을 적용하여 이론적인 해석을 가능하게 한 기관의 이론적 사이클은?,1,공기 표준 사이클,공기 사이클,표준 사이클,정압 사이클,Aviation Engineering and Maintenance,0.3077
+힌지 핸들(hinge handle)에 대한 설명으로 가장 올바른 것은?,2,부품수가 많은 볼트나 너트를 신속하게 풀 때 사용한다.,단단하게 조여져 있는 볼트나 너트를 풀 때 사용한다.,협소한 공간에서 소켓을 이용하여 볼트나 너트를 풀 때 사용한다.,협소한 공간에서 라쳇을 이용하여 볼트나 너트를 신속하게 풀 때 사용한다.,Aviation Engineering and Maintenance,0.3077
+면적이 일정한 날개에서 날개길이를 3배로 하고 양력계수를 1/2로 줄이면 유도항력계수는 몇 배로 되는가?,4,3/2,2/3,1/12,1/36,Aviation Engineering and Maintenance,0.3077
+헬리콥터에서 코닝(Coning)의 발생원인과 가장 관계가 깊은 것은?,3,회전력과 원심력,기하학적 불균형,양력과 원심력,기하학적 비틀림,Aviation Engineering and Maintenance,0.3077
+피스톤 링의 홈과 홈사이즈를 무엇이라 하는가?,2,그루브(Groove),랜드(Land),링랜드(Ring Land),서패이스(Surface),Aviation Engineering and Maintenance,0.3077
+"성형엔진에서 각종 기어가 그 내부에 설치되어 있어 기관구동력에 의해 윤활유 펌프, 연료펌프, 진공펌프, 발전기 및 회전계용 발전기등 여러가지 장비들을 구동시키는 부분은 크랭크 케이스의 어느 부분을 말하는가?",4,출력부분(power section),앞부분(front section),과급기 부분(supercharger section),보기부분(accessory section),Aviation Engineering and Maintenance,0.3103
+후기 연소기를 작동하는데 있어서 Variable Area Nozzle이 필요한 가장 큰 이유는?,2,추력을 증가시키기 위하여,배기가스의 증가로 더 큰 면적을 인가하기 위하여,아주 농후한 혼합으로부터 오는 너무 찬 냉각을 방지하기 위하여,제트추력을 적절한 방향으로 유도하기 위하여,Aviation Engineering and Maintenance,0.3103
+항공기 착륙장치와 가장 관계 깊은 밸브는?,2,릴리브 밸브(RELIEF VALVE),선택밸브(SELECTOR VALVE),우선밸브(PRIORITY VALVE),시퀀스밸브(SEQUENCE VALVE),Aviation Engineering and Maintenance,0.3125
+프로펠러에서 깃각(blade angle)을 옳게 설명한 것은?,4,비행 방향과 특정 깃 단면의 시위 사이의 각도,비행 방향과 프로펠러 깃의 회전면 사이의 각도,깃의 중심선과 프로펠러 깃의 회전면 사이의 각도,특정 깃 단면의 시위와 프로펠러 깃의 회전면 사이의 각도,Aviation Engineering and Maintenance,0.3125
+항공기 외부 세척작업의 종류가 아닌 것은?,4,습식 세척,건식 세척,광택 작업,블라스트 세척,Aviation Engineering and Maintenance,0.3125
+다이얼게이지를 이용하여 측정할 수 없는 것은?,4,기어의 백래시,원통의 진원상태,축의 굽힘 측정,작은 안지름이나 홈,Aviation Engineering and Maintenance,0.3125
+자동 방향 탐지기(ADF)의 방향 기준이 되는 것은?,2,진북(True North),자북(Magnetic North),자오선,지상무선국,Aviation Engineering and Maintenance,0.3125
+"9기통 성형기관에 장착된 마그네토의 2차회로에 있는 배전기 회전자 핑거가 7번 전극을 가리키고 있을 떄, 점화가 이루어져야 하는 실린더는?",2,2번 실린더,4번 실린더,7번 실린더,9번 실린더,Aviation Engineering and Maintenance,0.3125
+깃의 날개골(Airfoil)이 실속을 일으키는 이유와 상관이 가장 적은 것은?,3,깃의 익면하중감소,큰 받음각,주 날개의 익면하중,불충분한 공기속도,Aviation Engineering and Maintenance,0.3125
+절대압력(absolute pressure)을 가장 올바르게 설명한 것은?,2,표준대기상태에서 해면상의 대기압을 기준값 0으로하여 측정한 압력이다.,계기압력(gauge pressure)에 대기압을 더한 값과 같다.,계기압력으로부터 대기압을 뺀 값과 같다.,해당 고도에서의 대기압을 기준값 0으로 하여 측정한압력이다.,Aviation Engineering and Maintenance,0.3125
+공함(collapsible chamber)계기에 대한 설명으로 가장 거리가 먼 내용은?,2,공함은 압력을 기계적 변위로 바꾸어 주는 장치이다.,속이 진공인 공함을 다이어프램(diaphram)이라 한다.,공함 재료로는 베릴륨-구리 합금이 쓰인다.,"공함 계기로는 고도계, 승강계, 속도계 등이 있다.",Aviation Engineering and Maintenance,0.3143
+"1차조종면과 2차조종면이 직접 연결되어 있고, 1차조종면과 2차 조종면이 서로 반대로 작동하고 1차조종면에 의하여 비행기의 조종을 수행하는 경우 조종특성의 수정을 위한 탭은?",4,평형탭(Balance Tab),스프링탭(spring Tab),조종탭(Control Tab),트림탭(Trim Tab),Aviation Engineering and Maintenance,0.3148
+실용 상승한계에서 비행기의 상승률은 몇 m/s 인가?,4,0,0.1,0.3,0.5,Aviation Engineering and Maintenance,0.3157999999999999
+"체적 10L 속의 완전기체가 압력 760mmHg 상태에 있다. 만약 체적이 20L 로 단열팽창하였다면 압력은 얼마로 변화하겠는가? (단, 이 경우 비열비 k=1.4 로 한다.)",2,217mmHg,288mmHg,302mmHg,364mmHg,Aviation Engineering and Maintenance,0.3157999999999999
+금속표면의 부식을 방지하기 위하여 수행하는 작업으로 적절하지 않은 것은?,4,세척,도장,도금,마그네슘피막,Aviation Engineering and Maintenance,0.3157999999999999
+헬리콥터의 변속기와 기어박스에 사용되는 윤활유의 오염상태 점검 시 염산으로 구분할 수 있는 윤활유내 금속 분말은?,2,철분,알루미늄 분말,주석과 납의 분말,구리와 황동 및 마그네슘 분말,Aviation Engineering and Maintenance,0.3157999999999999
+티타늄 합금의 특성에 대한 설명으로 틀린 것은?,3,티타늄의 비중은 4.54로서 강의 0.6배 알루미늄의 1.6배 정도이다.,"티타늄은 고온에서 산소, 질소, 수소등과 친화력이 매우 크고 약간의 불순물의 혼합에도 경화되어 가공이 나빠진다.",티타늄 합금은 알루미늄을 포함하고 있으며 고온강도 증가 내산화성의 향상과 인성을 감소시키는 효과가 있다.,티타늄 합금은 열전도 계수가 작아 열의 분산이 나쁘고 가공을 할 경우 인화를 일으키기 쉽다.,Aviation Engineering and Maintenance,0.3167
+형광침투검사에 사용되는 현상제의 본래 색상은?,2,형광색,백색,황녹색,적색,Aviation Engineering and Maintenance,0.3182
+순항 시에 보증되는 기관의 최대성능 특정 값으로 보통 이륙 정격의 70~80% 전후의 출력을 나타내는 것은?,3,take-off rating,maximum climbing rating,maximum cruising rating,maximum continuous rating,Aviation Engineering and Maintenance,0.3182
+리벳의 보호막(Protective Coating)은 색깔로 구별하는데 크롬산 아연으로 칠한 것은 어떤 색 인가?,3,은색,회색,노란색,진주색,Aviation Engineering and Maintenance,0.3182
+"날개의 가로세로비가 8, 시의 길이 0.5m 인 직사각형 날개를 장착한 무게 200kgf의 항공기가 해발고도로 등속수평비행하고 있다. 최대양력계수가 1.4 일 때 비행 가능한 최소 속도는 몇 m/s 인가? (단, 밀도는 1.225kg/m 이다.)",4,5.40,16.90,23.90,33.81,Aviation Engineering and Maintenance,0.3193
+왕복기관의 윤활계통에서 릴리이프 밸브의 역할로 가장 올바른 것은?,2,윤활유가 불필요하게 기관내부로 스며 들어가는 것을 방지한다.,기관내부로 들어가는 윤활유의 압력이 높을 때 윤활유를 펌프입구로 되돌려준다.,윤활유 여과기가 막혔을 때 윤활유를 여과기를 거치지 않고 직접 기관의 내부로 공급한다.,윤활유 온도가 높을 때 윤활유를 냉각기로 보내고 낮을 때는 직접 윤활유 탱크로 가도록 한다.,Aviation Engineering and Maintenance,0.32
+항공기에서 사용되는 압력계에 대한 설명 중 가장 관계가 먼 것은?,2,오일 압력계는 버든 튜브식 압력계로 게이지 압력을 지시,흡기 압력계는 다이아프램형 압력계로 절대 압력을 지시,흡인 합력계는 공함식 압력계로 2곳의 압력의 차를 지시,EPR계는 벨로우관식 압력계로 2개의 압력 비를 지시,Aviation Engineering and Maintenance,0.3243
+"10 mH의 인덕턴스에 60 Hz, 100 V의 전압을 가하면 약 몇 암페어(A)의 전류가 흐르는가?",4,15,20,25,26,Aviation Engineering and Maintenance,0.3268
+지름이 12㎝인 피스톤에 35kgf/의 가스압력이 작용하면 피스톤에 미치는 힘은 약 몇kgf인가?,2,2560,3960,4260,4560,Aviation Engineering and Maintenance,0.3333
+가스터빈 기관을 장착한 아음속 항공기의 공기 흡입관에서 아음속 공기 흐름 변화를 옳게 설명한 것은?,3,"온도감소, 압력증가","온도상승, 압력감소","속도감소, 압력상승","속도증가, 압력상승",Aviation Engineering and Maintenance,0.3333
+J47 기관의 터빈깃에 새겨진 번호는 무엇을 의미하는가?,3,무게,모멘트,모멘트 무게,깃의 모양,Aviation Engineering and Maintenance,0.3333
+항공기에 장착된 상태에서 수행하는 정비작업으로 장비품이 규정된 지시와 허용 한계값 내에 있는가를 체크하는 점검은?,2,작동 점검,기능 점검,벤치 체크,주기 점검,Aviation Engineering and Maintenance,0.3333
+열기관에서의 에너지 변환형태를 옳게 설명한 것은?,3,운동에너지를 열에너지로 변환,위치에너지를 열에너지로 변환,열에너지를 기계적 에너지로 변환,열에너지를 화학적 에너지로 변환,Aviation Engineering and Maintenance,0.3333
+지상진동시험에 관계된 용어에 대한 설명으로 틀린 것은?,4,진동할 때 변위의 폭을 진폭이라 한다.,구조재료와 같은 탄성 재료는 외부의 하중과는 상관없이 고유한 진동수를 가지고 있다.,진폭의 최대값과 최소값이 교대로 한번씩 나타나는 구간을 1사이클(cycle)이라 한다.,외부 하중의 진동수가 고유진동수보다 클 때를 공진 이라 한다.,Aviation Engineering and Maintenance,0.3333
+왕복기관에서 7기통 성형기관의 캠링은 몇 개의 로브를 가지고 있는가?,3,6개 혹은 7개,5개 혹은 6개,3개 혹은 4개,4개 혹은 5개,Aviation Engineering and Maintenance,0.3333
+헬리콥터의 목재로 된 회전날개에서 금속코어를 넣는 가장 큰 이유는?,4,깃의 부식을 방지하기 위해,깃의 강도를 증가시켜 주기 위해,깃의 궤도를 맞추는 기준점으로 삼기 위해,무게중심을 맞추어주는 질량 밸런스 역할을 하기 위해,Aviation Engineering and Maintenance,0.3333
+"항공기에 장착된 상태로 계통 및 구성품이 규정된 지시대로 정상기능을 발휘하고, 허용한계값 내에 있는가를 점검하는 것을 무엇이라고 하는가?",2,트림점검,기능점검,벤치체크,오버홀,Aviation Engineering and Maintenance,0.3333
+일반적으로 대류권에서 공기온도는 고도가 1000m높아질때 마다 6.5℃씩 감소한다. 해발 고도에의 공기온도가 30℃일 때 고도 10000m에서의 온도는 몇 도인가?,2,-25℃,-35℃,-45℃,-55℃,Aviation Engineering and Maintenance,0.3333
+왕복기관의 점화계통 정비에서 마그네토 점검에 대한 설명중 틀린 것은?,2,브레이커 포인트가 건조된 경우는 지정된 윤활유를 2∼3 방울정도 떨어뜨려 준다.,배전기 블럭과 고무 그로밋(rubber grommet)의 이물질은 솔벤트로 깨끗이 닦아낸다.,저압 마그네토의 경우 변압코일을 멀티미터로 측정하여 2차 저항이 5500∼9000Ω이 되는가를 확인한다.,"마그네토를 점검할 때는 브레이커 포인트, 콘덴서 및 배전기 블럭 등의 상태를 검사한다.",Aviation Engineering and Maintenance,0.3333
+좌우 방향 전환의 조종뿐만 아니라 도움날개의 조종에 따른 빗놀이 모멘트를 상쇄하기 위해 사용되는 장치는?,3,플랩,승강키,방향키,도움날개,Aviation Engineering and Maintenance,0.3333
+왕복기관에서 발생하는 노킹현상의 원인이 아닌 것은?,2,부적절한 연료를 사용할 때,실린더 헤드가 과냉 되었을 때,혼합가스의 화염전파속도가 느릴 때,흡입공기의 온도와 압력이 너무 높을 때,Aviation Engineering and Maintenance,0.3333
+날개골(Airfoil)형태를 만들기 위한 구조부재는?,1,날개보(Spar),론저론(Longeron),리브(Rib),스트링저(Stringer),Aviation Engineering and Maintenance,0.3333
+정비의 목표 중 정비계획을 정확히 유지하고 철저한 정비가 수행되어 계획된 시간에 차질 없이 운항토록 하는 목표를 의미하는 것은?,2,안전성,정시성,쾌적성,경제성,Aviation Engineering and Maintenance,0.3333
+프로펠러의 깃 끝 실속은 성능에 큰 영향을 미친다. 이러한 현상을 방지하기 위한 방법으로 가장 관계가 먼 것은?,2,프로펠러 직경을 작게 한다.,프로펠러의 회전수를 증가시킨다.,유성 기어열의 감소기어를 설치한다.,익단 속도를 음속의 90% 이하로 제한한다.,Aviation Engineering and Maintenance,0.3333
+정상류 (steady-flow)에 대한 설명으로 가장 관계가 먼 내용은?,2,유선 (stream line)은 서로 교차하지 않는다.,임의 단면에서의 물리량의 상태는 시간에 따라 달라질 수 있다.,유관의 어느 단면에서나 energy-level은 같다.,"임의 지점에서의 속도, 압력, 밀도는 시간에 따라 변하지 않는다.",Aviation Engineering and Maintenance,0.3333
+왕복기관 작동시 한계 수치를 점검해야 할 필요가 없는 계기는?,4,매니폴드 압력계,윤활유 온도계,윤활유 압력계,배기가스 온도계,Aviation Engineering and Maintenance,0.3333
+"헬리콥터가 수평속도 V 상태에서 받음각 α와 코닝각(coning angle) β로 전진비행을 하고 있다. 진행방향과 90° 에 위치한 전진 깃(advancing blade)의 깃 끝의 상대 풍속(v)은 얼마 인가? (단, 주회전 날개의 각속도는Ω 이고 반지름은  R 이다.)",2,v = V sinα + RΩcos β,v = V cosα + RΩcos β,v = V sinα + RΩsin β,v = V cosα + RΩsin β,Aviation Engineering and Maintenance,0.3333
+고성능 왕복기관에 사용되는 배기밸브 면이나 밸스스템 팁 부분의 마멸에 대한 저항을 증가시키기 위하여 제작 또는 얇게 입혀주는 재질은?,4,마그네슘 합금,황동,알루미늄 합금,스텔라이트,Aviation Engineering and Maintenance,0.3333
+최근 대형 항공기에 장착된 가스터빈기관의 점화계통으로 주로 사용되는 것은?,4,Glow 플러그,유도형 점화계통,Battery형 플러그,용량형 점화계통,Aviation Engineering and Maintenance,0.3333
+"헬리콥터의 총중량이 700kg, 회전날개의 반지름이 2.5m, 회전날개 깃 수가 2개일 때 원판 하중은 약 몇 kg/m2인가?",2,30.65,35.65,61.30,142.60,Aviation Engineering and Maintenance,0.3333
+계통이나 구성품의 고장을 상태에 따라 분석하여 그 원인을 제거하기 위한 적절한 조치를 취함으로써 항공기의 감항성을 유지되도록 하는 정비 방식은?,2,시한성 정비,상태정비,폐품 정비,신뢰성 정비,Aviation Engineering and Maintenance,0.3333
+"날개의 공기 역학적 중심이 비행기의 무게 중심 앞의 0.2ｃ에 있으면, 공기 역학적 중심 주위의 키놀이 모멘트계수가 -0.015이다. 만일 양력계수 CL이 0.3인 경우 무게 중심 주위의 모멘트계수는 약 얼마인가? (단, 공기 역학적 중심과 무게 중심은 같은 수평선 상에 놓여 있다.)",3,0.015,-0.015,0.045,-0.045,Aviation Engineering and Maintenance,0.3333
+축류형 압축기를 가진 고성능 가스터빈기관에서 압축기 내부의 실속을 방지하는 것은?,4,실속 조절기,서비스 블리드 밸브,압력조절 밸브,가변 스테이터 베인,Aviation Engineering and Maintenance,0.3333
+항공기 조종계통 케이블에 설치된 턴버클 작업에 사용되지 않는 것은?,2,배럴,딤플링,포크,케이블아이,Aviation Engineering and Maintenance,0.3333
+관내의 공기 흐름을 비압축성 흐름으로 가정할 때 설명으로 틀린 것은?,2,연속방정식을 만족한다.,흐름이 고속일 때 만족한다.,질량보존의 법칙을 만족한다.,유체의 속도와 유체가 흐르는 단면적의 곱은 일정하다.,Aviation Engineering and Maintenance,0.3333
+가스터빈 기관의 교류 점화계통에 사용되는 전압(V) 및 사이클(Cycle) 수는?,4,"24, 600","115, 600","24, 400","115, 400",Aviation Engineering and Maintenance,0.3333
+터빈 기관에서 노즐 다이어프램의 주 목적은?,2,가스압력을 증가시키기 위해서,가스속도를 증가시키기 위해서,최대추력을 얻기 위해서,질량을 감소시키기 위해서,Aviation Engineering and Maintenance,0.3333
+"한쪽 끝은 고정 지지점이고, 다른 쪽은 롤러 지지점인 보의 종류는?",4,단순보,외팔보,고정보,고정지지보,Aviation Engineering and Maintenance,0.3333
+모든 오일탱크에 있는 벤트라인(Vent line)의 가장 중요한 역할은 무엇인가?,4,기관에서의 온도상승을 방지한다.,탱크내의 불순물을 제거한다.,기관내에서 생기는 불순물을 제거한다.,탱크내의 압력상승을 방지한다.,Aviation Engineering and Maintenance,0.3333
+변조 주파수 및 Keying 부호에 따라 식별되는 Marker 중 1300Hz의 Dot 및 Dash 교대 연속음이 들리는 곳은?,2,내측 마아커비이콘(Inner marker beacon),중앙 마아커비이콘(Middle marker beacon),외측 마아커비이콘(Outer marker beacon),중앙 마아커비이콘과 내측 마아카 비이콘 사이를 통과하는 곳,Aviation Engineering and Maintenance,0.3333
+기관의 출력 중 시간제한 없이 작동할 수 있는 최대 출력으로 이륙추력의 90% 정도에 해당하는 출력의 명칭은?,2,아이들 출력,최대 연속 출력,순항 출력,최대 상승 출력,Aviation Engineering and Maintenance,0.3333
+프로펠러의 평형 작업 시 사용하는 아버(Arbor)의 용도는?,2,평형 스탠드를 맞춘다.,평형 칼날 상의 프로펠러를 지지해 준다.,첨가하거나 제거해야 할 무게를 나타낸다.,중량이 부가되어야 하는 프로펠러 깃을 표시한다.,Aviation Engineering and Maintenance,0.3333
+"동력장치가 없고 고정날개를 가진, 공기보다 무거운 항공기는?",2,비행선,활공기,오토자이로,기구,Aviation Engineering and Maintenance,0.3333
+스프링과 지렛대 원리를 이용하여 부품등을 강력하게 잡아 주려고 할 때 사용하며 일종의 C-클램프 역할을 하는 공구는 무엇인가?,2,Needle Nose Pliers,Vise-grip Pliers,Connector Pliers,Slip Joint Pliers,Aviation Engineering and Maintenance,0.3333
+가스터빈 기관으로 흡입되는 단위공기 유량에 대한 진추력은?,3,총추력,부분추력,비추력,단위추력,Aviation Engineering and Maintenance,0.3333
+가스터빈 기관의 연소실에서 직접연소에 이용되는 공기량은 연소실을 통과하는 공기의 몇 % 정도인가?,3,5 ∼ 10 %,10 ∼ 15 %,20 ∼ 30 %,35 ∼ 40 %,Aviation Engineering and Maintenance,0.3333
+가스터빈 기관의 공기흡입 부분의 압력 회복점에 대한 설명으로 틀린 것은?,4,압축기 입구의 정압상승이 도관안에서 마찰로 인한 압력 강하와 같아지는 항공기 속도를 말한다.,압축기 입구의 전압이 대기압과 같아지는 항공기 속도를 말한다.,공기흡입 도관의 성능을 좌우하는 요소이다.,압력 회복점이 높을 수록 좋은 공기 흡입도관 이다.,Aviation Engineering and Maintenance,0.3333
+비행기가 가속도 없이 정상비행 할 경우 하중배수는 얼마인가?,3,0,0.5,1.0,1.5,Aviation Engineering and Maintenance,0.3333
+"어떤 항공기가 200[m/s]로 비행하고 있다. 이 때의 항력이 3,500[kg]이라면 필요마력은 얼마인가? (단, 1HP는 75[kg·m/s]로 한다.)",4,약 1313 HP,약 2625 HP,약 5250 HP,약 9333 HP,Aviation Engineering and Maintenance,0.3333
+"어떤 항공기가 특정한 고도를 비행하고 있는 경우, 최소 비행 속도를 실현시킬 수 있는 방법은 어떤 것인가? (단, 항공기 중량 W, 날개면적 S, 밀도는 ρ 확정되어 있음)",3,CD를 최대,CD를 최소,CL를 최대,CL를 최소,Aviation Engineering and Maintenance,0.3333
+"날개의 공기 역학적 중심이 비행기의 무게중심 앞의  에 있으며, 공기 역학적 중심 주위의 키놀이 모멘트 계수가 -0.015이다. 만일 양력계수 CL 이 0.3인 경우 무게 중심 주위의 모멘트 계수는 얼마인가? (단, 공기 역학적 중심과 무게 중심은 같은 수평선상에 놓여 있다.)",3,0.015,-0.015,0.045,-0.045,Aviation Engineering and Maintenance,0.3333
+정상수평 비행상태에서 날개의 한계하중을 나타낸 식은? (단 : W＝한계하중),3,기체의 모든 무게÷(날개의 무게×한계하중계수),기체의 모든 무게-(날개의 무게×한계하중계수),(기체의 모든 무게-날개의 무게)×한계하중계수,(기체의 모든 무게÷날개의 무게)×한계하중계수,Aviation Engineering and Maintenance,0.3333
+자동방향 탐지기(ADF)의 계기 지침은 무엇을 지시하는 가?,4,항공기 진행 방향,항공기 Heading 방향,자북(magnetic north)방향,선택된 무선국 방향,Aviation Engineering and Maintenance,0.3333
+항공기 정비기술지시와 관계가 없는 것은?,4,감항성 개선 명령,정비지원 기술정보,시한성 기술지시,작동 기술정보,Aviation Engineering and Maintenance,0.3333
+항공기용 AN볼트(BOLT)의 규격표시에서 AN 12-17에서 12 숫자는 무엇을 나타내는 것인가?,3,볼트(BOLT)의 길이가 3/4인치 (INCH),볼트(BOLT)의 나사산(THREAD)이 12개,볼트(BOLT)의 지름(DIA)이 3/4인치(INCH),볼트(BOLT)의 그리프(GRIP)의 길이,Aviation Engineering and Maintenance,0.3333
+"날개골 상류의 속도를 Vo, 날개골 상의 임의의 점의 속도를 V라고 할 때 그 점에서의 압력계수를 표현한 식은? (문제 오류로 원본 시험지가 없어서 복원하지 못하였습니다. 정답은 2번입니다.)",2,보기없음,보기없음,보기없음,보기없음,Aviation Engineering and Maintenance,0.3333
+5m 로 제작된 항공기 날개보가 급유를 한 후 5.005m 가 되었다면 날개보의 변형률을 옳게 나타낸 것은?,1,인장 변형률이 0.001 이다.,압축 변형률이 0.001 이다.,인장 변형률이 0.005 이다.,압축 변형률이 0.005 이다.,Aviation Engineering and Maintenance,0.3333
+대류권에서는 지표에서 복사되는 열로 인하여 몇m 올라갈 때 마다 기온이 6.5℃씩 감소 하는가?,2,600m,1000m,1200m,1500m,Aviation Engineering and Maintenance,0.3333
+자분탐상 검사에서 재료의 보자성(Retentivity)이란?,3,쉽게 자화되려는 성질,부품의 탈자에 소요되는 시간,잔류자장을 유지하려는 성질,부품에서 자장의 깊이,Aviation Engineering and Maintenance,0.3333
+자분탐상검사에서 재료의 보자성(Retentivity) 이란?,3,쉽게 자화되려는 성질,부품의 탈자에 소요되는 시간,잔류자장을 유지하려는 성질,부품에서 자장의 깊이,Aviation Engineering and Maintenance,0.3333
+가스터빈기관의 축류형 터빈에 대한 설명으로 옳은 것은?,2,회전자가 앞에 있고 고정자는 뒤에 있다.,"고장자(Stator)를 터빈 노즐(Turbine nozzle)이라 하고, 회전자(Rotor)를 터빈 브레이드(Turbine blade)라 한다.","고정자에서는 속도감소와 압력증가가 일어나고, 회전자는 속도의 변화 없이 회전동력을 발생한다.","회전자에서는 속도증가와 압력감소가 일어나고, 고정자에서는 속도의 변화 없이 압력을 감소시킨다.",Aviation Engineering and Maintenance,0.3333
+비행기가 수평비행이나 급강하로 속도를 증가하여 천음속 영역에 도달하게 되면 한쪽 날개가 충격실속을 일으켜서 갑자기 양력을 상실하여 급격한 옆놀이를 일으키는 현상을 무엇이라 하는가?,2,턱 언더(Tuck under),날개 드롭(Wing drop),피치 업(Pitch up),디프 실속(Deep stall),Aviation Engineering and Maintenance,0.3333
+"헬리콥터의 회전날개 중 허브에 힌지가 없으므로 무게가 가볍고 구조가 간단하며 안전성, 정비성 및 공기저항이 작아지는 등 여러 이점을 지니고 있는 회전날개는?",4,관절형 회전날개,반고정형 회전날개,고정형 회전날개,베어링리스 회전날개,Aviation Engineering and Maintenance,0.3333
+등가대기속도(Equivalent Airspeed)에 대한 정의로 가장 올바른 것은?,2,진대기속도를 해면고도의 압력으로 보정한 속도,진대기속도를 해면고도의 밀도로 보정한 속도,지시대기속도를 해면고도의 온도로 보정한 속도,지시대기속도를 해면고도의 압력으로 보정한 속도,Aviation Engineering and Maintenance,0.3333
+유도항력계수에 대한 설명 내용으로 가장 올바른 것은?,2,양력계수에 비례한다.,양력계수의 제곱에 비례한다.,날개의 가로세로비에 비례한다.,날개의 하중에 비례한다.,Aviation Engineering and Maintenance,0.3333
+"이상유체가 벤츄리관(Ventury tube)을 정상흐름 상태로 통과할 때, 이 흐름의 전압(Total pressure)에 대한 설명으로 옳은 것은?",1,위치에 관계없이 모두 같다.,해당 위치의 동압의 제곱에 비례한다.,해당 위치의 정압(Static pressure)에 비례한다.,해당 위치의 동압(Dynamic pressure)에 비례한다.,Aviation Engineering and Maintenance,0.3333
+"항공기 장비품 정비 작업 중 작업장의 작업대에서 항공기의 부품 또는 구성품의 사용 가능성 여부 또는 조절, 수리, 오버홀이 필요한지를 결정하기 위하여 기능 점검을 확인하는 작업은?",2,A 점검,벤치 점검,D 점검,공장 점검,Aviation Engineering and Maintenance,0.3333
+엔진 압축기 내부등과 같이 직접 눈으로 볼 수 없은 곳을 검사하는 방법은?,2,방사선 검사,보어스코프 검사,초음파 검사,와전류 검사,Aviation Engineering and Maintenance,0.3333
+안전결선 작업방법에 대한 설명 중 가장 관계가 먼 내용은?,2,3개 이상의 부품이 기하학적으로 밀착되어 있을 때에는 단선식 결선법을 사용하는 것이 좋다.,안전결선의 끝 부분은 1~2회 정도 꼬아 끝을 대각선 방향으로 전달한다.,안전결선을 신속하게 하기 위해서는 안전 결선용 플라이어 또는 와이어 트위스터를 사용한다.,안전결선에 사용된 와이어는 다시 사용해 서는 안된다.,Aviation Engineering and Maintenance,0.3333
+초음속 공기의 흐름에서 통로가 좁아질 때 일어나는 현상을 옳게 설명한 것은?,3,속도는 증가하고 압력은 감소한다.,압력과 속도가 동시에 증가한다.,속도는 감소하고 압력은 증가한다.,압력과 속도가 동시에 감소한다.,Aviation Engineering and Maintenance,0.3333
+오일 압력계 지침(Needle)이 심하게 진동한다. 그 원인으로서 가장 올바른 것은?,2,Oil Temperature가 너무 높기 때문에,Oil 압력계의 라인(Line)에 기포가 들어있기 때문에,Engine 진동이 심하기 때문에,Oil 압력계의 라인이 막혔기 때문에,Aviation Engineering and Maintenance,0.3333
+항공기용 왕복기관의 점화시기에 대한 설명으로 가장 올바른 것은?,4,전기적 에너지에 의하여 점화되는 기관의 점화는 압축상사점 후에 이루어져야 한다.,실린더 안의 최고압력은 상사점전 10도 근처에서 나타나도록 점화시기를 정한다.,외부 저모하시기조정은 기관의 점화진각 에서 크랭크축과 캠축의 각도를 일치시키는 것이다.,내부 점화시기 조정은 마그네토의 E갭 위치와 브레이커 포인트가 떨어지는 순간을 맞추는 것이다.,Aviation Engineering and Maintenance,0.3333
+침투탐상검사법에서 침투제가 침투되는 원리는?,3,사이폰 현상,관성력,모세관 현상,베르누이 정리,Aviation Engineering and Maintenance,0.3333
+카르노 사이클에서 공급 열량이 100kcal 이고 방출 열량이 40kcal 일 때 열효율은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),3,0.4,0.5,0.6,0.8,Aviation Engineering and Maintenance,0.3333
+ALCOA 규격의 2S는 주합금 원소가 무엇인가?,3,망간,구리,순수 알루미늄,규소,Aviation Engineering and Maintenance,0.3333
+헬리콥터의 주요 3조종계통에 속하지 않는 것은?,2,동시피치조종계통,자동조종계통,주기피치조종계통,방향조종계통,Aviation Engineering and Maintenance,0.3333
+왕복기관에서 하이드로릭 록(hydraulic lock)은 어떤 곳에서 가장 많이 걸리는가?,4,대향형 엔진의 우측 실린더,대향형 엔지의 좌측 실린더,성형엔진의 상부 실린더,성형엔진의 하부 실린더,Aviation Engineering and Maintenance,0.3333
+피로시험의 S-N곡선에서 회전수가 증가함에 따라 곡선은 아래로 감소하다가 일정한 값이 되면 수평을 유지하는데 이것을 무엇이라 하는가?,1,피로 한도,피로 파괴,피로 감쇄,피로 균형,Aviation Engineering and Maintenance,0.3333
+항공기의 감항성을 가장 올바르게 표현한 것은?,3,항공기가 안전운항을 할 수 있는 기능을 말한다.,항공기가 사용중 필연적으로 일어날수 있는 고장을 말한다.,항공기가 사용중 고장없이 그 기능을 다하여 안전 운항을 할 수 있는지의 여부를 말한다.,항공기가 고장이 발생하였을때 항상 완전한 기능을 가지도록 유지하게 하는 것을 말한다.,Aviation Engineering and Maintenance,0.3333
+실린더 게이지에 대한 설명이 아닌 것은?,3,칼마형 게이지가 있다.,아메스형 게이지가 있다.,검사 계기의 점검에 사용된다.,실린더 안지름이나 마멸량을 측정한다.,Aviation Engineering and Maintenance,0.3333
+지상진동시험에 대한 설명 중 가장 거리가 먼 것은?,4,진동할 때 변위의 폭을 진폭이라 한다.,구조재료와 같은 탄성 재료는 외부의 하중과는 상관없이 고유한 진동수를 가지고 있다.,진폭의 최대값과 최소값이 교대로 한 번씩 나타나는 구간을 1사이클(cycle)이라 한다.,외부 하중의 진동수가 고유 진동수보다 클 때를 공진이라 한다.,Aviation Engineering and Maintenance,0.3333
+"사고 방지의 마지막 단계는 시정책의 적용이며 3E를 완성함으로써 이루어진다 하였는데, 3E와 관계 없는 것은?",3,교육(education),기술(engineering),숙련(expert),규칙(enforcement),Aviation Engineering and Maintenance,0.3333
+"이 게이지는 주로 치수의 기준으로 사용되며, 각종 게이지나 측정기구와 함께 사용되어 여러 가지 측정기구에 이용되는 기구는?",3,실린더 게이지,두께 게이지,블럭 게이지,마이크로메터,Aviation Engineering and Maintenance,0.3333
+힘과 모멘트에 대한 설명 중 가장 올바른 내용은?,3,모멘트는 외력에 대한 구조 내부에서 생기는 힘이다.,평면 구조물의 평형방정식은 힘의 회전능률로서 길이와 힘의 곱으로 나타낸다.,"힘은 크기, 방향, 작용점을 가지며 벡터량 이다.",방향과 작용점만을 가지고 물리량은 스칼라량이라 한다.,Aviation Engineering and Maintenance,0.3333
+안절 결선 와이어의 재료로 사용되지 않는 것은?,2,모넬,고탄소강,인코넬,알루미늄합금,Aviation Engineering and Maintenance,0.3333
+제동 열효율을 가장 옳게 표현한 것은? (문제 오류로 복원중입니다. 보기내용을 정확히 아시는 분께서는 오류신고를 통하여 내용작성을 부탁드립니다. 정답은 2번입니다.),2,복원중,복원중,복원중,복원중,Aviation Engineering and Maintenance,0.3333
+볼트(BOLT)의 부품번호(PARTS NO)가 AN3DD5A에서 3은 무엇을 뜻하는가?,4,BOLT의 길이가 3/16인치 이다.,BOLT의 직경이 3/8인치 이다.,BOLT의 길이가 3/8인치 이다.,BOLT의 직경이 3/16인치 이다.,Aviation Engineering and Maintenance,0.3333
+실제유체와 이상유체를 구분하는 주된 요인은?,2,운동에너지,점성,유체의 압력,유체의 속도,Aviation Engineering and Maintenance,0.3333
+"표준상태(T = 273.15°K, P = 1.0332×104 Kgf/m2) 에서의 공기의 비체적  이라면 공기의 기체상수 R은 얼마인가?",3,27.29,28.29,29.27,32.21,Aviation Engineering and Maintenance,0.3333
+팬 블레이드(Fan Blade)등의 저압 압축기(LowPressure Compressor)에 사용되는 금속재료는?,3,스테인리스 강(Stainless Steel),내열 합금(Heat Resistant Alloy),티타늄 합금(Titanium Alloy),저 합금강(Low Alloy Steel),Aviation Engineering and Maintenance,0.3393
+"프로펠러의 각 단면에서 추력(T)에 해당하는 값은? (단, L : 깃 요소 양력, α : 받음각, D : 깃 요소 항력, Ǿ : 유입각)",4,T = L sin(α) – D cos(α),T = L cos(α) - D sin(α),T = L sin(Ǿ) - D cos(Ǿ),T= L cos(Ǿ) - D sin(Ǿ),Aviation Engineering and Maintenance,0.3404
+포말 소화기에 대한 설명으로 틀린 것은?,3,사용 후 재충전 한다.,B급 및 C급 화재 진화시 사용한다.,소화 작용제 방출시 산소를 공급한다.,"알코올, 아세톤 화재에는 사용을 금한다.",Aviation Engineering and Maintenance,0.3421
+비행성능에 대한 설명으로 틀린 것은?,2,고도가 증가하면 상승률이 감소한다.,활공각이 크면 활공 거리가 길어진다.,고도가 증가하면 비행 속도와 필요 마력은 증가한다.,정상 등속도 수평비행이란 항력과 추력이 같고 양력과 무게가 같다.,Aviation Engineering and Maintenance,0.3433
+액량계기의 형식과 가장 거리가 먼 것은?,3,직독식 액량계,부자식 액량계,차압식 액량계,전기용량식 액량계,Aviation Engineering and Maintenance,0.3448
+"비행기의 무게가 2200kgf, 날개면적이 55m2, 실속받음각에서의 양력계수가 1.6일 때 실속속도는 몇 m/s인가? (단, 공기의 밀도는 0.125kgfㆍs2/m4이다.)",3,10,15,20,25,Aviation Engineering and Maintenance,0.3461999999999999
+국제민간항공기구(ICAO)에서 정하는 국제표준대기에 관한 설명으로 옳은 것은?,3,"항공기의 설계, 운용에 기준이 되는 대기상태로서, 지역 및 고도에 관계없이 압력이 750mmHg, 온도가 15℃인 상태를 말한다.","항공기의 비행에 가장 이상적인 대기상태로서, 압력이 750mmHg, 온도가 15℃인 상태를 말한다.","항공기의 설계, 운용에 기준이 되는 대기상태로서, 같은 고도에 대한 표준압력, 밀도, 온도 등은 항상 같다.","해면상의 대기상태를 말하며, 항공기의 설계 및 운용의 기준이 된다.",Aviation Engineering and Maintenance,0.3461999999999999
+헬리콥터에서 플래핑 힌지를 사용하므로써 생기는 장점이 아닌 것은?,2,회전축을 기울이지 않고 회전면을 기울일 수 있다.,기하학적인 불평형을 제거할 수 있다.,뿌리부위에 발생되는 굽힘력을 없앨 수 있다.,돌풍에 의한 영향을 제거할 수 있다.,Aviation Engineering and Maintenance,0.3461999999999999
+항공기에서 사용되며 그 자체는 가연성 물질이 아니지만 다른 인화성 물질의 연소를 촉진하므로 특히 주의해야 하는 무색 무취의 고압가스는?,2,염소,산소,수소,페놀,Aviation Engineering and Maintenance,0.3478
+"17ST(2017) - D 리벳에서 “D""가 의미하는 것은?",4,리벳의 길이를 나타낸다.,리벳의 머리모양을 나타낸 것이다.,리벳의 재질기호이며 강한 강도가 요구되는 곳에 사용하며 열처리에 관계없이 사용된다.,리벳의 재질기호이며 상온에서는 너무 강해 그대로는 리베팅 할 수 없으며 열처리를 한 후 사용 가능하다.,Aviation Engineering and Maintenance,0.3478
+가스터빈기관의 여압 및 드레인밸브가 하는 역할이 아닌 것은?,2,"연료흐름을 1,2차로 분리한다.",연료와 공기의 혼합비를 일정하게 유지한다.,기관 정지 시 연료노즐에 있는 연료를 방출한다.,일정압력이 될 때 까지 연료의 흐름을 차단한다.,Aviation Engineering and Maintenance,0.3478
+브레이크(Brake)계통의 유압이 누출될 경우 이것은 무엇에 의해서 보상 될 수 있는가?,4,Linkage(연동장치),Piston Return Spring,Actuating Cylinder Reservoir,Master Cylinder Reservoir,Aviation Engineering and Maintenance,0.3488
+항공기의 날개 착륙장치의 트럭형식에서 트럭위치 작동기 에 대한 설명으로 가장 관계가 먼 내용은?,3,항공기가 지상에서 수평로 활주할 때에는 완충 스트럿과 트럭 빔이 수직이 되도록 댐퍼의 역할도 한다.,착륙장치가 접혀 들어갈 때 공간을 줄이기 위해서도 사용된다.,착륙장치를 접어 들이거나 펼칠 때 사용되는 유압작동기이다.,바퀴가 지면으로부터 떨어지는 순간에 완충스트럿과 트럭 빔을 특정한 각도로 유지시켜 주는 유압 작동기이다.,Aviation Engineering and Maintenance,0.3488
+소음 종류에 따른 방지책에 대한 설명으로 틀린 것은?,3,코어소음 - 소음 흡수판을 사용한다.,터빈 소음 - 로터와 스테이터의 수를 최적의 조건으로 선택한다.,팬소음 - 공력 분산효과를 위해 다단의 팬을 사용한다.,배기소음 - 배기노즐의 단면을 꽃입형 등으로 바꿔 대기와 홉합되는 면적을 넓힌다.,Aviation Engineering and Maintenance,0.35
+비행기의 동적 가로안정의 특성과 관계가 없는 것은?,2,방향 불안정,세로 불안정,나선 불안정,터치롤,Aviation Engineering and Maintenance,0.35
+램제트 기관에 대한 설명으로 틀린 것은?,3,초음속 비행이 가능하다.,정지 상태에서 작동이 불가능하다.,"압축기, 연소실, 터빈으로 구성된다.",제트기관 중에서 가장 간단한 구조이다.,Aviation Engineering and Maintenance,0.35
+비행기 날개의 모양에 따른 분류를 한 것중 유도항력이 최소인 날개는?,2,직사각형 날개,타원형 날개,테이퍼형 날개,앞젖힘형 날개,Aviation Engineering and Maintenance,0.35
+흐름이 없는 즉 정지된 유체에 대한 설명으로 옳은 것은?,3,정압과 동압의 크기가 같다.,전압의 크기는 영(0)이 된다.,동압의 크기는 영(0)이 된다.,정압의 크기는 영(0)이 된다.,Aviation Engineering and Maintenance,0.35
+도면에 기재되는 내용과 설명으로 옳은 것은?,4,도면에는 부품 목록을 기재할수 없다.,도면 번호는 부품 목록에만 등록이 된다.,모든 항공기 제작사는 동일한 방식으로 도면번호를 부여 한다.,도면에 사용되는 적용성 부호는 사용되는 부품의 번호를 나타낸다.,Aviation Engineering and Maintenance,0.3506
+대형 항공기에서 주로 비상전원으로 사용하는 발전기로 유압펌프를 구동시켜 모든 발전기가 정지된 경우라도 유압을 사용할 수 있도록 하며 프로펠러의 피치를 거버너로 조절해서 정 주파수의 발전을 하는 발전기는?,2,3상 교류발전기,공기 구동 교류발전기,단상 교류발전기,브러시리스 교류발전기,Aviation Engineering and Maintenance,0.3510999999999999
+"지름이 8cm 이고, 길이가 200 cm 인 기둥의 세장비는? (단, 이 기둥의한쪽 끝은 고정되어 있고 다른 한쪽끝은 자유단이다.)",2,50,100,150,200,Aviation Engineering and Maintenance,0.3521
+정침의(DG)의 자이로 축에 대한 설명으로 옳은것은?,2,지구의 중력 방향을 향하도록 되어 있다.,지표에 대하여 수평이 되도록 되어 있다.,기축에 평행 또는 수평이 되도록 되어 있다.,기축에 직각 또는 수직이 되도록 되어 있다.,Aviation Engineering and Maintenance,0.3529
+항공기에서 피치업 (Pitch Up)의 발생원인으로 틀린 것은?,4,후퇴날개의 비틀림,후퇴날개의 날개 끝 실속,승강키 효율의 감소,날개의 풍압중심이 뒤로 이동하기 때문,Aviation Engineering and Maintenance,0.3529
+왕복기관에서 직접 연료분사장치(Direct Fuel Injection System)의 장점이 아닌 것은?,2,비행자세에 의한 영향을 받지 않는다.,플로트식 기화기에 비하여 구조가 간단하다.,흡입계통 내에는 공기만 존재하므로 역화의 우려가 없다.,연료의 기화가 실린더 안에서 이루어지기 때문에 결빙의 위험이 거의없다.,Aviation Engineering and Maintenance,0.3529
+"복합재료의 초음파검사(Ultrasonic lnspection)중 낮은 주파수의 음향을 피검사물에 주고, 그것에 대한 피검사물로부터의 응답을 이용하는 방법은?",2,반사법,공진법,투과법,X선검사,Aviation Engineering and Maintenance,0.3529
+왕복성형기관의 실린더 수가 9 개 라면 연소 페이즈각(Combustion Phase Angle)은 얼마인가?,3,40°,60°,80°,100°,Aviation Engineering and Maintenance,0.3529
+날개의 받음각(α) 변화에 따른 항력계수(CD) 변화를 옳게 설명한 것은?,3,α가 커지면 CD는 증가하고 실속각을 넘으면 급격히 감소한다.,α가 커지면 CD는 감소하고 실속각을 넘으면 급격히 증가한다.,α가 커지면 CD는 증가하고 실속각을 넘으면 급격히 증가한다.,α가 커지면 CD는 감소하고 실속각을 넘으면 급격히 감소한다.,Aviation Engineering and Maintenance,0.3529
+항공기의 바퀴에 장착되어 있는 퓨즈 플러그의 주된 역할은?,4,타이어 내의 압력을 항상 일정하게 유지시킨다.,제동장치의 효율을 극대화시킨다.,과도한 압력에만 작동한다.,부적절한 브레이크 사용으로 과열시 타이어를 보호한다.,Aviation Engineering and Maintenance,0.3529
+추력 중량비(Thrust weight ratio)를 옳게 설명한 것은?,2,총추력을 기관의 무게로 나눈 값,진추력을 기관의 무게로 나눈 값,총추력을 연료의 무게로 나눈 값,진추력을 연료의 무게로 나눈 값,Aviation Engineering and Maintenance,0.3529
+예방정비에 대한 설명으로 가장 거리가 먼 내용은?,4,처음부터 고장 발생을 전제로 한다.,부품을 고장과 상관없이 일정시간 후에 교체한다.,잦은 교환과 분해 작업으로 조기 고장의 원인이 된다.,장비품이나 부품을 조기에 떼어 내므로 부품의 특성 파악이 용이하다.,Aviation Engineering and Maintenance,0.3529
+항공기의 이착륙 중이나 택시 중 랜딩기어 노스 휠(nose wheel)의 이상 진동을 막는 시미 댐퍼의 형태가 아닌 것은?,3,베인(Vane) 타입,피스톤(Piston) 타입,스프링(Spring) 타입,스티어 댐퍼(Steer damper) 타입,Aviation Engineering and Maintenance,0.354
+금속으로 된 헬리콥터의 회전날개 깃에서 깃의 뿌리에 부착되어 있어 깃이 받는 하중을 허브에 전달하는 역할을 하는 것은?,1,그립 플레이트,팁포켓,깃 얼라이먼트핀,트림태브,Aviation Engineering and Maintenance,0.3542
+항공기용 볼트의 부품번호가 AN 3H-5A인 경우 이 볼트의 재질은?,4,알루미늄합금,내식강,마그네슘합금,합금강,Aviation Engineering and Maintenance,0.3547
+항공기 계기판의 설명으로 가장 관계가 먼 것은?,4,계기판은 비자성재료인 알루미늄 합금으로 되어 있다.,기체 및 기관의 진동으로부터 보호하기 위해 완충 마운트 를 설치한다.,계기판은 지시를 쉽게 읽을 수 있도록 무광택의 검은색을 칠한다.,야간비행시 조종석은 밝게 하여 계기의 누금과 바늘이 잘 보이도록 한다.,Aviation Engineering and Maintenance,0.3547999999999999
+반고정형 회전날개를 가진 헬리콥터와 관계없는 것은?,2,부분 관절형 회전날개이다.,허브에 항력 힌지를 갖고 있다.,시소형 회전 날개가 여기에 속한다.,대부분 2개의 깃을 가진 회전 날개에서 사용한다.,Aviation Engineering and Maintenance,0.3553
+"황동, 공구강, 주철 등과 같이 단면적이 큰 재료를 절단하는 데 가장 적합한 톱날의 종류는?",3,앵글 블레이드(Angle blade),샤넬 블레이드(Channe blade),올-하드 블레이드(All-hard blade),플랙시블 블레이드(Flexible blade),Aviation Engineering and Maintenance,0.3556
+시동을 할 때 정상적인 throttle 보다 적게 열린다면 무엇을 초래하는가?,2,희박혼합비,농후혼합비,희박혼합비에 기인한 역화,조기점화,Aviation Engineering and Maintenance,0.3559
+통신보안 교육기관으로 맞게 짝지어진 것은?,4,"한국전파진흥협회, 중앙전파관리소","국립전파연구원, 중앙전파관리소","한국방송통신전파진흥원, 한국전파진흥협회","중앙전파관리소, 한국방송통신전파진흥원",Aviation Engineering and Maintenance,0.3559
+비행속도가 증가함에 따라 최대 프로펠러 효율을 얻고자 한다. 이 때 깃 각의 변화는 어떻게 되어야 하는가?,2,증가한 후 감소해야 한다.,증가해야 한다.,감소한 후 증가해야 한다.,감소해야 한다.,Aviation Engineering and Maintenance,0.3571
+"압축기의 단수(n)가 4이고, 단당 압력비(rs)가 2 일 때 이 압축기의 압력비는 얼마인가?",3,8,12,16,24,Aviation Engineering and Maintenance,0.3571
+최대 양력계수를 크게 하기 위하여 사용하는 것은?,3,플랩과 스포일러,슬롯과 드래그 슈트,플랩과 슬롯,슬랫과 스포일러,Aviation Engineering and Maintenance,0.3571
+항공기용 왕복기관 시동계통 중 고압마그네토에서 고압의 전류를 발생시키는 것은 무엇인가?,2,1차코일,2차코일,변압기,콘덴서,Aviation Engineering and Maintenance,0.3571
+"항공용 기관에서 내부에 기계적 기구를 가지지 않고 디퓨우져, 밸브망, 연소실 및 분사노즐로 구성된 기관은?",1,펄스 제트기관,램 제트기관,로켓트,프롭팬기관,Aviation Engineering and Maintenance,0.3571
+"날개시위의 길이가 2m, 공기흐름의 속도가 720㎞/h, 공기의 동점성계수가 0.2㎝2/sec일 때 레이놀즈수를 구하면?",2,2 x 106,2 x 107,4 x 106,4 x 107,Aviation Engineering and Maintenance,0.3571
+"기화기에서 만들어진 혼합가스를 각 실린더로 분배하고 , MAP계기의 수감부가 있는 곳은?",4,과급기,흡기밸브,기화기,매니폴드,Aviation Engineering and Maintenance,0.3571
+헬리콥터 회전날개의 각 요소를 결정하는 것에 대한 설명으로 틀린 것은?,2,진동을 줄이기 위해서는 깃의 수는 많아야 한다.,깃의 면적은 고속에서의 기동성을 위해서는 작아야 한다.,회전날개 지름은 좋은 정지비행성능을 위해서는 커야 한다.,전진 비행시 작은 진동과 균일한 깃 하중을 위해서는 깃 비틀림 각은 작아야 한다.,Aviation Engineering and Maintenance,0.3571
+미끈한 평판의 층류가 형성되었을 때 표면마찰 항력계수를 가장 올바르게 설명한 것은?,4,레이놀즈수의 제곱에 비례한다.,레이놀즈수의 제곱근에 비례한다.,레이놀즈수의 제곱에 반비례한다.,레이놀즈수의 제곱근에 반비례한다.,Aviation Engineering and Maintenance,0.3585
+피토-정압계통에서 피토 튜브에 걸리는 공기압은?,4,정압,동압,대기압,전압,Aviation Engineering and Maintenance,0.36
+"24 V, 1/3HP 인 전동기가 효율 75% 로 작동하고 있다면, 이 때 전류는 약 몇 A 인가?",2,7.8,13.8,22.8,30.0,Aviation Engineering and Maintenance,0.3609
+트레일링 에이지 플랩(trailing edge flap)의 설명 중 가장 관계가 먼 내용은?,4,비행기의 양력을 일시적으로 증가 시킨다.,착륙 거리를 감소시킨다.,이륙 거리를 짧게 한다.,보조날개 바깥쪽에 설치되어 있고 힌지로 지탱된다.,Aviation Engineering and Maintenance,0.3611
+실린더 내부의 가스가 피스톤에 작용한 동력은?,1,도시 마력,마찰마력,제동마력,축마력,Aviation Engineering and Maintenance,0.3611
+"헬리콥터의 공기역학에서 자주 사용되는 마력하중(horse power Loading) 을 구하는 식은? (단, W : 헬리콥터의 무게, HP : 헬리콥터의 추력이다.)",4,W/P,πHP/W,HP/W,W/HP,Aviation Engineering and Maintenance,0.3617
+항공기 V-n(비행속도－하중배수)선도에서 플랩등과 같은 공탄성에 의한 비행기의 위험을 피하기 위해서 제한하는 속도를 무엇이라 하는가?,4,실속속도,설계운영속도,설계순항속도,설계급강하속도,Aviation Engineering and Maintenance,0.3617
+가스터빈 엔진의 작동 점검시 드라이 모터링점검 (Dry Motoring Check)은 어느 때 수행하는가?,2,연료계통의 부품교환 후,윤활계통의 부품교환 후,배기계통의 부품교환 후,점화계통의 부품교환 후,Aviation Engineering and Maintenance,0.3622999999999999
+고도계의 오차 중 탄성오차에 대한 설명으로 틀린 것은?,3,재료의 피로 현상에 의한 오차이다.,온도 변화에 의해서 탄성계수가 바뀔 때의 오차이다.,"확대장치의 가동부분, 연결 등에 의해 생기는 오차이다.",압력 변화에 대응한 휘어짐이 회복되기까지의 시간적인 지연에 따른 지연 효과에 의한 오차이다.,Aviation Engineering and Maintenance,0.3632
+임계마하수가 0.70인 직사각형 날개에서 임계마하수를 0.91로 높이기 위해서는 후퇴각을 약 몇 도(°)로 해야 하는가,4,10°,20°,30°,40,Aviation Engineering and Maintenance,0.3632999999999999
+전기측정에 대한 설명 중 가장 올바른 것은?,4,전류계는 반드시 병렬로 연결해야 한다.,전압측정은 작은 범위에서 시작해서 큰 범위로 높여 가면서 측정한다.,저항계는 0점 조절이 필요없다.,저항이 큰 회로에 전압계를 사용할 때는 저항이 큰 전압계를 사용해야 한다.,Aviation Engineering and Maintenance,0.3636
+병렬식 회전날개 헬리콥터의 단점에 대한 설명 내용으로 가장 거리가 먼 것은?,3,수평 비행 시 유해항력이 크다.,세로안정성이 좋지 않기 때문에 꼬리날개를 가진다.,무게 중심 이동범위가 제한되기 때문에 대형기에만 적합하다.,회전날개 상호간의 충돌을 피하기 위한 장치를 설치해야 한다.,Aviation Engineering and Maintenance,0.3636
+최근 터보팬 기관의 역추력장치는 팬 역추력 장치를 주로 사용하는 이유가 아닌 것은?,4,무게감소,연료소모감소,고장감소,역추력 효과의 증가,Aviation Engineering and Maintenance,0.3636
+항공용 윤활유의 점도 측정에는 어떤 것을 사용하는가?,4,레이드 증기 점도계,CFR 점도계,맴돌이 점도계,세이볼트 유니버어설 점도계,Aviation Engineering and Maintenance,0.3636
+4행정 사이클 기관의 각 행정을 구분할 때 기준이 되는 것은?,4,피스톤 모양,크랭크축의 회전 속도,폭발력이 세기,피스톤과 밸브의 위치,Aviation Engineering and Maintenance,0.3636
+날개에서 최대 양력계수를 크게 하기 위한 장치가 아닌 것은?,3,슬롯,드루프 앞전,에어스포일러,크루거 플랩,Aviation Engineering and Maintenance,0.3636
+항공기 기체수리 작업시 리벳팅 하기 전에 임시 고정하는데 사용하는 공구는?,4,캠-록 파스너,딤플링,스퀴즈,시트 파스너,Aviation Engineering and Maintenance,0.3636
+귀보호 장구의 설명 내용으로 가장 올바른 것은?,3,1종 귀보호 장구는 고음에서만 차음되는 귀마개,2종 귀보호 장구는 저음에서 차음되는 귀마개,1종 귀보호 장구는 고음· 저음에서 모두 차음되는 귀마개,2종 귀보호 장구는 고음· 저음에서 모두 차음되는 귀마개,Aviation Engineering and Maintenance,0.3636
+헬리콥터의 주회전날개 헤드를 구성하고 있는 부품들은?,2,"경사판, 주기피치조종로드","경사판, 허브","허브, 동시피치조종로드","주기피치조종로드, 동시피치조종로드",Aviation Engineering and Maintenance,0.3636
+왕복기관 중 저온으로 작동하는 기관에 저온 점화 플러그를 사용하였다면 발생하는 현상은?,3,모두 정상적인 작동을 한다.,조기 점화 현상이 나타난다.,스파크 플러그에 탄소 찌꺼기가 부착된다.,실린더 내부가 저온이 되어 열소비율이 증가한다.,Aviation Engineering and Maintenance,0.3636
+항공기의 지상취급에 해당되지 않는 작업은?,2,계류작업,연료보급작업,견인작업,잭작업,Aviation Engineering and Maintenance,0.3636
+지시대기속도에 피토-정압관 장착 위치 및 계기자체의 오차를 수정한 속도는?,2,EAS,CAS,TAS,IAS,Aviation Engineering and Maintenance,0.3636
+제트기관에서 블리이드 밸브에 대한 설명중 틀린 것은?,4,터빈 노즐베인의 냉각에 사용된다.,방빙장치에 사용된다.,실속이나 서어지를 방지한다.,연료를 가열하고 터빈의 냉각에 사용된다.,Aviation Engineering and Maintenance,0.3636
+"수송기에 무게가 45000N인 기관을 중심으로부터 1000cm 되는 곳에 장착할 경우, 이로 인하여 생기는 중심에서의 모멘트는 약 몇 Nㆍm 인가?",3,45000,90000,450000,45000000,Aviation Engineering and Maintenance,0.3636
+프로펠러의 익단 실속은 성능에 큰 영향을 미치므로 이 현상을 방지하기 위한 방법으로 가장 관계가 먼 것은?,2,프로펠러 직경을 작게 한다.,프로펠러의 회전수를 증가시킨다.,익단 속도를 음속의 90% 이하로 제한 한다.,유성기어열의 감속기어를 설치한다.,Aviation Engineering and Maintenance,0.3636
+동적 세로 안정의 운동의 종류를 열거한 것이다. 해당 되지않는 것은?,2,장주기 운동,나선 운동,단주기 운동,승강키 자유운동,Aviation Engineering and Maintenance,0.3636
+가스터빈기관의 연료노즐 중 고압으로 연소실에 연료를 분사시켜 안개화하는 방식을 나타는 것은?,3,혼합식,증발식,분무식,연소식,Aviation Engineering and Maintenance,0.3636
+"복합 구조재 수리 시 외피세척, 루터작업, 코어 플러그 제작, 패치 교체가 필요한 작업은?",4,단면 수리,적층분리 수리,양면 수리,구멍 뚫림 수리,Aviation Engineering and Maintenance,0.3636
+효율을 증대시키기 위하여 대형 가스터빈기관의 작동 중 터빈 블레이드 팁 간극(Clearnace)을 적절하게 유지하는 방법으로 옳은 것은?,2,고압 압축기 공기를 터빈케이스에 분사한다.,팬부분 공기를 터빈케이스의 외면에 분사한다.,터빈케이스 내면을 진원이 되도록 연마 가공한다.,저압 압축기 공기를 터빈케이스 내면에 분사한다.,Aviation Engineering and Maintenance,0.3636
+음속에 가까운 속도로 비행을 하게되면 속도가 증가될 수록 비행기의 기수가 내려가는 경향이 생겨 조종간을 당겨야 하는 현상이 발생한다. 이 현상을 무엇이라 하는가?,4,더치 롤(dutch roll),내리 흐름(down wash),마하 트림(mach trim),턱 언더(tuck under),Aviation Engineering and Maintenance,0.3636
+직류발전기의 계자 플래싱(field flashing) 이란?,3,계자코일에 배터리로부터 역전류를 가하는 행위,계자코일에 발전기로부터 역전류를 가하는 행위,계자코일에 배터리로부터 정방향의 전류를 가하는 행위,계자코일에 발전기로부터 정방향의 전류를 가하는 행위,Aviation Engineering and Maintenance,0.3646999999999999
+왕복기관에 사용되는 기어(Gear)식 오일펌프의 사이드클리어런스(Side clearance)가 크면 나타나는 현상은?,2,오일 압력이 높아진다.,오일 압력이 낮아진다.,과도한 오일 소모가 나타난다.,오일펌프에 심한 진동이 발생한다.,Aviation Engineering and Maintenance,0.3647999999999999
+헬리콥터의 동력전달장치에서 기관의 동력을 회전날개에 전달하거나 차단하는 역할을 하는 장치는?,3,구동축,변속기,클러치,기어박스,Aviation Engineering and Maintenance,0.3654
+"가스터번엔진에서 압축기 입구온도가 200K, 압력이 1.0kgf/cm2이고, 압축기 출구압력이 10kgf/cm2일 때 압축기 출구온도는 약 몇 K인가? (단, 공기 비열비는 1.4이다.)",3,184.14,258.14,389.14,487.14,Aviation Engineering and Maintenance,0.3675
+비행기의 조종계통에 사용되는 페어리드(fairlead)의 목적은?,4,케이블에 윤활유를 공급해 준다.,케이블의 정비를 쉽게 할 수 있도록 한다.,케이블의 장력이 작아지는 것을 방지한다.,케이블이 처지지 않고 직선운동을 하도록 한다.,Aviation Engineering and Maintenance,0.3684
+볼트의 부품기호가 AN3DD5A로 표시되어 있다면 3이 의미하는 것은?,4,볼트 길이가 3/8in,볼트 직경이 3/8in,볼트 길이가 3/16in,볼트 직경이 3/16in,Aviation Engineering and Maintenance,0.3684
+연료 유량계의 종류가 아닌 것은?,3,차압식 유량계,베인식 유량계,부자식 유량계,동기 전동기식 유량계,Aviation Engineering and Maintenance,0.3684
+평면모양을 구분한 날개의 종류가 아닌 것은?,4,후퇴날개,전진날개,테이퍼날개,낮은날개,Aviation Engineering and Maintenance,0.3684
+평균 공력시위(MAC : mean aerodynamic chord)란 무엇인가?,3,한쪽 날개 끝에서 다른 쪽 날개 끝까지의 투영의 길이,날개의 윗면과 아랫면에 작용하는 압력이 작용하는 점,주날개의 항공역학적 특성을 대표하는 부분의 시위,날개골의 기준이 되는 점으로 받음각이 변하더라도 모멘트 값이 일정한 점,Aviation Engineering and Maintenance,0.3696
+터빈 블레이드 끝 과 터빈 케이스 안쪽의 에어시 일 과의 간격을 줄여주기 위해서 터빈 케이스 외부를 냉각 시켜준다. 여기에 사용되는 냉각 공기는?,3,압축기 배출공기,연소실 냉각공기,팬 압축공기,외부공기,Aviation Engineering and Maintenance,0.3696
+"알루미늄 합금 중 개략적으로 구리 2.5%, 망간 0.2%, 마그네슘 0.5%, 규소 0.8%, 의 성분으로 되어있으며 완전히 시효 경화된 상태로 사용 가능하여 주요강도 부재이외의 대부분 구조 부품의 리벳으로 사용되는 것은?",3,2014,2017,2117,7075,Aviation Engineering and Maintenance,0.3704
+응력외피형 날개의 I 현 날개보의 구성품 중 웨브가 주로 담당하는 하중은?,2,인장하중,전단하중,압축하중,비틀림하중,Aviation Engineering and Maintenance,0.371
+가스용접시 역화의 원인으로 가장 거리가 먼 것은?,3,팁이 물체에 부딪혀 순간적으로 가스의 흐름이 멈출때,팁이 과열되었을 때,가스의 압력이 높을 때,팁의 연결이 불충분할 때,Aviation Engineering and Maintenance,0.3714
+복합재료의 가압방법(Applying presure) 중 숏백(shot bag)에 대한 설명으로 옳은 것은?,3,미리 성형된 카울 플레이트(caul plate)와 함께 사용되어 수리부분의 뒤쪽을 지지한다.,수리한 곳에 압력을 가하는 가장 효과적인 방법이다.,넓은 곡면이 있어서 클램프를 사용할 수 없는 곳에 적합하다.,나일론 직물로 진공 백을 사용할 때 블리이더 재료(bleeder material)등의 제거를 용이하게 해준다.,Aviation Engineering and Maintenance,0.3725
+왕복기관의 연료계통에서 이코노마이져(economizer)장치에 대한 설명으로 옳은 것은?,3,연료 절감 장치로 최소 혼합비를 유지한다.,연료 절감 장치로 순항속도 및 고속에서 닫혀 희박혼합비가 된다.,출력 증강 장치로 순항속도에서 닫혀 희박혼합비가 되도록 한다.,출력 증강 장치로 순항속도에서 열려 농후혼합비가 되고 고속에서 닫혀 희박혼합비가 되도록 한다.,Aviation Engineering and Maintenance,0.3725
+정속프로펠러(constant speed propeller)가 장착되어 있는 경우 부가적으로 요구되는 계기는?,3,엑스허스트 어날라이저(exhaust analyzer),프로펠러 피치게이지(propeller pitch gage),매니폴드 프레셔 게이지(manifold pressure gage),실린더 베이스 템퍼레이쳐 게이지(cylinderbase temperature gage),Aviation Engineering and Maintenance,0.3729
+항공기 날개에서 상반각(쳐든각)에 대한 설명으로 옳은 것은?,2,윗날개와 아랫날개가 이루는 각,날개가 수평을 기준으로 위로 올라간 각,기체의 세로축과 날개의 시위선이 이루는 각,앞전에서 25%되는 점들을 날개 뿌리에서 날개끝까지 연결한 직선과 기체의 가로축이 이루는 각,Aviation Engineering and Maintenance,0.375
+이중 플레어링(Double Flaring) 방식에 대한 설명으로 틀린 것은?,4,심한 진동을 받는 곳에 사용된다.,계통의 압력이 높은 곳에 사용된다.,튜브 연결 부분이 누설되는 것을 방지하기 위하여 사용된다.,지름이 비교적 두꺼운 3/8in 이상의 튜브에 적용된다.,Aviation Engineering and Maintenance,0.375
+눈 보호장구인 차광안경의 색깔 중 가스용접이나 전기용접 시 자외선 차광용으로 어떤 색깔을 사용하는가?,2,적색,황색,황록색,녹색,Aviation Engineering and Maintenance,0.375
+가스터빈기관 중 압축공기를 압축기로 보내고 일부를 연소시키지 않고 엔진 뒤쪽으로 분출하는 형식의 엔진으로서 다량의 배기가스를 비교적 저속으로 분출시키면서 추력을 얻도록 설계되어 있는 기관은?,3,터보제트 기관,터보프롭 기관,터보팬 기관,터보샤프트 기관,Aviation Engineering and Maintenance,0.375
+"비행기 상승률 ""0""에 대한 등식으로 가장 올바른 것은?",4,여유마력 = 필요마력,여유마력 < 이용마력,이용마력 > 필요마력,이용마력 = 필요마력,Aviation Engineering and Maintenance,0.375
+왕복 기관에서 압축비를 너무 크게 할 경우 일어날 수 있는 가능성이 가장 높은 결함은?,2,안티노크현상,디토네이션현상,후화현상,역화현상,Aviation Engineering and Maintenance,0.375
+조종면이 움직이는 방향과 반대 방향으로 작동하도록 기계적으로 연결되어 있는 탭(tab)은?,2,트림탭(trim tab),평형탭(balance tab),서보탭(servo tab),스프링탭(spring tab),Aviation Engineering and Maintenance,0.375
+가스터빈 기관에서 연료여과기의 종류로 사용되지 않는 형식은?,3,카트리지형,스크린형,디스크형,스크린-디스크형,Aviation Engineering and Maintenance,0.375
+왕복기관의 점화계통 정비에서 마그네토 점검에 대한 설명으로 가장 관계가 먼 내용은?,2,펠트(felt)가 건조된 경우는 지정된 윤활유를 2∼3 방울정도 떨어뜨려 준다.,배전기 블럭과 고무 그로밋(rubber grommet)의 이물질은 솔벤트로 깨끗이 닦아낸다.,저압 마그네토의 경우 변압코일을 멀티미터로 측정하여 2차 저항이 5500∼9000Ω 이 되는가를 확인한다.,"마그네토를 점검할 때는 브레이커 포인트, 콘덴서 및 배전기 블럭 등의 상태를 검사한다.",Aviation Engineering and Maintenance,0.375
+옥탄값(O.N)과 퍼포먼스 수(P.N)의 관계식으로 가장 올바른 것은?,3,퍼포먼스 수(P.N) = 128-2800/O.N,퍼포먼스 수(P.N) = 2800-O.N/128,퍼포먼스 수(P.N) = 2800/128-O.N,퍼포먼스 수(P.N) = 128/2800-O.N,Aviation Engineering and Maintenance,0.375
+펄스 에코(pulse-echo)법을 이용한 비파괴 검사법은?,2,와전류 검사,초음파 탐상검사,방사선 투과검사,자분탐상 검사,Aviation Engineering and Maintenance,0.375
+오픈 엔드 렌치의 사용법으로 가장 옳게 설명된 것은?,3,볼트나 너트의 머리에는 한 사이즈 더 큰 렌치를 선택하여 작업한다.,가볍게 돌아가는 볼트와 너트에서는 오픈 엔드 렌치가 박스 렌치보다 작업속도가 느리다.,볼트나 너트를 푸는 방향으로 작업할 때에는 오프렌치의 손잡이를 손바닥으로 밀면서 작업하여야 한다.,렌치를 밀어낼 경우 렌치를 손으로 감아 잡고 작업한다.,Aviation Engineering and Maintenance,0.375
+주날개에 경계층 격판(boundary fence)을 붙이는 가장 큰 이유는?,4,보조날개의 효과를 높이기 위해,큰 받음각이 꼬리날개에 주는 와류의 영향을 막기위해,downwash를 막기위해,익폭에 따라 익단으로 흐르는 공기 흐름을 막기위해,Aviation Engineering and Maintenance,0.375
+헬리콥터의 공기역학에서 자주 사용되는 마력하중(horse power loading)을 구하는 식은?,4,마력하중 =W(π HP),마력하중 =(π HP)/W,마력하중 =HP/W,마력하중 =W/HP,Aviation Engineering and Maintenance,0.375
+서로 밀착된 부품 사이에서 아주 작은 진동이 발생하는 경우에 접촉 표면에 흠이 발생하는 부식은 무엇인가?,3,표면 부식(surface corrosion),응력 부식(stress corrosion),찰과 부식(fretting corrosion),이질 금속 간 부식(galvanic corrosion),Aviation Engineering and Maintenance,0.375
+"성능허용한계, 마멸한계 및 부식한계 등을 가지는 장비나 부품에 활용하여 일정 주기별로 감항성을 판단하여 교환을 결정하는 정비방식은?",3,오버홀,시한성정비,상태정비,신뢰성정비,Aviation Engineering and Maintenance,0.375
+헬리콥터가 자동회전 비행을 할 때에 회전날개 구동축을 기관구동축과 분리시키는 장치는?,4,자동비행 분리축,기관분리 구동축,자동비행장치,자유회전장치,Aviation Engineering and Maintenance,0.375
+한변이 10cm 인 정사각형 단명을 가진 막대에 500N 의 힘이 단면의 수직으로 작용할 때 단면에서의 응력은 몇 N/cm2 인가?,2,0.5,5,25,50,Aviation Engineering and Maintenance,0.375
+충동터빈(Impulse turbine)에 대한 설명으로 옳은 것은?,1,단에서 발생되는 압력저하는 노즐(정익)에서만 일어난다.,단에서 발생되는 압력저하는 회전익에서만 일어난다.,"단에서 발생되는 압력저하는 정익에서 50%, 회전익에서 50%가 일어난다.","일반적으로 블레이드 허브부분에서는 반동형을 채택하고, 팁에서는 충동형을 채택한다.",Aviation Engineering and Maintenance,0.375
+항공기 왕복기관의 크랭크 축에 정적 평형을 주는 것은?,4,주 저널,크랭트 핀,크랭크 암,평형추,Aviation Engineering and Maintenance,0.375
+"밝은 장소라면 실내, 실외에 관계없이 시험을 할 수 잇는 침투탐상검사는?",2,형광침투탐상검사,염색침투탐상검사,와전류침투탐상검사,자분침투탐상검사,Aviation Engineering and Maintenance,0.375
+유체의 흐름과 관련하여 동압(dynamiac pressure)에 대한 설명으로 가장 올바른 것은?,2,"속도에 비례하고, 밀도에는 반비례한다.","속도의 제곱에 비례하고, 밀도에 비례한다.",속도와 밀도에 반비례한다.,"속도에 비례하고, 밀도의 제곱에 비례한다.",Aviation Engineering and Maintenance,0.375
+"연한재질의 알루미늄 튜브(1100,3003 또는 5052)에서 손작업으로 굽힐 수 있는 가능한 치수는?",1,1/4 inch이하,5/16 inch이하,7/16 inch이하,5/8 inch이하,Aviation Engineering and Maintenance,0.375
+"충돌, 추락, 전복 및 사고의 위험이 있는 장비 및 시설물 등에 대하여 주의를 표시하기 위한 색은?",2,빨간색,노란색,녹색,파란색,Aviation Engineering and Maintenance,0.375
+배기밸브(exhaust valve)의 밸브스템(valvestem)의 중공(hollow) 내부에 넣는 금속나트륨 (metallic sodium)의 주역할은?,3,밸브의 파손을 방지한다.,배기밸브의 온도를 일정하게 유지하게 한다.,배기밸브의 냉각을 돕는다.,배기밸브를 가열시켜 출력을 증가시킨다.,Aviation Engineering and Maintenance,0.375
+론저론(Longeron)에 대한 설명으로 가장 옳은 것은?,3,가벼운 판금에 강성을 주기 위하여 플랜지를 갖는 부재,날개의 스파(Spar)를 결합하기 위한 세로방향 부재,동체나 낫셀에 있어서 앞ㆍ뒤 방향으로 배치된 강재,기관이나 연소실을 객실로부터 분리시키기 위한 수직 부재,Aviation Engineering and Maintenance,0.375
+"비행기가 3.6km/h의 속도로 비행하고 있을 때 상승각이 6°라면, 상승률은 몇 m/s인가? (단, sin6°=0.10, cos6°=0.99, tan6°=0.11로 한다)",3,0.3,0.9,0.1,1.1,Aviation Engineering and Maintenance,0.375
+불안전한 행위로 발생되는 사고와 관계 없는 것은?,4,지시상의 결함,"신체적, 정신적 부적합","규칙, 절차 무시",작업상태의 불량,Aviation Engineering and Maintenance,0.375
+고속 비행기의 세로 불안정에 포함되지 않는 것은?,4,턱 언더,피치 업,디프 실속,날개 드롭,Aviation Engineering and Maintenance,0.375
+"부식 환경에서 금속에 가해지는 반복 응력에 의한 부식이며, 반복 응력이 작용하는 부분의 움푹 파인 곳의 바닥에서부터 시작되는 부식은?",4,점 부식,입자간 부식,찰과 부식,피로 부식,Aviation Engineering and Maintenance,0.375
+가스터빈 기관의 연료조절 장치의 수감부분에서 수감하는 주요 작동변수가 아닌 것은?,3,기관의 회전수,압축기 입구온도,연료펌프의 출구압력,동력 레버의 위치,Aviation Engineering and Maintenance,0.3784
+"열가소성 수지 중 유압 백업링(Backup Ring), 호스(Hose), 패킹(Packing), 전선피복(Coating)등에 사용되는 수지는?",4,아크릴수지,염화비닐수지,폴리에틸렌수지,테프론(Teflon),Aviation Engineering and Maintenance,0.3784
+프로펠러에 의해 형성되는 프로펠러 주위에서 공기흐름에 의해 구성되는 유관(stream tube)의 단면적 형태는?,4,점점 증가하다가 감소한다.,점점 감소하다가 증가한다.,점진적으로 증가한다.,점진적으로 감소한다.,Aviation Engineering and Maintenance,0.3788
+"부품의 손상형태에서 깊게 긁힌형태로, 표면이 예리한 물체와 닿았을때 생긴것을 무엇이라 하는가?",3,균열(crack),가우징(gouging),스코어(score),용착(Gall),Aviation Engineering and Maintenance,0.3792999999999999
+미국 도선규격으로 채택된 도선규격은?,3,AM 도선 규격,AS 도선 규격,BS 도선 규격,DIN 도선 규격,Aviation Engineering and Maintenance,0.3792999999999999
+부자식 기화기(Float-type carburetor)에 있는 이코노마이저 밸브(Economizer valve)의 작동에 대한 설명으로 옳은 것은?,2,저속과 순항속도에서는 밸브가 열린다.,최대 출력에서 농후한 혼합비를 만든다.,순항시 최적의 출력을 얻기 위하여 농후한 혼합비를 유지한다.,기관의 갑작스런 가속을 위하여 추가적인 연료를 공급한다.,Aviation Engineering and Maintenance,0.3814
+스냅링(Snap ring)을 축 위의 홈에 맞도록 벌려주기 위하여 제작된 공구는?,4,롱노즈 플라이어(Longnose plier),커넥터 플라이어(Connector plier),인터널 링 플라이어(Internal plier),익스터널 링 플라이어(External plier),Aviation Engineering and Maintenance,0.3824
+저주파 증폭기에서 수신기 전체의 성능을 판단할 때 활용되는 특성이 아닌 것은?,2,감도,검출도,충실도,선택도,Aviation Engineering and Maintenance,0.3831
+카르노사이클이 427℃ 와 77℃ 의 온도 범위에서 작동할 때 열효율은 몇 % 인가?,3,0.3,0.4,0.5,0.6,Aviation Engineering and Maintenance,0.3846
+항공기 날개(WING)의 가장 기본적인 구조부재는?,2,스트링거(STRINGER),스파(SPAR),리브(RIB),스킨(SKIN),Aviation Engineering and Maintenance,0.3846
+메뉴얼 조종장치(Manual Control system)에 관한 설명으로 가장 올바른 내용은?,3,대형 항공기에 적합하다.,"신뢰성은 높으나 무겁고, 정비가 어렵다.",동력원이 필요 없다.,컴퓨터에 의해 조종계통을 자동적으로 제어한다.,Aviation Engineering and Maintenance,0.3846
+"입구 단면적 10cm2, 출구 단면적20cm2 인 관의 입구에서, 속도가 12m/s인 경우 출구에서의 속도는 몇 m/s 인가? (단, 유체는 비압축성 유체다.)",2,5 m/s,6 m/s,7 m/s,8 m/s,Aviation Engineering and Maintenance,0.3846
+제트 엔진의 소음감소 장치라 할 수 없는 배기노즐은?,4,다수 튜브제트 노즐형,주름살형(꽃모양형),소음흡수 라이너 부착,블록커 도어 부착,Aviation Engineering and Maintenance,0.3846
+"부피가 일정한 경우 공기 6kg을 100˚C에서 600˚C 까지 가열하는데 필요한 공급 열량은 몇 kcal 인가? (단, 부피가 일정한 상태에서 기체의 온도를 1˚C 높이는데 필요한 열량은 0.172kcal/kg·˚C 이다.)",3,316,416,516,616,Aviation Engineering and Maintenance,0.3846
+"항공기가 5,000 m의 고도를 360km/h로 비행하고 있다. 날개의 면적은 30m2이고, 항력계수는 0.03일 때 필요마력은 얼마인가? (단, 공기밀도는 0.075kg· s2 /m4)",4,3499 마력,58 마력,699 마력,450 마력,Aviation Engineering and Maintenance,0.3846
+속도 50m/sec로 비행하는 비행기의 항력이 1000kgf이라면 이때 비행기의 필요마력(Hp)은?,2,529,667,720,854,Aviation Engineering and Maintenance,0.3846
+압력계수의 의미를 가장 올바르게 나타낸 것은?,1,정압의 차/동압,정압의 차/전압,동압/정압의 차,전압/정압의 차,Aviation Engineering and Maintenance,0.3846
+정비기술 도서의 종류에 속하지 않는 것은?,3,정비 기술정보,작동 기술정보,정비지원 기술정보,부품 기술정보,Aviation Engineering and Maintenance,0.3846
+흐름의 떨어짐 현상(박리; Separation)에 대한 내용으로 가장 올바른 것은?,4,난류 경계층의 경우에만 발생한다.,층류 경계층의 경우에만 발생한다.,아음속 항공기의 난류 경계층에서만 발생한다.,난류 경계층보다 층류 경계층에서 쉽게 일어난다.,Aviation Engineering and Maintenance,0.3846
+"1기압, 15℃인 공기를 1초당 100kg씩 흡입하여 10기압으로 압축하고, 연소실에서 발열량이 1200kcal/kg인 연료를 1초당 1.2kg식 소비하는 터보제트 기관이 있다. 이상적인 사이클 해석에 의하면 압축기 출구온도는 약 얼마인가? (단, 비열비 k는 1.4이다.)",2,139K,556K,656K,1440K,Aviation Engineering and Maintenance,0.3846
+가스터빈기관 연료의 구비조건으로 틀린 것은?,4,점성이 낮아야 한다.,증기압이 낮아야 한다.,어는점이 낮아야 한다.,인화점이 낮아야 한다.,Aviation Engineering and Maintenance,0.3846
+완속(Idle) 상태에서 과도하게 농후한 혼합비의 원인이 아닌 것은?,2,연료 압력이 너무 높다.,연료 여과기 (Fuel Filter)가 막혔다.,완속 혼합비 조절이 정확하게 맞지 않았다.,프라이머 라인(Primer Line)이 개방(Open)되어 있다.,Aviation Engineering and Maintenance,0.3846
+항공기용 가스터빈 기관에 적용하기에 가장 적당한 열 역학적인 사이클은?,3,카르노 사이클(Carnot Cycle),오토 사이클(Otto Cycle),브레이턴 사이클(Brayton Cycle),디이젤 사이클(Diesel Cycle),Aviation Engineering and Maintenance,0.3846
+렌치 개구 부분의 크기를 웜과 래그로 조절이 가능한 렌치는?,2,박스렌치,조절렌치,소켓렌치,래치팅 렌치,Aviation Engineering and Maintenance,0.3846
+2개의 주 회전날개가 서로 반대 방향으로 회전하므로 각각의 회전 날개에서 발생되는 토크(Torque)가 상쇄되어 조종성이 좋은 회전날개 헬리콥터는?,4,단일 회전날개 헬리콥터,직렬식 회전날개 헬리콥터,병렬식 회전날개 헬리콥터,동축역회전식 회전날개 헬리콥터,Aviation Engineering and Maintenance,0.3846
+기관의 출력 정격중 비연료 소모율이 가장 적은 추력은?,4,이륙추력,물분사 이륙추력,최대 연속추력,순항추력,Aviation Engineering and Maintenance,0.3846
+접근하기 어려운 작업공간에서 유용하게 사용하며 금속재질을 잡는데 주로 사용하는 공구는?,4,Bit holder,Hinged mirror,Strap wrench,Permanent magnet,Aviation Engineering and Maintenance,0.3846
+세이크 프루프 고정 와셔(SHAKE PROOF LOCK WASHER)는 어떤 곳에 사용하는가?,1,회전을 방지하기 위하여 고정 와셔가 필요한 곳에 사용한다.,고열에 잘 견딜 수 있고 또한 심한진동에도 안전하게 사용할 수 있음으로 조절계통(CONTROL SYS)및 ENGINE 계통에 사용한다.,기체구조 접합물에 많이 사용된다.,기체외피와 구조물의 접착에 일반적으로 사용한다.,Aviation Engineering and Maintenance,0.3846
+크루거 플랩에 대한 설명중 잘못된 것은?,3,기구가 복잡하고 작동장치가 크다.,소형 항공기에는 별로 사용하지 않는다.,공기역학적으로 슬롯 등과 같은 효과를 갖는다.,앞전 플랩에 일반적으로 사용된다.,Aviation Engineering and Maintenance,0.3846
+일반적으로 항공기에서 사용하는 AWG 도선 규격에서 cail의 의미로 옳은 것은?,3,도선의 지름을 1/1000 인치 단위로 환산한 분자의 수치,도선의 단면적을 1/1000 인치 단위로 환산한 분자의 수치,도선의 지름을 1/1000 인치 단위로 환산하여 분자의 수치를 제곱한 것,도선의 단면적을 1/1000 인치 단위로 환산하여 분자의 수치를 제곱한 것,Aviation Engineering and Maintenance,0.386
+항공기의 날개착륙장치의 트럭형식에서 트럭위치작동기(truck position actuator)에 대한 설명으로 틀린 것은?,1,착륙장치를 접어들어거나 펼칠 때 사용되는 유압작동기이다.,착륙장치가 접혀 들어갈 때 공간을 줄이기 위해서도 사용된다.,항공기가 지상에서 수평으로 활주할 때에는 완충스트럿과 트럭빔이 수직이 되도록 댐퍼(damper)의 역할도 한다.,바퀴가 지면으로부터 떨어지는 순간에 완충 스트럿과 트럭빔을 특정한 각도로 유지시켜주는 유압작동기이다.,Aviation Engineering and Maintenance,0.3878999999999999
+비행기가 정상 수평선회시 경사각이 60° 일때의 하중배수는 얼마인가?,2,1,2,3,4,Aviation Engineering and Maintenance,0.3889
+속도50m/s 로비행하는 비행기의 항력이 1000kgf 라면 이때 비행기의  필요마력은 약 몇 hp 인가?,2,529,667,720,854,Aviation Engineering and Maintenance,0.3889
+회전자 깃의 입구와 출구의 압력 및 상대속도의 크기가 같은 터빈은?,4,레디얼 터빈,반동 터빈,충동-반동터빈,충동 터빈,Aviation Engineering and Maintenance,0.3889
+볼트 헤드에 × 기호가 새겨져 있다면 이 기호의 의미는?,3,열처리 볼트,내식강 볼트,합금강 볼트,정밀 공차 볼트,Aviation Engineering and Maintenance,0.3889
+스테인리스 강이나 인코넬 튜브로 만들어져 있으며 인코넬 튜브안은 절연체 세라믹으로 채워져 있고 전기적 신호를 전송하기 위하여 2개의 니켈 전선이 들어 있는 항공기 화재 탐지기는?,4,열전쌍식,광전지식,열스위치식,저항루프식,Aviation Engineering and Maintenance,0.3889
+항공기용 가스터빈기관의 역추력 장치에 대한 설명으로 틀린 것은?,1,추가적인 추력장치를 이용하여 정상착륙 시 제동능력 및 방향전환능력을 돕는다.,일부 항공기에서는 스피드 브레이크로 사용해서 항공기의 강하율을 크게 한다.,주기(Parking)해 있는 항공기에서 동력 후진할 때 사용한다.,비상 착륙 시나 이륙 포기 시 제동능력 및 방향 전환능력을 향상시킨다.,Aviation Engineering and Maintenance,0.3889
+왕복기관에서 흡입밸브의 여닫힘은 실제로 언제 이루어지는가?,3,"피스톤이 상사점에 있을 떄 열리고, 하사점에 있을 때 닫힌다.","피스톤이 하사점에 있을 떄 열리고, 상사점에 있을 때 닫힌다.","피스톤이 상사점 전에 열리고, 하사점 후에 닫힌다.","피스톤이 상사점 후에 열리고, 하사점 전에 닫힌다.",Aviation Engineering and Maintenance,0.3889
+가스터빈기관의 압축기에서 가변 스테이터(stator) 구조의 목적으로 옳은 것은?,1,로터의 회전 속도를 일정하게 한다.,유입 공기의 절대속도를 일정하게 한다.,로터에 대한 유입공기의 받음각을 일정하게 한다.,로터에 대한 유입공기의 상대 속도를 일정하게 한다.,Aviation Engineering and Maintenance,0.3889
+후기연소기에 대한 설명으로 틀린 것은?,2,효과적인 연소를 위해 입구의 공기속도가 작은 것이 좋다.,후기연소기 미작동 시에는 배기노즐 출구의 면적을 크게 한다.,터빈출구와 후기연소기 입구 사이는 디퓨져 구조로 설치한다.,터빈 뒤에 테일콘을 장착하여 확산통로가 되도록 한다.,Aviation Engineering and Maintenance,0.3889
+4극 랩결선(lap winding) 직류발전기는 4개의 병렬결선회전자(armature)를 갖고 있다.소요되는 브러시(brush)의 수는 몇 개 인가?,2,2,4,6,8,Aviation Engineering and Maintenance,0.3902
+항공용 왕복기관의 냉각계통에 대한 설명으로 틀린 것은?,3,공랭식 냉각장치 중 카울플랩은 조종석과 기계적 또는 전기적으로 연결되어 있다.,공랭식 왕복기관의 냉각공기 원(source)은 프로펠러 후류팬에 의해 발생된 공기와 램 공기이다.,공랭식 왕복기관을 장착한 헬리콥터의 경우 팬 후류보다 램 공기에 의한 냉각 효과가 좋다.,액랭식 왕복기관의 냉각재는 어는점과 끓는점의 특성이 우수한 에틸렌글리콜을 많이 사용한다.,Aviation Engineering and Maintenance,0.3913
+흐르지 않고 정지되어 있는 유체에 대한 설명으로 틀린 것은?,4,유체내의 압력은 모든 면에 수직으로 작용한다.,동일 높이에 있는 두 점의 압력의 크기는 항상 같다.,유채내의 임의의 한 점에 작용하는 압력의 크기는 모든 방향에서 동일하다.,밀폐된 용기에 있는 기체에 가한 압력의 크기는 압력을 가한 방향이 가장 크다.,Aviation Engineering and Maintenance,0.3913
+지름이 5cm 인 원형 단면인 봉에 1000 kg 의 인장 하중이 작용할 때 단면에서의 응력은 약 몇 kg/m2 인가?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),1,51,64,102,200,Aviation Engineering and Maintenance,0.3913
+구조재료중 FRP의 설명으로 옳지 않은 것은?,4,Fiber Reinforce Plastic(섬유강화 플라스틱)의 약어이다.,"경도, 강성이 낮은것에 비해 강도비가 크다.",2차구조나 1차구조에 적층재나 샌드위치 구조재로서 사용된다.,진동에 대한 감쇠성이 적다.,Aviation Engineering and Maintenance,0.3922
+"단(stage) 당 압력비가 1.34 인 9단 축류형 압축기의 출구압력은 약 몇 psi 인가? (단, 압축기 입구압력은 14.7 psi 이다.)",2,177,205,255,276,Aviation Engineering and Maintenance,0.3927
+헬리콥터의 착륙장치에 대한 설명으로 틀린 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),3,휠형 착륙장치는 자신의 동력으로 지상 활주시 가능하다.,스키드형의 착륙장치는 자신의 동력으로 지상 활주가 가능하다.,스키드형은 접개들이식 장치를 갖고 있어 이ㆍ착륙이 용이 하다.,휠형 착륙장치는 지상에서 취급이 어려운 대형 헬리콥터에 주로 사용된다.,Aviation Engineering and Maintenance,0.3928999999999999
+"24v, 1/3HP motor 가 효율 75%에서 동작되고 있으면 그 때의 전류는?",2,4.6A,13.8A,22.8A,30.0A,Aviation Engineering and Maintenance,0.3928999999999999
+저항 30Ω과 리액턴스 40Ω을 병렬로 접속하고 양단에 120V의 교류전압을 가했을 때 전선류는 몇 A인가?,1,5,6,7,8,Aviation Engineering and Maintenance,0.3932
+"압축비가 8인 오토사이클의 열효율은 약 얼마인가?(단, 공기 비열비는 1.5이다.)",4,0.52,0.56,0.58,0.64,Aviation Engineering and Maintenance,0.3933
+항공기가 이ㆍ착륙할 때 받는 추가적인 하중과 관련된 힘은?,3,구심력,원심력,관성력,표면장력,Aviation Engineering and Maintenance,0.3947
+"부품 제작사에서 설계, 제작한 구성품을 정비할 때 주로 활용하는 도서는?",3,정비 도서,전기 배선 도서,부품 오버홀 도서,부품 목록 도서,Aviation Engineering and Maintenance,0.3947
+유체흐름의 천이현상과 가장 관계가 적은 것은?,3,유체의흐름 속도,유체의 점성계수,유체의 온도,흐름에 놓여있는 물체의 형상,Aviation Engineering and Maintenance,0.3947
+헬리콥터의 지상취급에 대한 설명으로 틀린 것은?,3,풍속이 20knot 이상이면 헬리콥터의 계류작업을 실시한다.,헬리콥터의 연료 보급시 3점접지를 반드시 실시한다.,헬리콥터의 견인 작업시 견인속도는 5km/h를 초과하지 않는다.,헬리콥터의 잭 작업시 풍속이 24km/h 이상이면 작업을 금지한다.,Aviation Engineering and Maintenance,0.3973
+"압력 7atm, 온도 300℃인 0.7m3의 이상기체가 압력 5atm, 체적 0.56m3의 상태로 변화했다면 온도는 약 몇 ℃가 되는가?",1,54,87,115,187,Aviation Engineering and Maintenance,0.3986
+기체의 점검 중 정시점검에 해당하지 않는 것은?,4,ISI점검,C점검,D점검,E점검,Aviation Engineering and Maintenance,0.4
+"경질 공구용 합금 중 WC, TiC, TaC 등의 금속 탄화물을 Co로 소결한 비철합금으로서 소결 탄화물 공구하고도 불리는 재료는?",4,고속도강,스테인리스강,스텔라이드,소결 초경합금,Aviation Engineering and Maintenance,0.4
+마스터와 아티큘레이터 (Master and Articulater) 형 커넥팅 로드는 주로 어떤 기관에 사용되는가?,3,V 형 기관,수평대향형 기관,성형 기관,직렬형 기관,Aviation Engineering and Maintenance,0.4
+"기체구조 전체에 대해 반복하중을 가하는 방법을 통하여 구조의 안전 수명을 결정하는 것이 주목적이며, 부수적으로 2차 구조의 손상 여부를 검토하기 위한시험은?",3,낙하시험,정하중시험,피로시험,지상진동시험,Aviation Engineering and Maintenance,0.4
+"힘(force)은 크기,방향,작용점의 세 가지 요소를 가진다. 이와같은 세 가지 요소를 가지는 물리량은?",2,모멘트(moment),벡터(vector),스칼라(scalar),강도(strength),Aviation Engineering and Maintenance,0.4
+헬리콥터에서 목재로 된 주회전 날개 깃의 끝에 있는 팁 포켓의 역할은?,2,깃의 궤도를 맞추는데 사용,깃 길이 방향의 평형을 맞추는데 사용,깃의 무게중심을 맞추는데 사용,진동을 감소시키는데 사용,Aviation Engineering and Maintenance,0.4
+좌굴(Buckling)에 관한 설명으로 가장 올바른 것은?,4,세장비(Slenderness ratio)가 작은 봉(Bar)은 좌굴 강도에 의하여 파괴된다.,큰 인장하중을 받는 곳은 좌굴될 위험이 있다.,제한하중을 초과해서 선회하는 경우에 좌굴이 일어 난다.,압축하중을 받는 곳은 좌굴될 위험이 있다.,Aviation Engineering and Maintenance,0.4
+윙렛(winglets)에 대한 설명으로 잘못된 것은?,4,날개끝에서의 와류발생을 작게한다.,일반적으로 고속 비행기에 많이 사용한다.,항력을 감소 시킨다.,스핀시 회복력을 증가 시킨다.,Aviation Engineering and Maintenance,0.4
+"항공기가 200m/s 로 비행하고 있다. 이 때의 항력이 3500kgf 이라면 필요마력은 약 몇 HP 인가? (단, 1HP는 75kgfㆍm/s로 한다.)",4,1313,2625,5250,9333,Aviation Engineering and Maintenance,0.4
+헬리콥터의 주 회전날개의 평형작업에 대한 설명중 옳지 않은 것은?,4,진동은 회전날개와 기체구조에 커다란 영향을 끼치므로 회전날개는 평형을 맞추어야 한다.,주 회전날개의 진동은 시위방향과 길이방향의 평형이 맞지 않을 경우 나타난다.,떠어낸 상태에서 회전날개의 평형을 맞추는 것을 정적평형작업이라 한다.,동적평형작업이 끝난후에 정적평형작업을 실시한다.,Aviation Engineering and Maintenance,0.4
+단일 회전날개 헬리콥터에서 연료탱크는 대부분 어느 곳에 위치하는가?,3,테일 붐,파일론,동체,날개,Aviation Engineering and Maintenance,0.4
+헬리콥터에서 회전날개의 회전면과 원추 모서리와 이루는 각을 무엇이라 하는가?,3,받음각,피치각,코닝각,쳐든각,Aviation Engineering and Maintenance,0.4
+비행기 날개에서의 압력중심에 관한 설명 내용으로 가장 올바른 것은?,1,비행기의 안전성과 날개의 구조강도상 이동이 작은 것이 좋다.,받음각에 관계없이 일정하다.,캠버 길이의 1/4 정도인 곳에 위치한다.,비행기가 급강하할 때 앞으로 이동한다.,Aviation Engineering and Maintenance,0.4
+다이얼 타입이라고도 하며 토크가 걸리면 다이얼에 토크값이 지시되는 렌치는?,2,프리셋 토크 드라이버,리지드 프레임 토크 렌치,디플렉팅 빔 토크 렌치,소켓 렌치,Aviation Engineering and Maintenance,0.4
+안티스키드 장치의 구성품이 아닌 것은?,2,휠 스피드 센서,R.P.M,컨트롤 박스,컨트롤 밸브,Aviation Engineering and Maintenance,0.4
+배기가스 이젝터(exhaust ejector)에 대한 설명으로 옳은 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.)(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),4,배기 매니폴드(exhaust manifold) EH느 머플러(muffler)를 기관의 냉각 공기로 냉각시키는 장치,"배기가스의 흐름에 의한 저압을 이용, 기관실의 공기를 흡입하여 냉각 공기가 흐르도록 하는 장치",배기가스를 표준환경대기 수준으로 정화하는 장치,배기 매니폴드에서 모아진 배기가스를 모아 배기가 잘 되도록 하는 장치,Aviation Engineering and Maintenance,0.4
+가로방향 불안정에 대한 설명 내용으로 가장 관계가 먼 것은?,4,가로방향 불안정은 더치 롤(dutch roll)이라 한다.,가로진동과 방향진동이 결합되어 발생한다.,대개 동적으로는 안정하지만 진동하는 성질 때문에 문제가 된다.,정적방향 안정보다 쳐든각 효과가 작을 때 일어난다.,Aviation Engineering and Maintenance,0.4
+콤비네이션 플라이어(combination plier) 사용법에 대한 설명으로 옳은 것은?,3,코터핀을 장탈하는데 사용한다.,다량의 볼트나 너트 장˚탈착시 사용한다.,금속조각이나 와이어 등을 구부리는데 사용한다.,스크류 드라이버로서 작업하기 협소한 공간에서 사용한다.,Aviation Engineering and Maintenance,0.4
+헬리콥터의 동력 구동축에 대한 설명으로 관계가 먼 것은?,4,"동력 구동축은 기관 구동축, 주회전날개 구동축 및 꼬리 회전날개 구동축으로 구성되어 있다.",구동축의 양끝은 스플라인으로 되어 있거나 스플라인으로 된 유연성 커플링이 장착되어 있다.,진동을 감소시키기 위해 동적인 평형이 이루어지도록 되어 있다.,지지 베어링에 의해서 진동이 발생할 수 있으므로 회전을 고려한 베어링의 편심을 이뤄야 한다.,Aviation Engineering and Maintenance,0.4
+대향형 기관 실린더 헤드의 원통형 연소실과 비교하여 반구형 연소실의 장점이 아닌 것은?,3,연소실 전파가 좋아 연소효율이 높다.,흡˚배기 밸브의 직경을 크게 하므로 체적 효율이 증가한다.,실린더 헤드의 제작이 쉽고 밸브 작동기구가 간단하다.,동일 용적에 대해 표면적을 최소로 하기 때문에 냉각 손실이 적다.,Aviation Engineering and Maintenance,0.4
+날개 끝 실속을 방지하기 위해 날개 끝의 붙임각을 날개 뿌리의 받음각보다 작거나 크게 한 것을 무엇이라 하는가?,2,쳐든각,기하학적 비틀림,뒤젖힘각,기계적 비틀림,Aviation Engineering and Maintenance,0.4
+표준 오토 사이클은 어떤 과정으로 이루어지는가?,2,2개의 단열과정과 2개의 정압과정,2개의 단열과정과 2개의 정적과정,2개의 정압과정과 2개의 등온과정,2개의 정압과정과 2개의 정적과정,Aviation Engineering and Maintenance,0.4
+왕복기관에서 실린더안의 연소가 가장 잘 이루어지는 연소실의 모양은?,4,원뿔형,도움형,삼각,반구형,Aviation Engineering and Maintenance,0.4
+열을 일로 변환시키는 계수에 해당되는 것은?,3,일의 열당량,열팽창 계수,열의 일당량,에너지 변수,Aviation Engineering and Maintenance,0.4
+코터핀의 장착 및 떼어낼 때의 주의사항 중 틀린 내용은?,4,한번 사용된 것은 재사용해서는 안된다.,핀끝을 절단할 때는 핀축에 직각으로 절단 해야한다.,핀끝을 접어 구부릴 때는 펼쳐지게 해야한다.,핀끝을 너트의 벽에 꼭 붙이기 위해 스틸햄머를 사용해야 한다.,Aviation Engineering and Maintenance,0.4
+항공기 연료에 사용되는 케로신(kerosene)에 대한 내용으로 가장 올바른 것은?,3,가솔린 보다 갤론당 BTU가 적다.,가솔린과 갤론당 BTU가 같다.,가솔린 보다 파운드당 BTU가 적다.,가솔린 보다 파운드당 BTU가 많다.,Aviation Engineering and Maintenance,0.4
+불안전한 행위로 발생되는 사고와 가장 거리가 먼 것은?,1,물리적 위험 상태,피로한 상태,작업자의 능력부족,불안전한 습관,Aviation Engineering and Maintenance,0.4
+"표준상태(T=273.15 °K, P=1.0332×104 Kgf/m2 ) 에서의 공기의 비체적  이라면 공기의 기체상수 R은 얼마인가?",3,27.29,28.29,29.27,32.21,Aviation Engineering and Maintenance,0.4
+왕복가관 윤활계통에서 크랭크케이스 밑부분을 윤활유 탱크로 이용하는 방식을 무엇이라 하는가?,2,단일윤활계통,습식윤활계통,오일윤활계통,건식윤활계통,Aviation Engineering and Maintenance,0.4
+연료 조정장치와 연료 매니폴드 사이에 위치하여 연료 흐름을 1차 연료와 2차 연료로 분류시키고 기관 정지시에 매니폴드나 연소실에 남아 있는 연료를 외부로 배출시키는 역할을 하는 밸브를 무슨 밸브라 하는가?,4,드레인 밸브,가압 밸브,매니폴드 밸브,여압 및 배출 밸브,Aviation Engineering and Maintenance,0.4
+관성항법장치(INS)로서 얻을 수 없는 정보는?,4,현재의 비행위치,도착공항 까지의 거리,비행코스에 대한 벗어난 정도,방위에 따라 위상이 변화,Aviation Engineering and Maintenance,0.4
+"기체 수리 시 판재를 평면 설계할 때, 판재를 정확히 수직으로 구부리기 위하여 추가적으로 필요한 일정한 길이를 무엇이라 하는가?",2,세트백,굽힘여유,최소 굽힘반지름,스프링백,Aviation Engineering and Maintenance,0.4
+밸브 지연과 밸브 앞섬은 무엇으로 표시하는가?,4,캠축의 회전속도,캠축의 회전각도,크랭크축의 회전각도,크랭크축과 캠축의 회전각도 차이,Aviation Engineering and Maintenance,0.4
+점검을 위해서 가장 쉽게 떼어낼 수 있는 연소실의 형태는?,2,Annular Type,Can Type,Can-Annular Type,Axial-Annular Type,Aviation Engineering and Maintenance,0.4
+옥탄값(O.N)과 퍼포먼스수(P.N)의 관계식으로 가장 올바른 것은?,1,옥탄값(O.N.)=128-(2800/P.N.),옥탄값(O.N.)=2800-(128/P.N.),옥탄값(O.N.)=P.N.-(2800/128),옥탄값(O.N.)=P.N.-(128/2800),Aviation Engineering and Maintenance,0.4
+AN 310 규격번호는 어떤 너트인가?,3,고정너트,자동고정너트,캐슬너트,평너트,Aviation Engineering and Maintenance,0.4
+"장비 및 기기가 수리, 조절 및 검사 중 일때 이들 장비의 작동을 방지하기 위하여 사용되는 안전색채는 어느 것인가?",3,검은색,황색,청색,적색,Aviation Engineering and Maintenance,0.4
+오존의 농도가 가장 높은 곳은?,2,대기권,성층권,중간권,시위의 15%,Aviation Engineering and Maintenance,0.4
+가변면적 흡입도관을 설명한 내용으로 틀린 것은?,4,효율적이다.,설계가 어렵다.,제작이 어렵다.,구조가 간단하다.,Aviation Engineering and Maintenance,0.4
+왕복기관에서 피스톤 링의 역할이 아닌 것은?,4,실린더 벽에 윤활유를 공급한다.,피스톤의 열을 실린더에 전달한다.,가스의 누설을 방지한다.,피스톤에 작용하는 압력을 커넥팅로드에 전달한다.,Aviation Engineering and Maintenance,0.4
+왕복기관에서 임계고도는 어떤 마력에 의해 정하여 지는가?,2,이륙마력,정격마력,순항마력,경제마력,Aviation Engineering and Maintenance,0.4
+대기권중 대류권에서의 고도가 올라갈수록 대기의 상태를 가장 올바르게 서술한 것은?,2,"온도, 밀도, 압력 모두가 증가한다.","온도, 밀도, 압력 모두가 감소한다.","온도, 압력은 감소하고 밀도는 증가한다.","온도, 압력은 증가하고 밀도는 감소한다.",Aviation Engineering and Maintenance,0.4
+유압 계통에 있는 필터에서 필터 내에 바이패스 릴리프밸브의 주 목적은?,2,필터 엘리먼트 내에 유압유 압력이 높아지면 귀환 라인으로 유압유를 보내기 위하여,필터 엘리먼트가 막힐 경우 유압유를 계통에 공급하기 위하여,유압유 공급 라인에 압력이 과도하여지는 것으로부터 계통을 보호하기 위하여,회로 압력을 설정 값 이하로 제한하여 계통을 보호하기 위하여,Aviation Engineering and Maintenance,0.4
+항공용 가솔린의 구비 조건으로서 가장 관계가 먼 것은?,3,기화성이 좋아야 한다.,안전성이 커야 한다.,부식성이 커야 된다.,내한성이 커야한다.,Aviation Engineering and Maintenance,0.4
+제작회사나 관련기관으로 부터 전달되는 기술지시에서 AD는 무엇을 나타내는가?,2,시한성 기술지시,감항성 개선명령,도해부품 목록,최소 구비장비 목록,Aviation Engineering and Maintenance,0.4
+"가스터빈 기관의 안쪽으로 공기가 통과하면서 공기의 압력,온도 및 속도가 변화하는데 압력이 제일 높은 곳은?",2,터빈 출구,압축기 출구,터빈 입구,압축기 입구,Aviation Engineering and Maintenance,0.4
+왕복기관의 실린더에서 발생되는 마력으로 가장 올바른 것은?,2,축 마력,지시 마력,제동 마력,추력 마력,Aviation Engineering and Maintenance,0.4
+기관 압력비를 가장 올바르게 나타낸 것은?,3,연소실 입구와 터빈 출구의 전압의 비,압축기 입구의 전압과 출구의 전압의 비,압축기 입구의 전압과 터빈 출구의 전압의 비,압축기 입구의 전압과 연소실 출구의 전압의 비,Aviation Engineering and Maintenance,0.4
+가솔린 기관의 출력을 나타내는 대표적인 수치로 평균유효압력 (pme)이 사용된다. 이 pme 를 증가시키는 유효한 방법으로 가장 관계가 먼 것은?,2,부스트 압력을 높인다.,흡기온도를 될 수 있는 대로 높인다.,마찰손실을 최소한으로 한다.,배압을 가능한 한 낮게 유지한다.,Aviation Engineering and Maintenance,0.4
+항공기의 세척을 알카리 세제로 할 경우의 특징이 아닌것은?,3,인화성이 없다.,독성이 없다.,추운날씨에 적합하다.,페인트를 칠한 표면이 변색되지 않는다.,Aviation Engineering and Maintenance,0.4
+제트엔진(jet engine)의 주베어링(main bearing)은 어느 방법에 의하여 윤활되는가?,3,끼얹는다(splash),오일심지(wet wick),압력분사(pressure jet spray),oil 속에 부분적으로 잠기게(partially submerged in oil),Aviation Engineering and Maintenance,0.4
+피스톤 링의 기능이 아닌 것은?,4,연소실내 압력을 유지한다.,연소실내 과도한 윤활유 유입을 방지한다.,피스톤의 열을 실린더에 전도하는 역할을 한다.,피스톤에 작용하는 높은 압력의 힘을 커넥팅 로드에 전달한다.,Aviation Engineering and Maintenance,0.4
+C.F.R(Cooperative Fuel Research)기관으로 측정하는 것은 무엇인가?,4,윤활유의 유동성을 측정,윤활유의 내한성을 측정,가솔린의 증기압력을 측정,가솔린의 안티노크성을 측정,Aviation Engineering and Maintenance,0.4
+왕복기관 작동시 필요 없는 계기는?,2,윤활유 압력계,배기가스 온도계,연료압력계,윤활유 온도계,Aviation Engineering and Maintenance,0.4
+왕복기관에서 1 시간당 1 마력을 내는데 소비된 연료의 무게를 무엇이라 하는가?,4,왕복 기관의 비열비,왕복 기관의 연료 출력율,왕복 기관의 연료 비열비,왕복 기관의 비연료 소비율,Aviation Engineering and Maintenance,0.4
+가변피치 프로펠러 중 저피치와 고피치 사이에서 무한한 피치각을 취하는 프로펠러는 어느 것인가?,3,2단 가변피치 프로펠러,완전 페더링 프로펠러,정속 프로펠러,역피치 프로펠러,Aviation Engineering and Maintenance,0.4
+피스톤 링과 홈과 홈 사이를 무엇이라 하는가?,2,링,랜드,그루브,서페이스,Aviation Engineering and Maintenance,0.4
+연소실 유입공기에 강한 선회를 주어 공기에 적당한 와류를 발생시켜 압축공기의 연소실로 유입되는 속도를 감소시키며 화염전파속도를 증가시켜 주는 것은?,2,연소기도움,스웰가이드베인,내부 라이너,연소기 버너,Aviation Engineering and Maintenance,0.4
+양극산화처리 방법이 아닌 것은?,1,질산법,황산법,수산법,크롬산법,Aviation Engineering and Maintenance,0.4012
+"10 mH 의 인덕턴스에 60 Hz, 100 V의 전압을 가하면 약 몇 암페어(A)의 전류가 흐르는가?",4,15.35,20.42,25.78,26.54,Aviation Engineering and Maintenance,0.4031
+유압계통에서 리저버(Reservoir)내의 베플(Baffle)과 핀(Fin)의 가장 중요한 역할은?,2,작동유의 열을 식힌다.,펌프 안에 공기가 유입되는 것을 방지한다.,리저버(Reservoir) 안에 공기가 잘 가압되도록 한다.,작동유의 온도상승에 따른 가압공기의 온도를 낮춘다.,Aviation Engineering and Maintenance,0.4031
+프로펠러의 회전속도에 비해 비행속도가 아주빠른 하강비행시 풍압중심은 어느 쪽으로 이동하는가?,4,깃의 끝 방향,깃의 앞전 방향,깃의 뿌리 방향,깃의 뒷전 방향,Aviation Engineering and Maintenance,0.4032
+제트기관 항공기가 정지상태에서 단위면적(m2)당 40kg/s 질량을 속도 500m/s 로 방출할 때 팽창압력은 대기압이며 노즐 단면적은 0.2m2라면 추력은 몇 kN인가?,1,4,8,10,20,Aviation Engineering and Maintenance,0.4032
+항공 교통 관제(ATC) 트랜스폰더(Transponder)에서 Mode C의 질문에 대해 항공기가 응답하는 비행고도는?,3,진고도,절대고도,기압고도,객실고도,Aviation Engineering and Maintenance,0.4036999999999999
+비행기가 정적중립(Static neutral)인 상태일 때를 가장 옳게 설명한 것은?,2,받음각이 변화된 후 원래의 평형상태로 돌아간다.,"조종에 대해 과도하게 민감하며, 교란을 받게 되면 평형상태로 되돌아오지 않는다.",비행기의 자세와 속도를 변화시켜 평형을 유지시킨다.,반대 방향으로의 조종력이 작용되면 원래의 평형상태로 되돌아 간다.,Aviation Engineering and Maintenance,0.4038
+정상 운전 되고 있는 발전기(generator)의 계자코일(field coil)이 단선될 경우 전압의 상태는?,3,변함없다.,약간 저하한다.,약하게 발생한다.,전혀 발생치 않는다.,Aviation Engineering and Maintenance,0.4053
+항공기의 기체구조 수리에 대한 내용으로 가장 올바른 것은?,3,같은 enRP의 재료로써 17ST의 판재나 리벳트를 A17ST로 대체하여 사용할 수 있다.,수리부분의 원래 재료와의 접촉면에는 재료의 성분에 관계없이 부식방지를 위하여 기름으로 표면 처리한다.,사용 리벳트 수는 같은 재질로 기체의 강도를 고려하여 최소한의 수를 사용한다.,수리를 위하여 대치할 재료의 두께는 원래 두께와 같거나 작아야 한다.,Aviation Engineering and Maintenance,0.4054
+"두께가 40/1000in, 길이가 2.75in인 2024 T3 알루미늄 판재를 AD리벳으로 결합하려면 몇 개의 리벳이 필요한가?(단, 2024 T3 판재의 극한인장응력은 60000psi, AD리벳 1개당 전단강도는 388 lb, 안전계수는 1.15 이다.)",3,15,18,20,39,Aviation Engineering and Maintenance,0.406
+교류발전기의 병렬운전 시 고려해야 할 사항이 아닌 것은?,2,위상,전류,전압,주파수,Aviation Engineering and Maintenance,0.4061
+5/32인치 직경의 리벳을 장착할 때 적합한 버킹바의 무게로 가장 옳은 것은?,3,1 ~ 2 LBS,2 ~ 3 LBS,3 ~ 4 LBS,5 ~ 6 LBS,Aviation Engineering and Maintenance,0.4063
+정속 프로펠러(constant speed propeller)에 대하여 가장 올바르게 설명한 것은?,3,저 피치(low pitch)와 고피치(high pitch)인 2개의 위치만을 선택할 수 있다.,3방향 선택밸브(3way valve)에 의해 피치가 변경된다.,자유롭게 피치를 조정 할 수 있다.,깃각(blade angle)이 하나로 고정되어 피치 변경이 불가능 하다.,Aviation Engineering and Maintenance,0.4063
+헬리곱터의 로터 헤드에서 발생하는 추력하중(Thurst load)에 적합한 베어링의 형식은?,1,볼 베어링(Ball bearing),평면 베어링(Plain bearing),롤러 베어링(Roller bearing),직선 롤러 베어링(Straight roller bearing),Aviation Engineering and Maintenance,0.4063
+극수가 4인 교류발전기로 400Hz의 주파수를 얻으려면 발전기의 계자 회전속도는 분당 얼마가 되어야 하는가?,4,6000rpm,8000rpm,10000rpm,12000rpm,Aviation Engineering and Maintenance,0.4063
+"외경이 8 cm, 내경이 7 cm 인 중공원형단면의 극관성모멘트는 약 몇 cm4 인가?",1,166,252,275,402,Aviation Engineering and Maintenance,0.4072
+가스터빈기관 항공기에서 EPR 계기가 나타내는 것은?,3,압축기 출구전압 / 압축기 입구전압,터빈 출구전압 / 터빈입구전압,터빈출구전압 / 압축기 입구전압,터빈출구전압 / 압축기 출구전압,Aviation Engineering and Maintenance,0.4074
+카운터 싱크 리벳(counter sunk rivet)이 주로 사용되는 곳은?,3,내부 구조물에 많이 사용되며 두꺼운 판을 접합하는 데 사용된다.,항공기 내부구조의 결합에 사용된다.,항공기 외피용으로 사용된다.,아무데나 사용된다.,Aviation Engineering and Maintenance,0.4074
+방사능유출의 위험경고 표시 색채는?,2,검은색,보라색,주황색,파란색,Aviation Engineering and Maintenance,0.4074
+수축형 배기노즐의 쵸크(Choke)현상에 대한 설명으로 틀린 것은?,3,마하 1 에서 가스의 흐름은 안정된다.,기관압력비(EPR) 계기가 1.89이상을 지시할 때 배기 노즐은 쵸크상태이다.,가스가 쵸크된 오리피스를 빠져나갈 때는 반경방향이 아닌 축방향으로 가속된다.,마하 1 이 되면 가스흐름은 대기로 열린 배기노즐에서 쵸크되어진다.,Aviation Engineering and Maintenance,0.4078
+절대압력(Absolute pressure)을 옳게 설명한 것은?,2,계기압력으로부터 대기압을 뺸 값과 같다.,계기압력에 대기압을 더한 값과 같다.,표준대기상태에서 해면상의 대기압을 기준값 0 으로 하여 측정한 압력이다.,해당 고도에서의 대기압을 기준값 0 으로 하여 측정한 압력이다.,Aviation Engineering and Maintenance,0.4082
+C.F.R 기관이 하는것은?,4,윤활유의 점성을 측정,윤활유의 내한성을 측정,가솔린의 증기압력을 측정,가솔린의 안티노크성을 측정,Aviation Engineering and Maintenance,0.4090999999999999
+항공 교통 관제 (ATC)에서 항공기가 응답하는 비행고도로 가장 올바른 것은?,2,진고도,기압고도,절대고도,상대고도,Aviation Engineering and Maintenance,0.4103
+내부저항이 5Ω인 배율기를 이용한 전압계에서 50V의 전압을 5V로 지시하려면 배율기 저항은 몇 Ω이어야 하는가?,3,10,25,45,50,Aviation Engineering and Maintenance,0.4106
+헬리곱터에서 주기적 피치 제어간(Cycli pitch control lever)으로 조종할 수 없는 비행은?,2,전진비행,상승비행,측면비행,후퇴비행,Aviation Engineering and Maintenance,0.4107
+가스터빈기관의 역추력 장치에 대한 설명으로 틀린 것은?,2,역추력 장치는 비상 착륙 시나 이륙포기 시에 제동능력 및 방향전환 능력을 향상 시킨다.,역추력 장치의 사용절차는 착지 후 최대 이륙속도에서 역추력 모드를 선택한다.,구동방법으로 주로 공압 또는 유압이 상업용 항공기에 사용되고 있다.,캐스케이드 리버서(Cascade Reverser)와 클램셜리버서(Clamshell Reverser)가 있다.,Aviation Engineering and Maintenance,0.4118
+"충돌, 추락, 전복 및 사고의 위험이 있는 장비 및 시설 물 등에 대하여 주의를 표시하기 위한 색은?",2,빨간색,노란색,녹색,파란색,Aviation Engineering and Maintenance,0.4118
+"A, B, C 3대의 비행기가 각각 10000m, 5000m, 1000m 의 고도에서 동일한 속도로 비행하고 있다. 각 비행기의 마하계가 지시하는 마하수의 크기를 비교한 것으로 옳은 것은?",2,A＜ B＜ C,A ＞B ＞C,A ＞C ＞B,A = B = C,Aviation Engineering and Maintenance,0.4118
+초음속으로 흐르는 도관에서 단면적이 넓어질 경우 속도 및 압력의 변화를 옳게 설명한 것은?,4,속도와 압력이 감소한다.,속도와 압력이 증가한다.,속도는 감소하고 압력은 증가한다.,속도는 증가하고 압력은 감소한다.,Aviation Engineering and Maintenance,0.4118
+왕복엔진의 밸브작동장치 중 유압 타펫(hydraulic tappet)의 장점이 아닌 것은?,4,밸브 개폐시기를 정확하게 한다.,밸브 작동기구의 충격과 소음을 방지한다.,열팽창 변화에 의한 밸브간극을 항상 “0”으로 자동 조장한다.,엔진 작동 시 열팽창을 작게하여 실린더 헤드의 온도는 낮춘다.,Aviation Engineering and Maintenance,0.4132
+자세계(Attitude Director Indicator:ADI)가 지시하는 4가지 요소는?,4,"하강(Flight down)자세, 피치(Pitch)자세, 요(Yaw)변화율, 미끄러짐(Slip)","롤(Roll)자세, 선회(Left & Right turn)자세, 요 변화율, 미끄러짐","롤 자세, 피치 자세, 기수 방위(Heading) 자세, 미끄러짐","롤 자세, 피치 자세, 요 변화율, 미끄러짐",Aviation Engineering and Maintenance,0.4138
+조종컬럼이나 조종간에서 힘을 케이블 장치에 전달하는데 사용되는 조종계통의 장치는?,4,풀리,페어리드,벨 크랭크,쿼드런트,Aviation Engineering and Maintenance,0.4146
+객실압력 경고 혼(horn)이 울리는 고도와 승객 산소공급 계통의 산소마스크가 자동으로 나타나게 되는 고도는 각각 몇 ft인가?,4,"8000ft, 14000ft","8000ft, 10000ft","10000ft, 15000ft","10000ft, 14000ft",Aviation Engineering and Maintenance,0.4146
+속도 540km/h 로 비행하는 항공기에 장착된 터보제트엔진이 196kg/s인 중량유량의 공기를 흡입하여 250m/s 의 속도로 배기시킨다면 총추력은 몇kg인가?,2,4000,5000,6000,7000,Aviation Engineering and Maintenance,0.4147999999999999
+무게가 9000kgf 인 항공기가 30°의 경사각으로 정상선회를 할 때 원심력은 몇 kgf 인가?,2,4500,5196,7794,18000,Aviation Engineering and Maintenance,0.4150999999999999
+헬리콥터의 자동회전(Autorotation)비행에 대한 설명이 아닌 것은?,1,호버링의 일종으로 양력과 무게의 균형을 유지한다.,기관이 고장났을 경우 로터블레이드의 독립적인 자유회전에 의한 강하비행을 말한다.,위치에너지를 운동에너지로 바꾸면서 무동력으로 하강하는 것이다.,공기흐름은 상향공기흐름을 일으켜 착륙에 필요한 양력을 발생시킨다.,Aviation Engineering and Maintenance,0.4160999999999999
+가로진동과 방향진동이 결합된 것으로 대개 동적으로는 안정하지만 진동하는 성질 때문에 문제가 되는 현상으로 더치롤(Dutch roll)이라고도 하는 것은?,3,방향 불안정,나선 불안정,가로방향 불안정,세로 불안정,Aviation Engineering and Maintenance,0.4167
+"바깥지름이 1cm 인 강(AISI 4340)으로 된 봉에 인장하중 10ton 이 작용할 때 이 봉의 인장강도에 대한 안전여유는 약 얼마인가? (단, AISI 4340 의 인장강도는 18000kg/cm2 이다.)",2,0.29,0.41,0.71,1.41,Aviation Engineering and Maintenance,0.4167
+FRP(Fiber Reinforced Plastic)에 주로 사용되고 있는 열경화성 수지는?,4,멜라민 수지,실리콘 수지,폴리염화비닐,에폭시 수지,Aviation Engineering and Maintenance,0.4167
+가스터빈기관의 효율을 향상시키는 방법이 아닌 것은?,4,기관의 압축비를 높인다.,흡입 공기의 중량 유량을 증가시킨다.,압축기 및 터빈의 단열 효율을 높인다.,배기가스속도와 비행속도의 차를 크게 한다.,Aviation Engineering and Maintenance,0.4167
+2개의 깃을 가진 프로펠러의 궤도검사에서 두 깃에 대한 궤도허용 한계값은 몇 인치인가?,2,1/8,1/16,1/24,1/32,Aviation Engineering and Maintenance,0.4167
+멀티미터(회로 시험기)로 측정할 수 없는 것은?,3,저항,직류전류,주파수,교류전압,Aviation Engineering and Maintenance,0.4167
+"볼트의 각 부분에 대한 명칭 중 체결할 부재의 두께와 비슷하고, 나사산이 없는 부분을 무엇이라 하는가?",2,넥,그립,나사,머리,Aviation Engineering and Maintenance,0.4167
+"항공기 왕복기관 중 성형기관에서 1번 실린더의 일반적인 위치는? (단, 항공기 정면에서 기관을 볼 때를 기준으로 한다.)",2,아래쪽 중앙,위쪽 중앙,오른쪽 중앙,왼쪽 중앙,Aviation Engineering and Maintenance,0.4167
+스케치를 이용한 항공기의 결한 보고서 작성 내용으로 틀린 것은?,3,항공기의 이력사항을 기록한다.,손실부위의 위치를 명화하게 표시한다.,결함 발생 부위에 수행될 수리형태를 기록한다.,결함 발생 부위 근처에 이전에 유사한 수리가 수행 되었는지 여부를 기록한다.,Aviation Engineering and Maintenance,0.4167
+4행정 사이클 엔진에서 한 실린더가 분당 200번 폭발할 때 크랭크 축의 회전수는?,3,100rpm,200rpm,400rpm,800rpm,Aviation Engineering and Maintenance,0.4167
+고속기에서 나타나는 가로 불안정(lateral instability) 현상은?,4,턱 언더(tuck under),피치 업(pitch up),디프 실속(deep stall),날개 드롭(wing drop),Aviation Engineering and Maintenance,0.4167
+1시간 이상 귀의 보호 대책이 없으면 난청 정도를 느낄 수 있는 소음의 한계는?,3,95 dB,100 dB,140 dB,180 dB,Aviation Engineering and Maintenance,0.4167
+압력분사식 기화기에서 고도 변화에 따라 자동적으로 혼합비가 조절되는 장치를 무엇이라 하는가?,4,압력 조절 장치,연료 조절 장치,주 미터링 장치,자동 혼합 조절 장치,Aviation Engineering and Maintenance,0.4167
+항공기 견인시 주의사항으로 틀린 것은?,4,항공기에 항법등과 충돌 방지 등을 작동시킨다.,기어 다운 로크 핀들이 착륙 장치에 꽂혀 있는지를 확인한다.,항공기 견인 속도는 사람의 보행 속도를 초과해서는 안 된다.,제동 장치에 사용되는 유압압력은 제거 되어야 한다.,Aviation Engineering and Maintenance,0.4167
+유도항력(Induced Drag)에 대한 설명 내용으로 가장 관계 가 먼 것은?,3,날개스팬(Span)이 커지면 감소한다.,시위(Chord)가 커지면 증가한다.,가로세로비(Aspect Ratio)가 커지면 증가한다.,날개면적(S)이 커지면 증가한다.,Aviation Engineering and Maintenance,0.4167
+왕복기관에서 기화기를 장탈하기 전에 무슨 밸브를 먼저 확인해야 하는가?,4,드로틀 밸브,쵸크 밸브,연료조절 밸브,연료차단 밸브,Aviation Engineering and Maintenance,0.4167
+항공용 타이어 구조에서 비드 토우(Bead Toe)란?,3,트레드 절단과 손상을 방지해주는 합성고무 쿠션,비드 주위에 부가적으로 만든 고무띠,타이어 중심에 가장 가까운 내부 비드의 끝단부분,휠 플렌지(Wheel Flange)에 붙는 외부 비드의 끝부분,Aviation Engineering and Maintenance,0.4167
+NI-Cd 축전지에 대한 설명 중 가장 올바른 것은?,4,전해액의 부식성이 적어 안전하다.,단위 Cell 당 전압은 연 축전지보다 높다.,방전할 때는 음극판이 3수산화니켈이 된다.,연 축전지에 비해 수명이 길다.,Aviation Engineering and Maintenance,0.4167
+일반적으로 항공기 타이어의 원료로 사용하는 고무는?,4,불소고무,합성고무,부틸고무,천연고무,Aviation Engineering and Maintenance,0.4167
+"직경 5cm인 원형 단면봉에 1,000kgf의 인장하중이 작용할때 단면에서의응력은 몇 kgf/cm2 인가?",3,25.5,40.2,50.9,61.6,Aviation Engineering and Maintenance,0.4167
+프로펠러의 기하학적 피치비(geometric pitch ratio)를 옳게 정의한 것은?,3,프로펠러지름/기하학적피치,기하학적피치/유효피치,기하학적피치/프로펠러지름,유효피치/기하학적피치,Aviation Engineering and Maintenance,0.4172
+"프로펠러의 깃각이 일정하다면, 깃 끝으로 갈수록 받음각의 변화는?",3,작아진다.,일정하다.,커진다.,중간부분이 최대가 된다.,Aviation Engineering and Maintenance,0.4177
+"헬리콥터에서 정지비행시 회전날개의 회전축으로부터 거리 R 의 위치에 있는 깃 단면의 회전선속도를  계산하는 식은? (단, Ω은 회전날개의 각속도이다.)",2,Ω· R2,Ω· R,R2/Ω,Ω/R,Aviation Engineering and Maintenance,0.4185999999999999
+항공기 유압회로에서 프라이어리티 밸브(Priority Valve)에 대한 설명으로 옳은 것은?,3,유로를 선택하고 작동유의 공급과 리턴 회로를 만들고 기구의 작동 방향을 결정하는 밸브이다.,한 방향으로 자유로이 작동유를 흐르게 하지만 반대 방향으로 흐르지 못하게 하는 밸브이다.,작동유 압력이 일정 압력 이하로 떨어지면 유로를 차단하는 기능을 가진 밸브이다.,"한 개의 선택 밸브에 의해 복수의 기구를 작동시켰을 때, 그 작동 순서를 결정하는 밸브이다.",Aviation Engineering and Maintenance,0.4185999999999999
+헬리콥터용 터보샤프트엔진을 시운전실에서 시험하였더니 24000rpm 에서 토크가 51kg∙m이었다면 이 때 엔진은 약 몇 마력(ps)인가?,1,1709,2105,2400,2571,Aviation Engineering and Maintenance,0.4186999999999999
+항공기 볼트의 나사산(THREAD)은 일반적으로 Class 3 NF(American National Fine Pitch)가 사용된다. NF는 길이 1인치당 몇 개의 나사산(Thread)을 가지고 있는가?,3,10개,12개,14개,16개,Aviation Engineering and Maintenance,0.4194
+항공기용 Nut의 취굽방법에 대한 설명 중 가장 거리가 먼 내용은?,4,"Nut는 사용되는 장소에 따라 강도, 내식, 내열에 적합한 부품 번호의 Nut를 사용하여야 한다.",셀프 락킹(locking) Nut를 Bolt에 장착하였을 때는 Bolt 나사 끝 부분이 2나사이상 나와 있어야 한다.,셀프 락킹(lockong Nut의 느슨함으로 인한 Bolt의 결손이 비행의 안전성에 영향을 주는 장소에는 사용하여서는 안된다.,셀프 락킹(locking) Nut를 이용하여 토크를 걸 때에는 Nut의 규정 토크값 만을 정확히 적용한다.,Aviation Engineering and Maintenance,0.4194
+후기 연소기(after burner)의 4가지 기본 구성품으로 가장 올바른 것은?,2,"main flame, fuel spray bar, flame holder, variable area nozzle.","afterburner duct, fuel spray bar, flame holder, variable area nozzle.","afterburner duct, main flame, flame holder, variable area nozzle.","afterburner duct, fuel spray bar, main flame, variable area nozzle.",Aviation Engineering and Maintenance,0.4194
+자이로신 컴퍼스의 자방위판(컴퍼스 가드)은 어떤 신호에 의해 구동되는가?,1,플럭스 밸브에서 전기 신호,방향자이로 지시계(정침의)의 신호,자이로수평 지시계(수평의)의 신호,초단파 전방위 무선 표시장치(VOR)의 신호,Aviation Engineering and Maintenance,0.4208
+대형 항공기의 도장(Painting) 재료로 사용되는 열경화성수지는?,3,PVC,폴리에틸렌,폴리우레탄,나일론,Aviation Engineering and Maintenance,0.4211
+전진속도가 없을 때 헬리콥터의 자동회전에 대한 설명으로 틀린 것은?,4,기관의 정지 시의 비행이다.,점차 일정한 속도로 하강한다.,자동 회전의 회전은 풍차가 돌아가는 원리와 같다.,자동 회전에 의한 항력은 같은 면적의 낙하산 항력의 2배 이다.,Aviation Engineering and Maintenance,0.4211
+구조가 간단하며 전체길이가 짧고 연소실의 단면적을 전면적과 비교해 최대한 소형으로 제작 가능한 연소실은?,3,직류형 연소실,캔형 연소실,애뉼러형 연소실,캔 애뉼러형 연소실,Aviation Engineering and Maintenance,0.4211
+"항공기 세제 중 메틸클로로포름(methyl chloroform)이라고도 하며, 일반 세척과 그리스 세척제로 사용되고 있으며 장시간 사용하면 피부염을 일으킬 수 있으므로 주의해야 할 세제는?",4,건식 세척 솔벤트,케로신,메틸에틸케튼 (MEK),안전 솔벤트,Aviation Engineering and Maintenance,0.4211
+항공기기체 정비작업에서의 정시점검으로 내부구조검사에 관계 되는 것은?,3,A 점검,C 점검,ISI점검,D 점검,Aviation Engineering and Maintenance,0.4211
+정지비행 상태에 있는 헬리콥터의 수직방향으로 작용하는 힘에 대한 설명으로 옳은 것은?,2,주회전 날개 추력의 수평성분이 헬리콥터의 무게와 같다.,주회전 날개 추력의 수직성분이 헬리콥터의 무게와 같다.,주회전 날개 추력의 수직성분이 꼬리 회전 날개의 추력과 같다.,주회전 날개 추력과 꼬리회전 날개의 추력의 합이 회전익 항공기 무게와 같다.,Aviation Engineering and Maintenance,0.4211
+유압 리프터(hydraulic valve lifter)를 사용하는 수평 대향형 엔진에서 밸브 간극을 조절하려면 어떻게 해야 하는가?,3,로커 아암(rocker arm)을 조절,로커 아암(rocker arm)을 교환,푸시로드(push rod)를 교환,밸스 스템(stem) 심(sim)으로 조정,Aviation Engineering and Maintenance,0.4211
+20해리(Nautical mile) 떨어진 물체를 레이더가 감지하는데 걸리는 시간은 약 몇 ㎲ 인가?,1,247,124,12,6,Aviation Engineering and Maintenance,0.4217
+프로펠러에 유입되는 합성속도의 방향이 프로펠러의 회전면이 이루는 각은?,3,받음각,유도각,유입각,깃각,Aviation Engineering and Maintenance,0.4221999999999999
+복합재료의 강화재 중 무색 투명하며 전기부도체인 섬유로서 우수한 내열성 때문에 고온 부위의 재료로 상용되는 것은?,4,유리섬유,아라미드섬유,보론섬유,알루미나섬유,Aviation Engineering and Maintenance,0.4221999999999999
+항공기 급유시 안전사항과 가장 관계가 먼 것은?,1,번개가 치는 날씨에는 연료를 보급하거나 배출해서는 안된다.,"10Kg 이상 분말 소화기를 비치하고, 감시요원을 반드시 배치해야 한다.",연료 차량과 항공기 사이의 거리는 항공기 날개와 평행하게 75m 이상 떨어져야 한다.,주기장이 협소한 곳은 최소 30m 이상 유지해야 한다.,Aviation Engineering and Maintenance,0.4231
+정속프로펠러의 블레이드 각이 증가하면 나타나는 현상은?,1,회전수가 감소한다.,엔진출력이 감소한다.,진동과 소음이 심해진다.,실속 속도가 감소하고 소음이 증가한다.,Aviation Engineering and Maintenance,0.4232
+발전기의 무부하(No-load)상태에서 전압을 결정하는 3가지 주요한 요소가 아닌 것은?,2,자장의 세기,회전자의 회전방향,자장을 끊는 회전자의 수,회전자가 자장을 끊는 속도,Aviation Engineering and Maintenance,0.4233
+"가역과정의 1사이클을 하는 열역학적 시스템에 대하여 열역학 제1법칙과 가장 관계가 먼 식은? (단, Qcycle : 열에 의한 1사이클 동안의 순에너지 전달량, Wcycle : 일에 의한 1사이클 동안의 순에너지 전달량, △Ecycle : 시스템의 에너지 변화량이다.)",1,Wcycle = 0,Qcycle = Wcycle,△Ecycle = 0,△Ecycle = Qcycle - Wcycle,Aviation Engineering and Maintenance,0.4236999999999999
+항공정비도서 기술자료의 번호 “12 - 34 - 56”중　“12” 가 의미하는 것은?,3,유닛(Unit),서브젝트(Subject),계통(System),서브계통(Sub-system),Aviation Engineering and Maintenance,0.4242
+응력 외피 수리 시 리벳을 이용하여 패치를 부탁할 때 리벳 끝거리로 옳은 것은?,2,사용 리벳지름의 1.5배로 한다.,사용 리벳지름의 2.5배로 한다.,사용 리벳길이의 1.5배로 한다.,사용 리벳길이의 2.5배로 한다.,Aviation Engineering and Maintenance,0.425
+항공기 왕복기관에서 고도증가에 따르는 배기배압(exhaust back pressure)의 감소는?,1,소기효과를 향상시켜 제동마력을 향상시킨다.,소기효과를 저하시켜 제동마력을 감소시킨다.,마력과는 관계가 없다.,흡기다기관의 압력을 저하시킨다.,Aviation Engineering and Maintenance,0.4259
+속도를 지시하는 방법으로 전압(total pressure)과 정압(static pressure) 차를 감지하여 해면고도에서의 밀도를 도입하여 계기에 지시하는 속도는?,3,등가대기속도(EAS),진대기속도(TAS),지시대기속도(IAS),수정대기속도(CAS),Aviation Engineering and Maintenance,0.4259
+발전기 출력 제어회로에서 제너다이오드(zener diode)의사용 목적은?,3,정전류제어,역류방지,정전압제어,자기장제어,Aviation Engineering and Maintenance,0.4269
+지상안전의 필요사항으로 작업자가 취해야 할 안전사항으로 적절하지 않은 것은?,3,작업자는 작업 시 반드시 규정과 절차를 준수해야 한다.,작업 시 보호장구가 필요할 때에는 반드시 보호장구를 착용해야 한다.,작업장 및 주위 환경보다는 자기가 하고 있는 작업에만 몰두한다.,"작업장의 상태를 청결히 하고 정리, 정돈 하여 사고의 잠재 요인을 제거하도록 노력한다.",Aviation Engineering and Maintenance,0.4286
+기관을 시동하기 전에 주의해야 할 사항으로틀린 것은?,4,기관 전방에 설치했던 안전표지판 등을 제거한다.,지상요원을 항공기 주변에 적절히 배치한 다.,기관의 흡입구 주변에 장애물이 있는지 확인한 후 제거한다.,정비작업에 사용된 공구는 정상시동을 확 인한 후 제거한다.,Aviation Engineering and Maintenance,0.4286
+항공기에서 조종면의 평형은 어떠한 상태가 가장 바람직한가?,3,수평위치에서 조종면의 뒷전이 내려가는 상태,수평위치에서 조종면이 올라가는 상태,조종면의 앞전이 무거운 과대평형 상태,조종면의 앞전이 가벼운 상태,Aviation Engineering and Maintenance,0.4286
+프로펠러 깃의 받음각(α)과 깃각(β) 및 피치각(ø)의 관계를 옳게 나타낸 것은?,2,α = ø - β,α = β - ø,α = 2ø - β,α = 2β - ø,Aviation Engineering and Maintenance,0.4286
+항공기 조종석의 장치와 이들에 의해 조종되어지는 장치를 짝지은 것으로 틀린 것은?,3,페달 - 러더키,조종간 - 승강키,핸들 또는 틸러 - 강착장치,스로틀 레버 - 기관출력장치,Aviation Engineering and Maintenance,0.4286
+왕복기관에서 피스톤 링의 기능이 아닌 것은?,3,열전도 작용,누설방지 작용,충격흡수 작용,윤활유 조절 작용,Aviation Engineering and Maintenance,0.4286
+"구조 전체에 작용하는 중력, 자기력 및 관성력과 같은 하중을 무엇이라 하는가?",4,면 하중,분포하중,집중하중,체적하중,Aviation Engineering and Maintenance,0.4286
+튜브와 튜브를 연결할 때 사용되는 공구는?,4,튜브 벤더(Tube bender),프로트랙터(Protractor),뎁스 게이지(Depth gage),플레어링 공구(Flaring tool),Aviation Engineering and Maintenance,0.4286
+오일여과기에 있는 바이패스 밸브의 역할은?,4,릴리이프 밸브와 같은 역할을 한다.,오일냉각기로 오일을 보내는 역할을 한다.,보기부분으로 오일을 통과시키는 역할을 한다.,여과기가 막혔을 때 오일을 통과 시킨다.,Aviation Engineering and Maintenance,0.4286
+알루미늄 성질을 잘못 설명한 것은?,1,바닷물에 내식성이 강하다.,표면에 산화피막을 만든다.,전기 및 열의 양도체이다.,암모니아에 대한 내식성이 크다.,Aviation Engineering and Maintenance,0.4286
+"프로펠러 비행기의 비행속도가 98.4m/s이고프로펠러의 회전수가 1250rpm, 프로펠러 지름이 3.4m일 때 이 프로펠러의 진행률은 약 얼마인가?",3,0.98,1.08,1.39,2.43,Aviation Engineering and Maintenance,0.4286
+오픈 엔드 렌치의 사용법으로 가장 옳게 설명된 사항은?,3,볼트나 너트의 머리에는 한 사이즈 더 큰 렌치를 선택하여 작업한다.,가볍게 돌아가는 볼트와 너트에서는 오픈 엔드 렌치가 박스 렌치보다 작업속도가 느리다.,볼트나 너트를 푸는 방향으로 작업할 때에는 오프렌치의 손잡이를 손바닥으로 밀면서 작업하여야 한다.,렌치를 밀어낼 경우 렌치를 손으로 감아 잡고 작업한다.,Aviation Engineering and Maintenance,0.4286
+터빈엔진(turbine engine)에서 디퓨져 부분(diffusersection)의 주 목적은?,4,압력을 감소하고 속도를 증대한다.,디퓨저(diffuser)내의 압력을 균일하게 한다.,위치 에너지를 운동에너지로 바꾼다.,속도에너지를 압력에너지로 바꾸어 연소실로 보낸다.,Aviation Engineering and Maintenance,0.4286
+정확한 피치의 나사를 이용하여 실제의 길이를 측정하는 측정용 기기는 어느 것인가?,2,버니어 캘리퍼스,마이크로 미터,높이 게이지,다이얼 게이지,Aviation Engineering and Maintenance,0.4286
+평균 캠버선(mean camber line)에 대한 설명으로 가장 올바른 것은?,4,날개골 앞부분의 끝,날개골 뒷부분의 끝,앞전과 뒷전을 연결하는 직선,날개 두께의 2등분점을 연결한 선,Aviation Engineering and Maintenance,0.4286
+"비행기의 무게가 15000Kgf이고, 여유마력이 150마력일 경우에 상승률은 얼마인가?",2,6.5m/s,7.5m/s,8.5m/s,9.5m/s,Aviation Engineering and Maintenance,0.4286
+액화성 석유 가스(LPG)와 액화성 자연 가스(LNG)에서 발생하는 화재는?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),1,E급 화재,D급 화재,C급 화재,B급 화재,Aviation Engineering and Maintenance,0.4286
+국부적으로 색깔이 변했거나 심한 경우 재료가 떨어져 나간 형태로 과열에 의해 손상되는 상태는?,4,구부러짐(bow),마손(burr),균열(crack),소손(burning),Aviation Engineering and Maintenance,0.4286
+수세성 형광침투 검사에서 유제(Emulsifier)의 기능은?,2,허위 결함지시를 제거하여 준다.,침투제를 물로 세척할 수 있게 해준다.,현상제의 흡입작용을 도와준다.,침투제의 침투능력을 증대시켜 준다.,Aviation Engineering and Maintenance,0.4286
+수세성 형광침투 검사에서 유제(Emulsifier)의 기능으로 가장 올바른 것은?,2,하위 결함지시를 제거하여 준다.,침투제를 물로 세척할 수 있게 해 준다.,현상제의 흡입작용을 도와준다.,침투제의 침투능력을 증대시켜 준다.,Aviation Engineering and Maintenance,0.4286
+날개뿌리(wing root) 시위와 날개 끝(wing tip) 시위와의 비를 무엇이라 하는가?,2,가로세로비(aspect ratio),테이퍼비(taper ratio),뒤 젖힘각(sweep back angle),붙임각,Aviation Engineering and Maintenance,0.4286
+"입구 단면적이 8㎝2, 출구 단면적은 16㎝2인 관의 입구 속도가 10 m/s 인 경우 출구에서의 속도는 몇 m/s 인가? (단, 유체는 비압축성 유체이다.)",2,2,5,6,10,Aviation Engineering and Maintenance,0.4286
+가스터빈 기관의 교류 점화계통에 사용되는 전압(V) 및 주파수(Hz) 는?,4,"24, 600","115, 600","24, 400","115, 400",Aviation Engineering and Maintenance,0.4286
+최근 제트여객기에서는 충격파의 발생으로 인한 항력의 증가를 억제하기 위해서 시위의 앞부분에 압력분포를 뾰족하게 하였다. 이 날개 형태를 무엇이라 하는가?,3,층류 날개골,난류 날개골,피키 날개골,초임계 날개골,Aviation Engineering and Maintenance,0.4286
+비행기의 날개골에서 앞전과 뒷전을 연결하는 직선을 무엇이라 하는가?,3,캠버,두께,시위,모멘트,Aviation Engineering and Maintenance,0.4286
+"수송기에 무게가 45,000N인 기관을 중심으로부터 1000cm 되는 곳에 장착할 경우, 이로 인하여 생기는 중심에서의 모멘트는 얼마인가?",3,"45,000 N-m","90,000 N-m","450,000 N-m","45,000,000 N-m",Aviation Engineering and Maintenance,0.4286
+1500Kgf 의 추력으로 속도 360Km/h로 나는 비행기가 있다 이 비행기의 이용마력은 얼마인가?,1,2000마력,1500마력,1200마력,1000마력,Aviation Engineering and Maintenance,0.4286
+아래 그림은 미터식 마이크로미터의 눈금을 나타낸 것이다. 최소 측정값 1/100mm인 마이크로미터의 측정값은? (문제 오류로 그림파일이 없습니다. 정답은 2번 입니다.),2,0.75mm,8.75mm,8.55mm,8.25mm,Aviation Engineering and Maintenance,0.4286
+"날개에 발생하는 표면마찰 항력이 20㎏f, 압력항력이 50㎏f이며, 유도항력이 60㎏f일 때 형상항력 Dp와 전항력 D는 각각 얼마인가?",3,"Dp = 70㎏f,D = 110㎏f","Dp = 80㎏f, D = 110㎏f","Dp = 70㎏f,D = 130㎏f","Dp = 80㎏f, D = 130㎏f",Aviation Engineering and Maintenance,0.4286
+병렬식 회전날개 헬리콥터의 장점 사항으로 틀린 것은?,3,가로 안전성이 매우 좋다.,기체의 길이를 짧게 할 수 있다.,저속 수평비행시 추가양력을 발생시켜 준다.,수평비행시 유도손실이 적다.,Aviation Engineering and Maintenance,0.4286
+감항증명이 있는 항공기의 중요한 장비품은 안전성 확보를 위한 예비품 증명을 받을 수 있다. 예비품 증명을 받아야 할 대상이 아닌 것은?,4,기관(ENGINE),프로펠러,계기,연료필터,Aviation Engineering and Maintenance,0.4286
+TURBINE NOZZLE (NOZZLE DIAPHRAGM)의 주 목적은?,4,뜨거운 가스의 압력을 증가시킨다.,터빈휠로 가스를 분배시킨다.,방향을 변화시켜서 가스의 온도를 떨어뜨린다.,가스의 속도를 증가시키고 바켓트에 올바른 각도로 가스의 흐름을 인가한다.,Aviation Engineering and Maintenance,0.4286
+Dorsal Fin 을 장착하였을  경우 그 효과로 가장 옳은 것은?,2,가로 안정성이 좋아진다.,방향 안정성이 좋아진다.,세로 안정성이 좋아진다.,실속특성이 좋아진다.,Aviation Engineering and Maintenance,0.4286
+마그네슘 합금의 미세한 분말이 발화 했을 때 소화하는 방법으로 가장 올바른 것은?,3,물을 사용하여 소화한다.,산소가스를 사용하여 소화한다.,마른 모래를 뿌려 소화한다.,헝겊을 이용하여 소화한다.,Aviation Engineering and Maintenance,0.4286
+"비행기가 수평선과 θ의 각으로 상승비행하고 있다고 하면 힘의 평형식은 진행방향에 대하여 어떤 식으로 나타나는가? (단, T : 추력, W : 비행기의 무게, D : 항력)",3,D = T sinθ + W,W = T sinθ + D,T = W sinθ + D,sinθ = T D + W,Aviation Engineering and Maintenance,0.4286
+"두께 0.1cm의 판을 굽힘 반지름 25cm, 90°로 굽히려고 할 때 세트백(Set Back)은 몇 cm인가?",4,19.95,20.1,24.9,25.1,Aviation Engineering and Maintenance,0.4286
+왕복기관에서 과급기(Supercharge)가 없는 기관의 매니폴드 압력과 대기압과의 관계를 옳게 설명한 것은?,4,높은 고도에서 매니폴드 압력은 대기압보다 높다.,낮은 고도에서 매니폴드 압력은 대기압보다 높다.,고도와 관계없이 매니폴드 압력은 대기압과 같다.,고도와 관계없이 매니폴드 압력은 대기압보다 낮다.,Aviation Engineering and Maintenance,0.4286
+이륙 활주거리를 짧게 하기 위한 조건으로 옳은 것은?,2,항력이 큰 활주 자세로 이륙한다.,비행기의 무게를 작게 한다.,기관의 출력을 작게 한다.,바람을 등지고 이륙한다.,Aviation Engineering and Maintenance,0.4286
+What's not the primary group of the control surface?,4,The aileron,The elevators,The rudder,The tab,Aviation Engineering and Maintenance,0.4286
+헬리콥터 로터조종기구인 사이클릭(Cyclic) 조종간과 콜렉티브(Collective) 조종간에 연결되어 로터 깃각을 변경시키는 장치는?,3,댐퍼(Damper),에일러론(Aileron),회전 경사판(Swash plate),수직 안정판(Vertical stabilizer),Aviation Engineering and Maintenance,0.431
+720km/h 로 비행하는 비행기의 마하계 눈금이 0.6 을 지시했다면 이 고도에서의 음속은 몇 m/s 인가?,3,322,327,333,340,Aviation Engineering and Maintenance,0.431
+헬리콥터에 발생하는 지나친 중간주파수 진동의 원인으로서 적합하지 않은 것은?,4,기계적인 진동흡수 장치의 기능저하,변속기 장착 볼트의 부적절한 체결 토큐값,적재화물과 동체의 운동 사이에 일어나는 간섭효과,회전날개의 회전속도,Aviation Engineering and Maintenance,0.431
+거리측정장치(DME)에 대한 설명으로 가장 관계가 먼 것은?,2,"DME 는 초단파 전방향 무선 표지 시설과 병설되어 VOR 로도 불리며, 국제 표준으로 규정되어 있다.",DME 시스템의 사용 주파수대역은 500 ~ 1215kHZ 로 넓은 범위의 주파수대역을 사용한다.,DME 지시기에 표시되는 거리는 항공기에서 DME국까지의 경사거리이다.,DME 의 거리측정은 항공기로부터 질문펄스가 발사되어 지상국의 응답펄스를 수신할 때까지의 지연시간을 측정하여 거리로 환산하는 방법이다.,Aviation Engineering and Maintenance,0.4314
+상반각(쳐든각)에 대한 설명으로 가장 올바른 것은?,4,날개 끝 실속(익단실속)을 방지하고 세로안정성을 증가시킨다.,선회 성능을 향상시키고 가로안정성을 감소시킨다.,유도항력과 공기저항을 작게 하여 방향 안정성을 좋게 한다.,"옆미끄럼(횡활, side slip)을 방지하고 가로안정성을 증가시킨다.",Aviation Engineering and Maintenance,0.4324
+가스터빈엔진 연료조절장치의 기본 요소를 3개로 나눌 때 가장 관계가 먼 것은?,4,센싱부,컴퓨팅부,미터링부,드레이부,Aviation Engineering and Maintenance,0.4324
+정적비열 0.2kcal/(kgㆍK)인 이상기체 5kg이 일정 압력하에서 50kcal의 열을 받아 온도가 0℃에서 20℃까지 증가하였을 때 외부에 한 일은 몇 kcal인가?,3,4,20,30,70,Aviation Engineering and Maintenance,0.4326
+꼬리날개가 주날개의 뒤에 위치하는 일반적인 항공기에서 수평꼬리날개의 체적계수(tail volume coeffcient)에 대한 설명으로 틀린 것은?,4,주날개의 면적에 반비례한다.,주날개의 시위길이에 반비례한다.,수평꼬리날개의 면적에 비례한다.,수평꼬리날개의 시위길이에 비례한다.,Aviation Engineering and Maintenance,0.4327
+헬리콥터 회전날개의 코닝각에 대한 설명으로 틀린 것은?,4,양력이 증가하면 코닝각은 증가한다.,무게가 증가하면 코닝각은 증가한다.,회전날개의 회전속도가 증가하면 코닝각은 증가한다.,헬리콥터의 전진속도가 증가하면 코닝각은 증가한다.,Aviation Engineering and Maintenance,0.4327
+이상기체의 등온과정에 대한 설명으로 옳은 것은?,4,단열과정과 같다.,일의 출입이 없다.,엔트로피가 일정하다.,내부에너지가 일정하다.,Aviation Engineering and Maintenance,0.4328
+왕복엔진 기화기의 혼합기 조절장치(mixture control system)에 대한 설명으로 틀린 것은?,1,고도에 따라 변하는 압력을 감지하여 점화시기를 조절한다.,고고도에서 혼합기가 너무 농후해지는 것을 방지한다.,"고고도에서 기압, 밀도, 온도가 감소하는 것을 보상하기 위해 사용된다.",실린더가 과열되지 않는 출력 범위 내에서 희박한 혼합기를 사용하게 함으로써 연료를 절약한다.,Aviation Engineering and Maintenance,0.4329
+3PS 는 약 몇 와트인가?,2,2239.5,2206.5,1650,225,Aviation Engineering and Maintenance,0.4332999999999999
+기관 마운트와 나셀에 대한 설명으로 틀린 것은?,2,기관마운트를 쉽고 신속하게 분리할수 있도록 설계된 기관을 QEC(quick engine change) 기관이라한다.,제트기관을 장착한 항공기는 고공비행을 하므로 결빙에 대비하여 기관 앞 카울링 입구에는 반드시 제빙 장치가 설치되어야 한다.,"나셀의 구조는 동체 구조와 같이 외피, 카울링, 구조부재, 방화벽, 기관마운트로 구성되어 있다.","카울링이란 기관 및 기관에 관련된 보기, 기관 마운트 및 방화벽 주위를 쉽게 접근할수 있도록 장착하거나 떼어낼수 있는 덮개를 말한다.",Aviation Engineering and Maintenance,0.4332999999999999
+관성항법장치(INS) 계통에서 얼라민먼트(alignment)는 무엇을 하는 것인가?,1,"플랫폼(platform) 방향을 진북을 향하게 하고, 지구에 대해 수평이 되기 하는 것",조종사가 항공기 위치 정보를 입력하는 것,플랫폼(platform)에 놓여진 3축의 가속도계가 검출한 가속도를 적분하여 위치나 속도를 계산하는 것,INS가 계산한 위치(위도)와 제어표시장치를 통해 입력한 항공기의 실제 위치를 일치시켜 주는 것,Aviation Engineering and Maintenance,0.4339
+쉐이크 프루프 고정와셔가 주로 사용되는 곳은?,2,주 구조물에 고정장치로 사용,높은 온도에 잘 견디고 심한 진동부분에 사용,스큐류를 자주 장탈하는 부분에 사용,와셔가 공기흐름에 노출되는 곳에 사용,Aviation Engineering and Maintenance,0.4347999999999999
+지름 2cm 인 원형 단면봉에 3000kgf 의 인장하중이 작용할 때 단면에서의 응력은 약 몇 kgf/cm2 인가?,3,477,750,955,1910,Aviation Engineering and Maintenance,0.4347999999999999
+토크렌치 암의 길이가 5in(12.7cm)인 토크렌치 0.5in(1.27cm)의 토크 어댑터를 연결하여 토크의 값이 25in-lbs 되게 볼트를 토크하였다. 볼트에 실제로 가해지는 토크의 값은 몇 in-lbs인가?,3,25.5,26.5,27.5,28.5,Aviation Engineering and Maintenance,0.4347999999999999
+가스터빈 엔진의 블리드 밸브는 언제 완전히 열리는가?,1,완속출력,이륙출력,최대출력,최대순항출력,Aviation Engineering and Maintenance,0.4347999999999999
+피스톤 핀의 종류에 속하지 않는 것은?,3,고정식,반부동식,평형식,전부동식,Aviation Engineering and Maintenance,0.4347999999999999
+HF(high frequency) system에 대한 설명으로 옳은 것은?,3,"항공기 대 항공기, 항공기 대 지상 간에 가시거리 음성통화를 위해 사용한다.","작동 주파수 범위는 118MHz~137MHz이며, 채널별 간격은 8.33kHz이다.","송신기는 발진부, 고주파 증폭부, 변조기 및 안테나로 이루어진다.",HF는 파장이 짧기 때문에 안테나의 길이가 짧아야 한다.,Aviation Engineering and Maintenance,0.435
+"프로펠러 비행기의 항속거리를 나타내는 식은? (단, R = 항속거리, B = 연료탑재량, V = 순항속도, P = 순항중의 기관의 출력, t = 항속시간, C = 마력당 1시간에 소비하는 연료량)",3,R = V/t,R = CP/VB,R = VB/CP,R = PB/CV,Aviation Engineering and Maintenance,0.4359
+"항공기 외피용으로 적합하며, 플러시 헤드 리벳트(flush headrivet)라 부르는 것은?",3,납작머리 리벳트(flat rivet),유니버샬 리벳트(universal rivet),접시머리 리벳트(counter sunk rivet),둥근머리 리벳트(round head rivet),Aviation Engineering and Maintenance,0.4359
+항공기 유관 (hose) 외부에 부착되어 있는 식별표(decal)는 무엇을 표시하기 위한 것인가?,4,호스의 재질,호스의 제작번호,호스의 사용 가는 압력,호스의 흐르는 액체의 종류,Aviation Engineering and Maintenance,0.4359
+조종계통의 케이블이 온도변화 또는 구조변형에 따른 인장력이 변화하지 않도록 하기 위하여 설치된 장치는?,4,턴버클,콘트롤 칼럼,케이블 텐션 메터,케이블 텐션 레귤레이터,Aviation Engineering and Maintenance,0.4359
+헬리콥터에서 양력 불균형 현상이 일어나지 않도록 주회전 날개 깃의 플래핑 작용의 결과로 나타내는 현상은?,4,사이클릭 페더링,원추 현상,후진 블레이드 실속,블로우 백,Aviation Engineering and Maintenance,0.4361
+연료차단밸브레버(Fuel Shut off Valve Lever)를 Open 위치에 놓았을 때 연료를 연료조절장치(FuelControl Unit)로부터 연소실로 보내주는 것은?,1,최소가압 및 차단밸브 (Minimum Pressure and Shut off valve),메인 메터링 밸브 (Main Metering valve),여압 및 덤프밸브(Pressurizing And Dump valve),부스터펌프(Booster Pump),Aviation Engineering and Maintenance,0.4366
+허니컴 샌드위치 구조(HONEYCOMB SANDWITCH STRUCTURE)의 장점이 아닌 것은?,2,단열효과가 좋다,집중하중에 강하다,표면이 평평하며 요철이 없다,두께 방향의 균일한 압력 발생시 충격 흡수가 우수하다,Aviation Engineering and Maintenance,0.4375
+헬리콥터의 양력과 항력의 합이 헬리콥터의 무게보다 적은 경우의 비행을 무슨 비행이라고 하는가?,3,전진비행,후진비행,수직하강,호버링,Aviation Engineering and Maintenance,0.4375
+VHF와 UHF 대의 주파수 일부를 90㎐와 150㎐로 변조한 신호를 사용하는 SYSTEM은?,2,G/S,ILS,LOC,M/B,Aviation Engineering and Maintenance,0.4375
+맥동률이 가장 적은 정류기는?,2,단상 전파정류기,3상 전파정류기,단상 반파정류기,3상 반파정류기,Aviation Engineering and Maintenance,0.4375
+"수평면과 θ의 각을 이루며 등속도로 정상 활공비행을 하는 비행기의 힘의 평형 상태를 옳게 나타낸 것은? (단, L은 양력, W는 항공기의 무게이다.)",3,L = W,L = Wsinθ,L = Wcosθ,L = Wtanθ,Aviation Engineering and Maintenance,0.4375
+케로신 연료를 주로 사용하는 제트기관의 연료와 공기혼합비(공연비)에 대한 설명으로 틀린 것은?,4,연소에 필요한 최적의 이론적인 공연비는 약 15:1이다.,연소실로 유입되는 공기 중 1차 공기만이 연소에 사용된다.,연소실에서는 연소 효율을 높이기 위해 공연비를 14:1에서 18:1 정도로 제한한다.,스웰 가이드 베인(Swirl Guide Vane)은 연소실에서 공기유입량을 조절해 주는 역할을 한다.,Aviation Engineering and Maintenance,0.4375
+가스터빈기관의 윤활유 압력에 이상이 생겼을 때 점검방법으로 틀린 것은?,3,압력이 낮을 때 압력 트랜스미터의 벤트 구멍이 막혔는지 점검한다.,압력이 낮을 때 탱크 여압 계통의 벤트 출구 밸브에 결함이 있는지 점검한다.,압력이 높을 때 스로틀 레버가 잠겨 있는지 점검한다.,압력이 높을 때 공급관이 베어링 레이스와 접촉되었는지 점검한다.,Aviation Engineering and Maintenance,0.4375
+지상에 주기(PARKING)시켜 놓은 항공기를 강풍으로 부터 보호하기 위하여 지상에 고정시키는 작업은?,2,견인작업(TOWING),계류작업(MOORING),호이스트작업(HOISTING),잭작업(JACKING),Aviation Engineering and Maintenance,0.4375
+"대향형 기관의 밸브 기구에서 크랭크 축 기어의 잇수가 40개라면, 맞물려 잇는 캠 기어의 잇수는 몇 개 이어야 하는가?",4,20,40,60,80,Aviation Engineering and Maintenance,0.4375
+저온으로 작동되는 기관에 콜드(Cold)형 점화 플러그가 장착되었을 때 일어나는 현상으로 옳은 것은?,4,역화 현상이 발생한다.,rpm이 순간적으로 높아진다.,기관에 조기점화현상이 발생한다.,점화플러그에 파울링(Fouling)을 초래한다.,Aviation Engineering and Maintenance,0.4375
+일감의 표면을 보호하고 작업을 쉽게 하기 위하여 보조바이스를 사용하는데 이러한 공구중 일감의 모서리를 가공할 때 주로 사용하는 것은?,2,V홈 바이스 조,샤핑 바이스,클램프 바이스 바,수평 바이스,Aviation Engineering and Maintenance,0.4375
+헬리콥터의 주회전날개의 궤도점검에서 궤도가 맞지 않을 경우 발생하는 진동은?,1,저주파수 진동중 종진동,중간주파수진동,저주파수 진동중 횡진동,고주파수진동,Aviation Engineering and Maintenance,0.4375
+리벳작업 시 판재가 너무 얇아 카운터싱크(Countersink)를 할 수 없을 경우 적용하는 방법은?,2,본딩(Bonding),딤플링(Dimpling),드릴링(Drilling),챔퍼링(Chamfering),Aviation Engineering and Maintenance,0.4375
+"비행기 날개의 가로세로비(Aspect ratio) A를 올바르게 표현한 것은? (단, S: 날개면적, b: 날개길이, C: 시위)",2,A = b/S,A = b2/S,A = bC/S,A = C/S,Aviation Engineering and Maintenance,0.4375
+항공기 왕복기관에서 피스톤 링의 역할에 대한 설명으로 틀린 것은?,4,피스톤과 실린더 내벽 사이에 기밀유지를 통하여 블로우바이가스(Blow by Gas)가 생기지 않도록 한다.,피스톤이 직접 실린더에 접촉하는 것을 방지하는 일종의 베어링 역할을 한다.,피스톤의 열을 실린더에 전달하여 피스톤의 온도를 낮추는 역할을 한다.,실린더 내부에 탄소 피막을 형성시켜 실린더 내구성을 향상시킨다.,Aviation Engineering and Maintenance,0.4375
+나셀(nacelle)에 대한 설명으로 가장 거리가 먼 것은?,3,나셀은 기체에 장착된 기관을 둘러싼 부분을 말한다.,나셀은 공기저항을 작게하기 위하여 유선형으로 만든다.,나셀의 구성요소 중 방화벽이란 기관과 기관 주위를 둘러싼 덮개를 말한다.,나셀은 냉각과 연소에 필요한 공기를 유입하는 흡기구와 배기를 위한 배기구가 있다.,Aviation Engineering and Maintenance,0.4375
+17ST (2017) - D RIVET에서 “D” 는 무엇을 의미하는가?,3,RIVET의 머리모양을 나타낸 것이다.,RIVET의 길이를 나타낸 것이다.,"RIVET의 재질기호이며, 상온에서는 너무 강해 그대로는 리베팅(RIVETING)할 수 없으며 열처리를 한후 사용 가능하다.",RIVET의 재질기호이며 강한 강도가 요구되는 곳에 사용하며 열처리에 관계 없이 사용된다.,Aviation Engineering and Maintenance,0.4375
+헬리콥터에서 양력 불균형이 일어나지 않도록 하는 주 회전날개 깃의 플래핑 작용의 결과로 나타나는 현상으로 옳은 것은?,4,후퇴하는 깃에는 최대상향 변위가 기수 전방에서 나타난다.,후퇴하는 깃에는 최대상향 변위가 기수 후방에서 나타난다.,전진하는 깃에는 최대상향 변위가 기수 후방에서 나타난다.,전진하는 깃에는 최대상향 변위가 기수 전방에서 나타난다.,Aviation Engineering and Maintenance,0.4378
+날개 끝 실속을 방지하기 위한 대책이 아닌 것은?,3,실속펜스를 부착한다.,와류 발생창치를 설치한다.,크루거 앞전 형태를 갖춘다.,워시 아웃 형상을 갖도록 해준다.,Aviation Engineering and Maintenance,0.439
+가스터빈 기관의 점호계통에 대한 설명중 틀린 것은?,2,높은 에너지의 전기 스파크를 이용한다.,왕복 기관에 비해 점화가 용이하다.,유도형과 용량형이 있다.,점화시기조절 장치가 없다.,Aviation Engineering and Maintenance,0.439
+프로펠러 작동시 원심(centrifugal) 비틀림 모멘트는 어떤 작용을 하는가?,1,피치각을 감소시킨다.,피치각을 증가시킨다.,회전 방향으로 깃(blade)을 굽히게(bend) 한다.,비행 진행방향의 뒤쪽으로 깃(blade)을 굽히게 한다.,Aviation Engineering and Maintenance,0.4397999999999999
+항공기의 구조무게를 가볍게 하기 위한 소재로 제작하였을 때 설명으로 틀린 것은?,4,많은 화물을 수용할 수 있다.,많은 승객을 수용할 수 있다.,경제적인 동력장치의 선정이 가능하다.,연료소비 효율이 감소하여 운항경비가 감소한다.,Aviation Engineering and Maintenance,0.44
+금속재료의 열처리중 뜨임(Tempering)이란?,1,담금질후의 재료를 낮은 임계점 이하의 온도로 가열후 공기중에서 냉각시켜 경화에서 생긴 취성감소,재료를 가열후 급속히 냉각시키는 처리,기계가공 등으로 생긴 내부응력을 제거하기 위해 높은 임계점이상으로 가열후 대기중에서 냉각시키는 열처리,원자의 확산이 활발히 행해지는 임계점까지 가열하여 그 온도를 유지한후 노(Furnace)안에서 서냉하는 열처리,Aviation Engineering and Maintenance,0.44
+"이. 착륙 거리의 단축, 추력증가, 중량감소, 아음속에서의 높은 추진효율, 경제성 향상, 소음감소, 날씨변화에 대한 적응이 우수하여 최근 제트기에 많이 사용하는 기관은?",4,터보제트기관,터보축기관,터보프롭기관,터보팬기관,Aviation Engineering and Maintenance,0.44
+비행기가 가속도 없이 정상 비행할 경우 하중배수는 얼마인가?,3,０,0.5,1.0,1.5,Aviation Engineering and Maintenance,0.44
+케이블 주위에 구리로 된 8(팔) 자형태관 모양의 슬리브를 둘러 압착하는 방법을 이용하여 케이블의 단자를 연결하는 방법은?,4,랩솔더 이음 방법,5단 엮기l 이음 방법,스웨이징 단자 방법,니코프레스 처리방법,Aviation Engineering and Maintenance,0.4409
+"축류식 압축기의 1단당 압력비가 1.6 이고, 회전자 깃에 의한 압력 상승비가 1.3 일 때 압축기의 반동도는?",3,0.2,0.3,0.5,0.6,Aviation Engineering and Maintenance,0.441
+피스톤의 지름이 16cm 인 피스톤에서 65kgf/cm2  의 가스 압력이 작용하면 피스톤에 미치는 힘(ton)은 약 얼마인가?,4,10.06,11.06,12.06,13.06,Aviation Engineering and Maintenance,0.4412
+날개골의 받음각이 증가하여 흐름의 떨어짐 현상이 발생하면 양력과 항력의 변화로 가장 올바른 것은?,4,양력과 항력 모두 증가한다.,양력과 항력 모두 감소한다.,양력은 증가하고 항력은 감소한다.,양력은 감소하고 항력은 증가한다.,Aviation Engineering and Maintenance,0.4412
+금속튜브의 호칭 치수를 옳게 표기한 것은?,2,안지름 x 두께,바깥지름 x 두께,두께 x 안지름 x 바깥지름,바깥지름 x 안지름 x 두께,Aviation Engineering and Maintenance,0.4422999999999999
+터보제트기관에서 비추력을 증가시키기 위하여 가장 중요한 것은?,3,고회전 압축기의 개발,고열에 견딜수 있는 압축기의 개발,고열에 견딜수 있는 터빈 재료의 개발,고열에 견딜수 있는 배기 노즐의 개발,Aviation Engineering and Maintenance,0.4425
+Proximity Switch에 대한 설명으로 옳은 것은?,1,Switch와 피검출물과의 기계적 기계적 접촉을 없앤 구조의 Switch이다.,"Micro Switch라고 불리며, 주로 착륙장치 및 플랩 등의 작동 전동기 제어에 사용된다.",Switch의 Knob를 돌려 여러 개의 Switch 를 하나로 담당한다.,조작 레버가 동작상태를 표시하는 것을 이용하여 조종실의 각종 조작 Switch로 사용된다.,Aviation Engineering and Maintenance,0.4426
+프로펠러의 자이로 모멘트(Gyro moment) 특성은 자이로스코프의 어떤 특성에 기인하는가?,3,강직성(Rigidity),진자효과(Pendulum effect),섭동성(Precession),회전효과(Rotation effect),Aviation Engineering and Maintenance,0.4426
+어미자 19mm 를 20등분한 아들자로 구성된 버니어 캘리퍼스의 최소 측정값은 몇 mm 인가?,2,0.1,0.05,0.01,0.005,Aviation Engineering and Maintenance,0.4443999999999999
+볼트나 너트의 육면 중 2면만이 공구의 개구부분에 걸려서 그 볼트나 너트를 장착하는데 쓰이는 공구는?,2,박스 렌치,오픈엔드 렌치,조합 렌치,소켓 렌치,Aviation Engineering and Maintenance,0.4443999999999999
+"비행기의 무게가 8600kgf 이고, 날개면적이 60m2로 수평비행 시 플랩을 사용하지 않을 때 실속 속도가 80 m/s 라면, 장착 된 플랩의 30%를 사용할 때 실속 속도는 몇 m/s가 되겠는가? (단, 플랩의 30% 사용 시 30%의 코드 증가, 100%의 최대양력계수 증가 효과가 있다. )",1,56.6,70.2,113.2,120.3,Aviation Engineering and Maintenance,0.4443999999999999
+"항공기용 볼트 중 조종 케이블이나 턴버클과 같이 외부 특수한 목적으로 사용되며, 특히 인장하중이 주로 받는 곳에 사용되는 곳은?",2,정밀공차 볼트,아이 볼트,내부렌치 볼트,클레비스 볼트,Aviation Engineering and Maintenance,0.4443999999999999
+항공기용 왕복기관에 사용되는 마그네토의 형식 중 고공비행에 적합한 형태는?,4,초고압마그네토,고압마그네토,중압마그네토,저압마그네토,Aviation Engineering and Maintenance,0.4443999999999999
+비교적 두꺼운 날개를 사용한 비행기가 천음속 영역에서 비행할 때 발생하는 가로 불안정의 특별한 현상은?,3,커플링(Coupling),디프실속(Deep stall),날개드롭(Wing drop),더치롤(Dutch roll),Aviation Engineering and Maintenance,0.4443999999999999
+항공기 정비의 분류로 가장 올바른 것은?,4,"보수, 점검, 조절","보수, 수리, 점검","보수, 검사, 수리","보수, 수리, 개조",Aviation Engineering and Maintenance,0.4443999999999999
+4행정 사이클 기관에서 크랭크축 회전수가 4000rpm일 때 1분 동안 출력행정은 몇 회를 하였는가?,2,4000,2000,1000,500,Aviation Engineering and Maintenance,0.4443999999999999
+고고도에서 고속으로 비행하는 항공기에 가장 적합한 엔진 형식은?,2,터보 팬 엔진,터보 제트 엔진,터보 프롭 엔진,터보 샤프트 엔진,Aviation Engineering and Maintenance,0.4443999999999999
+헬리콥터 회전 날개의 회전면과 원추 모서리가 이루는 원추각에 영향을 주는 것으로만 짝지어진 것은?,2,추력과 항력,원심력과 양력,원심력과 항력,원심력과 추력,Aviation Engineering and Maintenance,0.4443999999999999
+기체구조에 부착되는 벌집구조부의 알루미늄 코어의 손상 시 대체용으로 자주 쓰이는 벌집구조부 코어의 재질은?,4,마그네슘,스테인리스강,티타늄,유리섬유,Aviation Engineering and Maintenance,0.4443999999999999
+헬리콥터 날개 깃에 충격 실속이 발생하는 마하수는 얼마인가?,4,M=0.3,M=0.5,M=0.7,M=1.0,Aviation Engineering and Maintenance,0.4443999999999999
+왕복기관에서 크랭크축의 변형이나 비틀림 진동을 줄여 주기 위해서 설치되는 것은?,4,크랭크 암,주 저널,평형추,다이나믹 댐퍼,Aviation Engineering and Maintenance,0.4443999999999999
+중력의 방향에 대해 항상 평형 상태를 유지하는 gyro를 사용하는 장치는?,3,거리 측정 장비(DME),항공 교통 관제(ATC),관성 항법 장치(INS),기상 레이다,Aviation Engineering and Maintenance,0.4443999999999999
+실제유체와 이상유체의 가장 큰 차이는?,2,운동에너지,점성,유체의 압력,유체의 속도,Aviation Engineering and Maintenance,0.4443999999999999
+와전류 검사의 특성을 설명한 내용으로 틀린 것은?,4,검사의 자동화가 가능하다.,비전도성 물체에는 적용할 수 없다.,형상이 단순한 것이 아니면 적용할 수 없다.,표면 아래의 깊은 위치에 있는 결함의 검출을 쉽게 할 수 있다.,Aviation Engineering and Maintenance,0.4443999999999999
+4행정기관에서 크랭크축이 4회전하는 동안에 몇 번의 폭발이 일어나는가?,2,1,2,3,4,Aviation Engineering and Maintenance,0.4443999999999999
+헬리콥터의 주회전날개 궤도점검 방법이 아닌 것은?,3,광선 반사에 의한 방법,검사 막대에 의한 방법,보어스코프를 이용한 방법,궤도 점검용 깃발에 의한 방법,Aviation Engineering and Maintenance,0.4443999999999999
+조종면을 조작하기 위한 조종력과 가장 관계가 먼 것은?,4,조종면의 폭,조종면의 평균시위,비행기의 속도,조종면의 표면상태,Aviation Engineering and Maintenance,0.4443999999999999
+대부분의 항공기에 사용되며 안쪽과 바깥쪽의 휠로 분리되는 조립품으로 이루어지는 형태의 휠 명칭은?,2,플랜지 휠(Flange Wheel),스플리트 휠(split Wheel),드롭센터 휠(Drop Center Wheel),고정플랜지 휠(Fixed Flange Wheel),Aviation Engineering and Maintenance,0.4443999999999999
+뒤 젖힘각 θ를 갖는 뒤젖힘 날개에서 진행 방향의 오른쪽 날개 유효 속도성분은 비행속도 V와 어떤 관계를 갖는가?,2,Vsinθ,Vcosθ,Vsecθ,Vtanθ,Aviation Engineering and Maintenance,0.4443999999999999
+기관 시동 시 과열시동에 대한 설명으로 가장 올바른 것은?,2,시동 중 윤활류 압력이 규정된 한계 값을 초과하는 현상,시동 중 EGT가 규정된 한계 값을 초과하는 현상,시동 중 RPM이 규정된 한계 값을 초과하는 현상,엔진 압력비가 규정된 한계 값을 초과하는 현상,Aviation Engineering and Maintenance,0.4443999999999999
+병렬식 회전날개 헬리콥터에 대한 설명으로 틀린 것은?,3,수평 비행 시 유해항력이 크다.,세로안정성이 좋지 않기 때문에 고리날개를 가진다.,무게 중심 이동범위가 제한되기 때문에 대형기에만 적합하다.,회전날개 상호간의 충돌을 피하기 위한 장치를 설치해야 할 경우가 있다.,Aviation Engineering and Maintenance,0.4443999999999999
+터보제트 엔진(TURBO JET ENGINE)에서 온도가 가장 높은 부분은?,2,COMPRESSOR 출구,연소실 내부,TURBINE 출구,배기노즐 출구,Aviation Engineering and Maintenance,0.4443999999999999
+기체 세로축과 날개 단면의 시위선이 이루는 각은?,2,받음각,붙임각,쳐든각,처진각,Aviation Engineering and Maintenance,0.4443999999999999
+"세로 안정에서의 꼬리날개 부피란 무엇을 의미 하는가? (단, qt : 수평꼬리날개 주위의 동압, q : 날개주위의 동압,   st : 수평꼬리날개 면적, ℓ: 무게중심에서 수평꼬리날개의 압력중심까지의 길이)",4,qt/ℓ,qt/q,st/ℓ,stㆍℓ,Aviation Engineering and Maintenance,0.4443999999999999
+초음속 흡입덕트에서 수축 통로의 가장 중요한 기능은?,4,공기속도를 증가시키고 압력을 감소시킨다.,공기속도를 감소시키고 압력을 감소시킨다.,공기속도를 증가시키고 압력을 증가시킨다.,공기속도를 감소시키고 압력을 증가시킨다.,Aviation Engineering and Maintenance,0.4443999999999999
+와전류검사의 특성에 대한 설명 중 가장 관계가 먼 내용은?,4,검사의 자동화가 가능하다.,비전도성 물체에는 적용할 수 없다.,표면결함에 대한 검출감도가 좋다.,표면 아래의 깊은 위치에 있는 결함의 검출을 쉽게 할 수 있다.,Aviation Engineering and Maintenance,0.4443999999999999
+자장 내 단일코일로 회전하는 발전기에서 중립면을 통과하는 코일에 전압이 유도되지 않는 이유로 옳은 것은?,2,자력선이 존재하지 않기 때문,자력선이 차단되지 않기 때문,자력선의 밀도가 너무 높기 때문,자력선이 잘못된 방향으로 차단되기 때문,Aviation Engineering and Maintenance,0.4451
+"정상선회하는 항공기의 선회반지름을 구하는 식은? (단, V : 항공기속도, g : 선회경사각이다.)",2,gtanø,V2/gtanø,V/gsinø,V2/gsinø,Aviation Engineering and Maintenance,0.4462
+"공기의 정압비열이 0.24kcal/kgㆍ℃ 라면 정적비열은 약 몇 kcal/kgㆍ℃인가? (단, 비열비는 1.4 이다.)",1,0.17,0.34,0.53,5.83,Aviation Engineering and Maintenance,0.4464
+항공기 방화시스템에 대한 설명으로 옳은 것은?,3,"방화시스템은 감지(detection), 소화(extinguishing), 탈출(evacuation)시스템으로 구성되어 있다.",엔진의 화재감지에 사용되는 감지기(detector)는 주로 스모그감지장치(smoke detector)이다.,연속 저항 루프 화재 탐지기에는 키드시스템(kidde system)과 팬웰시스템(fenwal system)이 있다.,항공기에서 화재가 감지되면 자동적으로 해당 소화시스템(extinguishing system)이 작동되어 화재를 진압한다.,Aviation Engineering and Maintenance,0.4465999999999999
+왕복엔진의 피스톤 지름이 16cm인 피스톤에 6370kPa의 가스압력이 작용하면 피스톤에 미치는 힘은 약 몇 kN인가?,4,63,98,110,128,Aviation Engineering and Maintenance,0.4467
+비행기가 옆 미끄럼 상태에 들어갔을 때의 설명으로 옳은 것은?,3,수직 꼬리 날개의 받음각에는 변화가 없다.,수평 꼬리 날개의 옆 미끄럼 힘이 발생한다.,무게중심에 대한 빗놀이 모멘트가 발생한다.,비행기의 기수를 상대풍과 반대방향으로 이동시키려는 힘이 발생한다.,Aviation Engineering and Maintenance,0.4474
+부식 발생시 녹색 산화 피막이 생기는 금속 재료는?,3,철강재료,마그네슘 합금,구리합금,알루미늄 합금,Aviation Engineering and Maintenance,0.4474
+왕복기관의 기화기빙결로 인하여 나타나는 현상이 아닌 것은?,3,출력 감소,흡기압력 감소,디토네이션,역화(Backfire),Aviation Engineering and Maintenance,0.4476
+항공기 나셀에 대한 설명으로 틀린 것은?,2,나셀의 구조는 세미모노코크구조 형식으로 세로부재와 수직부재로 구성되어 있다.,항공기 엔진을 동체에 장착하는 경우에도 나셀의 설치는 필요하다.,"나셀은 외피, 카울링, 구조부재, 방화벽, 엔진마운트로 구성되며 유선형이다.",나셀은 안으로 통과하여 나가는 공기의 양을 조절하여 엔진의 냉각을 조절한다.,Aviation Engineering and Maintenance,0.4479999999999999
+항공기에 사용되는 니켈-카드뮴 축전지의 방전상태를 측정하는 장비로 가장 적합한 것은?,2,저항계(ohmmeter),전압계(voltmeter),와트미터(wattmeter),전류계(ammeter),Aviation Engineering and Maintenance,0.4483
+헬리콥터 속도-고도선도(velocity-height diagram) 와 관련된 설명으로 틀린 것은?,1,양력불균형이 심회되는 높은 고도에서의 전진비행 시 비행가능영역이 제한된다.,엔진 고장 시 안전한 착륙을 보장하기 위한 비행가능영역을 표시한 것이다.,"속도-고도선도는 항공기 중량, 비행고도 및 대기온도 등에 따라 달라진다.",속도-고도선도는 인증을 받은 후 비행교범의 성능차트로 명시되어야 한다.,Aviation Engineering and Maintenance,0.4485
+프리즈 밸런스(frise balance)가 주로 사용되는 조종면은?,4,방향타,플랲,승강타,도움날개,Aviation Engineering and Maintenance,0.4487
+조종실내의 온도와 연전대식(thermo-couple) 온도계에 대한 설명으로 옳은 것은?,1,조종실내의 온도계는 열전대식(thermo-couple) 온도계가 사용되지 않는다.,조종실내의 온도계로 사용되는 열전대식(thermo-couple) 온도계는 최고 100℃까지 측정이 가능하다.,조종실내의 온도가 높아지면서 열전대식(thermo-couple) 온도계의 지시값은 낮게 지시된다.,조종실내의 온도가 높아지면 열전대식(thermo-couple) 온도계의 지시값은 높게 지시된다.,Aviation Engineering and Maintenance,0.4488
+토크렌치를 사용할 때 주의사항으로 틀린 것은?,4,토크렌치는 정기적으로 교정 점검해야 한다.,힘은 토크렌치에 직각방향으로 가하는 것이 효율적이다.,토크렌치 사용시 특별한 언급이 없으면 볼트에 윤활해서는 안된다.,토크렌치를 조이기 시작하면 조금씩 멈춰가며 지정된 토크를 확인한 후 다시 조인다.,Aviation Engineering and Maintenance,0.4495
+축류형 압축기의 실속(Stall) 방지장치가 아닌 것은?,4,다축 기관,가변 스테이터,블리드 밸브,공기 흡입덕트,Aviation Engineering and Maintenance,0.45
+왕복기관에서 역화(back fire)가 일어나는 가장 큰 원인은?,3,피스톤링(Piston ring)의 절손된 원인으로,농후혼합기(Rich Mixture)의 원인으로,희박혼합기(Lean Mixture)의 원인으로,푸쉬로드(Push 깽)의 절손 때문에,Aviation Engineering and Maintenance,0.45
+일반적으로 헬리콥터의 수평방향(전후좌우) 조종은 어느 것으로 하는가?,4,페달 조종,동시 피치 조종,스로틀 조종,주기적 피치 조종,Aviation Engineering and Maintenance,0.45
+공기를 강체(Rigid body)라 가정하고 프로펠러 깃이 1회전할 때 프로펠러가 진행하는 거리를 무엇이라 하는가?,3,유효 피치(Effective pitch),산술적 피치(Arithmetic pitch),기하학적 피치(Geometric pitch),평균 공력 피치(Mean aerodynamic pitch),Aviation Engineering and Maintenance,0.45
+"양력계수 0.9, 가로세로비 6, 스팬효율계수 1인 날개의 유도항력계수는 얼마인가?",2,0.034,0.043,0.054,0.061,Aviation Engineering and Maintenance,0.45
+가스터빈기관의 윤활계통에서 윤활유의 역류방지 역할을 하는 것은?,2,니들밸브,체크밸브,바이패스밸브,드레인밸브,Aviation Engineering and Maintenance,0.45
+유관의 입구지름이 20cm 이고 출구의 지름이 40cm 이다. 이 때 입구에서의 유체속도가 4m/s 이면출구에서의 유체 속도는 약 몇 m/s 인가?,1,1,2,4,16,Aviation Engineering and Maintenance,0.45
+착륙장치를 타이어의 수에 따라 분류했을 때 틀린 것은?,3,단일식,이중식,다발식,보우기식,Aviation Engineering and Maintenance,0.45
+왕복기관에서 증기폐색(Vapor Lock)이 발생되는 경우는?,4,연료의 기화성이 좋지 않을 때,연료의 압력이 연료의 증기압보다 클 때,주변기온이 낮아 연료의 온도가 매우 낮을 때,기화성이 좋은 연료가 흐르는 연료파이프가 열을 받았을 때,Aviation Engineering and Maintenance,0.45
+축류형 압축기에서 1단(1Stage)을 옳게 설명한 것은?,4,임펠러와 매니폴드의 합,1개의 임펠러와 1개의 디퓨저의 합,1열의 회전자와 1개의 디스크의 합,1열의 회전자 깃과 1열의 고정자 깃의 합,Aviation Engineering and Maintenance,0.45
+"700 ps 짜리 2 개의 엔진을 장착한 항공기가 대기속도 50 m/s 로 상승비행을 하고 있다면 이 항공기의 상승률은 몇 m/s 인가? (단, 비행기의 중량은 5000 kgf, 항력은 1000 kgf, 프로펠러 효율은 0.8 이다.)",4,3.4,5.0,6.0,6.8,Aviation Engineering and Maintenance,0.4504999999999999
+항공기용 회전식 인버터(rotary inverter)가 부하변동이 있어도 발전기의 출력 전압을 일정하게 하기 위한 방법은?,3,직류전원의 전압을 변화시킨다.,교류발전기의 전압을 변화시킨다.,직류전동기의 분권 계자 전류를 제어한다.,교류발전기의 회전 계자 전류를 제어한다.,Aviation Engineering and Maintenance,0.4504999999999999
+설계제한하중배수가 2.5 인 비행기의 실속속도가 120 km/h 일 때 이 비행기의 설계운용속도는 약 몇 km/h 인가?,3,150,240,190,300,Aviation Engineering and Maintenance,0.4506
+헬리콥터의 테일붐에 대한 설명으로 틀린 것은?,4,이구조는 알루미늄합금과 마그네슘합금으로 만들어진다.,꼬리회전날개의 구동축은 테일붐 위쪽에 베어링으로 장착되어 덮개로 보호해 주고 있다.,안정판은 수평안정판과 수직안정판으로 구성되며 허니콤으로 되어 있다.,수평안정판은 테일붐 좌 · 우측에 각각 따로 설치한다.,Aviation Engineering and Maintenance,0.4515999999999999
+조종면 효율변수(flap or control effectiveness parameter)를 설명한 것으로 옳은 것은?,2,양력계수와 항력계수의 비를 말한다.,플랩의 변위에 따른 양력계수의 변화량을 나타내는 값이다.,날개 면적을 날개 면적과 플랩 면적을 합한 값으로 나눈 값이다.,플랩 면적을 날개 면적과 플랩 면적을 합한 값으로 나눈 값이다.,Aviation Engineering and Maintenance,0.4524
+왕복엔진의 로커암과 밸브 끝의 간극이 작다면?,4,밸브가 늦게 열리고 늦게 닫힌다.,밸브가 열려있는 기간이 짧다.,밸브가 일찍 열리고 일찍 닫힌다.,밸브가 일찍 열리고 늦게 닫힌다.,Aviation Engineering and Maintenance,0.4526
+비행기가 500ft/s 의 속도로 수평선에 대해 30° 의 각도로 상승하고 있을 때 상승률은 몇 ft/s 인가?,4,152,171,234,250,Aviation Engineering and Maintenance,0.4531
+왕복기관의 피스톤 지름이 16cm인 피스톤에65kgf/cm2의 가스압력이 작용하면 피스톤에 미치는 힘은 약 몇 ton인가?,4,10,11,12,13,Aviation Engineering and Maintenance,0.4539
+가스터빈기관에서 윤활유의 구비조건으로 틀린 것은?,3,인화점이 높을 것,기화성이 낮을 것,점도지수가 낮을 것,산화안전성이 높을 것,Aviation Engineering and Maintenance,0.4545
+"기체 수리시 판재를 평면 설계할 때, 판재를 정확히 수직으로 구부릴 수 없기 때문에 굽혀지는 부분에 여유 길이가 생기는데, 이것을 무엇이라 하는가?",2,최소 굽힘 반지름,굽힘 여유,세트백,스프링백,Aviation Engineering and Maintenance,0.4545
+"지구 포텐셜고도(Geopotential Height)를 정확히 서술한 것은? (단, go: 표준중력 가속도, h: 기하학적 고도, g: 고도에 따른 중력 가속도)(문제 오류로 문제 복원이 완료되지 않았습니다. 정확한 내용을 아시는분께서는 오류신고를 통하여 보기내용 작성부탁드립니다. 여기서는 2번을 누르면 정답 처리 됩니다.)",2,보기 없음,정답,보기 없음,보기 없음,Aviation Engineering and Maintenance,0.4545
+"구조가 간단하고 길이가 짧으며 연소 효율이 좋으나, 정비하는 데 불편한 결점이 있는 가스 터빈기관의 연소실은?",3,캔 형,역류형,애뉼러 형,캔-애뉼러 형,Aviation Engineering and Maintenance,0.4545
+직렬식 회전날개 헬리콥터의 특징으로 잘못된 것은?,3,세로안정이 좋다.,무거운 물체운반에 적당하다.,가로안정성이 좋다.,앞에서 본 단면적이 작다.,Aviation Engineering and Maintenance,0.4545
+Change 59°F to degrees °C?,2,０,15,48.6,74.2,Aviation Engineering and Maintenance,0.4545
+터보 제트기관에서 중요한 구조 부분을 3가지로 구분하였을 때 옳은 것은?,4,"흡입구, 압축기, 노즐","흡입구, 압축기, 연소실","압축기, 연소실, 배기관","압축기, 연소실, 터빈",Aviation Engineering and Maintenance,0.4545
+헬리콥터의 꼬리 회전날개에 관한 설명으로 옳은 것은?,3,플래핑이 불가능하다.,리드래그 운동이 가능하다.,피치각의 변화가 가능하다.,오토 로테이션(auto rotation) 상태에서는 피치각을 변화시킬 수 없다.,Aviation Engineering and Maintenance,0.4545
+세장비(Slenderness ratio)에 관한 설명중 맞는 것은?,1,기둥의 길이를 단면의 회전 반지름으로 나눈비와 관련이 있다.,세장비가 작은 봉은 좌굴강도에 의하여 파괴된다.,세장비가 150보다 크면 짧은 기둥이라고 한다.,세장비가 90보다 크면 짧은 기둥이라고 한다.,Aviation Engineering and Maintenance,0.4545
+대형 항공기의 도장 재료로 사용되는 열경화성수지는?,3,PVC,폴리에틸렌,폴리우레탄,나일론,Aviation Engineering and Maintenance,0.4545
+좌굴에 관한 설명으로 옳은 것은?,2,세장비가 작은 봉은 좌굴 강도가 작다.,압축하중을 받는 부재에 발생 가능한 현상이다.,큰 인장하중을 받는 부재는 좌굴될 위험이 있다.,기둥의 좌굴 위험을 줄이기 위해서는 길이를 늘인다.,Aviation Engineering and Maintenance,0.4545
+기체의 점검에서 정시 점검에 속하지 않는 것은?,4,isi 점검,c 점검,d 점검,e 점검,Aviation Engineering and Maintenance,0.4545
+브레이턴 사이클은 어떤 과정으로 구성되어 있는가?,4,2개의 등온과정과 2개의 정적과정,2개의 등온과정과 2개의 정압과정,2개의 단열과정과 2개의 정적과정,2개의 단열과정과 2개의 정압과정,Aviation Engineering and Maintenance,0.4545
+리벳(RIVET)의 부품번호 AN 430 A 4-5 에서 끝의 숫자 5는 무엇을 나타내는가?,4,RIVET의 직경이 5/32인치,RIVET의 직경이 5/16인치,RIVET의 길이가 5/32인치,RIVET의 길이가 5/16인치,Aviation Engineering and Maintenance,0.4545
+금속표면이 국부적을 깊게 침식되어 콩알만한 작은 점을 만드는 부식은?,2,fatigue corrosion,pitting corrosion,stress corrosion,galvanic corrosion,Aviation Engineering and Maintenance,0.4545
+활공기가 고도 1000m 상공에서 양항비 20 인 상태로 활공한다면 도달할 수 있는 수평활공거리는 몇 m 인가?,4,50,1000,10000,20000,Aviation Engineering and Maintenance,0.4545
+일반적으로 항공기정비 작업장에서 많이 사용되는 독극물의 유기용제가 아닌 것은?,2,염소,산소,황산,질소,Aviation Engineering and Maintenance,0.4545
+헬리콥터에서 주기적 피치 제어간(Cyclic pitch control lever)으로 조종할 수 없는 비행은?,2,전진비행,상승비행,측면비행,후퇴비행,Aviation Engineering and Maintenance,0.4545
+항공기 연료 조절장치에서 수감하는 기관의주요 작동변수가 아닌 것은?,2,기관회전수,배기가스온도,압축기출구압력,압축기입구온도,Aviation Engineering and Maintenance,0.4545
+고공에서 연소가 불안정하며 시동시 과열을 일으키기 쉬운 연소실 형은?,2,애뉼러형,캔형,캔 애뉼러 형,리버스 후로우 애뉼러형,Aviation Engineering and Maintenance,0.4545
+헬리콥터 주 회전날개의 운동과 가장 거리가 먼 것은?,2,플래핑,버핏,페더링,리드-래그,Aviation Engineering and Maintenance,0.4545
+"두 겹 또는 그 이상의 보강재를 사용하여 서로 겹겹이 덧붙이는 형태로 각겹(ply)은 서로 다른 재질이고, 한 방향 혹은 두 방향 형태의 직물이 사용된 혼합 복합 소재의 구조 부재는?",3,탄소 섬유(carbon fiber),선택적 배치(selective placement),인터 플라이 혼합재(inter - ply hybrid),인트라 플라이 혼합재(intra - ply hybrid),Aviation Engineering and Maintenance,0.4545
+변압기에 성층 철심을 사용하는 사용하는 이유는?,3,동손을 감소시킨다.,유전체 손실을 적게한다.,와전류 손실을 감소시킨다.,히스테리스 손실을 감소시킨다.,Aviation Engineering and Maintenance,0.456
+비행기 속도가 2배로 증가했을 때 조종력은 어떻게 변화하는가?,4,1/2로 감소한다.,1/4로 감소한다.,2배로 증가한다.,4배로 증가한다.,Aviation Engineering and Maintenance,0.4561
+유압계통에서 유량제어 또는 방향제어밸브에 속하지 않은 것은?,3,오리피스(orifice),체크밸브(check valve),릴리프밸브(relief valve),선택밸브(selector valve),Aviation Engineering and Maintenance,0.4564
+"무게가 2000kgf 인 비행기가 고도 5000m 상공에서 급강하 하고 있다면 이때 속도는 약 몇 m/s인가?(단, 항력계수: 0.03, 날개하중: 274kgf/m2, 밀도 0.075kgf×S2/M4 이다)",1,494,1423,1973,1777,Aviation Engineering and Maintenance,0.4564999999999999
+시간에 따라 하중의 크기가 변화하면서 작용하여 구조에 진동을 일으키는 하중이 아닌 것은?,3,반복하중,교번하중,정하중,충격하중,Aviation Engineering and Maintenance,0.4568
+가솔린 엔진에서 노킹(knocking)을 방지하기 위한 방법으로 틀린 것은?,4,제폭성이 좋은 연료를 사용한다.,화염전파거리를 짧게 해준다.,착화지연을 길게 한다.,연소속도를 느리게 한다.,Aviation Engineering and Maintenance,0.4571
+"탄소강에 니켈, 크롬, 몰리브덴 등을 첨가한 것으로 인장강도와 내구성이 높아 구조재나 부품 등에 널리 쓰이는 것은?",1,고장력강,알류미늄 합금,티탄 합금,내식용 합금강,Aviation Engineering and Maintenance,0.4576
+유압 계통에서 레저버(Reservoir) 내에 있는 standpipe의 주된 역할은?,2,Vent 역할을 한다.,비상시 작동유의 예비공급 역할을 한다.,계통 내의 압력 유동을 감소시키는 역할을 한다.,탱크 내의 거품이 생기는 것을 방지하는 역할을 한다.,Aviation Engineering and Maintenance,0.4576
+FADEC(full authority digital electronic control)에서 조절하는 것이 아닌 것은?,1,오일 압력,엔진 연료 유량,압축기 가변 스테이터 각도,실속 방지용 압축기 블리드 밸브,Aviation Engineering and Maintenance,0.4579999999999999
+"왕복기관을 장착한 프로펠러 비행기에서 프로펠러 효울 및 모든 조건 일정한 경우에, 제동마력이 커지면 이용마력 또는 필요마력은 각각 어떻게 되는가?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.)",1,이용마력이 증가한다,이용마력이 감소한다,필요마력이 감소한다,필요마력이 증가한다,Aviation Engineering and Maintenance,0.4583
+마이크로미터 사용법에 대한 설명으로 틀린 것은?,4,래칫을 가볍게 돌려 스핀들의 측정면이 일감의 중심에 오도록 밀착시킨다.,따르락하는 소리가 2~3회 나도록 래칫을 돌려 측정면이 완전히 닿도록 한다.,눈금을 읽을 때에는 일감이 마이크로미터와 접촉된 상태에서 직접 읽는 것이 좋다.,마이크로미터를 사용한 후에는 앤빌과 스핀들이 서로 맞닿게 하여 보관한다.,Aviation Engineering and Maintenance,0.4583
+윤활유에 요구되는 특성이 아닌 것은?,2,저온에서 최대의 유동성을 갖추어야 한다.,산화에 대한 저항이 적어야 한다.,최대 냉각능력을 갖추어야 한다.,온도변화에 따른 점도의 변화가 최소이어야 한다.,Aviation Engineering and Maintenance,0.4583
+온도 20°C 의 이상기체가 압력 760mmHg인 공간 100m3에 채워져 있다. 만약 밀폐된 공간 500m3 으로 등온팽창 하였다면 이 때의 압력은 몇 mmHg 인가?,1,152,304,3040,3800,Aviation Engineering and Maintenance,0.4583
+방사선 전개도법으로 전개할 수 없는 것은?,1,원통,원뿔,깔때기,각뿔,Aviation Engineering and Maintenance,0.4583
+공함에 대한 설명으로 틀린 것은?,3,"승강계, 속도계에도 이용이 된다.",밀폐식 공함을 아네로이드라고 한다.,공함은 기계적 변위를 압력으로 바꾸어 주는 장치이다.,공함재료는 탄성한계 내에서 외력과 변위가 직선적으로 비례한다.,Aviation Engineering and Maintenance,0.4589999999999999
+"한쪽 끝은 힌지 지지점이고, 다른쪽은 롤러 지지점인 보는?",1,단순보,외팔보,고정보,고정지지보,Aviation Engineering and Maintenance,0.4595
+유효피치를 설명한 것 중 틀린 것은?,4,공기 중에서 프로펠러가 1회전 할 때 실제 전진한 거리이다.,"V× (60/n) (V는 비행속도, n은 프로펠러 회전속도)로 표시할 수 있다.",일반적으로 기하학적 피치 보다 작다.,"r은 프로펠러 중심부터의 거리, β는 깃각 일 때 날개골은 2πr*tanβ의 유효피치를 가진다.",Aviation Engineering and Maintenance,0.4595
+가스터빈기관 작동시 윤활계통에서 윤활유 압력이 규정값 이상으로 높게 지시되었다면 그 원인으로 볼수 없는 것은?,3,윤활유 공급관에 오물이 끼었다.,윤활유 공급관이 베어링 레이스와 접촉되었다.,윤활유 펌프의 릴리프 밸브 스프링이 파손되었다.,베어링 쪽에 공급하는 윤활유 제트가 오므라들었다.,Aviation Engineering and Maintenance,0.4598
+피스톤의 링의 끝은 링 홈에 링을 끼운 상태에서 끝 간격을 가지도록 해야 한다. 피스톤 링의 끝 간격 모양 중 제작이 쉽고사용하기 편리한 형으로 일반적으로 가장 널리 이용되는 것은?,3,계단형,경사형,맞대기형,쐐기형,Aviation Engineering and Maintenance,0.46
+Air Cycle Air Conditioning System에서 팽창터빈(Expansion Turbine)에 대한 설명으로 옳은 것은?,4,찬 공기와 뜨거운 공기가 섞이도록 한다,1차 열 교환기를 거친 공기를 냉각시킨다,공기공급 라인이 파열되면 계통의 압력손실을 막는다,공기조화계통에서 가장 마지막으로 냉각이 일어난다,Aviation Engineering and Maintenance,0.461
+"날개의 길이가 11m, 평균시위의 길이가 1.44m인 타원날개에서 양력계수가 0.8일 때 가로세로비는 약 얼마인가?",3,4.9,6.1,7.6,8.8,Aviation Engineering and Maintenance,0.4614999999999999
+왕복기관에서 실린더의 압축시험을 하는 주 목적은?,2,피스톤의 균열을 검사하기 위하여,밸브와 피스톤링에 의한 연소실내의 기밀을 검사하기 위하여,실린더의 냉각핀이 냉각을 잘하는지 검사하기 위하여,기관내의 기밀을 검사하기 위하여,Aviation Engineering and Maintenance,0.4614999999999999
+샌드위치 구조에 대한 설명중 가장 관계가 먼 내용은?,3,날개나 꼬리 날개와 같은 일부 구조 요소의 스킨에 사용된다.,2장의 판 상태의 스킨사이에 코어를 끼어서 제작된 구조이다.,샌드위치 구조는 부재를 결합하여 1개의 부재와 같거나 또는 그 이상의 강도를 갖게 하는 구조이다.,부분적인 벅클링이나 부분적인 피로 강도에 강하다.,Aviation Engineering and Maintenance,0.4614999999999999
+케이블 주위에 구리로 된 8(팔)자형 관 모양의 슬리브를 둘러 압착하는 방법을 이용하여 케이블 단자를 연결하는 방법은?,4,랩솔더 이용 방법,5단 엮기 이음 방법,스웨이징 단자 방법,니코프레스 처리 방법,Aviation Engineering and Maintenance,0.4614999999999999
+자동추력제어 장치에 있어서 추력은 무엇에 의하여 조절되는가?,2,공기량,연료량,오일량,배기가스,Aviation Engineering and Maintenance,0.4614999999999999
+소형 항공기에 사용되는 가장 일반적인 바퀴의 형태는?,1,스플리트형 바퀴,플랜지형 바퀴,드롭센터형 바퀴,고정 프랜지형 바퀴,Aviation Engineering and Maintenance,0.4614999999999999
+매스 밸런스(Mass Balance)를 부착하는 가장 큰 이유는?,2,구조의 강도를 보강하기 위해,조종면의 플러터(Flutter)를 방지하기 위해,조종면이 서로 반대 방향으로 움직이도록 하기 위해,상승속도를 증가시키기 위해,Aviation Engineering and Maintenance,0.4614999999999999
+종합계기 PFD에 Display 되지 않은 계기는?,2,Marker beacon (M/B),Very high frequency (VHF),Instrument Landing System (ILS),Altimeter,Aviation Engineering and Maintenance,0.4614999999999999
+가스터빈기관의 연소기에서 연소가 일어나고 있는 동안 연소기 내부 압력 변화에 대한 설명으로 옳은 것은?,3,연소가 발생한 곳에서 압력이 급격히 증가되지만 서서히 감소한다.,연소가 일어나면서 물이 생성되기 때문에 압력이 급격하게 저하된다.,"연소는 압력이 일정한 상태에서 일어나기에 압력은 일정하다. 단, 내부 마찰 등으로 인하여 압력이 약간 저하된다.",연소가 폭발적으로 일어나기 때문에 압력이 급격하게 증가한다.,Aviation Engineering and Maintenance,0.4614999999999999
+역화(Back Fire)가 잘 일어날 수 있는 경우는?,4,과농후 혼합기,과도한 실린더 압력,과도한 실린더 온도,과희박 혼합기,Aviation Engineering and Maintenance,0.4614999999999999
+유체의 흐름이 층류에서 난류로 변화하는데 관계되는 요소로 가장 거리가 먼 것은?,2,유체의 속도,유체의 양,유체의 점성,물체의 형상,Aviation Engineering and Maintenance,0.4614999999999999
+항공기의 실제 무게와는 관계가 없는 것은?,4,자기무게,최대무게,영연료무게,테어무게,Aviation Engineering and Maintenance,0.4614999999999999
+"왕복엔진의 피스톤 지름이 16cm, 행정길이가 0.16cm, 실린더수가 6, 제동평균 유효압력이 8kg/cm2, 회전수가 2400rpm 일 때의 제동마력은 약 몇 ps인가?",1,411.6,511.6,611.6,711.6,Aviation Engineering and Maintenance,0.4629
+항공기의 직류 전원을 공급(Source)하는 것은?,1,TRU,IDG,APU,Static Inverter,Aviation Engineering and Maintenance,0.4629999999999999
+화재탐지장치에 대한 설명으로 틀린 것은?,1,열전쌍(thermocouple)은 주변의 온독가 서서히 상승할 때 열전대의 열팽창으로 인해 전압을 발생시킨다.,광전기셀(photo-electric cell)은 공기 중의 연기로 빛을 굴절시켜 광전기셀에서 전류를 발생시킨다.,"써미스터(thermistor)는 저온에서는 저항이 높아지고, 온도가 상승하면 저항이 낮아지는 도체로 회로를 구성한다.",열스위치(thermal switch)식은 2개 합금의 열팽창에 의해 전압을 발생시킨다.,Aviation Engineering and Maintenance,0.4631
+"프로펠러 날개의 루트 및 허브를 덮는 유선형의 커버로, 공기흐름을 매끄럽게 하여 엔진효율 및 냉각효과를 돕는 것은?",4,램(ram),커프스(cuffs),가버너(governor),스피너(spinner),Aviation Engineering and Maintenance,0.4631
+"가스터빈 기관을 시동하여 공회전(Idle)에 도달했을 때, 기관의 정상 여부를 판단하는 중요한 변수와 가장 관계가 먼 것은?",3,진동,오일압력,추력,배기가스온도,Aviation Engineering and Maintenance,0.4632
+"착륙 접지시 역추력을 발생시키는 순 감속력(Fa)에 대한 식을 가장 올바르게 나타낸 것은? (단, 추력 : T, 항력 : D, 무게 : W, 양력 : L, 활주로마찰계수 : μ)",4,Fa = T-D+μ(W-L),Fa = T+D+μ(W+L),Fa = T-D+μ(W+L),Fa = T+D+μ(W-L),Aviation Engineering and Maintenance,0.4632
+"헬리콥터는 제자리비행 시 균형을 맞추기 위해서 주 회전날개 회전면이 회전방향에 따라 동체의 좌측이나 우측으로 기울게 되는데 이는 어떤 성분의 역학적 평형을 맞추기 위해서인가? (단, x, y, z는 기체축(동체축) 정의를 따른다.)",4,x축 모멘트의 평형,x축 힘의 평형,y축 모멘트의 평형,y축 힘의 평형,Aviation Engineering and Maintenance,0.4636
+날개길이 방향의 양력계수 분포가 일률적이고 유도항력이 최소인 날개는?,3,앞젖힘 날개,뒤젖힘 날개,타원날개,테이퍼 날개,Aviation Engineering and Maintenance,0.4643
+항공기 왕복기관의 매니폴드 압력이 증가함에 따라 어떤 현상이 주로 나타나는가?,4,실린더 내의 공기부피가 증가한다.,혼합가스의 무게가 감소한다.,실린더 내의 공기부피가 감소한다.,실린더 내의 공기밀도가 증가한다.,Aviation Engineering and Maintenance,0.4643
+고정익 항공기 추진에 사용되는 프로펠러에 대한 설명으로 옳은 것은?,2,일반적으로 지상활주 시와 같이 전진비가 낮은 경우에 프로펠러 효율은 최대가 된다.,전진비의 증가에 따라 피치각을 증가시켜야한다.,로터면에 대한 비틀림각을 블레이드 팁(tip)방향으로 증가하도록 분포시킨다.,프로펠러 직경이 큰 경우에는 회전수 변화로 추력을 증감시키는 방법이 일반적으로 사용된다.,Aviation Engineering and Maintenance,0.4648
+프로펠러 비행기의 이용마력과 필요마력을 비교할 때 필요마력이 최소가 되는 비행속도는?,4,비행기의 최고속도,최저상승률일 때의 속도,최대항속거리를 위한 속도,최대항속시간을 위한 속도,Aviation Engineering and Maintenance,0.4652
+2단 가변피치 프로펠러 항공기의 프로펠러 효율을 좋게 유지하기 위한 운항 상태에 따른 각각의 사용피치로 옳은 것은?,2,강하시에는 저피치(Low pitch)를 사용한다.,순항시에는 고피치(High pitch)를 사용한다.,이륙시에는 고피치(High pitch)를 사용한다.,착륙시에는 고피치(High pitch)를 사용한다.,Aviation Engineering and Maintenance,0.4654999999999999
+조종면에 사용하는 앞전 밸런스(leading edge balance)에 대한 설명으로 옳은 것은?,4,"조종면의 앞전을 짧게 하는 것이며, 비행기 전체의 정안정을 얻는데 주 목적이 있다.","조종면의 앞전을 길게 하는 것이며, 비행기 전체의 동안정을 얻는데 주 목적이 있다.","조종면의 앞전을 짧게 하는 것이며, 항공기 속도를 증가시키는데 주 목적이 있다.","조종면의 앞전을 길게 하는 것이며, 조종력을 경감시키는데 주 목적이 있다.",Aviation Engineering and Maintenance,0.4656
+지자기의 3요소 중 편각에 대한 설명으로 옳은 것은?,4,플럭스 밸브(flux valve)가 편각을 감지한다.,지자력의 지구수평에 대한 분력을 의미한다.,"지자기 자력선의 방향과 수평선 간의 각을 말하며, 양극으로 갈수록 90°에 가까워진다.",지축과 지자기축이 서로 일치하지 않음으로서 발생되는 진방위와 자방위의 차이이다.,Aviation Engineering and Maintenance,0.4661
+알루미늄합금 2024-H2에서 H2가 의미하는 것은?,2,뜨임(Tempering)을 했다.,가공경화 후 풀림을 했다.,담금질을 한 후 인공시효경화 했다.,용액내 열처리해서 6% 정도 연화시키기 위하여 냉간가공 했다.,Aviation Engineering and Maintenance,0.4667
+비행기가 정상선회를 할 때 비행기에 작용하는 원심력과 구심력의 관계에 대하여 옳게 설명한 것은?,2,두 힘은 크기가 같고 방향도 같다.,두 힘은 크기가 같고 방향이 반대이다.,두 힘은 크기가 다르고 방향이 같다.,두 힘은 크기가 다르고 방향이 반대이다.,Aviation Engineering and Maintenance,0.4667
+항공기에 사용되는 브레이크 계통의 기본형태가 아닌 것은?,4,독립형 계통(Independent system),파워 승압형 계통(Power boost system),파워 조정 계통(Power control system),디부스터 실린더 계통(Debooster cylinder system),Aviation Engineering and Maintenance,0.4667
+리벳의 부품번호 MS 20470 AD 6-6에서 리벳의 재질을 나타내는 “AD”는 어떤 재질을 의미하는가?,3,1100,2017,2117,모넬,Aviation Engineering and Maintenance,0.4667
+알루미늄이나 아연 같은 금속을 특수분무기에 넣어 방식 처리해야 할 부품에 용해분착시키는 방법을 무엇이라 하는가?,2,양극처리(ANODIZING),메탈라이징(METALLIZING),도금(PLATING),본데라이징(BONDERIZING),Aviation Engineering and Maintenance,0.4667
+미국규격협회(ASTM)에서 정한 성질별 기호중 ＂O＂는 무엇을 나타내는가?,2,가공경화한 것,풀림처리한 것,주조한 그대로의 상태인 것,담금질 후 시효경화가 진행중인 것,Aviation Engineering and Maintenance,0.4667
+피치 업(Pitch up)이 발생하는 원인이 아닌 것은?,1,승강키 효율의 증가,뒤젖힘 날개의 비틀림,뒤젖힘 날개의 날개 끝 실속,날개의 풍압중심이 앞으로 이동,Aviation Engineering and Maintenance,0.4667

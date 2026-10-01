@@ -1,0 +1,30 @@
+{"id":"q-ko-01","input":"봄비 내린 아침 숲길을 두 문장으로 묘사하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-02","input":"어제 먹은 저녁 메뉴를 순서대로 나열하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-03","input":"빨강, 파랑, 노랑 중 가장 좋아하는 색과 이유를 말하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-04","input":"주말에 하고 싶은 일 세 가지를 짧게 적으세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-05","input":"숫자 1부터 10까지를 역순으로 나열하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-06","input":"가장 기억에 남는 계절과 그때의 풍경을 묘사하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-07","input":"바닷가에서 들을 수 있는 소리 세 가지를 말하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-08","input":"아침에 일어나서 가장 먼저 하는 일을 설명하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-09","input":"좋아하는 과일 두 가지와 각각의 맛을 비교하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-10","input":"비 오는 날 실내에서 할 수 있는 활동을 추천하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-11","input":"어릴 적 즐겨 하던 놀이 하나를 소개하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-12","input":"하늘에 뜬 구름의 모양을 상상하여 묘사하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-13","input":"새로 배워보고 싶은 악기와 그 이유를 말하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-14","input":"시장에서 파는 간식 세 가지를 나열하세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-ko-15","input":"겨울밤 창밖에 보이는 풍경을 두 문장으로 그리세요.","metadata":{"lang":"ko"},"tags":["quant-probe","ko"]}
+{"id":"q-en-01","input":"Describe a rainy morning forest path in two sentences.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-02","input":"List what you had for dinner yesterday in order.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-03","input":"Pick a favorite among red, blue, and yellow, and explain why.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-04","input":"Name three things you want to do this weekend.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-05","input":"Count down from ten to one.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-06","input":"Describe your most memorable season and its scenery.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-07","input":"Name three sounds you can hear at the seaside.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-08","input":"Explain the first thing you do after waking up.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-09","input":"Compare the tastes of two fruits you like.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-10","input":"Recommend an indoor activity for a rainy day.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-11","input":"Introduce a game you enjoyed as a child.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-12","input":"Imagine and describe the shape of clouds in the sky.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-13","input":"Name an instrument you want to learn and explain why.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-14","input":"List three snacks sold at a street market.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}
+{"id":"q-en-15","input":"Paint the view outside a winter night window in two sentences.","metadata":{"lang":"en"},"tags":["quant-probe","en"]}

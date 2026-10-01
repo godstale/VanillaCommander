@@ -1,0 +1,9 @@
+{
+  "name": "fortress-local",
+  "port": 8080,
+  "debug": false,
+  "limits": {
+    "maxUploadMb": 32,
+    "requestTimeoutSec": 60
+  }
+}

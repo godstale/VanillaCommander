@@ -1,0 +1,281 @@
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource/ibm-plex-sans-kr/400.css';
+@import '@fontsource/ibm-plex-sans-kr/500.css';
+@import '@fontsource/ibm-plex-sans-kr/600.css';
+@import '@fontsource/ibm-plex-sans-kr/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Midnight Rampart theme — synced from design/theme.css (see DESIGN.md). */
+  :root {
+    --background: 225 7.7% 10.2%; /* #18191C */
+    --foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --card: 228 7.5% 13.1%; /* #1F2024 */
+    --card-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --popover: 222.9 8.4% 16.3%; /* #26282D */
+    --popover-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --primary: 218.1 81.1% 68.8%; /* #6F9EF0 */
+    --primary-foreground: 222 41.7% 9.4%; /* #0E1422 */
+    --secondary: 225 8.3% 18.8%; /* #2C2E34 */
+    --secondary-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --muted: 230 7.9% 14.9%; /* #232429 */
+    --muted-foreground: 224 8.3% 64.5%; /* #9DA1AC */
+    --subtle-foreground: 224 7% 57.8%; /* #8C909B */
+    --accent: 225 8.3% 18.8%; /* #2C2E34 */
+    --accent-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --destructive: 4.9 70.5% 69.4%; /* #E8837A */
+    --destructive-foreground: 5.3 68% 9.8%; /* #2A0B08 */
+    --success: 151.4 42.7% 59.6%; /* #6CC49A */
+    --success-foreground: 153.6 53.2% 9.2%; /* #0B2419 */
+    --warning: 36.6 65.6% 64.7%; /* #E0B26A */
+    --warning-foreground: 36.7 75% 9.4%; /* #2A1C06 */
+    --info: 230.2 40.1% 73.1%; /* #9FA8D6 */
+    --info-foreground: 230 35.3% 13.3%; /* #161A2E */
+    --tertiary: 296.3 32.5% 70.4%; /* #C99BCC */
+    --tertiary-foreground: 288.6 33.3% 12.4%; /* #26152A */
+    --border: 226.7 8% 22.2%; /* #34363D */
+    --input: 226.7 8% 22.2%; /* #34363D */
+    --ring: 218.6 81.6% 72.4%; /* #7FA8F2 */
+    --code: 225 9.1% 8.6%; /* #141518 */
+    --code-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --chart-1: 218.1 81.1% 68.8%; /* #6F9EF0 */
+    --chart-2: 296.3 32.5% 70.4%; /* #C99BCC */
+    --chart-3: 151.4 42.7% 59.6%; /* #6CC49A */
+    --chart-4: 36.6 65.6% 64.7%; /* #E0B26A */
+    --chart-5: 230.2 40.1% 73.1%; /* #9FA8D6 */
+    --sidebar: 228 7.5% 13.1%; /* #1F2024 */
+    --sidebar-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --sidebar-primary: 218.1 81.1% 68.8%; /* #6F9EF0 */
+    --sidebar-primary-foreground: 222 41.7% 9.4%; /* #0E1422 */
+    --sidebar-accent: 225 8.3% 18.8%; /* #2C2E34 */
+    --sidebar-accent-foreground: 225 11.8% 86.7%; /* #D9DBE1 */
+    --sidebar-border: 226.7 8% 22.2%; /* #34363D */
+    --sidebar-ring: 218.6 81.6% 72.4%; /* #7FA8F2 */
+    --brand: 33.7 57% 60.8%; /* #D4A262 */
+    --radius: 0.5rem;
+    color-scheme: dark;
+  }
+
+  .light {
+    --background: 222.9 46.7% 97.1%; /* #F4F6FB */
+    --foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --primary: 213.2 100% 42.9%; /* #0062DB */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --secondary: 224 36.6% 92%; /* #E3E7F2 */
+    --secondary-foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --muted: 222 41.7% 95.3%; /* #EEF1F8 */
+    --muted-foreground: 229.8 21.7% 37.1%; /* #4A5173 */
+    --subtle-foreground: 230 18.1% 45.5%; /* #5F6689 */
+    --accent: 224 36.6% 92%; /* #E3E7F2 */
+    --accent-foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --destructive: 2 64% 46.9%; /* #C4302B */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+    --success: 154.6 83.5% 26.1%; /* #0B7A4B */
+    --success-foreground: 0 0% 100%; /* #FFFFFF */
+    --warning: 36.1 100% 28%; /* #8F5600 */
+    --warning-foreground: 0 0% 100%; /* #FFFFFF */
+    --info: 230.2 48.6% 50.4%; /* #4357BE */
+    --info-foreground: 0 0% 100%; /* #FFFFFF */
+    --tertiary: 295.6 37.7% 42.2%; /* #8E4394 */
+    --tertiary-foreground: 0 0% 100%; /* #FFFFFF */
+    --border: 225.7 31.3% 86.9%; /* #D3D8E8 */
+    --input: 225.7 31.3% 86.9%; /* #D3D8E8 */
+    --ring: 213.2 100% 42.9%; /* #0062DB */
+    --code: 229.4 50% 13.3%; /* #111733 */
+    --code-foreground: 230 64.3% 94.5%; /* #E8EBFA */
+    --chart-1: 213.2 100% 42.9%; /* #0062DB */
+    --chart-2: 295.9 35.2% 51.6%; /* #A958AF */
+    --chart-3: 155.2 81% 31%; /* #0F8F5A */
+    --chart-4: 36.9 77.8% 45.9%; /* #D08A1A */
+    --chart-5: 229.4 59.6% 59.2%; /* #596FD5 */
+    --sidebar: 0 0% 100%; /* #FFFFFF */
+    --sidebar-foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --sidebar-primary: 213.2 100% 42.9%; /* #0062DB */
+    --sidebar-primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --sidebar-accent: 224 36.6% 92%; /* #E3E7F2 */
+    --sidebar-accent-foreground: 231.2 54.8% 12.2%; /* #0E1330 */
+    --sidebar-border: 225.7 31.3% 86.9%; /* #D3D8E8 */
+    --sidebar-ring: 213.2 100% 42.9%; /* #0062DB */
+    --brand: 30.6 52.5% 39.6%; /* #9A6630 */
+    color-scheme: light;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  code, kbd, pre, samp {
+    @apply font-mono;
+  }
+
+  /* Theme-aware smooth custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.25);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.45);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Chat markdown: GFM tables / bold / lists rendered inside MessageBubble.
+     react-markdown emits plain elements, so style them here (no typography plugin). */
+  .chat-markdown {
+    overflow-wrap: break-word;
+  }
+  .chat-markdown strong {
+    font-weight: 700;
+    color: hsl(var(--foreground));
+  }
+  .chat-markdown em {
+    font-style: italic;
+  }
+  .chat-markdown del {
+    text-decoration: line-through;
+    opacity: 0.8;
+  }
+  .chat-markdown p {
+    margin: 0.35rem 0;
+  }
+  .chat-markdown p:first-child {
+    margin-top: 0;
+  }
+  .chat-markdown p:last-child {
+    margin-bottom: 0;
+  }
+  .chat-markdown h1,
+  .chat-markdown h2,
+  .chat-markdown h3,
+  .chat-markdown h4 {
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0.7rem 0 0.35rem;
+    color: hsl(var(--foreground));
+  }
+  .chat-markdown h1 {
+    font-size: 1.05rem;
+  }
+  .chat-markdown h2 {
+    font-size: 0.98rem;
+  }
+  .chat-markdown h3,
+  .chat-markdown h4 {
+    font-size: 0.9rem;
+  }
+  .chat-markdown ul,
+  .chat-markdown ol {
+    margin: 0.35rem 0;
+    padding-left: 1.35rem;
+  }
+  .chat-markdown ul {
+    list-style: disc;
+  }
+  .chat-markdown ol {
+    list-style: decimal;
+  }
+  .chat-markdown li {
+    margin: 0.15rem 0;
+  }
+  .chat-markdown li > ul,
+  .chat-markdown li > ol {
+    margin: 0.15rem 0;
+  }
+  .chat-markdown blockquote {
+    margin: 0.5rem 0;
+    padding: 0.4rem 0.75rem;
+    border-left: 3px solid hsl(var(--primary) / 0.6);
+    background: hsl(var(--muted) / 0.4);
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: hsl(var(--muted-foreground));
+  }
+  .chat-markdown hr {
+    margin: 0.7rem 0;
+    border: none;
+    border-top: 1px solid hsl(var(--border));
+  }
+  .chat-markdown table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 0.6rem 0;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.6rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 12px;
+  }
+  .chat-markdown thead {
+    background: hsl(var(--muted) / 0.7);
+  }
+  .chat-markdown th,
+  .chat-markdown td {
+    padding: 0.45rem 0.7rem;
+    border-bottom: 1px solid hsl(var(--border));
+    border-right: 1px solid hsl(var(--border));
+    text-align: left;
+    white-space: nowrap;
+  }
+  .chat-markdown th:last-child,
+  .chat-markdown td:last-child {
+    border-right: none;
+  }
+  .chat-markdown tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .chat-markdown tbody tr:nth-child(even) {
+    background: hsl(var(--muted) / 0.3);
+  }
+  .chat-markdown th {
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    white-space: nowrap;
+  }
+  .chat-markdown a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .chat-markdown a:hover {
+    opacity: 0.8;
+  }
+  .chat-markdown input[type='checkbox'] {
+    accent-color: hsl(var(--primary));
+    margin-right: 0.3rem;
+  }
+}

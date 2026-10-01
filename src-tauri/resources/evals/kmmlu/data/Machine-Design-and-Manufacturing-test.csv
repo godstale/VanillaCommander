@@ -1,0 +1,1001 @@
+question,answer,A,B,C,D,Category,Human Accuracy
+보전용 자재의 월간사용량 700개 단가가 개당25원 구입기간중 최대사용빈도 K값이 100원인 경우 경제적 주문량은 약 몇 개인가?,4,450,473,551,529,Machine Design and Manufacturing,0.0588
+치공구에서 비대칭 부품을 고정구에 장착할 때 부품의 올바른 위치를 쉽게 찾아내어 신속하게 장착시키기 위한 보조 장치는?,4,이젝터 장치,중심위치 결정 장치,클램프 장치,풀 프루핑 장치,Machine Design and Manufacturing,0.0625
+"88%의 Cu, 10% 의 Sn, 2%의 Zn이 함유된 합금으로 기계적 특성이나 내식성이 우수한 청동 합금은?",2,네이벌 황동(Naval brass),애드미럴티 포금(Admiralty gun),텔타 메탈(Delta Metal),레드 브레스(Red brass),Machine Design and Manufacturing,0.0625
+단조에 관한 설명으로 틀린 것은?,4,재료를 필요한 모양으로 변화시키는 것이다.,금속의 조직입자를 미세화한다.,단조중 조직의 변형과 재결정이 반복된다.,변태점에서의 단조는 질을 향상시킨다.,Machine Design and Manufacturing,0.0667
+"b=200mm, h=150mm의 직사각형 단면을 가진 길이 2.5m의 기둥에서 세장비(細長比)의 값은?",2,45,58,65,78,Machine Design and Manufacturing,0.0713999999999999
+"모듈 m = 5, 중심거리 C = 225 mm, 속도비가 1 : 2 인 한쌍의 스퍼 기어의 잇수는 각각 몇 개인가?",4,"35, 70","40, 80","25, 50","30, 60",Machine Design and Manufacturing,0.0713999999999999
+강판의 엠보싱이나 비딩작업을 위한 재료 선택시 고려하지 않아도 되는 것은?,2,에릭슨치,드로잉률,가공경화지수,균일연신율,Machine Design and Manufacturing,0.0769
+"아래에서 공구간섭(overcut, undercut)에 대하여 틀리게 설명한 것은?",2,볼록한 모양을 가공할 시에는 별로 문제되지 않는다.,Overcut을 방지하려면 사용하는 공구의 반경이 곡면의 최소 곡률 반경보다 커야 한다.,Undercut을 방지하려면 사용하는 공구의 반경이 곡면의 최소 곡률 반경보다 작아야 한다.,여러 개의 곡면이 모여 복합곡면을 이루면 공구간섭을 체계적으로 해결하기가 힘들다.,Machine Design and Manufacturing,0.0769
+직경 30mm의 연강 봉재를 전방압출에 의해 직경 20mm로 압출했을때 단면감소율은?,2,33%,56%,75%,125%,Machine Design and Manufacturing,0.0833
+전동용 기계요소가 아닌 것은?,3,벨트,로프,코터,마찰차,Machine Design and Manufacturing,0.0833
+주축의 속도가 500rpm으로 회전하고 있다. 바이트가 홈 가공을 하고 5회전을 드월(G04) 하려고 한다면 프로그램에서 몇 초간 바이트의 이동을 멈추게 해야 하는가?,4,0.3초,0.4초,0.5초,0.6초,Machine Design and Manufacturing,0.0833
+"선반의 가로 이송대 리드가 4mm이고, 핸들 둘레에 200 등분한 눈금이 매겨져 있을 때 직경 40mm의 공작물을 직경 36mm로 가공하려면 핸들의 몇 눈금을 돌리면 되는가?",2,50눈금,100눈금,150눈금,200눈금,Machine Design and Manufacturing,0.0833
+전동기 과열의 원인이 아닌 것은?,2,과부하,결선의 착오,단상운전,회전자 동봉의 움직임,Machine Design and Manufacturing,0.087
+"두께 2㎜, 굽힘길이 200㎜의 연강판을 V굽힘가공을 할 때 소요되는 힘은 몇 ton 인가? (단, 인장강도는 40㎏/mm2, 다이의 어깨 폭은 판 두께의 8배, 비례상수 K=1.33이다.)",4,1.33,17.02,8.51,2.66,Machine Design and Manufacturing,0.0909
+"표면연삭기에서 숫돌의 원주속도 V=2400m`/min이고, 연삭력 P=147.15 N 이다. 이 때 연삭기에 공급된 동력이 10PS라면 이 연삭기의 효율은 몇 %인가?",3,70%,75%,80%,125%,Machine Design and Manufacturing,0.0909
+배럴속에 공작물을 넣고 회전시켜 끝 다듬질을 하는것은?,4,버니싱,샌드블라스팅,쇼트피닝,텀블링,Machine Design and Manufacturing,0.0909
+주강(cast steel)이 주철(cast iron)보다 부족한 성질은 무엇인가?,3,충격치,인장강도,유동성,굽힘강도,Machine Design and Manufacturing,0.0909
+U - 굽힘에서 스프링 백의 방지법이 아닌 것은?,4,펀치의 내측에 구배 클리어런스를 만든다.,펀치의 밑면에 릴리프를 만든다.,다이측면에 구배 클리어런스를 만든다.,패드장치를 하여 펀치의 압력을 조절한다.,Machine Design and Manufacturing,0.0909
+트랜스퍼 금형내로 블랭크를 송입시키는 이송방법이 아닌 것은?,3,푸셔식,컨베이어식,히치피드식,턴테이블식,Machine Design and Manufacturing,0.0909
+한계 게이지의 특징 설명 중 틀린 것은?,4,제품 사이의 호환성이 있다.,제품의 실제치수를 읽을 수 있다.,조작이 간단하므로 경험이 필요하지 않다.,1개의 치수마다 4개의 게이지가 필요하다.,Machine Design and Manufacturing,0.1
+중량물의 내면 연삭에 주로 사용되는 연삭방법은?,4,트래버스 연삭,플렌지 연삭,만능 연삭,플래내터리 연삭,Machine Design and Manufacturing,0.1
+"터릿 선반의 종류 중 크고 무거운 큰 가공물의 선삭, 보링, 래핑 등의 가공을 하는 데 가장 편리한 것은?",4,원통형,램형,드럼형,새들형,Machine Design and Manufacturing,0.1
+티탄의 일반적인 성질에 속하지 않는 것은?,2,비교적 비중이 작다.,용융점이 낮다.,열전도율이 낮다.,산화성 수용액 중에서 내식성이 크다.,Machine Design and Manufacturing,0.1
+"CNC 선반 프로그램에서 ""G96 S250 M03 ;""을 실행하여 공작물 직경 ø46 부분을 가공할 때 주축의 회전수는 약 몇 rpm인가?",3,58,250,1730,2500,Machine Design and Manufacturing,0.1
+회주철에 대한 설명 중 틀린 것은?,2,인장력에 약하고 깨지기 쉽다.,탄소강에 비해 진동에너지의 흡수가 되지 않는다.,주조 및 절삭성이 우수하다.,유동성이 좋아 복잡한 형태의 주물을 만들 수 있다.,Machine Design and Manufacturing,0.1
+외측 마이크로미터에서 생기는 기차(器差)의 원인과 가장 관계가 적은 것은?,2,측정면의 평행도,딤블의 원통도,눈금 오차,측정 스핀들의 피치 오차,Machine Design and Manufacturing,0.1
+"초경합금과 같은 경질재료, 숫돌마모가 큰 특수강, 열에 민감한 재료를 가공하는데 적합한 가공방법은?",2,전해연마,전해연삭,호우닝,슈퍼피니싱,Machine Design and Manufacturing,0.1
+투영면적이 120mm × 60mm인 상자형 성형품을 유효 사출압 460kgf/cm2로 성형하고자 할 때 사용 성형기의 형체력으로 가장 적합한 것은?,4,15 ton,25 ton,35 ton,45 ton,Machine Design and Manufacturing,0.1
+"유량 180ℓ/min, 100m 높이로 물을 보내고자 한다. 펌프에 필요한 동력은 약 몇 kW인가?",2,1.8 kW,2.9 kW,4 kW,176.5 kW,Machine Design and Manufacturing,0.1052999999999999
+직접 측정의 장점으로 틀린 것은?,3,측정기의 측정범위가 다른 측정법보다 넓다.,피측정물의 실제치수를 직접 읽을 수 있다.,눈금을 읽기 쉽고 측정시간이 적게 걸린다.,수량이 적고 종류가 많은 제품의 측정에 적합하다.,Machine Design and Manufacturing,0.1110999999999999
+"센터리스 연삭기에서 통과이송법으로 가공시 조정숫돌바퀴의 바깥 지름이 400mm, 조정 숫돌바퀴의 회전수가 30rpm, 경사각이 4°일 때, 가공물의 이송 속도는 약 몇 m/mim인가?",2,0.18,2.63,11.79,37.61,Machine Design and Manufacturing,0.1110999999999999
+베드를 가능한 짧게 하여 주로 공작물의 단면절삭에 쓰이는 것으로 길이가 짧고 직경이 큰 공작물의 절삭에 사용하는 선반은?,3,수직 선반,터릿 선반,정면 선반,모방 선반,Machine Design and Manufacturing,0.1110999999999999
+일반적으로 60mm이하의 작은 축과 테이퍼 축에 사용될 때 키(key)가 자동적으로 축과 보스 사이에서 자리를 잡을 수 있는 장점을 가지고 있는 키는?,2,성크 키,반달 키,접선 키,스플라인,Machine Design and Manufacturing,0.1110999999999999
+"머시닝센터에서 G00 G43 Z10. h12 ; 블록으로 공구 길이 보정을 하여 공작물을 가공하고 측정하였더니 도면의 치수보다 Z값이 0.5㎜ 작았다. 길이 보정 번호 H12의 보정값을 얼마로 수정하여 가공해야 하는가?(단, H12의 기존의 보정값은 100.0 이 입력된 상태이다.)",4,99.05,99.5,100.05,100.5,Machine Design and Manufacturing,0.1110999999999999
+축이 베어링과 접촉하여 받쳐지고 있는 축부분을 무엇이라고 하는가?,2,하우징,저어널,리테이너,내륜,Machine Design and Manufacturing,0.1110999999999999
+"특정 부품의 특별한 치수를 검사하기 위하여 설계된 한계게이지로 많은 연속작업, 또는 대량 생산으로 제작된 공작물을 검사하는데 적합한 것은?",3,플러그 게이지,스냅 게이지,플러시 핀 게이지,테보 게이지,Machine Design and Manufacturing,0.1110999999999999
+작업장내의 음파의 종류와 관계없는 것은?,3,평면파,발산파,직선파,구면파,Machine Design and Manufacturing,0.1110999999999999
+가벼우면서도 적은 부피를 가지는 평판 디스플레이의 종류가 아닌 것은?,2,플라즈마 판 디스플레이,래스터 스캔 디스플레이,액정 디스플레이,전자 발광 디스플레이,Machine Design and Manufacturing,0.1110999999999999
+공작물을 가공 무늬에 직각인 방향으로 절단했을때 그 절단 입구에 나타나는 요철의 곡선은?,3,거칠기 곡선,중심선 거칠기 곡선,단면곡선,파상도 곡선,Machine Design and Manufacturing,0.1110999999999999
+보가 굽힘을 받고 있을 때 보에 발생하는 전단응력에 대한 설명 중 틀린 것은?,2,단면 2차 모멘트에 반비례한다.,중립축에서는 응력이 발생하지 않는다.,원형 단면의 보에 발생하는 최대 전단 응력은 평균 전단 응력의 4/3배이다.,사각형 단면의 보에 발생하는 최대 전단 응력은 평균 전단 응력의 3/2배이다.,Machine Design and Manufacturing,0.1110999999999999
+미끄럼 베어링의 볼 베어링에 대한 비교 중 틀린 것은?,2,내충격성이 크다.,소음이 크다.,고온에 약하다.,교환성이 나쁘다.,Machine Design and Manufacturing,0.1110999999999999
+전단 가공에서의 뽑기압력은 이상 상태에 비하여 실제로 필요한 압력은 상당히 다르다. 그 원인과 거리가 가장 먼 항목은?,2,클리어런스의 영향,전단되는 길이에 의한 영향,펀치나 다이 날끝의 마모에 의한 영향,윤활유의 주입 여부에 의한 영향,Machine Design and Manufacturing,0.1110999999999999
+설비의 평균 고장률을 나타내는 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),3,MTTR,MTBF,1/MTBR,1/MTBF,Machine Design and Manufacturing,0.1153999999999999
+언더컷을 처리하기 위한 공압 실린더 작동방식의 특징이 아닌 것은?,3,작동력 및 작동 속도가 무단으로 조정될 수 있다.,"성형기의 사이클에 관계없이 전진, 후진이 가능하다.",성형기에 부착시 편리하게 사용할 수 있다.,금형 구조가 간단하다.,Machine Design and Manufacturing,0.125
+CAD 명령어에서 이동(MOVE)기능과 복사(COPY)기능의 차이는?,3,오브젝트의 변위,오브젝트의 위치,오브젝트의 수,오브젝트의 변환,Machine Design and Manufacturing,0.125
+연삭숫돌의 연삭조건과 입도(grain size)의 관계를 옳게 표시한 것은?,2,연하고 연성이 있는 재료의 연삭 : 고운 입도,다듬질 연삭 또는 공구의 연삭 : 고운 입도,경도가 높고 메진 일감의 연삭 : 거친 입도,숫돌과 일감의 접촉면이 작은 때 : 거친 입도,Machine Design and Manufacturing,0.125
+"지름이 16㎝, 길이 4.5m인 원형단면의 기둥의 세장비는?",2,100,112.5,200,225,Machine Design and Manufacturing,0.125
+"선반가공시 製50 환봉을 350rpm, 이송 0.3mm/rev, 노즈반경이 R0.4 일때 가공면의 이론조도는?",3,0.012,0.05,0.028,0.066,Machine Design and Manufacturing,0.125
+"탁상연삭기 덮개의 노출각도에서, 숫돌 주축수평면 위로 이루는 원주의 최대 각은?",2,45°,65°,90°,120°,Machine Design and Manufacturing,0.125
+마이크로미터의 스핀들 나사 피치가 0.5 mm 일 때 딤블을 100등분하고 딤블의 4눈금을 5등분한 아들자가 붙어 있다이 마이크로미터로 읽을 수 있는 최소 눈금은 얼마인가?,4,1/100mm,1/200mm,1/500mm,1/1000mm,Machine Design and Manufacturing,0.125
+연삭 가공된 표면에 떨림(chatter)이 나타나는 원인이 아닌 것은?,4,연삭 숫돌이 불균형일 때,연삭 숫돌이 진원이 아닐때,연삭 숫돌의 결합도가 굳을 때,연삭액이 부적합할 때,Machine Design and Manufacturing,0.125
+"서보모터에서 토크가 발생할 때, 20㎜ 피치의 리드 스크루(lead screw)가 1도의 비틀림 (wind up)이 발생되었다면 운동 손실의 크기는 얼마인가?",2,0.0055 ㎜,0.055 ㎜,0.0275 ㎜,0.00275 ㎜,Machine Design and Manufacturing,0.125
+"전연성이 좋고 색깔도 아름답기 때문에 장식용 금속 잡화, 모조금 등에 사용되는 황동은?",4,95% Cu-5% Zn(gilding metal),90% Cu-10% Zn(commerical bronze),85% Cu-15% Zn(red brass),80% Cu-20% Zn(low brass),Machine Design and Manufacturing,0.125
+강의 표면경화를 위한 침탄법에서 1차 담금질의 목적은?,4,경도강화,석출강화,연화촉진,결정의 미세화,Machine Design and Manufacturing,0.125
+B-spline곡선에 대한 설명으로 옳지 않은 것은?,2,곡선전체의 연속성이 좋다.,일부 정점(control point)의 이동에 의하여 곡선 전체의 모양을 변경할 수 있다.,곡선함수의 차수가 1개의 정점(control point)이 영향을 줄 수 있는 곡선 세그먼트의 갯수를 결정한다.,B-spline 곡선 세그먼트는 그 근방의 정점의 위치 벡터에 의하여 형상이 결정된다.,Machine Design and Manufacturing,0.125
+"주철제 V벨트 풀리의 홈 각도가 36°, 접촉부 마찰계수는 0.2라 할 때 유효마찰계수 μ‘는?",4,0.887,0.444,0188,0.401,Machine Design and Manufacturing,0.1304
+넓은 평면을 빨리 깎기에는 적합한 밀링커터는?,3,T커터(T-cutter),엔드밀(end mill),페이스 커터(face cutter),앵글 커터(angle cutter),Machine Design and Manufacturing,0.1314
+"가스킷, 박판, 패킹, 형강 등 얇은 재료의 단면을 표시하는 방법으로 옳지 않은 것은?",4,절단 자리가 얇을 경우에는 절단자리를 검게 빈틈 없이 칠한다.,실제치수와 관계 없이 1개의 아주 굵은 실선으로 표시 한다.,절단자리가 인접할 경우 도형사이에 0.7mm이상의 틈새를 둔다.,굵은 일점쇄선으로 표시한다.,Machine Design and Manufacturing,0.1333
+"지름 20 mm, 피치 2 mm인 2줄 나사를 10회전 시켰더니 완전하게 체결되었다. 이 나사의 리드(lead)는 몇 mm인가?",3,20,40,4,2,Machine Design and Manufacturing,0.1333
+CSG 트리 자료구조의 일반적인 특징으로 틀린 것은?,4,자료구조가 간단하고 데이터의 양이 적다.,CSG표현은 항상 대응되는 B-Rep모델로 치환 가능하다.,파라메트릭 모델링을 쉽게 구현할 수 있다.,리프팅이나 라운딩과 같이 편리한 국부 변형기능의 사용이 용이하다.,Machine Design and Manufacturing,0.1333
+"지름 50mm의 강봉을 회전수 1200rpm, 절입 2.5mm, 이송 0.3mm/rev 으로 가공할 때 주분력이 900N 이었다면 소요동력은 약 몇 kW 인가? (단, 기계의 효율은 85% 이다.)",3,4.75,3.92,3.32,2.64,Machine Design and Manufacturing,0.1364
+액체 상태의 기름에 압축 공기를 이용하여 분무(spray)시켜 공급하는 방법으로 고속드릴 및 초고속 베어링의 윤활에 가장 적합한 것은?,3,핸드 오일링 ( hand oiling ),드롭 피드 오일링 ( drop feed oilig ),오일 미스트 급유법 ( oil mist lubrication),오일링 급유법 ( oil ring lubrication ),Machine Design and Manufacturing,0.1429
+블록게이지와 마이크로미터를 조합한 측정기로서 μm단위의 높이를 설정하거나 또는 비교측정에서의 기준 게이지로 사용하는 측정기는?,2,공기마이크로미터,하이트 마이크로미터,사인바,나사 마이크로미터,Machine Design and Manufacturing,0.1429
+한계 게이지의 마멸여유는 어느 측에 두는가?,2,어느 측에도 두지 않는다,통과측에 둔다,정지측에 둔다,통과측과 정지측에 모두 둔다,Machine Design and Manufacturing,0.1429
+"전단강도가 50 kgf/mm2이고 두께가 2mm인 강판에 직경 10mm의 구멍을 전단가공할 때 필요한 전단력은 몇 kgf 인가? (단, 보정계수는 1이다.)",3,785,1570,3140,6280,Machine Design and Manufacturing,0.1429
+줄 눈금의 크기 표시가 맞는 것은?,3,1[㎜]2내에 있는 눈금의 수,1[㎜]에 대한 눈금의 수,1[inch]에 대한 눈금의 수,1[inch]2내에 있는 눈금의 수,Machine Design and Manufacturing,0.1429
+외경 연삭기에 대한 일반적인 설명으로 틀린 것은?,4,외경연삭기는 원통의 바깥지름을 연삭하는 연삭기이다.,외경연삭기의 구조는 선반(lathe)과 유사하다.,일반적으로 가공물을 양 센터로 지지한다.,"테이블을 전후로, 숫돌대로 좌우로 이송한다.",Machine Design and Manufacturing,0.1429
+"중앙에 구멍이 있고 원추형 모양이며, 병렬 또는 직렬로 조합하여 강성을 쉽게 조정할 수 있으며, 프레스의 완충장치, 공작기계 등에 쓰이는 스프링은?",4,토션 스프링,판 스프링,태엽 스프링,접시 스프링,Machine Design and Manufacturing,0.1429
+리프레시(refresh) CRT에서 화면이 흐려지고 밝아지는 현상이 반복되는 과정에서 화면이 흔들리는 현상을 나타내는 용어는?,3,증폭,굴절,플리커,레지스터,Machine Design and Manufacturing,0.1429
+"각도 가공, 드릴의 홈 가공, 기어의 치형 가공, 나선 가공을 할 수 있는 공작기계는 어느 것인가?",4,선반(Lathe),보링 머신(Boring Machine),브로칭 머신(Broaching Machine),밀링 머신(Milling Machine),Machine Design and Manufacturing,0.1429
+도면 부품란에 재질이 KS 재효기호 GC250으포 표시된 재질 설명으로 가장 적합한 것은?,3,가단주철 인장강도 250N/mm2,가단주철 인장강도 250kgf/mm2,회주철 인장강도 250N/mm2,회주철 인장강도 250kgf/mm2,Machine Design and Manufacturing,0.1429
+일반적인 CNC공작기계에서 제품가공 흐름도로 가장 적합한 것은?,2,프로그램작성 → 도면 → 가공계획 → 기계가공 → 제품,도면 → 가공계획 → 프로그램작성 → 기계가공 → 제품,제품 → 도면 → 기계가공 → 가공계획 → 프로그램작성,도면 → 프로그램작성 → 가공계획 → 기계가공 → 제품,Machine Design and Manufacturing,0.1429
+"연강제 볼트에 8000N의 하중이 축방향으로 작용할 때, 볼트의 골지름은 몇 ㎜ 이상이어야 하는가?(단, 허용압축응력은 40N/㎟ 이다.)",4,6.63,20.02,12.85,15.96,Machine Design and Manufacturing,0.1429
+단조중 업셋(Up set)작업에 대하여 올바르게 나타낸것은?,3,단면을 작게하여 길이를 늘인다.,재료에 단을 붙인다.,길이를 줄여 단면을 크게한다.,가늘고 길게 늘인다.,Machine Design and Manufacturing,0.1429
+기계적 컴퍼레이터의 확대방식에 이용되는 요소가 아닌 것은?,3,기어,레버,마찰차,비틀림 박편,Machine Design and Manufacturing,0.1429
+프리하든강과 관계없는 항은?,4,"강재를 제조할 때 불림, 뜨임, 석출경화열처리, 풀림등의 열처리를 실시하여 균일화된 상태의 강재로 공급된다.",금형을 제작한 후에는 열처리를 실시하지 않는다.,내마모성을 개선하기 위해서 표면 경화처리를 실시하는 경우가 있다.,정밀금형 및 대량 생산용 프라스틱 금형에 많이 이용한다.,Machine Design and Manufacturing,0.1429
+CNC선반에서 일감의 외경을 지령치 X55.0으로 가공한 후 측정한 결과가 ø54.96이었다. 기존의 X축 보정값을 0.004라고 하면 보정값을 얼마로 수정해야 하는가?,2,0.036,0.044,0.04,0.08,Machine Design and Manufacturing,0.1429
+지름 6cm의 환봉이 1200Nㆍm의 비틀림 모멘트를 받을 때 이 재료에 발생하는 응력은 몇 MPa인가?,4,18.3,21.3,24.3,28.3,Machine Design and Manufacturing,0.1429
+"선반가공에서 ø100×400인 SM45C소재를 절삭 깊이 3mm, 이송속도를 0.2mm/rev, 주축 회전수를 400rpm으로 1회 가공할 때, 가공소요시간은 약 몇 분인가?",3,2,3,5,7,Machine Design and Manufacturing,0.1429
+연삭 중 어느 정도 숫돌입자가 마멸되면 결합제의 결합도가 저항에 견디지 못하고 숫돌에서 탈락하여 새로운 날로 바뀌는 것이 숫돌의 특징이다. 이러한 현상을 무엇이라고 하는가?,3,로딩,트루잉,자생작용,글레이징,Machine Design and Manufacturing,0.1429
+물체의 경사진 면을 나타내는데 가장 적합한 투상도는?,2,관용 투상도,보조 투상도,회전 투상도,부분 투상도,Machine Design and Manufacturing,0.1429
+"원동차의 지름이 300 mm, 종동차의 지름이 500 mm인 내접촉 마찰차의 중심거리는?",4,800 mm,400 mm,200 mm,100 mm,Machine Design and Manufacturing,0.1429
+표면거칠기 기입방법이 잘못 설명된 것은?,3,부품 전체가 같은 다듬질 기호일 때는 부품번호 옆에 기입한다.,기어에 기입할 때는 피치선에 기입할 수도 있다.,기어에 기입할 때는 측면도의 잇봉우리에 따라서 기입한다.,부품 전체가 같은 다듬질 기호일 때 표제란 곁에 기입한다.,Machine Design and Manufacturing,0.1429
+윤곽절삭 제어 기능을 이용하고 있는 NC공작 기계는?,4,지그보링머신,드릴링,펀칭프레스,밀링,Machine Design and Manufacturing,0.1429
+막힌 구멍이나 인성이 강한 재료의 탭핑에 적합한 탭은?,4,관용 탭,핸드 탭,포인트 탭,스파이얼 탭,Machine Design and Manufacturing,0.15
+KS 기계제도에서 특수한 용도의 선으로 가는 실선을 사용하는 경우가 아닌 것은?,2,위치를 명시하는데 사용한다.,얇은 부분의 단면도시를 명시하는데 사용한다.,평면이라는 것을 나타내는데 사용한다.,외형선 및 숨은선의 연장을 표시하는데 사용한다.,Machine Design and Manufacturing,0.1515
+"코터이음에서 코터의 너비가 10mm, 평균 높이가 50mm인 코터의 허용전단응력이 20N/㎟일 때, 이 코터이음에 가할 수 있는 최대 하중(kN)은?",2,10,20,100,200,Machine Design and Manufacturing,0.1538
+"평벨트 전동장치에서 벨트의 긴장축 장력이 500N, 허용인장응력이 2.5N/mm2일 때, 벨트의 너비(폭)는 최소 몇 mm이상이어야 하는가? (단, 벨트의 두께는 2mm, 이음 효율은 80%이다.)",3,75,100,125,150,Machine Design and Manufacturing,0.1538
+연삭가공에서 숫돌의 원주속도를 높일 때 일어나는 현상이 아닌 것은?,3,연삭 저항이 적어진다.,숫돌의 소모량이 적어진다.,연삭량이 없어진다.,발열온도가 높아진다.,Machine Design and Manufacturing,0.1538
+"롤러 체인에서 스프로킷의 잇수 60, 체인의 피치 1 cm, 스프로킷의 회전수 100 rpm 일 때, 체인의 평균속도는?",4,8 m/s,16 m/s,5 m/s,1 m/s,Machine Design and Manufacturing,0.1538
+롤링 베어링이 슬라이딩 베어링에 비해 장점이 아닌것은?,4,마찰계수가 1/10 이하로 작아 동력 손실이 적다.,베어링 폭이 작다.,저어널의 길이가 짧다.,충격하중에 강하다.,Machine Design and Manufacturing,0.1538
+의 치수공차 표시에서 최대허용 치수는?,2,70.025,69.975,69.95,70.05,Machine Design and Manufacturing,0.1538
+2[uF]의 콘덴서에 1000[V]를 가할 때 저장되는 에너지[J]는 얼마인가?,2,0.1,1,10,100,Machine Design and Manufacturing,0.1552
+단면적이 25㎟인 어떤 봉에 10 kN의 인장하중이 작용할 때 발생하는 응력은 몇 MPa 인가?,4,0.4,4,40,400,Machine Design and Manufacturing,0.1578999999999999
+"훅의 법칙에서 ""재료의 비례한도 내에서 A와 B는 비례한다."" 에서 A와 B에 알맞은 용어는?",3,"A : 응력, B : 탄성","A : 안전율, B : 변형률","A : 응력, B : 변형률","A : 안전율, B : 탄성",Machine Design and Manufacturing,0.1578999999999999
+두개의 기어가 서로 맞물려서 운동을 전달하고 있다회전 방향이 같고 감속비가 큰 기어는 어느 것인가?,3,헬리컬 기어,웜기어,내접기어,하이포이드 기어,Machine Design and Manufacturing,0.16
+컬러 텔레비전의 전자총에서 나온 광선의 영향을 받아 섀도 마스크가 열팽창하면 엉뚱한 색이 나오게 된다. 이를 방지하기 위해 섀도 마스크의 제작에 사용되는 불변강은?,2,스테인리스강,인바,플래티 나이트,Ni-Cr 강,Machine Design and Manufacturing,0.1667
+일반적인 스케치 작업 중 재질 판정법이 아닌 것은?,2,색깔이나 광택에 의한 법,피로 시험에 의한 법,불꽃 검사에 의한 법,경도 시험에 의한 법,Machine Design and Manufacturing,0.1667
+스케치도를 그려야 하는 경우와 가장 관계가 없는 것은?,4,도면이 없는 부품과 같은 것을 만들려고 경우,도면이 없는 부품을 참고로 하려고 할 경우,도면이 없는 부품의 마멸 또는 파손된 부경우,도면을 좀 더 깨긋하게 보완할 필요가 있경우,Machine Design and Manufacturing,0.1667
+반복하중을 받는 스프링에서는 그 반복속도가 스프링의 고유진동수에 가까워지면 심한 진동을 일으켜 스프링의 파손 원인이 된다. 이 현상을 무엇이라 하는가?,4,자유높이,스프링상수,비틀림모멘트,서징,Machine Design and Manufacturing,0.1667
+"비중이 1.74정도이며, 가벼워 항공기 및 자동차 부품 등에 사용되는 합금의 재료는?",3,Sn,Cu,Mg,Ni,Machine Design and Manufacturing,0.1667
+주물사의 주성분이 되는것은?,4,Al2O3,Fe2O3,MgO,SiO2,Machine Design and Manufacturing,0.1667
+비제한 게이트 특성 중 틀린 것은?,4,압력손실이 적다.,수지량이 절약된다.,금형의 구조가 간단하고 고장이 적다.,스프루의 고화 시간이 비교적 적어 사이클이 짧다.,Machine Design and Manufacturing,0.1667
+구상흑연 주철의 조직이 아닌 것은?,2,페라이트 형,오스테나이트 형,시멘타이트 형,펄라이트 형,Machine Design and Manufacturing,0.1667
+코일 스프링의 제도에서 스프링 도면 아래 요목 표에 기입하지 않는 것은?,3,코일 평균지름,총 감김 수,스프링의 종횡비,재료의 지름,Machine Design and Manufacturing,0.1667
+단면의 무게 중심을 연결한 선을 표시할 때 사용하는 선은?,4,굵은 실선,가는 일점쇄선,가는 파선,가는 이점쇄선,Machine Design and Manufacturing,0.1667
+"비중이 1.74로서 실용 금속재료 중 가장 가볍고, 열전도율과 전기 전도율은 Cu, Al보다 낮고 강도는 작으나 절삭성이 좋은 비철 금속은?",2,Zn,Mg,Si,Ni,Machine Design and Manufacturing,0.1667
+피토우 정압관은 무엇을 측정하는가?,1,유동하고 있는 유체에 대한 동압,유동하고 있는 유체에 대한 정압,유동하고 있는 유체에 대한 전압,유동하고 있는 유체에 대한 비중량,Machine Design and Manufacturing,0.1667
+선반에서 주축의 회전수는 1000rpm 이고 외경 50mm를 절삭할 때 절삭속도는 약 몇 m/min인가?,3,1.571,15.71,157.1,1571,Machine Design and Manufacturing,0.1667
+금반지를 18금으로 만들었다. 순금(Au)은 몇 %가 함유된 것인가?,3,18%,34%,75%,92%,Machine Design and Manufacturing,0.1667
+"지름 500㎜, 길이 500㎜의 롤러로 두께 25㎜의 연강판을 두께 20㎜로 열간 압연할 때 압하율은?",3,28%,25%,20%,14%,Machine Design and Manufacturing,0.1667
+메뉴의 선택이나 위치 또는 좌표값의 입력 등 그래픽 작업을 신속하고 손쉽게 할 수 있도록 하는 입력장치가 아닌 것은?,3,라이트펜(Light pen),조이스틱(Joystick),하드카피(Hard copy),마우스(Mouse),Machine Design and Manufacturing,0.1667
+"성크키의 하중(P) = 18000㎏f, 길이(L) 24㎝, 폭(b) =1.5h라 할때 키이의 높이(h)는 약 몇 ㎜인가? (단, 키의 허용전단응력τa = 2㎏f/㎜2이다.)",2,15,25,35,45,Machine Design and Manufacturing,0.1667
+기어나 나사를 제작 가공할 수 있는 것은?,3,인발,용접,전조,압연,Machine Design and Manufacturing,0.1667
+"눈금선의 간격 ℓ =0.5mm, 최소눈금 s=0.001mm인 마이크로 인디케이터의 배율 V는?",4,0.5,5,50,500,Machine Design and Manufacturing,0.1667
+"엔드 저널로서 지름이 50mm인 전동축을 받치고 허용 최대 베어링 입력을 6N/mm2, 저널길이를 80mm라 할 때 최대 베어링 하중은 몇 kN인가?",3,3.64kN,6.4kN,24kN,30kN,Machine Design and Manufacturing,0.1667
+"공작물의 구멍깊이가 t=90mm, 드릴의 지름은 d=30mm, 이송량이 s=0.15mm/회전, 회전수는 n=270rpm, 드릴 끝 원뿔의 높이는 h=9mm 이라면 드릴의 절삭 소요시간 T는 얼마 정도 인가? (단, 드릴 날끝각은 118°이다.)",2,1.4 min,2.4 min,3.3 min,4.3 min,Machine Design and Manufacturing,0.1667
+"조립되는 구멍의 치수가 이고, 축의 치수가 인 끼워 맞춤에서 최대 틈새는?",4,0.005mm,0.015mm,0.030mm,0.045mm,Machine Design and Manufacturing,0.1667
+3중 나사에서 나사를 3회전 하였더니 36mm 전진하였다. 이 나사의 피치는?,3,12mm,6mm,4mm,3mm,Machine Design and Manufacturing,0.1667
+"선반에서 지름 125mm, 길이 350mm인 연강봉을 초경합금 바이트로 절삭하려고 한다. 회전수는? (단, 절삭속도는 150m/min 이다.)",2,720 rpm,382 rpm,540 rpm,1200 rpm,Machine Design and Manufacturing,0.1667
+단순보에 대한 설명 중 옳지 않은 것은?,4,전단력이 변하지 않을 때는 굽힘모멘트는 직선적으로 변한다.,전단력이 영이 되는 단면에서 최대 굽힘모멘트가 생긴다.,전단력이 직선적으로 증가할 때 굽힘모멘트는 곡선적으로 변한다.,전단력이 최대인 단면에서는 굽힘모멘트는 최소로 된다.,Machine Design and Manufacturing,0.1667
+"코터이음에서 2000 ㎏f 의 인장력이 작용한다. 이 때 코터의 폭이 90 mm, 두께가 60 mm 인 경우 코터가 받는 전단응력은 얼마인가?",2,0.185 ㎏f/cm2,18.5 ㎏f/cm2,29.5 ㎏f/cm2,37.0 ㎏f/cm2,Machine Design and Manufacturing,0.1667
+"평벨트 전동에서 두 축의 축간거리 C가 500mm, 풀리의 지름이 각각 300mm, 50mm일 때 바로걸기 벨트의 길이 L은 약 몇mm 인가?",2,1287,1581,1833,2042,Machine Design and Manufacturing,0.1667
+연삭숫돌의 결합도가 높은 것을 사용해야 하는 연삭작업은?,3,경도가 큰 가공물을 연삭할 경우,숫돌차의 원주 속도가 빠를 경우,접촉 면적이 작은 연삭작업일 경우,연삭깊이가 클 경우,Machine Design and Manufacturing,0.1667
+투상도를 그릴 때 선이 서로 겹칠 경우 우선 순위로 옳은 것은?,2,"중심선, ② 숨은선, ③ 외형선의 순서","① 외형선, ② 숨은선, ③ 중심선의 순서","① 중심선, ② 외형선, ③숨은선의 순서","① 외형선, ② 중심선, ③숨은선의 순서",Machine Design and Manufacturing,0.1667
+스프링의 제도방법 중 틀린 것은?,2,코일스프링은 하중이 가해지지 않은 상태에서 그리는 것을 원칙으로 한다.,겹판스프링의 모양만을 도시할 때에는 스프링의 외형을 가는 1점쇄선으로 그린다.,도면에서 지시가 없는 코일스프링은 모두 오른쪽으로 감은 것을 나타낸다.,코일 스프링의 간략도는 스프링 재료의 중심선을 굵은 실선으로 그린다.,Machine Design and Manufacturing,0.1667
+축 방향으로 본 단면으로 도시할 때 기어의 이뿌리원을 그리는데 사용되는 선의 종류는?,3,가는 1점 쇄선,가는 파선,가는 실선,굵은 실선,Machine Design and Manufacturing,0.1667
+"밀링 머신 중 분할대나 헬리컬 절삭 장치를 사용하려 헬리컬 기어, 트위스트 드릴의 비틀림 홈 등의 가공에 가장 적합한 것은?",3,수직 밀링 머신,수평 밀링 머신,만능 밀링 머신,플레이너형 밀링 머신,Machine Design and Manufacturing,0.1667
+"전기 도금과는 반대로 하여, 드릴의 홈, 주사침, 반사경, 및 시계의 기어 등을 다듬질하는 데 응용되고 있는 가공법은?",4,레이저 가공,방전 가공,숏 피닝,전해 연마,Machine Design and Manufacturing,0.1698
+어떤 정류회로의 출력 직류전압이 20[V]이고 맥동 전압이 0.1[V]였다면 이 정류회로의 맥동율은 몇 %인가?,1,0.5,1,1.5,2,Machine Design and Manufacturing,0.1765
+드로잉 가공된 용기의 바닥 부분 파단 대책으로 맞지 않는 것은?,3,펀치와 다이의 모서리 반지름을 크게 한다,블랭크 홀더의 압력을 조정하여 적당히 한다,블랭크 치수를 적당하게 하고 클리어런스를 작게한다,드로잉비를 적당히 하고 가공속도를 늦추며 적당한 윤활유를 선택한다,Machine Design and Manufacturing,0.1765
+경화능 향상에 효과적이며 첨가량이 1%이상이면 결정입자를 조대화하여 취성을 크게 하는 성분은?,3,Ni,Cr,Mn,Mo,Machine Design and Manufacturing,0.1765
+변압기의 권수비가 60이고 1차전압이 6600[V]이면 2차 전압은?,2,380[V],110[V],220[V],190[V],Machine Design and Manufacturing,0.1765
+"지름 50 mm의 축에 바깥지름 400 mm의 풀 리가 묻힘 키로 고정되어있고, 풀리의 바깥지름에 1.5kN의 접선력이 작용한다면 키에 작용하는 전단력은 약 몇 kN 인가?",4,1.8,1.5,7.5,12.0,Machine Design and Manufacturing,0.1818
+밀링머신 종류 중 생산형 밀링 머신은?,4,수직 밀링 머신,수평 밀링 머신,플래노 밀러,세라믹,Machine Design and Manufacturing,0.1818
+방정식 ax + by + c = 0 으로 표현 가능한 항목은?,3,Bezier curve,spline curve,polygonal line,circle,Machine Design and Manufacturing,0.1818
+슈퍼피니싱의 특징 설명으로 틀린 것은?,3,"원통형의 가공물 외면, 내면과 평면 등의 정밀 다듬질이 가능하다.","다듬질 된 면은 평활하고, 방향성이 없다.","입도가 비교적 크고, 경한 숫돌에 고압으로 가압하여 연마하는 방법이다.",가공에 의한 변질층의 두께가 매우 작다.,Machine Design and Manufacturing,0.1818
+"잇수 30개 압력각 30°의 스퍼기어에서 언더컷이 생기지 않도록 전위기어로 제작하려 한다. 언더컷이 발생하지 않도록 하기 위한 최소이론 전위량은 몇 mm인가? (단, 모듈 m=6이다.)",4,-10mm,-12.5mm,-14mm,-16.5mm,Machine Design and Manufacturing,0.1818
+"드릴작업할 때 절삭속도 25m/min, 드릴지름 22mm, 이송0.1mm/rev, 드릴 끝의 원추높이가 6mm일 경우 깊이 100mm인 구멍을 뚫는 때 소요시간은 약 몇 분인가?",4,8.76,6.43,4.72,2.93,Machine Design and Manufacturing,0.1818
+나사의 유효지름 측정에 사용되지 않는 측정기는?,4,투영기,나사 마이크로미터,공구 현미경,포인트 마이크로미터,Machine Design and Manufacturing,0.1818
+"실제로 액체 금속이 응고할 때에는 반드시 융점의 온도에서 응고가 시작되는 일은 적고, 용융점 보다 낮은 온도에서 응고가 시작된다. 이 현상을 무엇이라 하는가?",3,서냉,급냉,과냉,급냉과 과냉의 겹침,Machine Design and Manufacturing,0.1818
+공구강(탄소공구강)의 담금질 전처리로 가장적당한 것은?,3,불림,풀림,구상화풀림,항온풀림,Machine Design and Manufacturing,0.1818
+"블랭크 지름을 200㎜이라하고, 드로잉 직경을 60㎜로 성형할 때 드로잉비는 얼마인가?",4,0.30,0.43,2.33,3.33,Machine Design and Manufacturing,0.1818
+고 Cr강에서 가장 주의해야할 취성은?,3,800℃취성,650℃취성,475℃취성,25℃취성,Machine Design and Manufacturing,0.1818
+"머시닝센터를 이용하여 SM30C를 절삭속도 70 m/min으로 가공하고자 한다. 공구는 2날-ø20 엔드밀을 사용하고 절삭 폭과 절삭 깊이를 각각 7㎜씩 주었을 때 칩 배출량은 약 몇 ㎤/min 인가?(단, 날당 이송은 0.1㎜이다.)",2,5.5,11,16.5,20,Machine Design and Manufacturing,0.1818
+간접측정이 아닌 것은?,3,사인센터에 의한 테이퍼 측정,더브테일 측정,스냅 게이지에 의한 원통측정,삼침에 의한 나사의 유효지름 측정,Machine Design and Manufacturing,0.1818
+직류 발전기에서 전기자 반작용을 방지하느 대책으로 볼수 없는 것은?,2,브러시의 위치를 전기적 중성축까지 이동시킨다.,정류자를 설치한다.,보상 권선을 설치한다.,보극을 설치한다.,Machine Design and Manufacturing,0.1852
+CNC 공작기계에서 사용되는 좌표치의 기준으로 사용하는 좌표계가 아닌 것은?,4,기계 좌표계,공작물 좌표계,구역 좌표계,원통 좌표계,Machine Design and Manufacturing,0.1875
+블록 게이지의 부속 부품이 아닌 것은?,2,홀더,스크레이퍼,스크라이버 포인트,베이스 블록,Machine Design and Manufacturing,0.1875
+배관의 직선 이음에 사용되지 않는 배관용 관이음쇠는?,3,유니언,니플,플러그,부싱,Machine Design and Manufacturing,0.1875
+"스프링의 탄성변형에 의해 저장되는 에너지 U 를 계산하는 식으로 잘못된 것은? (단, T = 비틀림모멘트, θ = 비틀림각(rad), k = 스프링상수, δ= 스프링변형량(mm), P = 하중(kgf))",3,U = (1/2) Pδ,U = (1/2) K δ2,U =(1/2) Pδ2,U = (1/2) T θ,Machine Design and Manufacturing,0.1875
+볼베어링에서 베어링 하중을 2배로 하면 수명은 몇 배로 되는가?,4,4배,1/4배,8배,1/8배,Machine Design and Manufacturing,0.1905
+송풍기 베어링 케이스의 발열언인이 아닌 것은?,4,베어링 케이스에 구리스 과다주입,베어링 케이스 커버의 심한 손상,베어링 내륜의 마모,베어링과 축의 억지 끼워맞춤,Machine Design and Manufacturing,0.1905
+플라스틱 재료 중 연신율이 가장 큰 재료는?,2,페놀수지(일반용),나일론,에폭시 수지,폴리에스테르(유리섬유),Machine Design and Manufacturing,0.1905
+기계작업에서 고속 주축의 급유를 균등히 할 목적에 이용하는 급유법은?,2,핸드 오일링법(hand oiling),링 급유법(ring oiling),오일레스 오일링법(oiless oiling),적하 급유법(drop oiling),Machine Design and Manufacturing,0.1905
+"CNC 선반에서 ø52 부분을 가공하고, 측정한 결과 ø51.97이었다. 기존의 X축 보정값이 0.002라면 보정값을 얼마로 수정해야 ø52로 가공되는가?",4,0.002,0.028,0.03,0.032,Machine Design and Manufacturing,0.1923
+전기 시스템에서 전동기 저속회전의 원인이 되는 것은?,2,권선의 접지,과부하,단상운전,퓨즈의 단락,Machine Design and Manufacturing,0.1923
+머시닝센터에서 주축 회전수를 200rpm으로 피치 2㎜인 나사를 가공하고자 한다. 이때 이송속도 F는 몇 ㎜/min으로 지령해야 하는가?,4,100,200,300,400,Machine Design and Manufacturing,0.1923
+1bar 의 압력 값과 다른 것은?,4,750.061 mmHg,14.507 PSI,100000 Pa,101325 N/m2,Machine Design and Manufacturing,0.1944
+"축방향으로만 정하중을 받는 경우 50kN을 지탱할 수 있는 훅 나사부의 바깥지름은 약 몇 ㎜인가? (단, 허용응력은 50N/mm2이다.)",2,40㎜,45㎜,50㎜,55㎜,Machine Design and Manufacturing,0.1944
+3차원 솔리드 모델을 구성하는 요소 중 기본 형상(Primitive)이라고 할 수 없는 것은?,3,구(Sphere),원통(Cylinder),직선(Line),원추(Cone),Machine Design and Manufacturing,0.2
+3차원 솔리드 모델을 구성하는 요소 중 프리미티브(primitive)이라고 할 수 없는 것은?,3,구(Sphere),원주(Cylinder),에지(Edge),원뿔(Cone),Machine Design and Manufacturing,0.2
+열간가공에서 마무리온도(finighing temperature)란?,2,전성을 회복시키는 온도를 말한다.,고온기공을 끝맺는 온도를 말한다.,상온에서 경화되는 온도를 말한다.,"강도, 인성이 증가하는 온도를 말한다.",Machine Design and Manufacturing,0.2
+"금형의 강도계산에 있어서의 캐비티 바닥이 일체가 아닌 경우 P=500 kgf/cm2, L=500 mm, a=200 mm, b = 300 mm, δ =0.05 mm라고 하면 직사각형 캐비티의 측벽두께 h는 몇 mm로 설계하여야 하는가? (단, E=2.1× 106kgf/cm2이다.)",4,110mm 이상,130mm 이상,150mm 이상,184mm 이상,Machine Design and Manufacturing,0.2
+"만능시험기(universal tester)를 이용하여 인장시험을 하였다. 표점거리 140 mm, 지름 10 mm인 시편이 최대하중 1570 Kgf 에서 절단되었을 때 표점거리가 157mm 이었다. 이 때의 인장강도는?",2,10 Kgf/mm2,20 Kgf/mm2,80 Kgf/mm2,100 Kgf/mm2,Machine Design and Manufacturing,0.2
+고정스트리퍼의 종류를 나열하였다. 해당되지 않는 것은?,4,3면개방 스트리퍼,문형 스트리퍼,펀치안내 스트리퍼,스프링고정 스트리퍼,Machine Design and Manufacturing,0.2
+"30mm의 게이지블록으로 세팅한 하이트 게이지로 측정하여 29.54mm의 측정값을 얻었다면 실제값은? (단, 세팅한 30mm의 게이지블록은 -20㎛의 오차가 있다)",2,29.56mm,29.52mm,29.74mm,29.72mm,Machine Design and Manufacturing,0.2
+NC의 제어 방법 중 위치 검출을 서보 모터의 축 또는 볼스크루의 회전 각도로 하기 때문에 볼스크루의 피치 오차나 백래시가 있으면 정확히 제어되지 않는 단점이 있는 방식은?,2,개방 회로 방식 (open loop),반폐쇄 회로 방식(semi closed loop),폐쇄 회로 방식(closed loop),하이브리드 방식(hybrid loop),Machine Design and Manufacturing,0.2
+"지름 3㎝, 길이 1m의 연강봉의 한끝을 고정하고 다른 한 끝에 300Nㆍm의 비틀림 모멘트를 작용시킬 때 이 봉의 바깥원주에 발생하는 전단응력은 몇 MPa인가?",4,18.5,32.4,45.6,56.6,Machine Design and Manufacturing,0.2
+3D 모델링을 하는데 3차원적인 물체의 형상표현방법으로 적당하지 않은 것은?,3,공간격자에 의한 방법,메시 분할에 의한 방법,픽셀(pixel)에 의한 방법,경계표현에 의한 방법,Machine Design and Manufacturing,0.2
+"로울러의 중심거리가 100mm인 사인바로 21°30＇의 각도를 만들 때 낮은 쪽의 블럭 게이지의 높이를 10.00mm라 하면 높은 쪽은 몇 mm 가 되는가? (단, sin 21°30＇= 0.3665로 한다.)",3,24.65,36.65,46.65,56.65,Machine Design and Manufacturing,0.2
+상온의 철-탄소계 평형 상태도에서 탄소 0.99% 되는 과공석강의 조직은?,3,오스테나이트 + 페라이트,페라이트 + 펄라이트,펄라이트 + 시멘타이트,오스테나이트 + 소르바이트,Machine Design and Manufacturing,0.2
+탄소강의 표준조직에 대한 설명 중 옳지 않은 것은?,3,탄소강에 나타나는 조직의 비율은 C량에 의해 달라진다.,"탄소강의 표준조직이란 강종에 따라 A3점 또는 Acm보다 30 ∼ 50℃ 높은 온도로 강을 가열하여 오스테나이트 단일 상으로 한 후, 대기 중에서 냉각했을 때 나타나는 조직을 말한다.",탄소강은 표준조직에 의해 탄소량을 추정할 수 없다.,"탄소강의 표준조직은 오스테나이트, 펄라이트, 페라이트 등이다.",Machine Design and Manufacturing,0.2
+주성분이 구리인 구리합금의 종류가 아닌 것은?,4,톰백,문쯔메탈,포금,탕칼로이,Machine Design and Manufacturing,0.2
+구리에 아연을 5~20% 함유한 것으로 색깔이 아름답고 장식품에 주로 사용되는 황동은?,3,포금,문쯔 메탈,톰백,하이드로날륨,Machine Design and Manufacturing,0.2
+"컴퓨터의 중앙처리장치에서 사용되는 고속의 기억소자로 2진법 체계로 데이터를 받고, 저장, 전송 하는 기능을 갖고 있는 장소를 무엇이라 하는가?",2,MAIN MEMORY,REGISTER,BASIC,REFRESH,Machine Design and Manufacturing,0.2
+주철의 일반적인 성질을 설명한 것 중 틀린 것은?,3,용탕이 된 주철은 유동성이 좋다.,공정 주철의 탄소량은 4.3% 정도 이다.,강보다 용융 온도가 높아 복잡한 형상이라도 주조하기 어렵다.,주철에 함유하는 전탄소(total carbon)는 흑연+화합탄소로 나타낸다.,Machine Design and Manufacturing,0.2
+브라운 샤아프형의 직접 분할법 중 불가능한 분할수는?,3,2,3,5,24,Machine Design and Manufacturing,0.2
+구성 인선의 크기를 좌우하는 인자 중 가장 관계 없는 것은?,4,절삭 속도,칩의 두께,공구의 상면 경사각,공구의 전면 여유각,Machine Design and Manufacturing,0.2
+머시닝센터 가공 프로그램에 사용되는 준비기능 가운데 카운터 보링 기능에 해당하는 G 코드는?,2,G81,G82,G83,G84,Machine Design and Manufacturing,0.2
+"머시닝센타에서 2날 엔드밀를 사용하여 이송속도 (G94F100)으로 가공할 때 엔드밀의 날 하나당 이송속도는 몇 mm/tooth 인가? (단, 주축의 회전수는 500rpm 이다.)",2,0.05,0.1,0.2,0.25,Machine Design and Manufacturing,0.2
+양백(nickel silver)의 주성분에 포함되지 않는 것은?,4,Cu,Ni,Zn,Sn,Machine Design and Manufacturing,0.2
+"지름이 60mm인 축의 전달 토크가 2500kgfㆍmm일 때 너비가 0mm, 높이가 8mm인 묻힘 키의 길이는? (단, 허용전단응력은 τ=7kgf/mm2이다.)",2,8mm,12mm,15mm,16mm,Machine Design and Manufacturing,0.2
+물체의 경사면을 실제의 모양으로 나타내고자 할 경우에 사용되는 투상도는?,3,정 투상도,요점 투상도,보조 투상도,경사 투상도,Machine Design and Manufacturing,0.2
+용융금속의 응고에서 용융점이 내부로 전달되는 속도를 Vm라 하고 이 때의 결정입자 성장속도를 G라 하면 주상 (columnar)결정이 생기는 가장 좋은 조건은?,4,G < Vm,G = Vm,G ≦ Vm,G ≧ Vm,Machine Design and Manufacturing,0.2
+"단조작업에서 해머의 무게가 10㎏f, 타격순간의 해머의 속도가 10 m/sec, 타격에 의한 단조 재료 높이의 변화량이 3㎜, 중력가속도가 9.8 m/sec2, 해머의 효율이 0.9였다면, 이 때의 단조 에너지는 약 몇 ㎏f-m인가?",3,40.2,43.7,45.9,50.3,Machine Design and Manufacturing,0.2
+"밀링머신 분할대로  를 분할할 때, 분할크랭크의 회전수는?",4,9/11,11/9,18/11,11/18,Machine Design and Manufacturing,0.2
+2차원 컴퓨터 그래픽스의 Window/Viewport 변화를 위해 반드시 필요한 것이 아닌 것은?,3,Window 중심점의 좌표,Viewport 중심점의 좌표,X 및 Y 방향의 변환각도,X 및 Y 방향의 축척,Machine Design and Manufacturing,0.2
+면심입방격자의 기호는?,3,HCP,BCC,FCC,BCT,Machine Design and Manufacturing,0.2
+평면도 측정과 가장 관계가 적은 측정기는?,3,옵티컬 플랫(optical flat),오토-콜리메이터(auto-collimator),베벨 프로트랙터(bevel protractor),수준기(level),Machine Design and Manufacturing,0.2
+베어링 호칭 번호 6308Z NR에서 08이 나타내는 뜻은?,2,실드시호,안지름 번호,베어링 계열기호,레이스 형상 기호,Machine Design and Manufacturing,0.2
+직경지령으로 설정된 최소지령 단위가 0.001mm인 CNC선반에서 U30.으로 지령한 경우 공구의 실제 이동량은?,2,10mm,15mm,20mm,30mm,Machine Design and Manufacturing,0.2
+액체 호닝에 대한 특징 성명 중 틀린 것은?,4,공작물 표면의 산화막이나 거스러미(burr)를 제거하기 쉽다.,피닝 효과가 있다.,형상이 복잡한 것도 쉽게 가공한다.,가공시간이 길다.,Machine Design and Manufacturing,0.2
+3D 모델링에 대한 일반적인 설명으로 틀린 것은?,4,"3D 모델링은 와이어프레임 모델링, 서피스 모델링, 솔리드 모델링으로 구분된다.",대부분의 3D 모델링 소프트웨어에서는 3D 모델이 완성되면 2D 도면으로 변환이 가능하다.,3D 솔리드 모델은 컴퓨터 화면상에서 제품형상 확인이 가능하여 설계효율이 높아진다.,3D 솔리드 모델링은 수식이 복잡하고 계산량이 많아 PC에서는 사용할 수 없다.,Machine Design and Manufacturing,0.2
+구름베어링 제도에서 베어링의 하중 특성 또는 모양을 정확히 나타낼 필요가 없을 때 일반적인 간략 도시방법 설명 중 틀린 것은?,4,모든 도형은 도면의 윤곽선으로 사용한느 선과 같은 선 굵기로 그려야 한다.,윤곽은 그 제도에 사용된느 축척과 똑같은 축척으로 그려야 한다.,구름 베어링은 정사각형과 정사각형 중앙에 자유롭게 바로 세운 십자 모양으로 표시한다.,십자모양은 윤곽선에 닿아야 하며 중심 축의 한쪽 또는 양족 공간에 사용된다.,Machine Design and Manufacturing,0.2
+탄소량이 변화하면 탄소강의 성질도 변화된다. 탄소량이 증가하면 어떠한 현상이 나타나는가?,3,열팽창계수가 증가한다.,열전도율이 증가한다.,전기저항이 증가한다.,비중이 증가한다.,Machine Design and Manufacturing,0.2
+CNC 공작기계에서 백래시(BACK LASH)를 감소시키며 회전 운동을 직선운동으로 바꾸어 주는 장치는?,4,리졸버,컨트롤러,리드스크루,볼스크루,Machine Design and Manufacturing,0.2
+B-spline 곡선을 보다 다양하게 표현하고 있는 곡선은?,3,Bezier 곡선,Spline 곡선,NURBS 곡선,Ferguson 곡선,Machine Design and Manufacturing,0.2
+탄소강에서 적열취성의 원인이 되는 원소는?,4,규소,망간,인,황,Machine Design and Manufacturing,0.2
+표면 연삭기에서 숫돌의원주속도 V=2400m/min이고. 연삭력 P=15kgf 이다. 이 때 연삭기에 공급된 동력이 10PS이라면 이 연삭기의 효율은 몇 %인가?,3,70%,75%,80%,125%,Machine Design and Manufacturing,0.2
+피치 에러(Pitch error) 보정이란?,4,볼 스크루 피치의 정밀도를 검사하는 기능,축의 이동이 한 방향에서 반대 방향으로 이동할 때 발생하는 편차값을 보정하는 기능,나사가공의 피치를 정밀하게 보정하는 기능,볼 스크루의 부분적인 마모 현상으로 발생된 피치간의 편차값을 보정하는 기능,Machine Design and Manufacturing,0.2
+비철계 초소성 재료 중 최대의 연신을 갖는 합금은?,3,Ag합금,Co합금,Bi합금,Cd합금,Machine Design and Manufacturing,0.2
+"밀링 가공에서 일감의 절삭 속도가 62.8m/min이고 일감의 지름이 20㎜이면 회전수는 약 몇 rpm인가?(단, 원주율 π=3.14로 한다.)",3,100,500,1000,2000,Machine Design and Manufacturing,0.2
+두개의 기어가 서로 맞물려서 운동을 전달하고 있다. 회전 방향이 같고 감속비가 큰 기어는 어느 것인가?,3,헬리컬 기어,웜기어,내접기어,하이포이드 기어,Machine Design and Manufacturing,0.2
+70 Nㆍm의 비틀림모멘트를 받는 지름 70 mm의 환봉축에서 발생하는 최대전단응력은 몇 MPa인가?,2,0.1039,1.039,10.39,103.9,Machine Design and Manufacturing,0.2
+"지름 50㎜의 연강축을 사용하여 350rpm으로 40㎾을 전달할 묻힘키의 길이는 몇 ㎜ 정도가 적당한가? (단, 키 재료의 허용전단응력은 5㎏f/mm2, 키의 폭과 높이 b x h = 15mm x 10mm 이며 전단저항만 고려한다.)",3,38㎜,46㎜,60㎜,78㎜,Machine Design and Manufacturing,0.2
+"터릿 선반(turret lathe)등에 널리 사용되며, 보통 선반에서는 주축의 테이퍼 구멍에 슬리브를 꽂고 여기에 척을 끼워 사용하는 것은?",3,연동식 척,마그네틱 척,콜릿 척,단동식 척,Machine Design and Manufacturing,0.2
+기본 부하 용량과 동일한 베어링 하중이 작용하는 레디얼 볼베어링의 수명은 몇 회전인가?,4,103회전,104회전,105회전,106회전,Machine Design and Manufacturing,0.2
+가공물을 절삭할 때 발생되는 칩의 형태에 미치는 영향이 가장 적은 것은?,3,공작물 재질,절삭속도,윤활유,공구의 모양,Machine Design and Manufacturing,0.2
+얕은 드로잉 제품을 성형시 스트레처 스트레인(stretcher strain) 불량이 발생하는데 이에 대한 현상으로 틀린 것은?,3,소재의 항복점 연신율이 원인이다.,소재의 레벨링 작업에 의해 해결할 수 있다.,재료내부에 산소 원소 성분이 많아 발생하기 쉽다.,림드강판에 많이 발생한다.,Machine Design and Manufacturing,0.2
+"판두께 0.5 mm인 규소강판에 지름 20 mm의 둥근 구멍을 블랭킹 하는 경우의 최대 전단하중은? (단, 규소강판의 전단저항은 45㎏f/mm2임)",3,450㎏f,900㎏f,1413㎏f,3140㎏f,Machine Design and Manufacturing,0.2
+"길이가 314 ㎝인 원형단면축의 지름이 40 ㎜일 때 이 축이 비틀림 모멘트 100 N–을 받는다면 비틀림 각도는? (단, 전단 탄성계수는 80 GPa이다)",4,0.25°,0.0156°,0.156°,0.894°,Machine Design and Manufacturing,0.2
+연삭숫돌 입자의 표면이나 기공에 칩이 차있는 상태를 무엇이라 하는가?,3,프레싱(pressing),트루잉(truing),로우딩(loading),글레이징(glazing),Machine Design and Manufacturing,0.2
+각도 측정에서 1 라디안(radian)을 나타내는 식은?,3,360°/π,π/360°,360°/2π,2π/360°,Machine Design and Manufacturing,0.2
+와이어프레임 모델링의 기본요소가 아닌 것은?,4,곡선,직선,원호,면,Machine Design and Manufacturing,0.2
+CAD/CAM 시스템의 자료를 교환하는 표준규격에 해당되지 않는 것은?,3,STEP,DXF,XLS,IGES,Machine Design and Manufacturing,0.2
+렌더링의 한 기법인 음영법(shading)에서의 난반사(diffuse reflection)에 대한 설명 중 적당하지 않은 것은?,4,난반사에 의하면 빛이 표면에 흡수되었다가 모든 방향으로 다시 흩어진다.,난반사의 입사각이란 반사면의 법선벡터와 입사광 방향벡터의 사잇각을 의미한다.,난반사는 물체의 표면상태의 묘사에 이용된다.,난반사는 물체표면이 거울면과 같이 매끈한 면의 반사형태를 표현할 때 가장 적합하다.,Machine Design and Manufacturing,0.2
+공간상에서 선을 이용하여 3차원 물체를 표시하는 와이어 프레임 모델의 특징을 설명한 것 중 틀린 것은?,3,3면 투시도 작성이 용이하다.,단면도 작성이 불가능하다.,물리적 성질의 계산이 가능하다.,은선제거가 불가능하다.,Machine Design and Manufacturing,0.2
+재료를 변형시키므로써 변형저항이 증가하는 현상을 무엇이라 하는가?,2,스프링백,가공경화,상온취성,탄성경화,Machine Design and Manufacturing,0.2
+생산형 밀링머신에 관한 설명으로 틀린 것은?,2,"대량생산에 적합하도록 어느정도 단순화, 자동화된 것이다.",회전 테이블형 밀링머신은 1개의 스핀들 헤드를 써서 두 종류의 가공을 동시에 할 수 있다.,베드형 밀링머신이라고도 한다.,테이블은 상자형 베드 위에서 길이 방향으로만 움직인다.,Machine Design and Manufacturing,0.2
+x2+y2+z2-4x+6y-10z+2=0인 방정식으로 표현되는 구의 중심점과 반지름은 각각 얼마인가?,2,"중심(-2, 3, -5), 반지름:6","중심(2, -3, 5), 반지름:6","중심(-4, 6, -10), 반지름:2","중심(4, -6, 10), 반지름:2",Machine Design and Manufacturing,0.2
+기하공차의 부가 기호 중 돌출 공차역을 나타내는 것은?,4,Ⓑ,Ⓐ,Ⓜ,Ⓟ,Machine Design and Manufacturing,0.2
+어떤 회로에서 저항 양단전압의 참값이 40V이나 회로 시험기로 전압을 측정한 결과 39V를 지시 했다면 이 회로 시험기의 백분율 오차는 몇 [%]인가?,3,-1.0,+1.0,-2.5,+2.5,Machine Design and Manufacturing,0.2
+정비 자재 보충 방식에서 상비품 방식이 아닌 것은?,2,정량발주 방식,정액발주 방식,정기발주 방식,사용고발주 방식,Machine Design and Manufacturing,0.2
+형상은 같으나 치수가 다른 도형등을 작성할 때 가변되는 기본도형을 작성하여 놓고 필요에 따라 치수를 입력하여 비례되는 도형을 작성하는 기능을 무엇이라 하는가?,4,매크로화 기능,디스플레이 변형 기능,도면화 기능,파라메트릭 도형 기능,Machine Design and Manufacturing,0.2
+3차원으로 형상을 표현할 때 형상의 모서리(edge)선 만을 이용해서 표현하는 모델링 방법은?,3,solid 모델,surface 모델,wire frame 모델,system 모델,Machine Design and Manufacturing,0.2
+"브레이크 재료로 사용시 마찰계수가 가장 큰 것은?(단, 마찰 조건은 건조 상태이다)",4,주철,가죽,연강,석면,Machine Design and Manufacturing,0.2
+황동계 실용 합금인 톰백에 관한 설명으로 틀린 것은?,3,8~20%의 Zn을 함유하는 황동이다.,색깔이 금색에 가까워서 모조금으로 사용된다.,전연성이 나쁘다.,냉간가공이 쉽다.,Machine Design and Manufacturing,0.2
+미터인 회로와 미터 아웃 회로의 공통점을 설명한 것은?,3,릴리프 밸브를 통해 여분의 기름이 탱크로 복귀하지 않는다.,릴리프 밸브를 통해 여분의 기름이 탱크로 복귀하므로 유온이 떨어진다.,릴리프 밸브를 통해 여분의 기름이 탱크로 복귀 하므로 동력 손실이 크다.,릴리이프 밸브를 통해 여분의 기름이 탱크로 복귀치 않으므로 동력 손실이 있다.,Machine Design and Manufacturing,0.2
+M18×2의 미터 가는 나사의 치수를 설명한 것으로 맞는 것은?,3,"미터 가는 나사 유효지름 18mm, 산수 2","미터 가는 나사 유효지름 18mm, 피치 2mm","미터 가는 나사 바깥지름 18mm, 피치 2mm","미터 가는 나사 골지름 18mm, 2 줄나사",Machine Design and Manufacturing,0.2
+Ms점 이하 Mf점 이상을 이용한 것으로 오스테나이트 조직의 온도에서 Ms점(100∼200℃)이하로 열욕 담금질하여 뜨임 마르텐사이트와 하부 베이나이트 조직을 만드는 항온 열처리 방법은?,3,담금질,오스템퍼,마템퍼,항온풀림,Machine Design and Manufacturing,0.2
+특수강에 들어가는 합금 원소 중 탄화물형성과 결정립을 미세화하는 것은?,4,P,Mn,Si,Cr,Machine Design and Manufacturing,0.2051
+피치원 지름이 일정한 기어에서 치의 크기가 가장 큰 기어는 어느 것인가?,4,m = 2,pd = 12,m = 2.5,pd = 10,Machine Design and Manufacturing,0.2069
+"아이볼트에 로프를 걸어 20 kN의 물체를 들어 올릴 때 아이볼트 나사의 크기로 가장 적당한 것은?(단, 나사는 미터 보통나사를 사용하며, 허용인장응력은 48 N/mm2 이다.)",2,M 26,M 30,M 36,M 42,Machine Design and Manufacturing,0.2082999999999999
+"밀링 머신에서 둥근 단면의 공작물을 사각, 육각 등으로 가공할 때 사용하면 편리하며, 변환기어를 테이블과 연결하여 비틀림 홈 가공에 사용하는 부품은?",4,밀링 바이스,슬로팅 장치,회전 테이블,분할대,Machine Design and Manufacturing,0.2082999999999999
+"2개 이상의 유압실린더를 동일한 속도로 동작시키고자 할때 실린더 조립상의 오차, 부하 분포의 불균일, 마찰저항의 차이 등으로 차이가 나는 것을 방지하기 위한 방법으로 틀린 것은?",3,유량조절밸브를 이용하여 조정한다.,동일한 모터를 실린더 개수 만큼 설치하여 기계적으로 동일회전수를 갖게 하므로 공급유량을 동일하게 한다.,각각의 실린더에 체크밸브를 설치하여 조정한다.,유압실린더를 직렬로 설치하여 공급유량을 동일하게 한다.,Machine Design and Manufacturing,0.2082999999999999
+사출금형의 게이트 종류에서 핀 포인트 게이트의 특징을 설명한 것으로 틀린 것은?,3,게이트의 자동 절단이 가능하다.,게이트의 부근에서 잔류응력이 적다.,게이트의 위치가 제한된다.,투영면적이 큰 성형품의 경우 다점 게이트로 함으로써 수축을 적게 할 수있다.,Machine Design and Manufacturing,0.2105
+다이캐스팅 합금으로 요구되는 성질이 아닌 것은?,2,유동성이 좋을 것,금형에 대한 정착성이 좋을 것,응고수축에 대한 용탕 보금성이 좋을 것,열간취성이 적을 것,Machine Design and Manufacturing,0.2105
+송풍기 축의 온도상승에 의한 신장에 대한 대책은?,2,전동기측이 신장되도록 한다.,반전동기측이 신장되도록 한다.,양쪽이 모두 신장되도록 한다.,신장되지 못하도록 제한한다.,Machine Design and Manufacturing,0.2105
+효율적인 설비관리를 하기위하여 설비대장을 작성하고 개개의 설비에 고유번호를 부착하고자 한다. 적절하지 않은 것은?,3,설비번호는 개별설비의 눈에 잘 띄는곳에 부착한다.,"설비대장에는 설비의 도입일자, 가격, 크기 등을 기록하고 정비시 보수내용을 기록한다.",개별설비마다 눈에 잘 보이는 곳에 설비대장을 비치한다.,설비번호는 안전하고 견고하게 부착한다.,Machine Design and Manufacturing,0.2105
+"묻힘키이(sunkkey)에서 생기는 전단응력을 τ ,키이에 생기는 압축응력을 σ c라 하여 τ /σc=1/2일때 키의 폭 b와 높이 h와의 관계를 가장 옳게 설명한 것은?",3,폭이 높이 보다 크다.,폭이 높이 보다 작다.,폭과 높이가 같다.,폭과 높이는 반비례 한다.,Machine Design and Manufacturing,0.2105
+"드릴의 회전수 600rpm, 이송 속도 0.1mm/rev, 드릴의 원추 높이 3mm, 구멍의 깊이가 17mm일 경우 구멍을 가공하는데 소요되는 시간은 약 몇 초인가?",4,50,40,30,20,Machine Design and Manufacturing,0.2105
+침탄법과 질화법의 비교설명으로 틀린 것은?,3,경도가 침탄법이 질화법보다 낮다.,침탄법은 침탄 후 열처리가 필요하나 질화법은 필요 없다.,침탄 후는 수정이 불가능하나 질화 후 수정이 가능하다.,질화층은 여리나 침탄층은 여리지 않다.,Machine Design and Manufacturing,0.2105
+CNC와이어 컷 방전가공에서 가공액의 역할이 아닌 것은?,3,방전 폭발 압력의 발생,극간의 절연 회복,비 저항치의 제어,방전 가공부분의 냉각,Machine Design and Manufacturing,0.2121
+"두께 3mm, 0.1% C의 연강에 지름 20mm의 구멍으로 펀칭할 때 전단력은? (단, 판의 전단저항은 25kgf/mm2이다.)",4,1473kgf,3243kgf,2753kgf,4713kgf,Machine Design and Manufacturing,0.2121
+진원도 측정법의 종류에서 이론적으로 가장 정확한 측정 방법인 것은?,2,직경법,반경법,3점법,중심법,Machine Design and Manufacturing,0.2143
+"두께 2㎜인 연강판에 지름 10㎜의 구멍을 피어싱할 때 다이 구멍의 치수는 몇 ㎜로 하는가? (단, 클리어런스는 5%로 한다.)",4,9.8,9.9,10.1,10.2,Machine Design and Manufacturing,0.2143
+스핀들에 대한 설명 중 맞는 것은?,2,굽힘을 주로 받는 긴 회전축이다.,비틀림을 받는 짧고 정밀한 회전축이다.,휨을 받는 회전축이다.,굽힘과 비틀림을 동시에 받는 회전축이다.,Machine Design and Manufacturing,0.2143
+"2톤의 하중을 들어 올리는 나사 잭에서 나사 축의 바깥지름을 구한 것으로 맞는 것은? (단, 허용인장응력 =6㎏ f/㎜2이고,비틀림 응력은 수직응력의 1/3정도로 본다.)",4,24㎜,26㎜,28㎜,30㎜,Machine Design and Manufacturing,0.2143
+성분제어의 특징으로 틀린 것은?,4,"무용시간, 시정수가 대단히 크다.",프로세스 특성이 비선형으로 되는 경우가 많다.,촉매의 열화 등에 의해 프로세스 특성이 경시 변화한다.,성분의 온라인 측정이 쉽다.,Machine Design and Manufacturing,0.2143
+"코일 스프링에 있어서 스프링 지수를 C라 하고,와알의 수정계수를 K라 할때 C와 K의 관계로서 옳은 것은?",4,정비례 한다.,C는 K의 자승근에 정비례한다.,C는 K의 3승근에 정비례한다.,반비례 한다.,Machine Design and Manufacturing,0.2143
+"회전수 1500rpm, 축의 직경 110mm인 묻힘키를 설계하려고 한다. b(폭)×h(높이)×ℓ(길이)=28mm×18m×300mm일 때 묻힘키가 전달할 수 있는 최대 동력(kW)은? (단, 키의 허용전단응력 τa=40N/mm2이며, 키의 허용 전단응력만을 고려한다.)",3,933.05,1264.86,2902.83,3759.42,Machine Design and Manufacturing,0.2143
+"공작물의 직경이 ø 50㎜인 경강을 세라믹 공구로 절삭속도 300m/min의 조건으로 선삭가공하려고 할 때, 주축 회전수는?",3,약 480rpm,약 1350rpm,약 1910rpm,약 2540rpm,Machine Design and Manufacturing,0.2143
+어느 소자를 나타내는 기호 중 2SKOO에서 K는 무엇을 나타내는가?,4,SCR,TRIAC,UJT,N-채널 FET,Machine Design and Manufacturing,0.2143
+격자 상수란?,3,단위체적당의 격자수,격자를 이루고 있는 원자의 수,단위세포 한 모서리의 길이,단위세포 모서리와 모서리의 길이,Machine Design and Manufacturing,0.2143
+드로잉 공정의 불량 현상으로 공기빼기 구멍이 잘 맞지 않을 때 발생하는 것은?,4,스트레처 스트레인(stretcher strain),오일 캐닝(oil canning),쇼크 마크(shock mark),배큠(vacuum),Machine Design and Manufacturing,0.2143
+펄라이트(Pearlite)의 생성되는 과정에서 틀린 것은?,4,Fe3C의 핵이 성장한다.,α 가 생긴 입자에 Fe3C가 생긴다.,γ의 결정립계에 Fe3C의 핵이 생긴다.,Fe3C의 주위에 γ 가 생긴다.,Machine Design and Manufacturing,0.2143
+다각형으로 표현된 곡면의 각 꼭지점에서 반사광의 강도를 보간하여 내부의 화소에서 반사광의 강도를 계산하는 렌더링 기법은?,2,퐁(Phong) 음영법,고라드(Gouraud) 음영법,광선 추적법,Z 버퍼링,Machine Design and Manufacturing,0.2143
+블랭킹용 프레스 금형가공 기기 중 다이와 펀치가공에 주로 사용되는 공작기계는?,4,머시닝센터,밀링머신,CNC 선반,와이어 컷 방전가공,Machine Design and Manufacturing,0.2157
+산업현장에서 고무제품 등을 손쉽게 접착하는데 이용되는 순간접착제에 대한 것으로 맞는 것은?,2,감압형 접착제,중합제형 접착제,유화액형 접착제,열 용융형 접착제,Machine Design and Manufacturing,0.2173999999999999
+전원 회로에서 리플 (ripple) 전압이란?,2,정류된  직류전압,정류된 전압의 교류분,부하시의 전압,무부하시의 전압,Machine Design and Manufacturing,0.2173999999999999
+열전대의 특징이 아닌 것은?,2,제백 효과를 이용한다.,열저항을 측정하여 온도를 알 수 있다.,기준 접점에 대한 온도와 열기전력을 이용하여 온도를 측정한다.,B형은 온도변화에 대한 열기전력이 매우 작다.,Machine Design and Manufacturing,0.2188
+"판두께 0.5mm인 규소강판에 가로세로 각각 20mm의 사각구멍을 블랭킹 하는 경우의 최대 전단하중은? (단, 규소강판의 전단저항은 45㎏f/mm2)",2,900㎏f,1800㎏f,3600㎏f,9000㎏f,Machine Design and Manufacturing,0.2221999999999999
+분말고속도강의 특징이 아닌 것은?,1,탄화물 입자가 조대하여 피삭성이 좋다.,고경도 및 고인성의 특성이 있다.,내마모성은 용제고속도강과 초경의 중간정도이다.,무방향성으로 열처리 변형이 적다.,Machine Design and Manufacturing,0.2221999999999999
+머시닝센터에서 공작물을 자동으로 교환하는 장치는?,1,APC,APT,ATC,ABS,Machine Design and Manufacturing,0.2221999999999999
+선반에서 길이가 긴 물체를 가공할 때 방진구를 사용하는데 일반적으로 지름의 몇배 이상일 때 사용하는가?,4,8배,10배,14배,20배,Machine Design and Manufacturing,0.2221999999999999
+"브리넬 경도 시험기에서 강철볼(steel ball)의 지름이 2mm, 하중이 471kgf이고 시편에 압입한 강철볼의 깊이가 0.5mm일 때 브리넬 경도 HB는?",2,75,150,37.5,300,Machine Design and Manufacturing,0.2221999999999999
+프레스금형에서 펀치나 다이의 전단각을 주는 목적 중 가장 알맞은 것은?,3,펀치와 다이를 보호하기 위하여,전단면을 아름답게 하기 위하여,전단 하중을 줄이기 위하여,다이에 대한 펀치의 편심을 방지하기 위하여,Machine Design and Manufacturing,0.2221999999999999
+투영기를 이용한 측정에서 차트(chart)를 이용한 윤곽형상의 비교 측정시 가장 중요한 사항은?,3,형판 접안렌즈 사용,스크린의 크기,투영 배율의 정확성,이중상 접안렌즈 사용,Machine Design and Manufacturing,0.2221999999999999
+탄소강의 용접시 탄소함유량의 증가와 더불어 어떤 현상이 일어나는가?,3,용접성이 좋아진다.,급냉연화가 나타난다.,급냉경화가 심해진다.,용접부의 경도가 낮아진다.,Machine Design and Manufacturing,0.2221999999999999
+"CNC 선반에서 회전수가 200rpm일 때, 스핀드의 2회전 휴지를 위한 정지시간은 몇 초인가?",4,0.3,0.4,0.5,0.6,Machine Design and Manufacturing,0.2221999999999999
+도면의 크기와 대상물의 크기 사이에는 정확한 비례 관계를 가져야 하나 예외로 할 수 있는 도면은?,3,부품도,제작도,설명도,확대도,Machine Design and Manufacturing,0.2221999999999999
+4개의 경계곡선을 선형 보간하여 만들어지는 곡면은?,2,선형 곡면,군스 곡면,퍼거슨 곡면,베지어 곡면,Machine Design and Manufacturing,0.2221999999999999
+솔리드 모델링의 표현방식이 아닌 것은?,4,경계 표현 방식,스윕(sweep) 표현 방식,공간 분할 표현 방식,개별(Individual) 표현 방식,Machine Design and Manufacturing,0.2221999999999999
+마찰면이 넓은 부분 또는 시동횟수가 많을 때 사용하고 저속 및 중속 축의 급유에 사용되는 급유방법은?,3,담금 급유법,패드 급유법,적하 급유법,강제 급유법,Machine Design and Manufacturing,0.2221999999999999
+밀링 머신의 일반적인 부속장치에 해당되지 않는 것은?,4,회전 테이블,슬로팅 장치,래크 절삭장치,브로칭 장치,Machine Design and Manufacturing,0.2221999999999999
+"두 축의 중심선이 어느 각도로 교차되고, 그 사이의 각도가 운전 중 다소 변하여도 자유로이 운동을 전달 할수 있는 축 이음(shaft coupling)으로 맞는 것은?",4,고정 이음,플랙시블 이음,올덤 이음,유니벌셜 이음,Machine Design and Manufacturing,0.2221999999999999
+CNC선반의 공구기능 T0603을 바르게 설명한 것은?,3,6번 공구로 보정값 3을 수행,3번 공구로 보정값 6을 수행,6번 공구로 보정번호 3번의 보정값 수행,6번 공구로 보정번호 3번의 보정값 취소,Machine Design and Manufacturing,0.2221999999999999
+KS규격 안전색에서 빨강의 표시사항이 아닌 것은?,4,정지,고도 위험,방화,위험,Machine Design and Manufacturing,0.2221999999999999
+순간순간의 신호레벨을 서로 더해 측정시간 으로 나눈 값은?,4,실효값,편진폭값,양진폭값,평균값,Machine Design and Manufacturing,0.2257999999999999
+"1200rpm으로 2kW의 동력을 전달시키려고 할 때 기어잇수 Z=20, 모듈 m=4인 스퍼기어의 이에 걸리는 힘(피치원 접선방향 힘)은 약 몇 N 인가?",4,284,312,356,398,Machine Design and Manufacturing,0.2273
+피드백 제어계에서 설정값을 표시한는 것은?,2,PV,SV,MV,DV,Machine Design and Manufacturing,0.2273
+선반에서 맨드릴(mandrel)을 사용하는 가장 큰 이유는?,3,구멍 가공만이 꼭 필요하기 때문,구멍이 있는 공작물에 센터작업이 필요하기 때문,구멍과 외경이 동심원이고 직각단면이 필요하기 때문,척에 공작물을 고정하기 어렵기 때문,Machine Design and Manufacturing,0.2292
+볼베어링의 수명에 대한 설명으로 맞는 것은?,4,반지름방향 동등가하중의 3배에 비례한다.,반지름방향 동등가하중의 3승에 비례한다.,반지름방향 동등가하중의 3배에 반비례한다.,반지름방향 동등가하중의 3승에 반비례한다.,Machine Design and Manufacturing,0.2307999999999999
+안전율에 대한 설명으로 틀린 것은?,3,안전율은 항상 1보다 큰 값을 갖는다.,재료의 허용응력에 대한 기준강도의 비이다.,재료의 허용응력에 기준강도보다 반드시 커야 한다.,충격하중은 정하중보다 안전율을 크게 한다.,Machine Design and Manufacturing,0.2307999999999999
+원형의 긴 끈으로 된 밸트로서 전달력이 작은 소형 공작기계의 전동벨트로 사용되는 것은?,3,보통 벨트,링크 벨트,레이스 벨트,타이밍 벨트,Machine Design and Manufacturing,0.2307999999999999
+어미자의 최소눈금이 0.5㎜이고 아들자 24.5㎜를 25등분한 버니어캘리퍼스의 최소측정값은?,4,0.05㎜,0.01㎜,0.025㎜,0.02㎜,Machine Design and Manufacturing,0.2307999999999999
+사출성형용 수지 중 결정성 수지에 해당하는 것은?,2,폴리스티렌,폴리아마드,염화비늘수지,ABS수지,Machine Design and Manufacturing,0.2307999999999999
+"머시닝센터에서 지름 10mm인 엔드밀을 사용하여 외측가공 후 측정값이 ø62.0mm가 되었다. 가공 치수를 ø61.5mm로 가공하려면 보정 값을 얼마로 수정하여야 하는가?(단, 최초 보정은 5.0으로 반지름 값을 사용하는 머시닝 센터이다.)",2,4.5,4.75,5.5,5.75,Machine Design and Manufacturing,0.2307999999999999
+플라스틱 금형으로 성형하는 성형법이 아닌 것은?,4,압축 성형법,이송 성형법,블로 성형법,압인 성형법,Machine Design and Manufacturing,0.2307999999999999
+"보통 주철(회주철) 성분에 0.7~1.5% Mo, 0.5~4.0% Ni을 첨가하고 별도로 Cu, Cr을 소량 첨가한 것으로 강인하고 내마멸성이 우수하여 크랭크축, 캠축, 실린더 등의 재료로 쓰이는 것은?",3,듀리론,니-레지스트,애시큘러 주철,미하나이트 주철,Machine Design and Manufacturing,0.2307999999999999
+"성형품의 치수가 120mm이고, 캐비티내 성형압력은 400kg/cm2 이며 성형 수축률이 0.01일 때 금형의 치수는 얼마인가?",4,120.1mm,118.8mm,119.9mm,121.2mm,Machine Design and Manufacturing,0.2307999999999999
+"비중 7.14, 용융점 약 419℃ 이며 다이캐스팅용으로 많이 이용되는 조밀육방격자 금속은?",3,Cr,Cu,Zn,Pb,Machine Design and Manufacturing,0.2307999999999999
+CNC가공 중 금지영역을 침범했을 때 발생하는 경보(alarm) 내용은?,3,P/S ALARM,EMERGENCY L/S ON,DT ALARM,TORQUE LIMIT ALARM,Machine Design and Manufacturing,0.2307999999999999
+"마찰차의 접촉면에 종이,가죽 및 고무 등의 비금속 재료를 붙이는 이유는 무엇인가?",3,마찰각을 작게 하기 위하여,마찰차의 마멸을 방지하기 위하여,마찰계수를 크게 하기 위하여,회전수를 줄이기 위하여,Machine Design and Manufacturing,0.2307999999999999
+"분말상 Cu에 약 10% Sn 분말에 2% 흑연 분말을 혼합하고, 윤활제 또는 휘발성 물질을 가한 후 가압 성형 소결한 베어링 합금은?",4,켈밋 메탈,배빗 메탈,앤티프릭션,오일리스 베어링,Machine Design and Manufacturing,0.2307999999999999
+B-spline 곡선의 특징이 아닌 것은?,4,조정점들에 의해 인접한 B-spline 곡선간의 연속성이 보장된다.,국부적인 곡선 조정이 가능하다.,매개변수방식이므로 매개변수에 해당하는 좌표 값의 계산이 용이하다.,원이나 타원을 정확하게 표현할 수 있다.,Machine Design and Manufacturing,0.2307999999999999
+"ø50mm SM20C 재질의 가공물을 CNC 선반에서 작업할 때 절삭속도가 80m/min이라면, 적절한 스핀들의 회전수는 약 얼마인가?",1,510 rpm,1020 rpm,1600 rpm,2040 rpm,Machine Design and Manufacturing,0.2332999999999999
+"벨트가 회전하기 시작하여 동력을 전달하게 되면 인장 측의 장력은 커지고, 이완측의 장력은 작아지게 되는데 이 차이를 무엇이라 하는가?",4,이완 장력,허용 장력,초기 장력,유효 장력,Machine Design and Manufacturing,0.2353
+전기식 조절밸브의 구동신호로 사용되는 전류신호의 크기는 몇(mA) DC인가?,4,0.2 - 1.0,0.4 - 2.0,1.0 - 4.0,4.0 - 20,Machine Design and Manufacturing,0.2353
+"유량 180ℓ/min, 100m 높이로 물을 보내고자 한다. 펌프에 필요한 동력은 약 몇 KW인가?",2,1.8kW,2.9kW,4kW,176.5kW,Machine Design and Manufacturing,0.2353
+밀링 가공에서 하향 절삭의 장점에 대한 설명으로 틀린 것은?,4,커터 날이 공작물을 향하여 누르므로 공작물의 고정이 간편하다.,날의 마멸이 적고 수명이 길다.,커터의 절삭 방향과 이송 방향이 같으므로 가공면이 깨끗하다.,칩이 가공된 면 위에 쌓이지 않으므로 정밀도가 좋다.,Machine Design and Manufacturing,0.2353
+섭씨온도에서 물의 빙점을 0 [℃]로 하면 화씨온도의 물의 빙점은 얼마인가?,2,0,32,273.25,491.67,Machine Design and Manufacturing,0.2353
+"750 rpm, 극수 8인 3상 동기 전동기의 주파수는 몇 Hz인가?",1,50,60,70,80,Machine Design and Manufacturing,0.2353
+진동측정기기의 검출단 설치 방법 중 주파수 특징이 가장 좋은 것은?,2,접착제,비왁스,마그넷,손고정,Machine Design and Manufacturing,0.2380999999999999
+광화이버 센서의 종류에서 광화이버의 형상에 따라 분류 하는 방식이 아닌 것은?,4,분할형,평행형,렌덤 확산형,투과형,Machine Design and Manufacturing,0.2380999999999999
+가동 코일형 계기의 지시는?,1,평균값,파형값,피크값,실효값,Machine Design and Manufacturing,0.2380999999999999
+가열끼움 작업시 필요한 공구 및 기계가 아닌 것은?,1,래버린스((Labyrinth),체인블록,마이크로미터,서모미터(Thermo meter),Machine Design and Manufacturing,0.2380999999999999
+멍키스때너의 규격을 나타내는 것은?,2,무게,전체의 길이,입의 최대 너비,적용 가능한 볼트의 최대 직경,Machine Design and Manufacturing,0.2380999999999999
+진동의 변위를 측정할 때 사용되는 값은?,4,속도값,실효값,평균값,피크-피크,Machine Design and Manufacturing,0.24
+가속도 센서의 부착 방법 중 마그네틱 고정 방식의 특징이 아닌 것은?,4,가속도계의 고정 및 이동이 용이하다.,작은 구조물에는 자석의 질량 효과가 크다.,습기는 문제가 없다.,장기적인 안정성이 좋다.,Machine Design and Manufacturing,0.2414
+설비열화를 방지하기 위한 대책으로 잘못된 것은?,4,열화방지,열화측정,열화회복,열화개선,Machine Design and Manufacturing,0.2414
+"솔리드 모델링에서 토폴로지 요소간에는 오일러-포앙카레 공식이 만족해야 하는데, 이 식으로 옳은 것은? (단, v는 꼭지점의 개수, e는 모서리 개수, f는 면 혹은 외부 루프의 개수, h는 면상에 구멍 로프의 개수, s는 독립된 셀의 개수, p는 입체를 관통하는 구멍의 개수이다.)",4,u + e - f - h = 3(s - p),u + e - f - h = 2(s - p),u - e + f - h = 3(s - p),u - e + f - h = 2(s - p),Machine Design and Manufacturing,0.2423999999999999
+보스 부분의 이젝팅에 가장 적합한 방식은?,2,이젝터 핀,이젝터 슬리브,스트리퍼 플레이트,에어 이젝트,Machine Design and Manufacturing,0.25
+"회전수 200 rpm인 연강축 플랜지 커플링에서 40PS의 동력을 전달시키려면 축의 지름은 최소 몇 mm 이상이 좋은가? (단, 축의 허용비틀림 응력 τa = 2 kgf/mm2 이며, 축은 비틀림 모멘트만을 고려한다.)",1,72,77,82,87,Machine Design and Manufacturing,0.25
+연산기에 널리 사용되는 입력신호의 전압은?,1,DC 1∼5[V],DC 5∼10[V],AC 5∼10[V],AC 10∼15[V],Machine Design and Manufacturing,0.25
+입력신호가 어떤 정상상태에서 다른 상태로 변화했을 때 출력신호가 정상상태에 도달하기까지의 특성을 무엇이라 하는가?,2,임펄스 응답,과도 응답,램프 응답,스텝 응답,Machine Design and Manufacturing,0.25
+기하공차의 종류 중 모양 공차에 해당하지 않는 것은?,3,진직도 공차,평면도 공차,평행도 공차,원통도 공차,Machine Design and Manufacturing,0.25
+"3차원 측정기의 프로브에서 광학계를 이용한 것으로, 접촉측정이 부적당하거나, 곤란한 얇은 물체 혹은 연한 물체, 작은 구멍의 좌표측정, 금긋기선의 위치 측정 등에 쓰이는 프로브는?",2,접촉식 프로브,비접촉식 프로브,전방향성 접촉신호 프로브,변위검출형 프로브,Machine Design and Manufacturing,0.25
+600rpm으로 회전하는 스핀들에서 5회전 일시정지(dwell)를 주려고 한다. CNC 프로그램으로 맞는 것은?,4,G04 P0.5 ;,G04 X1.0 ;,G04 X5.0 ;,G04 X0.5 ;,Machine Design and Manufacturing,0.25
+편 로드형 공기압 실린더의 로드 후진 시 유량이 200cm3/sec이고，피스톤의 면적이 0.01m2이며，로드의 면적이 0.005m2이다. 이 실린더의 후진 속도는? (단，로드에 부착된 도그가 전진할 때를 실린더 전진으로 한다.),2,0.4m/sec,0.04m/sec,0.2m/sec,0.02m/sec,Machine Design and Manufacturing,0.25
+구리(Cu)계 소결 오일레스(oilless)베어링 합금의 주요 성분으로 알맞는 것은?,2,Cu + Zn + Si,Cu + Sn + C,Cu + Sn + Fe,Cu + Zn + C,Machine Design and Manufacturing,0.25
+방전가공에서 전극소모비의 표시법 중 측정이 간단하고 정확하므로 가장 많이 쓰이며 특히 공작물과 전극의 비중이 비슷할 경우에 쓰이는 표시법은?,2,체적 소모비,중량 소모비,형상 소모비,단면 소모비,Machine Design and Manufacturing,0.25
+외측 언더컷 처리 금형에 해당되지 않는 것은?,4,분할 캐비티형,회전형,슬라이드 블록형,슬리이브형,Machine Design and Manufacturing,0.25
+탄피와 튜뷰 같은 가공을 하는 가공법은?,2,인발 가공,압출 가공,압인 가공,엠보싱 가공,Machine Design and Manufacturing,0.25
+철-콘스탄탄 열전대에 대한 설명 중 잘못된 것은?,2,＋측 재료는 순철이다,"－측 재료는 니켈 90 ％, 크롬 10 %이다",사용온도는 약 600℃ 정도이다,측정온도 범위에 따라 보정이 필요하다,Machine Design and Manufacturing,0.25
+에어벤트(air vent)의 방법에 대해서 열거한 것이다. 맞지 않은 것은?,4,이젝터 핀을 이용하는 방법,진공흡입에 진공펌프를 이용하는 방법,코어 분할면을 이용하는 방법,스페이서 블록을 이용하는 방법,Machine Design and Manufacturing,0.25
+"제품 치수가 h=20 mm, d=50 mm, t=1 mm일 때 블랭크의 직경은?",2,92mm,80.6mm,100mm,78mm,Machine Design and Manufacturing,0.25
+송풍기의 베어링 과열 원인이 아닌 것은?,2,베어링의 마모,임펠러(impeller)의 부식,임펠러(impeller)와 케이싱(casing)의 접촉,그리스(grease)의 과충전,Machine Design and Manufacturing,0.25
+진원도 판정의 기준으로 사용할 수 없는 것은?,4,최소외접 중심법,최대내접 중심법,최소영역 중심법,최대영역 중심법,Machine Design and Manufacturing,0.25
+사각형 단면(100mm×60mm)의 기둥에 10kgf/cm2압축응력이 발생할 때 압축하중은 약 얼마인가?,2,6000kgf,600kgf,60kgf,60000kgf,Machine Design and Manufacturing,0.25
+V블록을 이용하여 진원도를 측정하는 3점법의 특징으로 올바른 것은?,2,3각 요철을 가진 원통형체의 진원도는 실제 값보다 작게 나온다.,형체의 요철 수에 따라서 진원도 값이 나타나지 않는 경우도 있다.,"V ﹣홈 각도, 곡률반지름, 3각 스납객, 요철의 수가 변하여도 진원도 값의 변화는 거의 없다.",반경법보다 합리적인 진원도 측정방법이다.,Machine Design and Manufacturing,0.25
+드로잉 가공된 제품의 내경을 외경으로 하면서 직경을 감소 시키는 가공법은?,2,재드로잉,역드로잉,아이어닝,스피닝,Machine Design and Manufacturing,0.25
+러너(runner)시스템의 역할 중 적합하지 않은 것은?,3,"러너의 단면은 가능한 굵게, 형상단면은 진원에 가까운 것이 좋다.","가능한 유동저항은 적고, 냉각되기 어려운 것이 좋다.",러너의 길이는 가급적 긴 것이 좋다.,러너의 굵기는 성형품의 살두께보다 굵게하는 것이 좋다.,Machine Design and Manufacturing,0.25
+반복하중을 받는 스프링에서는 그 반복속도가 스프링의 고유진동수에 가까워 지면 심한 진동을 일으켜 스프링의 파손 원인이 된다. 이 현상을 무엇이라 하는가?,4,자유높이,스프링상수,비틀림모멘트,서징,Machine Design and Manufacturing,0.25
+CNC 서보 기구에서 0.001㎜를 기본설정 단위(BLU: Basic Length Unit)로 하고 지령펄스가 1000 pulse/sec로 전달되고 있다면 테이블의 이송속도는 몇 mm/min 인가?,2,90,60,30,15,Machine Design and Manufacturing,0.25
+형상공차 중 관련형체의 위치에 관한 것은 어느 것인가?,3,원통도,진직도,동심도,직각도,Machine Design and Manufacturing,0.25
+국제 단위계 {SI) 에서 사용되는 기본 단위가 아닌것은?,2,시간,부피,질량,광도,Machine Design and Manufacturing,0.25
+"12m/s의 속도로 전달마력 48 PS를 전달하는 평벨트의 이 완측 장력으로 옳은 것은? (단, 긴장측의 장력은 이완측장력의 3배이고, 원심력은 무시한다.)",2,100㎏f,150㎏f,200㎏f,250㎏f,Machine Design and Manufacturing,0.25
+"소재의 직경 20mm, 소재의 두께 0.2mm, 전단저항 36kgf/mm2인 경우 블랭킹(blanking)에 필요한 힘을 구하면?",2,약 145kgf,약 452kgf,약 753kgf,약 2260kgf,Machine Design and Manufacturing,0.25
+선삭에서 칩의 변형 형식은?,3,인장,굽힘,전단,압축,Machine Design and Manufacturing,0.25
+시퀀스제어에 사용되는 지령용 기기에 속하지 않는 것은?,2,캠 스위치,토글 스위치,압력스위치,텀블러스위치,Machine Design and Manufacturing,0.25
+제한된 일정 지역 내에 분산 설치된 각종 정보 장비들 사이의 통신을 수행하기 위하여 최적화하고 신뢰성있는 고속의 통신 채널을 제공하는 것은?,3,부가가치 통신망(VAN),협대역 종합 정보 통신망(ISDN),근거리 통신망(LAN),광대역 종합 정보 통신망(ATM),Machine Design and Manufacturing,0.25
+"SM20C의 공작물을 ø20mm 드릴을 사용하여 구멍가공을 할 때 주축 회전수는 몇 rpm 인가? (단, 절삭속도는 30 m/min이다.)",4,378,458,496,478,Machine Design and Manufacturing,0.25
+CNC 장비의 보수 및 유지를 위한 설명 중 틀린 것은?,4,습동유가 떨어지지 않도록 보충한다.,조정 및 보수는 규정된 공구를 사용한다.,부품 교환은 규정부품을 사용한다.,강전반의 청소는 압축공기나 걸레로 털어서 깨끗하게 청소한다.,Machine Design and Manufacturing,0.25
+"4% Cu, 2% Ni, 1.5% Mg 이 함유된 Al 합금으로서 내열성이 크고 기계적 성질이 우수하여 실린더 헤드나 피스톤등에 적합한 합금은?",2,실루민,Y 합금,두랄루민,로엑스,Machine Design and Manufacturing,0.25
+컴퓨터의 운영체제(O.S) 기능 중 분산처리 시스템에 대한 특징을 설명한 것으로 잘못된 것은?,2,자료 처리 속도가 빠르다.,시스템의 신뢰성이 낮다.,새로운 기능을 부여하기가 용이하다.,부하의 자동 분산이 용이하다.,Machine Design and Manufacturing,0.25
+스프링의 제도방법 설명 중 틀린 것은?,2,코일스프링은 하중이 가해지지 않은 상태에서 그리는 것을 원칙으로 한다.,겹판스프링의 모양만을 도시할 때에는 스프링의 외형을 가는 1점쇄선으로 그린다.,도면에서 지시가 없는 코일스프링은 모두 오른쪽으로 감은 것을 나타낸다.,코일 스프링의 간략도는 스프링 재료의 중심을 굵은 실선으로 그린다.,Machine Design and Manufacturing,0.25
+머시닝센터에서 리머 가공시 바르지 못한 것은?,3,기계 리머를 사용한다.,리머를 뺄 때 정회전 상태에서 절입시와 같은 이송 속도로 한다.,좋은 가공면을 얻기 위하여 높은 절삭속도로 이송을 빠르게 한다.,리머 가공시 충분한 절삭유를 주입하여 칩(chip) 배출을 원활하게 한다.,Machine Design and Manufacturing,0.25
+CAM 가공에서 도형정의 및 운동정의 된 APT 언어를 각종 CNC 기계에 맞게 NC 데이터로 변화시켜주는 업무를 수행하는 것을 맞는 것은?,3,파트 프로그램 (part program),메인 프로세서 (main processor),포스트 프로세서( post processor),CL (cutter location)파일,Machine Design and Manufacturing,0.25
+역류방지 밸브의 종류가 아닌 것은?,3,스윙헝 역류방지 밸브,리프트혈 역류방지 밸브,콕 역류방지 밸브,듀얼 플레이트 역류방지 밸브,Machine Design and Manufacturing,0.25
+CNC 선반의 NC 프로그램에서 절대지령과 증분 지령에 관한 설명이다. 틀린 것은?,2,절대지령은 공작물 좌표계 원점에서 이동하고자 하는 위치를 지령한다.,"증분지령으로 하고자 하는 지령절 맨 앞에 G91을 입력하고 이동하고자 하는 위치를 X,Z로 지령한다.","절대지령의 좌표 값은 X,Z를 사용한다.","증분지령의 좌표 값은 U,W를 사용한다.",Machine Design and Manufacturing,0.25
+3차원 solid primitive가 아닌 것은?,4,실린더 (cylinder),원뿔(cone),박스(box),에지 (edge),Machine Design and Manufacturing,0.25
+서보모터에서위치 및 속도를 검출하고기계의위치는 볼스크루에 의해서제어되는 방식은?,3,개방회로방식,폐쇄회로방식,반폐쇄회로방식,반개방회로방식,Machine Design and Manufacturing,0.25
+컴퓨터의 주기억장치와 CPU의 처리속도 때문에 개발된 것은 어느 것인가?,2,blocking,cache memory,channel,interrupt,Machine Design and Manufacturing,0.25
+보전작업표준을 설정하고자할 때 사용하지 않는 방법은?,4,작업 연구법,경험법,실적 자료법,작업 순서법,Machine Design and Manufacturing,0.25
+압력계의 표준압력계로서 다른 압력계의 교정용으로 사용 되는 것은?,4,브르돈관식 압력계,피스톤식 압력계,단관식 압력계,분동식 압력계,Machine Design and Manufacturing,0.25
+"러너 단면적을 크게 하여 러너 외측은 고화된 수지를 단열층으로 이용하고, 러너 내측을 용융 상태로 유지시키는 러너리스 금형은?",3,웰타입 노즐,익스텐션 노즐,인슐레이티드 러너,핫 러너,Machine Design and Manufacturing,0.25
+치수 보조선에 대한 설명으로 옳지 않은 것은?,2,필요한 경우에는 치수선에 대하여 적당한 각도로 평행한 치수 보조선을 그을 수 있다.,외형선과 같은 굵기의 선으로 그린다.,치수선보다 2~3mm 연장하여 그린다.,"가는 실선으로 긋고, 치수선에 직각 되게 긋는다.",Machine Design and Manufacturing,0.25
+유체의 흐름에 관한 설명중 잘못된 것은?,2,관을 흐르는 유체는 레이놀즈수에 따라 층류와 난류로 구분한다.,층류에서 마찰 손실계수는 레이놀즈수를 62로 나눈 것이다.,레이놀즈수가 2300이하인 유도은 층류이다.,점도계수가 작고 유속이 굵은 관을 흐를 때 난류가 일어나기 쉽다.,Machine Design and Manufacturing,0.25
+축이 베어링과 접촉하여 받쳐지고 있는 축 부분을 무엇이라 하는가?,2,하우징,저어널,리테이너,내륜,Machine Design and Manufacturing,0.25
+단조를 온도에 따라 구분할 때 냉간단조에 해당되지 않는 것은?,2,코이닝(coining),업세팅(up setting),스웨이징(sweging),코울드헤딩(cold heading),Machine Design and Manufacturing,0.25
+"머시닝센터에서 지름 50㎜의 페이스커터로 25m/min의 절삭속도로 절삭하려고 하는 경우 주축의 회전수와 커터의 매분 이송속도를 결정하면? (단, 커터의 날수 12개, 날 1개당 이송 0.2㎜)",4,"125rpm, 300㎜/min","127rpm, 31.8㎜/min","159rpm, 31.8㎜/min","159rpm, 382㎜/min",Machine Design and Manufacturing,0.25
+일반적으로 60mm 이하의 작은 축과 테이퍼 축에 사용될 때 키(key)가 자동적으로 축과 보스 사이에서 자리를 잡을 수 있는 장점을 가지고 있는 키는?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),2,성크 키,반달 키,접선 키,스플라인,Machine Design and Manufacturing,0.25
+전기기기의 분류에서 회전기에 속하는 것은?,3,정류기,직류변환기,유도기,인버터,Machine Design and Manufacturing,0.25
+42500kgfㆍ㎜의 굽힘 모멘트가 작용하는 연강 축 지름은 약 몇 ㎜인가?(단. 허용 굽힘 응력은 5kgf/㎟이다.),4,21,36,92,44,Machine Design and Manufacturing,0.25
+"""차동 증폭기는 보통 연산증폭기(op-amp)의 (     )으로 사용된다."" (     )안에 알맞는 것은?",1,입력단,출력단,접지단,전원단,Machine Design and Manufacturing,0.25
+DXF(Datea Exchange File) 파일의 섹션구성에 해당되지 않는것은?,2,header section,library section,table section,entitiy section,Machine Design and Manufacturing,0.25
+CAD/CAM에서 사용하는 기하학적 형상의 3차원 모델링 방법이 아닌 것은?,4,와이어 프레임(wire frame) 모델링,서피스(surface) 모델링,솔리드(solid) 모델링,윈도우(window) 모델링,Machine Design and Manufacturing,0.25
+주요 공작기계의 일반적인 일감 운동에 대한 설명으로 틀린 것은?,4,밀링머신 : 일감을 고정하고 이송한다.,선반 : 일감을 고정하고 회전시킨다.,보링머신 : 일감을 고정하고 이송한다.,드릴링머신 : 일감을 고정하고 회전시킨다.,Machine Design and Manufacturing,0.25
+그래픽 디스플레이에서 스토리지형 디스플레이의 특징이 아닌 것은?,4,해상도가 우수하다.,밝기와 선명도가 낮다.,플리커 현상이 발생하지 않는다.,애니메이션에 적합하다.,Machine Design and Manufacturing,0.25
+"공학적인 해석을 할 때 사용하는 여러 성질(무게, 부피, 무게중심, 관성모멘트 등)을 구할 수 있는 모델링으로 가장 적합한 것은?",2,2차원 와이어 프레임 모델링,솔리드 모델링,3차원 와이어 프레임 모델링,서피스 모델링,Machine Design and Manufacturing,0.25
+"긴 기둥을 오일러의 식으로 설계함에 있어서 기둥의 양단을 볼트로 체결하여 양단고정으로 하면, 기둥의 양단을 핀으로 고정하여 양단 회전으로 하는 경우에 비하여 좌굴 하중을 몇배 증가시킬 수 있는가?",3,16배,8배,4배,2배,Machine Design and Manufacturing,0.25
+"구멍(hole), 슬롯(slot), 포켓(pocket) 등의 형상단위를 라이브러리(library)에 미리 갖추어 놓고 필요 시 이들의 치수를 변화시켜 설계에 사용하는 모델링 방식은?",2,Parametric modeling,Feature-based modeling,Solid modeling,Boolean operation modeling,Machine Design and Manufacturing,0.25
+제품의 모델(model)과 그에 관련된 데이터 교환에 관한 표준 데이터 형식이 아닌 것은?,4,STEP,IGES,DXF,DWG,Machine Design and Manufacturing,0.25
+CAD/CAM 시스템을 이용하여 2차원 작업을 하기 위한 기본 도형이 아닌 것은?,4,직선(line),원(circle),곡선(curve),구(sphere),Machine Design and Manufacturing,0.25
+분산처리 CAD 시스템에 대한 장점으로 틀린 것은?,2,자료 처리 속도를 증가시킬 수 있다.,이미 구성된 자료들을 효율적으로 관리할 수 있다.,시스템 구성에 유연성을 가질 수 있다.,시스템의 신뢰성과 활용성을 높일 수 있다.,Machine Design and Manufacturing,0.25
+일반적으로 공구 연삭기오 연삭하는 절삭공구로 적합하지 않은 것은?,2,바이트,줄,드릴,밀렁커러,Machine Design and Manufacturing,0.25
+화면에 CAD 모델들을 현실감 있게 나타내기 위하여 채색이나 음영 등을 주는 작업은 무엇인가?,4,Animation,Simulation,Modeling,Rendering,Machine Design and Manufacturing,0.25
+CAD 시스템에서 입력장치가 아닌 것은?,3,라이트 펜,마우스,프린터,스캐너,Machine Design and Manufacturing,0.25
+절삭유제에 대한 설명 중 옳은 것은?,2,마찰계수가 높고 표면장력이 커야 한다.,공구의 인선을 냉각시켜 공구의 경도 저하를 방지한다.,식물유는 냉각효과가 우수하므로 고속 다듬질 절삭에 좋다.,광(물)유는 윤활작용이 좋고 냉각성이 크다.,Machine Design and Manufacturing,0.25
+솔리드 모델링 방법 중 B-rep(Boundary Repesentation)과 비교해서 CSG(Constructive Solid Geometry)의 특징이 아닌 것은?,4,데이터를 아주 간결한 파일로 저장할 수 있어 메모리가 적다.,불리언 연산을 이용하여 모델을 생성한다.,형상수정이 용이하다.,전개도 작성 및 표면적 계산이 용이하다.,Machine Design and Manufacturing,0.25
+슈퍼 피니싱의 특징 중 맞는것은?,4,"호닝, 랩핑 등과 같은면을 10초 이내의 단시간에 얻을 수 있다.",연삭립은 연삭 행정이 길어서 구성인선이 발생한다.,"가공부에 고온이 발생하고, 변질층이 크게 생긴다.",방향성이 없는 다듬질면과 높은 정밀도를 얻을 수 있다.,Machine Design and Manufacturing,0.25
+브로우치 작업은 어느 경우에 유효하게 이용할 수 있는가?,2,대칭형의 윤곽을 가공할 때,복잡한 형상의 구멍을 가공할 때,나선홈을 가공할 때,베벨 기어를 가공할 때,Machine Design and Manufacturing,0.25
+스프링의 변형에 대한 강성을 나타내는 것이 스트링 상수가 있다. 하중이 W[kgf]일 때 변위량을 δ[mm]라 하면 스프링상수 k[kgf/mm]는?,3,k=δ/W,k=δ W,k=W/δ,k=W-δ,Machine Design and Manufacturing,0.25
+기억장치에서 데이터를 꺼내는데 소요되는 시간으로 대기 시간과 전송시간을 합친 시간을 무엇이라 하는가?,2,리드 타임(lead time),액세스 타임(access time),오프 타임( off time),온 타임(on time),Machine Design and Manufacturing,0.25
+서로 다른 CAD/CAM 시스템 사이에서 데이터를 상호교환하기 위한 데이터 교환 방식이 아닌 것은?,4,IGES,STEP,DXF,DWG,Machine Design and Manufacturing,0.25
+주평면 (Principal plane)에 대한 설명이다. 옳은것은?,3,주평면은 전단은력과 수직응력의 합이 작용한다.,주평면에는 전단응력이 작용하고 수직응력은 작용하지 않는다.,주평면에는 전단응력은 작용하지 않고 최대 및 최소의 수직응력만이 작용한다.,주평면에는 최대의 수직응력만이 작용하고 최소의 수직응력과 전단응력은 작용하지 않는다.,Machine Design and Manufacturing,0.25
+LAN 시스템 구성방식에서 망(topology) 접속형태에 의한 구분에 해당되지 않는 형은?,4,스타형,트리형,링형,다운로드형,Machine Design and Manufacturing,0.25
+평면상에서 직교좌표계의 기준 직교축의 원점에서부터 점 P까지의 직선거리(r)와 기준 직교축과 그 직선이 이루는 각도(θ)로 표시되는 좌표계를 무엇이라고 하는가?,2,절대좌표계,극좌표계,원통좌표계,구면좌표계,Machine Design and Manufacturing,0.25
+LAN 시스템의 주요 특징으로 가장 거리가 먼 것은?,4,자료의 전송속도가 빠르다.,통신망의 결합이 용이하다.,신규장비를 전송매체로 점가하기가 용이하다.,장거리 구역 내에서 정보통신에 용이하다.,Machine Design and Manufacturing,0.25
+지정된 점(정점 또는 조정점)을 반드시 통과하도록 고안된 곡선은?,3,Bezier curve,B-spline curve,Spline curve,NURBS curve,Machine Design and Manufacturing,0.25
+"컴퓨터의 중앙처리장치에서 사용되는 고속의 기억소자로 2진법 체계로 데이터를 받고, 저장, 전송하는 기능을 갖고 있는 장소를 무엇이라 하는가?",2,MAIN MEMORY,REGISTER,BASIC,REFRESH,Machine Design and Manufacturing,0.25
+곡면을 모델링하는 방식 중 4개의 경계곡선을 선형보간하여 형성되는 곡면은 무엇인가?,2,로프트(Loft) 곡면,쿤스(Coon's) 곡면,스윕(Sweep) 곡면,회전(Revolve) 곡면,Machine Design and Manufacturing,0.25
+탄소강에 함유되어 있는 원소 중 저온 메짐을 일으키는 것은?,4,Mn,S,Si,P,Machine Design and Manufacturing,0.25
+고속도강의 특징을 설명한 것 중 틀린 것은?,3,고속도강은 2차 경화강이다.,고온에서 경도의 감소가 적은 것이 특징이다.,마텐자이트(martensite)는 안정되어 1900℃까지 고속 절삭이 가능하다.,"주요 성분은 0.8~1.5%C, 18%W, 4%Cr, 1%V 그 외 Fe 이다.",Machine Design and Manufacturing,0.25
+순철의 자기변태점은?,2,A0,A2,A3,A4,Machine Design and Manufacturing,0.25
+선반에서 맨드릴(mandreal)을 사용하는 가장 큰 이유는?,3,구멍 가공만이 꼭 필요하기 때문,구멍이 있는 공작물에 센터작업이 필요하기 때문,구멍과 외경이 동심원이고 직각단면이 필요하기 때문,척에 공작물을 고정하기 어렵기 때문,Machine Design and Manufacturing,0.25
+CNC 선반에서 나사 절삭 사이클의 준비기능 코드는?,4,G02,G27,G72,G92,Machine Design and Manufacturing,0.25
+"레이디얼 저널베어링에 작용하는 압력 p를 구하는 식은? (단, W:베어링 하중, d:저널의 지름, ℓ:저널의 길이이다.)",2,p=(dℓ)/W,p=W/(dℓ),p=d/(Wℓ),p=W/(d2ℓ),Machine Design and Manufacturing,0.25
+화면에 CAD 모델들을 현실감 있게 나타내기 위해서 채색이나 음영 등을 주는 작업은 무엇인가?,4,Animation,Simulation,Mondelling,Rendering,Machine Design and Manufacturing,0.25
+이미 정해진 두 곡면을 필렛(fillet) 처리하여 매끄럽게 연결하는 것은?,2,리프팅,블랜딩,스키닝,리프레싱,Machine Design and Manufacturing,0.25
+CAD의 디스플레이 기능 중 줌(ZOOM) 기능을 사용시 화면에서 나타나는 현상 중 맞는 것은?,3,도형 요소의 치수가 변화한다.,도형 형상이 반대로 나타난다.,"도형 요소가 확대, 축소되어 진다.",도형 요소가 회전한다.,Machine Design and Manufacturing,0.25
+형상 모델링시 자유곡선을 나타내기 위해 가장 널리 사용되는 식의 형태는?,3,양함수식,음함수식,매개변수식,표준식,Machine Design and Manufacturing,0.25
+"셰이퍼 가공에서 행정길이가 300mm, 절삭속도가 40/min, 절삭행정의 시간과 바이트 1왕복 시간의 비 k=0.6으로 했을 때, 바이트의 매분 왕복횟수는 얼마인가?",3,40,60,80,100,Machine Design and Manufacturing,0.25
+일반적인 CAD 시스템에서 원호를 정의하는 방법을 설명한 것이다. 틀린 것은?,4,두 점과 중심점이 주어질 때,"중심점, 한 점과 현의 길이가 주어질 때","중심점, 각도, 시작점이 주어질 때",중심점과 반지름이 주어질 때,Machine Design and Manufacturing,0.25
+도형 내에 그 부분의 끊은 곳을 90° 회전하여 표시할 때 사용하는 선의 용도에 의한 명칭이 회전단면선인 것은?,3,굵은 2점쇄선,굵은 1점쇄선,가는 실선,가는 1점쇄선,Machine Design and Manufacturing,0.25
+형상기억 효과와 같이 특정한 모양의 제품을 인장 하여 탄성한도를 넘어서 소성변화를 시킨 경우에도 하중을 제거하면 원래상태로 돌아가는 성질을 무엇이라 하는가?,3,신소재 효과,형상기억 효과,초탄성 효과,초소성 효과,Machine Design and Manufacturing,0.25
+"도면 부품란에 재질이 KS 재료기호 ""GC 250""으로 표시된 재질 설명으로 맞는 것은?",3,"가단주철, 인장강도 250 N/mm2","가단주철, 인장강도 250 kgf/mm2","회주철, 인장강도 250 N/mm2","회주철, 인장강도 250 kgf/mm2",Machine Design and Manufacturing,0.25
+강철은 300℃ 부근에서 단조하는 것을 피한다. 이와 관련된 것은?,3,재결정온도,적열인성,청열취성,회복,Machine Design and Manufacturing,0.25
+"평면상의 한점 L = (2, 2)를 원점을 중심으로 30° 만큼 반시계 방향으로 회전시킬 때 변환된 좌표값은?",3,(2.866 2.5),(1.732 1),(0.732 2.732),(0.433 0.25),Machine Design and Manufacturing,0.25
+하중의 크기와 방향이 변화하면서 인장력과 압축력이 상호 연속적으로 반복되는 하중은?,3,인장하중,충격하중,교번하중,반복하중,Machine Design and Manufacturing,0.25
+"어떤 재료가 2축 방향에 σx= 300 MPa, σy= 200 MPa 의 인장응력과 τ= 200 MPa의 전단응력이 발생하고 있을 때, 최대 수직응력은 몇 MPa 인가?",3,251.6,353,456.1,706,Machine Design and Manufacturing,0.25
+"선반에서 지름 125mm, 길이 350mm인 연강봉을 초경합금바이트로 절삭하려고 한다. 회전수는? (단, 절삭속도는 150m/min 이다.)",2,약720 rpm,약382 rpm,약540 rpm,약1200 rpm,Machine Design and Manufacturing,0.25
+가늘고 긴 일감을 심압대 센터로 지지하고 깎을 때 사용하는 기구는?,3,면판,돌리개,방진구,맨드릴,Machine Design and Manufacturing,0.25
+평면을 가공할 수 없는 기계는?,4,밀링 머신,세이퍼,플레이너,센터리스 연삭기,Machine Design and Manufacturing,0.25
+절삭온도를 측정하는 방법에 해당되지 않는 것은?,3,칩의 빛깔에 의한 방법,서머컬러(thermo-color)에 의한 방법,방사능에 의한 방법,칼로리미터(calorimeter)에 의한 방법,Machine Design and Manufacturing,0.25
+"모듈5, 잇수 36인 스퍼기어를 절삭하려면 소재의 지름은 얼마가 가장 좋은가?",2,180mm,190mm,200mm,550mm,Machine Design and Manufacturing,0.25
+어미자의 1눈금이 0.5mm이며 아들자의 눈금이 12mm를 25등분한 버니어 캘리퍼스의 최소 측정값은?,3,0.01mm,0.05mm,0.02mm,0.1mm,Machine Design and Manufacturing,0.25
+브로칭머신의 절삭공구인 브로치의 구조에 해당되지 않는 것은?,4,자루부,절삭부,안내부,경사부,Machine Design and Manufacturing,0.25
+FMS 의 자동화 레벨을 결정하는 요소가 아닌 것은?,3,필요공구,처리시간,생산량,로트사이즈,Machine Design and Manufacturing,0.2557999999999999
+"두 종류 이상의 금속 특성을 복합적으로 얻을 수 있는 재료를 말하며, 일반적으로 얇은 특수한 금속을 두껍고 가격이 저렴한 모재에 야금학적으로 접합시킨 금속 복합 재료는?",4,섬유 강화 금속 복합 재료,일방향 응고 공정 합금,다공질 재료,클래드 재료,Machine Design and Manufacturing,0.2557999999999999
+"잇수 32, 피치 12.7mm, 회전수 500rpm의 스프로킷 휠에 50번 롤러 체인을 사용하였을 경우 전달동력은 약 몇 kW인가? (단, 50번 롤러 체인의 파단하중은 22.10kN, 안전율은 15이다.)",4,7.8,6.4,5.6,5.0,Machine Design and Manufacturing,0.2564
+"4m/s의 속도로 전동하고 있는 벨트의 긴장측의 장력이 1.23kN, 이완측의 장력이 0.49kN 라고 하면, 전달하고 있는 동력은 몇 kW 인가?",4,1.55,1.86,2.21,2.96,Machine Design and Manufacturing,0.2564
+복식 블록 브레이크의 설명 중 틀린 것은?,4,큰 회전력의 제동에 적당하다.,브레이크 드럼을 양쪽에서 누른다.,축에 구부림이 작용하지 않는다.,축의 역전 방지 기구로 사용된다.,Machine Design and Manufacturing,0.2581
+"수준기에서 1눈금의 길이를 2mm로 하고, 1눈금이 각고 5°(초)를 나타내는 기포관의 곡률반경은?",4,7.26m,72.6m,8.23m,82.5m,Machine Design and Manufacturing,0.2581
+이득이 80dB 이면 전압 증폭비는?,2,102,104,103,10,Machine Design and Manufacturing,0.2593
+밀링머신의 부속품 및 부속장치가 아닌 것은?,3,슬로팅 장치,분할대,맨드릴,회전 테이블,Machine Design and Manufacturing,0.26
+유도 전동기의 속도제어법이 아닌 것은?,1,계자제어,주파수제어,2차 저항 조정,극수변환,Machine Design and Manufacturing,0.2609
+실린더의 지지방식 중 로드 중심선에 대해서 직각으로 실린더의 양측으로 뻗은 원통상의 피봇으로 지탱 하는 설치형식은?,4,풋 형,클레비스 형,플랜지 형,트러니언 형,Machine Design and Manufacturing,0.2623
+"압력을 U자관 압력계로 수은주의 높이, 밀도, 중력 가속도를 측정해서 유도하여 압력의 측정값을 결정하였다. 이 와 같은 측정의 종류는?",4,직접 측정,간접 측정,비교 측정,절대 측정,Machine Design and Manufacturing,0.2632
+베리륨동(Be-Cu)의 장점 중 옳은 것은?,4,가공성이 좋지 않다.,열처리하기 좋지 않다.,경도가 아주 높다.,열전도율이 좋다.,Machine Design and Manufacturing,0.2632
+와이어 컷 방전가공기의 특징에 대해 설명한 것으로 틀린 것은?,2,담금질된 강이나 초경합금의 가공이 가능하다.,공구전극이 필요하며 전극재료는 주로 흑연을 사용한다.,가공 여유가 적고 전가공이 불필요하며 직접 형상을 얻을 수 있다.,"소비 전력이 적고, 전극의 소모가 무시된다.",Machine Design and Manufacturing,0.2632
+연삭조건에 따른 입도의 선정에서 거친 입도의 연삭숫돌 선택 기준으로 올바른 것은?,4,공구 연삭,다듬질 연삭,경도가 크고 메진 가공물의 연삭,숫돌과 가공물의 접촉 면적이 클 때의 연삭,Machine Design and Manufacturing,0.2632
+테스트 인디케이터와 비교할 때 다이얼 게이지의 특징이 아닌 것은?,3,측정범위가 넓다.,타원 측정이 용이하다.,직접 측정이 편리하다.,동적 측정이 가능하다.,Machine Design and Manufacturing,0.2642
+KS 나사 표시 방법에서 G 1/2 A로 기입된 기호의 올바른 해독은?,3,가스용 암나사로 인치 단위이다.,관용 평행 암나사로 등급이 A 급이다.,관용 평행 수나사로 등급이 A 급이다.,가스용 수나사로 인치 단위이다.,Machine Design and Manufacturing,0.2647
+부식을 방지하는 방법에서 알루미늄의 방식법에 속하지 않는 것은?,3,수산법,황산법,니켈산법,크롬산법,Machine Design and Manufacturing,0.2656
+켈밋(kelmet)은 베어링용 합금으로 많이 사용된다.성분은 구리(Cu)에 무엇을 첨가한 합금인가?,3,아연(Zn),주석(Sn),납(Pb),안티몬(Sb),Machine Design and Manufacturing,0.2667
+"초경합금과 같은 경질 재료, 숫돌마모가 큰 특수강, 열에 민감한 재료를 가공하는데 적합한 가공방법은?",2,전해연마,전해연삭,호닝,슈퍼피니싱,Machine Design and Manufacturing,0.2667
+소품종 대량 생산에 적합한 설비배치의 형태는?,2,공정별 배치,라인별 배치,기능별 배치,혼합형 배치,Machine Design and Manufacturing,0.2667
+직류 전동기가 저속으로 회전할 때 그 원인에 해당하지 않것은?,2,축받이 불량,단상 운전,코일의 단락,과부하,Machine Design and Manufacturing,0.2667
+호빙 머신의 이송에 대한 설명 중 맞는 것은?,3,테이블 1회전 할 동안의 호브의 회전수,호빙 머신의 효율,기어 소재의 1회전에 대하여 호브의 피드,호브 1회전에 대하여 기어의 전진 잇수,Machine Design and Manufacturing,0.2667
+앵귤러핀과 슬라이드 코어 구멍과의 틈새는 어느 정도가 적당한가?,4,0.1∼0.2 mm,0.2∼0.3 mm,0.3∼0.4 mm,0.5∼1.0 mm,Machine Design and Manufacturing,0.2667
+방향제어 밸브의 조작방식 중 기계조작 방식에 속하지 않는 것은?,2,플런저 방식,직접 파일럿 방식,롤러 방식,스프링 방식,Machine Design and Manufacturing,0.2667
+"설비를 제품별, 공정별 또는 지역별로 나누어 계획과 관리를 담당하는 설비관리의 조직 형태는?",4,기능별 조직,전문기술별 조직,매트릭스(Matrix) 조직,대상별 조직,Machine Design and Manufacturing,0.2667
+프레스의 종류 중 기계식 프레스에 해당하지 않는 것은?,3,크랭크 프레스,너클 프레스,공압 프레스,마찰 프레스,Machine Design and Manufacturing,0.2667
+유압 선형 액추에이터 설명으로 틀린 것은?,4,비압축성 유체를 사용한다.,정밀한 속도제어가 가능하다.,온도변화에 따라 유체의 점도 변화가 심하다.,빠른 속도가 필요한 곳에 유용하다.,Machine Design and Manufacturing,0.2667
+초소성 재료에 대한 설명으로 틀린 것은?,2,"미세결정입자 초소성과, 변태 초소성으로 나누어진다.",고온에서의 높은 강고가 특징이다.,초소성 재료로서 Al-Zn 합금은 플라스틱 성형용 금형을 제작하는데 실용화되고 있다.,결정입자가 보통 아주 미세하다.,Machine Design and Manufacturing,0.2667
+하중 3ton이 걸리는 압축코일 스프링의 변형량이 10㎜일때 스프링 상수는 몇 ㎏f/㎜인가?,1,300,1/300,100,1/100,Machine Design and Manufacturing,0.2667
+그리스 윤활에 비하여 윤활유 윤활의 장점은?,4,급유 간격이 길다.,누설이 적다.,밀봉효과가 크다.,냉각효과가 크다.,Machine Design and Manufacturing,0.2667
+CNC선반에서 900rpm으로 회전하는 스핀들에 3회전 동안 이송정지를 하고자 한다. 올바른 지령으로만 짝지어진 것은?,1,G04 X0.2; G04 U0.2; G04 P200;,G04 X1.5; G04 U1.5; G04 P1500;,G04 X2.0; G04 U2.0; G04 P2000;,G04 X2.7; G04 U2.7; G04 P2700;,Machine Design and Manufacturing,0.2683
+미끄럼 밀봉이 필요 없으며 단지 재료가 늘어나는 것에 따라 생기는 마찰이 있을 뿐인 실린더로 클램핑 실린더라고도 하는 것은?,2,탠덤 실린더,격판 실린더,피스톤 실린더,벨로즈 실린더,Machine Design and Manufacturing,0.2692
+"220V, 2 병렬 Δ결선 전동기를 직렬 Y 결선으로 바꿀 때 전동기에 인가하여야 할 전원 전압은?",4,380,440,620,760,Machine Design and Manufacturing,0.2692
+"dB 단위로 음압레벨(Lp)의 정의로 맞는 것은? (단, P는 측정값, Po는 최저 가청압력)",1,Lp = 20 log (P/Po) dB (Po = 20μ Pa),Lp = 10 log (P/Po) dB (Po = 20μ Pa),Lp = 20 log (P/Po) dB (Po = 2× 10-6 N/m2),Lp = 10 log (P/Po) dB (Po = 2× 10-6 N/m2),Machine Design and Manufacturing,0.2692
+"머시닝센터에서 모서리 치수를 정확히 가공하거나 드릴작업, 카운터 싱킹 등에서 목표점에 도달한 후 진원도 향상 및 깨끗한 표면을 얻기 위하여 사용하는 기능은?",4,G33,G24,G10,G04,Machine Design and Manufacturing,0.2692
+다응 급유법 중 가장 이상적인 급유법은 어느 것인가?,3,유욕 급유법,적하 급유법,강제순환 급유법,수 급유법,Machine Design and Manufacturing,0.2692
+만능 밀링에서 127개의 이를 가진 기어를 절삭하려고 할 때 가장 적당한 분할방식은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),4,차동 분할법,직접 분할법,단식 분할법,복식 분할법,Machine Design and Manufacturing,0.2703
+3상 유도전동기의 회전속도 제어와 관계없는 요소는?,1,전압,극수,슬립,주파수,Machine Design and Manufacturing,0.2712
+그래픽 장치 중 하나인 래스터(raster) 그래픽 장치에 관한 설명으로 틀린 것은?,3,래스터 그래픽 장치는 TV 기술의 발달과 함께 1970년대 중반에 출연하였다.,디스플레이 프로세서가 응용 프로그램으로부터 그래픽 명령을 받아 그것을 래스터 이미지로 변환한 다음 프레임 버퍼 메모리에 저장한다.,그림의 복잡성에 따라 리프레쉬에 소요되는 시간이 가변적이다.,화소(pixels)의 크기가 해상도를 결정한다.,Machine Design and Manufacturing,0.2727
+"열간가공이 쉽고 다듬질 표면이 아름답고, 특히 용접성이 좋고 고온강도가 큰 장점이 있는 합금강은?",3,Ni-Cr강,Mn-Mo강,Cr-Mo강,W-Cr강,Machine Design and Manufacturing,0.2727
+"3,140Nㆍ㎜의 비틀림 모멘트를 받는 실체 축의 지름은 약 몇 ㎜ 인가?(단, 허용전단응력 Ta=2 Nㆍ/mm2이다.)",4,10㎜,12.5㎜,16.7㎜,20㎜,Machine Design and Manufacturing,0.2727
+"코터이음에서 2000 ㎏f 의 인장력이 작용한다. 이 때 코터의 폭이 90 mm, 두께가 60 mm 인 경우 코터가 받는 전단응력은 얼마인가?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.)",2,0.185 ㎏f/cm2,18.5 ㎏f/cm2,29.5 ㎏f/cm2,37.0 ㎏f/cm2,Machine Design and Manufacturing,0.2727
+대기압을 0 으로 하여 측정한 압력은 ?,4,표준압력,양정압력,절대압력,게이지압력,Machine Design and Manufacturing,0.2727
+슬리브베어링의 진동 원인으로 틀린 것은?,3,축과 틈새의 과대,기계적 헐거움,전동체의 결함,윤활유 관계의 문제,Machine Design and Manufacturing,0.2727
+CNC 선반에서 1초 동안 일시 정지(dwell) 명령으로 틀린 것은?,2,G04 X1.0 ;,G04 W1.0 ;,G04 U1.0 ;,G04 P1000 ;,Machine Design and Manufacturing,0.2727
+재해 원인별 분류에서 인적원인(불안전한 행동)에 의한 것으로 옳은 것은?,3,불충분한지지 또는 방호,작업장소의 밀집,가동 중인 장치를 정비,결함이 있는 공구 및 장치,Machine Design and Manufacturing,0.2727
+센터리스 연삭기에서 조정 숫돌의 주된 역할은?,3,공작물의 연삭,공작물의 지지,공작물의 이송,연삭숫돌의 회전,Machine Design and Manufacturing,0.2727
+"KS 재료 기호가 ""SF 340A"" 인 것은?",3,기계구조용 주강,일반구조용 압연 강재,탄소강 단강품,기계구조용 탄소 강판,Machine Design and Manufacturing,0.2727
+CAD/CAM 시스템에서 구성된 자료를 서로 다른 시스템에서 공유하기 위해서 사용하는 표준파일 시스템으로 섹션 (section)과 엔티티(entity)로 구분된 표준파일은?,2,PHIGS,DXF,IGES,GKS,Machine Design and Manufacturing,0.2727
+"황삭 엔드밀의 절삭속도는 3.14m/min, 회전당 이송거리를 0.3㎜/rev로 선택하면, 주축 회전수 N(rpm)과 이송속도 F(㎜/min)는 각각 얼마인가?(단, 엔드밀 직경은 20㎜이고 π=3.14이다.)",2,"500, 180","500, 150","550, 180","550, 150",Machine Design and Manufacturing,0.2727
+"높은 정밀도를 요구하는 가공물, 각종 지그, 정밀기계의 구멍 가공 등에 사용하는 보링머신으로, 온도 변화에 따른 영향을 받지 않도록 항온 항습실에 설체해야 하는 것은?",4,코어보링 머신,수직보링머신,수평보링머신,지그보링머신,Machine Design and Manufacturing,0.2727
+펌프를 중심으로 하여 흡입 액면으로부터 송출 액면까지 수직 높이를 무엇이라 하는가?,2,전양정,실양정,흡입양정,토출양정,Machine Design and Manufacturing,0.2727
+"피크노미터를 이용하여 밀도 측정시 20[oC]에서 수은의체적이 25[㎝3],질량이 1[㎏] 일 때의 밀도는 몇[g/㎝3] 인가?",2,30,40,50,60,Machine Design and Manufacturing,0.2727
+핸드탭(Tap)작업의 가공율을 설명한 것이다. 맞는 것은?,2,"1번탭 80% , 2번탭 10% , 3번탭 10%","1번탭 55% , 2번탭 25% , 3번탭 20%","1번탭 60% , 2번탭 30% , 3번탭 10%","1번탭 40% , 2번탭 30% , 3번탭 30%",Machine Design and Manufacturing,0.2727
+프레스를 선택할 때 고려하여야 할 사항과 가장 거리가 먼 것은?,3,생산량 정도,"기계의 모양, 품질",공구의 재질,소재의 공급 및 스크랩 처리,Machine Design and Manufacturing,0.2727
+합금의 일반적 성질을 설명한 것 중 틀린 것은 어느 것인가?,3,순금속보다 용융점이 낮아진다.,강도와 경도가 증가다.,전기전도율과 열전도율이 증가한다.,연신율과 전연성이 감소한다.,Machine Design and Manufacturing,0.2727
+"양끝을 고정한 단면적 2cm2인 사각봉이 온도 -10℃에서 가열되어 50℃가 되었을 때, 재료에 발생하는 열응력은?(단 사각봉의 탄성계수는 21 GPa, 선팽창게수는 12×10-6/℃이다.)",1,15.1 MPa,25.2 MPa,29.9 MPa,35.8 MPa,Machine Design and Manufacturing,0.2727
+자동 하중 브레이크의 종류가 아닌 것은?,3,나사 브레이크,웜 브레이크,블록 브레이크,캠 브레이크,Machine Design and Manufacturing,0.2727
+아공석강 영역에서 탄소강은 탄소량의 증가에 따라 기계적 성질이 변한다. 이에 대한 설명으로 옳지 않은 것은?,3,경도가 증가한다.,항복점이 증가한다.,충격치가 증가한다.,인장강도가 증가한다.,Machine Design and Manufacturing,0.2727
+회전기계 진동에서 고주파의 발생 원인으로 적합한 것은?,4,오일 휠,미스얼라인먼트,언밸런스,"유체음, 진동",Machine Design and Manufacturing,0.2727
+프레스금형에서 펀치와 다이의 위치를 정확히 유지하여 금형의 정도와 생산성을 향상시키며 수명을 연장시키는 금형 부품은?,2,다이 홀더,다이 세트,펀치 플레이트,배킹 플레이트,Machine Design and Manufacturing,0.2727
+조절계로부터의 신호와 구동축 위치 고나계를 외부의힘에 대하여 항상 정확하게 유지시키고 조작부가 제어 루프 속에서 충분한 기능을 발휘할 수 있도록 하기 위해 사용하는 것은?,3,구동부,제어밸브,포지셔너,변환기,Machine Design and Manufacturing,0.2759
+"Ni에 Cr 13-21%와 Fe 6.5%를 함유한 우수한 내열, 내식성을 가진 합금은?",3,게이지용강,스테인리스강,인코넬,멜린바,Machine Design and Manufacturing,0.2759
+"전단력 1000kgf가 작용하는 볼트를 설계시 허용 볼트 최소 호칭지름은?(단, 미터 보통 나사로 허용 전단응력 6kgf/mm2 이다.)(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.)",3,M10,M12,M16,M20,Machine Design and Manufacturing,0.2778
+프레스금형에서 사용되는 가이드 포스트(guide post)에 대한 설명 중 틀린 것은?,4,가이드 포스트는 정밀하게 가공된 핀의 일종이다.,가이드 포스트는 다이 홀더에 정확히 억지끼워맞춤 되어야 한다.,가이드 포스트의 재질은 일반적으로 STC4를 사용한다.,가이드 포스트의 표면 경도는 HRC40이하 이어야 한다.,Machine Design and Manufacturing,0.2778
+"90rpm으로 회전하고 980N의 하중을 받는 레이디얼 볼베어링의 기본 동정격하중은 약 몇 kN인가? (단, 하중계수는 1로 하고, 수명은 5000시간으로 한다.)",1,2.94,4.91,8.83,15.70,Machine Design and Manufacturing,0.2778
+"지름이 20mm인 축이 114rpm으로 회전할 때 최대 약 몇 kW의 동력을 전달할 수 있는가? (단, 축 재료의 허용전단응력은 39.2MPa이다.)",1,0.74,1.43,1.98,2.35,Machine Design and Manufacturing,0.2778
+송풍기의 냉각방법에 의한 분류가 아닌 것은?,3,공기냉각형,재킷냉각형,풍로흡입형,중간냉각다단형,Machine Design and Manufacturing,0.2778
+1일 가동시간은 8시간이고 월 가동 일수는 20일인 경우 가동 중의 설비고장과 작업고장에 의한 설비 휴지시간이 1개월에 10시간이라면 실제 가동률은?,3,69.7%,83.8%,93.8%,98.5%,Machine Design and Manufacturing,0.2778
+시퀀스 제어 회로 작성에 있어 간섭제거를 위해 사용하는 방법이 아닌 것은?,1,유도형 센서 사용,공압 타이머 사용,방향성 리밋 스위치 사용,공압 제어체인(예:캐스케이드방식)을 구성,Machine Design and Manufacturing,0.2778
+"테이퍼의 양끝 지름 중 큰 지름이 23.826mm, 작은 지름이 19.760mm, 테이퍼 부분의 길이가 81mm, 공작물 전체의 길이는 150mm이다. 심압대의 편위량은 약 몇 mm인가?",3,1.098,2.196,3.765,7.530,Machine Design and Manufacturing,0.2778
+"연삭작업에서 연삭력 P = 15kg, 절삭속도 V = 35m/sec 일때 연삭동력은 얼마인가? (단, 기계효율은 100%로 가정한다.)",4,0.12 PS,3 PS,0.63 PS,7 PS,Machine Design and Manufacturing,0.2791
+배럴가공(barrel finishing)을 하면 여러가지 결과를 얻을 수 있다. 여기에 해당되지 않는 것은?,4,연삭의 효과,스케일 제거,버니싱(burnishing) 작용,도금의 효과,Machine Design and Manufacturing,0.2796
+관(튜브)의 끝을 원뿔형으로 넓힌 구조를 가진 관 이음쇠는?,2,스위블 이음쇠,플레어드 관 이음쇠,셀프 실 이음쇠,플랜지 관 이음쇠,Machine Design and Manufacturing,0.28
+탄소강의 성질에 관한 설명으로 옳지 않은 것은?,2,탄소량이 많아지면 인성과 충격치는 감소한다.,탄소량이 증가할수록 내식성은 증가한다.,탄소강의 비중은 탄소량의 증가에 따라 감소한다.,"비열, 항자력은 탄소량의 증가에 따라 증가한다.",Machine Design and Manufacturing,0.28
+브로칭 머신에 사용하는 절삭공구 브로치의 피치 간격을 일정하게 하지 않는 이유로 옳은 것은?,4,난삭재 가공,칩 처리용이,가공시간 단축,떨림 발생 방지,Machine Design and Manufacturing,0.28
+전류계의 측정 범위를 확대하기 위하여 사용하는 것은?,2,배율기,분류기,검전기,전류기,Machine Design and Manufacturing,0.28
+0~150V전압계가 최대눈금의 1%확도를 갖는다. 이 계기를 상요해서 측정한 전압이 60V일 때 제한 오차를 백분율로 계산하면 얼마일까?,4,1.0%,1.5%,2.0%,2.5%,Machine Design and Manufacturing,0.28
+"치직각 방식에서 모듈이 m=4, 잇수 z=72인 헬리컬 기어의 피치원 지름은 약 몇 ㎜인가?(단. 비틀림 각은 30°이다.)",3,132,233,333,432,Machine Design and Manufacturing,0.2813
+어떤 제어시스템에서 0에서 5V를 4개의 2진 신호만을 사용하여 간격을 나눌 때 표시되는 최소값은?,1,0.313V,1.250V,0.625V,0.039V,Machine Design and Manufacturing,0.2821
+"기기, 장치의 특성, 작동 등을 기호로 표시할 때 사용하는 기본적인 선 또는 도형을 나타내는 용어는?",2,기호 요소,기능 요소,조작 요소,가변 요소,Machine Design and Manufacturing,0.2821
+자기 인덕턴스가 0.5H인 코일에 전류 10A를 흘릴 때 축저되는 에너지는 몇 J 인가?,2,50,25,5,2.5,Machine Design and Manufacturing,0.2824
+금속을 냉간 가공할 때 가공도가 증가함에 따라 그 성질은 어떻게 변하는가?,4,인성증가,내부응력감소,연신율증가,경도증가,Machine Design and Manufacturing,0.2857
+기계를 운전하기 전에 미리해야 할 일이 아닌 것은?,3,기계점검,기계 주위정리,치수검사,급유,Machine Design and Manufacturing,0.2857
+스테인리스 강을 금속 조직학상으로 분류한 것이 아닌 것은?,2,오스테나이트계,시멘타이트계,마텐자이트계,페라이트계,Machine Design and Manufacturing,0.2857
+변환 행렬(Matrix)을 사용할 필요가 없는 작업은?,2,Scaling,Erasing,Rotation,reflection,Machine Design and Manufacturing,0.2857
+"100Nㆍm의 굽힘 모멘트를 받는 중실축의 지름은 약 몇 mm 이상이어야 하는가? (단, 중실축의 허용굽힘응력은 98MPa이다.)",3,12mm,18mm,22mm,32mm,Machine Design and Manufacturing,0.2857
+NURBS곡선에 대한 설명으로 틀린 것은?,4,"원, 타원, 포물선, 쌍곡선등 원추 곡선을 정확하게 나타낼 수 있다.",일반적인 B-Spline곡선을 포함한다.,3차 NURBS곡선은 특정 노트구간에서 4개의 조정점 외에 4개의 가중값(weights value)과 노트(knot) 벡터의 정보가 이용된다.,모든 조정점을 지나는 부드러운 곡선이다.,Machine Design and Manufacturing,0.2857
+"바깥지름 d=104mm, 잇수 z=50인 표준 스퍼 기어의 모듈은 얼마인가?",2,5,2,3,4,Machine Design and Manufacturing,0.2857
+CAD 프로그램에서 도형작성에 대한 설명 중 틀린 것은?,3,점은 절대 좌표 값을 입력하여 구성할 수 있다.,직선은 커서를 이용하여 임의의 두 점을 지정하여 구성할 수 있다.,곡선(curve)은 원호와 직선의 조합으로 이루어진 도형요소이다.,베지어곡선은 곡선을 구성하기 위해 제공된 n개의 제어점들 중에서 시작점과 끝점을 반드시 통과한다.,Machine Design and Manufacturing,0.2857
+밀링머신에서 테이블의 뒤틈(back lash) 제거장치는 어디에 설치하는가?,2,변속기어,테이블 이송나사,테이블 이송핸들,자동 이송레버,Machine Design and Manufacturing,0.2857
+진원도를 측저하는 방법과 관계 없는 것은?,2,직경법,투영법,3점법,반경법,Machine Design and Manufacturing,0.2857
+진동제어를 위한 댐핑 재료에 대한 내용으로 옳지 않은 것은?,2,구조물에 완전히 부착해야한다.,점성탄성인 재료는 사용하지 않는다.,열을 잘 발산해야 한다.,구조물이 진동할 때 현저한 변형을 받을 수 있는 곳에 설치한다.,Machine Design and Manufacturing,0.2857
+램이 상하로 직선운동을 하며 급속귀한 장치가 있는 공작기계는?,2,세이퍼,슬로퍼,브로치,플레이너,Machine Design and Manufacturing,0.2857
+원심형 팬 (fan) 을 냉난방용으로 사용할 경우 필터의 설치 위치는?,2,배기측,홉기측,토출측,덕트와 연결부촉,Machine Design and Manufacturing,0.2857
+"지름 20mm, 피치 2mm인 2줄 나사를 10회전 시켰더니 완전하게 체결되었다. 이 나사의 리드(lead)응 몇 mm인가?",3,20,40,4,2,Machine Design and Manufacturing,0.2857
+밀링머신에 사용되는 부속장치가 아닌 것은?,3,아버,분할대,면판,슬로팅장치,Machine Design and Manufacturing,0.2857
+"지름 d=5 cm의 축을 7° 비틀림하는 경우 최대전단응력이 95 MPa라 하면 이 축의 길이 L은 몇 cm 인가? (단, 이 축의 전단탄성계수 G = 85 GPa 이다.)",2,237,273,287,294,Machine Design and Manufacturing,0.2857
+실린더 동작 중 속도를 변화시키거나 부하가 큰 경우에 정지나 방향전환 시 충격을 방지하는 경우 사용되는 밸브는?,4,엑셀레이터 밸브,급배기 밸브,압력 보상형 유량제어밸브,디셀러레이션 밸브,Machine Design and Manufacturing,0.2857
+오토콜리메이터의 주요 부속품과 주된 용도가 올바르게 연결된 것은?,2,평면 반사경 : 진원도 측정,각도 게이지 : 회전 테이블 교정,펜타 프리즘 : 평행도 측정,다각 프리즘 : 평행도 측정,Machine Design and Manufacturing,0.2857
+탄소공구강(STC3)의 금속조직학적 분류로 옳은 것은?,3,공석강,아공석강,과공석강,공정주철,Machine Design and Manufacturing,0.2857
+"풀리의 지름 200mm, 회전수 1600rpm으로 4kW의 동력을 전달할 때 벨트의 유효 장력은 약 몇 N 인가? (단, 원심력과 마찰은 무시한다.)",3,24,93,239,527,Machine Design and Manufacturing,0.2857
+"직경이 6Cm이고 길이 1m당 1° 의 비틀림각이 생기는 축이 매분 300회 회전할 때의 전달동력은 몇 KM인가? (단, 전단탄성계수 G=80 Gpa이다.)",4,30.2,38.4,46.5,55.8,Machine Design and Manufacturing,0.2857
+트위스트 드릴은 절삭날의 각도가 중심에 가까울수록 절삭 작용이 나빠진다. 이것을 보충하기 위하여 어떻게 하는가?,3,드레싱,투루잉,디이닝,글레이징,Machine Design and Manufacturing,0.2857
+"CNC선반에서 절삭동력이 1.8kW이고, 주축의 회전수가 800rpm일 때 ø60mm가공시 주분력은 약 몇 N인가?",1,717,736,756,775,Machine Design and Manufacturing,0.2857
+밀링에서 상향절삭과 하향절삭의 비교 설명으로 맞는 것은?,2,상향절삭은 절삭력이 상향으로 작용하여 가공물 고정이 유리하다.,상향절삭은 기계의 강성이 낮아도 무방하다.,하향절삭은 상향절삭에 비하여 공구 마모가 빠르다.,하향절삭은 백래시(back lash)를 제거할 필요가 없다.,Machine Design and Manufacturing,0.2857
+금속의 동소변태를 설명한 것 중 옳은 것은?,4,합금을 형성하면서 그 성질이 변화되는 현상이다.,자기의 강도가 변화되는 현상이다.,크리프의 한도와 이슬점이 변화되는 현상이다.,결정격자의 형식이 바뀌는 현상이다.,Machine Design and Manufacturing,0.2857
+소성가공이 아닌 것은?,3,단조,인발,주조,압연,Machine Design and Manufacturing,0.2857
+"밀링머신에서 커터 지름이 120mm, 한 날 당 이송이 0.1mm, 커너 날수가 4날, 회전수가 900rpm 일 때, 절삭속도는 약 몇 m/min 인가?",4,33.9 m/min,113 m/min,214 m/min,339 m/min,Machine Design and Manufacturing,0.2857
+자동화 지그를 계획하기 전에 고려해야 할 사항으로 틀린 것은?,3,가공품의 크기,생산수량과 향후의 동향,표준부품의 내마모성,가공 전후 공정의 관계,Machine Design and Manufacturing,0.2857
+"재질이 W, Cr, V, Co 등을 주성부으로 하는 바이트는?",2,합금공구강 바이트,고속도강 바이트,초경합금 바이트,세라믹 바이트,Machine Design and Manufacturing,0.2857
+"밀링 커터의 날수 12개, 1날당 이송량 0.15㎜, 회전수가 780rpm일 때 이송량은?",4,약 800㎜/min,약 1000㎜/min,약 1200㎜/min,약 1400㎜/min,Machine Design and Manufacturing,0.2857
+"절삭속도 90m/min, 커터의 날 수 10개, 밀링커터의 지름을 100mm, 1개의 날당 이송을 0.05mm라 할 때 테이블의 이송속도는 약 몇 mm/min인가? (※ “약 mm/min""→""약 몇 mm/min"")",2,133.3,143.3,153.7,163.7,Machine Design and Manufacturing,0.2857
+PVC(폴리염화비닐)의 특성을 설명한 것 중 옳지 않은 것은?,4,PVC는 비중 1.4의 비결정성이다.,유리질의 폴리머로 투명성이 좋다.,난연성으로 전기 절연성이 우수하다.,열 안정성이 극히 좋다.,Machine Design and Manufacturing,0.2857
+"특수강에 함유되는 원소 중 내식, 내마모성을 증가시키는 원소는?",4,Ni,Mo,Si,Cr,Machine Design and Manufacturing,0.2857
+기계도면에서 ø50H7과 ø50F7의 공차는 어떻게 다른가?,3,알 수 없다,동일하다,ø50F7이 더 크다,ø50H7이 더 크다,Machine Design and Manufacturing,0.2857
+3차원 동차좌표계에서 변환 행렬(matrix)의 크기는 얼마로 해야 일반성이 있는가?,3,(2x2),(3x3),(4x4),(6x6),Machine Design and Manufacturing,0.2857
+보조기억장치에 대한 설명으로 틀린 것은?,4,보조기억장치의 순차처리법은 수록되어 있는 자료를 차례로 읽고 쓸 때 사용된다.,"보조기억장치는 처리하고자 하는 데이터량이 주기억장치 용량을 초과하거나, 기억장치에서 필요로 할 때 데이터를 호출하여 처리할 수 있도록 도와주는 장치이다.",보조기억장치의 직접처리법은 순차처리 방식보다 자료를 처리하는 시간이 훨씬 빠르나 가격이 고가이다.,"보조기억장치에는 CD-ROM, 하드디스크, 디지타이저가 해당한다.",Machine Design and Manufacturing,0.2857
+냉간가공의 장점은 무엇인가?,3,작업능률이 양호하다.,변형량이 매우 커서 경제적이다.,제품 표면이 아름답다.,단시간내 완성이 가능하다.,Machine Design and Manufacturing,0.2857
+폄프는 기동하지만 물이 안나오는 원인으로 맞는 것은?,2,공기가 흡입되고 있다.,마중물을 하지 않았다.,웨어링이 마모되어 있다.,토출양정이 높다.,Machine Design and Manufacturing,0.2857
+컴퓨터의 통신속도를 나타내는 단위는?,4,BPI,BPT,MIPS,BPS,Machine Design and Manufacturing,0.2857
+원통용 소재 등의 밑부분에 심(seam)을 하는데 사용하는 판금용 기계는 무엇인가?,2,프레스 브레이크,세팅 다운 머신,터닝 머신,탄젠트 벤더,Machine Design and Manufacturing,0.2857
+와이어프레임(wireframe) 모델이 솔리드(solid) 모델링 방법으로 사용되기 어려운 이유를 나타내는 특성은?,1,모호성(ambiguity),경계성(bounded),등질 3차원성(homogeneously three dimensional),유한성(finite),Machine Design and Manufacturing,0.2857
+어떤 코일에 흐르는 전류가 0.1초 사이에 50A에서 10A로 변할 때 40V의 유도 기전력이 발생한다면 이 때 코일의 자기 인덕턴스는 몇 mH인가?,1,100,200,300,400,Machine Design and Manufacturing,0.2866
+압축공기의 건조에 사용되는 흡착식 건조기에 대한 설명 중 올바른 것은?,4,외부에너지 공급이 필요하지 않다.,"사용되는 건조제는 염화리튬 수용액, 폴리에틸렌 등이다.",일시적으로 사용한다.,물리적 방식을 사용하여 반영구적으로 사용할 수 있다.,Machine Design and Manufacturing,0.2885
+신뢰성의 평가척도에 관한 설명으로 잘못된 것은?,2,평균고장간격이란 전 고장수에 대한 전 사용시간의 비이다.,평균고장시간이란 사용시간에 대한 평균고장시간의 비율이다.,평균고장간격은 고장률의 역수이다.,고장률은 일정기간 중 발생하는 단위시간당 고장횟수이다.,Machine Design and Manufacturing,0.2889
+Al-Cr-Mo강을 가스질화 할 때 처리온도로 적당한 것은?,2,370~450℃,500~550℃,650~700℃,850~900℃,Machine Design and Manufacturing,0.2903
+기계제도에서 스프링의 도시 방법에 관한 설명으로 틀린 것은?,3,스프링의 종류 및 모양만을 간략도로 나타내는 경우에는 스프링 재료의 중심선만을 굵은 실선으로 도시한다.,"조립도, 설명도 등에서 코일 스프링을 도시하는 경우에는 그 단면만을 나타내어도 좋다.",코일 스프링에서 양 끝을 제외한 동일 모양 부분의 일부를 생략하는 경우에는 생략하는 부분의 선지름의 중심선을 굵은 2점 쇄선으로 나타낸다.,"코일 스프링, 벌류트 스프링, 스파이럴 스프링 및 접시 스프링은 일반적으로 무하중 상태에서 그리며, 겹판 스프링은 일반적으로 스프링 판이 수평인 상태에서 그린다.",Machine Design and Manufacturing,0.2903
+"치약, 화장품 용기등 연한 금속의 짧고 얇은 관을 제작하는데 많이 이용되는 소성가공 방법은 무엇인가?",2,빌렛 압출법(billet extrusion process),충격 압출법(impact extrusion),관재 인발(tube drawing),디프 드로잉(deep drawing),Machine Design and Manufacturing,0.2917
+나사이음 또는 용접 등 방법으로 부착하고 관경이 비교적 클 경우 내압이 높을 경우 사용되는 관 이음쇠는?,3,주철관 이음쇠,유니온 이음쇠,플랜지 이음쇠,신축 이음쇠,Machine Design and Manufacturing,0.2917
+다품종 소량생산에 적합한 설비배치의 형태는?,4,제품별 배치,제품 고정형 배치,라인별 배치,기능별 배치,Machine Design and Manufacturing,0.2917
+"측정기를 측정방법에 따라 분류할 때 미니미터,옵티미터,공기 마이크로미터는 어디에 포함되는가?",2,직접측정,비교측정,한계게이지 측정,계량측정,Machine Design and Manufacturing,0.2917
+나사부의 녹에 의한 고착을 방지하기 위한 방법으로 잘못 된 것은?,3,산화연분을 기계유로 반죽하여 나사부에 칠한다.,나사부에 유성페인트를 칠한다.,나사부에 개스킷을 사용한다.,스테인리스강 등의 내식성 금속을 사용한다.,Machine Design and Manufacturing,0.2917
+전력용 트랜지스터의 종류가 아닌 것은?,1,RCT,BJT,MOSFET,IGBT,Machine Design and Manufacturing,0.2930999999999999
+로드리스 실린더에 관한 설명으로 틀린 것은?,2,설치공간을 줄일 수 있다.,빠른 속도를 얻을 수 있다.,임의의 위치에서 정지시키기가 유리하다.,양방항의 운동에서 균일한 힘과 속도를 얻기가 유리하다.,Machine Design and Manufacturing,0.2932
+회전기계의 간이진단에서 설비의 열화와 관련해서는 속도에 대한 판정기준을 많이 활용하고 있는 이유에 대한 내용으로 틀린 것은?,4,진동에 의한 설비의 피로는 진동속도에 비례한다.,진동에 의한 발생하는 에너지는 진동속도의 제곱에 비례한다.,회전수에 관계없이 기준값을 설정할 수 있다.,인체의 강도는 일반적으로 진동속도에 반비례 한다.,Machine Design and Manufacturing,0.2935
+CNC 선반가공용 프로그램에서 G96 S100 M03 ; 일 때 S100의 의미는?,2,회전당 이송량,원주속도 100 m/min으로 일정제어,분당 이송량,회전수 100 rpm으로 일정제어,Machine Design and Manufacturing,0.2941
+삼선법에 의해 미터나사의 유호지름 측정시 피치가 1mm인 나사에 사용할 삼선의 지름은 약 몇 mm인가?,1,0.5773,0.8660,1.0000,1.7320,Machine Design and Manufacturing,0.2941
+주형을 만들때 상형과 하형의 밀착 부족으로 인하여 발생하는 결함은?,3,기공(blow hole),수축공(shrinkage cavity),핀(fin),편석(segregation),Machine Design and Manufacturing,0.2941
+체결용 나사가 자립상태(自立狀態)를 유지하고 있을 경우 나사의 효율은 몇 % 이하인가?,1,50,60,70,80,Machine Design and Manufacturing,0.2941
+"두 개의 축이 평행하고, 그 축의 중심선의 위치가 약간 어긋났을 경우, 각속도는 변화 없이 회전동력을 전달시키려고 할 때 사용되는 가장 적합한 커플링은?",2,플랜지 커플링(flange coupling),올덤 커플링(oldham coupling),머프 커플링(muft coupling),유니버설 커플링(universal coupling),Machine Design and Manufacturing,0.2941
+균일한 평등 자장에 임의의 각을 이루며 진입한 전자는 어떤 운동을 하는가?,2,직선운동,나선운동,타원운동,포물선운동,Machine Design and Manufacturing,0.2941
+10kN의 축하중이 작용하는 볼트에서 볼트 재료의 허용인장응력이 60MPa 일 때 축하중을 견디기 위한 볼트의 최소 골지름은 약 몇 mm 인가?,1,14.6,18.4,22.5,25.7,Machine Design and Manufacturing,0.2941
+"치수허용한계의 기준이 되는 치수로 도면상에는 구멍, 축 등의 호칭치수와 같은 것은?",4,치수공차,치수허용차,허용한계치수,기준치수,Machine Design and Manufacturing,0.2941
+"ø30mm 드릴로 연강판에 90mm 깊이의 구멍을 뚫을려고 한다. 길이방향 이송을 0.1 mm/rev으로 하고 드릴 끝 원추 각도를 118° 로 한다면 소요되는 시간은? (단, 절삭속도는 20m/min으로 한다.)",4,2분 23초,3분 13초,3분 33초,4분 40초,Machine Design and Manufacturing,0.2955
+"유압 베인 모터의 1회전당 유량이 50㏄일 때, 공급 압력 8 MPa, 유량 30ℓ/min으로 할 경우 최대 회전 수(rpm)는?",4,700,650,625,600,Machine Design and Manufacturing,0.2963
+일반적인 합금의 성질을 설명한 것으로 틀린 것은?,3,전기 전도율이나 열전도율이 낮아진다.,강도와 경도가 커지고 전성과 연성이 작아진다.,용해점이 높아진다.,담금질 효과가 크다.,Machine Design and Manufacturing,0.2963
+"설비가 열화하여 성능 저하를 초래하는 상태를 조기 조치 하기 위해 행해지는 급유,부품교환,청소 등이 이루어지는 정비는?",3,사후정비,개량정비,일상정비,보전예방,Machine Design and Manufacturing,0.2963
+CNC선반에서 지름을 50mm로 가공한 후 측정한 결과 지름이 49.98mm였다. 기존의 보정값이 0.004라면 수정해야 할 보정값은 얼마인가?,3,0.02,0.04,0.024,0.048,Machine Design and Manufacturing,0.2963
+유압 펌프에서 강제식 펌프의 장점이 아닌 것은?,1,비 강제식에 비해 크기가 대형이며 체적효율이 좋다..,높은 압력(70 bar 이상)을 낼 수 있다.,작동 조건의 변화에도 효율의 변화가 적다.,압력 및 유량의 변화에도 원활하게 작동한다.,Machine Design and Manufacturing,0.2963
+와이어 컷팅 방전 가공에 대한 설명 중 옳지 않은 것은?,4,"와이어는 보통 동선, 황동선, 텅스텐선(직경 0.02 ~ 0.25 mm)을 사용한다.",가공 면의 거칠기는 10㎛ 전후로 가공 다듬질이 불필요하다.,간단한 자동 프로그래밍으로 누구든지 쉽게 프로그램을 작성할 수 있다.,가공 여유가 크다.,Machine Design and Manufacturing,0.3
+3차원 CAD 데이터를 이용하여 원하는 실물모형(mock-up)을 제작하는 것은?,2,Ivertment Casting,Rapid Prototyping,Slurry Casting,Reverse Engineering,Machine Design and Manufacturing,0.3
+나사의 풀림을 방지하는 것으로 사용되지 않는 것은?,2,스프링 와셔,캡 너트,철사,로크 너트,Machine Design and Manufacturing,0.3
+기계가공법에서 리밍 작업시 가장 옳은 방법은?,3,드릴 작업과 같은 속도와 이송으로 한다.,드릴 작업보다 고속에서 작업하고 이송을 작게 한다.,드릴 작업보다 저속에서 작업하고 이송을 크게 한다.,드릴 작업보다 이송만 작게 하고 같은 속도로 작업 한다.,Machine Design and Manufacturing,0.3
+호빙 머신의 자동장치는 어느 경우에 가장 적합한가?,3,위엄기어를 절삭 가공할 떄,베벨기어를 절삭 가공할 때,헬리컬 기어를 절삭 가공할 때,치형을 정밀하게 완성 가공할 떄,Machine Design and Manufacturing,0.3
+와이어 컷 방전가공기에서 작업이 곤란한 것은?,3,테이퍼가 있는 다이가공,피어싱 구멍,2차원 저부형가공,스퍼기어 펀치가공,Machine Design and Manufacturing,0.3
+제어밸브의 구동원으로 공기압 사용되는 이유 중 적당하지 않은 것은?,3,구조가 간단하고 고장이 적다.,방폭성이 있어 취급이 용이하다.,압축성이 있어 원거리 전송에 알맞다.,"유압 , 전기 요소에 비해 값이 싸다.",Machine Design and Manufacturing,0.3
+탄소강에서 적열취성이 원인이 되는 원소는?,4,규소,망간,인,황,Machine Design and Manufacturing,0.3
+표면 거칠기를 나타내는 방법이 아닌 것은?,3,최대 높이 거칠기,중심선 평균 거칠기,면적 평균 거칠기,10점 평균 거칠기,Machine Design and Manufacturing,0.3
+B-spline 곡선에 대한 설명으로 옳지 않은 것은?,2,곡선 전체의 연속성이 좋다.,일부 조정점(control point)의 이동에 의하여 곡선 전체의 모양을 변경하는 광범위 변형 성질을 갖는다.,곡선함수의 차수가 1개의 조정점이 영향을 줄 수 있는 곡선 세그먼트의 개수를 결정한다.,B-spline 곡선 세그먼트는 그 근방의 조정점의 위치 벡터에 의하여 형상이 결정된다.,Machine Design and Manufacturing,0.3
+성형품의 표면을 메탈라이징 하는 방법은?,2,핫스탬핑,진공증착,용제접착,열코킹,Machine Design and Manufacturing,0.3
+일반적으로 NC 가공계획에 포함되지 않은 것은?,3,사용 기계 선정,가공순서 결정,자동프로그래밍,공구 선정,Machine Design and Manufacturing,0.3
+강의 표면경화법으로서 표면에 Al을 침투시키는 표면경화법은 어느 것인가?,2,크로마이징,칼로라이징,실리콘나이징,보론나이징,Machine Design and Manufacturing,0.3
+"보전요원이 실시한 수리표준시간, 준비작업 표준시간 또는 분해검사 표준시간을 결정하는 보전표준의 종류는?",3,일상점검표준,설비점검표준,작업표준,수리표준,Machine Design and Manufacturing,0.3
+나사를 측정할 때 삼침법으로 측정 가능한 것은?,2,골지름,유효지름,바깥지름,나사의 길이,Machine Design and Manufacturing,0.3
+"Al-Si계 합금에 금속나트륨, 수산화나트륨, 플루오르화 알칼리, 알칼리염류 등을 첨가하면 조직이 미세화되고 공정점이 내려간다. 이러한 처리방법은?",2,시효 처리,개량 처리,실루민 처리,용체화 처리,Machine Design and Manufacturing,0.3
+"여러 종류의 CAD/CAM소프트웨어 간의 정보교환을 위하여 미국의 NBS(National Bureau of Standards)가 제안, ANSI 규격으로 승인한 표준 데이터 형식은?",3,GKS,DXF,IGES,STEP,Machine Design and Manufacturing,0.3
+분할대에서 분할 크랭크 핸들을 1회전하면 스핀들은 몇 도(°)회전 하는가?,4,36°,27°,18°,9°,Machine Design and Manufacturing,0.3
+"원주피치를 P 라고 하고 원주율을  π 라 할 때, 모듈 m을 구하는 식으로 옳은 것은?",2,m = π/P,m = P/π,m = πP,m = 2πP,Machine Design and Manufacturing,0.3
+U 굽힘가공에서 스프링 백의 방지법이 아닌 것은?,3,틈새를 작게 한다.,펀치 각반지름을 작게 한다.,굽힘 깊이를 작게 한다.,소재의 항복 강도를 낮춘다.,Machine Design and Manufacturing,0.3
+"산화알루미륨 분말에 Si 및 Mg 등의 산화물과 미량의 다른 원소를 첨가하여 고온에서도 경도가 높고  내 마멸성이 좋으며, 초경합금 보다 더욱 높은 속도로 절삭할 수 있으나, 취약 한 것이 결점인 공구재료는?",4,고속도강,스텔라이트,다이아몬도,세라믹,Machine Design and Manufacturing,0.3
+소재를 표면에 균열없이 구부릴 수 있는 굽힘반지름을 무엇이라 하는가?,4,한계 굽힘 반지름,최대 굽힘 반지름,허용 굽힘 반지름,최소 굽힘 반지름,Machine Design and Manufacturing,0.3
+"보통운전으로 회전수 300rpm, 베어링하중 110㎏f를 받는 단열레디얼 볼 베어링의 기본부하용량은 얼마가 되는가? (단, 수명은 6만 시간이고, 하중계수는 1.5이다.)",1,1693㎏f,165.0㎏f,1650㎏f,169.3㎏f,Machine Design and Manufacturing,0.3
+재료의 인장실험 결과 얻어진 응력-변형률 선도에서 응력을 증가시키지 않아도 변형이 연속적으로 갑자기 커지는 것을 무엇이라 하는가?,3,비례한도,탄성변형,항복현상,극한강도,Machine Design and Manufacturing,0.3
+절점의 개수가 9이고 차수(degree)가 4인 임의의 b-spline 곡선의 조정점의 개수는 몇 개인가?,2,3,4,5,6,Machine Design and Manufacturing,0.303
+CNC 선반 프로그램의 설명으로 틀린 것은?,3,동일 블록에서 절대 지령과 증분 지령을 혼합하여 지령 할 수 있다.,M01 기능은 자동 운전시 선택적으로 정지시킨다.,급속 위치 결정(G00)은 프로그램에서 지령된 이송속도로 이동한다.,머신 록 스위치를 ON하면 자동 운전을 실행해도 축이 움직이지 않는다.,Machine Design and Manufacturing,0.303
+3차원 뷰잉(viwin) 기법 중 아이소메트릭 투영(isometric projection)에 해당하는 투영 기법은?,3,경사 투영,원근 투영,직교 투영,캐비넷 투영,Machine Design and Manufacturing,0.303
+"리드각 α, 마찰계수 μ=tanρ인 나사의 자립(自立)조건을 만족하는 것은? (단, ρ는 마찰각을 의미한다.)",3,α＜2ρ,α2＜ρ,α＜ρ,α＞ρ,Machine Design and Manufacturing,0.3043
+"공구는 상하 직선운동을 하며 테이블은 직선운동과 회전운동을 하여 키 홈, 스플라인, 세레이션 등의 내면가공을 주로 하는 공작기계는?",2,세이퍼,슬로터,플레이너,브로칭,Machine Design and Manufacturing,0.3043
+공동현상(cavitation)의 발생 원인 중 거리가 먼 것은?,3,펌프를 규정 속도 이상으로 고속 회전 시켰을 때,패킹부에 공기가 흡입된 경우,흡입필터가 막히거나 유온이 저하된 경우,과부하이거나 급격히 유로를 차단한 경우,Machine Design and Manufacturing,0.3056
+"어느 브레이크에서 제동동력이 3kW 이고, 브레이크 용량(brake capacity)을 0.8 N/mm2·m/s 라고 할 때, 브레이크 마찰면적의 크기는 약 몇 mm2 인가?",4,3200,2250,5500,3750,Machine Design and Manufacturing,0.3056
+CNC 선반의 복합형 고정 사이클(예:G71~G76 등)에 있어서 사이클 가공의 종료시 공구가 복귀하는 위치는?,4,프로그램의 원점,제2원점,기계 원점,사이클 가공 시작점,Machine Design and Manufacturing,0.3056
+펌프에 관한 설명 중 올바른 것은?,3,다단 펌프는 유량을 증가시킨다.,양흡입 펌프는 양정을 증가시킨다.,양흡입펌프는 축추력이 발생되지 않는다.,축방향으로 유체를 흡입하고 반경방향으로 토출시키는 펌프는 축류식 펌프이다.,Machine Design and Manufacturing,0.3065
+6극 유도 전동기에 60[Hz]의 교류 전압을 가하면 동기 속도[rpm]는?,4,1800,3600,2400,1200,Machine Design and Manufacturing,0.3065
+TPM 관리와 전통적 관리의 차이점 중 TPM 관리에 속하지 않는 것은?,4,Input 지향,원인추구 시스템,전사적 조직과 전사원 참여,문제를 해결하려는 접근 방법,Machine Design and Manufacturing,0.3069
+CNC 머시닝센타에서 가공할 수 없는 작업은?,2,드릴 작업,선삭 작업,보링 작업,태핑 작업,Machine Design and Manufacturing,0.3077
+B-spline 곡선에 관한 설명으로 틀린 것은?,1,매듭값(knot value)이란 매개변수를 여러 범위로 나누어서 각각의 블렌딩 함수가 1 이 되는 범위의 경계값이다.,균일  B-spline곡선(uniform B-spline curve)은 매듭값의 간격이 항상 1의 등간격을 이루는 것이다.,곡선의 차수와 조정점(control point)의 개수는 무관하다.,한 개의 조정점이 움직이면 몇 개의 곡석 세그먼트만 영향을 받고 나머지는 변하지 않는다.,Machine Design and Manufacturing,0.3077
+맞물리는 한 쌍의 기어에서 정면도를 단면으로 도시할 때 물려있는 잇 봉우리원을 표시하는 선은?,3,양쪽 다 굵은 실선,양쪽 다 굵은 파선,"한 쪽은 굵은 실선, 다른 쪽은 파선","한 쪽은 굵은 실선, 다른 쪽은 굵은 일점 쇄선",Machine Design and Manufacturing,0.3077
+"공압에서 사용되는 기기중 습기에 대하여 친화력을 갖는 실리카 겔,활성 알루미나 등의 고체 건조제를 두 개의 타워 속에 가득 채워 습기와 미립자를 제거하여 초 건조 공기를 토출하며 최대 -70℃ 정도까지의 저노점을 얻을 수 있는 것을 무엇이라 하는가?",4,공랭식 냉각기,냉동식 건조기,흡수식 건조기,흡착식 건조기,Machine Design and Manufacturing,0.3077
+"베어링 하중 3500㎏f를 지지하고 있는 강제(鋼製)엔드저널의 허용 베어링 압력이 100㎏f/㎝2<이라면 저널의 지름 d와 길이 ℓ은 각각 얼마 정도인가? (단, ℓ = 2d이다.)",1,"d = 41.8㎜, ℓ = 83.6㎜","d = 46.1㎜, ℓ = 92.2㎜","d = 51.2㎜, ℓ = 102.4㎜","d = 56.3㎜, ℓ = 112.6㎜",Machine Design and Manufacturing,0.3077
+"회전하는 상자에 공작물과 숫돌입자. 공작액, 컴파운드 등을 함께 넣어 공작물이 입자와 충돌하는 동안에 그 표면의 요철(凹凸)을 제거하여 매끈한 가공면을 얻는 것은?",4,숏피닝,슈퍼피니싱,버니싱,텀블링,Machine Design and Manufacturing,0.3077
+Austenite강을 재결정 온도이하 Ms점 이상의 온도범위에서 소성 가공후 소입하는 조작은?,2,Martemper,Ausforming,Isothermal Tempering,Austemper,Machine Design and Manufacturing,0.3077
+기계식 프레스와 유압 프레스의 비교에서 기능상 기계식 프레스에 속하는 특징은?,3,스트로크 변화가 쉽다.,생산속도가 느리다.,가압속도 조절이 어렵다.,가압력 유지가 쉽다.,Machine Design and Manufacturing,0.3077
+한글 1글자를 기록하는데 2 바이트(byte)가 필요하다면 기억용량 600MB의 광디스크(CD) 1장에는 한글 몇 글자까지 기록할 수 있는가?,2,"300,000,000 자","314,572,800 자","600,000,000 자","629,145,600 자",Machine Design and Manufacturing,0.3077
+"30°미터 사다리꼴 나사(1줄 나사)의 유효지름이  18mm 이고, 피치는 4mm 이며 나사 접축부 마찰계수는 0.15일 때 이 나사의 효율은 약 몇 %인가?",3,24%,27%,31%,35%,Machine Design and Manufacturing,0.3077
+"최소 죔새를 나타낸 것은? (단, 조립 전 치수를 기준으로 한다.)",2,구멍의 최대 허용치수-축의 최소 허용치수,축의 최소 허용치수-구멍의 최대 허용치수,축의 최대 허용치수-구멍의 최소 허용치수,구멍의 최소 허용치수-축의 최대 허용치수,Machine Design and Manufacturing,0.3077
+나사 바이트의 각도를 측정하는 게이지는?,3,와이어 게이지,한계 게이지,센터 게이지,틈새 게이지,Machine Design and Manufacturing,0.3077
+고용체 처리에 의해서 시효경화 시키는 합금은 어느 것인가 ?,3,Al - Si,Cu - P,Al - Cu,Cu - Pb,Machine Design and Manufacturing,0.3077
+평행 투상법에 의한 3차원상의 표시법 중 경사 투상법에 속하지 않는 것은?,3,캐벌리어 투상법,캐비넷 투상법,다이매트릭 투상법,플라노매트릭 투상법,Machine Design and Manufacturing,0.3077
+밀링 머신의 주축베어링 윤활방법으로 적합하지 않은 것은?,4,그리스 윤활,오일 미스트 윤활,강제식 윤활,패드 윤활,Machine Design and Manufacturing,0.3091
+200V를 사용하는 가정집 전압의 최대값은 약 몇 [V]인가?,2,220V,283V,346V,440V,Machine Design and Manufacturing,0.3103
+스트립 레이아웃(Strip Layout) 작성시 고려할 사항 중 거리가 먼 것은?,3,공정 분산을 적절히 한다.,"굽힘 공정,변형 등을 주의하여 배치한다.",정밀도상 중요한 부분은 다른 스테이지에서 가공한다.,미스검출은 변형이 일어나지 않는 곳에 배치한다.,Machine Design and Manufacturing,0.3103
+"최대눈금 5mA의 직류 전류계로 50A 까지의 전류를 측정하려면 악 몇 Ω의 분류기가 필요한가? (단, 직류 전류계의 내부저항은 10옴 이다.)",1,0.001,0.01,0.1,0.2,Machine Design and Manufacturing,0.312
+"직경 500mm인 마찰차가 350rpm의 회전수로 동력을 전달한다. 이 때 바퀴를 밀어붙이는 힘이 1.96kN일 때 몇 kW의 동력을 전달할 수 있는가? (단, 접촉부 마찰계수는 0.35로 하고, 미끌림은 없다고 가정한다.)",4,4.5,5.1,5.7,6.3,Machine Design and Manufacturing,0.3125
+정류기의 평활회로로 사용되는 여파기의 종류는 어느 것 인가?,1,저역 여파기,고역 여파기,대역 여파기,대역소거 여파기,Machine Design and Manufacturing,0.3125
+적당한 캠 기구로 스풀을 이동시켜 유량의 증감 또는 개폐작용을 하는 밸브로서 상시개방형과 상시폐쇄형이 있으며 귀환운동을 자유롭게 하기 위하여 체크밸브를 내장한 것도 있는 유압기기는?,2,스로틀 변환 밸브,감속(deceleration) 밸브,파일럿 조작 체크 밸브,셔틀 밸브,Machine Design and Manufacturing,0.3125
+프레스에 금형을 설치 할때의 주의 사항이다. 틀린 것은?,2,"다이, 펀치홀더 면을 깨끗이 한다.",하형을 설치 한후에 상형을 설치한다.,"상, 하형을 맞출때 먼지, 쇳가루 등이 묻지 않도록 한다.",볼스터와 금형면을 평행으로 설치한다.,Machine Design and Manufacturing,0.3125
+연삭 숫돌에서 숫돌의 경도가 크다는 것은 무엇을 의미하는가?,4,입도,밀도,자생력,결합도,Machine Design and Manufacturing,0.3125
+공작기계의 절삭방식에서 입자에 의한 가공법이 아닌 것은?,4,샌드 블라스팅(sand blasting),액체 호닝(liquid honing),래핑(lapping),호빙(hobbing),Machine Design and Manufacturing,0.3125
+금형강의 담금질처리시 발생하는 파손을 방지하기 위하여 담금질과 뜨임의 2공정을 같이 행하는 열처리는?,2,심냉처리,항온열처리,구상화처리,불림처리,Machine Design and Manufacturing,0.3125
+"송풍기의 토출측 압력 게이지가 200㎜Hg일 때 절대압력으로 얼마인가?(단, 대기압은 표준 대기압으로 한다)",2,1.8 kgf/cm2,1.3 kgf/cm2,0.7 kgf/cm2,0.5 kgf/cm2,Machine Design and Manufacturing,0.3125
+프레스 기계의 규격을 나타내는 요소가 아닌 것은?,3,하중능력,토크능력,펀치높이,램조절량,Machine Design and Manufacturing,0.3125
+U-굽힘금형에서 다이에 쿠션 패드를 설치하는 목적 중 가장 알맞은 것은?,3,스프링 백 현상을 방지하기 위하여,재료의 두께 변화를 방지하기 위하여,제품 밑부분의 만곡 현상을 방지하기 위하여,굽힘 가공력을 감소시키기 위하여,Machine Design and Manufacturing,0.3125
+단일 금속에 비해 합금의 특성이 아닌 것은?,4,용융점이 낮아진다.,전도율이 낮아진다.,강도와 경도가 커진다.,전성과 연성이 커진다.,Machine Design and Manufacturing,0.3132999999999999
+직동형 압력 릴리프 밸브의 특징이 아닌 것은?,1,원격 제어가 가능하다.,구조가 간단하다.,압력 오버라이드 특성이 크다.,저압.소용량에 적합하다.,Machine Design and Manufacturing,0.3143
+"알루미늄(AI)에 약 10%까지 마그네슘(Mg)을 첨가한 합금으로 내식성, 강도, 연신율이 우수하며 비중이 작은 합금은?",2,실루민,하이드로날륨,톰백,스텔라이트,Machine Design and Manufacturing,0.3157999999999999
+다듬질 절삭 할 때의 절삭조건으로 적당한 것은?,2,절삭깊이와 이송을 크게 하고 절삭속도를 줄인다.,절삭깊이와 이송을 작게 하고 절삭속도를 높인다.,절삭깊이와 이송을 작게 하고 절삭속도를 줄인다.,절삭깊이와 이송을 크게 하고 절삭속도를 높인다.,Machine Design and Manufacturing,0.3157999999999999
+생산현장에 사용하고 있는 게이지의 이상유무나 사용중의 마모량을 확인하기 위해서 사용하는 게이지는?,3,검사용 게이지,공작용 게이지,점검용 게이지,기준 게이지,Machine Design and Manufacturing,0.3157999999999999
+제한된 공간상에서 긴 행정거리가 요구되는 곳에서 사용하며 외부와 피스톤 사이 의 강한 자력에 의해 운동을 전달하므로 내∙외부의 실링 효과가 우수하고 비 접촉식 센서에 의해서 위치제어가 가능한 실린더는?,3,텔레스코프 실린더,케이블 실린더,로드레스 실린더,충격 실린더,Machine Design and Manufacturing,0.3157999999999999
+"잇수 N=50 이며, 모듈 M=2.5인 평치차를 가공하려고 할 때 소재의 직경 D는 몇 mm가 되는가?",4,D = 115,D = 120,D = 125,D = 130,Machine Design and Manufacturing,0.3167
+보전 작업관리의 특징을 설명한 것 중 틀린 것은?,4,다양성 및 복잡성,가혹한 조건,투입비용 과다,표준화 곤란,Machine Design and Manufacturing,0.3171
+"길이가 1m이고 지름이 30mm인 둥근 막대에 30000 N 의 인장하중을 작용하면 얼마정도 늘어나는가?(단, 세로탄성계수는 2.1 × 105N/mm2",2,0.102mm,0.202mm,0.302mm,0.402mm,Machine Design and Manufacturing,0.3182
+다응 중 3매 구성 금형의 특징을 설명한 것으로 올바른 것은?,4,"스프루, 러너, 게이트가 캐비티와 동일면에 있는 구조","러너 플레이트와 고정축 형판 사이에 캐비티가 있으며 고정측 형판과 스트러퍼 플레이트 사이에 러너, 게이트가 있는 구조","스트리퍼 플레이트에 의해서만 밀어내기가 가능하며, 러너와 케이트는 스트리퍼 플레이트 위에 있는 구조","러너 플레이트와 고정축 형판 사이에 러너가 있으며, 고정측 형판과 가동측 형판 사이에 캐비티가 있는 구조",Machine Design and Manufacturing,0.3182
+보전비를 들여서 설비를 만족한 상태로 유지하여 막을 수 있었던 생산성의 손실을 무엇이라고 하는가?,3,재고 손실,자연재해에 의한 손실,기회 손실,기술 부족에 의한 손실,Machine Design and Manufacturing,0.3182
+일반적으로 사출금형의 강도계산시 사용되는 수지의 압력은?,3,100 - 300kgf/cm2,300 - 500kgf/cm2,500 - 700kgf/cm2,700 - 900kgf/cm2,Machine Design and Manufacturing,0.3182
+"400rpm으로 4kW의 동력을 전달하는 중실 스핀들 축의 최소 지름은 약 몇 mm인가? (단, 축의 허용전단응력은 20.60MPa 이다.)",1,29,13,48,36,Machine Design and Manufacturing,0.3182
+분사노즐과 수신노줄이 같이 있으며 배압의 원리에 의하여 작동되는 공압 센서는?,2,공압 제어블록,반향 감지기,공압 근접 스위치,압력 증폭기,Machine Design and Manufacturing,0.3188
+공압 선형액추에이터 중 단동실린더에 속하지 않는 것은?,2,피스톤 실린더,충격 실린더,격판 실린더,벨로스 실린더,Machine Design and Manufacturing,0.3191
+"주파수, 진폭 및 위상이 같은 두 진동이 합성되면 어떠한 진동 형태로 되는가?",4,주파수와 진폭은 변하지 않고 위상이 변한다.,진폭과 위상은 변동없고 주파수만 두 배로 증가한다.,"주파수, 진폭 및 위상이 두 배로 증가한다.",주파수와 위상은 변동없고 진폭만 두 배로 증가한다.,Machine Design and Manufacturing,0.32
+밀링머신에서 테이블의 백래시(back lash)제거장치 설치 위치는?,3,변속기어,자동 이송레버,테이블 이송나사,테이블 이송핸들,Machine Design and Manufacturing,0.32
+동기 전동기에 제동권선을 설치하는 이유는?,2,역률조정,난조방지,손실감소,고조파 발생방지,Machine Design and Manufacturing,0.32
+제어 지령용 주요기기가 아닌 것은?,4,누름버튼 스위치,캡 스위치,마이크로 스위치,리밋 스위치,Machine Design and Manufacturing,0.32
+구조 설계에 의한 진동 제어를 설명함에 있어 적용되는 요소로 틀린 것은?,4,구조물의 질량을 고려하여 진동이 최소화 되도록 설계한다.,구조물의 강성의 크기를 진동이 최소화 되도록 설계한다.,구조물이 강성의 분포를 고려하여 진동이 최소화 되도록 노력한다.,구조물의 형태를 고려하여 진동이 최소화 되도록 설계한다.,Machine Design and Manufacturing,0.32
+"어떤 작업을 수행하는데 작업소요시간이 빠른 경우 5시간, 보통이면 8시간, 늦으면 12시간 걸린다고 예측 되었다면 3점 견적법에 의한 기대 시간치와 분산을 계산하면 약 얼마인가?",2,"te = 8.0, σ2 = 1.17","te = 8.2, σ2 = 1.36","te = 8.3, σ2 = 1.17","te = 8.3, σ2 = 1.36",Machine Design and Manufacturing,0.3208
+3상 유도 전동기의 속도제어법이 아닌 것은?,1,계자제어,주파수제어,2차 저항 조정,극수변환,Machine Design and Manufacturing,0.3209
+탄소강은 일반적으로 200∼300℃ 부근에서 상온보다 더욱 취약한 성질을 갖는다이것을 무엇이라 하는가?,2,저온취성,청열취성,고온취성,적열취성,Machine Design and Manufacturing,0.3214
+CNC선반의 어드레스 중 일반적으로 지름지정으로 지령하는 것은?,2,R10.0,U10.0,I5.0,K5.0,Machine Design and Manufacturing,0.3214
+"드릴작업에서 드릴지름 d=15mm 이고 구멍깊이 t=30mm, 1회전당 드릴의 길이 방향의 이송거리 (Feed) S=0.5mm 이고 회전수 n=400rpm 이라면 가공시간은 얼마인가? (단, 이 때 드릴의 원추 높이는 6mm라 한다.)",3,15초,0.18초,10.8초,8.8초,Machine Design and Manufacturing,0.3226
+I.E.C(국제전기표준회의)에서 권고하고 있는 전기 릴레이 회로의 작성에 대한 설명으로 맞는 것은?,1,종속선(렁)은 위에서 아래로 신호흐름을 갖는다.,전원의 모선을 좌측과 우측에 그린다.,전원 부분을 실제의 위치에 그려준다.,제어의 순서에 따라 위에서 아래로 그린다.,Machine Design and Manufacturing,0.3235
+"유압 베인 모터의 1회전당 유량이 50㏄일 때,공급 압력을 80㎏f/㎝2,유량을 30ℓ /min으로 할 경우 최대 회전수(rpm)는 ?",4,700,650,625,600,Machine Design and Manufacturing,0.3243
+주기 T = 50[㎧] 이면 주파수[Hz]는 얼마인가?,1,20,60,100,200,Machine Design and Manufacturing,0.3247
+베어링의 열박음 장착시 베어링 재료의 경도가 저하되는 가열한계 온도는 몇 도(° )인가?,4,30,60,90,130,Machine Design and Manufacturing,0.3256
+"다이캐스팅용 알루미늄 합금으로 피삭성과 주조성이 좋고, 용도별 기호 중 Al-Si-Cu계인 것은?",4,ALDC 1,ALDC 3,ALDC 4,ALDC 7,Machine Design and Manufacturing,0.3268999999999999
+일반적인 CAD 시스템에서 많이 사용하는 곡선의 방정식의 차수가 3차인 이유로 가장 적절한 것은?,4,곡선의 전면에 떨림이 적어 평탄한 곡선을 만들어낼 수 있다.,곡선 방정식을 구성하는 계수의 계산이 편리하여 방정식을 구성하는 계수의 계산이 편리하여 방정식을 쉽게 구현할 수 있다.,곡선 방정식을 구성하는 계수의 변화에 따른 곡선형태의 변화를 미리 예측하기 쉽다.,두 개의 곡선을 연결할 때 양쪽 곡선이 모두 3차식이면 연결점에서 곡률 연속을 보장할수 있다.,Machine Design and Manufacturing,0.3276
+진성 반도체에 첨가 물질을 도핑하여 n형 반도체를 만들기 위한 도핑 물질은?,4,갈륨,인듐,붕소,비소,Machine Design and Manufacturing,0.3293
+밀링머신에서 얇은 금속을 자르는 커터(cutter)는?,2,총형(formed)커터,메탈소(metal saw)커터,앵글(angle)커터,플라이(fly)커터,Machine Design and Manufacturing,0.3333
+설비진단 기술의 필요성 중 연결이 잘못된 것은?,4,설비 측면→ 데이타에 의한 신뢰성,조업 측면→ Claim 방지,정비계획 측면→ 고장의 미연방지,설비관리 측면→ 정수적,Machine Design and Manufacturing,0.3333
+양 끝에 오른나사와 왼나사가 있어 배관 지지장치의 높낮이를 조절할 때 사용되는 너트는?,3,홈붙이너트,나비너트,터언버클,T 너트,Machine Design and Manufacturing,0.3333
+"드릴 머신으로 얇은 철판에 구멍을 뚫을 때, 그 판 밑에 무엇을 받치면 가장 좋은가?",3,구리판,강철판,나무판,니켈판,Machine Design and Manufacturing,0.3333
+Al합금 열처리 기호에 있어서 T6 란?,3,풀림한 재질,용체화 처리 후 자연시효처리 재질,용체화 처리 후 인공시효경화 처리 재질,용체화 처리 후 안정화 처리 재질,Machine Design and Manufacturing,0.3333
+브로칭머신에서 브로치를 인발 또는 압입하는 방법에 속하지 않는 것은?,4,나사식,기어식,유압식,압출식,Machine Design and Manufacturing,0.3333
+상온 가공한 강의 탄성 한계를 향상시키기 위하여 200-360℃로 가열하는 작업은?,3,서브제로 처리(Subzero treatment),오스포밍(Ausforming),불루잉(Bluing),어닐링(Annealing),Machine Design and Manufacturing,0.3333
+탄소강에서 펄라이트 조직중의 시멘타이트의 양은?,2,0.8%,12%,32%,88%,Machine Design and Manufacturing,0.3333
+n개의 입력선으로 코드화된 2진 정보를 최대 2n 개의 유일한 출력선으로 변환시켜주는 장치는?,4,가산기,비교기,인코더,디코더,Machine Design and Manufacturing,0.3333
+플레이너에 의한 가공방법이 아닌 것은?,4,수평깎기,수직깎기,각도깎기,나선형깎기,Machine Design and Manufacturing,0.3333
+3침법이란 나사의 무엇을 측정하는 방법인가?,3,골지름,피치,유효지름,바깥지름,Machine Design and Manufacturing,0.3333
+"금형의 제작 공정에서 가공 응력 변형이나 열처리 변형 등의 치수 변화를 조정, 수정을 하는 공정은?",2,생산 작업,조립 작업,성형 작업,시험 작업,Machine Design and Manufacturing,0.3333
+"주조,단조,리벳이음 등에 비해 용접 이음의 장점으로틀린 것은?",3,사용재료의 두께 제한이 없다.,기밀 유지에 용이하다.,작업 소음이 많다.,"사용기계가 간단하고,작업 공정수가 적어 생산성이높다.",Machine Design and Manufacturing,0.3333
+"물체의 길이, 각도, 형상측정이 가능한 측정기는?",2,표면 거칠기 측정기,3차원 측정기,사인 센터,다이얼게이지,Machine Design and Manufacturing,0.3333
+크랭크 축과 같이 복잡하고 큰 재료의 표면을 경화시키는데 가장 많이 사용하는 열처리 방법은?,2,침탄법,불꽃경화법,질화법,청화법,Machine Design and Manufacturing,0.3333
+창성법에 의한 기어 절삭에 사용하는 공구가 아닌 것은?,4,래크 커터,호브,피니언 커터,브로치,Machine Design and Manufacturing,0.3333
+보조 프로그램 호출 시 사용되는 보조기능은?,3,M 00,M01,M 98,M 99,Machine Design and Manufacturing,0.3333
+각종 기어에 대한 설명 중 틀리게 설명한 것은?,3,스퍼기어는 잇줄이 기어 축에 평행한 기어로서 평행한 두 축 사이의 동력전달에 이용된다.,헬리컬 기어는 잇줄이 나선 곡선인 원통기어로서 두 축의 상대적 위치는 평행하다.,"베벨기어는 원통의 안쪽에 이가 있는 기어이며 두축의 회전방향이 같으며, 높은 감속비의 경우에 사용된다.","하이포이드기어는 베벨기어의 축을 엇갈리게 한 것으로, 자동차의 차동기어장치의 감속기어로 사용된다.",Machine Design and Manufacturing,0.3333
+주철과 같이 매짐이 있는 재료를 저속으로 절삭할 때 발생되는 일반적인 칩의 형태는?,3,전단형,경작형,균열형,유동형,Machine Design and Manufacturing,0.3333
+진동방지의 일반적인 방법에 해당되지 않는 것은?,4,진동 차단기 사용,질량이 큰 경우 거더(girder)의 이용,2단계 차단기의 사용,가진기 사용,Machine Design and Manufacturing,0.3333
+V벨트가 널리 쓰이는 이유 중 틀린 것은?,3,고무의 굴요성(屈堯性)이 풍부하고. 마찰 전동력이 크다.,운전중 진동 소음이 적자.,"속조비를 크게 취할 수 없고, 축간거리가 길게 된다.",고속 전동을 할 수 있다.,Machine Design and Manufacturing,0.3333
+리머 작업시 가장 적합한 작업 조건은?,3,드릴작업보다 고속으로 작업하고 이송은 작게 한다.,드릴작업보다 고속으로 작업하고 이송은 크게 한다.,드릴작업보다 저속으로 작업하고 이송은 크게 한다.,드릴작업과 비슷한 절삭속도로 하고 이송은 크게 한다.,Machine Design and Manufacturing,0.3333
+강의 펄라이트(pearlite)조직을 설명한 것 중 옳은 것은?,1,페라이트 + Fe3C 의 층상 혼합물,γ고용체와 Fe3C 의 혼합물,α 고용체와 γ고용체의 혼합물,δ 고용체와 α 고용체의 혼합물,Machine Design and Manufacturing,0.3333
+6.4 황동에 1% Fe 내외를 첨가한 고강도 황동인 철황동을 다른 말로 무엇이라고도 하는가?,3,망간황동,네이벌황동,델타메탈,톰백,Machine Design and Manufacturing,0.3333
+기어 조립 후 운전 초기에 발생하는 현상은?,2,백레시,스코어링,피치선,인벨루트,Machine Design and Manufacturing,0.3333
+프로세스 제어시스템에서 신호 전송라인에 노이즈(noise)가 발생하는 원인이 아닌 것은?,1,전하,중첩,정전유도,전자유도,Machine Design and Manufacturing,0.3333
+"회전하는 상자에 공작물과 숫돌입자, 공작액, 컴파운드 등을 함께 넣어 공작물이 입자와 충돌하는 동안에 그 표면의 요철(凹凸)을 제거하여 매끈한 가공면을 얻는 것은?",4,숏피닝,수퍼피니싱,버니싱,배럴가공,Machine Design and Manufacturing,0.3333
+KS규격의 안전색과 안전표지를 연결한 것 중 틀린 것은?,4,자주 - 방사능,빨강 - 고도의 위험,"주황 - 항해, 항공의 보안시설",파랑 - 위생∙구호,Machine Design and Manufacturing,0.3333
+"단면적 A = 20mm2, 길이 ℓ =100 mm인 균일단면의 강봉을 측정압 P=1kgf으로 측정할 때 압축 탄성변형량은? (단, 강의 세로 탄성계수는 20 × 104 kgf/mm2 이다.)",2,0.1㎛,0.025㎛,0.25㎛,0.005㎛,Machine Design and Manufacturing,0.3333
+제조할 때 접종(Ca-Si 합금첨가)을 하여 응고와 동시에 흑연화가 이루어져 강인한 조직을 얻는다. 이런 주철을 무엇이라 하는가?,2,Chilled주철,Meehanite주철,Pearlite주철,Acicular주철,Machine Design and Manufacturing,0.3333
+일반적인 전동기류의 안전에 관한 설명으로 틀린 것은?,4,전동기에 습기가 있으면 건조시킨 다음 사용한다.,단락장치는 정위치로 확실히 돌려 놓는다.,"권선형 전동기의 경우, 회전자의 슬립링(slip ring)섭동 부분에 주의한다.",전압이 규정값보다 떨어졌을 때에는 부하를 높이도록 한다.,Machine Design and Manufacturing,0.3333
+서보(servo)기구를 위치 검출 방식에 따라 분류할 때 해당되지 않는 것은?,2,개방 회로 방식,반개방 회로 방식,반폐쇄 회로 방식,폐쇄 회로 방식,Machine Design and Manufacturing,0.3333
+GC 60 K m V 1호 12″× 3/4″× 1″ 인 연삭 숫돌을 사용한 연삭기의 회전수가 1700 rpm 이라면 숫돌의 원주 속도는 몇 m/min 인가?,2,약 135 m/min,약 1628 m/min,약 102 m/min,약 1725 m/min,Machine Design and Manufacturing,0.3333
+"매분 175회전으로 44 kW를 전달하는 중실원축의 지름으로 가장 적당한 것은 몇 cm 인가? (단, 재료의 인장강도는 340 MPa로 하고 비틀림 강도는 인장강도의 70%, 안전율 S=10으로 한다.)",2,6,8,10,12,Machine Design and Manufacturing,0.3333
+마찰차의 응용범위와 거리가 가장 먼 항목은?,4,전달력이 크지 않고 속도비가 중요하지 않은 경우,회전속도가 커서 보통기어를 쓰기 어려울 경우,양 축간을 자주 단속할 필요가 있을 경우,정확한 속도비가 필요할 경우,Machine Design and Manufacturing,0.3333
+직류전동기에 과부하가 걸리면 발생하는 현상은?,2,브러시에서 스파크 발생,저속회전,정격속도 이상으로 회전,회전방향 불량,Machine Design and Manufacturing,0.3333
+생산보전(PM)의 관점에서 설비 교체를 위한 수리한계의 시기를 결정하는 기준은?,3,안전 위생,물리적 손상,경제적 비용,제품의 품질,Machine Design and Manufacturing,0.3333
+보전용 상비품의 품목 결정요인으로 옳지 않은 것은?,2,여러 공정의 부품에 공통적으로 사용될 것,사용량이 비교적 적으며 일시적으로 사용될 것,단가가 낮을 것,보관에 지장이 없을 것,Machine Design and Manufacturing,0.3333
+공작물과 같은 형상으로 제작된 모델에 따라 제품을 절삭하는 것은?,2,정면절삭,모방절삭,보링절삭,템플렛절삭,Machine Design and Manufacturing,0.3333
+PLC 프로그램에서 카운터의 출력은 어떻게 OFF 시키는가 ?,2,카운터의 계수치가 같아지면 OFF된다.,카운터의 리셋 입력을 ON 으로 한다.,카운터의 계수입력을 설정시간 동안 ON으로 한다.,카운터의 계수입력을 설정시간 동안 OFF로 한다.,Machine Design and Manufacturing,0.3333
+코일 스프링(coil spring)을 그릴 때의 설명으로 맞는 것은?,4,원칙적으로 하중이 걸린 상태에서 그린다.,특별한 단서가 없는 한 모두 왼쪽 감기로 그린다.,중간부분을 생략할 때에는 생략한 부분을 가는 실선으로 그린다.,스프링의 종류 및 모양만을 도시하는 경우에는 중심선을 굵은 실선으로 그린다.,Machine Design and Manufacturing,0.3333
+구성인선(built-up edge)이 생기는 것을 방지하기 위한 대책으로서 틀린 것은?,4,바이트의 윗면 경사각을 크게 한다.,절삭 속도를 크게 한다.,윤활성이 좋은 절삭유를 준다.,절삭 속도를 극히 작게하여 윤활성이 작은 절삭유를 준다.,Machine Design and Manufacturing,0.3333
+"금형재료를 절약할 수 있고, 2개 이상의 전단가공을 할 경우 다이의 중심거리가 정확하여 날 맞추기가 간단한 다이는?",2,일체 다이,부시 다이,분할 다이,노칭 다이,Machine Design and Manufacturing,0.3333
+제어정보 표시 형태에 의한 분류 중 해당되지 않는 것은?,4,아날로그 제어계,디지탈 제어계,2 진 제어계,1O 진 제어계,Machine Design and Manufacturing,0.3333
+전단금형에서 클리어런스가 클 경우에 나타나는 현상이 아닌 것은?,4,전단력이 작아지므로 금형의 파손이 적다.,정도 높은 제품이 요구될 경우는 불량품이 된다.,파단면의 각도는 클리어런스가 클수록 커진다.,2차 전단 현상이 발생한다.,Machine Design and Manufacturing,0.3333
+"판 두께 0.5㎜인 규소강판에 지름 20㎜의 둥근 구멍을 블랭킹하기 위한 전단력은? (단, 규소강판의 전단강도는 45kgf/mm2 이고, 전단각은 무시한다.)",4,450 kgf,900 kgf,1014 kgf,1414 kgf,Machine Design and Manufacturing,0.3333
+철강 재료 기호의 첫째자리 부분이 나타내는 것은?,2,제품의 형상,재질,경도,인장강도,Machine Design and Manufacturing,0.3333
+투상법상 도형에 나타나지 않으나 편의상 필요한 모양을 표시하는데 쓰이는 선은?,2,숨은선,가상선,수준면선,특수 지정선,Machine Design and Manufacturing,0.3333
+부궤환증폭기의 특징이 아닌 것 ?,1,이득이 증가한다.,찌그러짐이 감소한다.,입력저항이 증가한다.,출력저항이 감소한다.,Machine Design and Manufacturing,0.3333
+제팅 현상을 방지하기 위한 대책이 아닌 것은?,4,사출속도를 느리게 한다.,게이트의 크기를 키운다.,콜드슬러그웰을 크게 한다.,금형온도를 낮게 한다.,Machine Design and Manufacturing,0.3333
+바이트 끝 반지름이 1.5㎜의 바이트로 0.08 ㎜/rev 의 이송으로 깎았을 때 이론상의 최대 표면 거칠기는 얼마인가?,3,53㎛,5.3㎛,0.53㎛,0.053㎛,Machine Design and Manufacturing,0.3333
+표준게이트에서 성형품의 살두께는 2.5mm이고 수지상수가 0.8일 때 게이트 두께는 얼마로 하는 것이 적당한가?,2,1mm,2mm,3mm,4mm,Machine Design and Manufacturing,0.3333
+특수강에서 합금원소의 주요한 역할이 아닌 것은?,4,"기계적, 물리적, 화학적 성질의 개선",황 등의 해로운 원소 제거,소성가공성의 개량,페라이트의 입자 조정,Machine Design and Manufacturing,0.3333
+밀링머신에서 할 수 없는 가공은?,3,총형 가공,기어 가공,브로칭 가공,나선홈 가공,Machine Design and Manufacturing,0.3333
+연삭숫돌의 입자를 결합하여 형성하는 결합체를 종류별 기호로 짝지은 것이 잘못된 것은?,4,고무 - R,셸락 - E,비닐 - PVA,레지노이드 - L,Machine Design and Manufacturing,0.3333
+공장에서 측정기를 선정할 때 고려해야 할 사항으로 관련이 가장 적은 것은?,4,공차,제품 수량,측정범위,제품의 기계적 성질,Machine Design and Manufacturing,0.3333
+일반적으로 손다듬질 가공에 해당되지 않는 것은?,4,해머링(hammering),스크레이핑(scraping),파일링(filing),호닝(honing),Machine Design and Manufacturing,0.3333
+드릴의 연삭에 관한 사항이다. 틀린 것은?,2,날끝각은 표준드릴에서 118° 이다.,날끝각은 굳은 재료일수록 적게하고 무른 재료 일수록 크게 한다.,절삭날의 길이를 좌우 같게 한다.,절삭날에 중심과 이루는 각과 여유각을 좌우 같게 한다.,Machine Design and Manufacturing,0.3333
+금형의 설치에서 금형의 점검 사항이 아닌 것은?,4,녹아웃 장치의 고정 상태,안내판과 부시의 조립 상태,자동 스톱핀의 작동 상태,램과 슬라이드의 간격(틈) 상태,Machine Design and Manufacturing,0.3333
+메달을 제작하는 금형을 제작하고자 한다. 무엇을 이용하는 금형이 좋은가?,2,엠보싱(embossing),코닝(coining),스웨이징(swaging),마르폼(marform),Machine Design and Manufacturing,0.3333
+펀치 고정판(Punch Plate)재질에 관한 설명으로 가장 적당한 것은?,3,영구변형이 생기기 쉬워야 한다.,결정립이 조대하여야 한다.,불림한 재료를 사용 HRC40의 경도가 있어야 한다.,펀치 직경의 1.5배 이하의 두께가 원칙이다.,Machine Design and Manufacturing,0.3333
+"세이퍼(shaper)에서 길이 200mm인 일감을 20m/min의 절삭 속도로 절삭 하고져 한다. 램의 매분 왕복 횟수는? (단, 절삭행정시간과 바이트 1 왕복시간과의 비 k = 3/5이다.)",2,매분 40 회,매분 60 회,매분 80 회,매분 100 회,Machine Design and Manufacturing,0.3333
+절삭제의 작용이 아닌 것은?,3,윤활작용,냉각작용,방진작용,세정작용,Machine Design and Manufacturing,0.3333
+발전기의 유도기전력의 방향을 알기 위한 법칙은?,4,패러데이의 법칙,렌츠의 법칙,플레밍의 왼손법칙,플레밍의 오른손법칙,Machine Design and Manufacturing,0.3333
+"하나의 제어변수에 2가지의 가능한 값, 신호의 유/무 ON/OFF, YES/NO 등과 같은 신호를 이용하는 것은?",3,동기 제어계,아나로그 제어계,2진 제어계,디지털 제어계,Machine Design and Manufacturing,0.3333
+선반작업시 절삭속도 결정의 조건 중 거리가 가장 먼 것은?,4,일감의 재질,바이트의 재질,절삭제의 사용유무,기계의 강도,Machine Design and Manufacturing,0.3333
+3매 구성 금형의 특징으로 적합한 것은?,3,고장이 적고 내구성이 우수하다.,게이트의 형상과 위치를 쉽게 변경할 수 있다.,금형을 열기 위해 스트로크가 큰 성형기가 필요하다.,성형품과 게이트는 성형 후 절단가공이 필요한 경우도 있다.,Machine Design and Manufacturing,0.3333
+"어떤 저주파 전압을 측정하였더니 7.5[V]를 지시하였다. 이것은 몇 [dB]에 해당하는가 ? (단, 기준 전압은 0.75[V]이다.)",2,25 [dB],20 [dB],15 [dB],10 [dB],Machine Design and Manufacturing,0.3333
+금속표면처리 방법을 설명한 것 중 맞는 것은?,4,칼로라이징이란 금속표면에 크롬을 침투시켜 내식성을 증가한다.,크로마이징이란 금속표면에 알루미늄을 침투시켜 강도를 증가시킨다.,"화염경화법이란 금속표면에 질소, 탄소막을 만드는 것이다.",실리콘나이징이란 금속표면에 규소를 침투시켜 내식성을 증가시킨다.,Machine Design and Manufacturing,0.3333
+제작기간의 단축과 소량생산 용도의 간이 금형용 재료는?,2,주철제,에폭시수지,탄소공구강,합금공구강,Machine Design and Manufacturing,0.3333
+"지그(jig) 중 간단하고 저렴하며, 일반적으로 클램프가 없이 공작물에 밀착하여 핀이나 네스트(nest)로 공작물 위치를 고정하여 사용하는 지그는 어느 것인가?",3,채널 지그,박스 지그,템플레이트 지그,플레이트 지그,Machine Design and Manufacturing,0.3333
+CNC공작기계에서 각 축의 이송 정밀도를 높이기 위하여 사용하는 나사는?,4,삼각 나사,사각 나사,애크미 나사,볼 나사,Machine Design and Manufacturing,0.3333
+"드릴, 탭, 호브 등의 날 여유면을 절삭할 수 있는 선반의 부속장치는?",2,이송 장치,릴리빙 장치,총형 바이트 장치,테이퍼 절삭 장치,Machine Design and Manufacturing,0.3333
+머시닝센터에서 200rpm으로 회전하는 스핀들에 피치 1.5mm 나사를 가공할 때 주축 이송속도는 몇 mm/min 인가?,4,150,200,250,300,Machine Design and Manufacturing,0.3333
+"금형 내에 용융수지를 사출하지 않고, 일정 온도로 가열되어 있는 금형에 분말성형 재료를 넣고 일정시간 동안 가열·가압하는 성형방식은?",4,이송 성형,캘린더 성형,압출 성형,압축 성형,Machine Design and Manufacturing,0.3333
+파이프끼리 서로 맞대기 용접을 하는데 가장 좋은 용접 결과를 얻을 수 있는 것은?,3,가스 압접,플래시버트 용접(flash butt welding),고주파 유도 용접,초음파 용접,Machine Design and Manufacturing,0.3333
+선삭에서 절삭속도 942m/h로 직경 200mm의 공작물을 절삭할 때의 회전수는 얼마인가?,1,25 rpm,50 rpm,44977 rpm,89954 rpm,Machine Design and Manufacturing,0.3333
+집중보전의 장점을 설명한 것 중 거리가 먼 것은?,3,대 수리가 필요할 때 충분한 인원을 동원할 수 있다.,자본과 새로운 일에 대하여 통제가 보다 확실하다.,작업 표준을 위한 시간 손실이 적다.,보전 요원의 기능향상을 위해 훈련이 보다 잘 행하여진다.,Machine Design and Manufacturing,0.3333
+"구조는 간단하나 복잡한 운동을 수비게 실철할 수 있어, 내연 기관의 밸브 개폐기구나 공작 기계, 인쇄 기계, 자동 기계 등의 운동 변환 기구에 사용되는 것은?",4,마찰차,나사,키,캠,Machine Design and Manufacturing,0.3333
+탄소강이 가열되어 200~300℃ 부근에서 상온일 때보다 인성이 저하되는 현상을 무엇이라고 하는가?,4,저온취성,고온취성,적열취성,청열취성,Machine Design and Manufacturing,0.3333
+전기도금과 반대 현상을 이용한 가공으로 알루미늄은 거울과 같이 광택있는 가공면을 비교적 쉽게 가공할 수 있는 것은?,2,방전가공,전해연마,액체호닝,레이저가공,Machine Design and Manufacturing,0.3333
+탄소강을 변태점 이상으로 가열한 후에 수중 담글질 속도를 대단히 빠르게 냉각시킬 때 생성되는 조직은?,4,솔바이트,펄라이트,트루스타이트,마이텐자이트,Machine Design and Manufacturing,0.3333
+롤러 중심거리가 200mm인 사인바로 각도를 측정하고자 할 때 게이지 블록의 높이가 각각 10mm와 110mm이었다면 각도 θ는 얼마인가?,2,15,30,45,60,Machine Design and Manufacturing,0.3333
+"W, Ti, Ta 등의 경질합금 탄화물 분말에 Co 또는 Ni을 결합제로 소결하여 제조한 절삭 공구의 재료는?",3,탄소 공구강,스텔라이트,초경 합금,시효경화 합금,Machine Design and Manufacturing,0.3333
+굽힘금형으로 제품을 가공할 때 발생하는 스프링백에 대한 설명으로 틀린 것은?,2,동일재질일 경우 판 두께가 얇을수록 크다.,굽힘부에 큰 압력을 가하면 증가할 수 있다.,굽힘반경이 클수록 증가한다.,굽힘각도가 클수록 증가한다.,Machine Design and Manufacturing,0.3333
+나사의 종류를 표시하는 기호 중 미터 사다리꼴 나사의 종류를 표시하는 기호는?,4,M,SM,TM,Tr,Machine Design and Manufacturing,0.3333
+축을 설게할 때 고려해야 할 사항이 아닌 것은?,3,강도 및 변형,진동,회전방향,열응력,Machine Design and Manufacturing,0.3333
+방화(防火)조치로서 부적당한 것은?,2,흡연은 정해진 곳에서 한다.,유류취급 장소에서는 방화수를 준비한다.,화기는 정해진 곳에서 취급한다.,기름걸레 등은 정해진 용기에 보관한다.,Machine Design and Manufacturing,0.3333
+CNC선반에서 명령값 X = 70 mm로 부품을 가공한 후에 측정한 결과 ø69.93이었다. 기존의 X축 보정값이 0.004 일 경우 수정해야 할 공구 보정값은 전부 얼마인가?,2,0.74,0.074,0.69,0.069,Machine Design and Manufacturing,0.3333
+"회전수가 250 rpm인 원동축에 모듈이 4, 잇수가 30인 기어가 있다. 속도비가 1/3인 경우 중심거리는?",2,80mm,240mm,480mm,600mm,Machine Design and Manufacturing,0.3333
+수평 밀링 머신의 주축(spindle)에 대한 설명 중 틀린 것은?,3,보통 테이퍼 롤러 베어링으로 지지되어 있다.,기둥(column)에 설치되어 있으며 아버를 고정한다.,주축 끝에 코터가 장치되어 있어 커터의 중심을 맞춘다.,주축단은 보통 테이퍼진 구멍으로 되어 있으며 크기는 규격으로 정해져 있다.,Machine Design and Manufacturing,0.3333
+CNC선반에서 ø100mm의 환봉을 절삭하고자 한다. 절삭동력이 2kw이고 주축의 회전수가 600rpm일 때 절삭 주분력은 약 몇 N 인가?,2,745,637,561,460,Machine Design and Manufacturing,0.3333
+한 변의 길이 12㎜인 정사각형 단면 봉에 축선 방향으로 144kgf의 압축하중이 작용할 때 생기는 압	축응력 값은 몇 kgf/㎟ 인가?,2,4.75,1.0,0.75,12.1,Machine Design and Manufacturing,0.3333
+"밴드 브레이크의 긴장측 장력 814㎏f, 두께 2 mm, 허용응력 8㎏f/mm2일 때 밴드의 폭은? (단, 이음 효율은 100 % 로 한다.)",2,약 40 mm,약 51 mm,약 60 mm,약 71 mm,Machine Design and Manufacturing,0.3333
+미리 정해진 연속된 단면을 덮은 표면 곡면을 생성시켜 닫혀진 부피 영역 혹은 솔리드 모델을 만드는 모델링 방법은?,2,스위핑(sweeping),스키닝(skinning),트위킹(tweaking),리프팅(lifting),Machine Design and Manufacturing,0.3333
+소용량 농형 유도전동기에 정격전압을 가하면 기동전류는 정격전류의 몇 배가 흐르는가?,3,1∼2배,3∼4배,4∼6배,7∼10배,Machine Design and Manufacturing,0.3333
+다이스 절삭작업 중 나사가 뜯기는 원인이 아닌 것은?,2,다이스가 마모되어 절삭할 수 없을 때,소재의 기초구멍의 지름이 작을 때,다이스날이 빠져 있을 때,절삭제를 쓰지 않았을 때,Machine Design and Manufacturing,0.3333
+전해연마의 장점이 아닌 것은?,4,절삭 또는 연삭된 표면의 조도를 높인다.,복잡한 면의 정밀가공이 가능하다.,가공에 의한 표면균열이 생기지 않는다.,전류밀도가 클수록 표면이 깨끗하다.,Machine Design and Manufacturing,0.3333
+블랭킹 제품에서 제 2차 전단면이 발생되었다. 그 이유로 타당한 것은?,2,크리어런스(clearance)가 너무 크다.,크리어런스(clearance)가 너무 적다.,크리어런스(clearance)가 알맞다.,크리어런스(clearance)가 0(zero) 이다.,Machine Design and Manufacturing,0.3333
+상이한 CAD 시스템 간의 데이터의 교환을 목적으로 개발된 표준데이터 교환 방식이 아닌 것은?,2,GKS,HWP,STEP,IGES,Machine Design and Manufacturing,0.3333
+큐펄러(Cupola) 용량의 기준은?,3,1회 용출되는 최대량,큐펄러의 내부용적,매 시간당 용해량,1회에 장입 할 수 있는 최대량,Machine Design and Manufacturing,0.3333
+"알곤, 헬륨 등의 불활성가스 분위기 속에서 텅스텐 용접봉을 사용하여 용접하는 것은?",4,CO2 알곤 용접,서브머지드 용접,MIG 용접,TIG 용접,Machine Design and Manufacturing,0.3333
+금속간 화합물에 대한 설명으로 옳은 것은?,2,"변형하기 쉽고, 인성이 크다.",일반적으로 복잡한 결정구조를 갖는다.,"전기저항이 낮고, 금속적인 성질이 우수하다.",성분금속 중 낮은 용융점을 갖는다.,Machine Design and Manufacturing,0.3333
+연삭숫돌 표시법 WA 60 L6 V에서 60의 의미는?,3,결합도,조직,입도,결합제,Machine Design and Manufacturing,0.3333
+호칭번호가 6026P6인 단열 깊은홈 볼 베어링의 안지름 치수는 몇 ㎜인가?,4,6,26,30,130,Machine Design and Manufacturing,0.3333
+철사를 끊으려고 손으로 여러 번 구부렸다 폈다 하면 구부러지는 부분에 경도가 증가된다. 가장 큰 이유는?,2,쌍정현상 때문에,가공경화현상 때문에,질량효과 때문에,결정입자가 충격을 받기 때문에,Machine Design and Manufacturing,0.3333
+"S-N 선도에서 응력의 값이 어느 일정한 값에 도달하면 곡선이 수평으로 되어, 이 응력 이하에서는  아무리 반본 횟수를 늘려도 파괴되지 않게 된다. 이 응력의 한도 값을 무엇이라 하는가?",3,응력한도,수직한도,피로한도,수평한도,Machine Design and Manufacturing,0.3333
+마찰자의 응용범위에 대한 설명 중 옳지 않은 것은?,2,전달하여야 될 힘이 그다지 크지 않고 정확한 속도비를 중요시 하지 않는 경우,양축 사이를 빈번하게 단속할 필요가 없는 경우,회전속도가 커서 보통의 기어를 사용할 수 없는 경우,무단변속을 하는 경우,Machine Design and Manufacturing,0.3333
+스케치 부품의 표면에 기름이나 광면단을 얇게 칠하고 그 위에 종이를 대고 문질러서 실제의 모양을 뜨는 방법은?,2,직접 본뜨기법,프린트법,간접 본뜨기법,사진 촬영법,Machine Design and Manufacturing,0.3333
+나사를 도시하는 방법으로 옳은 것은?,4,수나사의 바깥 지름은 가는 실선으로 그린다.,완전 나사부와 불완전 나사부의 경계선은 가는 2점쇄선으로 그린다.,암나사의 골 지름은 굵은 실선으로 그린다.,수나사의 골 지름은 가는 실선으로 그린다.,Machine Design and Manufacturing,0.3333
+"절삭 작업에서 절삭 저항력이 150kgf, 절삭속도가 60m/min라면 절삭동력은 몇 PS인가?",2,1.5,2.0,3.0,3.5,Machine Design and Manufacturing,0.3333
+강관에 의한 배관시 주의사항으로 옳지 않은 것은?,3,나사 전용기로 정확한 나사 가공 후 내부 청소를 깨끗이 한다.,실링 테이프는 1∼2산 정도 남기고 감는다.,원터치 니들 사용시에 누설이 없도록 충분히 끼워 넣는다.,액체 실을 사용할 경우 암나사 부에는 바르지 않는다.,Machine Design and Manufacturing,0.3333
+일반적인 CAD 시스템에서 원을 정의하는 방법이 아닌 것은?,4,중심과 반지름,중심과 원주상의 한점,원주상의 3점,정점과 초점,Machine Design and Manufacturing,0.3333
+상비품과 비 상비품을 결정할 시 각 품목마다 검토 하여야 할 사항으로 관계가 먼 것은?,4,불출실적,보전방법,돌발고장유무,구매비용,Machine Design and Manufacturing,0.3333
+Fe-C 상태도에서 공석반응을 일으키는 온도는 약 몇 도인가?,3,521℃,621℃,723℃,821℃,Machine Design and Manufacturing,0.3333
+V-벨트 전동장치에 대한 장점을 설명한 것 중 틀린 것은?,2,지름이 작은 풀리에도 사용할 수 있다.,바로 걸기 보다 엇걸기로 하여야만 한다.,"마찰력이 평 벨트보다 크고, 미끄럼이 적어 비교적 작은 장력으로 큰 회전력을 전달할 수 있다.",이음매가 없어 운전이 정숙하다.,Machine Design and Manufacturing,0.3333
+응력-변형률 선도에서 재료가 견딜 수 있는 최대의 응력을 무엇이라 하는가?,4,비례한도,소성변형,항복점,극한강도,Machine Design and Manufacturing,0.3333
+"프레스의 수명, 보수, 관리, 정밀도 등을 고려하여 프레스를 선정할 때 보통 프레스 최대 호칭 하중의 몇 %를 선정기준으로 하는가?",3,20-30 %,40-50 %,60-70 %,80-90 %,Machine Design and Manufacturing,0.3333
+"드릴의 속도V(m/min), 지름d(mm)일 때, 드릴의 회전수 n(rpm)을 구하는 식은?",3,n=1000/(πdV),n=(πdV)/1000,n=(1000 V)/(πd),n=(πd)/(1000 V),Machine Design and Manufacturing,0.3333
+기본 부하 용량이 32kN인 단열 깊은 홈형 볼 베어링이 800rpm으로 회전하면서 4kN의 레이디얼 하중을 받고 있을 때 이 베어링의 수명은 약 몇 시간인가?,2,8565,10656,18654,21312,Machine Design and Manufacturing,0.3333
+베어링의 호칭번호가 6026일 때 이 베어링의 안지름은?,4,6mm,60mm,26mm,130mm,Machine Design and Manufacturing,0.3333
+컴퓨터 그래픽의 기본요소(PRIMITIVE)중 3차원 프리미티브에 해당되지 않는 것은 어느 것인가?,4,구(sphere),관(tube),원통(cylinder),선(line),Machine Design and Manufacturing,0.3333
+"구조는 간단하나 복잡한 운동을 쉽게 실현할 수 있어, 내연 기관의 밸브 개폐기구나 공작 기계, 인쇄 기계, 자동 기계 등의 운동 변환 기구에 사용되는 것은?",4,마찰차,나사,키,캠,Machine Design and Manufacturing,0.3333
+웜 휠의 측면도 제도시 이뿌리원은 무슨 선으로 표시하는가?,4,굵은 실선,가는 실선,은선,도시하지 않는다,Machine Design and Manufacturing,0.3333
+"도면에 ø30H7/g6로 조립한 상태의 치수 허용한계가 기입되어 있을 때 축의 최대 허용치수는 몇 mm 인가? (단, 임.)",2,ø29.980,ø29.993,ø30.000,ø30.021,Machine Design and Manufacturing,0.3333
+프로그램 주소(address)에 대한 기능 설명으로 틀린 것은?,3,G - 준비기능,M - 보조기능,S - 이송기능,T - 공구기능,Machine Design and Manufacturing,0.3333
+공구 전체의 길이로 규격을 나타내지 않는 것은?,1,스톱 링 플라이어,멍키 스패너,롱 노즈 플라이어,조합 플라이어,Machine Design and Manufacturing,0.3333
+솔리드 모델링에서 CSG방식과 비교한 B-rep방식의 특성으로 보기 어려운 것은?,1,데이터 구조가 간단하다.,전개도 작성이 용이하다.,표면적 계산이 용이하다.,표면의 유한요소법 적용이 용이하다.,Machine Design and Manufacturing,0.3333
+높이 50mm의 사각봉이 압축하중을 받아 0.004의 변형률이 생겼다고 하면 이 봉의 높이는 얼마로 되었는가?,1,49.8mm,49.9mm,49.98mm,49.99mm,Machine Design and Manufacturing,0.3333
+물체의 양단에 압축력이 작용하여 하중방향의 직각인 단면에 발생하는 수직 응력은?,3,인장응력,전단응력,압축응력,굽힘응력,Machine Design and Manufacturing,0.3333
+"S-N(응력진폭-반복횟수)선도에서 응력의 값이 어느 일정한 값에 도달하면 곡선이 수평으로 되어, 이 응력 이하에서는 아무리 반복 횟수를 늘려도 파괴되지 않게 한다. 이 응력의 한도 값을 무엇이라 하는가?",3,응력한도,반복한도,피로한도,수평한도,Machine Design and Manufacturing,0.3333
+"절삭속도 31.4m/min 인 8날 짜리  20 엔드밀로 소재를 가공할 때 이송 속도는? (단, 밀링커터의 날 1개 마다의 이송 fｚ=0.05mm 이다.)",4,251.2 mm/min,25.12 mm/min,20 mm/min,200 mm/min,Machine Design and Manufacturing,0.3333
+자유 곡면의 NC가공을 계획하는 과정에서 가공 영역을 지정하는 방식 중 지정된 폐곡선 영역의 외부를 일정 옵셋(offset)량을 주어 지정하는 것은?,3,area 지정,trimming 지정,island 지정,blending 지정,Machine Design and Manufacturing,0.3333
+3차원 측정기의 정밀도 시험 항목으로 거리가 먼 것은?,3,각 축의 측정 정밀도,공간의 측정 정밀도,엔코더의 정밀도,진직도,Machine Design and Manufacturing,0.3333
+센터리스 연삭기의 장점으로 볼 수 없는 것은?,4,중공물의 원통 연삭에 편리하다.,가늘고 긴 공작물의 연삭에 알맞다.,숫골의 마모가 적고 수명이 길다.,연삭에 상당한 숙련이 요구된다.,Machine Design and Manufacturing,0.3333
+드로잉 가공 그룹에 속하지 않는 것은?,4,아이어닝 가공,재 드로잉 가공,역 드로잉 가공,사이징 가공,Machine Design and Manufacturing,0.3333
+피복 초경합금의 피복재로 사용되지 않는 것은?,4,TiC,TiN,Al2O3,SiC,Machine Design and Manufacturing,0.3333
+"피측정물을 양 센터에 지지하고 , 360° 회전시켜 다이얼 게이지의 최대값과 최소값의 차이로 진원도를 측정하는 것은?",2,직경법,반경법,3점법,센터법,Machine Design and Manufacturing,0.3333
+와이어프레임 모델의 특징을 설명한 것 중 틀린 것은?,1,은선제거가 가능하다.,처리속도가 빠르다.,단면도 작성이 어렵다.,데이터의 구성이 간단하다.,Machine Design and Manufacturing,0.3333
+"1줄 사각나사의 접촉면 마찰계수가 0.15이고, 이 나사의 리드각이 3.8° 일 때 이 나사의 효율을 약 몇 % 인가?",1,30.4,32.4,34.5,37.8,Machine Design and Manufacturing,0.3333
+중량 가공물을 가공하기 위한 대형밀링머신으로 플레이너와 유사한 구조로 되어 있는 것은?,3,수직 밀링머신,수평 밀링머신,플래노 밀러,회전 밀러,Machine Design and Manufacturing,0.3333
+청동의 주 성분은?,2,구리-니켈,구리-주석,철-납,철-알루미늄,Machine Design and Manufacturing,0.3333
+"지름 7cm의 중실축과 비틀림 강도(强度)가 같고, 내ㆍ외경비가 0.8인 중곡축의 바깥지름은 약 몇 mm인가?",2,77.3,83.4,89.5,95.1,Machine Design and Manufacturing,0.3333
+Fe-Fe3C 상태도에는 몇 개의 고상이 있는가?,2,3개,4개,5개,6개,Machine Design and Manufacturing,0.3333
+"직경이 20mm, 길이 2m의 둥근막대의 일단을 고정하고 자유단을 5° 비틀었다면 이 때 생기는 전단응력은 몇 Mpa인가? (단, 전단탄성계수 G=85 Gpa이다.)",2,25.2,37.1,40.5,57.9,Machine Design and Manufacturing,0.3333
+스프링이나 기어와 같이 반복 하중을 받는 기계부품에 소형강구 등을 표면에 고속으로 분사시켜 기계적 성질을 향상시키는 가공법은?,2,액체 호닝,쇼트 피닝,버니싱,전해연삭,Machine Design and Manufacturing,0.3333
+"강재의 화학 조성을 변화시키지 않고, 작은 볼 (shot)을 표면에 고속으로 분사하여 그 표면을 매끈하게 경화시키는 방법은?",4,금속 침투법,침탄 질화법,질화법,숏피닝법,Machine Design and Manufacturing,0.3333
+CNC 와이어 컷 방전가공의 가공기술에서 소재를 테이블에 올려 놓고 클램핑하기 위한 여유치수는 테이블의 이송한계가 미치지 못하는 범위를 포함하여 안정도를 유지하는 데 얼마정도가 가장 적합한가?,2,0∼10mm,20∼30mm,50∼60mm,70mm이상,Machine Design and Manufacturing,0.3333
+"절삭 동력이 2kw이고, 주축 회전수가 500rpm일 때 선반에서 ø80mm의 환봉을 절삭하는 절삭 주분력은 약 몇 N인가?",2,95.5,955,90.7,907,Machine Design and Manufacturing,0.3333
+KS규격 안전색에서 자주색이 의미하는 것은?,4,"방화, 금지, 정지","항해, 항공의 보안시설",의무적 행동,방사능,Machine Design and Manufacturing,0.3333
+Solid model의 data 구조 중 CSG와 비교한 경계 표현방식(Boundary representation)의 특징은?,3,기본도형을 직접 입력하므로 data의 작성이 용이하다.,데이터의 수정이 용이하다.,위상요소와 기하요소를 사용하여 솔리드를 표현한다.,Data 구조가 간단하여 적은 기억용량을 사용한다.,Machine Design and Manufacturing,0.3333
+합금의 일반적인 성질에 해당되지 않는 것은?,3,강도 및 경도가 커진다.,전기 및 열의 전도도가 낮아진다.,용융점이 올라간다.,전성 및 연성이 낮아진다.,Machine Design and Manufacturing,0.3333
+"보통 주철보다 Si 함유량을 적게 하고, 적당한 양의 Mn을 첨가한 용탕에 금형 또는 철메탈이 붙어 있는 모래형에 주입하여 필요한 부분만을 급랭시켜 만드는 주철을 무엇이라고 하는가?",2,가단 주철,냉경 주철,애시클러 주철,구상 흑연 주철,Machine Design and Manufacturing,0.3333
+변압기용 박판에 사용하는 강으로 가장 적합한 것은?,4,크롬 강,망간 강,니켈 강,규소 강,Machine Design and Manufacturing,0.3333
+지름14[mm]의 연강봉에 800[kgf]의 인장하중이 작용할때 발생하는 응력은 얼마 정도인가?,4,1.5[kgf/mm2],2.3[kgf/mm2],4.6[kgf/mm2],5.2[kgf/mm2],Machine Design and Manufacturing,0.3333
+스케치 방법에서 부품의 표면에 광명단을 바르거나 기름걸레로 문지른 후 종이를 대고 눌러서 실제 모양을 뜨는 방법을 무엇이라 하는가?,4,광면단법,모양뜨기법,압착법,프린트법,Machine Design and Manufacturing,0.3333
+"연삭숫돌 바퀴의 표시 “WA 46 J 4 V""에서 ‘4’가 나타내는 것은?",3,입도,결합도,조직,결합제,Machine Design and Manufacturing,0.3333
+"호브(hob)를 사용하여 기어를 절삭하는 기계로써, 차동 기구를 갖고 있는 공작기계는?",4,레이디얼 드릴링 머신,호닝 머신,자동 선반,호빙 머신,Machine Design and Manufacturing,0.3333
+지름 14mm의 연강봉에 8000N의 인장하중이 작용할 때 발생하는 응력은 몇 N/mm2인가?,4,15,23,46,52,Machine Design and Manufacturing,0.3333
+킬드강(killed steel)이란 ?,2,탈산하지 않은 강,완전히 탈산한 강,중간정도 탈산한 강,뚜껑을 씌운강,Machine Design and Manufacturing,0.3333
+B-spline과 NURB 곡선에 대한 설명으로 잘못된 것은?,1,B-spline 곡선식은 NURB(Non-uniform Rational B-spline) 곡선식을 포함하는 보다 일반적인 형태의 곡선이다.,"B-spline 곡선에서는 곡선의 모양을 변화시키기 위해서 각각의 control point의 좌표를 조절하지만, NURB 곡선에서는 동차 좌표값까지 포함하여 4개의 자유도가 있다.","B-spline 곡선은 원, 타원, 포물선 등 원추곡선을 근사할 수 있다.","NURB 곡선은 원, 타원, 포물선 등 원추곡선을 표현할 수 있어, 프로그램 개발 시 모든 곡선을 NURB곡선으로 나타냄을써 작업량을 줄여준다.",Machine Design and Manufacturing,0.3333
+공정점 4.3%C에서는 용액으로부터 γ-고용체와 시멘타이트가 동시에 정출한다. 이 때의 공정 조직명은?,4,페라이트,펄라이트,오스테나이트,레데뷰라이트,Machine Design and Manufacturing,0.3333
+"아공석강에서는 A3,2,1   변태점보다 30~50℃ 높게 하고, 공석강, 광공석강은 A1변태점보다 30~50℃ 높게 가열하여 적당시간 유지후, 노에서 서서히 냉각시키는 열처리는?",2,저온풀림,완전풀림,중간풀림,항온풀림,Machine Design and Manufacturing,0.3333
+구조는 간단하면서 복잡한 운도을 구현할 수 있는 기계요소로서 내연 기관의 밸브 개폐기구 등에 사용되는 것은?,4,마찰차(friction wheel),클러치(clutch),기어(gear),캠(cam),Machine Design and Manufacturing,0.3333
+축에는 키 홈을 파지 않고 보스(boss)에만 키 홈을 파는 키는?,4,성크 키,스플라인 키,평 키,새들 키,Machine Design and Manufacturing,0.3333
+항온기의 온도조절용 변환기에 사용되는 재료는?,3,인코넬,하스텔로이,바이메탈,톰백,Machine Design and Manufacturing,0.3333
+CNC선반에서 지령값 X70.0으로 프로그램하여 소재를 시험 가공한 후에 측정한 결과 ø69.95 이었다. 기존의 X축 보정값을 0.005라 하면 공구 보정값을 얼마로 수정해야 하는가?,2,0.045,0.055,0.005,0.01,Machine Design and Manufacturing,0.3333
+"독일형 버니어캘리퍼스라고도 부르며, 슬라이더가 홈형으로 내측면의 측정이 가능하고, 최소 1/50mm로 측정할 수 있는 버이너 캘리퍼스는?",4,M1형,M2형,CB형,CM형,Machine Design and Manufacturing,0.3333
+경제대안의 평가를 위한 방법으로 자본사용의 여러 가지 방법에 대하여 창출되는 수입액수를 기준으로 평가하는 기법이다. 즉 미래의 모든 비용의 현재가치와 미래의 모든 수입의 현재가치를 같게 하는 방법은?,4,현가액법,연차등가액법,회수기간법,수익률법,Machine Design and Manufacturing,0.3368
+"잇수 32, 피치 12.7mm, 회전수 500rpm의 스프로킷 휠에 50번 롤러 체인을 사용하였을 경우 전달동력은 약 몇 kW 인가? (단, 50번 롤러 체인의 파단하중은 22.10kN, 안전율은 15이다.)",4,7.8,6.4,5.6,5.0,Machine Design and Manufacturing,0.337
+출력 특성이 좋고 사용하기 쉬우므로 기계 및 지반진동에 가장 많이 사용되는 진동센서는?,2,압전형 가속도 센서,동전형 속도 센서,서브형 가속도 센서,와전류형 변위 센서,Machine Design and Manufacturing,0.3373
+제어신호의 간섭을 제거하기 위하여 캐스케이드 회로 설계방법을 이용하었을 때의 특징이 아닌 것은?,1,오버센터 작동기구를 사용한다.,특정한 밸브를 사용하지 않고 일반적인 밸브를 사용한다.,입력신호와 출력신호가 각각 대응되어 제어의 신뢰성이 보장된다.,제어회로가 복잡하여 밸브가 많아지면 회로 내의 입력 강화로 인한 스위칭 시간의 지연과 배선이 복잡해진다.,Machine Design and Manufacturing,0.3379999999999999
+순철에 대한 설명으로 옳은 것은?,3,각 변태점에서 연속적으로 변화한다.,저온에서 산화작용이 심하다.,온도에 따라 자성의 세기가 변화한다.,알칼리에는 부식성이 크나 강산에는 부식성이 작다.,Machine Design and Manufacturing,0.3389999999999999
+개회로 제어와 폐회로 제어에 대한 설명으로 틀린 것은?,3,개회로 제어는 외란의 영향을 무시하고 제어계의 출력을 유지한다.,외란의 영향에 대응하는 제어가 폐회로 제어이다.,개회로 제어는 센서를 통해 출력을 연속적으로 감시한다.,폐회로 제어는 개회로 제어에 비해 설치에 많은 비용이 소요된다.,Machine Design and Manufacturing,0.3394
+정비용 재료 중 운동부에 사용되는 밀봉 재료는?,4,금속 가스킷,비금속 가스킷,액상 패킹,그랜드 패킹,Machine Design and Manufacturing,0.3398
+차음벽이 고유진동 모드의 주파수로 입사한 소음과 공진 하는 영향 요소와 거리가 먼 것은?,3,차음벽의 강성,차음벽의 무게,차음벽의 표면,내부 댐핑,Machine Design and Manufacturing,0.3409
+물체의 한쪽 면이 경사되어 평면도나 측면도로는 물체의 형상을 나타내기 어려울 경우 가장 적합한 투상법은?,4,요점투상법,국부투상법,부분투상법,보조투상법,Machine Design and Manufacturing,0.3429
+복합재료에 널리 사용되는 강화재가 아닌 것은?,3,유리섬유,붕소섬유,구리섬유,탄소섬유,Machine Design and Manufacturing,0.3429
+물탱크의 수위를 조절하는 자동스위치를 표시하는 것은?,3,FS,FCB,FLTS,FTS,Machine Design and Manufacturing,0.3429
+그랜드 패킹(grand packing)을 축에 부착할 때 최소 몇 개 이상이 좋은가?,4,1개,2개,3개,4개,Machine Design and Manufacturing,0.3429
+도면에 표시된 3/8-16UNC-2A의 해석으로 옳은 것은?,2,피치는 3/8 인치이다.,산의 수는 1인치당 16개이다.,유니파이 가는 나사이다.,나사부의 길이는 2인치이다.,Machine Design and Manufacturing,0.3435
+전계효과 트랜지스터(FET)의 설명과 거리가 먼 것은?,2,극성이 1개만 존재하는 단극성 트랜지스터이다.,N채널 J FET의 경우 게이트는 N형이다.,"소스, 드레인, 게이트 3개의 전극이 있다.",게이트 음(-)전압에 의해 채널이 막히는 것이 핀치 오프이다.,Machine Design and Manufacturing,0.3443
+KS 나사의 표시기호에 대한 설명으로 잘못된 것은?,3,호칭 기호 M은 미터 나사이다.,호칭 기호 UNF는 유니파이 가는 나사이다.,호칭 기호 PT는 관용 평행 나사이다.,호칭 기호 TW는 29도 사다리꼴 나사이다.,Machine Design and Manufacturing,0.3443
+공압장치의 윤활기에 관한 일반적인 사항 중 잘못 설명된 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),4,과도한 윤활은 부품의 오동작을 야기한다.,윤활기의 세척은 중성세제를 사용한다.,윤활기는 밸브나 실린더 가까운 곳에 설치한다.,윤활기의 원리는 파스칼의 법칙을 응용한 것이다.,Machine Design and Manufacturing,0.3443
+일반적으로 사용하는 안전율은 어느 것인가?,3,사용응력/허용응력,허용응력/기준강도,기준강도/허용응력,허용응력/사용응력,Machine Design and Manufacturing,0.3448
+일반적으로 아날로그 신호로 사용되지 않는 것은?,1,AC 0 ~ 24V,DC -10V ~ +10V,DC 0 ~ +10V,4 ~ 20 mA,Machine Design and Manufacturing,0.3448
+동관 이음을 할 때 관 끝 모양을 접시 모양으로 넓혀서 이음하는 방식은?,3,플랜지(flange) 이음,나사(screw) 이음,압축(compressed) 이음,플레어리스(flareless) 이음,Machine Design and Manufacturing,0.3455
+금속침투에 의한 표면 경화법으로 금속 표면에 AL을 침투시키는 것은?,2,크로마이징,칼로라이징,실리콘라이징,보로나이징,Machine Design and Manufacturing,0.3455
+보전용 자재 관리상 특징이 아닌 것은?,2,불용 자재 발생 가능성이 높다.,보전용 자재는 비순환성이 높다.,"연간 사용 빈도가 적고, 소비 속도가 늦다.","자재 구입의 품목, 수량, 시기 등의 계획 수립이 어럽다.",Machine Design and Manufacturing,0.3457
+Y합금의 일종으로 Ti과 Cu를 0.2% 정도씩 첨가한 합금으로 피스톤에 사용되는 합금의 명칭은?,4,라우탈,엘린바,문쯔메탈,고비탈륨,Machine Design and Manufacturing,0.3461999999999999
+배관의 직선 연결 이음에 사용되지 않는 배관용 관 이음쇠는?,3,유니언,니플,플러그,부싱,Machine Design and Manufacturing,0.3461999999999999
+지름 50 mm인 원형 단면에 하중 4500 N 이 작용할 때 발생되는 응력은 약 몇 N/mm2 인가?,1,2.3,4.6,23.3,46.6,Machine Design and Manufacturing,0.3461999999999999
+전압계의 측정범위를 넓히기 위해 전압계에 직렬로 저항을 접속하는데 이 저항을 무엇이라고 하는가?,3,미소저항,가변저항,배율기,분류기,Machine Design and Manufacturing,0.3461999999999999
+펌프를 구조상 분류할 때 왕복 펌프의 종류가 아닌 것은?,3,피스톤 펌프,다이아프램 펌프,로터리 플랜지 펌프,플런저 펌프,Machine Design and Manufacturing,0.3461999999999999
+쾌속조형(RP)에 관한 일반적인 설면 중 틀린 것은?,1,특징형상 기반 설계(feature-based design)나 특징형상 인식(feature recognition)이 필요하다.,재료를 제거하는 것이 아니라 재료를 더해 나가는 공정이다.,"클램프(clamp), 지그(jig), 또는 고정구(flxture)를 고려할 필요가 없다.",물체를 만들기 위해 단면 데이터를 요구한다.,Machine Design and Manufacturing,0.3461999999999999
+크롬 몰리브덴강 단강품의 KS 재질 기호는?,3,SCM,SNC,SFCM,누츠,Machine Design and Manufacturing,0.3469
+"성크 키의 길이가 150mm, 키에 발생하는 전단하중은 60kN, 키의 너비와 높이와의 관계는 b=1.5h 라고 할 때 허용 전단응력 20MPa라 하면 키의 높이는 약 몇 mm이상이어야 하는가? (단, b는 키의 너비, h는 키의 높이이다.)",3,8.2,10.5,13.3,17.9,Machine Design and Manufacturing,0.3469
+"너클 핀 이음에서 인장력이 50kN인 핀의 허용전단응력을 50MPa이라고 할 때, 핀의 지름 d는 몇 mm인가?",2,22.8,25.2,28.2,35.7,Machine Design and Manufacturing,0.3478
+차압식 유량계에서 유량은 교축기구 전후의 차압과 어떤 관계인가?,3,비례한다.,반비례한다.,평방근에 비례한다.,근사값이다.,Machine Design and Manufacturing,0.3478
+"사람이 가청 할 수 있는 최대 가청음의 세기는 얼마인가? (단, W/m2 = 음향출력/표면적)",1,10(W/m2),20(W/m2),30(W/m2),40(W/m2),Machine Design and Manufacturing,0.3478
+608C2P6 로 표시된 베어링의 호칭번호의 설명 중 틀린 것은?,3,60 : 베어링 계열기호,8 : 안지름 번호,C2 : 외부 틈새 기호,P6: 등급 기호,Machine Design and Manufacturing,0.3478
+복합금형(compound die)의 일반적인 특성이 아닌 것은?,2,Burr의 방향이 동일하다.,제품 및 스크랩 제거가 쉽다.,재료의 사용면에서 우수하다.,제품의 정도가 높다.,Machine Design and Manufacturing,0.3478
+"지름 50mm의 연강축을 사용하여 350rpm으로 40kW를 전달할 수 있는 묻힘 키의 길이는 몇 mm 이상인가? (단, 키의 허용전단응력은 49.05MPa, 키의 폭과 높이는 bxh = 15mm × 10mm 이며, 전단저항만 고려한다.)",3,38,46,60,78,Machine Design and Manufacturing,0.3478
+"3차원 직교좌표계 상의 세점 A(1,1,1), B(2,1,4), C(5,1,3)가 이루는 삼각형의 면적은 얼마인가?",2,4,5,8,10,Machine Design and Manufacturing,0.3478
+정의에 따라서 결정된 양을 사용하여 기본량만의 측정으로 유도하는 측정방법은?,4,직접측정,간접측정,비교측정,절대측정,Machine Design and Manufacturing,0.3478
+"미터나사의 피치가 3mm이고 유효 지름 d는 22.051mm 일 때 나사 효율 η는 약 얼마인가? (단, 마찰 계수 μ = 0.105 이다.)",1,η = 25.2%,η = 32.2%,η = 39.2%,η = 48.8%,Machine Design and Manufacturing,0.3478
+원통형 성형품의 코어 휨을 방지하기 위한 게이트로 적합한 것은?,4,필름 게이트,핀포인트 게이트,서브마린 게이트,링 게이트,Machine Design and Manufacturing,0.3478
+1㎌콘덴서에 22000V로 충전하여 이를 200Ω의 저항에 연결하면 저항에서 소모되는 총 에너지는 약 몇 J 인가?,4,12.2,122,24.2,242,Machine Design and Manufacturing,0.3485
+코일 스프링에 350 N의 하중을 걸어 5.6 cm 늘어났다면 이 스프링의 스프링 상수(N/mm)는?,2,5.25,6.25,53.5,62.5,Machine Design and Manufacturing,0.3492
+"50kN의 축방향 하중과 비틀림이 동시에 작용하고 있을 때 가장 적절한 최소 크기의 체결용 미터나사는? (단, 허용인장응력은 45N/mm2 이고, 비틀림 전단응력은 수직응력의 1/3 이다.)",4,M36,M42,M48,M56,Machine Design and Manufacturing,0.3493
+저양정 펌프에서 토출량을 조절할 수 있는 밸브는?,4,코크 밸브,감압 밸브,체크 밸브,나비형 밸브,Machine Design and Manufacturing,0.35
+정비계획에 필요한 예비품의 종류 중 전 공장에 영향을 미치는 동력 설비에서 많이 볼 수 있는 것은 무엇인가?,3,부분 예비품,라인예비품,단일기계 예비품,부분적 세트(set)예비품,Machine Design and Manufacturing,0.35
+"모듈이 3이고, 잇수가 각각 30과 60인 한 쌍의 표준 평기어의 중심거리는?",3,114㎜,126㎜,135㎜,148㎜,Machine Design and Manufacturing,0.35
+"3.68kW의 동력으로 회전하는 드럼을 블록 브레이크를 이용하여 제동하고자 할 때 브레이크의 용량(brake capacity)은 약 몇 MPaㆍm/s인가? (단, 브레이크 블록의 길이가 100m, 너비 30mm이고, 접촉부 마찰계수는 0.2이다.)",4,0.12,0.25,0.64,1.23,Machine Design and Manufacturing,0.35
+설비의 고장율 곡선에서 시간이 지날수록 고장율이 감소하며 예방보전이 거의 필요없는 고장기는?,1,초기 고장기,우발 고장기,마모 고장기,노후 고장기,Machine Design and Manufacturing,0.35
+"400rpm으로 전동축을 지지하고 있는 미끄럼 베어링에서 저널의 지름은 6cm, 저널의 길이는 10cm 이고, 4.2kN의 레이디얼 하중이 작용할 때, 베어링 압력은 약 몇 MPa 인가?",3,0.5,0.6,0.7,0.8,Machine Design and Manufacturing,0.35
+허용전단응력 60N/mm2의 리벳이 있다. 이 리벳에 15kN의 전단 하중을 작용시킬 때 리벳의 지름은 약 몇 mm 이상이어야 안전한가?,1,17.85,20.50,25.25,30.85,Machine Design and Manufacturing,0.35
+"유도 전동기의 극수가 4 이고 , 주파수가 60 Hz 일 때 전동기회전속도는 몇 rpm 인가?",2,1200,1800,2400,3600,Machine Design and Manufacturing,0.35
+인장시험으로 측정할 수 없는 것은?,4,비례한도,항복점,탄성한도,피로한도,Machine Design and Manufacturing,0.35
+두께 1 mm의 연강판 (전단저항 τ= 40 kgf/mm2)을 이용하여 지름 100 mm 의 블랭크를 블랭킹하려 한다. 블랭킹 압력은 약 몇 톤(ton)인가?,4,31.5,25.6,20.5,12.6,Machine Design and Manufacturing,0.35
+"유압 프레스를 설계하려고 한다. 사용압력은 24Mpa, 필요한 힘은 500kN 이며, 행정거리는 0.8m이다. 또한 실린더의 속도는 0.01m/s 라고 가정 할 경우 실린더의 직경은 약 얼마인가?",4,113mm,123mm,153mm,163mm,Machine Design and Manufacturing,0.3506
+설비보전표준의 분류 중 일상보전과 관계 있는 것으로서 공작기계가 없어도 할 수 있는 보전작업은?,2,검사,정비,수리,설치,Machine Design and Manufacturing,0.3514
+드릴 지그를 구성하는 3대 요소가 아닌 것은?,2,위치 결정,기준면,체결,공구의 안내,Machine Design and Manufacturing,0.3519
+"냉각수 위치 설계로 제품면에서 냉각수 중심까지 일반적으로 얼마일때 가장 적절한가? (단, 냉각수 구멍 직경 8mm 사용할 경우이다.)",3,6mm,12mm,24mm,48mm,Machine Design and Manufacturing,0.3529
+피드백 제어계에서 설정값을 표시하는 것은?,2,PV,SV,MV,DV,Machine Design and Manufacturing,0.3529
+금형의 생산 형태에 따라 분류한 것이 아닌 것은?,4,간이 금형,시험용 금형,시작 금형,소형 금형,Machine Design and Manufacturing,0.3529
+구멍의 치수가  축은  인 끼워맞춤이 있다. 이 끼워 맞춤의 최대 죔새는?,2,0.042,0.021,0.029,0.008,Machine Design and Manufacturing,0.3529
+"특히, 구멍 가공에서 다이어몬드,루비,사파이어 등의 가공에 가장 적합한 특수 가공 방법은?",2,전해연마,방전가공,수퍼 피니싱,호우닝,Machine Design and Manufacturing,0.3529
+계측용어에서 통계적 처리에 관한 용어 중 잔치(residual)의 의미는?,4,오차 절대치의 평균치,편차 절대치의 평균치,평균치로부터 모평균을 뺀 값,측정치로부터 시료평균을 뺀 값,Machine Design and Manufacturing,0.3529
+PN접합 다이오드의 순반향 바이어스 전압의 설명 중 잘못된 것은?,1,전위장벽이 높아진다,공핍층이 좁아진다,P형 쪽에 (+)단자를 접속한다,정공이나 전자는 접합면을 빠져나가 이동한다,Machine Design and Manufacturing,0.3529
+볼트너트의 이완 방지 방법이 아닌 것은?,4,홈달림 너트 분할핀 고정에 의한 방법,절삭너트에 의한 방법,로크너트에 의한 방법,볼트를 잘라 넓히는 방법,Machine Design and Manufacturing,0.3529
+강에 함유되어 있는 황(S)의 편석이나 분포 상태를 검출하는데 사용되는 검사법은?,2,감마선(γ)검사법,설퍼 프린트법,X-선 검사법,초음파 검사법,Machine Design and Manufacturing,0.3529
+1공학 기압은 몇 mAq인가 ?,3,1.0,735.5,10.0,760,Machine Design and Manufacturing,0.3529
+역률 80[%]인 부하의 전력이 400[KW]이라면 무효전력[KVar]은 얼마인가?,2,200,300,400,500,Machine Design and Manufacturing,0.3529
+전위기어의 사용목적으로 거리가 먼 것은?,1,속도비를 크게 하기 위해서,언더컷을 방지하기 위해서,물림률을 증가시키기 위해서,이의 강도를 증대시키기 위해서,Machine Design and Manufacturing,0.3529
+"설비의 열화 패턴에서 개선 개량이 절대 필요하며, 예비품 관리가 중요하고 유효수명이라고 하는 것으로 맞는 것은?",1,우발 고장기,초기 고장기,돌발 고장기,마모 고장기,Machine Design and Manufacturing,0.3529
+"용융상태의 주철에 마그네슘, 세륨, 칼슘 등을 첨가시켜 만든 주철은?",2,합금주철,구상흑연주철,칠드주철,가단주철,Machine Design and Manufacturing,0.3529
+백심가단 주철에서 사용되는 탈탄제는?,3,"알루미나, 탄소가루","알루미나, 철광석","철광석, 밀 스케일의 산화철","유리탄소, 알루미나",Machine Design and Manufacturing,0.3529
+수직 밀링머신에 관한 설명으로 틀린 것은?,4,공구는 주로 정면 밀링 커터와 엔드밀을 사용한다.,"평면가공이나 홈 가공, T홈 가공, 더브테일 등을 주로 가공한다.","주축헤드는 고정형, 상하이동형, 경사형 등이 있다.",공구는 아버를 이용하여 고정한다.,Machine Design and Manufacturing,0.3529
+내면 연삭기의 내면 연삭 방식이 아닌 것은?,4,보통형,센터리스형,유성형,지지판 위치형,Machine Design and Manufacturing,0.3529
+CNC 공작기계의 좌표치 입력방법에서 메트릭 입력 명령어는?,3,G17,G20,G21,G28,Machine Design and Manufacturing,0.3536999999999999
+어떤 회로에서 저항 양단 전압의 참값이 40V 이나 회로시험기로 전압을 측정한 결과 39V를 지시 했다면 이 회로시험기의 백분율 오차(%)는?,3,-1.0,+1.0,-2.5,+2.5,Machine Design and Manufacturing,0.3543
+일반적으로 축과 보스에 자동적으로 조정되어 테이퍼 축의 회전체를 결합할 때 사용되는 키(key)는?,3,원뿔 키,패더 키,반달 키,평 키,Machine Design and Manufacturing,0.3547999999999999
+고주파 진동에 효과적이지만 저주파 진동에는 역효과가 발생되는 진동 방지 방법은?,2,진동차단기 사용,2단계 차단기 사용,기초의 진동을 제어,질량이 큰 경우 거더(girder)이용,Machine Design and Manufacturing,0.3547999999999999
+프레스의 스트로크에서 전단가공을 피어싱과 블랭킹을 동시에 행하는 가공은?,3,프로그레시브 가공,콤비네이션 가공,콤파운드 가공,트랜스퍼 가공,Machine Design and Manufacturing,0.3547999999999999
+일반적으로 압축기에서 압축의 정도를 나타낼 때에는 흡입공기 압력과 배출공기 압력의 비를 사용한다. 압축기는 얼마의 압력비로 압축된 것을 말하는가?,4,0.1 ~ 0.3,0.5 ~ 1.1,1.3 ~ 1.8,2.0 이상,Machine Design and Manufacturing,0.3556
+블록게이지(block gauge)는 어느 작업으로 완성 가공되는가?,3,호닝,버핑,래핑(건식),브로칭,Machine Design and Manufacturing,0.3556
+신호전송의 노이즈에 대한 대책으로 전력선 용량 중 전압이 250V이면 전력선과 신호선관의 최저 격리거리는?,2,300mm,460mm,610mm,1200mm,Machine Design and Manufacturing,0.3559
+"테이블의 전후 및 좌우 이송으로 원형, 윤곽가공 및 분할 작업에 적합한 밀링머신의 부속장치는?",2,회전 바이스,회전 테이블,분할대,슬로팅 장치,Machine Design and Manufacturing,0.3571
+"러너리스 금형에서 러너판 중량이 30 kgf일 때 히터의 용량은 몇 KW 필요한가? (단, 요구 러너 플레이트 온도 t1=180℃, 대기온도t2=20℃, 강의 비열C=0.11 kcal/kgf℃, 온도상승시간T=1시간, 효율η= 0.8이다.)",1,0.77,3.19,4.25,5.24,Machine Design and Manufacturing,0.3571
+"피치가 12.7㎜, 잇수 15인 체인휘일이 400rpm으로 회전할 때 이 체인의 평균 속도는 약 얼마인가?",1,1.3m/sec,2.5m/sec,3.3m/sec,4.5m/sec,Machine Design and Manufacturing,0.3571
+"코일스프링의 전체 평균직경이 50mm, 소선의 직경이 6mm일 때 스프링 지수는 약 얼마인가?",4,1.4,2.5,4.3,8.3,Machine Design and Manufacturing,0.3571
+주철조직에 니켈이 잘 고용되어 있으면 여러 가지 좋은 점이 나타내는데 그 내용으로 틀린 것은?,4,강도를 증가시킨다.,펄라이트를 미세하게 하여 흑연화를 촉진시킨다.,"내열성, 내식성, 내마멸성을 증가시킨다.",얇은 부분의 칠(chill)의 발생을 촉진시킨다.,Machine Design and Manufacturing,0.3571
+드로잉 공정 설계시 고려하지 않아도 되는 것은?,4,리스트라이킹의 유무,블랭크 지름과 두께비,트리밍 여유,시어각의 크기,Machine Design and Manufacturing,0.3571
+"선삭에서 외경을 절삭할 때 가공길이 l=150mm, 회전수 N=l000rpm, 이송속도 f=0. 3mm/rev인 경우 절삭시간은?",2,15초,30초,45초,60초,Machine Design and Manufacturing,0.3571
+배관을 고정시키는 장치 중 배관의 높낮이를 조절할 수 있도록 제작된 배관 지지 장치는?,2,새들밴드 지지,턴 버클 지지,덕트 위 고정,U볼트 지지,Machine Design and Manufacturing,0.3571
+"구멍의 치수가 이고, 축의 치수가 이라면 무슨 끼워 맞춤인가?",1,헐거운 끼워 맞춤,중간 끼워 맞춤,억지 끼워 맞춤,가열 끼워 맞춤,Machine Design and Manufacturing,0.3571
+순차이송 금형에서 게이트의 역할은?,4,제품 치수 결정,제품 정밀도 결정,소재 이송거리 결정,소재 위치 결정,Machine Design and Manufacturing,0.3571
+주조된 상태에서 구상 흑연 주철의 조직이 아닌 것은?,2,페라이트 형,마텐자이트 형,시멘타이트 형,펄라이트 형,Machine Design and Manufacturing,0.3571
+윤활제의 사용 목적이 아닌 것은?,3,밀폐 작용,냉각 작용,방진 작용,청정 작용,Machine Design and Manufacturing,0.3571
+"경량의 플라스틱을 매트릭스로 하고, 내부에 강화섬유를 함유시킴으로써 비강도를 현저하게 높인 복합재료는?",2,FRM,FRP,SiC,FRC,Machine Design and Manufacturing,0.3571
+공작물을 화학반응을 통하여 가공하는 화학적 가공의 특징으로 틀린 것은?,2,강도나 경도에 관계 없이 사용할 수 있다.,가공경화 또는 표면변질 층이 생긴다.,복잡한 형상과 관계없이 표면 전체를 한번에 가공할 수 있다.,한번에 여러 개를 가공할 수 있다.,Machine Design and Manufacturing,0.3571
+공기 압축기 언로더(unloader)의 작동 불량 원인이 아닌 것은?,3,언로더 조작 압력이 낮은 경우,다이아프램(diaphragm)이 파손되어 있는 경우,루브리케이터(Iubricator)의 작동 불량인 경우,솔레노이드 밸브(solen이d valve)의 작동 불량인 경우,Machine Design and Manufacturing,0.3576
+"체인 피치가 15.875mm, 잇수 40, 회전수가 500rpm이면 체인의 평균속도는 약 몇 m/s인가?",2,4.3,5.3,6.3,7.3,Machine Design and Manufacturing,0.359
+압력 릴리프 밸브의 용도에 따른 분류가 아닌 것은?,1,감압 밸브,안전 밸브,압력 시퀀스 밸브,카운터 밸런스 밸브,Machine Design and Manufacturing,0.3599
+쾌속조형(RP)에 관한 일반적인 설명 중 틀린 것은?,2,"클램프, 지그, 또는 고정구를 고려할 필요가 없다.",특징형상 기반 설계나 특징형상 인식이 필요하다.,물체를 만들기 위해 단면 데이터를 생성하여 사용한다.,재료를 제거하는 것이 아니라 재료를 더해 나가는 공정이다.,Machine Design and Manufacturing,0.36
+관의 이음 중 열에 의한 관의 팽창 수축을 허용하는 이음 방법은?,2,용접 이음,신축 이음,유니온 이음,플랜지이음,Machine Design and Manufacturing,0.36
+고무 스프링의 일반적인 특징에 관한 설명으로 틀린 것은?,4,1개의 고무로 2축 또는 3축 방향의 하중에 대한 흡수가 가능하다.,"형상을 자유롭게 할 수 있고, 다양한 용도가 가능하다.",방진 및 방음 효과가 우수하다.,특히 인장하중에 대한 방진효과가 우수하다.,Machine Design and Manufacturing,0.36
+"350rpm으로 15kW의 동력을 전달시키는 축의 지름은 약 몇 mm 이상이어야 하는가? ( 단, 축의 허용전단응력은 25Mpa이다. )",3,35,40,44,52,Machine Design and Manufacturing,0.36
+"PLC 프로그램의 최초단계인 0 스텝에서 최후 스탭까지 진행되는데 걸리는 시간을 스캔타임이라 한다. 6μs의 처리 속도를 가진 PLC가 1,000스텝을 처리하는데 걸리는 스캔타임은?",1,6 X 10-3[S],6 X 10-4[S],6 X 10-5[S],6 X 10-6[S],Machine Design and Manufacturing,0.36
+"지름이 100mm인 가공물에 리드 600mm의 오른나사 헬리컬 홈을 깎고자 한다. 테이블 이송나사의 피치가 10mm인 밀링머신에서, 테이블 선회각을 tanα로 나타낼 때 옳은 값은?",4,31.41,1.90,0.03,0.52,Machine Design and Manufacturing,0.36
+측온저항체의 특성이 아닌 것은?,3,가격이 비싸다.,최고사용온도가 600℃정도이다.,충격 진동에 강하다.,응답속도가 느리다.,Machine Design and Manufacturing,0.36
+측정방식에서 영위법 방식으로 많이 쓰이는 계기는?,2,다이얼게이지,전위차계,부르동관 압력계,가동코일형 전압계,Machine Design and Manufacturing,0.3607
+밸브 취급상의 일반적인 주의 사항으로 옳지 않은 것은?,2,밸브를 열 때는 처음에 약간 열고 기기의 상태를 확인하면서 소정의 열림 위치까지 연다.,밸브를 완전히 열 때는 개폐 손잡이를 정지할 때 까지 완전히 회전시킨 후 그대로 개폐 손잡이를 잠궈 둔다.,밸브를 닫을 때 밸브가 진동을 일으키면 빨리 닫는다.,이종 금속으로 이루어진 밸브를 닫을 때는 냉각된 다음 더 죄기를 한다.,Machine Design and Manufacturing,0.3611
+프레스 가공 중 전단가공에 속하지 않는 것은?,2,피어싱 가공,코이닝 가공,트리밍 가공,블랭킹 가공,Machine Design and Manufacturing,0.3617
+유리섬유에 합침(합침)시키는 것이 가능하기 때문에 FRP(fiber reinforced plastic)용으로 사용되는 열경화성 플라스틱은?,2,폴리에틴렌계,불포화 폴리에스테르계,아크릴계,폴리염화비닐계,Machine Design and Manufacturing,0.3617
+"긴장측의 장력이 3800N, 이완측의 장력이 1850N일 때 전달동력은 약 몇 kW인가? (단, 벨트의 속도는 3.4m/s이다.)",4,2.3,4.2,5.5,6.6,Machine Design and Manufacturing,0.3627
+도면의 치수는 가급적 어느 곳에 기입하여야 하는가?,2,평면도,정면도,측면도,저면도,Machine Design and Manufacturing,0.3636
+소성가공의 종류에 해당되지 않는 것은?,4,판금가공,압연,전조,주조,Machine Design and Manufacturing,0.3636
+서피스 모델에 관한 설명 중 틀린 것은?,3,단면도를 작성할 수 있다.,2개 면의 교선을 구할 수 있다.,유한요소법(FEM) 적용을 위한 입체 요소 분할이 쉽다.,NC코드 생성에 적당하다.,Machine Design and Manufacturing,0.3636
+"백주철을 고온으로 장시간 풀림해서 시멘타이트를 분해또는 감소시키고 인성이나 연성을 증가시킨 주철로, 대량생산품에 사용되는 측심,백심,펄라이트계로 구분되는 것은?",3,칠드주철,회주철,가단주철,구상흑연주철,Machine Design and Manufacturing,0.3636
+일반적으로 방전가공 작업시 사용되는 가공액의 종류 중 가장 거리가 먼 것은?,4,변압기유,기유,등유,휘발유,Machine Design and Manufacturing,0.3636
+나사의 회전각과 딤블(thimble)직경의 눈금으로 확대하여 측정하는 측정기는?,4,블록게이지,다이알게이지,버어니어캘리퍼스,마이크로미터,Machine Design and Manufacturing,0.3636
+러너리스 시스템 중 핫 러너(hot runner)방식의 특징으로 틀린 것은?,4,성형 사이클이 단축된다.,러너에 의한 수지 손실이 없다.,"구조가 복잡하게 되고, 고가이다.",노즐의 열이 금형에 전달되기 쉽다.,Machine Design and Manufacturing,0.3636
+가공면을 자동적으로 인식 처리하며 NC데이터 작성이 용이한 모델은?,2,실물 모델,곡면 모델,유한요소 모델,와이어 프레임 모델,Machine Design and Manufacturing,0.3636
+감압밸브에 관한 설명으로 맞는 것은?,3,입구 압력을 일정하게 유지하는 밸브이다.,감압밸브는 방향밸브의 역할도 한다.,감압밸브는 정상상태 열림형이다.,감압밸브는 출구 측으로부터 입구 측으로 역류가 생길 때 역류작용을 하는 릴리프 밸브와 같은 작용을 한다.,Machine Design and Manufacturing,0.3636
+설비가 신품일 때와 비교하여 점차로 열화 되어 가는 것을 무엇이라고 하는가?,1,절대적 열화,돌발 고장형 열화,기능 정지형 열화,우발적 열화,Machine Design and Manufacturing,0.3636
+에방보전(장비)의 효과가 가장 큰 것은?,3,초기 고장기,우발 고장기,마모 고장기,돌발 고장기,Machine Design and Manufacturing,0.3636
+와이어 컷 방전가공기의 가공속도를 표시하는 것은?,2,단위 시간당의 가공 체적,단위 시간당의 가공단면적,단위 시간당의 가공중량,단위 시간당의 와이어 이송길이,Machine Design and Manufacturing,0.3636
+침탄과 동시에 질화도 되므로 침탄질화법 또는 청화법이라고 하는 열처리법은?,2,고체 침탄법,액체 침탄법,가스 침탄법,전해 경화법,Machine Design and Manufacturing,0.3636
+탄소강에 함유된 망간의 영향과 거리가 먼 것은?,4,고온에서 거칠어지는 것을 감소시킨다.,고온가공은 용이하나 냉간가공에는 불리하다.,담금질 효과를 증대시킨다.,강도를 감소시키고 연성을 증가시킨다.,Machine Design and Manufacturing,0.3636
+"두께 2mm의 연강판 소재를 가지고 직경 100mm의 제품을 블랭킹하기 위해 필요한 프레스의 전단력은 약 몇 ton인가? (단, 전단강도 32kgf/mm2, 안전율은 20%, 전단각이 없는 경우이다.)",3,15,20,25,35,Machine Design and Manufacturing,0.3636
+공유압 변환기 사용시 주의점으로 옳은 것은?,2,수평방향으로 설치한다.,실린더나 배관 내의 공기를 충분히 뺀다.,반드시 액추에이터보다 낮게 설치한다.,열원에 가까이 설치한다.,Machine Design and Manufacturing,0.3636
+송풍기 기동 후 베어링의 온도가 급상승하는 경우 점검사항이 아닌 것은?,3,윤활유의 적정 여부,미끄럼 베어링은 오일링의 회전이 정상인지 여부,댐퍼 및 베인 콘트롤 장치의 개폐조작이 원활한지 여부,"관통부에 펠트[felt]가 쓰이는 경우,축에 강하게 접촉되어 있는지 여부",Machine Design and Manufacturing,0.3636
+오스테나이트계의 스테인리스강의 대표강인 18-8 스테인리스강의 합금 원소와 그 함유량이 옳은 것은?,4,Ni(18%) - Mn(8%),Mn(18%) - Ni(8%),Ni(18%) - Cr(8%),Cr(18%) - Ni(8%),Machine Design and Manufacturing,0.3636
+무단변속 마찰차가 아닌 것은?,4,원뿔 마찰차,구면 마찰차,원판 마찰차,홈붙이 마찰차,Machine Design and Manufacturing,0.3636
+"1날 당 이송량 0.12㎜, 밀링 커터의 날수 12개, 회전수가 800rpm일 때 이송속도는 몇 ㎜/min인가?",3,1050,1100,1152,1200,Machine Design and Manufacturing,0.3636
+회전기계의 열화 시 발생되는 주파수 특성에서 언밸런스에 대한 설명으로 틀린 것은?,3,언밸런스는 회전 벡터이다.,회전 주파수의 1f 성분의 탁월 주파수가 나타난다.,휨 축이거나 베어링의 설치가 잘못 되었을 때 나타난다.,언밸런스에 의한 진동은 수평ㆍ수직방향에 최대의 진폭이 발생한다.,Machine Design and Manufacturing,0.3646
+블랭크를 생산하기 위하여 블랭킹 가공을 하였더니 블랭크가 낙하하지 않고 떠오르는(블랭크 업) 현상이 발생하였을 때의 방지 대책으로 틀린 것은?,2,펀치에 셰더핀을 설치한다.,펀치의 반경값을 크게 한다.,클리어런스 값을 작게 한다.,펀치에 에어 벤트(공기구멍)를 설치한다.,Machine Design and Manufacturing,0.3651
+"−18㎛의 오차가 있는 블록 게이지에 다이얼 게이지를 영점 셋팅하여 공작물을 측정하였더니, 측정값이 46.78mm 이었다면 참값(mm)은?",3,46.960,46.798,46.762,46.603,Machine Design and Manufacturing,0.3651
+디지털 신호처리에서 일반적으로 데이터의 경향을 제거하는 방법으로 옳은 것은?,1,최소 자승법,최대 자승법,이산적 신호법,데이터 주밍법,Machine Design and Manufacturing,0.3651
+"근래에 생산되는 대형 정밀 CNC 고속가공기에 주로 사용되며 모터에서 속도를 검출하고, 테이블에 리니어 스케일을 부착하여 위치를 피드백 하는 서보기구 방식은?",3,개방회로 방식,반폐쇄회로 방식,폐쇄회로 방식,복합회로 방식,Machine Design and Manufacturing,0.3659
+"100V, 20W의 전구에 50V의 전압을 가했을 때의 전력은 몇 W인가?",3,20,10,5,3,Machine Design and Manufacturing,0.3664
+"원주속도 5m/s로 2.2kW의 동력을 전달하는 평벨트 전동장치에서 긴장측 장력은 몇 N인가? (단, 벨트의 장력비(eμθ)는 2이다.)",4,450,660,750,880,Machine Design and Manufacturing,0.3664
+휘발성 메모리의 일종으로 데이터 보존을 위한 리프레시(Ref lash) 신호가 계속 공급 띨어야 하는 것은?,2,ROM,DRAM,SRAM,EPRAM,Machine Design and Manufacturing,0.3667
+설비 개선의 사고법에 대한 설명 중 틀린 것은?,3,복원이란 결함이 있는 현재의 상태를 원래의 바른 상태로 되돌리는 일이다.,미결함의 사고법은 결과에 대한 영향이 적다고 일반적으로 생각되는 것을 철저 하게 제거하는 사고를 뜻한다.,조정의 조절화의 사고법은 기계에 의한 정량화와 수치화를 통해 활용하는 것이 다.,기능의 사고법이란 모든 현상에 대하여 체득한 것을 근거로 바르게 또한 반사적 으로 행동할 수 있는 힘이며 장시간에 걸쳐 지속될 수 있는 능력을 말한다.,Machine Design and Manufacturing,0.3667
+"멀링작업에서 플랜지를 6° 간격으로 등분하려고 한다. 이때 사용하는 분할판과 크랭크 회전수는? (단, 브라운 샤프형을 사용한다.)",3,15구멍의 분할판에서 6구멍씩,18구멍의 분할판에서 15구멍씩,27구멍의 분할판에서 18구멍씩,36구멍의 분할판에서 13구멍씩,Machine Design and Manufacturing,0.3667
+선반 작업에서 테이퍼 부분의 길이가 짧고 경사각이 큰 일감의 테이퍼 가공에 사용되는 방법은?,2,심압대 편위에 의한 방법,복식 공구대에 의한 방법,체이싱 다이얼에 의한 방법,방진구에 의한 방법,Machine Design and Manufacturing,0.3667
+스퍼기어의 도면에서 항목표에 기입해야하는 사항으로 가장 거리가 먼 것은?,4,치형,모듈,압력각,리드,Machine Design and Manufacturing,0.3667
+나사연삭기의 연삭방법이 아닌 것은?,3,다인 나사연삭 방법,단식 나사연삭 방법,역식 나사연삭 방법,센터리스 나사연삭 방법,Machine Design and Manufacturing,0.3684
+"유압펌프의 동력 (Lp) 을 구하는 식으로 맞는 것은? (단, p=펌프토출압 (kg/cm2) . Q=이론토출량 (l/min) η = 전효율 이다 )",2,Lp=P x Q /450 η kW,Lp=P x Q /612 η kW,Lp=P x Q /7500 η kW,Lp=P x Q /10200 η kW,Machine Design and Manufacturing,0.3684
+공작물 연삭면의 모양에 따라 연삭 가공의 종류를 분류할 경우 해당하지 않는 것은?,4,원통 연삭,평면 연삭,공구 연삭,공작물 연삭,Machine Design and Manufacturing,0.3684
+주철은 고온에서 가열과 냉각을 반복하면 부피가 불고 변형이나 균열이 일어나 주철의 강도나 수명을 저하시키게 되는데 이러한 현상을 무엇이라하는가?,3,주철의 자연 시효,주철의 자기 풀림,주철의 성장,주철의 시효 경화,Machine Design and Manufacturing,0.3684
+"연신율이 20%이고, 파괴되기 직전의 늘어난 시편의 전체 길이가 30㎝ 일 때 시편의 본래의 길이는?",2,20㎝,25㎝,30㎝,35㎝,Machine Design and Manufacturing,0.3684
+압출 가공의 종류에 해당되지 않는 것은?,1,복식 압출,직접 압출,간접 압출,충격 압출,Machine Design and Manufacturing,0.3684
+유압 펌프의 형식 중 비용적형에 해당되는 것은?,2,베인 펌프,원심펌프,로브펌프,피스톤펌프,Machine Design and Manufacturing,0.3684
+M16 볼트를 길이 15cm의 스패너를 이용하여 1000 kgfㆍcm의 토크로 체결하고자 한다.체결에 필요한 스패너의 조임력은?,2,33.3 kgf,66.7 kgf,1000 kgf,15000 kgf,Machine Design and Manufacturing,0.3684
+"두 개의 축이 평행하고, 그 축의 중심선의 위치가 약간 어긋났을 경우, 각 속도는 변화없이 회전동력을 전달 시키려고 할 때 사용되는 가장 적합한 커플링은?",2,플랜지 커플링(flange coupling),올덤 커플링(oldham coupling),머프 커플링(muff coupling),유니버설 커플링(universal coupling),Machine Design and Manufacturing,0.3684
+"블랭킹 금형에서 전단력이 1000kgf이고, 전단 윤곽길이가 50mm일 때, 다이 플레이트의 두께는 최소 어느 정도가 되어야 하는가? (단, 보정계수 k=1.0일 때)",2,7 mm,10 mm,15 mm,20 mm,Machine Design and Manufacturing,0.3684
+V-벨트의 각도는 보통 몇 도인가?,3,90°,60°,40°,30°,Machine Design and Manufacturing,0.3684
+강력한 흑연화 촉진 원소로서 탄소량을 증가시키는 것과 같은 효과를 가지며 주철의 응고 수축을 적게 하는 원소는?,1,Si,Mn,P,S,Machine Design and Manufacturing,0.369
+"절삭속도 70m/min, 밀링 커터의 날 수 10, 커터의 지름 140㎜, 1날 당 이송 0.15㎜로 밀링 가공할 때, 테이블의 이송속도는 약 얼마인가?",4,144m/min,144㎜/min,239m/min,239㎜/min,Machine Design and Manufacturing,0.3699
+"구멍의 치수는  , 축의 치수는  일 때. 최대 틈새는?",3,0.004,0.005,0.007,0.009,Machine Design and Manufacturing,0.3699
+감속기 하우징의 기름 주입구 나사가 PF 1/2 - A 로 표시되어 있을 때 이 나사는?,1,"관용 평행나사, A 급","관용 평행나사, 바깥지름 1/2 인치","관용 테이퍼나사, A 급","관용 테이퍼나사, 바깥지름 1/2 인치",Machine Design and Manufacturing,0.3704
+300rpm으로 회전하는 스핀들에서 5회전 휴지(dwell)를 주려고 한다. 정지시간을 구해 NC 프로그램을 작성한 것 중 옳은 것은?,4,G04 P1500;,G04 X1000;,G04 X1.5;,G04 U1.0;,Machine Design and Manufacturing,0.3704
+지름 14mm의 연강봉에 8000N의 인장하중이 작용할 때 발생하는 응력은 약 몇 N/mm2인가?,4,15,23,56,52,Machine Design and Manufacturing,0.3704
+재료를 원하는 모양으로 변형하거나 성형시켜 제품을 만드는 기계 공작법의 종류가 아닌 것은?,2,소성 가공법,탄성 가공법,접합 가공법,절삭 가공법,Machine Design and Manufacturing,0.3704
+금속표면으로부터 자유전자를 방출시키는 방법이 아닌 것은?,4,광전자방출,열전자방출,2차전자장출,3차전자방출,Machine Design and Manufacturing,0.3704
+"60[Hz], 4극, 3상 유도전동기가 있다. 슬립이 4[%]일 때 전동기의 회전수는?",3,3600 [rpm],1800[rpm],1728[rpm],1228[rpm],Machine Design and Manufacturing,0.3714
+"지름 45mm의 축이 200rpm 으로 회전하고 있다. 이 축은 길이 1m에 대하여 1/4° 의 비틀림 각이 발생한다고 할 때 약 몇 kW 의 동력을 전달하고 있는가? (단, 축 재료의 가로탄성계수는 84 GPa 이다.)",3,2.1,2.6,3.1,3.6,Machine Design and Manufacturing,0.3714
+CNC선반의 좌표계 설정에 대한 설명으로 틀린 것은?,3,좌표계를 설정하는 명령어로 G50을 사용한다.,"일반적으로 좌표계는 X, Z축의 직교좌표계를 사용한다.",주축 방향과 직각인 축을 Z축으로 설정한다.,프로그램을 작성할 때 도면 또는 일감의 기준점을 나타낸다.,Machine Design and Manufacturing,0.3714
+터릿 선반의 설명을 틀린 것은?,2,공구를 교환하는 시간을 단축할 수 있다.,가공 실물이나 모형을 따라 윤곽을 깎아낼 수 있다.,숙련되지 않은 사람이라도 좋은 제품을 만들 수 있다.,보통선반의 심압대 대신 터릿대(Turret Carriage)를 놓는다.,Machine Design and Manufacturing,0.3721
+"M20×2.5 나사가 유효지름 18.396mm이고, 마찰계수가 0.1일 때 나사의 효율은?",3,약 37%,약 56%,약 27%,약 46%,Machine Design and Manufacturing,0.375
+회전기계에서 발생하는 진동신호의 주파수 분석에 대한 설명이 잘못된 것은?,4,시간신호를 푸리에 변환하여 주파수를 분석한다.,회전기계에서 발생하는 여러 가지의 진동신호의 분석이 가능하다.,언밸런스의 이상 현상은 회전주파수의 1f의 특성으로 나타난다.,진동주파수는 회전축의 회전수와 반비례한다.,Machine Design and Manufacturing,0.375
+"인공합성 절삭 공구재료로 고속작업이 가능하며, 난삭재료, 고속도강, 담금질강, 내열강 등의 절삭에 적합한 공구재료는?",4,서멧,세라믹,초경합금,입방정 질화붕소,Machine Design and Manufacturing,0.375

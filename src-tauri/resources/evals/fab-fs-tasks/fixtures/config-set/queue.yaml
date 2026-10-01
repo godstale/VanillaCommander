@@ -1,0 +1,6 @@
+queue:
+  backend: memory
+  concurrency: 2
+  retry:
+    maxAttempts: 3
+    backoffSec: 5

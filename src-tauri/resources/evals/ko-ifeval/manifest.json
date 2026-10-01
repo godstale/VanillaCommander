@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "id": "ko-ifeval",
+  "version": "1.0.0",
+  "title": {
+    "ko": "IFEval-Ko 한국어 지시사항 준수",
+    "en": "IFEval-Ko Korean instruction following"
+  },
+  "description": {
+    "ko": "한국어 검증 가능한 지시사항(Q3). 한국어 체커와 strict/loose 두 지표로 평가합니다.",
+    "en": "Korean verifiable instructions (Q3), scored with Korean checkers and strict/loose metrics."
+  },
+  "category": "Q3",
+  "lang": [
+    "ko"
+  ],
+  "license": {
+    "id": "Apache-2.0",
+    "source": "https://huggingface.co/datasets/allganize/IFEval-Ko"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "사용자 메시지의 모든 지시사항을 정확히 따르세요.",
+  "scorers": [
+    {
+      "type": "ifeval",
+      "key": "strict",
+      "options": {
+        "mode": "strict"
+      }
+    },
+    {
+      "type": "ifeval",
+      "key": "loose",
+      "options": {
+        "mode": "loose"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "id": "prompt-strict",
+      "description": {
+        "ko": "프롬프트 통과율(strict)",
+        "en": "Prompt-level pass rate (strict)"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    },
+    {
+      "id": "prompt-loose",
+      "description": {
+        "ko": "프롬프트 통과율(loose)",
+        "en": "Prompt-level pass rate (loose)"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 20,
+    "standard": 100,
+    "full": "all"
+  }
+}

@@ -1,0 +1,8 @@
+auth:
+  provider: local
+  sessionTtlHours: 12
+  password:
+    minLength: 12
+    requireNumber: true
+  oauth:
+    enabled: false

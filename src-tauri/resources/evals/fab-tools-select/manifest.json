@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "id": "fab-tools-select",
+  "version": "1.0.0",
+  "title": {
+    "ko": "도구 선택",
+    "en": "Tool Selection"
+  },
+  "description": {
+    "ko": "적절한 Fortress 도구를 선택하고 인자를 구성하는 능력 평가",
+    "en": "Evaluates selecting the right Fortress tool with correct arguments"
+  },
+  "category": "A1",
+  "lang": [
+    "ko",
+    "en"
+  ],
+  "license": {
+    "id": "same-as-app",
+    "attribution": "Fortress 자체 제작"
+  },
+  "kind": "tool_call",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "scorers": [
+    {
+      "type": "tool_call_ast",
+      "options": {
+        "orderSensitive": false
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 15,
+    "standard": 60,
+    "full": 60
+  },
+  "defaults": {},
+  "systemPrompt": "You are Fortress, an agent working inside the user's project folder. Use tools when needed. The project root is `/project`.",
+  "tools": "fortress-default",
+  "stratifyBy": "subtype",
+  "requires": {
+    "toolCalling": true
+  }
+}

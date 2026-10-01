@@ -1,0 +1,119 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`buildRunConfig > matches snapshot 1`] = `
+{
+  "candidates": [
+    {
+      "baseUrl": "http://127.0.0.1:11434",
+      "contextSize": 8192,
+      "enabledBuiltinTools": [],
+      "enabledSkills": [],
+      "endpointClass": "local",
+      "keepRecentTokens": 2048,
+      "label": "cand-1",
+      "model": "qwen3:8b",
+      "provider": "ollama",
+      "reasoning": "default",
+      "reasoningEffort": "medium",
+      "reserveTokens": 1024,
+      "sourceAgentId": "agent-1",
+      "systemPrompt": "sys",
+      "temperature": 0.7,
+    },
+  ],
+  "confirmations": {
+    "codeExecution": {
+      "confirmedAt": "2026-09-25T00:00:02.000Z",
+      "runtime": "python",
+      "snippetCount": 3,
+    },
+    "externalConfirmedAt": "2026-09-25T00:00:01.000Z",
+    "externalTransfers": [
+      {
+        "dataClasses": [
+          "public-bundled",
+        ],
+        "estimatedInputTokens": 8000,
+        "estimatedRequests": 10,
+        "integrationId": "int-1",
+        "purpose": "judge",
+      },
+    ],
+    "weightsConfirmedAt": "2026-09-25T00:00:00.000Z",
+  },
+  "judge": null,
+  "name": "test-run",
+  "options": {
+    "deterministicMode": true,
+    "perfRepeats": 3,
+    "reliabilityEpochs": 3,
+    "sampleOrderSeed": 7,
+    "timeoutMultiplier": 1,
+    "unloadBetweenCandidates": true,
+  },
+  "packs": [
+    {
+      "circular": false,
+      "contentHash": "hash-pack-a",
+      "epochs": 2,
+      "packId": "pack-a",
+      "sampleIds": [
+        "s6",
+        "s5",
+      ],
+      "scope": "builtin",
+      "tier": "smoke",
+      "version": "1.0.0",
+    },
+  ],
+  "profile": {
+    "anchorOverrides": {},
+    "anchorsVersion": "anchors-v1",
+    "arena": {
+      "enabled": false,
+      "minVotes": 30,
+    },
+    "builtIn": true,
+    "categoryWeights": {
+      "Q1": 9,
+      "Q9": 2,
+    },
+    "constraints": [
+      {
+        "label": {
+          "en": "VRAM headroom ≥ 5%",
+          "ko": "VRAM 여유 ≥ 5%",
+        },
+        "metric": "vram_headroom",
+        "op": ">=",
+        "value": 0.05,
+      },
+      {
+        "label": {
+          "en": "Failure rate ≤ 10%",
+          "ko": "실패율 ≤ 10%",
+        },
+        "metric": "failure_rate",
+        "op": "<=",
+        "value": 0.1,
+      },
+    ],
+    "description": {
+      "en": "Balanced view across quality, agent, performance, resource, and reliability.",
+      "ko": "품질·에이전트·성능·자원·신뢰성을 균형 있게 봅니다.",
+    },
+    "dimensionWeights": {
+      "A": 25,
+      "P": 20,
+      "Q": 30,
+      "R": 10,
+      "S": 15,
+    },
+    "id": "balanced",
+    "name": {
+      "en": "Balanced",
+      "ko": "균형",
+    },
+  },
+}
+`;

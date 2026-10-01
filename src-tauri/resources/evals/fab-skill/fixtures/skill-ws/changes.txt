@@ -1,0 +1,7 @@
+1.4.0 candidate changes:
+- feat(eval): add pass-at-k chart to run detail
+- fix(eval): repair CSV import for quoted fields
+- fix(i18n): restore missing Korean labels
+- BREAKING: rename metric key accuracy_top1 to accuracy
+- docs: add metric glossary page
+- Contributors: 김민준, 이서아

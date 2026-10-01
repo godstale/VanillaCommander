@@ -1,0 +1,60 @@
+{"id": "fts-s-01", "toolCalls": [{"name": "read", "arguments": {"path": "docs/guide.md"}}]}
+{"id": "fts-s-02", "toolCalls": [{"name": "read", "arguments": {"path": "notes/todo.md"}}]}
+{"id": "fts-s-03", "toolCalls": [{"name": "read", "arguments": {"path": "src/app.ts"}}]}
+{"id": "fts-s-04", "toolCalls": [{"name": "read", "arguments": {"path": "README.md"}}]}
+{"id": "fts-s-05", "toolCalls": [{"name": "read", "arguments": {"path": "config/settings.json"}}]}
+{"id": "fts-s-06", "toolCalls": [{"name": "read", "arguments": {"path": "CHANGELOG.md"}}]}
+{"id": "fts-s-07", "toolCalls": [{"name": "ls", "arguments": {"path": "src"}}]}
+{"id": "fts-s-08", "toolCalls": [{"name": "ls", "arguments": {"path": "docs"}}]}
+{"id": "fts-s-09", "toolCalls": [{"name": "ls", "arguments": {"path": "assets/images"}}]}
+{"id": "fts-s-10", "toolCalls": [{"name": "ls", "arguments": {"path": "tests"}}]}
+{"id": "fts-s-11", "toolCalls": [{"name": "grep", "arguments": {"pattern": "TODO", "path": "src"}}]}
+{"id": "fts-s-12", "toolCalls": [{"name": "grep", "arguments": {"pattern": "FIXME", "path": "src"}}]}
+{"id": "fts-s-13", "toolCalls": [{"name": "grep", "arguments": {"pattern": "로그인", "path": "docs"}}]}
+{"id": "fts-s-14", "toolCalls": [{"name": "grep", "arguments": {"pattern": "API_KEY", "path": "config"}}]}
+{"id": "fts-s-15", "toolCalls": [{"name": "grep", "arguments": {"pattern": "에러", "path": "src"}}]}
+{"id": "fts-s-16", "toolCalls": [{"name": "find", "arguments": {"pattern": "*.md", "path": "docs"}}]}
+{"id": "fts-s-17", "toolCalls": [{"name": "find", "arguments": {"pattern": "*.test.ts", "path": "tests"}}]}
+{"id": "fts-s-18", "toolCalls": [{"name": "find", "arguments": {"pattern": "App.*", "path": "src"}}]}
+{"id": "fts-s-19", "toolCalls": [{"name": "find", "arguments": {"pattern": "*.json", "path": "config"}}]}
+{"id": "fts-s-20", "toolCalls": [{"name": "write", "arguments": {"path": "memos/idea.md", "content": "# 아이디어\n- 첫 번째 메모\n"}}]}
+{"id": "fts-s-21", "toolCalls": [{"name": "write", "arguments": {"path": "notes/summary.md", "content": "# Summary\nAll done.\n"}}]}
+{"id": "fts-s-22", "toolCalls": [{"name": "write", "arguments": {"path": "scripts/setup.md", "content": "# 설치 순서\n1. 의존성 설치\n"}}]}
+{"id": "fts-s-23", "toolCalls": [{"name": "edit", "arguments": {"path": "README.md", "oldText": "설치 방법", "newText": "빠른 시작"}}]}
+{"id": "fts-s-24", "toolCalls": [{"name": "edit", "arguments": {"path": "CHANGELOG.md", "oldText": "version 1", "newText": "version 2"}}]}
+{"id": "fts-c-01", "toolCalls": [{"name": "grep", "arguments": {"pattern": "TODO", "path": "src"}}]}
+{"id": "fts-c-02", "toolCalls": [{"name": "find", "arguments": {"pattern": "*test*", "path": "."}}]}
+{"id": "fts-c-03", "toolCalls": [{"name": "grep", "arguments": {"pattern": "pricing", "path": "docs"}}]}
+{"id": "fts-c-04", "toolCalls": [{"name": "find", "arguments": {"pattern": "logo*", "path": "."}}]}
+{"id": "fts-c-05", "toolCalls": [{"name": "grep", "arguments": {"pattern": "결제", "path": "src"}}]}
+{"id": "fts-c-06", "toolCalls": [{"name": "find", "arguments": {"pattern": "*.png", "path": "assets"}}]}
+{"id": "fts-c-07", "toolCalls": [{"name": "read", "arguments": {"path": "src/app.ts"}}]}
+{"id": "fts-c-08", "toolCalls": [{"name": "ls", "arguments": {"path": "src"}}]}
+{"id": "fts-c-09", "toolCalls": [{"name": "read", "arguments": {"path": "package.json"}}]}
+{"id": "fts-c-10", "toolCalls": [{"name": "ls", "arguments": {"path": "docs"}}]}
+{"id": "fts-c-11", "toolCalls": [{"name": "read", "arguments": {"path": "CHANGELOG.md"}}]}
+{"id": "fts-c-12", "toolCalls": [{"name": "write", "arguments": {"path": "docs/faq.md", "content": "# 자주 묻는 질문\n"}}]}
+{"id": "fts-c-13", "toolCalls": [{"name": "edit", "arguments": {"path": "docs/guide.md", "oldText": "베타", "newText": "정식"}}]}
+{"id": "fts-c-14", "toolCalls": [{"name": "write", "arguments": {"path": "todos.md", "content": "# Todos\n- [ ] first item\n"}}]}
+{"id": "fts-c-15", "toolCalls": [{"name": "edit", "arguments": {"path": "README.md", "oldText": "draft", "newText": "final"}}]}
+{"id": "fts-c-16", "toolCalls": [{"name": "write", "arguments": {"path": "config/settings.json", "content": "{\n  \"theme\": \"default\"\n}\n"}}]}
+{"id": "fts-p-01", "toolCalls": [{"name": "read", "arguments": {"path": "docs/guide.md"}}, {"name": "read", "arguments": {"path": "src/app.ts"}}]}
+{"id": "fts-p-02", "toolCalls": [{"name": "read", "arguments": {"path": "notes/todo.md"}}, {"name": "read", "arguments": {"path": "README.md"}}]}
+{"id": "fts-p-03", "toolCalls": [{"name": "read", "arguments": {"path": "src/app.ts"}}, {"name": "read", "arguments": {"path": "config/settings.json"}}]}
+{"id": "fts-p-04", "toolCalls": [{"name": "read", "arguments": {"path": "CHANGELOG.md"}}, {"name": "read", "arguments": {"path": "notes/todo.md"}}]}
+{"id": "fts-p-05", "toolCalls": [{"name": "read", "arguments": {"path": "config/settings.json"}}, {"name": "read", "arguments": {"path": "docs/guide.md"}}]}
+{"id": "fts-p-06", "toolCalls": [{"name": "read", "arguments": {"path": "README.md"}}, {"name": "read", "arguments": {"path": "CHANGELOG.md"}}]}
+{"id": "fts-p-07", "toolCalls": [{"name": "read", "arguments": {"path": "docs/guide.md"}}, {"name": "read", "arguments": {"path": "src/app.ts"}}]}
+{"id": "fts-p-08", "toolCalls": [{"name": "read", "arguments": {"path": "notes/todo.md"}}, {"name": "read", "arguments": {"path": "README.md"}}]}
+{"id": "fts-p-09", "toolCalls": [{"name": "read", "arguments": {"path": "src/app.ts"}}, {"name": "read", "arguments": {"path": "config/settings.json"}}]}
+{"id": "fts-p-10", "toolCalls": [{"name": "read", "arguments": {"path": "CHANGELOG.md"}}, {"name": "read", "arguments": {"path": "notes/todo.md"}}]}
+{"id": "fts-p-11", "toolCalls": [{"name": "read", "arguments": {"path": "config/settings.json"}}, {"name": "read", "arguments": {"path": "docs/guide.md"}}]}
+{"id": "fts-p-12", "toolCalls": [{"name": "read", "arguments": {"path": "README.md"}}, {"name": "read", "arguments": {"path": "CHANGELOG.md"}}]}
+{"id": "fts-e-01", "toolCalls": [{"name": "edit", "arguments": {"path": "src/app.ts", "oldText": "const version = 1", "newText": "const version = 2"}}]}
+{"id": "fts-e-02", "toolCalls": [{"name": "edit", "arguments": {"path": "README.md", "oldText": "draft release", "newText": "final release"}}]}
+{"id": "fts-e-03", "toolCalls": [{"name": "edit", "arguments": {"path": "docs/guide.md", "oldText": "베타 버전", "newText": "정식 버전"}}]}
+{"id": "fts-e-04", "toolCalls": [{"name": "edit", "arguments": {"path": "config/settings.json", "oldText": "\"debug\": false", "newText": "\"debug\": true"}}]}
+{"id": "fts-e-05", "toolCalls": [{"name": "edit", "arguments": {"path": "notes/todo.md", "oldText": "- [ ] 청소", "newText": "- [x] 청소"}}]}
+{"id": "fts-e-06", "toolCalls": [{"name": "edit", "arguments": {"path": "CHANGELOG.md", "oldText": "배포 예정", "newText": "배포 완료"}}]}
+{"id": "fts-e-07", "toolCalls": [{"name": "edit", "arguments": {"path": "src/app.ts", "oldText": "TODO: 리팩터링", "newText": "DONE: 리팩터링"}}]}
+{"id": "fts-e-08", "toolCalls": [{"name": "edit", "arguments": {"path": "docs/guide.md", "oldText": "빠른 시작", "newText": "상세 안내"}}]}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "id": "gsm8k",
+  "version": "1.0.0",
+  "title": {
+    "ko": "GSM8K 초등 수학 문제",
+    "en": "GSM8K grade-school math"
+  },
+  "description": {
+    "ko": "초등 수준 수학 문장제 1319개(Q2). 풀이 텍스트는 포함하지 않으며 정답 숫자만 평가합니다.",
+    "en": "1319 grade-school math word problems (Q2). Solution text is dropped; only the final number is scored."
+  },
+  "category": "Q2",
+  "lang": [
+    "en"
+  ],
+  "license": {
+    "id": "MIT",
+    "source": "https://huggingface.co/datasets/openai/gsm8k",
+    "attribution": "OpenAI (openai/gsm8k)"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "Solve the problem. Write the final line as `ANSWER: <number>` and nothing else on that line.",
+  "scorers": [
+    {
+      "type": "numeric"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 20,
+    "standard": 100,
+    "full": "all"
+  }
+}

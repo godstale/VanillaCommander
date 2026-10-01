@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "id": "bfcl",
+  "version": "1.0.0",
+  "title": {
+    "ko": "BFCL v3 함수 호출",
+    "en": "BFCL v3 function calling"
+  },
+  "description": {
+    "ko": "BFCL v3 Python 5개 범주 각 100문항, 총 500문항(A1). irrelevance는 no_tool_call로 평가합니다.",
+    "en": "100 items each from 5 BFCL v3 Python categories, 500 total (A1). Irrelevance items are scored with no_tool_call."
+  },
+  "category": "A1",
+  "lang": [
+    "en"
+  ],
+  "license": {
+    "id": "Apache-2.0",
+    "source": "https://github.com/ShishirPatil/gorilla",
+    "attribution": "Gorilla/Berkeley Function-Calling Leaderboard"
+  },
+  "kind": "tool_call",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "You have tools you can call. Fulfill the user request with tool calls only, using the exact function names and argument values.",
+  "scorers": [
+    {
+      "type": "tool_call_ast"
+    },
+    {
+      "type": "no_tool_call"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 20,
+    "standard": 100,
+    "full": 500
+  },
+  "stratifyBy": "subtype",
+  "requires": {
+    "toolCalling": true
+  }
+}

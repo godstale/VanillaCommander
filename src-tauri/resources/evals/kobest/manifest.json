@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "id": "kobest",
+  "version": "1.0.0",
+  "title": {
+    "ko": "KoBEST 한국어 이해 5종",
+    "en": "KoBEST Korean NLU x5"
+  },
+  "description": {
+    "ko": "KoBEST 5개 과제(boolq/copa/wic/hellaswag/sentineg) 각 200문항, 총 1000문항(Q1, 과제별 정답 형식에 맞는 선택형).",
+    "en": "200 items each from 5 KoBEST tasks (Q1), 1000 total, with task-appropriate choice formats."
+  },
+  "category": "Q1",
+  "lang": [
+    "ko"
+  ],
+  "license": {
+    "id": "CC-BY-SA-4.0",
+    "source": "https://huggingface.co/datasets/skt/kobest_v1",
+    "attribution": "SK Telecom (skt/kobest_v1)"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "문제를 풀고 마지막 줄에 `정답: X`라고 쓰세요. X는 정답 선택지의 알파벳입니다.",
+  "scorers": [
+    {
+      "type": "choice"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": "auto_choices"
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 25,
+    "standard": 250,
+    "full": "all"
+  },
+  "stratifyBy": "task"
+}

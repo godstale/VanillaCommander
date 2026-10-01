@@ -1,0 +1,30 @@
+{"id":"la-01","toolCalls":[{"name":"grep","args":{"pattern":"8443"}},{"name":"read","args":{"path":"notes-2026-04.md"}}],"answer":"notes-2026-04.md에 배포 포트 8443 결정이 기록되어 있다."}
+{"id":"la-02","toolCalls":[{"name":"grep","args":{"pattern":"3600"}},{"name":"read","args":{"path":"notes-2026-07.md"}}],"answer":"notes-2026-07.md에 캐시 TTL 3600초 결정이 기록되어 있다."}
+{"id":"la-03","toolCalls":[{"name":"grep","args":{"pattern":"박서연"}},{"name":"read","args":{"path":"notes-2026-06.md"}}],"answer":"notes-2026-06.md에 배포 체크리스트 담당 박서연이 기록되어 있다."}
+{"id":"la-04","toolCalls":[{"name":"grep","args":{"pattern":"재시도"}},{"name":"read","args":{"path":"notes-2026-08.md"}}],"answer":"notes-2026-08.md에 재시도 5회 제한이 기록되어 있다."}
+{"id":"la-05","toolCalls":[{"name":"grep","args":{"pattern":"보관"}},{"name":"read","args":{"path":"notes-2026-09.md"}}],"answer":"notes-2026-09.md에 로그 90일 보관이 기록되어 있다."}
+{"id":"la-06","toolCalls":[{"name":"grep","args":{"pattern":"retry policy"}},{"name":"read","args":{"path":"troubleshooting-en.md"}}],"answer":"troubleshooting-en.md documents a retry policy of 5 attempts."}
+{"id":"es-01","toolCalls":[{"name":"read","args":{"path":"notes-2026-05.md"}},{"name":"edit","args":{"path":"notes-2026-05.md","oldText":"담당: 미정","newText":"담당: 최도윤"}}],"answer":"notes-2026-05.md의 담당자를 최도윤으로 변경했다."}
+{"id":"es-02","toolCalls":[{"name":"read","args":{"path":"src/price.ts"}},{"name":"edit","args":{"path":"src/price.ts","oldText":"TAX_RATE = 0.1","newText":"TAX_RATE = 0.15"}}],"answer":"src/price.ts의 TAX_RATE를 0.15로 변경했다."}
+{"id":"es-03","toolCalls":[{"name":"read","args":{"path":"app.json"}},{"name":"edit","args":{"path":"app.json","oldText":"\"port\": 8080","newText":"\"port\": 8443"}}],"answer":"app.json의 포트를 8443으로 변경했다."}
+{"id":"es-04","toolCalls":[{"name":"read","args":{"path":"db.yaml"}},{"name":"edit","args":{"path":"db.yaml","oldText":"poolSize: 10","newText":"poolSize: 20"}}],"answer":"Changed db.yaml poolSize to 20."}
+{"id":"es-05","toolCalls":[{"name":"read","args":{"path":"guide-en.md"}},{"name":"edit","args":{"path":"guide-en.md","oldText":"## Geting Started","newText":"## Getting Started"}}],"answer":"guide-en.md의 소제목 오타를 수정했다."}
+{"id":"es-06","toolCalls":[{"name":"read","args":{"path":"src/format.ts"}},{"name":"edit","args":{"path":"src/format.ts","oldText":"toLocaleString('en-US')","newText":"toLocaleString('ko-KR')"}}],"answer":"src/format.ts를 ko-KR 로케일로 변경했다."}
+{"id":"es-07","toolCalls":[{"name":"read","args":{"path":"index.md"}},{"name":"edit","args":{"path":"index.md","oldText":"13차 회의: 일정 미정","newText":"13차 회의: 2026년 1월 9일 예정"}}],"answer":"index.md의 13차 회의 일정을 갱신했다."}
+{"id":"es-08","toolCalls":[{"name":"read","args":{"path":"logging.ini"}},{"name":"edit","args":{"path":"logging.ini","oldText":"level=INFO","newText":"level=DEBUG"}}],"answer":"Changed logging.ini level to DEBUG."}
+{"id":"cs-01","toolCalls":[{"name":"ls","args":{"path":"."}},{"name":"read","args":{"path":"index.md"}},{"name":"write","args":{"path":"SUMMARY.md"}}],"answer":"회의록 요약 SUMMARY.md를 작성했다 (결정 사항, 후속 조치 포함)."}
+{"id":"cs-02","toolCalls":[{"name":"ls","args":{"path":"src"}},{"name":"read","args":{"path":"README.md"}},{"name":"write","args":{"path":"SUMMARY.md"}}],"answer":"Wrote SUMMARY.md with Modules and Test coverage sections."}
+{"id":"cs-03","toolCalls":[{"name":"ls","args":{"path":"."}},{"name":"read","args":{"path":"app.json"}},{"name":"write","args":{"path":"SUMMARY.md"}}],"answer":"Wrote SUMMARY.md with Configuration and database sections."}
+{"id":"cs-04","toolCalls":[{"name":"ls","args":{"path":"."}},{"name":"read","args":{"path":"guide-ko.md"}},{"name":"write","args":{"path":"SUMMARY.md"}}],"answer":"사용자용 SUMMARY.md를 작성했다 (개요, 문제 해결 포함)."}
+{"id":"cs-05","toolCalls":[{"name":"ls","args":{"path":"."}},{"name":"read","args":{"path":"index.md"}},{"name":"write","args":{"path":"SUMMARY.md"}}],"answer":"분기 보고용 SUMMARY.md를 작성했다 (참석자, 다음 회의 포함)."}
+{"id":"cs-06","toolCalls":[{"name":"ls","args":{"path":"src"}},{"name":"read","args":{"path":"src/index.ts"}},{"name":"write","args":{"path":"SUMMARY.md"}}],"answer":"Wrote SUMMARY.md with Quick start and API sections."}
+{"id":"mr-01","toolCalls":[{"name":"grep","args":{"pattern":"formatKRW"}},{"name":"edit","args":{"path":"src/format.ts","oldText":"formatKRW","newText":"formatWon"}}],"answer":"formatKRW를 formatWon으로 개명했다 (src 3곳, tests 2곳)."}
+{"id":"mr-02","toolCalls":[{"name":"grep","args":{"pattern":"calcDiscount"}},{"name":"edit","args":{"path":"src/price.ts","oldText":"calcDiscount","newText":"computeDiscount"}}],"answer":"calcDiscount를 computeDiscount로 개명했다 (4개 파일)."}
+{"id":"mr-03","toolCalls":[{"name":"grep","args":{"pattern":"CartItem"}},{"name":"edit","args":{"path":"src/types.ts","oldText":"CartItem","newText":"CartLine"}}],"answer":"Renamed CartItem to CartLine in 6 files."}
+{"id":"mr-04","toolCalls":[{"name":"grep","args":{"pattern":"toSlug"}},{"name":"edit","args":{"path":"src/string.ts","oldText":"toSlug","newText":"slugify"}}],"answer":"toSlug를 slugify로 개명했다 (2개 파일)."}
+{"id":"mr-05","toolCalls":[{"name":"grep","args":{"pattern":"sum("}},{"name":"edit","args":{"path":"src/math.ts","oldText":"sum(","newText":"sumAll("}}],"answer":"sum을 sumAll로 개명했다 (3개 파일)."}
+{"id":"ag-01","toolCalls":[{"name":"read","args":{"path":"CHANGELOG.md"}}],"answer":"7"}
+{"id":"ag-02","toolCalls":[{"name":"read","args":{"path":"CHANGELOG.md"}}],"answer":"3"}
+{"id":"ag-03","toolCalls":[{"name":"read","args":{"path":"CHANGELOG.md"}}],"answer":"3"}
+{"id":"ag-04","toolCalls":[{"name":"read","args":{"path":"CHANGELOG.md"}}],"answer":"1"}
+{"id":"ag-05","toolCalls":[{"name":"read","args":{"path":"CHANGELOG.md"}}],"answer":"2"}

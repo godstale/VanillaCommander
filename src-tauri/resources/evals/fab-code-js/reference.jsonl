@@ -1,0 +1,40 @@
+{"id":"c-str-01","reference":"function solve(s) { return [...s].reverse().join(''); }"}
+{"id":"c-str-02","reference":"function solve(s) { return (s.match(/[aeiouAEIOU]/g) ?? []).length; }"}
+{"id":"c-str-03","reference":"function solve(s) { return s.split(' ').map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w)).join(' '); }"}
+{"id":"c-str-04","reference":"function solve(s) { const t = s.toLowerCase().replace(/\\s+/g, ''); return t === [...t].reverse().join(''); }"}
+{"id":"c-str-05","reference":"function solve(s, n) { return s.length > n ? s.slice(0, n) + '...' : s; }"}
+{"id":"c-str-06","reference":"function solve(s) { return s.toLowerCase().replace(/\\s+/g, '-').replace(/[^a-z0-9-]/g, ''); }"}
+{"id":"c-str-07","reference":"function solve(s, ch) { return [...s].filter((c) => c === ch).length; }"}
+{"id":"c-str-08","reference":"function solve(s) { if (s === '') return ''; return s.split(' ').reduce((a, b) => (b.length > a.length ? b : a)); }"}
+{"id":"c-str-09","reference":"function solve(s) { return s.length <= 4 ? s : '*'.repeat(s.length - 4) + s.slice(-4); }"}
+{"id":"c-str-10","reference":"function solve(s) { return s.trim() === '' ? 0 : s.trim().split(/\\s+/).length; }"}
+{"id":"c-str-11","reference":"function solve(s) { return [...new Set(s)].join(''); }"}
+{"id":"c-str-12","reference":"function solve(s) { return s.replace(/[A-Z]/g, (m) => '_' + m.toLowerCase()); }"}
+{"id":"c-arr-01","reference":"function solve(a) { return a.reduce((x, y) => x + y, 0); }"}
+{"id":"c-arr-02","reference":"function solve(a) { return Math.max(...a); }"}
+{"id":"c-arr-03","reference":"function solve(a) { return [...new Set(a)]; }"}
+{"id":"c-arr-04","reference":"function solve(a) { return a.reduce((acc, v) => acc.concat(v), []); }"}
+{"id":"c-arr-05","reference":"function solve(a) { return a.length === 0 ? 0 : a.reduce((x, y) => x + y, 0) / a.length; }"}
+{"id":"c-arr-06","reference":"function solve(a) { return a.filter((x) => x % 2 === 0); }"}
+{"id":"c-arr-07","reference":"function solve(a) { return [...a].sort((x, y) => x - y); }"}
+{"id":"c-arr-08","reference":"function solve(users, key) { return users.map((o) => o[key]); }"}
+{"id":"c-arr-09","reference":"function solve(pairs) { return Object.fromEntries(pairs); }"}
+{"id":"c-arr-10","reference":"function solve(a, size) { const out = []; for (let i = 0; i < a.length; i += size) out.push(a.slice(i, i + size)); return out; }"}
+{"id":"c-arr-11","reference":"function solve(a, b) { return [...new Set(a.filter((x) => b.includes(x)))]; }"}
+{"id":"c-arr-12","reference":"function solve(o1, o2) { return { ...o1, ...o2 }; }"}
+{"id":"c-num-01","reference":"function solve(date, n) { const t = new Date(date + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); }"}
+{"id":"c-num-02","reference":"function solve(a, b) { return (Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000; }"}
+{"id":"c-num-03","reference":"function solve(y) { return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0; }"}
+{"id":"c-num-04","reference":"function solve(n) { let r = 1; for (let i = 2; i <= n; i++) r *= i; return r; }"}
+{"id":"c-num-05","reference":"function solve(a, b) { return b === 0 ? a : solve(b, a % b); }"}
+{"id":"c-num-06","reference":"function solve(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }"}
+{"id":"c-num-07","reference":"function solve(x, d) { return Math.round(x * 10 ** d) / 10 ** d; }"}
+{"id":"c-num-08","reference":"function solve(date) { return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date(date + 'T00:00:00Z').getUTCDay()]; }"}
+{"id":"c-alg-01","reference":"function solve(a, t) { let lo = 0, hi = a.length - 1; while (lo <= hi) { const m = (lo + hi) >> 1; if (a[m] === t) return m; if (a[m] < t) lo = m + 1; else hi = m - 1; } return -1; }"}
+{"id":"c-alg-02","reference":"function solve(n) { let a = 0, b = 1; for (let i = 0; i < n; i++) [a, b] = [b, a + b]; return a; }"}
+{"id":"c-alg-03","reference":"function solve(nums, target) { for (let i = 0; i < nums.length; i++) for (let j = i + 1; j < nums.length; j++) if (nums[i] + nums[j] === target) return [i, j]; throw new Error('no pair'); }"}
+{"id":"c-alg-04","reference":"function solve(a, b) { return [...a].sort().join('') === [...b].sort().join(''); }"}
+{"id":"c-alg-05","reference":"function solve(nums) { const s = new Set(nums); for (let i = 0; ; i++) if (!s.has(i)) return i; }"}
+{"id":"c-alg-06","reference":"function solve(n) { if (n < 2) return false; for (let i = 2; i * i <= n; i++) if (n % i === 0) return false; return true; }"}
+{"id":"c-alg-07","reference":"function solve(a, b) { const out = []; let i = 0, j = 0; while (i < a.length && j < b.length) out.push(a[i] <= b[j] ? a[i++] : b[j++]); return out.concat(a.slice(i), b.slice(j)); }"}
+{"id":"c-alg-08","reference":"function solve(n) { return Array.from({ length: n }, (_, i) => { const v = i + 1; return v % 15 === 0 ? 'FizzBuzz' : v % 3 === 0 ? 'Fizz' : v % 5 === 0 ? 'Buzz' : v; }); }"}

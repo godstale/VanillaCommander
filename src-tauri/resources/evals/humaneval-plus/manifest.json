@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "id": "humaneval-plus",
+  "version": "1.0.0",
+  "title": {
+    "ko": "HumanEval+ 파이썬 코딩",
+    "en": "HumanEval+ Python coding"
+  },
+  "description": {
+    "ko": "EvalPlus HumanEval+ 164 과제(Q5). 실행에는 Python 런타임 동의가 필요합니다.",
+    "en": "164 EvalPlus HumanEval+ tasks (Q5). Execution requires Python runtime opt-in."
+  },
+  "category": "Q5",
+  "lang": [
+    "en"
+  ],
+  "license": {
+    "id": "Apache-2.0",
+    "source": "https://huggingface.co/datasets/evalplus/humanevalplus",
+    "attribution": "EvalPlus (evalplus/humanevalplus)"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "Complete the Python function from the prompt. Return only one ```python code block that defines the function. Do not use network access.",
+  "scorers": [
+    {
+      "type": "code_exec"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "pass_at_1",
+      "description": {
+        "ko": "1회 시도 통과율",
+        "en": "Single-attempt pass rate"
+      },
+      "source": "score",
+      "aggregation": "pass_at_k",
+      "k": 1,
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 10,
+    "standard": 50,
+    "full": "all"
+  },
+  "requires": {
+    "codeRuntime": "python"
+  }
+}

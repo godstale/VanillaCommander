@@ -1,0 +1,10 @@
+{"id":"cr-01","toolCalls":[],"answer":"배포 포트는 8443입니다."}
+{"id":"cr-02","toolCalls":[],"answer":"배포 체크리스트 담당자는 박서연입니다."}
+{"id":"cr-03","toolCalls":[],"answer":"릴리즈 마감일은 11월 14일입니다."}
+{"id":"cr-04","toolCalls":[],"answer":"결제 재시도 횟수 제한은 5회입니다."}
+{"id":"cr-05","toolCalls":[],"answer":"상품 캐시 TTL은 3600초입니다."}
+{"id":"cr-06","toolCalls":[],"answer":"배포 리전은 ap-northeast-2입니다."}
+{"id":"cr-07","toolCalls":[],"answer":"이번 분기 인프라 예산은 120만원입니다."}
+{"id":"cr-08","toolCalls":[],"answer":"평가에 쓰던 모델은 fortress-7b입니다."}
+{"id":"cr-09","toolCalls":[],"answer":"웹 서버 복제본은 3대입니다."}
+{"id":"cr-10","toolCalls":[],"answer":"정기 점검 시간대는 새벽 2시입니다."}

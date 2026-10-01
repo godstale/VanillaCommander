@@ -1,0 +1,1001 @@
+question,answer,A,B,C,D,Category,Human Accuracy
+컴퓨터의 하드웨어 구성 중 중앙처리장치에 해당되는 것은?,3,제어장치,입출력장치,보조기억장치,주기억장치,Telecommunications and Wireless Technology,0.0385
+레이다에서 동일 거리에 있는 2개의 적은 목표물을 2개로 분리해서 볼 수 있는 능력은 무엇인가?,4,방위 분해능,거리 분해능,최대 탐지거리,상의 선명도,Telecommunications and Wireless Technology,0.0455
+ITU-T 권고안 중 패킷교환용 공중 데이터 네트워크의 상호접속을 위한 노드사이의 표준프로토콕(Protocol)은?,4,X.3,X.25,X.28,X.75,Telecommunications and Wireless Technology,0.0556
+송수신점간의 거리가 정해졌을 때 전리층 반사파를 이용하여 통신할 수 있는 최적의 사용 주파수를 무엇이라고 하는가?,4,LUF,MUF,FOT,VHF,Telecommunications and Wireless Technology,0.0556
+전파법령에서 “무선국에서 사용하는 주파수마다의 중심 주파수를 말한다.”로 정의되는 용어는?,4,지정주파수,기준주파수,특성주파수,분배주파수,Telecommunications and Wireless Technology,0.0713999999999999
+광섬유케이블의 분산에 대한 설명 중 옳지 않은 것은?,2,파장 및 모드에 따른 전파속도차 때문에 발생한다.,단일모드 광섬유에서는 색분산 및 모드분산이 생긴다.,다중모드 광섬유에서는 색분산보다 모드분산 비중이 더 크다.,GIF 광섬유를 사용하면 모드분산을 줄일 수 있다.,Telecommunications and Wireless Technology,0.0833
+"주파수 150[kHz]의 무선통신에서 정전계, 유도 전자계, 복사전자계가 같아지는 거리는 안테나로부터 약 얼마의 거리인가?",3,320[m],500[m],650[m],770[m],Telecommunications and Wireless Technology,0.087
+정전압 회로의 안정도 파라미터에 해당되지 않는 것은?,4,전압안정계수,온도안정계수,출력저항,출력직류전압,Telecommunications and Wireless Technology,0.0909
+"도파관에 전력을 급전하거나 반대로 전력을 얻어 내는 것을 무엇이라 하며, 일반적으로 무엇을 사용하는가?",4,도파관 여진 – 동축케이블,도파관 자려 – 동축케이블,도파관 여진 – 평행2선식,도파관 자려 – 평행2선식,Telecommunications and Wireless Technology,0.0951999999999999
+"CPU에서 처리되는 작업 중 메모리 장치 접근에 지나치게 페이지 폴트가 발생하여, 프로세스 수행에 소요되는 시간보다 페이지 교환에 소요되는 시간이 더 커지는 현상은?",2,워킹 세트(Working set),세마포어(Semaphore),교환(Swapping),스레싱(Thrashing),Telecommunications and Wireless Technology,0.1
+ITU-T에서 권고한 ISDN 가입자의 기본 채널구조인 2B+D 접속에서 전송정보량은 얼마인가?,3,80[kbps],128[kbps],144[kbps],256[kbps],Telecommunications and Wireless Technology,0.1110999999999999
+정보통신 서비스의 제공에 사용되는 자동교환설비의 특성 임피던스는 몇[Ω]인가?,4,50,750,300,600,Telecommunications and Wireless Technology,0.1110999999999999
+"다중신호 si(t) = ai cos w ct + bi sin w ct의 ai, bi를 다중보호의 값으로 대응하는 변조기술은?",4,AM,FSK,ASK,APK,Telecommunications and Wireless Technology,0.1110999999999999
+발진회로의 출력이 직접 부하와 결합되면 부하의 변동으로 인하여 발진주파수가 변동된다. 이에 대한 대책으로 많이 사용하는 방법은?,2,정전압 회로를 사용한다.,발진회로와 부하 사이에 증폭기를 접속한다.,발진회로를 온도가 일정한 곳에 둔다.,타 회로와 차단하여 습기가 차지 않도록 한다.,Telecommunications and Wireless Technology,0.1110999999999999
+"해밍코드(7,4)의 4비트의 용도는?",2,검사용,데이터,예비용,에러위치 표시용,Telecommunications and Wireless Technology,0.1110999999999999
+정보통신 시스템에서의 장애오류 검출에서 다중비트의 오류를 검출하고 정정할 수 있는 부호는?,2,고장마크부호,순회부호,잉여부호,패리티검사부호,Telecommunications and Wireless Technology,0.1110999999999999
+데이터 링크 제어절차(HDLC)에 대한 설명 중 잘못된 것은?,4,"링크 형식은 점대점, 멀티포인트 모두 가능하다.",비동기 방식보다 전송 효율이 우수하다.,"반이중, 전이중 전송 방식이 모두 가능하다.",Byte 방식 프로토콜로서 시스템의 변경 및 확대가 어렵다.,Telecommunications and Wireless Technology,0.1110999999999999
+HDLC 프로토콜에서 복합국끼리 상대방의 허가 없이 명령이나 응답을 전송할 수 있는 동작 모드는?,3,정규 응답 모드,폴링 모드,비동기 평형 모드,비동기 응답 모드,Telecommunications and Wireless Technology,0.1110999999999999
+자가 전기통신설비를 설치하고자 하는 자는 어떤 절차를 거쳐야 하는가?,2,정보통신부장관의 허가를 받아야 한다.,정보통신부장관에게 신고만 하면 된다.,정보통신부 장관의 승인을 받아야 한다.,정보통신부 장관의 등록만 하면된다.,Telecommunications and Wireless Technology,0.1110999999999999
+"문서를 정형화, 표준화된 표준양식과 코드를 이용하여 컴퓨터가 처리 가능한 형태로 작성한 후 컴퓨터 상호간 직접통신에 의해 교환되는 시스템을 무엇이라 하는가?",3,E-mail,MHS,EDI,Telemetering,Telecommunications and Wireless Technology,0.1110999999999999
+"150[Ω]의 저항, 0.4[μF]의 커패시터 그리고 값을 모르는 인덕터가 직렬로 연결되어 있는 회로가 356[Hz]에서 공진할 경우 인덕터의 값은 얼마인가?",3,0.5[H],1.5[H],2.5[H],3.5[H],Telecommunications and Wireless Technology,0.12
+30[MHz] 주파수에 대한 전파의 1/2 파장은 얼마인가?,1,1[m],5[m],10[m],15[m],Telecommunications and Wireless Technology,0.12
+ATM에 대한 설명으로 적합하지 않은 것은?,4,비동기 전송방식을 사용한다.,고정된 길이의 셀을 갖고 전송한다.,동적으로 대역폭을 할당할 수 있다.,단말과 오류확인 재송제어를 한다.,Telecommunications and Wireless Technology,0.12
+불감지대(dead zone)가 존재하는 주파수대는?,3,장파,중파,단파,초단파,Telecommunications and Wireless Technology,0.125
+전체 n비트를 사용하는 코드에서 각 비트당 착오가 일어날 확률이 P이라면 수신된 코드에서 착오가 발생하지 않을 확률은?,3,n×p,pn,(1-p)n,n×(1-p),Telecommunications and Wireless Technology,0.125
+광통신 케이블에 대한 특징이 아닌 것은?,2,무전도성이다.,내화성이 강하다.,가볍다.,광대역 통신에 적합하다.,Telecommunications and Wireless Technology,0.125
+어떤 반파정류 회로의 전압을 측정하였더니 최고치가 10(V)이었다. 이때의 파고율은 얼마인가?,2,2,7.07,1.414,5,Telecommunications and Wireless Technology,0.125
+중앙처리장치와 유사한 기능을 보유한 입출력 프로세서 혹은 입출력 컴퓨터를 추가하여 입출력 기능을 강화시킨 것은?,4,중앙처리장치에 의한 입출력,폴링에 의한 입출력,DMA에 의한 입출력,채널에 의한 입출력,Telecommunications and Wireless Technology,0.125
+광섬유 내에서 산란손실은 빛의 파장(λ)과 어떠한 관계가 있는가?,4,2승에 비례,2승에 반비례,4승에 비례,4승에 반비례,Telecommunications and Wireless Technology,0.125
+전송로의 시험중 나타나는 백색잡음(White noise)이란 무엇인가?,4,가우스 잡음으로 제한된 대역폭을 갖는 잡음,임펄스성 잡음으로 제한된 대역폭을 갖는 잡음,백색을 나타내는 주파수대로 이루어진 잡음,모든 주파수에 걸쳐서 포함된 잡음,Telecommunications and Wireless Technology,0.125
+공전잡음의 경감대책으로 적절한 것은?,3,접지 안테나를 사용한다.,수신기의 대역폭을 넓게 한다.,안테나의 실효고를 높인다.,무지향성 안테나를 사용한다.,Telecommunications and Wireless Technology,0.125
+차세대 인터넷 프로토콜인 IPv6에서 IP 주소는 몇 개의 비트로 구성되는가?,3,32,64,128,256,Telecommunications and Wireless Technology,0.125
+라우터(Router)의 설명으로 가장 옳은 것은?,2,"근거리통신망 내에서 세그먼트들을 서로 연결하는데 사용되며, 또한 유무선 광역통신망 전송을 증폭하고 연장하는 데에도 사용된다.",어떤 통신망 내에서의 트래픽 흐름의 경로를 결정하여 메시지 전달을 신속히 처리하기 위한 장치이다.,디지털 신호를 아날로그 전송 회선의 전송에 적합하도록 변조하여 통신 회선을 통해 전송하며 수신측에서는 이의 역과정을 통해서 원래의 신호로 복원하는 것이다.,"통신망에 과다하게 연결된 컴퓨터들로 인한 병목현상을 줄이고자 할 때, 서로 다른 물리적 매체로 구성된 통신망을 연결할 때 사용한다.",Telecommunications and Wireless Technology,0.125
+"R, L, C직렬 회로에 사인파 교류를 가할 때  일 경우 전압과 전류의 위상 관계는?",2,전압의 위상이 앞선다.,전류의 위상이 앞선다.,전압과 전류의 위상이 같다.,경우에 따라. 다르다.,Telecommunications and Wireless Technology,0.125
+오류제어 방식 중 ARQ방식의 장점이 아닌 것은?,4,신뢰도가 높다.,예상되지 않은 오류에 대해서도 강하다.,복호기가 간단하다.,귀환통신로를 사용한다.,Telecommunications and Wireless Technology,0.125
+정보통신시스템에서 통신제어장치 및 주변제어장치와 비교할 때 중앙처리장치의 기능과 관계가 없는 것은?,4,시스템 전체를 제어한다.,통신회선을 설정하고 제어한다.,통신제어장치나 주변장치를 제어한다.,"데이터의 축적, 검색, 변경 및 처리를 수행한다.",Telecommunications and Wireless Technology,0.125
+여파기(filter)의 구비 조건이 아닌 것은?,3,전력 소비가 적을 것,예리한 차단 특성을 가질 것,통과 대역 외의 감쇠량이 작을 것,통과 대역의 주파수 특성이 평탄할 것,Telecommunications and Wireless Technology,0.125
+CCTV의 기본구성 중 촬상장치에 해당되지 않은 것은?,3,광학렌즈계,지지보호계,TV모니터계,TV카메라계,Telecommunications and Wireless Technology,0.125
+비정현파의 실효치는?,4,각 고조파의 실효치,기본파 및 각 고조파 실효치의 합,기본파 및 각 고조파  실효치의 평방근,기본파 및 각 고조파 실효치의 제곱의 합의 평방근,Telecommunications and Wireless Technology,0.125
+우리나라의 전기통신에 관한 사항은 누가 관장하는가?,3,대통령,국무총리,방송통신위원회,한국통신사장,Telecommunications and Wireless Technology,0.125
+안테나의 빔(Beam)폭에 관한 설명으로 옳은 것은?,2,복사전계가 최대 복사전계강도의 1/2이 되는 두 방향 사이각,복사전력밀도가 최대 복사방향의 1/2이 되는 두 방향 사이각,복사전계가 0이 되는 두 방향사이각,최대복사방향을 중심으로 총복사 전력의 90(%)를 포함하는 범위의 사이각,Telecommunications and Wireless Technology,0.1429
+무선마이크로파 통신의 전송로상 전파잡음대책을 고려할 때 해당되지 않는 것은?,4,강우(Rain) 마진을 충분히 둔다.,공간 다이버시티(site diversity)를 사용한다.,G/T를 크게하여 C/N을 개선한다.,이중편파를 채용한다.,Telecommunications and Wireless Technology,0.1429
+(011111100000)2의 값을 갖는 레지스터의  내용을 오른쪽으로 네 번 시프트 시켰다면 실제로 이 레지스터가 수행한 연산은 무엇인가?,4,added -400,multiplied by 4,divided by 4,divided by 16,Telecommunications and Wireless Technology,0.1429
+BPS(Bits Per Second)의 설명으로 틀린 것은?,4,정보의 유통 단위이다.,마아크와 스페이스와 같이 서로 상반되는 부호의 정보량은 1 bit 이다.,5단위 부호의 정보량은 log2 25 = 5bits 이다.,4진 신호레벨에서는 baud와 동일하다.,Telecommunications and Wireless Technology,0.1429
+로트수가 10이고 준비작업시간이 20분이며 로트별 정미작업시간이 60분이라면 1로트당 작업시간은?,2,90분,62분,26분,13분,Telecommunications and Wireless Technology,0.1429
+"프로토콜의 구성요소 중 ""통신할 데이터의 형식""이란 의미로 코딩, 신호레벨 등을 정의하며 통신에서 전달되는 자료의 구조를 정의하는 것은?",2,의미(Semantics),구문(Syntax),타이밍(Timing),포맷(Format),Telecommunications and Wireless Technology,0.1429
+"8진 PSK 신호에 5,000[Hz]의 대역폭이 주어졌을 때 비트율은?",2,40[kbps],15[kbps],5[kbps],625[kbps],Telecommunications and Wireless Technology,0.1429
+인터넷 ISP(Internet Service Provider)에서 사용자 이름과 암호를 일괄 관리하기 위한 프로토콜은?,3,DNS(Domain Name Server),PPP(Point To Point protocol),RADIUS(Remote Authentication Dial-in User Server),SNMP(Simple Network Management Protocol),Telecommunications and Wireless Technology,0.1429
+AM 통신방식과 비교한 FM 통신방식의 특징 중 틀린 것은?,3,신호대잡음비가 개선된다.,수신 입력 레벨 변동의 영향이 적다.,수신신호가 매우 낮은 통신에 적합하다.,넓은 점유주파수 대역폭이 요구된다.,Telecommunications and Wireless Technology,0.1429
+패킷교환방식에서 트래픽제어 기법의 요소가 아닌 것은,4,flow control,congestion control,deadlock avoidance,error control,Telecommunications and Wireless Technology,0.1429
+HDLC전송제어 절차에서 사용되는 것의 설명과 맞는 것은?,3,"균형구성 : 정상응답모드 , 비동기응답모드","균형구성 : 비동기응답모드 , 비동기 균형모드","불균형구성 : 정상응답모드 , 비동기응답모드","불균형구성 : 비동기응답모드 , 비동기 균형모드",Telecommunications and Wireless Technology,0.1429
+광섬유의 흡수현상으로 주성분인 SiO2에 의한 흡수와 다른 조성성분에 의한 흡수를 들 수 있다. 흡수현상의 발생원인이 아닌 것은?,4,천이금속 이온에 의한 흡수손실,OH기 이온에 의한 흡수손실,자외선 흡수손실,부정합 흡수손실,Telecommunications and Wireless Technology,0.1429
+정보통신 시스템에서 정보전송 장치에 속하지 않는 것은?,3,단말장치,전송회선,중앙처리장치,통신제어장치,Telecommunications and Wireless Technology,0.1429
+가입자가 요청하는 호를 접속하기 위하여 필요한 정보를 전화기와 교환기 또는 교환기 상호간에 주고 받는 과정을 나타내는 방식은?,3,중계방식,교환방식,신호방식,서비스방식,Telecommunications and Wireless Technology,0.1429
+정보처리 시스템에서 H/W와 S/W가 갖추어야 할 기본적인 기능은?,2,다수의 단말장치로부터 CPU의 시분할 사용이 가능한 기능,"데이터링크의 확립, 상대감시, 링크의 개방기능",데이터 전송제어의 기능,"메시지 교환, 전문 해석, 번호처리기능",Telecommunications and Wireless Technology,0.1429
+B-ISDN의 프로토콜에서 AAL에 대한 설명으로 맞는 것은?,3,셀단위의 스위칭을 담당하는 계층이다.,AAL type 1은 회선 emulation에 적합하다.,AAL type 2에서는 47 octet 이하의 짧은 데이터의 전송만 지원한다.,AAL type 3/4는 신호(signaling)에 사용된다.,Telecommunications and Wireless Technology,0.1429
+비 정현파의 실효치는?,4,각 고조파의 실효치,기본파 및 각 고조파 실효치의 합,기본파 및 각 고조파 실효치의 평방근,기본파 및 각 고조파 실효치의 제곱의 합의 평방근,Telecommunications and Wireless Technology,0.1429
+발진 주파수를 안정시키는 방법이 아닌 것은?,2,항온조 시설을 한다.,체배 증폭단을 둔다.,완충 증폭단을 둔다.,정전압 안정회로를 설치한다.,Telecommunications and Wireless Technology,0.1429
+일반적인 메시지 블록의 형태중 BCC(Blcok check character)의 체크 범위가 아닌 것은?,4,STX,TEXT,ETX,SOH,Telecommunications and Wireless Technology,0.1429
+"데이터 전송을 위한 변복조에서 심벌간의 간섭, 다경로 확산, 첨가 잡음 및 페이딩에 의한 왜곡이  생겨서 수신되는 경우가 있으므로 이를 방지하기 위한 것은?",3,대역여파기,디스크림블러,등화기,채널디코더,Telecommunications and Wireless Technology,0.1429
+GMDSS설비의 DSC 단파송신장치는 기준설비의 어느장비의 역할을 하는것인가?,2,Auto-keyer,Auto-Alarm,보조송신기,보조수신기,Telecommunications and Wireless Technology,0.1429
+해상이동업무를 행함에 있어서 사용하는 주파수의 표시는 반송 주파수로 하고 그 할당 주파수를 반송주파수 보다 140㎐ 높은 주파수로 표시하지 아니하는 전파형식은?,3,R3E,H3E,G3E,J3E,Telecommunications and Wireless Technology,0.1429
+"팩시밀리 장치에서 주사기능과 광전변환기능을 가지며, 고속주사가 가능한 주사 소자는?",3,포토 다이오드,LED,CCO(charge coupled device）,광 트랜지스터,Telecommunications and Wireless Technology,0.1429
+전송하려는 부호어들의 최소 해밍거리가 6일 때 수신기 정정할 수 있는 최대오류의 수는?,2,1,2,3,6,Telecommunications and Wireless Technology,0.1429
+주파수 100[MHz]의 반송파를 3[kHz]의 신호파로 FM 변조할 때 최대 주파수 편이가 16[kHz]이다. 변조지수는 얼마인가?,1,3,6,9,42,Telecommunications and Wireless Technology,0.1429
+위상 전이 방법에 의한 SSB송신기에 가장 적합한 이상회로는?,1,30°이상기,45°이상기,60°이상기,90°이상기,Telecommunications and Wireless Technology,0.1429
+전력 증폭기의 종류가 아닌 것은?,4,A급 증폭기,B급 증폭기,AB급 증폭기,AC급 증폭기,Telecommunications and Wireless Technology,0.1429
+광섬유의 원리로서 매질Ⅰ에서 매질Ⅱ로 광이 입사될 때 굴절현상이 생기지 않고 완전히 반사되는 현상을 무엇이라고 하는가?,2,무굴절 현상,전반사 현상,임계 현상,무반사 현상,Telecommunications and Wireless Technology,0.1429
+가장 적은 수의 정지위성으로 양극지방을 제외한 전 세계를 커버(Cover)하는 통신망을 구성할 수 있는 배치 방법은?,1,5개의 위성을 72도의 간격으로 배치한다.,4개의 위성을 90도의 간격으로 배치한다.,3개의 위성을 120도의 간격으로 배치한다.,2개의 위성을 180도의 간격으로 배치한다.,Telecommunications and Wireless Technology,0.15
+300[Ω]의 특성 임피던스를 갖는 선로에 75[Ω]의 특성 임피던스를 갖는 선로를 접속시 반사계수 는?,3,0.25,0.5,0.6,0.75,Telecommunications and Wireless Technology,0.1538
+ISDN망 종단장치 NT2에 대한 설명으로 옳지 않은 것은?,2,"하나의 TE1, 또는 TE2와 TA의 결합체가 NT2 없이 NT1에 연결될 수 있다.",최대 4개의 가입자 접속장치가 버스형태로 연결되어 NT2없이 NT1에 연결될 수 있다.,사설교환기도 NT2가 될 수 있다.,NT2에서 버스구조도 접속될 수 있다.,Telecommunications and Wireless Technology,0.1538
+기간통신사업자의 전기통신회선설비 등을 이용하여 기간통신역무를 제공하는 사업을 무엇이라 하는가?,4,통신역무사업,부가통신사업,회선설비사업,별정통신사업,Telecommunications and Wireless Technology,0.1538
+"ISO의 OSI 7계층 참조모델에서 동기화, 에러제어, 흐름제어 등의 기능을 수행하여 물리적 링크(physical link)간에 원활한 데이타의 전송이 이루어질 수 있도록 제공하는 계층은?",2,물리층,데이타 링크층,네트워크층,트랜스포트층,Telecommunications and Wireless Technology,0.1667
+FM 수신기에서 스켈치(squelch) 회로의 사용 목적으로 가장 타당한 것은?,2,안테나로부터의 불필요한 복사를 방지한다.,검파출력의 잡음이 클 때 가청주파 증폭단을 차단한다.,국부발진주파수의 변동을 방지한다.,페이딩에 의한 수신레벨을 자동 조절한다.,Telecommunications and Wireless Technology,0.1667
+"PSTN 상에서 대화형 멀티미디어 응용을 지원하고, 64[kbps] 이하의 낮은 전송률을 대상으로 전송하며, Sub-QCIF, QCIF, CIF, 4CIF, 16CIF를 지원하는 동영상 압축방식은?",2,H.261,H.263,MPEG-1,MPEG-2,Telecommunications and Wireless Technology,0.1667
+BASIC 프로토콜에서 사용되는 전송제어문자중 헤딩(heading)의 종료 및 텍스트(text)의 개시를 나타내는 것은?,2,SOH,STX,ENQ,DLE,Telecommunications and Wireless Technology,0.1667
+100[MHz] 초과 470[MHz] 이하의 주파수대를 사용하는 텔레비전방송국의 주파수허용편차로 맞는 것은?,3,10[Hz],100[Hz],500[Hz],1[kHz],Telecommunications and Wireless Technology,0.1667
+"디지털 전송에서 등화된 파형을 가지고 디지털 파형으로 복원하기 위한 과정에서 확률적으로 0과 1을 판정하는데 오류를 최소화하고, 신호대 잡음비를 개선하기 위하여 사용 되는 것은?",2,등화기,정합필터,스크램블러,자동이득 조절기,Telecommunications and Wireless Technology,0.1667
+동기를 잃지 않도록 신호의 스펙트럼이 채널의 대역폭에 가능한한 넓게 분포하도록 하여 수신측에서 등화기가 최적의 상태를 유지하도록 하는 기능을 담당하는 것은?,2,변복조기,스크램블러,여파기,디코더,Telecommunications and Wireless Technology,0.1667
+M/S 플립플롭 회로는 어떤 현상을 해결하기 위한 플립플롭회로인가?,2,Delay현상,Race현상,Set현상,Toggle현상,Telecommunications and Wireless Technology,0.1667
+메시지교환망의 설명으로 틀린 것은?,4,축적교환(Store and Forward)메시지 망이라고도 한다.,코드와 속도가 서로 다른 터미널끼리도 메시지 교환이 가능하다.,메시지를 축적한 후 전송하므로 전송로를 효율적으로 이용할 수 있다.,대화식 터미널 - 호스트간의 연결에 적합하다.,Telecommunications and Wireless Technology,0.1667
+"디지털 화상회의 시스템에서 QCIF 포맷을 흑백화면으로 25프레임, 8비트로 샘플링을 한다면 데이터 전송률은 약 얼마인가?",2,5[Mbps],10[Mbps],20[Mbps],40[Mbps],Telecommunications and Wireless Technology,0.1667
+위성 중계기에서 잡음의 영향을 최소화하기 위해서 저잡음 증폭기에 사용되는 소자는?,4,MASER,HPA,SSPA,GaAsFET,Telecommunications and Wireless Technology,0.1667
+"복사저항이 36[Ω], 접지저항이 14[Ω]인 안테나에 1KW의 전력이 공급되고 있을때 복사전력은 ? (단, 여기서 다른 손실 무시한다.)",3,350 [W],390 [W],720 [W],1000 [W],Telecommunications and Wireless Technology,0.1667
+정보통신시스템의 변경요인 중 가장 거리가 먼 것은?,2,transaction의 증가 및 처리능력 부족,on line 업무후 batch 처리시간의 감소,소프트웨어 유지보수 효율저하,단말설비의 처리능력과 노후화,Telecommunications and Wireless Technology,0.1667
+국내에서 음성통신의 음량에 관한 객관적 척도로서 통화품질기준을 규정할 때 사용되는 것은?,4,전송손실(transmission loss),통화당량(reference equivalent),명료도 등가 감쇠량(AEN),음량정격(loudness rating),Telecommunications and Wireless Technology,0.1667
+"FM의 변조지수가 7.5일 때 10[KHz]의 신호를 FM으로 변조하면, 이 경우 주파수 대역폭은 몇 [KHz]인가?",2,75,170,320,150,Telecommunications and Wireless Technology,0.1667
+정지위성과 지구국 사이의 전파지연 시간은 약 얼마인가?,2,0.10 - 0.20초,0.20 - 0.35초,0.35 - 0.50초,0.50 - 0.65초,Telecommunications and Wireless Technology,0.1667
+이동 통신 시스템에서 무선 교환국과 이동 단말 장치를 연결해주는 기능을 하는 곳은?,2,교환국,기지국,중계국,단말 장치,Telecommunications and Wireless Technology,0.1667
+전기통신의 효율적인 관리를 위한 전기통신 정책수행에 관한 필수사항을 규정한 법은?,4,전기통신사업법,정보화촉진기본법,정보통신공사업법,전기통신기본법,Telecommunications and Wireless Technology,0.1667
+"F1층의 임계주파수가 5[MHz], 겉보기 높이가 100[Km]이고 송ㆍ수신점 간의 거리가 200[km]일 때 최적 운용주파수(FOT)는 약 몇[MHz] 인가?",3,4[MHz],5.6[MHz],6[MHz],7.1[MHz],Telecommunications and Wireless Technology,0.1667
+동기식 전송과 비동기식 전송의 근본적인 차이는?,4,필요로하는 대역,펄스의 높이,비동기식전송에서는 데이터에 클럭이 포함,동기식전송에서는 데이터로부터 클럭을 추출,Telecommunications and Wireless Technology,0.1667
+저궤도 통신위성(LEO)에 대한 설명 중 옳지 않은 것은?,2,"지구관측, 기상관측, 지구자원탐사 등에 이용된다.",복수개의 궤도에 복수개의 정지위성을 이용한 통신서비스를 제공한다.,Iridium Global star project가 있다.,음성 및 비음성 서비스를 전세계로 제공할 수 있다.,Telecommunications and Wireless Technology,0.1667
+데이터 통신에서 full-duplex 방식의 가장 큰 장점은?,2,비동기식 전송에 적합하다.,"송신, 수신을 동시에 할 수 있다.",데이터를 병렬로 전송할 수 있다.,데이터를 직렬로 전송할 수 있다.,Telecommunications and Wireless Technology,0.1667
+"안테나의 길이가 20[m], 사용 파장이 200[m]로서 λ /4 보다 상당히 짧은 수직접지형 안테나가 있다. 복사저항은 대략 얼마 정도인가 ?",2,약 2[Ω],약 4[Ω],약 20[Ω],약 40[Ω],Telecommunications and Wireless Technology,0.1667
+디지털 종합 정보통신망(ISDN)에서 데이터 링크 제어용으로 대역외 신호방식(Out-of-band Signaling)을 사용하는 HDLC 응용 프로토콜은?,2,LAPB(Link Access Procedure Balanced),LAPD(Link Access Procedure for D channel),LAPM(Link Access Procedure for Modems),SLIP(Serial Line IP),Telecommunications and Wireless Technology,0.1667
+기간통신사업자로부터 전기통신회선설비를 임차하여 전기 통신 역무를 제공하는 사업은?,3,임차통신사업,자가통신사업,부가통신사업,대여통신사업,Telecommunications and Wireless Technology,0.1667
+통신로용량(channel capacity)에 관한 것 중 틀린 것은?,2,데이터 신호속도와 같은 단위를 갖는다.,통신한 시간에 비례한다.,대역폭에 비례한다.,수신기에서의 신호대 잡음비가 높을수록 증대된다.,Telecommunications and Wireless Technology,0.1667
+어떤 발진기에서 전압이득이 50이다. 궤환회로의 감쇠는 얼마여야하는가?,4,1,0.01,10,0.02,Telecommunications and Wireless Technology,0.1667
+전동기의 회전 방향을 알기 위한 법칙으로 올바른 것은?,2,앙페르의 오른나사 법칙,플레밍의 왼손 법칙,쿨롱의 법칙,렌츠의 법칙,Telecommunications and Wireless Technology,0.1667
+HDLC 프레임을 구성하는 요소가 아닌 것은?,2,시작 및 종료 플래그,53 바이트 셀 필드,주소 필드,FCS 필드,Telecommunications and Wireless Technology,0.1667
+ARQ의 종류가 아닌 것은?,3,stop and wait ARQ,continuous ARQ,discrete ARQ,adaptive ARQ,Telecommunications and Wireless Technology,0.1667
+데이터의 표현단위와 관계가 먼 것은?,3,바이트(byte),레코드(record),메모리(memory),파일(file),Telecommunications and Wireless Technology,0.1667
+인켑슐화에 사용되는 제어 정보가 아닌 것은?,4,주소,에러 검출부호,프로토콜제어,유료부하,Telecommunications and Wireless Technology,0.1667
+광 중계기의 구성품이 아닌 것은?,2,광전 변환기,전기신호 중계기,전광 변환기,광화이버,Telecommunications and Wireless Technology,0.1667
+명령 수행시 memory로부터 명령을 fetch하고 그것의 주소부분으로부터 다시 유효주소를 memory에서 가져와서 동작하는 방식은?,3,상대 주소지정 방식(relative addressing mode),절대 주소지정 방식(absolute addressing mode),간접 주소지정 방식(indirect addressing mode),직접 주소지정 방식(direct addressing mode),Telecommunications and Wireless Technology,0.1667
+데이터 전송에 융통성이 있고 메세지가 짧은 경우에 가장 유리한 교환방식은?,2,회선 교환방식,데이터그램 패킷 교환방식,메시지 교환방식,가상회선 교환방식,Telecommunications and Wireless Technology,0.1667
+개인용 컴퓨터를 멀티미디어 단말기로 사용하기 위한 필수적인 기능과 관계 적은 것은?,4,CPU 등 고속 처리능력,대용량의 외부기억장치,오디오 기능,레이저 프린터,Telecommunications and Wireless Technology,0.1667
+RC결합 증폭회로에서 증폭 대역폭을 4배로 하려면 증폭이득을 약 몇 [㏈] 감소시켜야 하는가?,4,0.5[㏈],4[㏈],6[㏈],12[㏈],Telecommunications and Wireless Technology,0.1667
+ITU-T의 X 시리즈 중 패킷망에서 패킷형 터미널을 위한 DCE 와 DTE 사이의 접속규격은?,3,X.21,X.21 bis,X.25,X.75,Telecommunications and Wireless Technology,0.1667
+Maxwell 방정식을 이루는 법칙이 아닌 것은?,4,페러데이(Faraday) 법칙,암페어(Ampere) 법칙,스넬(Snell) 법칙,가우스(Gauss) 법칙,Telecommunications and Wireless Technology,0.1667
+"비트 하나 하나가 독립적으로 동작하고, 실행된 결과를 나타내는 레지스터는?",4,범용 레지스터,세그먼트 레지스터,인덱스 레지스터,상태 레지스터,Telecommunications and Wireless Technology,0.1667
+"일반적으로 부호화된 2의 보수 표시에서 표시가능한 수의 범위는? (단 K = n-1이며, n은 레지스터 비트수이다.)",2,+(2k) ~ -(2k-1),+(2k-1) ~ -(2k),+(2k+1) ~ -(2k),+(2k) ~ -(2k),Telecommunications and Wireless Technology,0.1667
+전송로 부호를 선정하는 조건중 맞지 않는 것은?,2,타이밍 정보손실의 방지를 고려할 것,교류성분의 변동에 따른 감소를 고려할 것,부호오류의 감시가 용이할 것,클럭주파수의 상승을 고려할 것,Telecommunications and Wireless Technology,0.1667
+가상회선과 데이터그램에 의한 패킷교환에 대한 설명으로 맞지 않는 것은?,2,가상회선의 라우팅 테이블은 노드가 가상회선 번호를 어떻게 변경하여야 하는가를 규정한다.,가상회선전송시 동일한 접속에 속한 모든 패킷들이 각각 다른 경로를 선택할 수도 있다.,데이타그램의 라우팅테이블은 노드가 랜덤하게 또는 주기적 순서에 따라 선택할 수 있는 경로를 규정한다.,데이타그램 전송시 망은 각각의 패킷에 대해 다른 경로를 선택하도록 할 수도 있다.,Telecommunications and Wireless Technology,0.1667
+케이블 선로에서 장하라 함은 무엇을 의미하는가?,4,C를 첨가하는 것,G를 첨가하는 것,R을 첨가하는 것,L를 첨가하는 것,Telecommunications and Wireless Technology,0.1667
+인공위성망(Satellite Network)의 설명으로 틀린 것은?,2,인공위성을 중계기로 하여 수신이 어려운 지역에도 통신이 가능하다.,위성회선은 전송지연이 작기 때문에 재전송이나 데이터의 전송이 빠르다.,광역의 대량 서비스가 가능하다.,"전송채널을 미리 확보해야 하며, 가능한 재전송이 없도록 해야한다.",Telecommunications and Wireless Technology,0.1667
+이동통신서비스 품질을 나타내는 파라미터 가운데서 고정 통신서비스와 가장 크게 다른 파라미터는 무엇인가?,3,호손율,통화품질,호절단비율,전송품질,Telecommunications and Wireless Technology,0.1667
+패킷 교환방식(packet switching)중 틀리는 것은?,4,트래픽 용량이 큰 경우에 유리하다.,축적 교환방식의 일종이다.,데이터 단위의 길이가 제한된다.,"대체 경로를 선택할 수 있으나, 네트워크의 신뢰성이 낮다.",Telecommunications and Wireless Technology,0.1667
+PCM 24채널(PCM T1프레임)방식에 대한 설명중 옳은 것은?,2,각 채널은 10개의 비트로 구성된다,프레임당 비트수는 193개이다,표본화 주파수는 4KHz이다,전송속도는 2.048 Mbit/sec이다,Telecommunications and Wireless Technology,0.1667
+쌍방향 파장다중전송 방식의 구성 요소가 아닌 것은?,4,발광소자,분파기,수광소자,혼 반사기,Telecommunications and Wireless Technology,0.1667
+기간통신사업자가 전기통신설비의 설치 공사를 하기 위하여 필요한 경우 타인의 토지를 일시 사용할 수 있는 최대 기간은?,4,1월,2월,3월,6월,Telecommunications and Wireless Technology,0.1667
+직렬 전송 방식에 대한 설명 중 옳지 않은 것은?,4,회선의 전송 대역을 효율적으로 사용케 해준다.,비트 단위로 단일 선로를 통해 전송하는 방식이다.,대부분의 데이타 전송 시스템에서 채택하고 있다.,전송 매체의 비용이 비교적 많이 소요된다.,Telecommunications and Wireless Technology,0.1667
+통신 전송의 세 가지 기본 방식으로 옳은 것은?,2,"단방향 통신, 양방향 통신, 전이중 통신","단방향 통신, 반이중 통신, 전이중 통신","양방향 통신, 반이중 통신, 전이중 통신","단방향 통신, 이중 통신, 혼합 통신",Telecommunications and Wireless Technology,0.1765
+"AM 무선전화 송신기의 변조도를 80%로 했을 때 종단 전력 증폭기의 컬렉터 손실이 600W, 컬렉터 효율이 70%였다면 무변조시 반송파 출력은 약 몇 W 인가? (단, 변조파는 단일 정형파로 출력회로의 손실은 무시함)",4,649,857,1000,1061,Telecommunications and Wireless Technology,0.1818
+RC결합 저주파 증폭회로의 이득이 높은 주파수에서 감소되는 이유는?,4,부성저항이 생기기 때문,증폭기 소자의 특성이 변하기 때문,결합 캐패시턴스의 영향 때문에,출력회로의 병렬 캐패시턴스 때문에,Telecommunications and Wireless Technology,0.1818
+마이크로프로세서에서 인터럽트 발생기에 돌아올 주소를 어디에 저장하고 인터럽트 터리 루틴으로 가는가?,2,ALU,STACK POINTER,PROGRAM COUNTER,STATUS REGISTER,Telecommunications and Wireless Technology,0.1818
+"중간주파수가 500[kHz]인 슈퍼헤테로다인 수신기에서 희망파 1,000[kHz]에 대한 영상주파수는 얼마인가? (단, 상측 헤테로다인 방식으로 동작한다.)",1,"1,500[kHz]","2,000[kHz]","2,200[kHz]","3,200[kHz]",Telecommunications and Wireless Technology,0.1852
+FDM 다중화 신호계위에서 1 MG(mastergroup)은 몇 통화로[CH]로 구성되는가?,3,12,60,300,900,Telecommunications and Wireless Technology,0.1875
+방송통신위원회가 수립하여 공고하는 전기통신기본계획에 포함되어야 하는 사항이 아닌것은?,4,전기통신사업에 관한 사항,전기통신설비에 관한 사항,전기통신의 질서유지에 관한 사항,전기통신서비스의 진흥에 관한 사항,Telecommunications and Wireless Technology,0.2
+2진수 1100을 그레이 코드 (gray code)로 바꾼 것은?,3,1000,1101,1010,1001,Telecommunications and Wireless Technology,0.2
+등록을 하지 아니하고 별정통신사업을 경영한 자에 대한 벌칙은?,3,1년 이하의 징역 또는 5천만원 이하의 벌금,2년 이하의 징역 또는 1억원 이하의 벌금,3년 이하의 징역 또는 1억5천만원 이하의 벌금,5년 이하의 징역 또는 2억원 이하의 벌금,Telecommunications and Wireless Technology,0.2
+수신기 시험에 의사 공중선을 사용하는 이유는 ?,3,수신기의 입력 레벨을 감쇠시키기 위하여,표준 입력 신호를 공급하기 위하여,공중선에 의한 입력 회로와 등가회로를 구성하기 위하여,수신기의 감도가 좋아지기 때문에,Telecommunications and Wireless Technology,0.2
+디지털 회선에 디지털 데이터의 형태로 전송할 때 필요한 것은?,3,DTE,DCE,DSU,CCU,Telecommunications and Wireless Technology,0.2
+전기통신설비기술기준에서 정의하는 강전류전선은 몇[V] 이상의 전력을 송전하거나 배전하는 전선을 말하는가?,2,220[V],300[V],500[V],3300[V],Telecommunications and Wireless Technology,0.2
+중앙처리장치의 구성에 해당되지 않는 것은?,2,레지스터,입력장치,연산장치,제어장치,Telecommunications and Wireless Technology,0.2
+"비동기 전송에서 시작과 정지비트가 각각 1비트, 문자비트가 8비트가 사용되고 있는 9600(bps) 전송속도의 통신구간에서 실제 유효속도는 얼마인가? (단, 패리티비트는 없다)",2,9600,7680,4800,3840,Telecommunications and Wireless Technology,0.2
+전기통신사업은 어떻게 구분하는가?,4,"전화통신사업, 정보통신사업, 우선통신사업","유선통신사업, 무선통신사업, 데이터통신사업","특정통신사업, 공중통신사업, 일반통신사업","기간통신사업, 별정통신사업, 부가통신사업",Telecommunications and Wireless Technology,0.2
+디지탈 마이크로파 통신에서 페이딩현상에 대처하기 위한 것은?,4,엠파시스,스크램블,DSI,다이버시티,Telecommunications and Wireless Technology,0.2
+변조속도가 1200[Baud]일때 4상식 위상변조를 하면 데이타 신호속도는?,2,1200[b/s],2400[b/s],4800[b/s],9600[b/s],Telecommunications and Wireless Technology,0.2
+WCDMA 방식에 대한 설명으로 옳은 것은?,3,주파수 간격은 1.5[MHz]이다.,GPS로 기지국간 시간 동기를 맞추어 전송한다.,서로 다른 코드로 기지국을 구분한다.,칩 전송속도는 1.2288[Mcps]이다.,Telecommunications and Wireless Technology,0.2
+AM 수신기으 수신 전파의 강약에 있어서 자동으로 일정한 음량으로 수신할 목적으로 이용되는 것은?,4,검파기,중간주파 증폭기,자동 잡음제한기,자동이득 제어기,Telecommunications and Wireless Technology,0.2
+"반송파 20[MHz]를 신호파 10[kHz]로 FM 변조 할 경우 주파수 변조지수와 점유주파수 대역폭은 각각 얼마인가? (단, 최대주파수 편이는 80[kHz]이다.)",2,"4, 180[kHz]","8, 180[kHz]","4, 200[kHz]","8, 200[kHz]",Telecommunications and Wireless Technology,0.2
+정현파 교류의 실효값이 90[V]이면 반주기 평균값은 약 몇 [V] 인가?,3,63.7[V],70.7[V],81[V],100[V],Telecommunications and Wireless Technology,0.2
+어떤 명령이  수행되기 위해 가장 우선적으로 이루어져야 하는 마이크로 오퍼레이션은 무엇인가?,4,MBR ← PC,PC ← PC + 1,IR ← MBR,MAR ← PC,Telecommunications and Wireless Technology,0.2
+"2개의 지점에서 신호의 세기를 측정한 결과, 각각 P1과 P2였다. 여기서 P1/P2=0[dB]가 의미하는 것은?",4,P1 전력레벨이 0[dB]이다.,P2 전력레벨이 0[dB]이다.,P1이 P2보다 전력이 크다.,P1과 P2의 전력 크기가 같다.,Telecommunications and Wireless Technology,0.2
+에미터 접지(CE) 증폭기의 특징 중 거리가 가장 먼 것은?,2,전압이득이 1이상이다.,주로 버퍼(Buffer)로서 사용한다.,전류이득이 1이상이다.,"Ri , Ro 는 RS , RL 에 따라 그다지 변동하지 않는다.",Telecommunications and Wireless Technology,0.2
+연산증폭기를 사용한 아날로그 계산기에서 미분기 대신 적분기를 사용하는 가장 큰 이유는 ?,4,적분기의 회로가 간단하다.,적분기는 비선형이다.,적분기의 계산속도가 빠르다.,적분기는 잡음특성이 좋다.,Telecommunications and Wireless Technology,0.2
+"비디오텍스에서 점, 선, 호, 다각형과 같은 기하학적 요소의 조합에 의해 표현되는 방식은?",2,알파 포토그래픽 방식,알파 지오메트릭 방식,알파 모자이크 방식,알파 혼합 방식,Telecommunications and Wireless Technology,0.2
+외부 트리거 입력신호가 인가되는 경우에만 폭이 0.1[ms]이고 전압이 5[V]인 펄스를 발생시켜 출력하고자 한다. 이러한 목적에 가장 적합한 것은?,4,시미트 트리거회로,비안정 멀티바이브레이터,쌍안정 멀티바이브레이터,단안정 멀티바이브레이터,Telecommunications and Wireless Technology,0.2
+"모뎀의 송신부 중 데이터 패턴을 랜덤하게 하여 수신측에서 동기를 잃지 않도록 하며, 신호의 스펙트럼이 채널의 대역폭 내에 가능한 넓게 분포하도록 하여 수신 측에서 등화기가 최적의 상태를 유지하도록 하는 기능을 하는 것은?",3,변조기,데이터 부호화기,스크램블러,증폭기,Telecommunications and Wireless Technology,0.2
+단파대의 불감지대에서 신호가 잡히는 현상으로 가장 적합한 원인은?,4,회절파,산악회절파,대류권 산란파,전리층 산란파,Telecommunications and Wireless Technology,0.2
+가입자가 요청하는 호를 접속하기 위하여 필요한 정보를 전화기와 교환기 또는 교환기 상호간에 주고받는 과정을 나타내는 방식은?,3,중계방식,교환방식,신호방식,서비스방식,Telecommunications and Wireless Technology,0.2
+PCM방식에서 8비트로 구성된 펄스계열의 주기가 125[㎲]일 때 펄스의 전송속도는 몇[kbps]인가?,4,8,10,32,64,Telecommunications and Wireless Technology,0.2
+정보통신 기술을 이용해 시간과 장소의 제약 없이 동료 직원들과 원활하게 협업하고 끊김 없이 업무를 수행가능하게 하는 환경으로 옳은 것은?,2,원격 회의,스마트 워크,영상 응답 시스템,화상 회의 시스템,Telecommunications and Wireless Technology,0.2
+셀룰러 이동통신방식에서 기지국 서비스 영역을 확대하는 방법이 아닌 것은?,2,고이득 지향성 안테나를 사용한다.,수신기의 수신 한계레벨을 높게 조정한다.,다이버시티 수신기를 사용한다.,기지국 안테나 높이를 증가시킨다.,Telecommunications and Wireless Technology,0.2
+100개의 전화국간을 망형으로 연결할 때 최소로 필요한 회선수는?,3,1950,2950,4950,6950,Telecommunications and Wireless Technology,0.2
+직류 및 저주파 성분이 감소하여 전송로에서 발생하는 저주파 차단 영향을 가장 받지 않는 신호방식은?,3,복류 RZ 방식,복류 NRZ 방식,바이폴라 방식,단류 RZ 방식,Telecommunications and Wireless Technology,0.2
+DPCM에 대한 설명 중 잘못된 것은?,2,실제 표본값과 추정(예측) 표본값과의 차이만을 양자화한다.,양자화시 사용하는 비트수가 PCM보다 증가한다.,PCM보다 정보전송량이 줄어든다.,"송신기는 양자화기, 예측기, 부호화기 등으로 구성된다.",Telecommunications and Wireless Technology,0.2
+데이터 전송에서 전송 용량을 늘리기 위한 방안이 아닌 것은?,4,전송선로의 대역폭을 늘린다.,전송선로의 잡음을 줄인다.,전송신호의 신호대잡음비를 높인다.,전송신호의 대역폭을 늘린다.,Telecommunications and Wireless Technology,0.2
+정보단말기구성 장치로 데이터 전송시에 발생되는 오류의 검출이나 정정 등의 제어를 하는 것은?,3,모뎀장치,전송등화장치,전송제어장치,다중제어장치,Telecommunications and Wireless Technology,0.2
+디지털 분야의 논리소자로서 바이폴라소자가 아닌 것은?,2,TTL,C-MOS,DTL,HTL,Telecommunications and Wireless Technology,0.2
+Multiple Access 방식 중 대역확산(Spread Spectrum)방식과 가장 관계 깊은 것은?,3,Frequency division MA,Time division MA,Code division MA,Space division MA,Telecommunications and Wireless Technology,0.2
+수신기의 내부 잡음이 없는 이상적인 수신기의 잡음 지수는?,4,100,0,10,1,Telecommunications and Wireless Technology,0.2
+TPM 활동의 기본을 이루는 3정 5S 활동에서 3정에 해당 되는 것은?,4,정시간,정돈,정리,정량,Telecommunications and Wireless Technology,0.2
+문자나 그림으로 구성된 화상정보가 축적되어 있는 데이터베이스로부터 TV 수상기와 전화회선을 이용하여 사용자가 원하는 정보를 검색하는 시스템은?,4,텔레텍스트,텔레텍스,팩시밀리,비디오텍스,Telecommunications and Wireless Technology,0.2
+"n비트 직렬이벽-직렬출력 레지스터를 이용하여 시간 지연회로를 구성할 때, 4비트 레지스터를 사용하였다면 Time Delay는 얼마인가? (단, 클럭 주파수는 1[MHz]이다.)",3,1[μs],2[μs],3[μs],4[μs],Telecommunications and Wireless Technology,0.2
+위성시스템 설계시 전파가 빗방울에 부딪치면 산란되면서 전력이 감쇠되는데 이러한 영향은 10GHz에서 현저하다. 이러한 현상을 막기위해 사용하는 회로로 가장 적합한 것은?,4,스크램블러회로,디스크램블러회로,전파보상회로,AGC 회로,Telecommunications and Wireless Technology,0.2
+단측파대 통신에 이용되는 변조 회로는 ?,4,제곱 변조 회로,주파수 변조 회로,펄스 변조 회로,링 변조 회로,Telecommunications and Wireless Technology,0.2
+"팩시밀리 장치에서 주사기능과 광전변화 기능을 가지며, 고속주사가 가능한 장치는?",3,포트 다이오드,LED,CCD,광 트랜지스터,Telecommunications and Wireless Technology,0.2
+ATM 교환시스템의 주요 특징에 대한 설명으로 틀린 것은?,4,서비스특성 및 대역폭에 상관없이 수용이 가능함으로 새로운 서비스 수용이 가능하다.,기존의 다양한 종류의 망을 하나의 멀티미디어 통합형으로 구성할 수 있으므로 효율적인 망 운영이 가능하다.,사용하는 정보의 형태나 양에 따라 요금체계를 다양화할 수 있다.,동기식 다중방식을 사용함으로써 기존방식보다 전송효율을 높일 수 있다.,Telecommunications and Wireless Technology,0.2
+"IPv4의 C 클래스 네트워크를 26개의 서브넷으로 나누고, 각 서브넷에는 4~5개의 호스트를 연결하려고 한다. 이러한 서브넷을 구성하기 위한 서브넷 마스크 값은?",4,255.255.255.192,255.255.255.224,255.255.255.240,255.255.255.248,Telecommunications and Wireless Technology,0.2
+"입력 데이터 비트율(Bit Rate)이 4,800[bps]일 때, 맨체스터 부호인 경우 심볼률 및 대역폭은 각각 얼마인가?",3,"2,400[symbols/sec], 2,400[Hz]","4,800[symbols/sec], 4,800[Hz]","9,600[symbols/sec], 9,600[Hz]","12,000[symbols/sec], 12,000[Hz]",Telecommunications and Wireless Technology,0.2
+통계적 시분할 다중화장치의 특징으로 틀린 것은?,2,실제 데이터가 있는 부채널에만 시간폭을 할당하는 방식이다.,접속에 소요되는 시간이 단순한 시분할 다중화장치 보다 짧다.,지능 다중화기 또는 비동기식 시분할 다중화기라고 한다.,메시지를 일시 보관하기 위한 기억 장치가 필요하다.,Telecommunications and Wireless Technology,0.2
+특성임피던스 600[Ω] 및 150[Ω]의 선로를 임피던스 변성기로 정합시키고자 한다. 파장이 λ 일 때 삽입해야 할선로의 특성임피던스와 길이는?,3,"75[Ω],λ/2","300[Ω],λ/3","300[Ω],λ/4","377[Ω],λ/4",Telecommunications and Wireless Technology,0.2
+직류 출력전압이 무부하일 때 250[V]이고 부하일 때 220[V]이다 이때 정류회로의 전압변동률은?,2,12.6[%],13.6[%],25.2[%],27.2[%],Telecommunications and Wireless Technology,0.2
+팩시밀리에서 연속된 2차원 정보에 대해 부호화 하는 주사선과 부호화 이전 주사선과의 상관관계를 부호화 하는 방법은?,2,Wyle 부호,MR(Modified Read) 부호,MH(Modified Huffman) 부호,BGH 부호,Telecommunications and Wireless Technology,0.2
+ECL(Emitter Coupled Logic) 회로를 TTL 회로와 비교 설명한 것으로 가장 적합한 것은?,2,이미터 플로어이므로 안정된 동작을 한다.,스위칭 속도가 빠르다.,전력소모가 매우 적다.,단일전원 방식으로 공급전압이 높아야 한다.,Telecommunications and Wireless Technology,0.2
+수치 자료 표현 방법에서 부동 소수점 표현(Floating Point Representation)을 가장 적절하게 설명한 것은?,2,"부동 소수점 표현 방법에는 부호부, 가수부로 구분할 수 있다.",정밀도가 요구되는 과학 및 공학 또는 수학적인 응용에 주로 사용된다.,수를 표현하는 자리수는 고정 소수점에 비하여 적게 든다.,수 표현 방법이 고정 소수점에 비하여 간단하다.,Telecommunications and Wireless Technology,0.2
+주파수 변조방식의 설명으로 가장 거리가 먼 것은?,2,중간 주파수 증폭단의 이득을 작게 해야 한다.,점유 주파수 대역폭이 진폭변조보다 크다.,주파수 편이를 크게 하면 점유 주파수 대역폭이 커진다.,FM 방식이 AM 방식에 비하여 잡음이 비교적 적다.,Telecommunications and Wireless Technology,0.2
+"단순한 전송 기능 이상으로 정보의 축적, 가공, 변환 처리 등의 부가가치를 부여한 음성 또는 데이터 정보를 제공해 주는 복합적인 정보서비스망은?",2,DSU,VAN,LAN,MHS,Telecommunications and Wireless Technology,0.2
+이동통신 시스템의 주요 기능에 해당되지 않는 것은?,2,위치 등록(Location Registration),자동적 최적의 존(Cell) 구역화,통화채널 전환(Hand off),소구역 기법(Small Cell Technique),Telecommunications and Wireless Technology,0.2
+네트워크 장비 중 경로결정(Path Determination)과 스위칭(Switching) 기능을 가진 장비는?,2,허브(Hub),라우터(Router),버퍼(Buffer),리피터(Repeater),Telecommunications and Wireless Technology,0.2
+PCM 단국장치사이의 전송로 구간에서는 일정한 거리마다 중계기를 설치하여 3R 기능을 수행토록 한다. 3R 기능과 관계 없는 것은?,4,Reshaping,Retiming,Regeneration,Retransmission,Telecommunications and Wireless Technology,0.2
+정궤환(Positive Feedback)을 사용하는 발진회로에서 발진을 위한 궤환루프(Feedback Loop)의 건은?,3,"궤환루프의 이득은 없고, 위상천이가 180°이다.","궤환루프의 이득은 1보다 작고, 위상천이가 90°이다.","궤환루프의 이득은 1이고, 위상천이는 0°이다.","궤환루프의 이득은 1보다 크고, 위상천이는 180°이다.",Telecommunications and Wireless Technology,0.2
+통신설비인 전파응용설비 중 유도식통신설비에서 발사되는 주파수 범위는 얼마이어야 하는가?,3,9[kHz]~450[kHz],9[kHz]~350[kHz],9[kHz]~250[kHz],9[kHz]~150[kHz],Telecommunications and Wireless Technology,0.2
+가입자망에 사용되는 고속모뎀인 ADSL에 사용되는 변조방식이 아닌 것은?,4,QAM,DMT,CAP,FSK,Telecommunications and Wireless Technology,0.2
+PCM 전송 방식에서 4[kHz]의 대역폭을 갖는 음성 정보를 7[bit] coding으로 부호화 한다면 음성을 전송하기 위한 데이터 전송률은?,3,8[kbps],24[kbps],56[kbps],64[kbps],Telecommunications and Wireless Technology,0.2
+자료의 표현방식에서 한글/한자의 경우는 몇 비트로 표현 되는가?,4,1,4,8,16,Telecommunications and Wireless Technology,0.2
+브리지 정류회로에서 교류 220[V]를 정류시킬 때 최대전압은 약 몇 [V] 인가?,2,140,311,432,180,Telecommunications and Wireless Technology,0.2
+무선 송신기에서 발생하는 스퓨리어스를 적게 하는 방법이 아닌 것은?,3,트랩(trap)회로를 삽입한다.,출력 결합회로의 Q를 높인다.,푸시풀 증폭으로 하여 기수차 고조파를 작게한다.,송신기와 급전선의 사이에 BPF를 삽입한다.,Telecommunications and Wireless Technology,0.2
+프리엠퍼시스(pre-emphasis)회로는 어느 회로와 같은가?,2,저역통과필터,고역통과필터,대역통과필터,대역저지필터,Telecommunications and Wireless Technology,0.2
+리미터(Limiter) 작용을 강한 주파수 변별기는?,4,경사형 검파,스태거 동조형 검파,포스터 실리형 검파,비 검파,Telecommunications and Wireless Technology,0.2
+오실로스코프에서 톱니파를 측정하고자 하는 파에 동기를 시키는 이유는?,2,전압을 알기 위하여,파형을 정지시키기 위하여,파형을 확대하기 위하여,주파수를 알기 위하여,Telecommunications and Wireless Technology,0.2
+OSI 7계층에서 응용 사이의 연결을 설정·관리·해제하는 통신제어 구조를 제공하는 계층은?,4,물리계층,표현계층,전송계층,세션계층,Telecommunications and Wireless Technology,0.2
+"재너 다이오드의 항복전압이 10[V], 내부저항이 8.5[Ω]이다. 제너전류가 20[mA]일 때 부하전압은 얼마인가?",4,10.11[V],10.13[V],10.15[V],10.17[V],Telecommunications and Wireless Technology,0.2
+TCP / IP에 대한 설명으로 적합하지 않은 것은?,2,전송제어 프로토콜과 인터넷 프로토콜을 의미한다.,"FTP, TELNET, HTTP 등은 TCP / IP와는 별개로 동작하는 통신 프로토콜 또는 응용프로그램이다.",TCP / IP의 시조는 ARPAnet 이다.,인터넷은 주로 TCP / IP 프로토콜과 응용 프로그램을 사용한다.,Telecommunications and Wireless Technology,0.2
+무선통신에서 백색잡음(White Noise)에 대한 설명으로 옳지 않은 것은?,4,열 잡음이 대표적 예이다.,백색잡음은 신호에 더해지는 형태이다.,주파수 전 대역에서 전력스펙트럼 밀도가 거의 일정하다.,레일리 분포 특성을 보인다.,Telecommunications and Wireless Technology,0.2
+다중화장비와 집중화장비에 대한 설명으로 틀린 것은?,2,"다중화장비는 정적인 채널을 공유하고, 집중화장비는 동적인 채널을 공유한다.","다중화장비는 입출력의 대역폭이 다르고, 집중화장비는 입출력의 대역폭이 같다.",집중화장비에서 입력 회선수는 출력 회선수보다 크거나 같다.,"다중화장비는 주파수분할, 시분할방식 등이 있다.",Telecommunications and Wireless Technology,0.2
+차동증폭기에서 차동신호에 대한 전압이득은 Ad이고 동상 신호에 대한 전압이득은 Ac이다. 이때 동상신호 제거비(CMRR)를 옳게 나타낸 식은?,2,Ac+Ad/2,Ad/Ac,Ac/Ad,Ac-Ad/2,Telecommunications and Wireless Technology,0.2
+망관리(network management)기능의 대상이 아닌 것은?,3,시스템 오류(fault),성능(performance),신호 프로토콜 처리,망 구성(configuration),Telecommunications and Wireless Technology,0.2
+데이터 통신에서 10개의 스테이션을 점대점(1:1)으로 직접 연결한다면 몇 개의 전송링크가 필요한가?,4,4개,10개,20개,45개,Telecommunications and Wireless Technology,0.2
+PCM 전송시스템의 수신측에서 본 아이(EYE) 패턴으로 알 수 있는 것은?,2,정확한 에러율,전송로상의 파형 찌그러짐과 잡음 정도,양자화 잡음,변조방식,Telecommunications and Wireless Technology,0.2
+안테나의 지향성을 높이는 방법이 아닌 것은 ?,3,반사기를 사용한다.,반파장 다이폴을 평면상에 배열한다.,가능한 한 연장선륜을 여러 개 사용한다.,도파기를 사용한다.,Telecommunications and Wireless Technology,0.2
+일정시간 모여진 변동 자료를 어느 시기에 일괄적으로 처리하는 방법은?,2,리얼 타임 프로세싱(Real Time Processing) 방식,배치 프로세싱(Batch Processing) 방식,타임 셰어링 시스템(Time Sharing System) 방식,멀티 프로그래밍(Multi Programming) 방식,Telecommunications and Wireless Technology,0.2
+OSI 모델에서 계층구조상 기본구성요소가 아닌 것은?,4,실체(Entity),접속(Connection),데이터단위(Data Unit),타이밍(Timing),Telecommunications and Wireless Technology,0.2
+아날로그 지상파 TV에서 NTSC 방식의 주사선수는?,2,405개,525개,625개,819개,Telecommunications and Wireless Technology,0.2
+전기통신설비의 건설 또는 보전의 공사를 하기 위하여 타인의 토지를 출입함으로서 피해자에게 어떠한 보상을 하여야 하는가?,2,손해배상,손실보상,실비보상,실비배상,Telecommunications and Wireless Technology,0.2
+변복조기(Modem)의 고려사항과 관계가 적은 것은?,3,변조방식,동기방법,샘플링방식,등화회로,Telecommunications and Wireless Technology,0.2
+MODEM에서 T=833絨10-6초의 단위펄스가 4개의 독립적인 변조파를 갖는 4위상 변복조 방식에 의하여 표시될 때에 전송되는 비트수를 나타내는 데이타 신호속도는 몇[bps]인가?,2,1200,2400,3600,4800,Telecommunications and Wireless Technology,0.2
+정보교환회선 서비스를 받기 위하여 사용자가 설치해야할 필요가 없는 장비는?,4,단말기기,회선보호장치,변복조장치,과금장치,Telecommunications and Wireless Technology,0.2
+패킷교환망에서 우수한 라우팅 알고리즘이 갖추어야 될 성질로서 가장 거리가 먼 것은?,4,최적의 패킷 전송시간,자원할당의 공정성,라우팅 결정의 안정성,라우팅 경로의 이중성확보,Telecommunications and Wireless Technology,0.2
+프로토콜 표준화에 대한 설명으로 적합하지 않은 것은?,4,표준화대상에 있어 대폭적인 개방성을 추구하고 있다.,광범위한 통신망과의 적응성을 확보하고 있다.,ITU-T에서도 권고안(X.200 계열)에 OSI참조 모델과 동일한 내용을 권고하고 있다.,"부분적, 개별적 프로토콜 표준화에 역점을 두고 있다.",Telecommunications and Wireless Technology,0.2
+데이타를 전송하는데 사용하는 구조화 기법의 구성형태에서 교환통신망에 해당되지 않는 것은?,3,회선 교환망,패킷 교환망,패킷 라디오망,메세지 교환망,Telecommunications and Wireless Technology,0.2
+베이스 밴드(base band) 전송에서 전송 신호의 상태가 3종류로 나타나는 방식은?,3,RZ 스페이스 방식,바이페이즈(biphase) 방식,바이폴라(bipolar) 방식,복류 NRZ 방식,Telecommunications and Wireless Technology,0.2
+위성통신에서 지구국을 구성하는 부분이 아닌 것은?,3,지상통제부,안테나부,중계부(Transponder),증폭부,Telecommunications and Wireless Technology,0.2
+정보통신부장관이 전기통신의 표준화에 관한 업무를 효율적으로 추진하기 위하여 두는 기구는?,3,통신위원회,한국전기통신공사 품질보증단,한국정보통신기술협회,형식승인심의회,Telecommunications and Wireless Technology,0.2
+통신망 분류에 대한 설명으로 옳지 않은 것은?,3,"정보내용에 의한 분류는 전화망, 데이터망, 방송망 등이 있다.","서비스대상에 의한 분류는 공중통신망, 전용통신망 등이 있다.","전송방식에 의한 분류는 아날로그통신망, 회선통신망, 광통신망 등이 있다.","규모에 의한 분류는 구내통신망, 시내통신망, 시외통신망 등이 있다.",Telecommunications and Wireless Technology,0.2
+셀룰러 이동전화시스템에서 각 부의 설명이다. 잘못 된 것은?,3,무선기지국은 단말기와 이동전화 교환국을 연결하는 기능을 갖는다.,"이동전화단말기는 무선송수신기, 안테나 및 제어장치로 구성되어있다.",무선기지국은 이동단말기에서 발·착신되는 호의 처리 등을 운용한다.,"단말기,기지국과 이동전화교환국은 서로 통화회선과 데이터링크로 연결된다.",Telecommunications and Wireless Technology,0.2
+통신위원회의 위원장은 누가되는가?,4,국무총리,정보통신부차관,한국통신사장,대통령이 임명하는 자,Telecommunications and Wireless Technology,0.2
+통신제어장치의 기능에 대해 가장 적합한 설명은?,2,통신회선상에서 물리적 오류제어 및 데이터 분석,중앙처리장치와 데이터전송회선간 데이터송수신제어,"통신회선의 주파수, 위상 등 특성제어",메모리장치의 데이터 버스 제어,Telecommunications and Wireless Technology,0.2
+"송신 신호의 전력(분산)을 S ,주파수 대역폭 W인 신호를 통과시켰을 때 전력(분산) N인 백색 가우스 잡음을 발생하는 통신로의 용량에 관하여 바르게 설명한 것은?",3,통신로 용량을 크게하려면 신호전력 S2 에 비례하므로 S 의 값을 증가시키는 것이 효과적이다.,대역폭을 크게하는 것 보다 잡음 전력을 감소 시키는 것이 통신로 용량을 지수적으로 증가 시킨다.,대역폭을 K배함과 SN비를 K승 함은 정보 전송량인 점에서 등가이다.,SN비를 크게하므로서 통신로 용량을 shannon 한계보다 크게할 수 있다.,Telecommunications and Wireless Technology,0.2
+정보통신공사업법령에 대한 내용으로 틀린 것은 ?,4,정보통신공사는 다른 종류의 공사와 분리하여 계약을 체결하여야 한다.,통신기술자격자는 동시에 2이상의 공사업체에 종사할 수 없다.,하수급인은 하도급된 공사를 다시 제3자에게 하도급 하여서는 아니된다.,공사업자는 수급한 공사를 일괄하여 제3자에게 하도급할 수도 있다.,Telecommunications and Wireless Technology,0.2
+"팩시밀리 통신방식에서 100초의 전송시간으로 보내고 있었던 원고를 200초의 전송시간으로 보내는 경우 주사선 밀도는 어떻게 되는가? (단, 전송로의 주파수 대역은 일정하다.)",2,2배,√2배,3배,4배,Telecommunications and Wireless Technology,0.2
+고주파 증폭회로에서 중화 조정을 수행하는 목적은?,4,이득의 증가,주파수의 안정,전력 효율의 증대,자기 발진의 방지,Telecommunications and Wireless Technology,0.2
+주문형비디오(VOD)에 대한 설명으로서 옳지 않는 것은?,3,"정지화,텍스트뿐만 아니라 컴퓨터 프로그램,데이터도 가능하다.",저장된 영상의 재생이 가능하다.,영상압축을 하여도 화질의 저하를 가져오지 않는다.,영상기록에 많은 시간이 소요된다.,Telecommunications and Wireless Technology,0.2
+광케이블의 종류별 구조에 따른 설명으로 잘못된 것은?,4,계단형 굴절율 광섬유는 균일한 굴절율의 core와 이를 둘러싼 약간 작은 굴절율의 cladding 으로 되어 있다.,단일 물질 광섬유는 core의 주위에 공기와 얇은판으로 되어 있어 계단형 굴절율 광섬유와 모양만 다르다.,W형 굴절율 광섬유는 단일모드 광섬유로서 제조시core를 크게 만들 수 있다.,언덕형 굴절율 광섬유는 섬유 중심부에서 core 와 cladding 경계면 쪽으로 굴절율의 분포가 증가하도록 되어 있다.,Telecommunications and Wireless Technology,0.2
+비동기 매체 엑세스 제어 기술에 해당하지 않는 것은?,4,라운드 로빈 방식,예약방식,경쟁방식,핸드쉐이크 방식,Telecommunications and Wireless Technology,0.2
+컴퓨터가 단말기에게 전송할 데이타가 있는가를 확인하는 방법은?,3,Selection,Addressing,Polling,Link,Telecommunications and Wireless Technology,0.2
+정보통신공사의 현장 배치 정보통신기술자의 의무사항으로 옳지 않은 것은?,4,공사 관리 업무 성실 수행,모든 안전 조치 강구,관계 법령의 준수,"공사 관련 인원의 지휘, 통솔",Telecommunications and Wireless Technology,0.2
+단말기의 데이터를 전송신호로 변환하는 목적으로 가장 타당한 것은?,4,데이터를 공간파로 전송하기 위함,유선의 경제적인 운용이점을 활용하기 위함,다양하게 신호를 변환하여 응용하기 위함,데이터를 전송로의 특성에 알맞게 하기 위함,Telecommunications and Wireless Technology,0.2
+문자나 도형 등을 입력하기 위하여 평면 모양으로 구성된 입력면내에 지시펜 등으로 지시하므로써 그 위치정보를 입력할 수 있는 단말장치는?,4,OCR,OMR,COM,Tablet,Telecommunications and Wireless Technology,0.2
+전송설비 및 선로설비는 전력유도로 인한 피해가 없도록 건설.보전되어야 한다. 기기 오동작 유도종전압이 몇[V]를 초과시 전력유도 방지조치를 하여야 하는가?,2,10[V],15[V],24[V],58[V],Telecommunications and Wireless Technology,0.2
+구내에 설치하는 100회선 이하의 배선 단자함의 접지 저항은 몇 [Ω] 이하인가?,4,1[Ω],10[Ω],50[Ω],100[Ω],Telecommunications and Wireless Technology,0.2051
+셀룰러 방식에서 기지국의 서비스 지역을 확대시키는 방법이 아닌 것은?,4,다이버시티 수신기 사용,송신 출력의 증가,기지국 안테나 높이의 증가,수신기의 수신 한계 레벨을 높게 조정,Telecommunications and Wireless Technology,0.2143
+T3디지탈 전송망의 접속 신호형태는?,3,NRZ BIPOLAR,RZ BIPOLAR,B6ZS,B3ZS,Telecommunications and Wireless Technology,0.2143
+전송로에 디지탈 신호를 양극 부호펄스 형태로 전송 시키는 가장 큰 이유는?,3,직류성분을 추가한다.,타이밍 신호를 넣을 수 없다.,직류성분이 없다.,연속하는 0을 취급하지 않는다.,Telecommunications and Wireless Technology,0.2143
+광통신시스템 특유의 잡음은?,3,열 잡음,혼신 잡음,모드 분산 잡음,양자화 잡음,Telecommunications and Wireless Technology,0.2143
+무선국의 정기검사에서 성능검사에 해당되지 않는 것은?,2,점유주파수대폭,혼신 및 잡음대역폭,주파수허용편차,공중선전력,Telecommunications and Wireless Technology,0.2143
+네트워크 구조상의 논리적 모델요소가 아닌 것은?,3,링크,노드,개체,프로세스,Telecommunications and Wireless Technology,0.2173999999999999
+통신망의 설계시 어떤 구역안의 탄템극과 그 구역내의 분국과의 전화회선망은 어느 방식으로 하여야 효과적인가?,2,망형망,성형망,사선망,복합망,Telecommunications and Wireless Technology,0.2173999999999999
+"OSI 7 참조모델의 계층 중 데이터 압축, 암호화 등을 수행하는 계층은?",4,세션 계층,응용 계층,네트워크 계층,프리젠테이션 계층,Telecommunications and Wireless Technology,0.2221999999999999
+데이터 전송기준의 측정 척도중 오율의 측정기준이 아닌 것은?,4,비트 오율,블록 오율,전신 왜율,트래픽 오율,Telecommunications and Wireless Technology,0.2221999999999999
+교환기의 공통제어 방식의 특징으로서 가장 큰 단점은?,4,축적변환기능,저손실 중계,번호계획과 교환회로망 구성의 독립성,장애발생시 영향이 큼,Telecommunications and Wireless Technology,0.2221999999999999
+8개의 위상과 2개의 진폭을 혼합하여 어느 신호를 변조하려 할 때 적장한 방법은?,3,FSK(Frequency shift keying),FSK + AM,DPSK(Differential Phase Shift Keying) + AM,DPSK,Telecommunications and Wireless Technology,0.2221999999999999
+SDLC(Synchronous data link control) 프로토콜의 특성이 아닌 것은?,4,비트방식의 프로토콜이다.,네크워크 구조에 무관하게 운영된다.,IBM 네트워크에서 주로 사용하는 프로토콜이다.,반이중방식만 가능하다.,Telecommunications and Wireless Technology,0.2221999999999999
+8비트 정보에 1개의 스타트(Start) 비트와 1개의 스톱 비트를 추가하여 전송하면 전송효율은 약 몇 [%]인가?,3,25[%],50[%],80[%],100[%],Telecommunications and Wireless Technology,0.2221999999999999
+전력증폭기에 대한 설명으로 틀린 것은?,2,대신호 동작용으로 사용된다.,증폭기의 선형동작에 의해 고조파 왜곡이 생긴다.,고출력 증폭을 위해 사용된다.,"부궤환 회로를 적용하면, 저왜곡 고출력이 가능하다.",Telecommunications and Wireless Technology,0.2221999999999999
+주파수 분할 다중 통신에서 주군(master group)의 주파수 대역으로 맞는 것은?,3,60 -108[kHz],312-552[kHz],812-2044[kHz],8516-12388[kHz],Telecommunications and Wireless Technology,0.2221999999999999
+에러제어방식중 ARQ(Automatic Repeat Request)방식은 어떤 방식인가?,2,패리티검사 코드방식,에러검출후 재전송방식,전진에러 수정방식,루프 혹은 에코검사방식,Telecommunications and Wireless Technology,0.2221999999999999
+자동재전송요구(Automatic Retransmission Query)기법이 전진오류정정(Foreward Error Correction) 기법에 비교하여 갖는 장점을 올바르게 기술한 것은?,4,역방향 채널이 필요없다.,자동적으로 에러를 정정한다.,자동재전송요구 전략이 간단하다.,하드웨어가 간단하다.,Telecommunications and Wireless Technology,0.2221999999999999
+데이터 교환방식 중 망의 과부하로 인하여 전송지연시간이 길어지고 포화상태에 이르면 전송이 불가능한 것은?,3,메세지교환,음성을 위한 교환회선,패킷교환,데이터를 위한 교환회선,Telecommunications and Wireless Technology,0.2221999999999999
+"송신안테나와 수신안테나가 200λ[m] 떨어져 있고, 각각의 방향성 이득은 20[dB]와 15[dB]이다. 만일 수신안테나에 5[mW]의 전력이 수신되어야 한다면, 최소 송신전력의 값은 얼마인가?",1,약 8[W],약 10[W],약 12[W],약 14[W],Telecommunications and Wireless Technology,0.2221999999999999
+지구극 안테나빔을 항상 통신위성의 방향으로 향하게 하는 장치는?,4,구체계장치,자세제어계,어포지(apogee)모터,추미장치,Telecommunications and Wireless Technology,0.2221999999999999
+e=141 sin(120πt-π/6)인 파형의 주파수는 몇[㎐]인가?,2,120[㎐],60[㎐],50[㎐],12.5[㎐],Telecommunications and Wireless Technology,0.2221999999999999
+전송 신호가 전송 매체를 통해 전달될 때 일부 신호가 열로 변하여 에너지가 손실되는 것은 무엇이라 하는가?,1,누화,열 잡음,왜곡,감쇠,Telecommunications and Wireless Technology,0.2273
+"MHS(Message Handling System)의 구성 요소로 텔레텍스, 팩시밀리 등의 텔레매틱스 User가 이용하도록 하는 기능을 제공하는 것은?",4,UA(User Agent),MTA(Message Transfer Agent),MS(Message Store),AU(Access Unit),Telecommunications and Wireless Technology,0.2307999999999999
+"송신기와 수신기 사이에 공기 매질에서 전파 손실이 23㏈ 라고 할 때 송신 전력의 몇 %가 수신기에 도달 하는가? (단, 안테나의 이득은 0㏈)",4,25%,5%,1.5%,0.5%,Telecommunications and Wireless Technology,0.2307999999999999
+"전송선로의 무왜조건이 되기 위해서 1차 정수 R,C,L,G의 관계식은?",2,RL = 2CG,RC = LG,RG = LC,RG = 2LC,Telecommunications and Wireless Technology,0.2307999999999999
+허가 유효기간이 1년 미만인 무선국의 재허가 신청기간은 언제까지인가?,1,유효기간 만료 10일전,유효기간 만료 15일전,유효기간 만료 1개월 전,유효기간 만료 3개월 전,Telecommunications and Wireless Technology,0.2307999999999999
+증폭회로에서 중화회로를 사용하는 가장 큰 목적은?,3,전압이득을 증대시킨다.,기생진동을 방지한다.,자기발진을 방지한다.,잡음을 감소시킨다.,Telecommunications and Wireless Technology,0.2353
+ASK와 BPSK를 비교하여 설명한 것으로 틀린 것은?,3,단극성 NRZ 신호를 DSB 변조한 것은 ASK이다.,양극성 NRZ 신호를 DSB 변조한 것은 BPSK이다.,ASK와 BPSK의 신호의 전력 스펙트럼은 다른 모양을 갖는다.,"ASK 신호의 스펙트럼에는 직류성분이 있고, BPSK 신호의 스펙트럼에는 직류성분이 없다.",Telecommunications and Wireless Technology,0.2444
+"변환하고자 하는 입력전압은 0[V]에서 15[V]일 때, 몇 BIT의 A/D변환기를 사용해야하는 것이 가장 좋은가? (단, 분해능은 3.66[mV] 이다.)",2,10 BIT,12 BIT,14 BIT,16 BIT,Telecommunications and Wireless Technology,0.25
+선형 부호화된 코드어 1001101과 0100101의 해밍의 거리(Hamming Distance)는?,2,2,3,4,5,Telecommunications and Wireless Technology,0.25
+광대역통합망(BcN : Broadband Convergence Network)의 계층구조 중 전달망 계층에 대한 설명으로 옳지 않은 것은?,4,광대역(Broadband) 서비스 제공,이동망 사용자의 이동성(Mobility) 확보,서비스 보장(QoS) 및 정보보안,소프트스위치에 의한 다양한 서비스 구현,Telecommunications and Wireless Technology,0.25
+축전지에서 AH(암페어시)가 나타내는 것은?,2,축전지의 사용가능시간,축전지의 용량,축전지의 충전전류,축전지의 방전전류,Telecommunications and Wireless Technology,0.25
+델린저 현상의 전반적인 특징으로 옳은 것은?,3,15일 주기로 발생하고 전자밀도가 증가한다.,저위도보다 고위도 지방이 심하다.,소실현상이라고 한다.,지속 시간은 2일에서 5일간 계속된다.,Telecommunications and Wireless Technology,0.25
+프로그램 카운터와 명령의 번지 부분을 더해서 유효번지를 결정하는 어드레싱 모드는?,4,Immediate Addressing,Index Addressing,Direct Addressing,Relative Addressing,Telecommunications and Wireless Technology,0.25
+RC 결합 증폭기에서 고주파 및 저주파 특성을 제한하는 요소와 가장 관계 깊은 것은?,2,바이패스 콘덴서 저항,"결합콘덴서, 저항","출력 임피던스, 입력저항","입력 임피던스,출력저항",Telecommunications and Wireless Technology,0.25
+아나로그 통신방식에 비하여 펄스 통신방식(PCM)의 장점 설명으로 옳지 않은 것은?,3,잡음에 대한 영향을 적게 받는다,경제성이 우수하다,주파수 대역폭이 좁다,정보의 기억 및 다양한 처리를 할 수 있다,Telecommunications and Wireless Technology,0.25
+제어장치를 구성하는 요소가 아닌 것은?,3,제어 신호 발생기,명령 레지스터,명령 계수기,누산기,Telecommunications and Wireless Technology,0.25
+데이터 전송시 블록으로 나누어 전송하는 이유가아닌 것은?,4,전송이 길어지면 에러가 일어날 확률이 높으므로,한 회선을 오랫동안 점유함으로써 발생되는 지연을 최소화시키기 위해,수신측 버퍼 크기의 제한 때문에,보내는 정보의 속도를 빠르게 하기 위해서,Telecommunications and Wireless Technology,0.25
+"통신회선을 직접 보유하거나 공중통신사업자의 회선을 임차 또는 이용하여 단순한 전송기능 이상의 정보의 축적, 가공, 변환처리 등을 행하는 정보통신 서비스는?",2,LAN,VAN,CATV,HDTV,Telecommunications and Wireless Technology,0.25
+정보통신망에 관한 표준인증 업무를 정보통신부장관으로부터 수임받은 기관은 ?,4,한국정보보호센터,한국통신망연구위원회,한국정보문화센터,한국정보통신기술협회,Telecommunications and Wireless Technology,0.25
+아날로그 신호를 표본화했을 때 얻어지는 신호는?,4,PPM,PWM,PCM,PAM,Telecommunications and Wireless Technology,0.25
+스마트도시(Smart City) 기반시설에 해당하지 않는 것은?,3,기반시설 또는 공공시설에 건설·정보통신 융합기술을 적용하여 지능화된 시설,초연결지능통신망,도시정보 데이터베이스,스마트도시 통합운영센터 등 스마트도시의 관리·운영에 관한 시설,Telecommunications and Wireless Technology,0.25
+금속선로인 채널의 데이터 속도는 초당 송출 비트수이다. 채널용량(데이터 속도)과 관계없는 것은?,4,신호전력,잡음전력,채널의 대역폭(Hz),선로부호,Telecommunications and Wireless Technology,0.25
+"반송파전압 eS =EScos(wSt+θ)를 신호전압 ec=Eccos wct로 진폭변조시 피변조파의 상측파대의 진폭은? (단, ma : 변조도)",2,WC + WS,(ma·EC) / 2,WC - WS,ma ㆍ EC,Telecommunications and Wireless Technology,0.25
+"정보를 송수신할 수 있는 능력을 가진 개체로써, 주어진 입력에 대하여 어떤 기능을 수행하고 출력하는 것은?",2,데이터(Data),엔티티(Entity),프로토콜(Protocol),스테이트(State),Telecommunications and Wireless Technology,0.25
+포인터에 대한 설명중 옳지 않은 것은?,3,포인터는 간결하게 프로그래밍을 할 수 있다.,액세스(access)하기 전에 포인터의 값이 주어져야 한다.,포인터는 연산속도를 빠르게 해준다.,Call by Name은 포인터에 의해서 처리된다.,Telecommunications and Wireless Technology,0.25
+컴퓨터의 주메모리(main memory)장치에 널리 사용 되는 것은?,4,자기테이프,플로피 디스크,하드 디스크,반도체 IC 메모리,Telecommunications and Wireless Technology,0.25
+CCTV 시스템의 기본 구성에 속하지 않는 것은?,4,촬상계,전송계,수상계,교환계,Telecommunications and Wireless Technology,0.25
+"듀티사이클(duty cycle)이 0.1 이고, 주기가 40μs 인 경우 펄스폭은 몇 μs 인가?",2,10,4,3,1,Telecommunications and Wireless Technology,0.25
+비동기식 계수기[Counter)의 일반적인 설명으로 거리가 먼 것은?,4,리플 카운터라고도 한다.,동작속도가 동기식보다 비교적 느리다.,전단의 출력이 다음 단의 입력이 된다.,동작속도가 동기식보다 고속이다.,Telecommunications and Wireless Technology,0.25
+위성통신 서비스와 위성중계기의 다원접속(Multiple Access)이 가장 이상적으로 짝을 이룬 것은?,2,VSAT - ALOHA(RMA),DBS - CDMA,PCN - TWTA,IBS - SCPC,Telecommunications and Wireless Technology,0.25
+1200 보오(baud)의 전송속도를 갖는 전송선로에서 신호비트가 트리비트(tribit)이면 전송속도는 몇 bps인가?,3,1200,2400,3600,4800,Telecommunications and Wireless Technology,0.25
+"중단 전력 증폭기에서 자기 발진을 할 때, 이것을 제거하기 위해 필요한 조치는?",2,변조 입력을 적게 한다.,중화회로를 사용한다.,부동조 회로를 약간 이조한다.,증폭기의 바이어스 전압을 변경시킨다.,Telecommunications and Wireless Technology,0.25
+정보를 전송하기위한 5단계중 4단계는?,2,회선접속,링크절단,데이터전송,회선절단,Telecommunications and Wireless Technology,0.25
+전기통신설비의 통합운용에 관한 내용으로 관련이 없는 것은 ?,2,전기통신설비의 효율적인 관리.운영을 위하여 필요한 경우에 한한다.,별정통신사업자로 하여금 통합운영하게 할 수 있다.,통합운용계획은 관계 행정기관의 장과 협의한 후 국무회의를 거쳐 대통령의 승인을 얻어야 한다.,전기통신설비뿐만 아니라 그에 부속된 토지.건물 기타 구축물도 포함된다.,Telecommunications and Wireless Technology,0.25
+한번에 3개의 비트를 PSK 방식으로 전송하고자 한다면 반송파간의 위상차는 몇 도가 되는가?,2,22.5,45,90,135,Telecommunications and Wireless Technology,0.25
+과부하 잡음이 없는 경우 양자화 레벨의 수를 2배 증가(비트 수를 한 개 증가)시키면 입력신호 전력대 양자화 잡음전력의 비는 몇 dB 개선되는가?,4,3,4,5,6,Telecommunications and Wireless Technology,0.25
+연산장치에서 뺄셈을 계산할 때 사용하는 방법은 ?,2,피감수에서 감수를 직접 뺀다.,보수(complement)를 사용하여 덧셈 계산한다.,쉬프트(shift)방법을 이용하여 감산한다.,비트마크(bit mark)방법을 사용하여 감산한다.,Telecommunications and Wireless Technology,0.25
+"주기억장치의 크기가 64[Mbyte], 캐쉬 크기가 64[kbyte]이고 주기억장치와 캐쉬 사이에 4[byte]블록 단위로 데이터 전송이 이루지는 시스템에서 연관사상(Associative Mapping)으로 관리된다. 이 때 캐쉬 1 라인(Line)에 필요한 태그(Tag)의 크기는?",4,8비트,10비트,22비트,24비트,Telecommunications and Wireless Technology,0.25
+총톤수 40톤 미만인 어선의 의무선박국의 정기검사 유효기간은?,2,1년,2년,3년,5년,Telecommunications and Wireless Technology,0.25
+도약거리(Skip Distance)에 대한 설명 중 틀린 것은?,2,전리층의 겉보기 높이에 비례한다.,사용주파수가 임계주파수보다 낮을수록 크게 된다.,전리층에 의한 1회 반사파 도달거리를 말한다.,도약거리 이내에 신호가 수신되지 않는 불감지대가 존재한다.,Telecommunications and Wireless Technology,0.25
+"음성파형을 분석하여 유ㆍ무성음의 구별, 주기, 성도의 형태 등 음성의 특징을 추출하여 전송하고 수신측에서는 전송된 정보를 가지고 음성을 합성해내는 방식은?",2,파형부호화 방식,보코딩 방식,혼합부호화 방식,원천부호화 방식,Telecommunications and Wireless Technology,0.25
+양측파대(DSB) 전송방식과 비교하여 단측파대(SSB) 전송 방식의 장점이 아닌 것은?,3,선택성 페이딩의 영향이 적다.,신호대잡음비(S/N)가 개선된다.,송수신기의 회로구성이 간단해진다.,점유주파수 대역폭이 1/2로 축소된다.,Telecommunications and Wireless Technology,0.25
+어떠한 명령(instruction)이 수행되기 위해서 가장 먼저 이루어져야 하는 마이크로 오퍼레이션은 무엇인가?,3,PC ← MAR,PC ← PC+1,MAR ← PC,MBR ← 1R,Telecommunications and Wireless Technology,0.25
+블록동기방식 중 문자동기방식에 대한 설명으로 옳지 않은 것은?,3,데이터블록 앞에 데이터의 시작을 알리는 전송제어 코드 ‘STX’ 사용,전송 시 동기용 전송 제어코드 ‘SYN’ 2개 이상 사용,데이터 전송의 끝을 의미하는 ‘END’ 제어신호 사용,에러를 체크하기 위한 에러제어코드 ‘BCC’사용,Telecommunications and Wireless Technology,0.25
+시분할 방식 스위치 회로망을 사용하는 디지털 교환기가 CEPT (30 +2)PCM 방식으로 신호를 처리하는 경우 그 부호 속도는 몇 Mbps 인가?,2,1.544,2.048,6.312,8.192,Telecommunications and Wireless Technology,0.25
+패킷 교환망에서 네트워크를 효율적으로 이용할 수 있도록하는 트래픽 제어기술이 아닌 것은?,2,교착상태회피(Deadlock Avoidance),순서 제어(Sequence Control),혼잡 제어(Congestion Control),흐름 제어(Flow Control),Telecommunications and Wireless Technology,0.25
+다원 접속방식의 설명으로 잘못된 것은?,3,주파수분할다원접속은 광대역의 중계기대역을 분할하여 각대역폭을 지구국에 할당한다.,부호분할다원접속은 대역확산의 개념으로 복수개의 지구국이 위성중계기를 공유한다.,"공간분할다원접속은 위성안테나의 설비구성이 간단하고, 중계기의 구조가 간단하다.",시분할다원접속은 시간을 분할하여 프레임내의 특정 위치를 각 지구국에 할당한다.,Telecommunications and Wireless Technology,0.25
+태양에서 발생하는 자외선의 돌발적 증가로 인하여 발생되는 전파방해는 ?,3,에코우(echo),록셈부르코 효과(luxemburg effect),델린저 현상(dellinger effect),자기람(magnetic storm),Telecommunications and Wireless Technology,0.25
+FM 방식을 AM 방식에 비교할 경우 틀리는 것은?,3,레벨변동이 없다.,S/N비가 개선된다.,미약한 신호의 수신에 적합하다.,초단파대 통신에 적합하다.,Telecommunications and Wireless Technology,0.25
+"진폭변조에서 신호전압음 es=Essinωst, 반송파 전압을 ec=Ecsinωct 라 할 때 피변조파 전압 e(t)를 표시하는 것은?",3,e(t) = (Ec + Es)sinωst,e(t) = (Ec + Es)sinωct,e(t) =(Ec+Es sinωst) sinωct,e(t) =(Es+Ec sinωct) sinωst,Telecommunications and Wireless Technology,0.25
+위성통신의 특징이 아닌 것은?,4,많은 통신용량을 가지고 있다.,전송 오류율이 감소한다.,SHF 주파수를 사용한다.,고품질의 협대역 통신이 가능하다.,Telecommunications and Wireless Technology,0.25
+슈퍼헤테로다인 수신기에서 중간주파수를 높게 선택할 경우 나타나는 현상이 아닌 것은?,3,인입현상이 개선된다.,전기적 충실도가 개선된다.,근접주파수 선택도가 개선된다.,영상주파수 선택도가 개선된다.,Telecommunications and Wireless Technology,0.25
+인터네트워킹을 구축할 때 요구되는 사항이 아닌 것은?,4,네트워크 간의 링크를 제공하며 최소한 물리적 계층과 링크의 제어 연결이 요구된다.,상이한 네트워크들 상의 프로세스들 사이에 데이터의 경로 배정과 전달에 관한 모든 것을 제공하여야 한다.,여러 종류의 네트워크들과 게이트웨이의 사용에 대한 트랙을 보존하며 상태정보를 유지하고 요금계산 서비스를 제공하여야 한다.,다양한 서비스를 위해 임의 구성된 네트워크 구조 자체를 자유롭게 변형할 수 있어야 한다.,Telecommunications and Wireless Technology,0.25
+MODEM에서 T=833×10-6초의 단위펄스가 4개의 독립적인 변조파를 갖는 4위상 변복조 방식에 의하여 표시될 때 전송되는 비트수를 나타내는 데이터 신호 속도는 몇[bps]인가?,2,1200,2400,3600,4800,Telecommunications and Wireless Technology,0.25
+발진 주파수를 측정할 수 있는 계측기가 아닌 것은?,3,주파수계수기(Frequency Counter),오실로스코프(Oscilloscope),파워메타(Power Meter)s,스펙트럼 분석기(Spectrum Analyzer),Telecommunications and Wireless Technology,0.25
+"무선 송신기의 EIRP 규경이 50[dBW] 일 때 송신기 출력 전력은 몇 [㎾] 인가? (단, 안테나 이득 10[㏈], 급전선 손실 0[㏈] 이다.",3,1[㎾],5[㎾],10[㎾],100[㎾],Telecommunications and Wireless Technology,0.25
+문자 방식 프로토콜에서 일반적인 메시지 블록의 형태중 BCC(Block check character)의 체크 범위가 아닌 것은?,4,STX,TEXT,ETX,SOH,Telecommunications and Wireless Technology,0.25
+디지털 전송방식 중 유럽방식(CEPT)의 특징이 아닌 것은?,4,전송 기본 속도는 64Kbps 이다.,프레임 당 비트수는 256개이다.,전송 비트율은 2048Kbps이다.,압신방식(companding)은 u-Law이다.,Telecommunications and Wireless Technology,0.25
+에러율이 5×10-5 [비트/초]인 전송회선에서 9600[bps] 속도로 15분간 전송할 때의 에러 비트수는?,3,72비트,288비트,432비트,720비트,Telecommunications and Wireless Technology,0.25
+일정한 시간 간격으로 발생된 신호에 따라 각 부분의 동작을 규칙적으로 제어하는 방식은?,3,비 주기식 제어 방식,비 동기식 제어 방식,동기식 제어 방식,랜덤 제어 방식,Telecommunications and Wireless Technology,0.25
+J-K 플립-플롭은 두개의 입력 데이터에 의하여 출력에서 몇개의 조합을 얻을수 있는가 ?,2,2,4,8,16,Telecommunications and Wireless Technology,0.25
+국제위성통신용 정지위성의 고도는 적도 상공에서 약 몇 Km 인가?,3,16000,26000,36000,46000,Telecommunications and Wireless Technology,0.25
+FM 검파회로로서 사용되지 않는 회로는 ?,4,PLL 검파,Ratio 검파,Foster-seeley형 검파,Collector 검파,Telecommunications and Wireless Technology,0.25
+"화상회의의 오디오 압축방식으로 300~3,400[Hz]의 대역폭을 가진 채널 상에서 16, 24, 32, 40[kbps] ADPCM을 지원하는 표준은?",4,G.721,G.722,G.724,G.726,Telecommunications and Wireless Technology,0.25
+정보통신부장관이 통신기자재 생산업자 또는 전기통신공사업자에 대하여 행하는 기술지도의 내용이 아닌 것은?,4,기술의 표준화,기술정보의 제공,국제기구와의 협력,새로운 기술의 운용,Telecommunications and Wireless Technology,0.25
+"대칭키 암호화 방식을 사용하여 4명이 통신을 한다고 할 때, 4명이 서로 간 비밀통신을 하기 위해 필요한 비밀키의 수는?",2,4,6,8,10,Telecommunications and Wireless Technology,0.25
+방송통신기기의 사후관리에서 인증사항에 대한 이행여부를 확인하는 사항과 가장 거리가 먼 것은?,4,인증 받은 기기의 구조ㆍ설계ㆍ형식 등이 임의로  변경되었는지의 여부,변경 신고한 기기의 적합성 여부,관계 규정의 이행여부,지식경제부 소관 규정과의 적합성 여부,Telecommunications and Wireless Technology,0.25
+OSI-7 프로토콜중 네트웍층이 하는 역할을 바르게 나타낸 것은?,4,회선의 제어규칙,회선의 전기규칙,오류의 감지와 제어,데이터의 전송과 교환,Telecommunications and Wireless Technology,0.25
+정보 단말기 기능 중 전송제어 기능이 아닌 것은?,3,입⋅출력 제어 기능,오류 제어 기능,출력 변환 기능,송ㆍ수신 제어 기능,Telecommunications and Wireless Technology,0.25
+수신한계 레벨이 가장 낮은 것은?,2,대역폭이 넓고 수신기 잡음지수(NF)가 큰 것,대역폭이 좁고 수신기 잡음지수(NF)가 작은 것,대역폭이 넓고 수신기 잡음지수(NF)가 작은 것,대역폭이 좁고 수신기 잡음지수(NF)가 큰 것,Telecommunications and Wireless Technology,0.25
+이동통신 기지국의 섹터간 전파가 겹치는 지역에서 통화전환이 이루어질 때의 핸드오프를 무엇이라고 하는가?,3,하드 핸드오프(Hard Handoff),소프트 핸드오프(Soft Handoff),소프터 핸드오프(Softer Handoff),미들 핸드오프(Middle Handoff),Telecommunications and Wireless Technology,0.25
+변조도 40[%]의 진폭변조에서 반송파의 평균전력이 300[mW]일 때 피변조파의 평균전력[mW]은?,3,100,300,324,424,Telecommunications and Wireless Technology,0.25
+HDLC의 프레임 필드 중 오류제어와 관련되는 필드는?,2,플래그,FCS,제어부,정보부,Telecommunications and Wireless Technology,0.25
+"정류기의 부하단의 평균전압은 200V, 실효값 맥동율이 2%일 때 교류분 실효값은?",3,8[V],6[V],4[V],2[V],Telecommunications and Wireless Technology,0.25
+주파수 분할 다중화기에서는 다중신호는?,2,시간을 분할하여 전송한다.,공동대역폭을 나누어서 전송한다.,다중코딩을 사용하여 전송한다.,디지털 신호로 변조한다.,Telecommunications and Wireless Technology,0.25
+"OSI 참조모델에서 네트워크 상에서 동작하는 응용프로그램과 시스템운영 및 관리 프로그램, 단말기 동작과 관련된 프로그램 운영 기능을 제공하는 요소는?",2,전송미디어,응용개체,연결,개방형 시스템,Telecommunications and Wireless Technology,0.25
+이미터 전류를 1mA 변화시켰더니 컬렉터 전류의 변화는 0.96mA였다. 이 트랜지스터의 β는 얼마인가?,3,0.96,1.04,24,48,Telecommunications and Wireless Technology,0.25
+통신설비의 기술기준에서 정한 음성주파수의 대역폭은?,2,300[Hz] 미만,300~3400[Hz],300~3400[kHz],300~3400[MHz],Telecommunications and Wireless Technology,0.25
+자동오자 정정부호에서 오자의 검출방법은?,4,통신속도를 측정,전류의 부호검출,부호왜곡을 체크(CHECK),패리티 체크(PARITY CHECK),Telecommunications and Wireless Technology,0.25
+"증폭기와 정궤환 회로를 이용한 발진회로에서 증폭기의 이득을 A, 궤환율을 β라고 할 때, βA>1이면 출력되는 파형은 어떤 현상이 발생하는가?",2,출력되는 파형의 진동이 서서히 사라진다.,출력되는 파형은 진폭에 클리핑이 일어난다.,지속적으로 안정적인 파형이 발생한다.,출력되는 파형은 서서히 진폭이 작아진다.,Telecommunications and Wireless Technology,0.25
+수신설비의 성능을 위한 충족 조건과 관계가 적은 것은?,3,선택도가 클 것,명료도가 충분할 것,정합이 적정할 것,내부잡음이 적을 것,Telecommunications and Wireless Technology,0.25
+"전류이득은 약 1이고, 전압이득은 대단히 높으며, 출력 임피던스가 대단히 높은 증폭기는?",3,에미터 접지 증폭기,콜렉터 접지 증폭기,베이스 접지 증폭기,모든 트랜지스터 증폭기,Telecommunications and Wireless Technology,0.25
+CDMA방식에 대한 설명으로 틀린 것은?,4,Spread spectrum 기술을 이용한 것이다.,광대역의 주파수폭을 필요로 한다.,코드의 검출이 어렵기 때문에 통신의 비밀이 보장된다.,광대역특성이므로 간섭의 영향도 크다.,Telecommunications and Wireless Technology,0.25
+정보통신시스템 분석의 목적에 관한 내용으로 맞지 않는 것은?,3,새로운 시스템 설계의 기초자료를 얻는다.,비능률적이고 낭비적인 요소와 문제점을 발견할 수 있다.,"시스템 또는 각 구성요소에 장애가 발생했을 때 회복을 위한 수리의 간편성, 정기적인 점검자료를 얻는다.",전산화에 따른 효과분석을 할 수 있는 기초자료를 얻는다.,Telecommunications and Wireless Technology,0.25
+주파수 분할 다중(FDM)방식에서 주로 사용되고 있는 복합변조방식은?,2,SS-AM,SS-FM,SS-SS,SS-PM,Telecommunications and Wireless Technology,0.25
+아날로그 전송로에 의한 디지털 데이타 전송에 관하여 설명한 것이다. 틀린 것은?,4,디지털 신호를 그대로 전송하는 베이스벤드(base band)전송을 할 수 있다.,디지털 신호를 아날로그 형태의 신호로 변환하여 전송하는 대역전송을 할 수 있다.,고속으로 디지털 데이타 신호를 전송하는 경우에는 다치(多値)변조를 사용한다.,전화망을 디지털 데이타 전송에 사용할 수는 있으나 변복조 방식은 사용하지 않는다.,Telecommunications and Wireless Technology,0.25
+PCM 파를 수신하여 원래의 신호로 복원하려면 복조기의 출력에 필터를 거쳐야 하는데 이 때 사용되는 필터로 가장 적합한 것은?,2,고역 통과 필터,저역 통과 필터,대역 통과 필터,대역 차단 필터,Telecommunications and Wireless Technology,0.25
+전기통신설비의 기술기준에 관한 규칙에서 정의하는 음성주파수대역은?,3,200[Hz] 이상 2200[Hz] 이하,300[Hz] 이상 3000[Hz] 이하,300[Hz] 이상 3400[Hz] 이하,3400[Hz] 이상,Telecommunications and Wireless Technology,0.25
+다수의 사용자가 동일한 시간에 동시에 할당된 주파수 스펙트럼(spectrum)을 사용하도록 하는 다중화 기술은?,3,FDM,TDM,CDM,STDM,Telecommunications and Wireless Technology,0.25
+발신지로부터 목적지로 패킷을 절달하는 기능을 수행하는 OSI 7계층은?,3,물리계층,데이터링크계층,네트워크계층,전송계층,Telecommunications and Wireless Technology,0.25
+양의 VGS로 된 n채널 공핍형 MOSFET의 동작은?,2,공핍형 모드에서 동작한다.,증가형 모드에서 동작한다.,차단에서 동작한다.,포화에서 동작한다.,Telecommunications and Wireless Technology,0.25
+전기통신설비의 기술기준은 어느 법령에 근거를 두고 제정하는가?,2,정보화촉진기본법,전기통신기본법,정보통신공사업법,전기통신사업법,Telecommunications and Wireless Technology,0.25
+UTP에서 선끼리의 상호간섭을 최소화하는 방법에 대한 설명으로 가장 적합한 것은?,4,박막을 입혀서 상호간섭을 최소화한다.,전송거리를 제한하여 상호간섭을 최소화한다.,네 선을 서로 꼬아서 선끼리의 상호간섭을 최소화한다.,두 선을 서로 꼬아서 선끼리의 상호간섭을 최소화한다.,Telecommunications and Wireless Technology,0.25
+패킷교환망(packet-switched network)에 대한 설명으로 틀린 것은?,3,패킷교환망을 통과한 패킷들의 순서는 전송한 순서와 다를 수도 있다.,데이터그램 서비스에서는 패킷에 목적지의 주소가 포함되며 이들 패킷들은 독립적으로 다루어진다.,호(call)가 한번 성립되면 호가 지속되는 동안 두 터미널간에 전용회선이 계속 유지된다.,장애발생시 대체 경로 선택기능이 있다.,Telecommunications and Wireless Technology,0.25
+"MS F-F 의 진리표에서 Jn=1, Kn=0 이고 클럭펄스를 인가할 때 출력 Qn+1 의 값은?",3,Qn,0,1,불확정,Telecommunications and Wireless Technology,0.25
+정보통신의 특징으로 바르지 않는 것은?,2,고속전송 및 광대역전송이 가능하다.,근거리에 한정된 고품질의 통신을 한다.,에러제어로서 신뢰성이 높다.,경제성이 높고 응용범위가 넓다.,Telecommunications and Wireless Technology,0.25
+전가산기(full adder)의 입⋅출력 구조는?,2,"입력 2개, 출력 2개","입력 3개, 출력 2개","입력 2개, 출력 3개","입력 3개, 출력 3개",Telecommunications and Wireless Technology,0.25
+지상파 DMB 기기의 8번 채널의 주파수 사용대역폭은?,3,4[MHz],5[MHz],6[MHz],7[MHz],Telecommunications and Wireless Technology,0.25
+안테나에 관한 저항 중 클수록 좋은 것은?,4,도체 저항,안테나 임피던스,급전선 임피던스,복사 저항,Telecommunications and Wireless Technology,0.25
+"아날로그 전송 회선에서 BPSK 변조 방식을 사용하여 4,800[bps]의 전송 속도로 데이터를 전송하려 할 때 필요한 주파수대역폭은? (단, 잡음이 없는 채널인 경우)",2,"1,200[Hz]","2,400[Hz]","4,800[Hz]","9,600[Hz]",Telecommunications and Wireless Technology,0.25
+반파장 안테나의 뒷면에 평면 반사기를 설치하여 안테나 이득을 높이려 한다. 안테나와 반사기의 거리는?,3,λ,λ/8,λ/4,λ/2,Telecommunications and Wireless Technology,0.25
+영상정보처리기기 운영자가 개인영상정보를 제3자에게 제공할 수 있는 경우가 아닌 것은?,3,정보주체에게 동의를 얻은 경우,범죄의 수사와 공소의 제기 및 유지를 위하여 필요한 경우,개인정보처리자의 동의를 얻은 경우,통계작성 및 학술연구 등의 목적을 위하여 필요한 경우로서 특정 개인을 알아볼 수 없는 형태로 개인영상정보를 제공하는 경우,Telecommunications and Wireless Technology,0.25
+에미터 접지 트랜지스터에서 동작점의 안정화를 위한 대책을 가장 적절하게 설명한 것은?,3,동작점의 베이스전류 I8만 일정하게 한다.,전류 이득 β가 일정하게 한다.,동작점의 IC의 VCE의 값을 일정하게 한 다.,역포화 전류 ICO가 일정한 값을 갖도록  한다.,Telecommunications and Wireless Technology,0.25
+"어떤 시각에 E층의 임계주파수가 2[㎒]이고, 송수신 점간의 거리가 400(㎞)일 때 최고 사용 주파수(MUF)는? (단, E층의 겉보기 높이는 100(㎞)로 한다)",2,2.26(㎒),4.46(㎒),6.64(㎒),8.74(㎒),Telecommunications and Wireless Technology,0.25
+비동기 counter와 관계없는 것은?,4,전단의 출력이 다음 단의 trigger 입력이 된다.,회로가 단순하므로 설계가 쉽다.,ripple counter라고도 한다.,속도가 빠르다.,Telecommunications and Wireless Technology,0.25
+비동기 전송방식과 비교하여 동기식 전송방식의 특징이 아닌 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),4,"전송율이 좋고, 장거리 전송에 유리하다.",문자 사이에는 항상 휴지 간격이 존재한다.,단말기는 기억장치(버퍼)를 갖고 있어야 한다.,동기문자는 송수신의 동기를 유지하기 위해 사용된다.,Telecommunications and Wireless Technology,0.25
+군사용으로 개발된 시스템으로 정보통신 시스템의 원조로 알려진 데이터 통신 시스템은?,3,NTDS,ENIAC,SAGE,SABRE,Telecommunications and Wireless Technology,0.25
+G4 팩시밀리의 일반적인 특징에 해당하지 않는 것은?,4,고속의 전송이 가능하다.,해상도가 높으며 정밀도가 높다.,오류제어에 따른 고품질성을 갖는다.,PSTN에 적합한 형태이다.,Telecommunications and Wireless Technology,0.25
+정보화 사회에서 정보통신망의 최종적인 발전단계는?,3,패킷 교환망 구축,디지털 전용회선 구축,종합정보통신망(ISDN) 구축,광대역 데이터 전용회선 구축,Telecommunications and Wireless Technology,0.25
+일반적인 무선 송신기의 구성으로 필수적인 사항이 아닌 것은?,2,전원부,겸파부,발진부,변조부,Telecommunications and Wireless Technology,0.25
+직렬 전송과 비교하여 병렬 전송의 특징으로 옳은 것은?,3,전송 속도가 느리다.,단말 장치와의 인터페이스 구성이 복잡하다.,진송 매체의 비용이 높다.,병렬 신호를 직렬 신호로 변환해야 한다.,Telecommunications and Wireless Technology,0.25
+"기간통신사업자가 전기통신역무에 관한 요금, 기타 이용조건을 정하여 정보통신부장관의 인가를 받은 것을 무엇이라 하는가?",2,시행규정,이용약관,시설기준,시행규칙,Telecommunications and Wireless Technology,0.25
+FM 방식을 AM 방식에 비교할 경우 틀리는 것은 ?,3,레벨 변동이 없다.,S/N비가 개선된다.,미약한 신호의 수신에 적합하다.,초단파대 통신에 적합하다.,Telecommunications and Wireless Technology,0.25
+이동통신 시스템의 존(zone)은 무엇을 말하는가?,2,한 무선교환국이 수용할 수 있는 트래픽 범위 지역,한 무선기지국이 담당하는 범위인 무선 구역,이동통신 시스템이 제공할 수 있는 전체 서비스 영역,자동차 전화시스템망이 일반 전화망으로 제공할 수 있는 구역,Telecommunications and Wireless Technology,0.25
+시외 동선케이블의 심선수가 500쌍(pair)일 때 어떠한 구조로 결합되어 있는가?,4,성연,층연,쿼드연,유니트연,Telecommunications and Wireless Technology,0.25
+기존의 전화선을 이용하여 고속데이터 전송이 가능한 기술은?,2,Cable MODEM,ADSL,WLL,CDMA,Telecommunications and Wireless Technology,0.25
+전송제어의 5단계 중 4단계는?,3,회선의 접속,링크의 설정,링크의 해제,정보의 전송,Telecommunications and Wireless Technology,0.25
+PCM에서 양자화 잡음을 경감시키는 방법과 관련 없는 것은?,4,양자화 단계의 세분화,압축과 신장,비직선 양자화,부호 비트수의 감소,Telecommunications and Wireless Technology,0.25
+"통신속도가 300[BAUD]이고, 보오당 신호레벨이 4일 때 1분간의 송신 가능속도를 계산하시오.",4,4500[bps],18000[bps],36000[bps],72000[bps],Telecommunications and Wireless Technology,0.25
+"점대점(point-to-point)의 형태로 연결된 메쉬형 회선망에서 전화가입자의 수가 10 이라면, 필요한 회선의 수는 얼마인가?",4,15,25,35,45,Telecommunications and Wireless Technology,0.25
+여러 신호를 단일 회선을 이용하여 공동으로 전송하는데 필요한 장치는 ?,4,엔코더(encoder),디코더(decoder),디멀티플렉서(demultiplexer),멀티플렉서(multiplexer),Telecommunications and Wireless Technology,0.25
+코드분할 다원 접속인 CDMA의 장점이 아닌 것은?,4,페이딩과 간섭에 강한 특성을 보인다.,보안성이 높아 도청하기 어렵다.,소프트 통화 채널 전환이 가능하다.,주파수 사용효율이 낮다.,Telecommunications and Wireless Technology,0.25
+"IPv4 주소체계는 Class A, B, C, D, E로 구분하여 사용하고 있으며 Class C는 가장 소규모의  스트를 수용할 수 있다. Class C가 수용할 수 있는 호스트 개수로 가장 적합한 것은?",2,1개,254개,"1,204개","65,536개",Telecommunications and Wireless Technology,0.25
+(011111100000)2의 값을 갖는 레지스터의  내용을 오른쪽으로 네 번 시프트 시켜다면 실제로 이 레지스터가 수행한 연산은 무엇인가?,4,added –400,multiplied by 4,divided by 4,divided by 16,Telecommunications and Wireless Technology,0.25
+"반송파전압 ec = Ec cos(wct + θ)를 신호전압 es = Es cos wst 로 진폭변조시 피변조파의 상측파대의 진폭은? (단, ma: 변조도)",2,wc + ws,ma·Ec/2,wc - ws,ma·Ec,Telecommunications and Wireless Technology,0.25
+"공중통신회선을 이용하여 정보의 처리, 축적, 가공 등의 부가가치를 부여한 음성 또는 데이터 정보를 제공하는 정보통신 서비스는?",3,ISDN,CATV,VAN,LAN,Telecommunications and Wireless Technology,0.25
+발진 주파수의 안정화를 위해 콜피츠 발진기를 변형한 발진회로는?,2,하틀리 발진기,클랩 발진기,오버톤 발진기,이상형 발진기,Telecommunications and Wireless Technology,0.25
+전계강도 측정에 관한 설명으로 가장 거리가 먼 것은?,2,전계강도 측정기는 내부 잡음에 의한 오차가 생길수 있다.,전계강도는 송신기 출력의 제곱에 비례한다.,전계강도 측정 시 주위에 전화선이나 배전선등이 있을 때는 정확한 측정이 곤란하다.,전계강도는 ㎶/m로 표시된다.,Telecommunications and Wireless Technology,0.25
+PCM 통신방식에서 부호화의 방법에 대한 설명으로 가장 적절한 것은?,3,표본화된 펄스에서 일정한 주기로 나타나는 진폭의 폭을 바꾸어 준다.,주기적으로 PAM 변조하여 나타난 파형으로 표시한다.,"표본화된 펄스를 진폭의 크기에 따라 수개의 단위펄스의 유, 무 조합(1, 0 의 조합)으로 만든다.","양자화된 파형의 위치 및 폭을 일정한 크기의 진폭을 갖는 연속, 불연속 신호로 표시한다.",Telecommunications and Wireless Technology,0.25
+해상에서의 조난 및 인명의 안전에 관한 통신을 목적으로 사용하는 위성에 대한 설명 중 틀린 것은?,4,INMARSAT 위성을 말한다.,이 위성의 사용 주파수 대역은 L 및 C 밴드이다.,이 위성은 항공통신서비스도 제공하고 있다.,주로 이용하는 위성은 무궁화 위성이다.,Telecommunications and Wireless Technology,0.25
+"파형률, 파고율이 동일하게 1인 파형은?",2,사인파,구형파,삼각파,고조파,Telecommunications and Wireless Technology,0.25
+미약 전계강도 무선기기의 기술기준에서 322[MHz] 미만의 주파수를 사용하는 무선기기는 3[m] 거리에서 측정한 전계강도가 얼마 이하이어야 하는가?,2,100[μV/m] 이하,500[μV/m] 이하,1[mV/m] 이하,10[mV/m] 이하,Telecommunications and Wireless Technology,0.25
+2-out of-5 code에 해당되지 않는 것은?,4,10010,11000,10001,11001,Telecommunications and Wireless Technology,0.25
+중심 주파수가 455[KHz]이고 대역폭이 8[KHz]가 되는 단 동조 회로를 만들려고 한다. 이때 이 회로의 Q는 약 얼마가 되는가?,4,2.9,5.7,29,57,Telecommunications and Wireless Technology,0.25
+SSB수신기에서 자동 이득 조정이 곤란한 이유는?,4,측대파가 없으므로,신호 주파수가 적으므로,송신 출력이 적으므로,반송파가 없으므로,Telecommunications and Wireless Technology,0.25
+전기통신망에서 정보를 교환하는 방식이 아닌 것은?,4,회선교환(circuit switching),패킷교환(packet switching),메세지교환(message switching),망교환(network switching),Telecommunications and Wireless Technology,0.25
+이동통신에서 다경로 신호에 의한 전파의 페이딩(fading) 방지책과 거리가 가장 먼 것은?,4,다이버시티를 사용한다.,수신기에 등화기(Equalizer)를 첨가한다.,지향성이 예민한 안테나를 사용한다.,송신주파수를 안정시킨다.,Telecommunications and Wireless Technology,0.25
+Radar의 최대 탐지거리를 크게하기 위한 조건으로 적합하지 않은 것은?,4,송신 전력을 크게한다.,수신기 감도를 좋게한다.,안테나 이득을 크게한다.,송신 파장을 크게한다.,Telecommunications and Wireless Technology,0.25
+Micro 파대의 송신장치에서 주파수 체배에 주로 많이 사용되는 것은?,4,Diode Thyristor,TR Convertor,Tube Convertor,Varactor diode,Telecommunications and Wireless Technology,0.25
+병렬전압 궤환 증폭기의 입력 임피던스는 궤환이 없을 때와 비교하면?,3,증가한다.,증가 후 감소한다.,감소한다.,변함이 없다.,Telecommunications and Wireless Technology,0.25
+우주 공간에 마이크로파대의 중계장치를 탑재한 정지 위성을 띄워서 지상의 지구국에서 발사한 전파를 증폭한 후 다시 지구로 발사하여 통신하는 통신은?,2,이동통신,위성통신,화상통신,음성통신,Telecommunications and Wireless Technology,0.25
+주소지정방식 중 기억장치에 최소 두번 접근해야 오퍼 랜드를 얻을 수 있는 것은?,2,직접주소지정방식,간접주소지정방식,상대주소지정방식,실제값주소지정방식,Telecommunications and Wireless Technology,0.25
+"수신기의 통과대역폭(B), 절대온도(T), 볼쯔만 상수(K), 잡음전력(P)의 관계식으로 맞는 것은?",4,P = KB2T,P = K2BT,P = KBT2,P = KBT,Telecommunications and Wireless Technology,0.25
+컴퓨터 등 정보처리능력을 가진 장치에 의하여 전자적인 형태로 작성되어 송.수신 또는 저장된 문서형식으로 표준화된 것을 무엇이라고 하는가?,3,정보 토큰버스,사이버 몰,전자문서,전산자료,Telecommunications and Wireless Technology,0.25
+전화용 시외자동교환기 누화감쇄량의 한계치는 얼마인가?,4,50[dB] 이상,55[dB] 이상,60[dB] 이상,68[dB] 이상,Telecommunications and Wireless Technology,0.25
+"ARQ 방식 중 에러 발생 비율이 높을 경우 블록의 길이를 작게하고, 재전송 요청 비율이 작을 경우는 블록을 크게하는 방식은?",3,Stop-and-wait ARQ,Go-Back-N ARQ,Adaptive ARQ,Selective ARQ,Telecommunications and Wireless Technology,0.25
+대기잡음에 속하지 않는 것은 ?,4,클릭(click),그라인더(Grinder),힛싱(Hissing),글로우 방전,Telecommunications and Wireless Technology,0.25
+전계강도 측정에 관한 설명중 옳지 않는 것은?,2,전계강도 측정기는 내부 잡음에 의한 오차가 생길 수 있다.,전계강도는 송신기 출력의 제곱에 비례한다.,전계강도 측정시 주위에 전화선이나 배전선등이 있을 때는 정확한 측정이 곤란하다.,전계강도는 uV/m로 표시된다.,Telecommunications and Wireless Technology,0.25
+"컴퓨터 시스템에서 보통 0-주소, 1-주소, 2-주소, 3-주소로 분류할 때 기준이 되는 것은?",2,명령어의 수,오퍼랜드의 수,레지스터의 수,기억 장치의 수,Telecommunications and Wireless Technology,0.25
+"1,200[bps] 속도를 갖는 4채널을 다중화한다면 다중화 설비 출력 속도는 적어도 얼마 이상이어야 하는가?",3,"1,200[bps]","2,400[bps]","4,800[bps]","9,600[bps]",Telecommunications and Wireless Technology,0.25
+"무선접속 장치가 설치된 곳을 중심으로 일정 거리 이내에서 PDA나 노트북, 스마트폰을 이용하여 초고속 인터넷을 이용할 수 있는 서비스를 무엇이라 하는가?",4,RFID,Bluetooth,SWAP,WiFi,Telecommunications and Wireless Technology,0.25
+"컴퓨터에서 처리된 문자, 도형, 그림등으로 구성된 정보를 보관, 검색하기 위하여 작은 면적에 대량의 정보를 아날로그 형태로 저장할 수 있는 장치는?",2,OCR,COM,MICR,CIM,Telecommunications and Wireless Technology,0.25
+통신용 관로의 매설시 가스관 등 다른 매설물과의 간격을 얼마 이상으로 유지하여야 하는가?,2,30㎝ 이상,50㎝ 이상,1m 이상,1.5m 이상,Telecommunications and Wireless Technology,0.25
+일반 단말(NPT)과 PAD간 통신에 이용되는 프로토콜은?,3,X.3,X.25,X.28,X.29,Telecommunications and Wireless Technology,0.25
+이동통신채널의 특징중 이동체의 움직임에 따라 수신신호 주파수가 변하는것과 가장 관계 깊은것은?,4,페이딩,채널간섭,지연확산,도플러현상,Telecommunications and Wireless Technology,0.25
+북미 표준(T1) PCM 시스템의 전송속도로 적합한 것은?,3,56 Kbps,64 Kbps,1.54 Mbps,2.048 Mbps,Telecommunications and Wireless Technology,0.25
+마이크로파 안테나로 적합하지 못한 것은 ?,4,파라볼라 안테나,호온 안테나,렌즈 안테나,웨이브 안테나,Telecommunications and Wireless Technology,0.25
+통신제어장치의 기능에 대한 가장 적합한 설명은?,2,회선에 적합한 형태로 신호의 상호변환,중앙처리장치와 데이터 전송회선간 데이터 송수신제어,통신회선의 주파수 및 위상의 특성 제어,메모리장치의 데이터 버스 제어,Telecommunications and Wireless Technology,0.25
+전동기의 회원 방향을 알기 위한 법칙으로 올바른 것은?,2,렌츠의 법칙,플레밍의 왼손 법칙,쿨롱의 법칙,앙페르의 오른나사 법칙,Telecommunications and Wireless Technology,0.25
+"OTT(Over The Top)는 전파나 케이블이 아닌 인터넷망을 통해 멀티미디어 콘텐츠를 볼 수 있는 서비스를 말한다. Over The Top에서 “Top""이 의미하는 기기는 무엇인가?",2,모뎀,셋탑박스,공유기,TV,Telecommunications and Wireless Technology,0.25
+인공위성이나 우주 비행체는 매우 빠른 속도로 운동하고 있으므로 전파발진원의 이동에 따라서 수신주파수가 변하는 현상은?,3,페이져 현상,플라지마 현상,도플러 현상,전파지연 현상,Telecommunications and Wireless Technology,0.25
+FM 수신기의 스켈치(Squelch) 회로에 대한 설명 중 맞지 않는 것은?,2,잡음 증폭과 잡음 정류 기능을 갖추고 있다.,수신기 감도 및 이득을 향상시켜 준다.,잡음이 커지면 자동적으로 가청 주파수 증폭기 기능을 정지한다.,"수신 신호가 약하거나 없을 때, 잡음 출력이 커질 때 이를 방지한다.",Telecommunications and Wireless Technology,0.25
+문자동기방식에서 에러를 체크하기 위한 코드는?,3,ETX(End of Text),STX(Start of Text),BCC(Block Check Character),BSC(Binary Synchronous),Telecommunications and Wireless Technology,0.25
+위성통신의 저잡음 증폭기로 많이 사용되는 것은?,4,Parametric 증폭기,Magnetron 증폭기,Tunnel 증폭기,GaAs FET 증폭기,Telecommunications and Wireless Technology,0.25
+변복조기 공동이용기와 선로공동이용기에 대한 설명 중 옳은 것은?,3,변복조기 공동이용기와 선로공동이용기는 폴/셀렉트 프로토콜을 이용한다.,"집중화기보다 네트워크구성이 복잡하고, 소프트웨어의 기능이 다양하다.","변복조기 공동이용기는 원거리에서 사용되고, 선로공동이용기는 근거리에서 사용된다.",변복조기 공동이용기는 타이밍소스가 있고 선로공동이용기는 내부에 타이밍소스가 없다.,Telecommunications and Wireless Technology,0.25
+TV 신호의 수직귀선 소거 기간 동안을 이용하여 문자나 도형등을 전송하는 방식은?,3,비디오텍스,데이터 방송,텔레텍스트,팩시밀리 방송,Telecommunications and Wireless Technology,0.25
+아날로그 통신방식과 비교한 디지털 통신방식의 특징에 대한 설명으로 적합하지 않은 것은?,3,통신비화가 용이하다.,다른 채널로부터의 간섭 현상이 적다.,종합통신망의 구축이 어렵다.,전송선로에서 발생하는 잡음의 영향을 덜 받는다.,Telecommunications and Wireless Technology,0.25
+디지털 교환기의 통화로망(switching network)의 가장 일반적인 구성 형태는?,4,T,T - S - T - S,S - T - S,T - S - T,Telecommunications and Wireless Technology,0.25
+"채널의 대역폭이 12[kHz]이고 S/N비가 15일 때, 채널용량[kbps]은?",2,12,48,56,68,Telecommunications and Wireless Technology,0.25
+위성통신에서 강우중인 공간을 전파하는 전파가 빗방울에 의한 영향으로 생기는 현상이 아닌 것은?,2,전파의 흡수,전파의 산란,교차편파 식별도의 열화,파라데이 회전,Telecommunications and Wireless Technology,0.25
+PCM 통신 방식의 특징으로 맞지 않는 것은?,3,전송로에 의한 레벨 변동이 거의 없다.,PCM 고유(특유)의 잡음이 발생한다.,디지털 신호 전송시 능률이 떨어진다.,외부 잡음 등 방해에 강하고 저질의 전송로에도 사용할 수 있다.,Telecommunications and Wireless Technology,0.25
+전전자 교환기에서 디지털 스위칭의 장점이 아닌 것은?,4,교환망에 의한 손실이 없다.,잡음을 방지한다.,전송방식을 PCM방식으로 유도한다.,교환점은 공간분할 스위칭에 비해 많다.,Telecommunications and Wireless Technology,0.25
+중계기의 구성요소가 아닌 것은?,4,등화증폭회로,식별회로,타이밍회로,위상검출기,Telecommunications and Wireless Technology,0.25
+진폭 편이 변조기의 구성요소가 아닌 것은?,4,펄스 발생기,저역여파기,변조기,위상지연기,Telecommunications and Wireless Technology,0.25
+트랜지스터를 활성영역으로 동작시키는 증폭회로에서 베이스와 콜렉터 접합부의 바이어스 전압의 극성은?,2,항상 순방향 바이어스,항상 역방향 바이어스,PNP 트랜지스터에서는 순방향 바이어스,NPN 트랜지스터에서는 순방향 바이어스,Telecommunications and Wireless Technology,0.25
+출력 4[V]를 얻는데 궤환이 없을 때는 0.2[V]의 입력이 필요하고 부궤환이 있을 때는 2[V]의 입력이 필요하다고 한다. 궤환율 β 는 얼마인가?,4,0.25,0.30,0.40,0.45,Telecommunications and Wireless Technology,0.25
+전화기의 송화기는 음성신호를 전기신호로 변환하는 장치이다. 송화와 밀접한 관계가 있는 것은?,3,진동판과 콘덴서,진동판과 영구자석,진동판과 탄소입자,진동판과 유도코일,Telecommunications and Wireless Technology,0.25
+e = 100 √2 sin (377t + π/6)[V]인 순시전압에서 옳지 않은 것은?,2,각속도(ω)=377rad/s,최대값(Vm)=100V,주파수(f)=60Hz,위상(θ)=30°,Telecommunications and Wireless Technology,0.25
+다중화 방식의 설명중 옳은 것은?,2,TDM은 전송로의 잡음이나 누화 등의 방해가 FDM보다 많다.,FDM은 TDM에 비해 협대역이고 핵심기술은 필터이다.,TDM에서 상호변조의 결과 기저대역에서 채널사이에 혼선이 된다.,FDM의 가장 어려움의 하나는 다중 통신 통신자와 역다중 통신 통신자의 동기를 관리하는것이다.,Telecommunications and Wireless Technology,0.25
+"은행, 백화점, 댐, 하역장, 공장 및 사람이 접근할 수 없는 산업현장 등을 감시하는데 가장 적합한 것은?",4,CATV,VRS,HDTV,CCTV,Telecommunications and Wireless Technology,0.25
+데이터링크 계층에서 동작하는 인터네트워킹 장비는?,2,라우터,브리지,허브,리피터,Telecommunications and Wireless Technology,0.25
+AM 슈퍼헤타로다인 수신기에서 중간주파수의 선정에 있어 고려될 필요가 없는 것은?,3,영상 주파수 방해,단일조정의 용이성,초고주파에 의한 방해,국부 발진기의 주파수 안정도,Telecommunications and Wireless Technology,0.25
+"MS F-F 의 진리표에서 Jn=1, Kn=0 일 때 출력 Qn+1 의 값은?",3,Qn,0,1,불확정,Telecommunications and Wireless Technology,0.25
+인터넷상에서 주소체계인 IPv4와 IPv6을 비교한 설명으로 옳지 않은 것은?,4,IPv4는 32비트의 주소체계를 가지고 있다.,IPv4는 헤도구조가 복잡하다.,"IPv4는 네트워크 크기나 호스트의 수에 따라 A, B, C, D, E 클래스로 나누어진다.",IPv4는 확실한 Qos(Quality of Service)가 보장된다.,Telecommunications and Wireless Technology,0.25
+단일 링크를 통하여 여러 개의 신호를 동시에 전송하는 것은 무엇인가?,4,변조,부호화,복호화,다중화,Telecommunications and Wireless Technology,0.25
+CSMA/CD 방식에 관한 특징 중 옳지 않은 것은?,3,데이터 전송이 피용할 때 임의로 채널을 할당하는 랜덤할당방식이다.,버스 구조에 이용될 수 있다.,"노드수가 많고, 데이터 전송량이 많을수록 안정적이고 효율적으로 전송이 가능하다.",채널로 전송된 패킷은 모든 노드에서 수신이 가능하다.,Telecommunications and Wireless Technology,0.25
+전화수화기에 영구자석을 사용하지 않으면 어떤 현상이 생기는가?,4,음성전류의 주파수와 같은 흡인력이 발생한다.,주파수 특성이 평탄해진다.,진동판의 진동이 커진다.,음성전류의 2배수의 주파수 음성이 재생된다.,Telecommunications and Wireless Technology,0.25
+Yagi 안테나의 특징이 아닌 것은?,2,TV(텔레비젼) 전파수신용으로 사용된다.,쌍향성의 예민한 지향성을 갖는다.,소자수가 많을수록 임피던스가 낮아진다.,도파기의 수를 증가 시키면 이득이 증대된다.,Telecommunications and Wireless Technology,0.25
+"MTBF가 72시간, MTTR이 1시간이 걸린 시스템이 있다고 할 때, 가동율은 약 몇 [%]인가?",3,92.4,96.2,98.6,99.8,Telecommunications and Wireless Technology,0.25
+국내 공중통신망의 총괄국 아래 계위의 디지털 교환기들이 사용하고 있는 망동기 방식은?,3,단순 종속동기방식(SMS : Simple Master Slave),계위 종속동기방식(HMS : Hierarchical Master Slave),선지정 대체 종속동기방식(PAMS : Pre Assigned Master Slave),자체 재배열 종속동기방식(SOMS : Self Organized Master Slave),Telecommunications and Wireless Technology,0.25
+수신한 마이크로파를 중간주파수로 변환하여 증폭한 후 다시 마이크로파로 변환하여 송신하는 중계방식은?,4,직접 중계방식,검파 중계방식,베이스밴드 중계방식,헤테로다인 중계방식,Telecommunications and Wireless Technology,0.25
+NO.1A 전자교환기 중 통화로부라 볼 수 없는 것은?,3,LSC(Line Switching Circuits),JSC(Junctor Switching Circuits),NC(Network Control),TSC(Trunk Switching Circuits),Telecommunications and Wireless Technology,0.25
+이동통신 시스템의 구성에서 존(zone)이란 무엇인가?,2,한 무선교환국이 수용할 수 있는 트래픽 범위지역,한 무선기지국이 담당하는 범위인 무선통신구역,이동통신 시스템이 제공할 수 있는 전체 서비스영역,자동차 전화 시스템망이 일반전화망으로 제공할 수 있는 구역,Telecommunications and Wireless Technology,0.25
+GPS(Global Positioning System)에 대한 설명 중 틀린것은?,4,수동적이며 무제한 사용 가능하고 24시간 연속적인 서비스를 제공한다.,"GPS시스템은 위성부문, 지상관제부문, 사용자 부문으로 구성된다.",측위 정밀도를 향상시킨 GPS를 DGPS라 한다.,최소한 3개의 위성으로부터 데이터를 수신하면 사용자의 위치를 알 수 있다.,Telecommunications and Wireless Technology,0.25
+데이터링크 계층의 프로토콜 비트 중심의 프로토콜이 아닌 것은?,4,SDLC,X.25,HDLC,PPP,Telecommunications and Wireless Technology,0.25
+마이크로웨이브를 이용하는 고정통신방식의 시스템에서 송신안테나는 수평편파용을 이용하고 수신안테나는 수직 편파용을 이용한 경우 일어나는 현상은?,2,이득에 전혀 영향을 받지 않아 통신하는데 영향이 없다.,이득이 현저히 줄게되어 통신에 지장을 받는 경우도 있다.,간헐적으로 이득이 크게 증가한다.,간헐적으로 이득이 약간 감소한다.,Telecommunications and Wireless Technology,0.25
+"MODEM의 수신 입력단에서 최저 S/N 비가 25dB 필요하도록 설계되어 있다고 한다. 전송로의 수신레벨이 -10dB 라고 할 때, 이 전송로의 허용되는 잡음 레벨은 몇 dB 인가?",2,-45,-35,-25,-15,Telecommunications and Wireless Technology,0.25
+정보 단말기의 구성 중 전송제어장치에 해당되지 않는 것은?,4,입출력제어부,회선제어부,회선접속부,출력장치부,Telecommunications and Wireless Technology,0.25
+고속의 무선 및 멀티미디어 통신을 위해 하나의 정보를 여러 개의 반송파로 분할하고 분할된 반송파 사이의 주파수 간격을 최소화하기 위해 직교 다중화해서 전송하는 통신 기술은 무엇인가?,4,THSS,FHSS,DSSS,OFDM,Telecommunications and Wireless Technology,0.25
+대수주기형 안테나(Log periodic antenna)에 대한 기술로서 옳지 않는 것은?,3,안테나의 크기와 모양이 비례적으로 커지는 여러개의 안테나 소자로 되어 있다.,주파수의 대수값이 일정한 값만큼씩 달라지는 주파수 때마다 동일한 복사특성을 나타낸다.,무지향성의 안테나로 이득이 매우 높다.,매우 넓은 주파수 대역을 갖는다.,Telecommunications and Wireless Technology,0.25
+수직접지 안테나의 설명으로 옳지 않은 것은?,2,복사전파가 수직편파이다.,도선의 길이가 λ/4일 때에는 전압급전으로 하는 것이 좋다.,수평면 내에서는 무지향성이다.,도선의 길이가 λ4보다 긴 경우에는 직렬로 콘덴서를 삽입하여 공진시킨다.,Telecommunications and Wireless Technology,0.25
+초단파가 가시거리를 넘어서 이례적으로 멀리 전파하는 일이 있는데 그 원인이 아닌것은?,4,초굴절 또는 라디오 덕트에 의한 전파,대류권 산란에 의한 전파,산악회절파에 의한 전파,F층의 반사에 의한 전파,Telecommunications and Wireless Technology,0.25
+"팩시밀리의 원통직경이 50[mm]이고, 주사선 밀도가 5[선/mm]일 때 협동계수는 얼마인가?",4,10,25,100,250,Telecommunications and Wireless Technology,0.25
+"데이터에 통신국의 주소, 에러 검출 부호, 프로토콜 제어 등의 제어 정보인 헤더(Header)를 부착하는 기능은?",4,흐름제어,주소지정,다중화,캡슐화,Telecommunications and Wireless Technology,0.25
+4[kHz]까지의 음성신호를 완전히 재생시키기 위한 표본화 주기는 몇 [㎲]인가?,3,250,200,125,100,Telecommunications and Wireless Technology,0.25
+ADSL의 스플리터(splitter)에 대한 설명으로 가장 옳은 것은?,3,음성신호와 데이터 신호를 합치는 장비,음성신호와 데이터 신호를 나눠주는 장비,음성신호와 데이터 신호를 합치거나 나눠주는 장비,데이터 신호를 음성신호로부터 구분하는 장비,Telecommunications and Wireless Technology,0.25
+정보통신설비의 시설공사에서 하도급 원칙에 관한 규정이 아닌것은?,3,일괄하도급 금지,재하도급 금지,하도급 공사 단독책임,일부하도급시 사전서면승인,Telecommunications and Wireless Technology,0.25
+AM 수신기에서 중간 주파수의 선정시 고려사항으로 관계가 적은 것은?,4,이득 및 안정도,지연특성,인입현상,초고주파의 방해,Telecommunications and Wireless Technology,0.25
+"반송파전압 ec = Ec cos(wct +  θ)를 신호전압 es = Es cos wst 로 진폭변조시 피변조파의 상측파대의 진폭은? (단, ma : 변조도)",2,wc + ws,(ma · Ec) / 2,wc - ws,ma · Ec,Telecommunications and Wireless Technology,0.25
+위성통신이나 무선통신등에서 여러가입자가 동시에 할당된 주파수대에서 통신이 가능하도록 하는 다원접속 방식이 아닌 것은?,3,주파수 분할 접속,시 분할 접속,멀티 분할 접속,코드 분할 접속,Telecommunications and Wireless Technology,0.25
+컴퓨터에서 처리된 문자나 도형의 형태로 마이크로 필름에 기록하는 장치는?,3,CAM,CAR,COM,OCR,Telecommunications and Wireless Technology,0.25
+주파수 변조파를 수신하는데 무신호시 잡음을 제어하는 것은?,3,IDC,AFC,SQUELCH,AGC,Telecommunications and Wireless Technology,0.25
+단말과 단말 사이를 하나하나의 회선으로 연결한 형태의 통신망은?,3,원형,트리형,메쉬형,버스형,Telecommunications and Wireless Technology,0.25
+RC 결합 증폭회로에서 대역폭을 4배로 증가 시키려면 전압증폭이득을 약 몇 [dB] 감소시켜야 하는가?,4,0.5,4,6,12,Telecommunications and Wireless Technology,0.25
+통신제어장치의 통신접속에서 복수개의 단말이 1개의 통신회선을 공유하는 경우에 복수의 논리적인 통신회선을 설정하는 기능은?,3,통신방식제어,제어정보의 식별,다중접속방식,흐름 및 우선권 제어,Telecommunications and Wireless Technology,0.25
+PCM-24B 시스템에서 하나의 음성채널을 PCM 방식으로 전송할 때의 채널 당 정보전송량은 몇 kbps 인가?,4,24,48,56,64,Telecommunications and Wireless Technology,0.25
+데이터 전송에서 다수의 에러를 검출하고 정정할 수 있는 부호방식은?,3,ARQ,군계수 체크 코드,Reed-Solomon 코드,패리티 체크 코드,Telecommunications and Wireless Technology,0.25
+기본주파수 17.7[㎓]를 초과하는 무선설비의 스퓨리어스 발사의 허용값은?,2,기본주파수의 평균전력보다 20[㏈] 낮은 값,기본주파수의 평균전력보다 40[㏈] 낮은 값,기본주파수의 평균전력보다 60[㏈] 낮은 값,기본주파수의 평균전력보다 80[㏈] 낮은 값,Telecommunications and Wireless Technology,0.25
+정보통신장관이 전기통신을 연구하는 기관이나 단체를 지도 육성하는 목적은?,2,전기통신의 질서유지를 위하여,전기통신의 진흥을 위하여,전기통신의 기술지도를 위하여,정보통신망의 확충을 위하여,Telecommunications and Wireless Technology,0.25
+원신호를 복원하기 위해서 샘플링 주파수는 샘플링되는 신호의 최고주파수에 비하여 최소한 몇 배 이상이 되어야 하는가?,2,1,2,3,4,Telecommunications and Wireless Technology,0.25
+"태양의 폭발로 인하여 발생하는 강력한 자외선 방출에 의해 D, E 층의 전자 밀도가 급격히 증가하여 전파의 감쇠가 심하게 발생하는 현상은 ?",3,페이딩,자기폭풍,델린저 현상,공전,Telecommunications and Wireless Technology,0.25
+FDM 다중화 신호계위에서 1SG(Super Group)은 몇 개의 BG(Base Group)으로 구성되는가?,3,3,4,5,6,Telecommunications and Wireless Technology,0.25
+전파연구소장은 특별한 사유가 없는 한 전자파 적합등록 신청서를 받은 날로부터 며칠 이내에 처리하여 하는가?,2,3일,5일,10일,25일,Telecommunications and Wireless Technology,0.25
+FM 통신방식이 AM 방식에 비해 S/N 비가 좋은 이유는?,4,깊은 변조를 할 수 있다.,점유주파수대 폭이 좁다.,클래리파이어(clarifier)를 사용한다.,수신측에 리미터(limiter)를 사용한다.,Telecommunications and Wireless Technology,0.25
+LAN에서 사용하는 다중 액세스 방식 중 CSMA/CD 방식의 특징은?,4,각 노드의 액세스 시간은 무한정 보장된다.,최대 거리 제한이 없다.,높은 부하에 대해 충돌 없이 안정하게 동작한다.,모든 노드는 대등한 액세스 권리를 갖는다.,Telecommunications and Wireless Technology,0.25
+PCM 32채널 방식 설명 중 옳은 것은?,2,각 채널은 4개의 비트로 구성된다.,프레임당 비트 수는 256개이다.,전송속도는 1.024[Mbit/s]이다.,멀티 프레임 수(주기)는 8(4.0ms)이다.,Telecommunications and Wireless Technology,0.2632
+음향 결합기(Acoustic Coupler)에서 주로 사용되는 변조방법은?,3,PSK,ASK,FSK,DPSK,Telecommunications and Wireless Technology,0.2667
+진폭 변조에서 변조 지수가 1인 경우 변조 출력은 반송파 전력의 몇 배가 되는가?,2,1.5배,2배,2.5배,3배,Telecommunications and Wireless Technology,0.2667
+평활회로의 특성 중 L형 평활회로와 비교하여 C형 평활회로의 특성으로 틀린 것은?,3,직류 출력 전압이 높다.,시정수가 클수록 리플이 감소된다.,전압변동률이 작다.,"고전압, 저전류 용도로 사용된다.",Telecommunications and Wireless Technology,0.2727
+광섬유케이블 심선에 있어서 core의 굴절률을 점차 높이면(증가시키면) 통화용 레이저광선의 전파 속도는 어떻게 변화되는가?,2,점차 빨라진다.,점차 늦어진다.,전혀 불변이다.,주기적으로 빨라졌다 늦어졌다 한다.,Telecommunications and Wireless Technology,0.2727
+전자파가 금속에 인가될 때 금속표면에서의 전자파의 특징을 설명한 것 중 잘못된 것은?,2,금속표면에서 전자파의 투과 정도는 표피 두께(skin depth)로 나타낸다.,금속의 투과 정도는 동작 주파수가 높을수록 높아진다.,금속의 투과 정도는 금속의 전도율이 높을수록 낮아진다.,UHF 대역에서 유전체 투과 정도는 금속에 비해 매우 높다.,Telecommunications and Wireless Technology,0.2727
+무선 수신기에서 S/N비를 개선시키는 방법으로 적합하지 않은 것은?,3,주파수 변환회로의 변환이득을 크게 한다.,고주파 증폭부의 증폭도를 적당하게 한다.,각 증폭기의 대역폭을 넓게 하여 충실도를 향상시킨다.,동조회로 등을 사용하여 수신안테나와 고주파증폭기의 임피던스 정합을 좋게 한다.,Telecommunications and Wireless Technology,0.275
+"ASK, FSK, BPSK의 성능에 대한 비교 설명으로 적합하지 않은 것은?",4,비동기식 ASK와 비동기식 FSK는 동기식 복조에 비해 약 1[dB]의 성능 열화가 있다.,가장 성능이 우수한 것은 동기식 BPSK이다.,동기식 ASK와 동기식 FSK의 성능은 동일하다.,비동기식 BPSK와 동기식 FSK와 성능이 거의 동일하다.,Telecommunications and Wireless Technology,0.2821
+입력임피던스가 매우 높고 출력임피던스는 낮아서 완충 증폭기로 많이 사용되는 것은?,4,푸시풀 증폭기,베이스 접지 증폭기,이미터 접지 증폭기,컬렉터 접지 증폭기,Telecommunications and Wireless Technology,0.2857
+프로토콜이 다른 LAN을 연결할 때 또는 LAN을 WAN에 접속할 경우에 사용하며 동일한 망(network) 내에서 주고받는 데이터는 망 내에서만 전송되도록 제한을 가하여 불필요한 작업량을 제거하여 주는 장비는?,3,허브(HUB),스위치(Switch),라우터(Router),게이트웨이(Gateway),Telecommunications and Wireless Technology,0.2857
+정전압회로에서 주로 사용되는 다이오드는?,2,터널 다이오드,제너 다이오드,발광 다이오드,바렉터 다이오드,Telecommunications and Wireless Technology,0.2857
+정보통신공사에서 “설계도서”에 포함되지 않는 것은?,2,공사시방서,공사도급서,공사비명세서,공사설계도면,Telecommunications and Wireless Technology,0.2857
+0.1[V]의 교류 입력이 10[V]로 증폭되었을 때 증폭도는 몇 [dB] 인가?,4,0.1[dB],4[dB],20[dB],40[dB],Telecommunications and Wireless Technology,0.2857
+지표파는 거의 이용되지 않으나 공간파가 전리층에 반사되어서 원거리까지 전파되는 전파는?,2,장파(LF),단파(HF),초단파(VHF),극초단파(SHF),Telecommunications and Wireless Technology,0.2857
+"수신기에서 증폭단 출력의 기본파 전압이 50[V], 제2고조파 전압이 1.73[V], 제3고조파 전압이 1[V]이면 종합왜율은 약 몇 [%]인가?",3,1[%],2[%],4[%],5[%],Telecommunications and Wireless Technology,0.2857
+컴퓨터 시스템의 운영을 제어하고 지원하는 프로그램에 속하지 않는 것은?,4,컴파일러,운영체제,로더,데이터베이스,Telecommunications and Wireless Technology,0.2857
+마이크로파용 송신기의 전력측정 방법 중 해당되지 않는 것은 ?,4,볼로미터 소자 이용,열량계 이용,방향성 결합기 이용,직선 검파기 이용,Telecommunications and Wireless Technology,0.2857
+일반적인 무선송신기의 기본적인 구성을 가장 옳게 나타낸 것은?,2,"발진부, 증폭부, 체배부, 전원부","발진부, 변조부, 증폭부, 전원부","전원부, 증폭부, 체배부, 안테나부","발진부, 체배부, 복조부, 전원부",Telecommunications and Wireless Technology,0.2857
+A급 증폭기의 동작은 정특성 곡선상의 어느 점에 설정 하는가?,3,정특성 곡선에 컬렉터 전류의 차단점보다 더욱 부(-)쪽에 잡는다.,정특성 곡선에서 컬렉터 전류의 차단점에 잡는다.,정특성 곡선에서 직선부의 중앙부에 잡는다.,정특성 곡선의 안곡부에 잡는다.,Telecommunications and Wireless Technology,0.2857
+주파수 변조(FM)에서 S/N비를 높이기 위한 방법으로 적당치 않은 것은?,2,변조지수 m를 크게 한다.,신호파의 진폭을 크게 한다.,주파수 대역폭을 크게 한다.,pre-emphasis를 채용한다.,Telecommunications and Wireless Technology,0.2857
+TTL에 비교하여 C-MOS 집적회로의 특징이 아닌 것은 ?,3,소비전력이 적다.,잡음여유도가 높다.,동작속도가 빠르다.,폭넓은 전원전압에서 동작이 가능하다.,Telecommunications and Wireless Technology,0.2857
+A급 증폭기에 대한 설명으로 틀린 것은?,4,저 왜율이 요구되는 증폭기용으로 적합하다.,출력신호의 왜율이 B급 보다 작다.,B급 보다 트랜지스터 컬렉터 손실이 크다.,"A급, B급, C급 중에서 A급의 유통각이 가장 작다.",Telecommunications and Wireless Technology,0.2857
+전송로의 특성 중 시스템적인 왜곡(systematic distortion)에 해당되는 것은?,4,페이딩,에코(echo),백색잡음,지연왜곡,Telecommunications and Wireless Technology,0.2857
+"어느 전화 회선의 단말을 개방시키고 임피던스를 측정하였더니 400[Ω], 단락시키고 측정하였더니 900[Ω]이었다. 이 회선의 특성 임피던스[Ω]는?",4,200[Ω],400[Ω],450[Ω],600[Ω],Telecommunications and Wireless Technology,0.2857
+동축케이블의 특성이 아닌 것은?,2,특성 임피던스는 주파수에 관계없이 일정하다.,"전파 전송은 불가능하여, 중계소의 무인화가 불가능하다.",고주파 영역에서 누화는 거의 문제되지 않는다.,위상정수는 거의 주파수에 비례하고 감쇠량은 거의 주파수 제곱근에 비례한다.,Telecommunications and Wireless Technology,0.2857
+Slot array 안테나에 대한 설명 중 적합하지 않은 것은?,4,부엽이 적고 효율이 높다.,급전은 안테나의 중앙부 또는 한쪽 끝에서 한다.,선박용 레이더 안테나 등에 사용된다.,다수의 Slot에 의해 관벽과 같은 방향에 날카로운 빔이 얻어진다.,Telecommunications and Wireless Technology,0.2857
+대수 주기형 안테나(Log periodic antenna)에 대한 기술로서 옳지 않는 것은?,3,안테나의 크기와 모양이 비례적으로 커지는 여러개의 안테나소자로 되어있다.,주파수의 대수값이 일정한 값만큼씩 달라지는 주파수 때마다 동일한 복사특성을 나타낸다.,무지향성의 안테나로 이득이 매우높다.,매우 넓은 주파수 대역을 갖는다.,Telecommunications and Wireless Technology,0.2857
+신틸레이션 페이딩(Scintillation Fading)에 대해서 잘못 설명한 것은?,4,송수신점간의 거리가 클수록 전계변동폭이 커진다.,전계강도는 2~3[㏈]이하의 진폭으로 수초에서 수십초의 주기로 발생하여 불안정하다.,원인은 대기중에 와류에 의하여 유전율이 불규칙한 공기뭉치를 발생하기 때문이다.,동계보다 하계에 더 적게 발생한다.,Telecommunications and Wireless Technology,0.2857
+PCM 통신방식에서 수신단에만 설치하는 회로는?,4,표본화 회로,양자화 회로,부보화 회로,복호화 회로,Telecommunications and Wireless Technology,0.2857
+중앙처리장치로부터 발생되는 기억장치의 읽기 신호와 쓰기 신호를 이용하여 입ㆍ출력장치에 대한 읽기와 쓰기를 수행할 수 있는 방식은?,4,Interrupt I/O,Channel I/O,Programmed I/O,Memory Mapped I/O,Telecommunications and Wireless Technology,0.2857
+전기통신사업의 종류가 알맞게 분류된 것은?,4,"기간통신사업, 일반통신사업, 특정통신사업","일반통신사업, 특정통신사업, 별정통신사업","기간통신사업, 정보통신사업, 별정통신사업","기간통신사업, 별정통신사업, 부가통신사업",Telecommunications and Wireless Technology,0.2857
+전기통신설비의 보호를 위한 금지 행위가 아닌 것은?,3,전기통신설비의 손괴 금지,전기통신 소통 방해 금지,전기통신설비의 대여 금지,전기통신설비의 기능 장애 금지,Telecommunications and Wireless Technology,0.2857
+"선로설비의 회선 상호간, 회선과 대지간 및 회선의 심선 상호간의 절연저항은 얼마이어야 하는가?",3,직류 50[V] 절연저항계로 측정하여 1[㏁] 이상,교류 50[V] 절연저항계로 측정하여 1[㏁] 이하,직류 500[V] 절연저항계로 측정하여 10[㏁] 이상,교류 500[V] 절연저항계로 측정하여 10[㏁] 이하,Telecommunications and Wireless Technology,0.2857
+데이터 전송기준의 측정 척도중 오율의 측정기준이 아닌것은?,4,비트 오율,블록 오율,전신 왜율,트래픽 오율,Telecommunications and Wireless Technology,0.2857
+논리식 ABC+ABC+ABC+ABC을 간단히 하면?,2,B(A+C),AB+BC+AC,C(A+B),A+B+C,Telecommunications and Wireless Technology,0.2857
+전화망 음성통신에 사용되는 PCM 방식에서 표본화(sampling) 주파수는?,2,4kHz,8kHz,10kHz,16kHz,Telecommunications and Wireless Technology,0.2857
+[AT/Wb]의 단위와 같은 것은?,2,[H],[H-1],[F],[F-1],Telecommunications and Wireless Technology,0.2857
+"휴대용 무선기기에서 주로 쓰이는 통신 방식으로서 양쪽방향으로 통신은 가능하나, 동시에 양쪽으로의 전송은 되지 않는 통신 방식은?",4,단방향 통신,전이중 통신,다중 통신,반이중 통신,Telecommunications and Wireless Technology,0.2857
+광섬유의 광손실중 외부의 힘에 의한 손실은?,2,매크로 밴딩(macro banding) 손실,마이크로 밴딩(micro banding) 손실,나노 밴딩(nano banding) 손실,피코 밴딩(pico banding) 손실,Telecommunications and Wireless Technology,0.2857
+RS-232C 통신방식에서 DTE와 DCE 사이의 최대 이격 거리는?,4,2[m],5[m],10[m],15[m],Telecommunications and Wireless Technology,0.2857
+절연된 두 도체사이에 정전유도를 이용하여 많은 전기량을 저축하는 장치는?,2,저항기,축전기,건전지,유도기,Telecommunications and Wireless Technology,0.2857
+전파가 전리층에서 받는 감쇠중 제2종 감쇠는?,3,E층 투과할 때 받는 감쇠,F층 투과할 때 받는 감쇠,E층 또는 F층에서 반사할 때 받는 감쇠,D층에서 반사할 때 받는 감쇠,Telecommunications and Wireless Technology,0.2857
+어떤 전원 정류기에서 전부하의 출력전압이 250[V]일 때 전압변동률 20[%]일 경우 무부하시 전압은?,3,500[V],312.5[V],300[V],475[V],Telecommunications and Wireless Technology,0.2857
+T형 플립플롭에 대한 설명으로 틀린 것은?,3,토글 플립플롭(toggle flip-flop)이라고도 한다.,클록이 들어올 때마다 상태가 반전된다.,출력파형의 주파수는 입력파형의 주파수와 동일하다.,1/2분주회로 또는 계수회로에 많이 쓰인다.,Telecommunications and Wireless Technology,0.2857
+IEEE 802.1Q 표준 규격의 VLAN을 규별하는 VLAN ID를 전달하는 방법인 태킹(Tagging) 방법에 대한 설명으로 틀린 것은?,4,이더넷 프레임에서 소스 주소(Source Address) 바로 다음에 2바이트 TPID(Tag Protocol ID)를 삽입하여 VLAN 태그가 존재함을 알려준다.,VLAN 태그를 인식하지 못하는 구형 장비는 알려지지 않은 이더넷 프로토콜 타입으로 간주하여 폐기한다.,TPID 바로 다음에 2바이트 TCI(Tag Control Information)를 삽입하여 태그 제어 정보로 사용한다.,"TCI 중 12비트인 VID(VLAN ID)는 각각의 VLAN을 식별하는데 사용하며, 총 4096개의 VLAN 구별이 가능하다.",Telecommunications and Wireless Technology,0.2857
+"방송국의 안테나 전력이 10[㎾]에서 250[㎾]로 증가되면 전계강도는 몇 배로되는가? (단, 거리는 일정하다고 한다.)",3,1/5배,1/25배,5배,25배,Telecommunications and Wireless Technology,0.2857
+광통신시스템에서 광합파기 및 광분배기를 사용하는 광다중전송방식은?,2,TDM,WDM,ADM,FDM,Telecommunications and Wireless Technology,0.2857
+팩스(FAX)의 부호화 방식으로 사용되지 않는 것은?,3,MH(Modified Huffman) 방식,MR(Modified Read) 방식,MMH(Modified MH) 방식,MMR(Modified MR) 방식,Telecommunications and Wireless Technology,0.2857
+No.7 신호방식의 특징이 아닌 것은?,4,공통선 신호방식이다.,기능별로 모듈화된 계층구조이다.,다양한 서비스 제공능력을 가진다.,패킷교환망에 가장 적합한 신호방식이다.,Telecommunications and Wireless Technology,0.2857
+연산증폭기에 대한 설명이다. 틀린 것은?,3,고이득 차동 증폭기가 주축을 이룬다.,"IC화된 연산 증폭기는 고신뢰도, 고안정도, 회로의 소형화 등 장점이 있다.","이상적 연산증폭기인 경우 입력저항은 zero, 출력저항은 ∞ 를 갖는다.","가상접지는 물리적인 구성을 표시하는 것이 아니고, 전압증폭도를 구하는데 유용하다.",Telecommunications and Wireless Technology,0.2857
+HDLC 전송제어에서 사용하는 동작 모드가 아닌 것은?,2,정규응답모드(NRM),초기 모드(IM),비동기 평형모드(ABM),비동기 응답모드(ARM),Telecommunications and Wireless Technology,0.2857
+채널을 통해 보낼 수 있는 데이터량과 채널의 대역폭과의 관계는?,4,반비례,제곱근의 비례,1/3 비례,비례,Telecommunications and Wireless Technology,0.2857
+야기 안테나의 소자중 가장 긴 소자의 역활과 리액턴스 성분은 무엇인가?,2,"도파기, 용량성","반사기, 유도성","지향기, 유도성","복사기, 용량성",Telecommunications and Wireless Technology,0.2857
+광전송 시스템의 구성요소 중 광섬유를 통하여 전송된 광을 수신하기 위한 수광 소자에 해당하는 것은?,4,반도체 레이저(LD),고체 레이저,발광다이오드(LED),에버런치 광검출기(APD),Telecommunications and Wireless Technology,0.2857
+무선 송신기의 송신 주파수 변동을 줄이기 위한 대책이 아닌 것은?,3,전원의 안정도를 높인다.,발진기의 출력단 사이에 완충증폭기를 넣는다.,발진기의 동조회로 Q가 낮은 부품을 사용한다.,발진기의 코일과 콘덴서의 온도계수를 상쇄하도록 부품을 선택한다.,Telecommunications and Wireless Technology,0.2857
+"음성, 비음성의  다양한 통신 서비스를 하나의 통신망으로 종합적으로 제공하는 통신시스템은?",4,TCP/IP망,PSTN,PSDN,ISDN,Telecommunications and Wireless Technology,0.2857
+PCM 통신방식의 특징 설명으로 틀리는 것은?,3,외부잡음등 방해에 강하고 저질의 전송로에도 사용 할 수 있으며 높은 품질의 장거리 전송이 가능하다.,전송로의 손실 변동에 영향을 받지 않는다.,PCM단국장치는 고급여파기를 사용하여야 한다.,점유주파수대역폭이 넓다.,Telecommunications and Wireless Technology,0.2857
+OSI-7 Layer를 하부 Layer에서부터 상부 Layer까지 옳게 나열한 것은?,3,Physical - Data Link - Transport - Network - Presentation - Session - Application,Physical - Data Link - Network - Session - Transport - Presentation - Application,Physical - Data Link - Network - Transport - Session - Presentation - Application,Physical - Network - Data Link - Session - Transport - Presentation - Application,Telecommunications and Wireless Technology,0.2857
+패킷교환망에서 우수한 라우팅 알고리즘(routing algorithm)이 갖추어야 될 성질로서 적합하지 않은 것은?,4,최적의 패킷 전송시간(optimality),자원할당의 공정성(fairness),라우팅 결정의 안정성(stability),라우팅 경로의 이중성확보(duality),Telecommunications and Wireless Technology,0.2857
+"500가지의 색상을 나타낼 정보를 저장하고자 할 경우, 최소 몇 비트가 필요한가?",4,6비트,7비트,8비트,9비트,Telecommunications and Wireless Technology,0.2857
+"통신로의 주파수 대역폭을 B, 신호전력을 S, 잡음 전력을 N이라고 할 때 통신 용량을 가르키는 식은?",3,B log10(1+S/N),2B log10(1+S/N),B log2(1+S/N),2B log2(1+S/N),Telecommunications and Wireless Technology,0.2857
+오류가 검출될 경우 송신측에 재전송을 요청하지 않고 스스로 오류를 정정하는 방식은?,1,Forward Error Correction,ARQ,CRC,Flow Control,Telecommunications and Wireless Technology,0.2917
+"직류 출력전압이 무부하일 때 300[V], 부하일 때 220[V]이면 정류기의 전압 변동률은 약 몇 [%]인가?",3,10.25,22.45,36.36,47.25,Telecommunications and Wireless Technology,0.2917
+"명령어의 주소 부분이 그대로 유효 명령어의 주소 필드에 나타나고, 분기 형식의 명령어에서는 실제 분기할 주소를 나타내는 주소 모드를 무엇이라고 하는가?",1,상대 주소 모드,직접 주소 모드,간접 주소 모드,베이스 레지스터 어드레싱 모드,Telecommunications and Wireless Technology,0.2941
+ASK 변조방식의 성능에 관한 설명으로 가장 잘못된 것은?,3,동기식과 비동기식의 성능차이는 1[dB] 이하이다.,Eb/No가 클수록 동기식과 비동기식의 성능 차이는 줄어든다.,FSK와 비교하여 동기식의 경우 성능이 떨어진다.,"비동기식의 구현이 간단하지만, 동기식 정합필터에 비해 성능이 떨어진다.",Telecommunications and Wireless Technology,0.2963
+가청주파 증폭기에서 부궤환 회로를 사용하는 목적으로 적당하지 않은 것은?,2,왜곡(distortion)을 개선하려고,이득을 크게 하려고,주파수특성을 좋게 하려고,잡음을 적게 하려고,Telecommunications and Wireless Technology,0.3
+PCM 통신에서 질이 낮은(low quality) 전송선로로도 장거리 전송이 가능한 가장 큰 이유는?,3,전력의 소모가 극히 적기 때문,변조과정에서의 잡음이 극히 적기 때문,잡음이 다소 있더라도 재생중계기를 사용하여 왜곡이 없는 신호로 재생이 가능하기 때문,누화와 잡음을 변조할 수 있기 때문,Telecommunications and Wireless Technology,0.3
+배타 OR(Exclusive OR)회로의 논리식으로 잘못된 것은 ?,4,Y = AB+AB,Y = (A+B)(AB),Y = AB,Y = (A+B)(A+B),Telecommunications and Wireless Technology,0.3
+300[Ω]읙 특성 임피던스를 갖는 선로에 75[Ω]의 특성임피던스를 갖는 선로를 접속시 반사계수 ?,3,0.25,0.5,0.6,0.75,Telecommunications and Wireless Technology,0.3
+베이스 밴드 신호중 샘플링이 필요치 않은 형태는?,2,Return to Zero Space,Return to Zero,Return to Bias,Nonreturn to Zero,Telecommunications and Wireless Technology,0.3
+ISO에서 제안한 LAN 프로토콜 중 논리링크 제어 및 매체 액세스 제어를 기술하고 있는 계층은 OSI의 어느 계층에 해당하는가?,2,물리 계층,데이터링크 계층,네트워크 계층,전달 계층,Telecommunications and Wireless Technology,0.3
+인터넷 프로토콜 IPv4에서 IPv6로 전환됨에 따른 장점과 거리가 먼 것은?,4,IP 주소 용량 증가,서비스 품질(QoS) 개선,Mobile IP 기능 개선,Multicasting 기능 개선,Telecommunications and Wireless Technology,0.3
+"드레인 접지형 FET 증폭기의 특성을 설명한 것중 옳지 않은 것은? (단, FET의 파라미터 gm은 상호 전도도이다)",4,출력저항은  약 1/gm 이다.,전압이득은 약 1이다.,입력신호전압과 출력전압은 동상이다.,입력저항은 매우 낮다.,Telecommunications and Wireless Technology,0.3
+단일모드 광섬유(single mode fiber) 케이블에 대한 설명 중 틀린 것은?,4,색분산이 존재한다.,모드간 간섭이 없다.,제조 및 접속이 어렵다.,"모드가 한 개밖에 존재하지 않아 고속, 대용량 전송이 어렵다.",Telecommunications and Wireless Technology,0.3
+가상회선(Virtual Circuit)패킷교환방식과 데이터그램(Data gram)패킷 교환방식의 공통점이 아닌 것은?,2,패킷들은 전달될 때까지 저장되기도 한다.,각 패킷에 대하여 경로를 선택해야 한다.,전용선로는 없다.,대역폭 사용이 융통적이다.,Telecommunications and Wireless Technology,0.3
+공중선의 실효저항 측정방법에 해당되지 않는 것은?,2,저항 삽입법,표준 인덕턴스를 사용하는 방법,작도법,치환법(의사 공중선법),Telecommunications and Wireless Technology,0.3
+대류권 산란파에 대한 설명으로 틀린 것은?,4,전파 경로 상의 지형에 대한 영향을 별로 받지 않는다.,공간 다이버시티를 이용하면 대류권 산란에 의한 페이딩을 방지할 수 있다.,짧은 주기를 갖는 페이딩이 발생한다.,전파 손실이 자유공간 손실보다 작은 값을 갖는다.,Telecommunications and Wireless Technology,0.3043
+"트랜지스터 증폭기의 입력전력이 1[mW]이고, 출력전력이 2[W]일 때 증폭기의 전력이득은?",3,12[dB],23[dB],33[dB],45[dB],Telecommunications and Wireless Technology,0.3043
+10진수 9를 그레이코드로 변환한 결과로 옳은 것은?,1,1100,1101,1110,1111,Telecommunications and Wireless Technology,0.3043
+무선통신의 특징이 아닌 것은 ?,1,전송매개체로 전자파와 빛을 사용한다.,무한한 공간을 공통의 전송로로 사용한다.,수신점에는 목적외의 전자파가 많이 포함되어 있다.,전자파의 대역폭 중 제한된 대역폭을 필요로 한다.,Telecommunications and Wireless Technology,0.3077
+정류회로에서 맥동율을 나타내는 수식으로 올바른 것은?,2,맥동률=맥동신호의평균전압/출력신호의평균전압×100(%),맥동률=맥동신호의실효전압/출력신호의평균전압×100(%),맥동률=맥동신호의실효전압/출력신호의실효전압×100(%),맥동률=맥동신호의평균전압/출력신호의실효전압×100(%),Telecommunications and Wireless Technology,0.3077
+"사용주파수가 20[MHz]이고, 복사저항이 73.13[Ω]인 반파장 다이폴 안테나의 실효길이는 약 얼마인가?",3,2.4[m],3.6[m],4.8[m],5.2[m],Telecommunications and Wireless Technology,0.3103
+반송파 전송에 대해 알맞는 설명은?,4,임의의 주파수 대역을 가진 전송신호를 그대로 전류의 형태로 전송하는 형식이다.,신호를 대역통과시키는 전송방식이다.,신호를 증폭하는 전송방식이다.,송신기에 의해서 발진한 반송파로 신호를 변조시켜 전송로로 보내는 전송방식이다.,Telecommunications and Wireless Technology,0.3111
+"주기억장치의 용량이 512[KB]인 컴퓨터에서 32비트의 가상주소를 사용하고, 페이지의 크기가 4[kB]면 주기억장치의 페이지 수는 몇 개인가?",3,32,64,128,512,Telecommunications and Wireless Technology,0.3125
+공중선계가 충족하여야 하는 조건이 아닌 것은?,4,공중선은 이득이 높을 것,정합은 신호의 반사손실이 최소화 되도록 할 것,지향성은 복사되는 전력이 목표하는 방향을 벗어나지 아니하도록 할 것,급전선에 공급되는 전력을 규격전력 이상이 되도록 할 것,Telecommunications and Wireless Technology,0.3125
+"진폭 2[V], 주파수 2[kHz]의 신호파를 진폭 5[V], 주파수 2[MHz]의 반송파로 진폭 변조할 경우 변조율은 얼마인가?",3,60[%],50[%],40[%],30[%],Telecommunications and Wireless Technology,0.3157999999999999
+스펙트럼 확산통신 시스템 중 직접확산 DS(Direct Sequence) 방식의 특징이 아닌 것은?,2,간섭(재밍)에 강하다.,신호 검출이 용이하다.,다중경로에 강하다.,PN부호 발생기가 필요하다.,Telecommunications and Wireless Technology,0.3157999999999999
+"사람의 목소리를 PCM 방식으로 디지털화 하고자 한다. 음성 전달 대역폭을 0~4,000[Hz]로 정의할 경우, tishs의 표본화 정리에 의한 표본화율(Sampling Rate)은 얼마인가?",4,"4,000[Hz]","6,000[Hz]","7,000[Hz]","8,000[Hz]",Telecommunications and Wireless Technology,0.3157999999999999
+주파수 변조를 진폭 변조와 비교할 경우 잘못된 설명은?,2,S/N 비가 개선된다.,에코우의 영향이 크다.,초단파대의 통신이 적합하다.,점유주파수 대역폭이 넓다.,Telecommunications and Wireless Technology,0.3182
+전파형식의 표시에 있어서 등급을 표시하는 셋째기호 중 텔레비전(영상)을 나타내는 기호는?,4,N,E,W,F,Telecommunications and Wireless Technology,0.3182
+정(+)으로 바이어스 된 리미터 회로와 부(-)로 바이어스 된 리미터 회로를 결합하여 입력신호의 일부분을 추출하는 회로는?,3,클리퍼(Clipper),클램퍼(Clamper),슬라이서(Slicer),슈미트 트리거(Schmitt Trigger),Telecommunications and Wireless Technology,0.32
+정기검사 유효기간이 1년인 무선국의 정기검사 시기는 유효기간 만료일 전후 몇 개월 이내인가?,2,1개월,2개월,3개월,6개월,Telecommunications and Wireless Technology,0.32
+전송 제어 장치(TCU)의 구성요소 중 회선 접속부를 통해 들어온 데이터를 직렬과 병렬 신호로 변환하는 것은?,3,신호 변환부,직ㆍ병렬 신호부,회전 제어부,입ㆍ출력 장치부,Telecommunications and Wireless Technology,0.3243
+“전파의 전파특성을 이용하여 위치·속도 및 기타 사물의 특징에 관한 정보를 취득하는 것”으로 정의되는 것은?,3,전파측정,전파측위,무선측위,무선측정,Telecommunications and Wireless Technology,0.325
+쌍안정 멀티바이브레이터 회로의 응용 분야는?,1,분주기,전압분배기,AD 변환기,전압비교기,Telecommunications and Wireless Technology,0.3333
+고속 동기식 모뎀과 시분할 다중화기를 하나의 장비로 만든 것으로 모뎀의 최대 전송 속도 이내에서 각 포트가 전송속도를 나누어 사용할 수 있는 모뎀은 무엇인가?,2,멀티포인트(multi-point) 모뎀,멀티포트(multi-port) 모뎀,제한 거리 모뎀,멀티채널(multi-channel) 모뎀,Telecommunications and Wireless Technology,0.3333
+Direct Sequence와 같은 대역확산방식을 사용하여 Fading과 Jamming의 영향을 감소시킬수 있는 다자간 접속방법은?,3,FDMA,TDMA,CDMA,DFDMA,Telecommunications and Wireless Technology,0.3333
+무선통신망의 유지ㆍ보수에서 SINAD와 거리가 먼 것은?,3,Signal to Noise And Distortion 의 약어이다.,SINAD는 무선통신 기지국의 기본적인 측정항목 중의 하나이다.,SINAD는 음성의 압축률을 측정할 때 이용되는 방법이다.,SINAD를 측정하기 위해서는 별도의 신호 발생기와 SINAD 미터가 있어야 한다.,Telecommunications and Wireless Technology,0.3333
+직선검파기에서 Diagonal Clipping이 발생하는 원인은?,2,평균 검파기는 부하에 저항만 접속되어서,검파회로의 시정수가 너무 커서,직선 검파기의 출력측에는 직류 성분이 포함되어서,직선 검파기의 출력이 커서,Telecommunications and Wireless Technology,0.3333
+정지궤도위성에 대한 설명으로 적합하지 않은 것은?,3,지구의 자전과 같은 방향의 주기로 지구주위를 회전한다.,적도 상공 약 36000[㎞]의 고도를 일정하게 유지한다.,지구에서 바라볼 때 위치가 계속 변한다.,3개의 위성으로 극지방을 제외한 전세계 통신을 커버할 수 있다.,Telecommunications and Wireless Technology,0.3333
+주파수 체배 증폭기의 증폭방식으로 가장 적당한 것은?,4,A 급,B 급,AB 급,C 급,Telecommunications and Wireless Technology,0.3333
+개구지름이 2[m]의 파라볼라 안테나가 주파수(f) 6000[㎒]에서 이득이 40[㏈] 이상 얻으려면 개구효율은 약 몇 [%]이상 되어야 하는가?,4,25.2[%],30.6[%],40.5[%],63.4[%],Telecommunications and Wireless Technology,0.3333
+전파의 대류권 전파에 있어서 라디오 덕트의 생성 원인이 아닌 것은?,2,전선에 의한 덕트,주간 냉각에 의한 덕트,대양상의 덕트,이류성 덕트,Telecommunications and Wireless Technology,0.3333
+FDM의 다중화 방식에 적용되지 않는 변조방식은?,2,진폭변조,펄스변조,주파수변조,위상변조,Telecommunications and Wireless Technology,0.3333
+"비디오텍스의 기술방식에서 점, 선, 호, 원, 다각형 등과 같은 기본적인 도형 요소를 부호화하는 방법으로 표준화된 방식은?",4,알파 모자이크,알파 포토그래픽,알파 뉴메릭,알파 지오메트릭,Telecommunications and Wireless Technology,0.3333
+이동통신에서 송.수신주파수 간에 이격을 두는 방식은?,2,FM,FDD,FDMA,TDMA,Telecommunications and Wireless Technology,0.3333
+중위도 지방(한국)에서는 태양폭발이 관측된 후 얼마 후에 자기장이 발생되는가?,3,수 분후,수십 분후,수 시간~수십 시간 후,수일~수십 일 후,Telecommunications and Wireless Technology,0.3333
+단일 정현파의 변조주파수 1000㎑로 주파수 변조한 결과 최대주파수 편이가 5000㎑이었다. 이때의 변조지수는?,4,1.2,1.6,3.4,5.0,Telecommunications and Wireless Technology,0.3333
+반송파 vc = Vc sin ωct를 프 = Vm sin pt 로 진폭변조했을 때 피변조파 v(t)의 식은?,2,v(t) = (Vc + Vm)sin pt,v(t) = (Vc + Vm sin pt)sin ωct,v(t) = (Vc + Vm)sin ωct,v(t) = (Vc sin ωct + Vm)sin pt,Telecommunications and Wireless Technology,0.3333
+"DM에서 사용되는 표본화 주파수를 2배 증가시키면 S/Nq비(신호전력대 양자화잡음전력의 비)는 몇[dB]증가하는가? (단, LPF의 차단주파수와 전송하려는 아날로그 신호가 가지는 최고주파수는 일정하다.)",2,6[dB],9[dB],12[dB],15[dB],Telecommunications and Wireless Technology,0.3333
+선박 레이더용으로 사용하기에 가장 적합한 안테나는?,4,루프(loop) 안테나,애드콕(adcock) 안테나,헤리컬(helical) 안테나,슬롯 어레이(slot array) 안테나,Telecommunications and Wireless Technology,0.3333
+4개의 J-K 플립플롭을 이용하여 구성할 수 있는 분주기의 최대값은 얼마인가?,3,8분주기,10분주기,16분주기,24분주기,Telecommunications and Wireless Technology,0.3333
+어떤 정류기의 출력 평균 전압이 250[V]이고 맥동률이 1.5[%]일 때 교류분의 최대치는 약 몇 [V] 인가?,4,1.5[V],2.7[V],3.8[V],5.3[V],Telecommunications and Wireless Technology,0.3333
+아날로그 신호를 디지털 신호로 변환하는 과정을 옳게 나열한 것은?,3,부호화-양자화-표본화,양자화-부호화-표본화,표본화-양자화-부호화,표본화-부호화-양자화,Telecommunications and Wireless Technology,0.3333
+데이터통신은 전자 교환국에 수용된 푸쉬버튼전화로 신호가 접속될 수 있다. 수자 “8”을 눌렀을E 때 신호 주파수는?,3,697 [Hz] + 1209 [Hz],770 [Hz] + 1336 [Hz],852 [Hz] + 1336 [Hz],852 [Hz] + 1477 [Hz],Telecommunications and Wireless Technology,0.3333
+N 부호 발생기의 이진 출력에 의해 선택된 특정 time slot 동안 데이터로 변조된 반송파를 송출하는 방식의 확산대역통신 방식은?,3,DS,FH,TH,CM,Telecommunications and Wireless Technology,0.3333
+문자나 도형을 입력하기 위하여 평면 모양으로 구성된 입력면내를 지시 펜으로 지시함으로서 그 위치 정보를 입력할 수 있는 입력기기는?,4,OCR,바코드 리더,스캐너,태블릿,Telecommunications and Wireless Technology,0.3333
+급전선 측정 항목으로 가장 타당한 것은?,4,주파수 안정도 측정,주파수 허용 편차 측정,실효 인덕턴스 측정,전압 정재파비 측정,Telecommunications and Wireless Technology,0.3333
+FM수신기 구성이  DSB 수신기 또는 SSB 수신기와 비교하여 볼 때 다른점이 아닌 것은?,3,통과 대역폭이 넓은 것,진폭 제한기를 사용하는 것,Ring 복조기를 사용하는 것,스켈치 회로를 사용하는 것,Telecommunications and Wireless Technology,0.3333
+운영체계의 처리방식중 온라인개념으로 데이터의 처리요구가 오면 즉시처리하는 방식은?,4,Batch processing,Time sharing,spooling,Real time processing,Telecommunications and Wireless Technology,0.3333
+통신제어 처리장치의 구성요소가 아닌 것은?,4,회선 제어부,회선 접속부,전송 제어부,전단 처리기(FEP),Telecommunications and Wireless Technology,0.3333
+PCM에서 피크-피크 전압이 ±8[V]인 아날로그 신호를 일정한 간격으로 16개의 레벨로 나눈 경우 양자화 잡음에 대한 S/N[㏈]는 약 얼마인가?,2,19.8㏈,25.8㏈,31.8㏈,37.8㏈,Telecommunications and Wireless Technology,0.3333
+전자계산기의 성능을 표시하는 단위는?,3,BPS,MIS,MIPS,TPS,Telecommunications and Wireless Technology,0.3333
+수화기 진동판의 구비 조건이 아닌 것은?,3,자유진동이 적을 것,평탄한 주파수 특성,진동이 외력에 반비례할 것,고투자율의 재료 사용,Telecommunications and Wireless Technology,0.3333
+수치 자료 표현 방법에서 부동 소수점 표현(Floating point representation)을 가장 적절하게 설명한 것은?,2,"부동 소수점 표현 방법에는 부호부, 가수부로 구분할 수 있다.",정밀도가 요구되는 과학 및 공학 또는 수학적인 응용에 주로 사용된다.,수를 표현하는 자리수는 고정 소수점에 비하여 적게 든다.,수 표현 방법이 고정 소수점에 비하여 간단하다.,Telecommunications and Wireless Technology,0.3333
+허가 유효기간이 1년인 무선국의 재허가 신청은 허가 유효기간 만료 얼마전에 해야 하는가?,2,1월,2월,3월,4월,Telecommunications and Wireless Technology,0.3333
+"4096 × 8 비트의 ROM이 있을 때, 필요한 어드레스(address)핀은 몇 개가 필요한가?",3,10 개,11 개,12 개,13 개,Telecommunications and Wireless Technology,0.3333
+통신망의 구성에서 교환국수가 10개국일 때 망형(mesh type)으로 구성시 중계회선의 경로수는?,2,9,45,56,68,Telecommunications and Wireless Technology,0.3333
+디지털 데이터를 디지털 신호로 전송하는 장치는?,3,CODEC,변복조기,DSU,전화,Telecommunications and Wireless Technology,0.3333
+무선통신 시스템 계획시 종합신뢰도의 설계에서 고려할 사항이 아닌 것은?,3,MTBF(평균동작시간),MTTR(평균고장시간),TWTA(진행파증폭기),REDUNDANCY(병렬예비장치),Telecommunications and Wireless Technology,0.3333
+연축전지에 과대한 전류로 충전하면 어떠한 현상이 일어나는가?,4,극판의 부식현상,자기방전의 증대현상,분할성 유산염의 발생현상,극판의 만곡현상,Telecommunications and Wireless Technology,0.3333
+전파법에 의해 주파수대가를 지불하고 할당받은 주파수 이용권에 대한 설명으로 틀린 것은?,4,당해 주파수를 배타적으로 이용할 수 있다.,대통령령이 정하는 기간 이후에는 주파수이용권을 양도할 수 있다.,주파수이용권을 양수 받은 자는 주파수할당을 받은 자 및 시설자의 지위를 승계한다.,주파수이용권을 양수 받은 자는 무선국 개설의 결격 사유는 적용받지 아니한다.,Telecommunications and Wireless Technology,0.3333
+"비상국의 전원은 수동발전기, 원동발전기, 축전기로 몇 시간이상 상시 운용할 수 있는 것이어야 하는가?",3,6시간,12시간,24시간,36시간,Telecommunications and Wireless Technology,0.3333
+Push - pull 전력증폭기에서 출력파형의 찌그러짐이 작아지는 이유는 무엇인가?,3,직류성분이 없어지기 때문,기수차 및 우수차 고조파가 상쇄되기 때문,우수차 고조파가 상쇄되기 때문,기수차 고조파가 상쇄되기 때문,Telecommunications and Wireless Technology,0.3333
+저궤도 위성통신 서비스 방식이 아닌 것은?,3,이리듐,글로벌 스타,DBS(Direct Broddcasting Satellite),오딧세이,Telecommunications and Wireless Technology,0.3333
+PLL 주파수 합성기의 기본구성 요소와 거리가 먼것은?,2,전압제어발진기,주파수 변별기,저역통과 필터,위상검출기,Telecommunications and Wireless Technology,0.3333
+여파기에 있어서 요망되는 특성이 아닌 것은?,3,감쇠대역의 감쇠량은 될 수 있는 대로 클 것,차단특성이 예리할 것,통과대역에 있어서의 영상 임피던스의 편차가 클 것,통과대역의 손실이 될 수 있는 대로 작을 것,Telecommunications and Wireless Technology,0.3333
+장·중파대에서 주가되는 지상파는?,3,직접파,대지반사파,지표파,회절파,Telecommunications and Wireless Technology,0.3333
+"복사 저항이 50[Ω]이고, 손실 저항이 10[Ω]인 안테나에 200[W]의 전력이 공급되고 있다면 이 안테나의 복사 전력은 몇[W]인가?",3,66.67 [W],96.67 [W],166.67 [W],196.67 [W],Telecommunications and Wireless Technology,0.3333
+고해상도의 영상을 표시하기 위한 것으로 방전관의 원리를 이용한 표시장치는?,2,CRT,Plasma,LCD,LED,Telecommunications and Wireless Technology,0.3333
+무선통신에서 일반적인 잡음개선 방법이 아닌 것은?,3,수신전력을 크게 하여 S/N비를 개선시킨다.,전원측에 필터를 사용하고 송신전력을 크게 한다.,평행식 급전선을 사용하거나 수신기를 완전히 차폐 한다.,수신기의 실효대역폭을 좁히고 선택도를 높인다.,Telecommunications and Wireless Technology,0.3333
+위성통신시스템 설계시 고려사항이 아닌 것은?,4,전파손실,전송지연,주파수변조,위성월식,Telecommunications and Wireless Technology,0.3333
+중계소에서 FM 검파를 하여 영상 주파수로 변환 증폭하고 다시 주파수 변조하여 송출하는 방식은?,3,헤테로다인 중계 방식,직접 중계 방식,복조 중계 방식,무급전 중계 방식,Telecommunications and Wireless Technology,0.3333
+의료용 전파응용설비의 안전시설에 관한 규정과 틀리는 것은?,4,고압전기에 의하여 충전되는 기구와 전선은 절연차 폐체 또는 접지된 금속차폐체내에 수용할 것,의료전극 및 그 도선과 발진기·출력회로·전력선 등 사이에서의 절연저항은 500V용 절연저항시험기에 의하여 측정하여 50MΩ 이상일 것,의료전극과 그 도선은 직접 인체에 닿지 않도록 양호한 절연체로 덮을 것,배치의 편의 및 인체의 안전을 위하여 접지장치는 설치하지 아니할 것,Telecommunications and Wireless Technology,0.3333
+단파의 전파특성 중 주.야간과 주파수의 관계에 대한 설명이 옳은 것은?,4,주.야간에 높은 주파수를 사용,주.야간에 낮은 주파수를 사용,"주간에 낮은 주파수, 야간에 높은 주파수를 사용","주간에 높은 주파수, 야간에 낮은 주파수를 사용",Telecommunications and Wireless Technology,0.3333
+SSB 송신기에서 상. 하측파대중 희망하는 측파대를 얻기 위해 사용하는 여파기는?,2,저역여파기,대역여파기,고역여파기,대역소거여파기,Telecommunications and Wireless Technology,0.3333
+무선 송신기에서 많이 사용되는 C급 증폭기에 대한 설명으로 옳은 것은?,3,선형 증폭을 하지만 효율은 매우 낮다.,증폭기 2개를 푸시풀로 접속하여 사용한다.,증폭과정에서 고조파가 발생되므로 주파수 체배기로 사용된다.,선형 증폭 동작을 하며 사인파 입력에 대해서 360°도통각을 갖는다.,Telecommunications and Wireless Technology,0.3333
+무선설비에 대한 형식점정을 받고자 할 때는 관련 자료를 누구에게 제출하여야 하는가?,1,전파연구소장,방송통신위원장,중앙전파관리소장,무선국관리 사업단장,Telecommunications and Wireless Technology,0.3333
+안테나의 급전선(도파관)에 스터브(stub)를 다는 이유는?,3,복사전력을 증폭시키기 위하여,안테나의 지향성을 높이기 위하여,안테나의 리액턴스 성분을 제거하여 임피던스를 정합시키기 위하여,안테나의 서셉턴스 성분을 제거하여 대역폭을 증가시키기 위하여,Telecommunications and Wireless Technology,0.3333
+이동위성통신 시스템(Satellite Mobile System)에 해당되지 않는 것은?,4,Iridium,Globalstar,Odyssey,DECT,Telecommunications and Wireless Technology,0.3333
+인터넷 표준화에서 IP 주소체계를 128비트로 확장하여 많은 호스트 수용이 가능한 주소 체계는?,4,IPv3,IPv4,IPv5,IPv6,Telecommunications and Wireless Technology,0.3333
+CSMA/CD 방식에 관한 설명 중 틀린 것은?,4,버스 구조에 이용될 수 있다.,제록스사가 개발한 방식이다.,동축케이블을 사용할 수 있다.,단말기 사이에 신호 충돌이 없다.,Telecommunications and Wireless Technology,0.3333
+"정전압 회로(Regulator circuit)에서 경부하시 효율이 병렬 제어형보다 크고, 출력 전압의 안정 범위가 넓은 것은?",3,제너 다이오드형 정전압 회로,병렬 제어형 정전압 회로,직렬 제어형 정전압 회로,IC형 정전압 회로,Telecommunications and Wireless Technology,0.3333
+무선송신기의 송신주파수 변동을 줄이기 위한 대책이 아닌 것은?,4,발진기와 출력단 사이에 완충증폭기를 넣는다.,발진기와 코일과 콘덴서의 온도계수를 상쇄하도록 부품을 선택한다.,전원의 안정도를 높인다.,발진기의 동조회로에 Q가 낮은 부품을 선택한다.,Telecommunications and Wireless Technology,0.3333
+변조도 40[%]의 진폭변조에서 반송파의 평균전력이 300[mW]일 때 피변조파의 평균전력은 약 얼마인가?,3,100[mW],300[mW],324[mW],424[mW],Telecommunications and Wireless Technology,0.3333
+CDMA통신에 대한 설명중 가장 옳은 것은?,4,이 방식은 동기가 필요없이 코드만 식별되면 통신이 된다.,CDMA에서는 캐리어 주파수분할이 필요없다.,PN코드의 동기만 맞으면 통신이 된다.,각 가입자별로 고유의 PN 코드를 할당하는 방식이다.,Telecommunications and Wireless Technology,0.3333
+DTE와 DCE 접속을 위한 인터페이스의 특성이 아닌 것은?,4,기계적 특성,전기적 특성,절차적 특성,응용적 특성,Telecommunications and Wireless Technology,0.3333
+무선국에서 사용하는 주파수마다의 중심 주파수를 무엇이라 하는 가?,2,기준주파수,지정주파수,특성주파수,필요주파수,Telecommunications and Wireless Technology,0.3333
+종단 전력증폭기에서 자기발진을 할때 이것을 제거하기 위해서는 어떠한 조치가 필요한가?,2,변조입력을 적게 한다.,중화회로를 설치한다.,부하동조회로를 약간 이조시킨다.,증폭기의 바이어스 전압을 변경시킨다.,Telecommunications and Wireless Technology,0.3333
+점유율이 50[%]인 10 [MHz]의 클럭신호로부터 펄스폭이 1[초]인 게이트 펄스를 얻어내기 위해 분주회로를 구성할때 필요로 하는 분주회로의 종류와 개수를 올바르게 선택한 항은?,2,"10분주회로 6개, 2분주회로 2개","10분주회로 7개, 2분주회로 1개",10분주회로 7개,"10분주회로 5개, 2분주회로 3개",Telecommunications and Wireless Technology,0.3333
+PM을 등가 FM으로 만들기 위하여 사용되는 회로는?,2,pre-emphasis회로,pre-distorter회로,de-emphasis회로,IDC회로,Telecommunications and Wireless Technology,0.3333
+3개의 T 플립플롭이 직렬로 연결되어 있다. 입력단(첫단)에 1000[Hz]의 입력신호를 인가하면 마지막 플립플롭의 출력신호는 몇 [Hz] 인가?,4,3000,333,167,125,Telecommunications and Wireless Technology,0.3333
+정보통신 시스템에서 CCU(Communication Control Unit)의역할이 아닌 것은?,3,통신회선과 중앙처리 장치를 결합시킴,중앙처리 장치와 데이터의 송ㆍ수신 제어,데이터 회선 종단장치의 기능,다수의 회선을 시분할 방식으로 다중제어,Telecommunications and Wireless Technology,0.3333
+"AM 송신기가 전체 전력60[W]를 안테나에 공급할 때 변조율이 100%라고 가정한다면, 반송파와 상측파대에 포함되는 각각의 전력은?",4,"30[W], 10[W]","30[W], 20[W]","40[W], 20[W]","40[W], 10[W]",Telecommunications and Wireless Technology,0.3333
+DARC와 관계가 먼 것은?,4,Data Radio Channel의 약어이다.,이동체를 위한 고속 FM방송시스템이다.,"기상정보, 교통정보, 페이징서비스 등이 가능하다.",DGPS를 이용한 위치정보서비스는 불가능하다.,Telecommunications and Wireless Technology,0.3333
+무변조 상태에서 무선주파수 1[㎐]사이에 송신기에서 공중선계의 급전선에 공급되는 평균전력은?,4,평균전력,규격전력,첨두전력,반송파전력,Telecommunications and Wireless Technology,0.3333
+통신위성의 종류로서 위성통신업무에 따른 구분이 아닌것은?,4,방송위성,기상위성,해사위성,위상위성,Telecommunications and Wireless Technology,0.3333
+형식검정 및 형식등록기기의 사후관리 시험과 거리가 먼 것은?,1,부차적 전파발사 강도,주파수,스퓨리어스 발사 강도,점유주파수 대역폭,Telecommunications and Wireless Technology,0.3333
+송신공중선계의 설명으로 옳은 것은?,3,무선통신의 송신을 위한 고주파 에너지를 발생하는장치,전파를 보내는 설비로서 송신장치와 송신공중선계로 구성되는 설비,송신장치에서 발생하는 고주파에너지를 공간에 복사하는 설비,무선통신을 하기 위한 신호발생 계통설비와 부가 설비,Telecommunications and Wireless Technology,0.3333
+안테나를 설계할 때 반사기를 붙이는 이유는?,4,임피던스 정합을 위해,광대역화를 위해,접지저항을 적게 하기 위해,전파를 한 방향으로 보내기 위해,Telecommunications and Wireless Technology,0.3333
+공통선 신호방식 중 No.7 신호방식에 대한 설명으로 적합하지 않은 것은?,4,64[kbps] 속도로 전송이 가능하다.,디지털 교환망에 적합한 방식이다.,국내망 및 국제망에서도 사용된다.,OSI 7 Layer 계층 구조를 그대로 사용한다.,Telecommunications and Wireless Technology,0.3333
+컴퓨터 등 정보처리능력을 가진 장치에 의하여 전자적인 형태로 작성되어 송수신 또는 저장된 문서형식으로 표준화된 것은?,3,정보 토큰버스,사이버 몰,전자문서,전산자료,Telecommunications and Wireless Technology,0.3333
+마이크로웨이브(microwave) 통신의 장점이 아닌 것은?,3,광대역 통신이 가능하며 사용주파수의 범위가 넓다.,외부잡음의 영향이 적고 PTP(point to point)통신이 가능하다.,전리층을 통과하여 전파하며 중계기 없이도 원거리 통신이 가능하다.,예민한 지향성과 고이득을 가진 안테나를 사용하여 간섭을 적게 할 수 있다.,Telecommunications and Wireless Technology,0.3333
+CDMA 이동통신 시스템의 기본 구성 중 이동국에서 발신한 무선신호를 무선채널로 수신하는 기능을 하는 것은?,2,이동 통신 교환국(MSC),기지국(BS),운용 보존국(OMC),방문 위치 등록 레지스터(VLR),Telecommunications and Wireless Technology,0.3333
+대류권 산란파의 특징 중 잘못된 것은?,2,"적당한 주파수파수는 200[MHz]∼3,000[MHz]이다.",아주 첨예한 지향특성을 갖는 안테나가 필요하다.,지리적 조건의 제한을 받지 않는다.,다이버시티방식에 의해서 실용화가 가능하다.,Telecommunications and Wireless Technology,0.3333
+수신설비의 성능조건과 관계 적은 것은?,3,명료도가 충분할 것,내부잡음이 적을 것,정합이 충분할 것,선택도가 클 것,Telecommunications and Wireless Technology,0.3333
+"열잡음(thermal noise)에 관해서 k를 볼츠만 상수, T를 절대온도, R을 저항치, B를 대역폭이라고 하면 평균열잡 음전압은?",3,2kTRB,2kTRB2,√ 4kTRB,4kTRB 2,Telecommunications and Wireless Technology,0.3333
+"위성통신방식에서 통신가능한 지구상의 통신거리(L)은 어떻게 표시되는가? (단, R : 지구반경, h : 위성의 고도, θ : 안테나의 최저 양각, β : 커버리지의 중심각)",3,L = R cos(θ +β )/cosθ,L = R cos(β +θ )/cosβ,L = (R+h)sinβ /cosθ,L = (R+h)sinθ /cosβ,Telecommunications and Wireless Technology,0.3333
+방송통신위원회가 행정처분을 할 경우 청문의 실시 대상이 아닌 것은?,4,무선국 개설허가의 취소,형식검정의 합격 또는 형식등록의 취소,기술자격의 취소,무선국 준공검사의 취소,Telecommunications and Wireless Technology,0.3333
+위성통신에서 정지위성궤도에 대한 설명 중 틀린 것은?,3,"지구적도상공 약 35,786[㎞]에 존재하는 궤도이다.",궤도 1주기는 약 24시간이다.,하나의 위성은 궤도상에서 지구표면의 약 60% 시각성을 갖는다.,지구의 각 속도와 동일한 각 속도로 지구를 회전하는 궤도이다.,Telecommunications and Wireless Technology,0.3333
+슈퍼 헤테로다인 수신기의 중간 주파수(IF)를 선정할 때 고려되는 사항으로 틀린 것은?,3,안정도 : 중간주파수(IF)가 낮은 것이 좋다.,지연특성 : 중간주파수(IF)가 높을수록 좋다.,근접 주파수 선택도 : 중간주파수(IF)가 높을수록 좋다.,영상 혼신 : 중간주파수(IF)가 높을수록 좋다.,Telecommunications and Wireless Technology,0.3333
+비안정 멀티바이브레이터에 대한 설명으로 가장 관계 없는 것은?,4,출력파형에 많은 고조파가 포함되어 있다.,발진주파수는 회로의 시정에 의해서 결정된다.,동작전압 범위 내에서 전원 전압의 변동은 발           진주파수에 큰 영향을 주지 않는다.,두개의 안정된 상태를 갖는다.,Telecommunications and Wireless Technology,0.3333
+카운터(counter)를 이용하여 켄베어 벨트를 통과하는 생산품의 갯수를 파악하려고 한다. 최대 500개의 생산품을 카운트하기 위한 카운터를 플립-플롭(flip-flop)을 이용하여 제작할 때 최소한 몇 개의 플립-플롭이 필요한가.?,3,5,7,9,11,Telecommunications and Wireless Technology,0.3333
+FM 방식에서 변조신호의 높은 주파수대를 강하게 하여 S/N 비의 개선을 위한 것은?,4,IDC,AFC,De-emphasis,Pre-emphasis,Telecommunications and Wireless Technology,0.3333
+섹터간 전파가 겹치는 지역에서 통화가 이루어지면 한 기지국의 두 섹터를 통해 통화가 이루어지게 되는데 이러한 핸드오프는?,3,하드 핸드오프(hard handoff),소프트 핸드오프(soft handoff),소프터 핸드오프(softer handoff),주파수간 하드 핸드오프,Telecommunications and Wireless Technology,0.3333
+전화망에서 음량손실의 객관적 척도로 표시하는 것은?,4,전송당량,통화당량,전송레벨,음량정격,Telecommunications and Wireless Technology,0.3333
+"회로내의 분포용량, 표유 인덕턴스 또는 회로 정수의 불평형에 의하여 증폭하려는 주파수와 다른 주파수간에 발진이 생기는 현상은?",4,자기 발진,이완 발진,다이나트론 발진,기생 발진,Telecommunications and Wireless Technology,0.3333
+OSI 7계층 중 응용 프로토콜에서 고도의 정보 표현형식에 관한 기능을 나타낸 계층은?,4,응용 계층,전송 계층,세션 계층,표현 계층,Telecommunications and Wireless Technology,0.3333
+스위칭 정전압 제어기에서 제어 트랜지스터가 도통되는 시간은?,4,입력전압이 정해진 제한을 넘어설 때만,항상,과부하가 걸렸을 때만,일정부분의 시간에서만,Telecommunications and Wireless Technology,0.3333
+정보통신부장관은 전기통신의 원할한 발전과 정보사회의 촉진을 위하여 전기통신기본계획을 수립하여 공고하여야 한다. 전기통신기본계획에 포함되지 않는 것은?,3,전기통신사업에 관한 사항,전기통신설비에 관한 사항,전기통신 기술보호에 관한 사항,전기통신의 이용효율에 관한 사항,Telecommunications and Wireless Technology,0.3333
+정보의 안전한 유통을 위한 정보보호에 필요한 시행을 효과적으로 추진하기 위하여 설립한 기구는?,2,한국전산원,한국정보보호진흥원,한국정보통신진흥협회,한국정보문화센터,Telecommunications and Wireless Technology,0.3333
+2의 보수 표현 방법에 의해 10진수 36과 -72를 8비트로 올바르게 표현한 것은?,2,"00100100, 00111000","00100100, 10111000","00100100, 10110111","10100100, 01000111",Telecommunications and Wireless Technology,0.3333
+정보통신장관이 전기통신설비의 운용자와 이용자의 안전 및 전기통신역무의 품질향상을 위하여 단말장치의 기술기준을 정할 수 있는 사항이 아닌 것은?,3,비상 전기통신역무를 위한 전기통신망의 접속에 관한 사항,전기통신망과 단말장치간의 상호작동에 관한 사항,통화량의 규모에 관한 사항,전화역무간의 상호운용에 관한 사항,Telecommunications and Wireless Technology,0.3333
+신틸레이션 페이딩에 대한 설명 중 틀린 것은?,3,대기 중의 산란파와 직접파의 간섭에 의해 발생되는 페이딩이다.,전계 변동 폭은 파장이 짧을수록 크게 된다.,여름보다 겨울에 많이 발생한다.,방지대책으로 AGC(자동이득조절회로)를 사용한다.,Telecommunications and Wireless Technology,0.3333
+정보통신공업자가 아니어도 시공할 수 있는 것은?,4,시내 케이블공사,가입자망 인입공사,광통신 시설공사,간이무선국 설치공사,Telecommunications and Wireless Technology,0.3333
+전압직렬(Voltage Series) 궤환증폭기의 일반적인 특성이 아닌것은?,3,주파수 대역폭이 증가한다.,비직선 일그러짐이 감소한다.,입력저항이 감소한다.,출력저항이 감소한다.,Telecommunications and Wireless Technology,0.3333
+팩시밀리 단말장치의 특성임피던스는 몇 [Ω]인가?,4,72,135,360,600,Telecommunications and Wireless Technology,0.3333
+"송신 안테나의 높이가 30.25[m]이고,수신 안테나의 높이가 20.25[m]일때 초단파의 직접파 최대 가시거리는 얼마인가?",3,20.5[m],32.2[m],41.1[m],53.4[m],Telecommunications and Wireless Technology,0.3333
+인공위성의 이동에 따라서 수신 주파수가 변화하는 현상을 무엇이라고 하는가?,2,패러데이 회전,도플러 효과,플라즈마 층,전파의 지연시간,Telecommunications and Wireless Technology,0.3333
+전리층의 높이를 측정할 때 주로 사용되는 파형은?,4,정현파,3각파,구형파,펄스파,Telecommunications and Wireless Technology,0.3333
+모든 방향으로 균일하게 전하를 복사하는 안테나는?,3,파라보라(Parabola) 안테나,카세그레인(Cassegrain)안테나,아이 소트로픽(Isotropic)안테나,인라인(In-line)안테나,Telecommunications and Wireless Technology,0.3333
+급전점이 전류 정재파의 파복이 되는 것은?,3,동조급전,비동조급전,전류급전,전압급전,Telecommunications and Wireless Technology,0.3333
+무선통신에서 야기되는 전파잡음중 공전방해로 인한 대기 잡음이 발생한다. 이러한 공전으로 인한 잡음을 경감시키기 위한 대책으로 적합하지 못한 것은?,4,지향성이 예민한 안테나를 사용한다.,수신기의 선택도를 높이도록 한다.,진폭제한회로가 부가된 수신기를 설치한다.,다이버시티 수신기법을 이용한다.,Telecommunications and Wireless Technology,0.3333
+282. sin 377t[V]로 표현되는 식에서 전압의 실효값과 주파수를 구하라.,3,"전압실효값 220[V], 주파수 50[㎐]","전압실효값 110[V], 주파수 50[㎐]","전압실효값 200[V], 주파수 60[㎐]","전압실효값 100[V], 주파수 60[Hz]",Telecommunications and Wireless Technology,0.3333
+파라보라 안테나(Parabola antenna)의 특성 중 옳지 않은 것은?,3,이득은 안테나의 개구면적에 비례한다.,같은 크기에서는 파장이 짧을수록 이득은 크다.,지향성은 예민하나 방향조정이 안된다.,반사면을 망으로 하거나 도전도료를 칠하여도 특성에는 커다란 변동이 없다.,Telecommunications and Wireless Technology,0.3333
+FM 송신기에서 프리엠퍼시스(pre-emphasis) 회로를 사용하는 목적은?,3,신호의 크기를 증가시킨다.,전송 효율을 높인다.,신호대 잡음비(S/N)를 향상시킨다.,주파수 대역폭을 좁힌다.,Telecommunications and Wireless Technology,0.3333
+CATV와 CCTV에 관한 설명 중 틀린 것은?,3,CATV는 방송국과 수신자 간에 정보교환이 가능하다.,CATV를 이용해서 홈쇼핑을 할 수 있다.,CCTV는 보통 많은 시청자의 유료가입을 위한 것이다.,"CCTV는 학교, 병원 등에서 VTR 또는 특정프로그램 서비스를 제공한다.",Telecommunications and Wireless Technology,0.3333
+전기통신역무별로 요금 및 이용조건을 정한 내용은?,2,통신규약,이용약관,기술기준,가입청약,Telecommunications and Wireless Technology,0.3333
+음성 비트(bit)를 7비트에서 8비트로 했을 때 맞지 않는 것은?,4,압축특성이 개선된다.,신장특성이 개선된다.,양자화 잡음이 반으로 감소한다.,표본화 잡음이 반으로 감소한다.,Telecommunications and Wireless Technology,0.3333
+정보전송 중 오류가 발생한 데이터 프레임만을 재 전송하는 방식은?,3,Go-Back-N ARQ,Stop-and-Wait ARQ,Selective-Repeat ARQ,Point-to-Point Protocol,Telecommunications and Wireless Technology,0.3333
+양측파대(DSB)로부터 단일측파대(SSB)를 얻기 위하여 사용하는 여파기(filter)는?,3,저역여파기,고역여파기,대역통과여파기,대역제거여파기,Telecommunications and Wireless Technology,0.3333
+"복사저항이 100[Ω]이고, 손실저항이 25[Ω]이라고 할때 안테나의 복사효율은 몇[%]가 되는가?",3,60%,70%,80%,90%,Telecommunications and Wireless Technology,0.3333
+마이크로파 송신기의 전력 측정에 사용되는 방향성결합기를 이용하여 측정할 수 없는 것은?,2,정재파비,위상차,결합도,반사파전력,Telecommunications and Wireless Technology,0.3333
+증폭기의 전압이득이 증가할 때 대역폭은?,3,영향을 받지 않는다.,증가한다.,감소한다.,일그러진다.,Telecommunications and Wireless Technology,0.3333
+거수형 주파수 측정장치에서 Reset 회로의 역할은?,3,Gate 시간 조정,입력신호레벨 조정,계수부를 “0”으로 복귀,출력부의 파형 조정,Telecommunications and Wireless Technology,0.3333
+뉴미디어(new media) 정보 전달방식의 분류에 해당하지 않는 것은?,3,케이블 TV 등의 유선계,텔레텍스트(teletext) 등의 무선계,컴퓨터를 이용한 비디오텍스계,비디오 디스크 등의 패키지계,Telecommunications and Wireless Technology,0.3333
+"수정 발진회로에서 수정진동자의 전기적 직렬공진 주파수를 fs, 병렬공진 주파수를 fp라 하면 안정한 발진을 하기위한 동작 출력 주파수 fo의 범위는?",2,fs ＜ fo ＞ fp,fs＜ fo ＜ fp,fs ＞ fo ＞ fp,fo = fs,Telecommunications and Wireless Technology,0.3333
+린콤팩스(LINCOMPEX. linked compressor and expander) 통신방식의 특징이 아닌 것은?,4,음성신호가 주파수변화 정보만으로 변환되어 전송되기 때문에 페이딩 영향이 적다.,압축기와 신장기를 이용하기 때문에 S/N이 향상된다.,음성신호를 압축하여 변조를 행하기 때문에 종합변조가 향상된다.,진폭변화 성분과 주파수성분은 페이딩 영향을 거의 받지 않기 때문에 다른 변환과정을 행할 필요가 없다.,Telecommunications and Wireless Technology,0.3333
+안테나 도선의 표피효율과에 의한 고주파 저항 및 연장 코일 등의 손실저항은?,2,접지저항,도체저항,유전체손,코로나손,Telecommunications and Wireless Technology,0.3333
+"센터의 컴퓨터 시스템에 정지 화상이나 동화상 등의 각종 영상정보 및 음성정보 파일을 설치해 놓고, 각 단말기에서 개별 액세스에 의해 각종 정보안내 및 학습프로그램 등의 서비스를 개별적으로 제공하는 것은?",3,텔레텍스트,TV 회의 시스템,화상응답 시스템,정지화 통신회의 시스템,Telecommunications and Wireless Technology,0.3333
+FM 수신기에서 사용되는 잡음 억제회로가 아닌 것은?,4,뮤팅(muting) 회로,리미터(limiter) 회로,스퀄치(squelch) 회로,잡음억제기(noise reducer),Telecommunications and Wireless Technology,0.3333
+위성방송 TV수신용 안테나와 가장 거리가 먼 것은?,2,파라볼라안테나,야기(yagi)안테나,패치 어레이(patch array)안테나,오프 세트(off set)안테나,Telecommunications and Wireless Technology,0.3333
+모든 통신에 있어서 구성되는 통신회선의 신뢰도는 통신망을 구성하는 가장 중요한 요소로서 특히 무선통신에서 발생하기 쉬운 페이딩(fading)현상은 신뢰도를 저하시키는 원인이 되는데 이러한 페이딩 대책기술이 아닌 것은?,4,공간 다이버시티,주파수 다이버시티,각도 다이버시티,송신 다이버시티,Telecommunications and Wireless Technology,0.3333
+링 변조기(Ring modulator)의 설명 중 틀린 것은?,3,다이오드는 반송파 극성에 따른 switch 구실을 한다.,반송파와 신호파가 각각 입력단에 가해질 때 출력이 나온다.,입력단에 반송파만 가할 때 변조된 출력이 나온다.,입력단에 신호파만이 가해질 때에는 변조된 출력이 나오지 않는다.,Telecommunications and Wireless Technology,0.3333
+RC결합 저주파 증폭회로의 이득이 낮은 주파수에서 감소되는 이유는?,4,출력회로의 병렬 캐패시턴스 때문,에미터 저항 때문,콜렉터 저항 때문,결합 캐패시턴스의 영향 때문,Telecommunications and Wireless Technology,0.3333
+이동통신에서 한 셀(cell)의 모든 채널이 혼잡상활일 때 이웃셀에서 가용채널을 찾는 것은?,2,동적채널 할당,차용채널 할당,혼합채널 할당,고정채널 할당,Telecommunications and Wireless Technology,0.3333
+수퍼 헤테로다인 수신기의 중간 주파수 (1F)를 선정할 때 고려되는 사항으로 틀린 것은?,3,안정도 : 중간주파수(1F)가 낮은 것이 좋다.,지연특성 : 중간주파수(1F)가 높을수록 좋다.,근접주파수 선택도 : 중간주파수(1F)가 높을수록 좋다.,영상주파수 선택도 : 중간주파수(1F)가 높을수록 좋다.,Telecommunications and Wireless Technology,0.3333
+2개의 반사판을 갖는 안테나는?,4,다이폴 안테나,야기-우다 안테나,렌즈안테나,카세그레인 안테나,Telecommunications and Wireless Technology,0.3333
+반송파 20[㎒]를 신호파 10[㎒]로 FM 변조 할 경우 주파수 변조지수와 점유 주파수 대역폭은 각각 얼마인가?,2,"4, 180[㎑]","8, 180[㎑]","4, 200[㎑]","8, 200[㎑]",Telecommunications and Wireless Technology,0.3333
+전파의 창(radio window)의 범위를 결정하는 요소가 아닌 것은?,2,전리층의 영향,도플러 효과의 영향,대류권의 영향,대기 잡음의 영향,Telecommunications and Wireless Technology,0.3333
+위성의 다원접속기술에서 패킷전송망에 많이 활용되는 회선할당방식은?,4,사전할당방식,요구할당방식,개방할당방식,임의할당방식,Telecommunications and Wireless Technology,0.3333
+"반가산기(half-adder)를 이용하여 전가산기(full adder)를 만드는 회로구성을 올바르게 된 것은?  (단, C는 가산기의 캐리(carry)를 나타내고, S는 합을 나타내는 비트이다.) (정확한 보기 내용을 아시는분께서는 오류 신고를 통하여 내용 작성부탁 드립니다. 정답은 2번입니다.)",2,복원중 (정확한 보기 내용을 아시는분께서는 오류 신고를 통하여 내용 작성부탁 드립니다. 정답은 2번입니다.),복원중 (정확한 보기 내용을 아시는분께서는 오류 신고를 통하여 내용 작성부탁 드립니다. 정답은 2번입니다.),복원중 (정확한 보기 내용을 아시는분께서는 오류 신고를 통하여 내용 작성부탁 드립니다. 정답은 2번입니다.),복원중 (정확한 보기 내용을 아시는분께서는 오류 신고를 통하여 내용 작성부탁 드립니다. 정답은 2번입니다.),Telecommunications and Wireless Technology,0.3333
+광대역 ISDN의 교환 및 다중화기술로서 개발되고 있는 교환기술은?,2,APMBS,ATM,PABX,X.31,Telecommunications and Wireless Technology,0.3333
+통신 제어 장치의 주요 기능이 아닌 것은?,3,통신 접속기능,정보 전송기능,입·출력 변환기능,회선의 감시 및 오류의 제어기능,Telecommunications and Wireless Technology,0.3333
+"전방 전계의 세기를 Ef, 후방전계의 세기를 Eb 라고 할때 전후 전계비(front to back ratio)를 옳게 표현한 식은?",3,10 log10 Ef/Eb,10 log10 Eb/Ef,20 log10 Ef/Eb,20 log10 Eb/Ef,Telecommunications and Wireless Technology,0.3333
+전기통신기본법의 목적이 아닌 것은?,2,전기통신의 효율적 관리,전기통신역무의 효율적인 제공 및 이용,전기통신의 발전 촉진,공공의 복리증진,Telecommunications and Wireless Technology,0.3333
+"셀룰러 이동전화 시스템에서 ""Hand-off""란 무엇인가?",4,이동전화 기지국간 통화종료를 의미한다.,MSC와 Cell Site간의 정보전송 속도의 변경을 의미한다.,한 지역에서 통화도중 다른 지역으로 이동시 통화가 끊어져 버리는 현상을 의미한다.,통화중 이동시 인접 기지국간 통화 채널의 자동전환을 의미한다.,Telecommunications and Wireless Technology,0.3333
+정보통신 시스템에서 CCU(Communication Control Unit)의 역할이 아닌 것은?,3,통신회선과 중앙처리장치를 결합시킴,중앙처리장치와 데이터의 송ㆍ수신제어,데이터 회선 종단장치의 기능,다수의 회선을 시분할 방식으로 다중제어,Telecommunications and Wireless Technology,0.3333
+2진수 0111을 그레이 코드(Gray code)로 바꾸면 무엇인가?,2,1010,0100,0000,1111,Telecommunications and Wireless Technology,0.3333
+전기통신기본법에서 정하는 전기통신사업자의 구분으로 올바른 것은?,2,"공중통신사업자, 별정통신사업자, 부가통신사업자","기간통신사업자, 별정통신사업자, 부가통신사업자","기간통신사업자, 일반통신사업자, 별정통신사업자","기간통신사업자, 공중통신사업자, 부가통신사업자",Telecommunications and Wireless Technology,0.3333
+디지털 신호를 아날로그 전송회선에 전송 가능하도록 변환시켜 주는 변환기는?,4,DSU(Digital Service Unit),DCE(Data Circuit Terminal Equipment),CSU(Channel Service Unit),MODEM,Telecommunications and Wireless Technology,0.3333
+"문자, 부호, 영상, 음향등 정보를 저장 처리하는 장치나그에 부수되는 입출력장치 또는 기타의 기기를 이용하여 정보를 송· 수신 또는 처리하는 전기통신설비를 무엇이라고 하는가?",4,단말장치,통신교환설비,정보통신망,정보통신설비,Telecommunications and Wireless Technology,0.3333
+범세계적인 위성통신방식 중 해당되지 않는 것은 ?,4,위상 위성방식,정지 위성방식,랜덤(random) 위성방식,헤테로다인(heterodyne) 위성방식,Telecommunications and Wireless Technology,0.3333
+전파의 창(radio window)의 범위를 결정하는 요소가 아닌것은?,2,전리층의 영향,도플러 효과의 영향,대류권의 영향,대기 잡음의 영향,Telecommunications and Wireless Technology,0.3333
+지구국 안테나가 갖추어야 할 성능 조건이 여러 가지가 있는데 이중 적당하지 않은 것은?,4,고이득이어야 한다.,대역폭이 넓어야 한다.,지향성 폭이 좁아야 한다.,잡음 온도가 높아야 한다.,Telecommunications and Wireless Technology,0.3333
+광섬유(fiber optic)에 대한 설명으로 틀린 것은?,4,용량 성장의 잠재성이 높다.,BER(bit error rate)이 낮다.,보안성이 좋다.,반복기(repeater)들 간의 간격이 짧다.,Telecommunications and Wireless Technology,0.3333
+기지국의 서비스 지역을 확대시키기 위한 방법이 아닌 것은?,2,송신 출력을 증가시킨다.,기지국 안테나 높이를 감소시킨다.,지형에 맞는 안테나를 사용한다.,고이득 또는 지향성 안테나를 사용한다.,Telecommunications and Wireless Technology,0.3333
+데이터 통신에서 에러의 검출 및 교정까지 할 수 있는 부호는?,2,2 out of 5 code,Hamming code,Excess - 3 code,2 진 parity,Telecommunications and Wireless Technology,0.3333
+교환원 대신에 전화교환의 조작을 행한 최초의 자동교환기는?,4,기계식 교환기,크로스바 교환기,진공관식 교환기,스탭 바이 스탭 교환기,Telecommunications and Wireless Technology,0.3333
+UHF대를 사용하는 통신망을 설계할 때 치국계획상 고려해야 할 점과 거리가 먼 것은?,4,총장비 이득,총경로 손실,통신망 성능 평가치,전력 소모율,Telecommunications and Wireless Technology,0.3333
+연속적으로 변화하는 아날로그 신호(analog signal)를 펄스부호(pulse code)로 변화시키는데 필요한 단계가 아닌 것은 ?,2,부호화,복극성화,표본화,양자화,Telecommunications and Wireless Technology,0.3333
+마이크로파 통신방식에서 변환된 중간주파수를 증폭후 다시 마이크로파로 변환하여 송신하는 중계방식은?,4,직접 중계방식,검파 중계방식,베이스밴드 중계방식,헤테로다인 중계방식,Telecommunications and Wireless Technology,0.3333
+라디오 덕트(radio duct)에 대한 설명으로 가장 적합한 것은?,3,라디오 덕트 발생원인 중 하나는 주간 냉각에 의한 라디오 덕트이다.,대양성 덕트는 육상의 건조한 대기가 해상으로 흘러들어가면서 일어난다.,라디오 덕트 내에서는 도파관과 같이 차단주파수 이상의 전파만 통과시킨다.,침강에 의한 덕트는 표준형 덕트를 발생시킨다.,Telecommunications and Wireless Technology,0.3333
+통신 구간에서 온도 변화에 의해서 발생하는 잡음은?,2,누화 잡음,백색 잡음,충격 잡음,상호 변조 잡음,Telecommunications and Wireless Technology,0.3333
+마이크로웨이브 통신에서 잡음 방해의 개선방법으로 적합하지 않은 것은?,3,인공잡음의 발생원에 필터 등을 삽입한다.,수신기에는 잡음 억제회로를 설치한다.,수신기의 실효 대역폭을 넓게 한다.,안테나의 지향성을 예민하게 한다.,Telecommunications and Wireless Technology,0.3333
+"OSI 7 계층에서 데이터의 압축, 암호화 등의 역할을 수행하는 계층은?",3,물리계층,세션계층,표현계층,데이터링크계층,Telecommunications and Wireless Technology,0.3333
+"1,024개의 입력 펄스가 들어올 때마다 한 개의 출력 펄스를 발생시키려고 한다. T플립플롭을 이용할 경우 몇 개가 필요한가 ?",4,4개,6개,8개,10개,Telecommunications and Wireless Technology,0.3333
+"45[㎒]의 반송파를 최대 주파수편이 38[㎑]로 하고, 9[㎑]의 신호파로 주파수 변조를 했을 경우 주파수 대역은 ?",2,47[㎑],94[㎑],38[㎑],9[㎑],Telecommunications and Wireless Technology,0.3333
+집적회로(IC)에서 고주파 특성을 제한하는 요인은 ?,3,저항,다이오드,기생 커패시턴스,실리콘,Telecommunications and Wireless Technology,0.3333
+이미터 폴로워(emitter follower)의 특징을 설명한 것중 옳지 않은 것은 ?,3,전압이득은 1 에 가깝다.,전류이득은 1 보다 크다.,전력증폭에 적합하다.,입력임피던스가 크고 출력임피던스는 작다.,Telecommunications and Wireless Technology,0.3333
+위성통신에서 지구국 장비의 기본 구성에 해당하지 않는 것은?,4,안테나계,송신계,수신계,추진계,Telecommunications and Wireless Technology,0.3333
+"수정 발진회로에서 수정진동자의 전기적 직렬 공진 주파수를 fs, 병렬 공진 주파수를 fp라 하면 안정한 발진을 하기 위한 동작 출력 주파수 fo는 아래 어느 것인가 ?",2,fs ＜ fo＞ fp,fs ＜fo＜ fp,fs ＞fo＞fp,fo = fs,Telecommunications and Wireless Technology,0.3333
+SHF대의 전파방식과 관계 적은 것은?,4,직접파,라디오 덕트,대류권 산란파,전리층(F2층) 반사파,Telecommunications and Wireless Technology,0.3333
+전압 정재파비가 3인 어떤 급전선에서 진행파 전압이 10[V]라면 반사파 전압은 몇 [V] 인가 ?,3,3[V],3.3[V],5[V],15[V],Telecommunications and Wireless Technology,0.3333
+ARQ 방식에 대한 설명으로 가장 적합한 것은?,4,에러를 정정하는 방식,부호를 전송하는 방식,에러를 검출하는 방식,에러를 검출하여 재전송을 요구하는 방식,Telecommunications and Wireless Technology,0.3333
+간접 FM방식에서 사용되는 전치보상회로(pre-distorter)의 설명중 틀린 것은?,2,신호 주파수에 반비례하는 회로이다.,미분회로의 일종이다.,PM을 FM으로 만드는데 쓰인다.,입출력 위상차는 90° 이다.,Telecommunications and Wireless Technology,0.3333
+"델타 변조방식에서는 표본화 순간에 직전 표본 신호에 비하여 +, 또는 -변화만을 부호화 한다. 이때 표본화 주파수는 Nyquist 표본화 주파수보다 10배 이상 빨라야 하나 그렇지 못한 경우 입력 신호가 급격하게 변하면 잡음이 발생한다. 이에 해당하는 잡음은?",2,프레임 잡음(Frame noise),과부하 잡음(Overload noise),열 잡음(Thermal noise),지연의곡(Dalay distortion),Telecommunications and Wireless Technology,0.3333
+사무실에서 인터넷 구내 망을 설치하여 음성전화 서비스를 제공하는 설비는?,2,PBX,IP-PBX,ISDN-PBX,Solo-PBX,Telecommunications and Wireless Technology,0.3333
+super-hetrodyne 수신기에서 중간주파수를 높게 할수록 수신기의 특성이 나빠지는 것은?,3,영상주파수 선택도,인입현상,감도 및 안정도,전송대역 주파수 특성,Telecommunications and Wireless Technology,0.3333
+위성의 제어를 위하여 위성에 있는 각 장치의 전기적인 상태 및 센서로 감지한 열에 대한 데이터의 정보를 지구국에 송신하는 기능을 갖는 장치를 무엇이라고 하는가?,2,자세제어시스템,Telemetry시스템,열제어시스템,전원제어시스템,Telecommunications and Wireless Technology,0.3333
+M/W 중계방식이 아닌 것은?,4,베이스 밴드(Base Band)중계방식,헤테로다인 중계방식,무급전 중계방식,페이딩 중계방식,Telecommunications and Wireless Technology,0.3333
+3[㎓]~30[㎓]범위내에 해당하는 주파수대는?,4,HF,VHF,MF,SHF,Telecommunications and Wireless Technology,0.3333
+스켈치(Squelch)회로의 입력은 어느 단에서 얻는가 ?,4,고주파증폭단,중간주파증폭단,저주파증폭단,주파수변별기,Telecommunications and Wireless Technology,0.3333
+비동기식 계수기(counter)와 관계가 없는 것은 ?,4,리플 카운터라고도 하다.,동작속도가 느리다.,전단의 출력이 다음 단의 입력이 된다.,동작속도가 고속이다.,Telecommunications and Wireless Technology,0.3333
+디지털 데이터의 형태로 전송할 때 필요한 회선종단장치는?,3,자동응답기,호출기,디지털 서비스 유니트,모뎀,Telecommunications and Wireless Technology,0.3333
+안테나의 급전선(도파관)에 스터브(stub)를 사용하는 이유로 가장 타당한 것은?,3,반사전력을 증폭시키기 위하여,안테나의 지향성을 높이기 위하여,임피던스를 정합시키기 위하여,대역폭을 증가시키기 위하여,Telecommunications and Wireless Technology,0.3333
+가공통신선과 특고압의 가공강전류전선을 공가하는 전주의 안전계수는 얼마 이상으로 하여야 하는가?,2,1,2,3,4,Telecommunications and Wireless Technology,0.3333
+채널의 대역폭이 1000[Hz]이고 채널에서의 출력의 신호대 잡음비가 31일 때 대역통과 채널의 통신 용량을 tishs의 정리에 의해서 계산하면?,2,4000 bit/s,5000 bit/s,6000 bit/s,30000 bit/s,Telecommunications and Wireless Technology,0.3333
+"어느 멀티미디어 기기의 전송대역폭이 6[MHz]이고 전송속도가 19.39[Mbps]일 떄, 이 기기의 대역폭 효율값은 약 얼마인가?",2,2.23,3.23,5.25,6.42,Telecommunications and Wireless Technology,0.3333
+무선 송신기에서 사용되는 완충 증폭기에 대한 설명이 맞지 않는 것은?,4,증폭방식은 주로 A급이다.,발진회로와 부하간을 격리하기 위하여 사용되는 증폭 기다.,발진기의 안정도를 높이기 위하여 사용된다.,주파수 대역폭을 높이기 위하여 사용된다.,Telecommunications and Wireless Technology,0.3333
+PCM 파를 수신하여 원래의 신호로 복원하기 위한 필터로 적합한 것은?,2,고역 통과 필터,저역 통과 필터,대역 통과 필터,대역 차단 필터,Telecommunications and Wireless Technology,0.3333
+PCM(Pulse Code Modulation) 방식의 장점은?,4,점유 주파수 대역폭이 넓다.,기기 구성이 복잡하여 가격이 비싸다.,고주파에 있어서 전송손실 및 누화가 생긴다.,"전송로에서 발생하는 누화, 잡음, 왜곡의 영향이 적다.",Telecommunications and Wireless Technology,0.3333
+FM변조 방식중 간접 FM변조 방식이 아닌 것은?,3,이상법에 의한 변조 방법,벡터 합성법에 의한 변조방법,반사형 크라이스트론을 이용한 변조방법,펄스 위치변조를 이용한 변조방법,Telecommunications and Wireless Technology,0.3333
+수신기의 종합특성중 희망신호 이외의 신호를 어느정도 분리할 수 있느냐의 분리능력을 나타내는 것은?,2,감도 (Sensitivity),선택도 (Selectivity),충실도 (Fidelity),안정도 (Stability),Telecommunications and Wireless Technology,0.3333
+프레임 동기 유지 접근 방식 프로토콜이 아닌 것은?,4,문자 지향형 프로토콜,비트 지향형 프로토콜,카운트 지향형 프로토콜,경로 선택 프로토콜,Telecommunications and Wireless Technology,0.3333
+이동통신 시스템 중 GPS(Global Position System)를 기반으로 하는 동기식 이동통신 시스템으로 옳은 것은?,3,AMPS,GSM,CDMA,WCDMA,Telecommunications and Wireless Technology,0.3333
+Micro파 통신의 특징을 설명한 것 중 틀린 것은?,4,안테나의 이득을 크게 할 수 있다.,안정한 전파전파 특성을 나타낸다.,광대역성이 가능하다.,외부의 잡음에 매우 약하다.,Telecommunications and Wireless Technology,0.3333
+RC 결합 저주파 증폭회로에서 낮은 주파수의 이득이 감소되는 주된 원인은?,4,병렬 커패시턴스 때문에,이미터의 저항 때문에,컬렉터의 저항 때문에,결합 커패시턴스의 영향 때문에,Telecommunications and Wireless Technology,0.3333
+초단파가 가시거리를 넘어서 이례적으로 멀리 전파하는 일이 있는데 그 원인이 아닌 것은?,4,초굴절 또는 라디오 닥트에 의한 전파,대류권 산란에 의한 전파,산악회절파에 의한 전파,F 층의 반사에 의한 전파,Telecommunications and Wireless Technology,0.3333
+프로토콜의 기능 중 송신측 개체로부터 오는 데이터의 양이나 속도를 수신측 개체에서 조절하는 기능은 무엇인가?,3,연결제어,에러제어,흐름제어,동기제어,Telecommunications and Wireless Technology,0.3333
+-2[dB/km]의 손실을 가지는 케이블의 시작점에서의 전력이 4[mW]였다면 5[km] 뒤에서의 신호의 전력은 얼마인가?,2,0.2[mW],0.4[mW],0.6[mW],0.8[mW],Telecommunications and Wireless Technology,0.3333
+이동통신의 세대와 기술이 바르게 짝지어진 것은?,3,1세대 : GSM,2세대 : AMPS,3세대 : WCDMA,4세대 : CDMA,Telecommunications and Wireless Technology,0.3333
+"4-PSK 변조방식에서 변조속도가 1,200[baud]일 때 데이터 전송속도는 몇 [bps]인가?",2,"1,200[bps]","2,400[bps]","3,600[bps]","4,800[bps]",Telecommunications and Wireless Technology,0.3333
+케이블 모뎀을 64-QAM으로 하향 데이터전송(6[MHz] 대역폭)을 한다. 최대 데이터 전송률은?,3,20[Mbps],30[Mbps],36[Mbps],40[Mbps],Telecommunications and Wireless Technology,0.3333
+FM 수신기에서 스켈치 회로가 사용되는 이유는?,4,수신기 감도를 향상시키기 위해서,선택도를 높이기 위해서,자동 주파수를 조정하기 위해서,수신 신호가 없을 때 내부 잡음을 억제하기 위해서,Telecommunications and Wireless Technology,0.3333
+다중화된 신호의 증폭시 증폭기의 비직선성 때문에 발생하는 왜곡은 ?,3,에코현상,페이딩,상호 변조잡음,혼선,Telecommunications and Wireless Technology,0.3333
+텔레텍스트의 기술적 특성이 아닌 것은?,3,TV전파를 사용한다.,디코더와 TV 수신기와의 조합성이 양호하다.,한정된 지역에서 사용된다.,"선택하여 수신할 수 있고, 반복송출이 가능하다.",Telecommunications and Wireless Technology,0.3333
+무선 송신기에 사용되는 완충 증폭기에 대한 설명으로 적합하지 않은 것은?,2,완충 증폭기의 바이어스는 주로 A급 또는 AB급이다.,광대역의 주파수 대역폭이 요구된다.,발진기의 안정도를 높이기 위하여 사용된다.,발진회로와 부하간을 격리하기 위하여 사용되는 증폭기이다.,Telecommunications and Wireless Technology,0.3333
+이동통신시스템에서 기지국의 주요 기능인 것은?,3,이동국감시기능,Handover 기능,이동국과의 무선전송을 위한 기능,통화상대번호 저장기능,Telecommunications and Wireless Technology,0.3333
+무선통신시스템 이동국의 전력 절감 방안으로 적합하지 않은 것은?,4,간헐적 수신방식의 적용,전력제어 방식의 적용,통신중 비연속적 송신방식의 적용,빈번한 이동국 위치 확인 방식의 적용,Telecommunications and Wireless Technology,0.3333
+Ku-Band에서 사용할 수 있는 위성통신용 주파수는 ?,3,1GHz / 2GHz,4GHz / 6GHz,12GHz /14GHz,20GHz / 30GHz,Telecommunications and Wireless Technology,0.3333
+전화망의 음량손실의 객관적 척도로 이용되는 것은?,4,결합계수,평형도,송화당량,음량정격,Telecommunications and Wireless Technology,0.3333
+"마이크로파 중계방식 중 중계소마다 신호의 복조, 재생 및 변조를 통하여 중계하는 방식은?",2,헤테로다인 중계 방식,검파 중계 방식,무급전 중계 방식,직접 중계 방식,Telecommunications and Wireless Technology,0.3333
+2개의 음성대역 통신회선을 이용하여 19.2Kbps의 전송량을 전송하고자 할 때 가장 경제적인 방식은?,3,동기식 모뎀,복합 모뎀,역 다중화기,지능 다중화기,Telecommunications and Wireless Technology,0.3333
+무선송신기에서 발생하는 스퓨리어스 복사의 감소 대책이 아닌 것은?,4,급전선에 트랩을 설치한다.,π형 회로를 사용하여 고조파의 불요파를 제거한다.,전력 증폭단의 바이어스전압을 알게 하거나 여진전압을 가급적 적게 한다.,전력증폭단과 기타공진회로의 Q를 작게 하여 불요 주파수를 제거하도록 한다.,Telecommunications and Wireless Technology,0.3333
+공전(空電)의 잡음을 경감시키는 방법 중 적당하지 않은 것은?,2,지향성 안테나를 사용한다.,수신전력을 증가시킨다.,높은 주파수를 사용한다.,비접지 안테나를 사용한다.,Telecommunications and Wireless Technology,0.3333
+데이터 전송에서 다수의 에러를 검출하고 정정할 수 있는 부호방식은 어느 것인가?,3,ARQ,CRC,Reed-Solomon code,parity check,Telecommunications and Wireless Technology,0.3333
+송신기의 성능지수에 해당하는 것은?,4,영상주파수선택도,잡음억압감도,상호변조,점유주파수 대역폭,Telecommunications and Wireless Technology,0.3333
+정보를 전송하기 위한 5단계중 4단계는?,2,회선접속,링크절단,데이타전송,회선절단,Telecommunications and Wireless Technology,0.3333
+"어떤 코드의 최소 해밍거리가 8일 때, 수신측에서 정정할 수 있는 오류의 개수는?",2,2,3,4,8,Telecommunications and Wireless Technology,0.3333
+"전화통신망(PSTN)에서 최번시 1시간에 발생한 호(Call)수가 240이고, 평균통화시간이 2분일 때 이 회선의 호량(Erlang)은?",2,0.1,8,40,360,Telecommunications and Wireless Technology,0.3333
+"특정자 상호간만을 연결한 텔레비젼에 의한 통신 시스템으로서 호텔, 병원, 학교 등 특정대상의 관찰을 목적으로 하는 것은?",2,CATV,CCTV,HDTV,VRS,Telecommunications and Wireless Technology,0.3333
+전송선로의 전송특성 요인이 아닌 것은?,4,전송손실,주파수 특성,누화특성,전계강도,Telecommunications and Wireless Technology,0.3333
+트랜지스터에서 베이스폭변조(Base width modulation)에 관한 설명으로 가장 적합한 것은?,3,트랜지스터를 제조할 때 베이스 두께를 조정해주는 것을 말한다.,트랜지스터의 베이스에 변조전압을 걸어서 동작시키는 것을 말한다.,트랜지스터의 접합에 가해지는 바이어스에 의해 베이스 두께가 변하는 것을 이용한 변조를 말한다.,트랜지스터의 포장에 의해 베이스가 영향을 받는 것을 말한다.,Telecommunications and Wireless Technology,0.3333
+지구 전체(극 지방 제외)를 커버하기 위해 필요한 최소의 위성 수는?,2,2 개,3 개,4 개,6 개,Telecommunications and Wireless Technology,0.3333
+슈미트 트리거의 특징으로 옳지 않은 것은?,3,쌍안정 멀티 바이브레이터의 일종이다.,"입력 전압의 크기가 회로의 포화, 차단 상태를 결정해 준다.",구형파와 삼각파 발생에 사용한다.,한쪽 트랜지스터의 콜렉터에서 다른쪽 트랜지스터의 베이스로만 결합용 캐퍼시터가 있다.,Telecommunications and Wireless Technology,0.3333
+최고 주파수 fm으로 대역 제한된 신호를 표본화할 때 원신호를 재생하는데 필요한 최소한의 시간간격은 얼마인가?,4,1/0.5fm,1/fm,1/1.5fm,1/2fm,Telecommunications and Wireless Technology,0.3333
+라우터가 패킷을 수신하면 라우터 포트 중 단 하나만을 통해 패킷을 전달하는 라우팅을 무엇이라 하는가?,2,싱글캐스트 라우팅,유니캐스트 라우팅,멀티캐스트 라우팅,브로드캐스트 라우팅,Telecommunications and Wireless Technology,0.3333
+이동통신 채널의 모델링에서 중요하게 다루는 요소가 아닌 것은?,4,페이딩 현상,도플러 현상,채널 간섭,전송 거리,Telecommunications and Wireless Technology,0.3333
+네트워크를 서로 연결하여 상호접속을 위한 망간연동장치로 사용되지 않은 것은?,4,리피터,브리지,라우터,트랜시버,Telecommunications and Wireless Technology,0.3333
+정지위성통신 시스템의 특징이 아닌 것은?,4,다원접속을 이용한다.,광역통신에 적합하다.,"고품질, 광대역통신에 적합하다.",전파손실이 가장 적다.,Telecommunications and Wireless Technology,0.3333
+AM 변조기에서 발생하는 측파대의 수는?,2,1개,2개,3개,4개,Telecommunications and Wireless Technology,0.3333
+HDLC 프로토콜에서 사용되는 국(station)의 이름을 바르게 나타낸 것은?,3,"주국, 종국, 종속국","총괄국, 집중국, 단국","1차국, 2차국, 복합국","상위국, 중간국, 하위국",Telecommunications and Wireless Technology,0.3333
+패킷화 기능이 없는 일반형 터미널을 접속하여 패킷의 조립과 분해 기능을 대신해 주는 장치는?,3,DTE,PMX,PAD,PS,Telecommunications and Wireless Technology,0.3333
+위성지구국 시스템은 신호를 지구국 안테나에서 위성으로 Up-link 시키거나 혹은 위성에서 Down-link 신호를 분리하는 기능을 하는 장치는?,3,디멀티플렉서(Demultiplexer),다운 컨버터(Down converter),다이플렉서(Diplexer),멀티플렉서(Multiplexer),Telecommunications and Wireless Technology,0.3333
+병렬 전송의 특징으로 옳은 것은?,3,전송 속도가 느리다.,단말 장치와의 인터페이스 구성이 복잡하다.,전송 매체의 비용과 접속 비용이 높다.,병렬 신호를 직렬신호로 또는 반대로 변환해야한다.,Telecommunications and Wireless Technology,0.3333
+메시지 10001101(P(X)=X7+X3+X2 +1)에 대해 생성 다항식 G(X)=X5+X4 +X+1을 이용하여 CRC 부호화할 경우 패리티 비트의 형태는?,2,11111,11011,10101,01001,Telecommunications and Wireless Technology,0.3333
+교환국 수가 n일 때 성형 통신망의 중계 회선수는?,2,n,n-1,n/2,n(n-1)/2,Telecommunications and Wireless Technology,0.3333
+통신 시스템간의 대화를 제어하는 기능을 담당하는 계층은?,3,네트워크계층,데이터링크계층,세션계층,응용계층,Telecommunications and Wireless Technology,0.3333
+"선로설비의 회선 상호간, 회선과 대지간 및 회선의 심선 상호간의 절연저항은 직류 500볼트 절연저항계로 측정하여 얼마 인상이어야 하는가?",2,5메가옴,10메가옴,15메가옴,20메가옴,Telecommunications and Wireless Technology,0.3333
+PCM-32 채널 다중화 장치의 음성비트와 표본화 주기는?,2,"7비트, 256[μs]","8비트, 125[μs]","8비트, 256[μs]","7비트, 125[μs]",Telecommunications and Wireless Technology,0.3333
+MPLS(Multi Protocol Label Switching) 기반의 인터넷서비스의 특징이 아닌 것은?,4,교환기능과 제어기능이 분리되어 다양한 전달망에 적용될 수 있으며 이기종간에도 동일한 제어기능을 적용할 수 있다.,레이블에 목적지뿐만 아니라 서비스등급의 의미를 부여할 수 있으므로 IP QoS 제공이 용이하다.,레이블에 의한 터널링의 구성이 가능하므로 이를 이용한 VPN 서비스 제공이 가능하다.,헤드처리 오버헤드가 증가되어도 기능망을 이용하므로 기존 라우터에 비해 대용량 구성이 용이하다.,Telecommunications and Wireless Technology,0.3333
+정보화사회의 촉진을 위한 전기통신 기본계획의 수립·공고권자는?,4,과학기술부장관,한국통신사장,한국전산원장,정보통신부장관,Telecommunications and Wireless Technology,0.3333
+자유공간에서 송수신 안테나간 거리 2[km]에 10[GHz]의 주파수로 통신 링크를 구성하고자 한다. 이에 대한 전송경로의 손실은 약 얼마인가?,3,106.52[dB],112.52[dB],118.52[dB],124.52[dB],Telecommunications and Wireless Technology,0.3333
+"유선전화망에서 노드가 10개일 때 그물형(Mesh형)으로 교환회선을 구성할 경우, 링크 수를 몇 개로 설계해야 하는가?",4,30개,35개,40개,45개,Telecommunications and Wireless Technology,0.3333
+정보통신시스템 소프트웨어 중 운영체제의 기능이 아닌 것은?,3,메모리관리,잡(job)관리,범용라이브러리,통신제어,Telecommunications and Wireless Technology,0.3333
+2개의 전극(Anode와 Cathode) 사이 삽입된 유기물층에 가해지는 전기장을 가해 발광하게 되는 것은?,2,CRT,OLED,PDP,TFT-LCD,Telecommunications and Wireless Technology,0.3333
+정보통신공사업법령에 근거한 감리원의 업무범위에 해당되지 않는 것은?,4,공사계획 및 공정표의 검토,공사업자가 작성한 시공 상세도면의 검토 및 확인,재해예방대책 및 안전관리의 확인,형식승인 준공검사 및 승인 여부 검토,Telecommunications and Wireless Technology,0.3333
+"최대 전송률을 예상할 수 있는 나이퀴스트(Nyquist) 공식으로 맞는 것은? (단, C는 채널용량, B는 전송채널의 대역폭, M은 진수, S/N은 신호대 잡음비)",2,C = B×log2(M),C = 2×B×log2(M),C = B×log2(M×1+S/N),C = 2×B×log2(M×(1+S/N)),Telecommunications and Wireless Technology,0.3333
+단말기에 마이크로프로세서를 내장하여 분산처리방식에 적절한 단말장치는?,2,전용단말장치,지능형단말장치,복합단말장치,범용단말장치,Telecommunications and Wireless Technology,0.3333
+20개의 중계선으로 5[Erl]의 호량을 운반하였다면 이 중계선의 효율은 몇 [%]인가?,2,20[%],25[%],30[%],35[%],Telecommunications and Wireless Technology,0.3333
+무선 송신기에서 사용하지 않는 회로는?,2,변조회로,뮤팅(Muting)회로,완충 증폭회로,전력 증폭회로,Telecommunications and Wireless Technology,0.3333
+인공위성이나 우주 비행체는 매우 빠른 속도로 운동하고 있으므로 전파 발진원의 이동에 따라서 수신주파수가 변하는 현상은?,3,페이져 현상,플라즈마 현상,도플러 현상,전파지연 현상,Telecommunications and Wireless Technology,0.3333
+FAX의 기본 과정에서 공간적으로 2차원으로 분포한 원화 정보를 1차원적인 신호로 변환하는 것을 송신주사라고 한다. 송신주사방식 중 기계적 주사방식이 아닌 것은?,4,원통 주사,원호면 주사,평면 주사,고체 주사,Telecommunications and Wireless Technology,0.3333
+일반적인 메시지 블록의 형태중 BCC(Block check character)의 체크 범위가 아닌 것은?,4,STX,TEXT,ETX,SOH,Telecommunications and Wireless Technology,0.3333
+20개의 중계선으로 5[Erl]의 호량은 운반하였다면 이 중계선의 효율은 몇 [%]인가?,2,20[%],25[%],30[%],35[%],Telecommunications and Wireless Technology,0.3333
+FM 방식에서 변조를 깊게 하여 초대 주파수 편이가 ⊿f 라고 했을 때 주파수 대역폭 B는?,2,B = ⊿f,B = 2⊿f,B = 3⊿f,B = 4⊿f,Telecommunications and Wireless Technology,0.3333
+송수신할 데이터가 있는 단말기에만 타임슬롯(time slot)을 할당하는 방식은 무엇인가?,4,주파수분할 다중화 방식,부호화 방식,변조 방식,통계적 시분할 다중화 방식,Telecommunications and Wireless Technology,0.3333
+"1,200[bps] 속도를 갖는 4채널을 다중화 한다면 다중화 설비 출력 속도는 적어도 얼마 이상이어야 하는가?",3,"1,200[bps]","2,400[bps]","4,800[bps]","9,600[bps]",Telecommunications and Wireless Technology,0.3333
+전파정류기의 DC 출력전력[W]은 반파정류기 전력의 몇 배가 되는가?,2,2,4,8,16,Telecommunications and Wireless Technology,0.3333
+블루투스에 대한 설명으로 거리가 가장 먼 것은?,4,2.4[GHz] 주파수 대역을 사용한다.,"저가격, 저전력 무선 구현을 지원한다.",블루투스 규격은 크게 코어 규격과 프로파일 규격으로 구분한다.,주변조 방식은 PSK이다.,Telecommunications and Wireless Technology,0.3333
+정보통신공사업의 등록기준에 포함되지 않는 것은?,3,사무실,자본금,공시경력,기술능력,Telecommunications and Wireless Technology,0.3333
+공사를 설계한 용역업자는 그가 작성 또는 제공한 실시 설계도서를 당해 공사가 준공된 후 몇 년간 보관하여야 하는가?,2,3년,5년,7년,10년,Telecommunications and Wireless Technology,0.3333
+데이터링크 계층(Data link Layer)에서 데이터가 전송되는 형태는 어떤 것인가?,3,비트(bit),패킷(packet),프레임(Frame),데이터그램(Datagram),Telecommunications and Wireless Technology,0.3333
+“전기통신망에 접속되는 단말기기 및 그 부속설비”로 정의되는 것은?,3,전송장치,정보설비,단말장치,선로설비,Telecommunications and Wireless Technology,0.3333
+"정보통신부장관이 전기통신의 원활한 발전과 정보사회의 촉진을 위하여 수립, 공고하여야 하는 전기통신기본계획에 포함되어야 하는 사항이 아닌 것은?",3,전기통신설비에 관한 사항,전기통신의 질서유지에 관한 사항,전기통신기술의 표준화에 관한 사항,전기통신기술의 진흥에 관한 사항,Telecommunications and Wireless Technology,0.3333
+포트 공동 이용기(port sharing unit)에 대한 설명 중 틀린 것은?,2,컴퓨터에 여러 개의 터미널들이 하나의 포트를 공유한다.,거리 제한이 있어 컴퓨터와 근거리에 있는 터미널들이 사용된다.,호스트 컴퓨터와 모뎀 사이에 설치된다.,컴퓨터 포트의 과부하를 조절하는 기능을 갖고 있다.,Telecommunications and Wireless Technology,0.3333
+"이동하고 있는 수신국의 전방에서 오는 전파의 주파수는 높아지고, 뒤에서 되돌아오는 전파의 주파수는 낮아져 송신지점에서 단일 주파수 일지라도 수신점에서는 여러 주파수가 도래하는 것으로 에러발생의 원인 중 하나인 것은?",2,페이딩 현상,도플러 현상,채널 간섭,맥놀이 현상,Telecommunications and Wireless Technology,0.3333
+빔(beam) 안테나의 특성에 관한 설명 중 틀린 것은?,3,이득이 크고 지향성이 예리하다.,큰 복사전력을 얻을 수 있다.,주파수 이용도가 중파로 제한되어 있다.,공전 및 인공잡음의 방해를 경감할 수 있다.,Telecommunications and Wireless Technology,0.3333
+"스마트 더스트(Smart Dust) 프로젝트에 사용하기 위하여 개발된 컴포넌트 기반 내장형 운영체제로 센싱 노드와 같은 초저전력, 초소형, 저가의 노드에 저전력, 최소한의 하드웨어 리소스 사용을 목표로 하는 것은?",2,임베디드리눅스,tinyOS,palmOS,윈도 CE,Telecommunications and Wireless Technology,0.3333
+정보처리과정에서 데이터의 처리가 컴퓨터에 의해서만 이루어지는 시스템은?,3,Off Line,Real time,On Line,Batch Process,Telecommunications and Wireless Technology,0.3333
+텔레텍스의 특징이 아닌 것은?,4,메모리로 전송하고 자동 수신이 가능하다.,"혼합모드를 이용, 도표 등 이미지 정보를 포함하는 문장을 전송한다.",부호화를 통한 문자 전송으로 단시간 전송이 가능하다.,초당 30프레임의 영상 신호를 변환하여 재생한다.,Telecommunications and Wireless Technology,0.3333
+정보 단말기의 기능이 아닌 것은?,3,입ㆍ출력 기능,입ㆍ출력 제어기능,회선 제어 기능,송ㆍ수신 제어기능,Telecommunications and Wireless Technology,0.3333
+무선통신 시스템에서 코드 열을 사용하는 확산 스펙트럼 다중 접속을 하는 기술로 아날로그 셀룰러에 비해 가입자 수용량이 많은 전송 방식은?,2,SDMA,CDMA,FDMA,TDMA,Telecommunications and Wireless Technology,0.3333
+MHS(Message Handing System)의 구성요소로서 텔레텍스나 팩시밀리 등의 텔레매틱스 User가 이용하도록 하는 기능을 제공하는 것은?,4,UA(User Agent),MTA(Message Transfer Agent),MS(Message Store),AU(Access Unit),Telecommunications and Wireless Technology,0.3333
+컴퓨터가 이해할 수 있는 형태로 데이터를 변환하여 입력시키는 장치가 아닌 것은?,4,키보드,광마우스,디지타이저,XY플로터,Telecommunications and Wireless Technology,0.3333
+2개 또는 6개 이상의 음성대역 회선을 사용하여 고속 전송을 할수 있는 기기의 이름은?,4,집중화기,시분할 다중화기,지능 다중화기,역 다중화기,Telecommunications and Wireless Technology,0.3333
+HDLC 프로토콜의 FCS에 대한 설명으로 가장 적합한 것은?,4,2차국 또는 복합국의 주소를 나타낸다.,프레임의 동기를 맞추기 위해 사용된다.,1차국 또는 복합국이 주소부에서 지정하는 2차국 또는 복합국에 대한 동작을 command로 지령한다.,프레임 내용이 잘 전송되었는지 확인하기 위한 에러검출용으로 사용되며 통산 16비트 CRC 방식을 이용한다.,Telecommunications and Wireless Technology,0.3333
+이동통신의 채널에서 일어나는 현상과 가장 관련이 적은 것은?,2,음영효과,방해파 억압,도플러 효과,인접채널 간섭,Telecommunications and Wireless Technology,0.3333
+전송효율을 최대로 하기 위해서 프레임의 길이를 동적으로 변경시킬 수 있는 방식은?,4,정지-대기 ARQ,Go-back-N ARQ,Selective-repeat ARQ,Adaptive ARQ,Telecommunications and Wireless Technology,0.3333
+전송로에서 사용되는 재생중계기의 3R 기능이 아닌 것은?,2,식별재생,신호전송,파형정형,타이밍재생,Telecommunications and Wireless Technology,0.3333
+"수신된 BPSK 신호는 반송파 성분이 없기 때문에 복조하기 위해 반송파 신호를 발생시킨다. 발생된 반송파의 위상은 두 개의 위상 중 어느 하나의 Locking 되며, Detector Mixer는 수신 BPSK 신호와 반송파를 곱해 데이터를 복조하게 된다. 이러한 역할을 하는 회로를 무엇이라 하는가?",2,Polybinary,Costas loop,Phase lock loop,Phase ambiguity,Telecommunications and Wireless Technology,0.3333
+동축케이블에서 가장 감쇠가 적게하기 위해서는 내부도체의 외경(d)과 외부도체의 내경(D)과의 비(ratio) D/d의 값을 얼마로 만드는 것이 가장 좋은가?,2,1.8,3.6,5.8,7.2,Telecommunications and Wireless Technology,0.3333
+"에러의 검출 능력을 나타내는 데는 해밍(Hamming)거리라는 것을 사용한다. U=(1011), V=(0010)일 때, 부호어 U와 V의 해밍 거리는?",2,1,2,3,4,Telecommunications and Wireless Technology,0.3333
+반송파 vc=Vcsinωct를 vm=Vmsinpt로 진폭 변조했을 때 피변조파 v(t)는?,2,v(t) = (Vc + Vm)sin pt,v(t) = (Vc + Vm sin pt)sinωct,v(t) = (Vc + Vm)sinωct,v(t) = (Vcsinωct + Vm)sin pt,Telecommunications and Wireless Technology,0.3333
+셀룰러의 최대 셀 반경을 결정하는 요인이 아닌 것은?,2,송신기의 출력,수신기의 감도,지역적인 환경,안테나의 이득과 높이,Telecommunications and Wireless Technology,0.3333
+통신위성 지구국에 설치하는 안테나로 가장 적당한 것은?,3,헤리컬 안테나,야기 안테나,카세그레인 안테나,비버리지 안테나,Telecommunications and Wireless Technology,0.3333
+통신위성의 통신계 기기에 해당하지 않는 것은?,4,저잡음 수신기,전력 증폭기,주파수 변환기,위상 변조기,Telecommunications and Wireless Technology,0.3333
+SS 7(Signaling System 7) 이란 약어의 의미와 관계가 먼 것은?,4,디지털 전송망을 지원하기 위한 것이다.,ISDN에 있어서 운영을 위한 것이다.,정보의 교환에 사용된다.,OSI와 같은 의미를 갖는다.,Telecommunications and Wireless Technology,0.3333
+광학문자 읽기장치(OCR)와 관계 없는 것은?,2,주사광전변환,랜덤스캔,문자판독기,특징 추출식별,Telecommunications and Wireless Technology,0.3333
+프로파일 차트(profile chart) 작성시에 적용하는 등가지구 반경계수(K)는 우리나라의 지리적 여건을 감안할 경우 얼마가 적당한가?,4,K=0,K=1,K=1/2,K=4/3,Telecommunications and Wireless Technology,0.3333
+PM파와 FM파의 스펙트럼 분포의 관계 중 틀린 것은 ?,2,"PM파와 FM파의 스펙트럼은 반송파를 중심으로 해서 위, 아래로 변조 주파수 간격으로 무한히 발생한다.",PM파의 변조지수 mp는 위상편이량 Δ ø 와 같으므로 변조 신호전압에 역비례 한다.,PM파에서나 FM파에서 변조 신호전압을 높게 하면 대역폭은 넓게 된다.,변조주파수를 높게 하면 PM에서는 대역폭이 비례하여 커진다.,Telecommunications and Wireless Technology,0.3333
+국내의 RFID 시스템에서 사용하고 있는 ISM(Industrial Science Medical) 밴드의 주파수 대역은?,3,125㎑ 대역,134㎑ 대역,2.45㎓ 대역,433㎒ 대역,Telecommunications and Wireless Technology,0.3333
+옥내통신선은 ‘300[V] 초과 전선과의 이격 거리’를 얼마 이상으로 하여야 하는가?,4,6[cm],9[cm],12[cm],15[cm],Telecommunications and Wireless Technology,0.3333
+위성통신시스템의 구성 중 지구국 장비에 해당하지 않는 것은?,4,변복조기,저잡음 증폭기,주파수 변환기,페이로드 시스템,Telecommunications and Wireless Technology,0.3333
+무선통신에서 신호의 품질을 평가하는 척도는?,3,신호대 변조전력비,정보의 전송량,신호대 잡음비,전송 주파수,Telecommunications and Wireless Technology,0.3333
+정보통신기술자를 공사현장에 배치하지 아니한 자에 대한 벌칙은?,4,100만원 이하의 과태료,200만원 이하의 과태료,300만원 이하의 벌금,500만원 이하의 벌금,Telecommunications and Wireless Technology,0.3333
+정보통신공사 발주자는 누구에게 공사의 감리를 발주하여야 하는가?,3,설계자,감리기술자,용역업자,정보통신고사업자,Telecommunications and Wireless Technology,0.3333
+홈네트워크설비 중 단지네트워크장비를 설치할 때 고려할 사항이 아닌 것은?,2,함체나 랙에는 잠금장치를 하여야 한다.,누구나 조작이 가능하도록 개방되어 있어야 한다.,집중구내통신실에 설치하여야 한다.,별도의 함체나 랙(Rack)으로 설치하여야 한다.,Telecommunications and Wireless Technology,0.3333
+정보통신망에 관련된 기술기준의 제정목적으로 적합하지 않은 것은?,4,기술 및 기기의 호환성 확보,기기의 연동성 확보,망의 안정성· 신뢰성 확보,전산망에 관련된 신기술개발의 기반 확보,Telecommunications and Wireless Technology,0.3333
+"차동증폭기의 두 입력전압에 각각 v1 = 7[mV], v2 = 5[mV]가 인가되었다. 차동전압 이득이 150이고 동상이득이 0.5일 때 출력전압은?",2,301[mV],306[mV],"1,801[mV]","1,806[mV]",Telecommunications and Wireless Technology,0.3333
+전화통신망에서 적용되고 있는 신호 방식(signaling)은 무엇인가?,2,K2,R2,L2,P2,Telecommunications and Wireless Technology,0.3333
+컴퓨터 등 정보처리능력을 가진 장치에 의하여 전자적인 형태로 작성되어 송.수신 또는 저장된 문서형식으로 표준화된 것은?,3,정보 토큰버스,사이버 몰,전자문서,전산자료,Telecommunications and Wireless Technology,0.3333
+OSI 7계층 중 네트워크계층에서 동작하는 장비는?,4,HUB,Repeater,Modem,Router,Telecommunications and Wireless Technology,0.3333
+CATV의 발전요인이 아닌 것은?,4,도시잡음 등의 고주파 방해잡음의 증가에 의한 화질의 열화,지역정보 시스템의 사회적 필요성,TV 방송 프로그램의 다채널 요망,중요건물의 시설 감시,Telecommunications and Wireless Technology,0.3333
+3MHz 내지 30MHz의 주파수대역 중 방송용으로 분배된 주파수의 전파를 이용하여 음성ㆍ음향 등을 보내는 방송은?,3,데이터방송,중파방송,단파방송,초단파방송,Telecommunications and Wireless Technology,0.3333
+디지털데이터를 디지털신호로 전송하는 장치는?,3,CODEC,변복조기,DSU,전화,Telecommunications and Wireless Technology,0.3333
+정보화추진위원회의 심의 사항이 아닌 것은?,4,정부의 정보화기본계획에 관한 사항,정보화촉진기금의 운용방침에 관한 사항,초고속 정보통신기반의 구축과 이용에 관한 사항,국가 기간 정보통신망사업자의 지정에 관한 사항,Telecommunications and Wireless Technology,0.3333
+이동통신에서 이동체의 움직임에 따라 수신 신호 주파수가 변하는 현상은?,4,지역확산현상,음영현상,채널간섭현상,도플러현상,Telecommunications and Wireless Technology,0.3333
+디지탈 입력 신호 펄스열을 그대로 또는 다른 형태의 펄스 파형으로 변환하여 전송하는 방식은?,4,광대역(broad band) 전송 방식,QAM 방식,반송대역 전송 방식,베이스 밴드 전송 방식,Telecommunications and Wireless Technology,0.3333
+오퍼레이팅 시스템의 성능 평가중 데이터 처리를 위하여 시스템이 필요하게 되었을 때 시스템을 어느 정도 빨리 사용할 수 있는가를 나타내는 것은?,3,처리능력,응답시간,사용가능도,신뢰도,Telecommunications and Wireless Technology,0.3333
+전화급 평형회선에서 2회선 사이의 원단누화의 요해성 누화감쇠량 한계치는?,2,10[dB] 이상,68[dB] 이상,22[dB] 이상,108[dB] 이상,Telecommunications and Wireless Technology,0.3333
+고압 전력선이 통신회선에 전력유도 영향을 주는 경우 이에 대한 방지조치를 하여야 한다. 이때 이상시 유도위험전압의 제한치는?,4,110[V],300[V],600[V],650[V],Telecommunications and Wireless Technology,0.3333
+사설구내교환기와 전화망 접속에서 외부 가입자가 교환원의 도움을 받지 않고 직접 구내교환기의 내부가입자를 호출할 수 있는 방식은?,2,DOD,DID,ACD,CBX,Telecommunications and Wireless Technology,0.3333
+전기통신설비의 기술기준에서 정의한 강전류전선이란?,4,직류 700[V]를 초과 7000[V]이하의 전압인 고압선,교류 220[V]를 초과 1000[V]이하의 전압인 전선,교류 220[V] 이하의 전류가 흐르는 전선,300[V] 이상의 전력을 송전하거나 배전하는 전선,Telecommunications and Wireless Technology,0.3333
+광전송시스템에서 전송신호와 간섭을 유발시키는 역반사 잡음을 방지하기 위한 것은?,4,광감쇠기,광서큘레이터,광커플러,광아이솔레이터,Telecommunications and Wireless Technology,0.3333
+FM 송신기의 반송파와 최대주파수 편이를 측정하였더니 각각 80MHz 와 50KHz 이었다. 이 송신기에 10KHz 의 신호파로 변조한다면 점유 주파수 대역폭(B)과 변조지수(mf)는 얼마인가?,3,"B=110[KHz], mf =5","B=110[KHz], mf =6","B=120[KHz], mf =5","B=120[KHz], mf =6",Telecommunications and Wireless Technology,0.3333
+"대역폭이 6[㎑]인 슈퍼헤테로다인 수신기가 470[㎑]를 수신하고 있을 때 영상 혼신 주파수는? (단, 중간 주파수는 400[㎑]임)",3,870[㎑],"1,110[㎑]","1,270[㎑]","1,750[㎑]",Telecommunications and Wireless Technology,0.3333
+"인쇄물이나 이미지에 빛을 투시해 반사되는 광선의 양적 차이인 강약을 검출하여 문자를 인식, 판독하는 장치는?",3,Scanner,ORT,OCR,MICR,Telecommunications and Wireless Technology,0.3333
+문자나 그림으로 구성된 화상 정보가 축적되어 있는 데이터베이스로 부터 TV 수상기와 전화회선을 이용하여 사용자가 원하는 각종 정보검색 시스템을 제공하는 것은?,4,쌍방향 CATV,VRS(Video Response System),팩시밀리,비디오텍스,Telecommunications and Wireless Technology,0.3333
+전송 제어문자 중 전송을 종료하고 데이터 링크를 초기화 시키는 문자는?,2,SOH,EOT,DLE,STX,Telecommunications and Wireless Technology,0.3333
+"전산망 기기 상호간을 연결할 때 건설,운용 및 유지보수의 책임한계를 구분하기 위한 접속점을 무엇이라 하는가?",4,평형도,절분기,번호계획,분계점,Telecommunications and Wireless Technology,0.3333
+우리나라의 전기통신은 누가 관장하는가?,2,국무총리,정보통신부장관,산업자원부장관,한국통신사장,Telecommunications and Wireless Technology,0.3333
+전기통신망에 접속되는 단말기기 및 그 부속설비로 정의되는 것은?,4,정보통신설비,전송설비,국선접속설비,단말장치,Telecommunications and Wireless Technology,0.3333
+정보통신공사업을 영위하고자 할 경우의 절차로 옳은 것은?,3,시ㆍ도지사의 허가를 받아야 한다.,정보통신부장관의 허가를 받아야 한다.,시ㆍ도지사에게 등록하여야 한다.,정보통신부장관에게 등록하여야 한다.,Telecommunications and Wireless Technology,0.3333
+ITU-T의 규격 중 광통신에서 사용되는 단일모드 광섬유의 코어와 클래딩의 직경은?,1,"10[μm], 125[μm]","10[μm], 250[μm]","50[μm], 125[μm]","50[μm], 250[μm]",Telecommunications and Wireless Technology,0.3333
+전기통신설비가 다른 사람의 전기통신설비와 접속되는 경우에는 그 건설과 보전에 관한 책임 등의 한계를 명확하게 하기 위하여 설정하여야 하는 것은?,2,접속점,분계점,단자반,경계점,Telecommunications and Wireless Technology,0.3333
+전기통신의 표준화에 관한 업무를 효율적으로 추진하기 위해 설립한 것은?,2,형식승인심의회,한국정보통신기술협회,한국표준화센타,통신기술진흥협의회,Telecommunications and Wireless Technology,0.3333
+길이가 반파장인 2선식 폴디드(folded)안테나(도선의 굵기는 같고 두 도선은 충분히 접근해 있는 것으로 한다)의 급전점 임피던스는?,4,36.56[Ω],73[Ω],192[Ω],292[Ω],Telecommunications and Wireless Technology,0.3333
+"V.32, V.42, X.25등의 표준을 제정한 표준화 기구는 어디인가?",4,IEEE,ANSI,ISO,ITU-T,Telecommunications and Wireless Technology,0.3333
+슈미트 트리거 회로의 출력파형으로 옳음 것은?,3,삼각파,정현파,구형파,램프(ramp) 파형,Telecommunications and Wireless Technology,0.3333
+3개의 T플립플롭이 직렬로 연결되어 있다. 입력단(첫단)에 100[㎐]의 입력신호를 인가하면 마지막 플립플롭의 출력신호는 몇[㎐]인가?,4,3000,333,167,125,Telecommunications and Wireless Technology,0.3333
+반송파의 전력이 20[KW]일 때 변조율 70[%]로 진폭 변조하였다. 이 때 상측파대(USB) 전력은 ?,4,20[KW],10[KW],4.9[KW],2.45[KW],Telecommunications and Wireless Technology,0.3333
+RZ와 NRZ에 대한 설명 중 옳지 않는 것은?,4,RZ는 동기측면에서 NRZ보다 유리하다.,NRZ는 한 비트의 점유율이 100% 인 부호이다.,NRZ는 RZ보다 잡음에 대한 성능이 우수하다.,RZ의 소요 대역폭은 NRZ소요 대역폭의 반이다.,Telecommunications and Wireless Technology,0.3333
+국가기관 등의 전산망 감리는 어디에서 수행하는가?,3,한국정보문화센터,초고속정보통신기획단,한국전산원,한국정보통신기술협회,Telecommunications and Wireless Technology,0.3333
+이동통신 시스템에서 다원접속기술인 CDMA의 장점이 아닌 것은?,4,가입자용량이 기존의 아날로그 셀룰러방식 보다 매우 크다.,주파수의 효율적 이용이 가능하다.,다중경로에서 링크를 튼튼히 할수있다.,넓은 주파수대역이 필요하나 장치가 간단하다.,Telecommunications and Wireless Technology,0.3333
+LAN에 대한 설명으로 적합하지 않은 것은?,2,통산 단일조직에 의해 점유되어 있다.,넓은 지역(수십km)내의 각종 장치를 상호 접속하기 위한 범용 데이터 망이다.,전송선로로서 UTP 케이블이 널리 사용된다.,"장비의 확장 및 재배치가 비교적 쉽고, 통신 속도가 고속이다.",Telecommunications and Wireless Technology,0.3333
+어느 특정시간 동안 1000000개의 비트가 전송되고 이 비트 중 2개가 오류로 판명되었을 때 이 전송의 비트 에러율은 얼마인가?,4,1×10-5,2×10-5,1×10-5,2×10-6,Telecommunications and Wireless Technology,0.3333
+전리층의 제2종 감쇠에 대한 설명 중 틀린 것은?,3,전리층에서 반사할 때에 받는 감쇠이다.,감쇠량은 전자밀도에 반비례 한다.,감쇠량은 수직으로 입사할수록 작아진다.,감쇠량은 주파수가 높을수록 커진다.,Telecommunications and Wireless Technology,0.3333
+설치장소의 여건에 따른 가공통신선의 설치 높이에 대한 설명으로 옳지 않은 것은?,3,"22,900[V]를 수용하는 전압의 가공강 전류전선용 전주에 가설되는 경우에는 노면으로부터 5[m] 이상으로 하여야 한다.",도로상 설치되는 경우 노면으로부터 4.5[m] 이상으로 한다.,철도 또는 궤도를 횡단하는 경우 차량의 통행에 지장을 줄 우려가 없더라도 열차의 높이 때문에 5[m] 이상으로 하여야 한다.,도로상에서 교통에 지장을 줄 염려가 없고 시공상 불가피한 경우 보도와 차도의 구별이 있으면 보도상에서 3[m] 이상으로 한다.,Telecommunications and Wireless Technology,0.3333
+"전기통신사업자가 법원·검사·수사관서의 장, 정보수사기관의 장으로부터 재판, 수사, 형의 집행 또는 국가안전보장에 대한 위해를 방지하기 위한 정보수집을 위하여 자료의 열람이나 제출을 요청받을 때에 응할 수 있는 대상이 아닌 것은?",4,이용자의 성명과 주민등록번호,이용자의 주소와 전화번호,이용자의 아이디,이용자의 동산 및 부동산,Telecommunications and Wireless Technology,0.3333
+컴퓨터 등 정보처리능력을 가진 장치에 의하여 전자적인 형태로 작성되어 송수신되거나 저장된 문서형식의 자료로서 표준화된 것을 무엇이라 하는가?,2,행정문서,전자문서,통신문서,인증문서,Telecommunications and Wireless Technology,0.3333
+도파관의 임피던스 정합 방법으로 맞지 않는 것은?,4,스터브(stub)에 의한 방법,창(window)에 의한 방법,금속막대(post)에 의한 방법,1/2파장 변성기에 의한 방법,Telecommunications and Wireless Technology,0.3333
+Helical 안테나 설명 중 틀린 것은?,2,구조가 간단하고 고이득이므로 방송용으로 사용한다.,반사파에 의해서 동작한다.,광대역 주파수 특성이 있다.,나선형 안테나라고도 한다.,Telecommunications and Wireless Technology,0.3333
+2개의 음성대역 회선을 사용하여 광대역에서 얻을 수 있는 통신 속도를 얻는 기기는?,4,집중화기,시분할 다중화기,지능 다중화기,역 다중화기,Telecommunications and Wireless Technology,0.3333
+수신기에 일정한 주파수와 진폭의 희망파를 인가한 경우에 재조정하지 않고 얼마나 오랜 시간 동안 일정한 출력을 얻을 수 있는가의 능력을 나타내는 것은?,3,감도(sensitivity),충실도(fidelity),안정도(stability),선택도(selectivity),Telecommunications and Wireless Technology,0.3333
+홈네트워크 기술에서 유선기반기술이 아닌 것은?,4,Home PNA,PLC(Power Line Communication),Ethernet,Bluetooth,Telecommunications and Wireless Technology,0.3333
+전기통신기자재의 형식승인을 심의하는 형식승인 심의회의 위원장은 누구인가?,3,정보통신부장관,과학기술부장관,전파연구소장,한국통신품질보증단장,Telecommunications and Wireless Technology,0.3333
+광전송시스템의 각종 부품 및 경계면에서 반사되어 전송 신호와 간섭을 유발하여 전체 성능을 저하시키는 역반사 잡음을 제거하기 위한 소자는?,4,광감쇠기,광서큘레이터,광커플러,광아이솔레이터,Telecommunications and Wireless Technology,0.3333
+데이터 단말장치의 기본 기능이 아닌 것은?,3,데이터 입력,데이터 송신,데이터 처리,데이터 출력,Telecommunications and Wireless Technology,0.3333
+기존의 아날로그 카메라에 설치되어 있는 동축케이블을 활용해 고화질 영상전송이 가능한 디지털 신호 전송방식은?,2,DNR,HD-SDI,HDMI,WDR,Telecommunications and Wireless Technology,0.3333
+이동통신망에서 사용하는 Handoff의 종류가 아닌 것은?,3,Hard Handoff,Soft Handoff,Dual Handoff,Softer Handoff,Telecommunications and Wireless Technology,0.3333
+"초고속 인터넷을 이용하여 다양한 디지털 영상 서비스, 개인맞춤형 서비스, 양방향 데이터 서비스 등을 제공하는 TV로 옳은 것은?",2,DTV,IPTV,HDTV,UHDTV,Telecommunications and Wireless Technology,0.3333
+지능 다중화기에 대한 설명 중 옳은 것은?,2,동기식 시분할 다중화기라고도 한다.,동적인 시간 폭의 배정이 가능하다.,집중화 장비의 기능을 전혀 수행하지 못한다.,타임슬롯의 낭비가 심하다.,Telecommunications and Wireless Technology,0.3333
+국제 전기통신의 효율적이고 호환성있는 연동성을 보장하는 무선시스템 및 기술설비의 성능 표준을 권고하는 등의 국제무선통신자문위원회는?,2,ITU-T,ITU-R,ISO,IEC,Telecommunications and Wireless Technology,0.3333
+일정한 형태의 방송통신콘텐츠를 정송하기 위하여 사용하는 동선ㆍ광섬유 등의 전송매체로 제작된 선조ㆍ케이블 등과 이를 수용 또는 접속하기 위하여 제작된 전주ㆍ관로ㆍ통신터널ㆍ배관ㆍ맨홀ㆍ핸드홀ㆍ배선반 등과 그 부대설비를 무엇이라 하는가?,3,교환설비,구내설비,선로설비,전송설비,Telecommunications and Wireless Technology,0.3333
+다원 접속방식 중 CDMA 방식의 장점이 아닌 것은?,2,가입자 수용 용량이 크다.,전력제어 및 동기 기술이 필요 없다.,간섭과 방해에 강하다.,다경로 페이딩을 극복 할 수 있다.,Telecommunications and Wireless Technology,0.3333
+"정보 단말장치 중 입출력기능, 데이터 처리기능, 계산 및 프로그램 개발 기능을 가진 장치는?",3,Dummy Terminal,Up-Down Terminal,Intelligent Terminal,Remote Batch Terminal,Telecommunications and Wireless Technology,0.3333
+방송통신설비 기술기준 적합조사를 실시하는 경우가 아닌 것은?,3,방송통신설비 관련 시책을 수립하기 위한 경우,국가비상상태를 대비하기 위한 경우,신기술 및 신통신방식 도입을 위한 경우,방송통신설비의 이상으로 광범위한 통신장애가 발생할 우려가 있는 경우,Telecommunications and Wireless Technology,0.3333
+1[MHz]을 입력으로 하는 분주 회로에서 출력을 250[KHz] 로 만들려면 몇 개의 T 플리플롭이 필요한가?,2,1,2,3,4,Telecommunications and Wireless Technology,0.3333
+"크리스탈이 500[kHz]에서 공진하고 있다. 이 주파수에 대한 등가 인덕턴스가 4[H], 등가 커패시턴스가 0.0427[pF], 등가 저항이 10[㏀]이라 할 때, 이 크리스탈의 Q 값은 약 얼마인가?",4,1513,1457,1318,1256,Telecommunications and Wireless Technology,0.3333
+FM 수신기는 신호파가 도달하지 않을 때 진폭제한기가 동작하지 않으므로 반송파가 없으면 큰 잡음이 생긴다. 그래서 반송파가 없을 때 저주파 증폭기의 동작을 멈추게 하는 기능을 갖는 것은?,4,주파수 변별기,디엠파시스 회로,자동 주파수 제어부,스켈치 회로,Telecommunications and Wireless Technology,0.3333
+FM 송신기에서 프리엠퍼시스 회로를 사용하는  이유로 가장 적합한 것은?,4,전송효율 증대,검파 왜율의 감소,주파수 대역을 넓힘,신호대 잡음비의 개선,Telecommunications and Wireless Technology,0.3333
+정보통신공사업자 이외의 자가 시공할 수 없는 공사는?,2,데이터단말기 설치공사,구내교환기 설치공사,전화기 설치공사,아마추어국 무선설비 설치공사,Telecommunications and Wireless Technology,0.3333
+정보통신부장관으로부터 전기통신에 관한 표준화 업무를 위탁받은 기관은?,3,한국소프트웨어진흥원,한국통신,한국정보통신기술협회,한국전산원,Telecommunications and Wireless Technology,0.3333
+B급 푸시풀 전력증폭기에서 평균 직류 컬렉터 전류는 어떻게 되는가?,3,입력신호 전압이 커짐에 따라 줄어든다.,입력신호 전압이 작으면 흐르지 않는다.,입력신호 전압이 커짐에 따라 증가된다.,입력전압의 대소에 불구하고 항상 일정하다.,Telecommunications and Wireless Technology,0.3333
+"전원회로에서 무부하시 출력단자 전압이 100[V]이고, 부하를 연결했을 때의 출력단자 전압이 80[V]이었다. 전압변동률은 몇[%] 인가?",3,15,20,25,30,Telecommunications and Wireless Technology,0.3333
+SSB통신에서 Speech clarifier를 행하는 목적은 ?,3,반송파의 발진을 잘 하기 위하여,전반송파 신호만을 수신하기 위하여,반송파와 수신기의 국부 발진 주파수와의 편차를 적게 하기 위하여,저주파 증폭단의 증폭도를 높이기 위하여,Telecommunications and Wireless Technology,0.3333
+변복조기(MODEM)의 송신부 구성요소에 해당하는 것은?,1,데이터부호화기(DATE ENCODER),디모듈레이터(DEMODULATOR),데이터복호화기(DATE DECODER),반송파검출기(CARRIER DETECTOR CIRCUITS),Telecommunications and Wireless Technology,0.3333
+BSC링크 전송제어 문자의 설명으로 틀린 것은?2,3,SOH : 헤딩의 시작을 알려준다.,ETX : 텍스트의 끝을 의미한다.,ENQ : 송신측의 긍정적 응답으로 사용된다.,SYN : 프레임 동기문자이다.,Telecommunications and Wireless Technology,0.3333
+이동 통신 망의 주요 기능인 위치 등록이 수행 되는 경우가 아닌 것은?,3,전원을 끌 때 등록,위치 영역 변경 등록,단말기를 수리하기 위하여 등록,거리 기준 등록,Telecommunications and Wireless Technology,0.3333
+일정한 폭을 가지는 통신선로의 주파수대역을 몇개의 작은 대역으로 나누어 각 신호 스펙트럼을 각각의 부반송파 반송주파수를 중심으로 주파수영역에 위치시키는 방식은 ?,2,TDM,FDM,PCM,SDM,Telecommunications and Wireless Technology,0.3333
+수신기의 성능을 측정하는 변수가 아닌 것은?,3,감도,선택도,변조도,충실도,Telecommunications and Wireless Technology,0.3333
+마이크로파 장치에서 주파수 체배용으로 사용되는 것은 ?,3,TUNNEL DIODE,SILICON POINT CONTACT DIODE,VARACTOR DIODE,SILICON JUNCTION DIODE,Telecommunications and Wireless Technology,0.3333
+지구국 안테나의 성능조건에 해당하지 않는 것은 ?,4,고이득이어야 한다.,잡음온도의 상승이 낮아야 한다.,양호한 지향성을 가져야 한다.,가급적 앙각이 넓어지도록 설계되어야 한다.,Telecommunications and Wireless Technology,0.3333
+셀룰라(Cellular) 시스템의 특징에 해당되지 않는 것은 ?,2,대용량 가입자 수용,통화량 밀집에 대한 적응성이 적음,서비스 지역의 확장 용이,주파수 스펙트럼 효율성의 증가,Telecommunications and Wireless Technology,0.3333
+"슈미트 트리거 회로에 입력파형으로 주기적인 정현파를 인가할 때, 출력파형은 어떠한 파형이 되는가?",3,정현파,삼각파,구형파,타원파,Telecommunications and Wireless Technology,0.3333
+고주파대에서 차단 특성이 좋은 여파기를 얻기 곤란하므로 경사진 특성을 가진 여파기를 이용하는 변조방법은 ?,3,군 변조법,대역여파기법,잔류측파대법,단측파대법,Telecommunications and Wireless Technology,0.3333
+Beam안테나의 지선에 애자를 어떤 간격마다 여러개 분할하여 넣는 가장 큰 이유는 ?,4,낙뇌 방지를 위해서,지선의 강도를 보강하기 위해서,짧은 지선을 활용하기 위해서,복사 특성 변화를 작게하기 위해서,Telecommunications and Wireless Technology,0.3333
+루프 안테나(Loop Antenna)의 특성에 속하지 않는 것은 ?,4,급전선과의 정합이 어렵다.,수평면내 지향성 특성이 8자형이다.,소형으로 이동이 용이하다.,주간오차가 크다.,Telecommunications and Wireless Technology,0.3333
+전화 가입자의 회선을 전부 교환기에 집중시켜 놓고 가입자의 접속 희망에 따라 교환 접속하도록 하는 교환기의 기본 기능에 해당하지 않는 것은?,3,호출에 대한 응답 또는 호의 포착,발신자의 번호 수신 및 해석,선택된 출선의 이중 접속,상대방 응답 시의 통화로 접속,Telecommunications and Wireless Technology,0.3333
+Microwave 통신에서 잡음방해에 대한 개선방법으로 적합하지 않은 것은 ?,4,송신전력을 크게 하거나 안테나의 지향성을 예민하게 하여 이득을 높힘으로서 수신전력을 크게 한다.,수신기의 설계를 적절하게 하여 내부잡음을 적게 한다.,인공잡음의 발생원에 필터를 삽입하거나 차폐시킨다.,광대역 증폭기를 사용하여 출력을 크게 한다.,Telecommunications and Wireless Technology,0.3333
+윈브리지(Wien bridge) 발진회로에 관한 설명이 틀린 것은?,3,"증폭기, R 및 C로 간단히 회로를 구성할 수 있다.",발진 주파수가 비교적 안정적이다.,발진 주파수의 가변이 용이하지 않다.,저주파 발진기 등에 많이 쓰인다.,Telecommunications and Wireless Technology,0.3333
+균일 양자화 PCM 에서 양자화를 위한 비트를 1개씩 추가할 때마다 개선되는 신호대 양자화 잡음전력비는 몇[dB]씩 개선되는가?,3,3,4,6,8,Telecommunications and Wireless Technology,0.3333
+주된 맥동전압주파수가 전원주파수의 6배가 되는 정류방식은?,4,단상전파정류,단상브리지정류,3상반파정류,3상전파정류,Telecommunications and Wireless Technology,0.3333
+광섬유케이블의 분산(dispersion)에 대한 설명 중 옳지 않은 것은?,2,파장 및 모드에 따른 전파 속도차 때문에 발생한다.,단일보드 광섬유에서는 색분산 및 모드분산이 생긴다.,다중모드 광섬유에서는 색분산 보다 모드분산 비중이 더 크다.,GIF 광섬유를 사용하면 모드분산을 줄일 수 있다.,Telecommunications and Wireless Technology,0.3333
+FM 송신기에서 신호파의 높은 주파수 성분을 강조하는 회로는?,4,리미터 회로,스켈치 회로,디엠퍼시스 회로,프리엠퍼시스 회로,Telecommunications and Wireless Technology,0.3333
+교환기의 구성요소 중 통화로계와 관계가 없는 것은?,4,주사장치,화상응답서비스,통화로 제어장치,포선논리 제어회로,Telecommunications and Wireless Technology,0.3333
+공동주택의 홈네트워크에 설치해야 하는 “원격제어기기”가 아닌 것은?,4,가스밸브제어기,조명제어기,난방제어기,전원제어기,Telecommunications and Wireless Technology,0.3333
+"(011111100000)2의 값을 갖는 레지스터의 내용을 오른쪽으로 네 번 시프트 시켰다면, 실제로 이 레지스터가 수행한 연산은 무엇인가?",4,added -400,multiplied by 4,divided by 4,divided by 16,Telecommunications and Wireless Technology,0.3333
+주파수 3[㎑]로 3[㎒]의 반송파를 주파수 변조하였을 때 최대 주파수 편이가 ± 75[㎑]라면 소요 대역폭은?,2,225[㎑],156[㎑],150[㎑],112.5[㎑],Telecommunications and Wireless Technology,0.3333
+PCM(펄스부호화변조) 통신방식 과정에서 나타나는 신호가 아닌 것은?,3,PAM 신호,양자화된 신호,멀티레이트 신호,시분할 다중신호,Telecommunications and Wireless Technology,0.3333
+"수신 FM 신호 r(t)=5cos[2Å⒡106t + 200sin(2Å⒡500t)] 인 경우 수신 파형의 대역폭은? (단, Carson의 법칙을 적용)",3,100[kHz],152[kHz],201[kHz],225[kHz],Telecommunications and Wireless Technology,0.3333
+지표파 전파의 특징 중 틀린 것은?,3,지면도중의 凸凹에 별로 영향을 받지 않는다.,대지의 도전율이 클수록 멀리 도달한다.,주파수가 높을 수록 멀리까지 전파한다.,수직편파가 잘 전파한다.,Telecommunications and Wireless Technology,0.3333
+발광소자에서 파장이 다른 광신호를 광결합기로 결합하여 전송하고 광분파기로 분리하는 다중화방식은?,4,FDM,TDM,SDM,WDM,Telecommunications and Wireless Technology,0.3333
+펄스부호변조방식(PCM) 통신의 특징 설명 중 잘못된 것은?,3,동일 송신출력에 대하여 중계소간의 거리를 크게 할 수 있다.,동일 회선거리에 대하여 송신전력은 적어도 된다.,전송로에 사용되는 모든 장치는 Analog 기술로 실현된다.,PCM 전송기술과 교환기술과의 대응이 완전해진다.,Telecommunications and Wireless Technology,0.3333
+각 프로세스에게 순차적으로 일정한 Time Slice 동안 처리기를 차지하도록 하는 프로세스 스케줄링 정책은?,3,Deadlock,Swapping,Round Robin,Spooling,Telecommunications and Wireless Technology,0.3333
+광통신시스템에서 광합파기 및 광분배기를 사용하는 광다중 전송방식은?,2,TDM,WDM,ADM,FDM,Telecommunications and Wireless Technology,0.3333
+"회선을 보유하거나 임차하여 정보의 축적, 가공, 변환하여 광범위한 서비스를 제공하는 것은?",2,LAN,VAN,CATV,ISDN,Telecommunications and Wireless Technology,0.3333
+"적도위에 고도 약 35,860[㎞]로 띄어진 위성으로 지구의 자전주기와 위성의 공전주기를 같게 하여 적도상에 등간격으로 3개 정도를 배치하여 전세계를 커버할 수 있어 경제적인 위성통신을 할 수 있는 방식은 ?",3,random 위성방식,위상 위성방식,정지궤도 위성방식,다중 위성방식,Telecommunications and Wireless Technology,0.3333
+이득이 10[㏈]이고 잡음지수가 15[㏈]인 증폭기의 후단에 잡음지수가 18[㏈]인 2단 증폭기가 있다. 종합 잡음지수는 얼마인가?,3,10 [㏈],15 [㏈],16.7 [㏈],18 [㏈],Telecommunications and Wireless Technology,0.3333
+"다른 사람의 위탁을 받아 공사에 관한 조사, 설계, 감리, 사업관리 및 유지관리 등의 역무를 수행하는 것을 무엇이 라 하는가?",3,도급,수급,용역,감리,Telecommunications and Wireless Technology,0.3333
+Mobile IP 서비스에서 사용되는 바인딩(Binding)에 대한 설명으로 맞는 것은?,2,HA(Home Agent)가 MN(Mobile Node)에게 데이터를 보내기 위해 터널을 연결하는 것,COA(Care Of Address)와 MN(Mobile Node)의 홈 주소를 연결시키는 것,HA(Home Agent)와 FA(Foreign Agent)가 자신이 어느 링크에 접속되어 있는지를 광고로 알리는 것,FA(Foreign Agent)가 MN(Mobile Node)과 다른 MN(Mobile Node)을 연결시키는 것,Telecommunications and Wireless Technology,0.3333
+병렬 프로세서의 한 종류로 여러 개의 프로세서들이 서로 다른 명령어와 데이터를 처리하는 진정한 의미의 병렬 프로세서로 대부분의 다중프로세서 시스템과 다중 컴퓨터 시스템이 이 분류에 속하는 구조는?,4,SISD(Single Instruction stream Single Data stream),SIMD(Single Instruction stream Multiple Data stream),MISD(Multiple Instruction stream Single Data stream),MIMD(Multiple Instruction stream Multiple Data stream),Telecommunications and Wireless Technology,0.3333
+정보통신망에서 사용되지 않는 교환방식은?,3,회선교환방식,메시지교환방식,위성교환방식,패킷교환방식,Telecommunications and Wireless Technology,0.3333
+OA(사무자동화) 기기로서 거리가 먼 것은?,3,워드프로세서,복사기,모뎀,컴퓨터,Telecommunications and Wireless Technology,0.3333
+"통신속도가 2,000[bps]인 회선에서 1시간 전송했을 때, 에러 비트수가 36[bit]였다면, 이 통신회선의 비트 에러율은 얼마인가?",3,2.5 × 10-6,2.5 × 10-5,5 × 10-6,5 × 10-5,Telecommunications and Wireless Technology,0.3333
+A3E 전파형식을 사용하는 방송국 송신설비의 공중선전력은 무엇으로 표시하는가?,2,평균전력,반송파전력,첨두포락선전력,규격전력,Telecommunications and Wireless Technology,0.3333
+현재 국내ㆍ외에서 RFID(Radio Frequency IDentification)시스템에 사용하는 주파수대역 및 용도로 적당하지 않는 것은?(오류 신고가 접수된 문제입니다. 반드시 정답과 해설을 확인하시기 바랍니다.),3,"135[kHz]이하의 저주파(출입통제, 가축관리 등)","13.56[MHz]의 고주파(도서관리, 교통카드 등)","700[MHz]의 극초단파(유통, 물류 등)","2.45[GHz]의 마이크로파 대역(여권, ID카드, 위치추적 등)",Telecommunications and Wireless Technology,0.3333
+"어느 멀티미디어 기기의 전송대역폭이 6[MHz]이고 전송속도가 19.93[Mbps]일 때, 이 기기의 대역폭 효율값은 약 얼마인가?",2,2.23,3.23,5.25,6.42,Telecommunications and Wireless Technology,0.3333
+"프로세서, 주기억장치, I/O 모듈이 한 개의 버스를 공유할 때 사용하는 주소지정 방식 중 격리형 또는 분리형 I/O(Isolated I/O) 방식에 관한 사항은 어느 것인가?",4,많은 종류의 I/O 명령어들을 사용할 수 있다.,귀주한 주기억자이 주소영역이 I/O 장치들을 위하여 사용된다.,프로그래밍을 더 효율적으로 할 수 있다.,특정 I/O 명령들에 의해서만 I/O 포트들을 엑세스할 수 있다.,Telecommunications and Wireless Technology,0.3333
+셀룰라 통신에서 널리 사용되는 로밍(ROAMING)에 대한 설명중 가장 알맞는 것은?,3,이동중 RF접속이 한 셀기지국으로 부터 다른 셀기지국으로 변경되는 것을 말한다.,외국인이 한국을 방문하여 셀룰라 전화를 임대하여 사용하는 서비스다.,사용자가 가입된 사업권 영역을 벗어나는 지역에서 이동전화를 사용하고자 할때 타 사업권 영역에서 서비스를 받도록 하는 방식이다.,인공위성을 이용한 세계 전체의 이동전화 서비스를 말한다.,Telecommunications and Wireless Technology,0.3333
+연축전지의 취급상 주의할 점에서 틀리는 사항은 ?,4,충전할때 축전지의 전극에서 가스가 발생하는 상태에 주의해야 한다.,규정된 방전율 이상 방전하지 말아야 한다.,침전물이 극단하부 또는 측면에 쌓여 단락이 되지 않게 주의하여야 한다.,전해액 면은 언젠나 극판 밑에 차있게 한다.,Telecommunications and Wireless Technology,0.3333
+무선 송신기에서 발생하는 스퓨리어스 복사(Spurious emission)의 방지 방법이 아닌 것은?,4,전력 증폭단을 push-pull로 접속한다.,증폭단과 공중선 결합 회로에 π형 회로를 사용한다.,급전선에 트랩(trap)을 설치한다.,전력 증폭단의 바이어스를 깊게 취한다.,Telecommunications and Wireless Technology,0.3333
+DSU(Digital Service Unit)의 기능이 아닌 것은?,4,신호파형의 변환,전송속도의 변환,제어신호의 삽입,데이터의 집중화,Telecommunications and Wireless Technology,0.3333
+OSI 참조모델에서 통신기기와 네트워크 간의 통신 경로를 설정하거나 경로의 유지 ㆍ 해제를 규정하는 계층에 해당하지 않는 계층은?,3,물리계층,데이터링크계층,표현계층,네트워크계층,Telecommunications and Wireless Technology,0.3333
+중앙 연산 처리 장치의 하드웨어(hardwere)적 요소가 아닌 것은?,3,IR(Instruction Register),MAR(Memory Address Register),LAN(Local Area Network),PC(Program Counter),Telecommunications and Wireless Technology,0.3333
+"동조형 증폭기에서 공진주파수 fo, 주파수 대역폭 B, 코일의 Q 와의 관계를 설명한 것중 맞는 것은 ?",1,B 와 fo 는 비례한다.,Q 와 fo 는 반비례한다.,Q 와 fo 의 자승에 비례한다.,Q 는 B 의 자승에 비례한다.,Telecommunications and Wireless Technology,0.3333
+"단일 리액턴스관(Reactance tube)방식으로서 최대 주파수편이 30[㎑]를 얻으려면 얼마로 체배하여야 하는가 ? (단,음성 주파수 범위는 30 ∼ 3000[㎐]이고, 이 리액턴스관의 직선범위는 0.33[㎭]이다.)",3,10체배,20체배,30체배,40체배,Telecommunications and Wireless Technology,0.3333
+멀티포인트(multi-point)모뎀에서 폴링(polling)할 때 발생되는 시간지연요소가 아닌 것은?,4,모뎀의 시간 지연,단말기의 시간 지연,거리에 따른 시간 지연,반송파 발생에 따른 시간 지연,Telecommunications and Wireless Technology,0.3333
+위성통신에서 위성의 상태 보고 및 위성체의 위치 및 자세제어 등을 하는 서브 시스템은?,4,Propulsion sub-system,Power sub-system,Communication sub-system,Tracking telemetry and command sub-system,Telecommunications and Wireless Technology,0.3333
+정보통신공사업의 등록기준에 해당되지 않는 것은?,4,기술능력,자본금,사무실(작업실),공사용 기기,Telecommunications and Wireless Technology,0.3333
+"이득이 8[dB]이고, 잡음지수가 8[dB]인 증폭기 후단에 잡음지수가 9[dB]인 증폭기가 연결되어 있다면 종합잡음지수는 몇 [dB]인가?",2,8.5,9.0,9.5,10.0,Telecommunications and Wireless Technology,0.3333
+전자식 전화기의 푸시버튼 신호에서 고주파군에 사용되는 주파수가 아닌 것은?,4,1477[Hz],1336[Hz],1209[Hz],941[Hz],Telecommunications and Wireless Technology,0.3333
+증폭이득이 60[dB]인 증폭기에서 20[%]의 찌그러짐이 발생했다. 이것을 2[%] 이내로 개선하기 위해서 걸어야 할 부궤환은?,2,10[dB],20[dB],30[dB],40[dB],Telecommunications and Wireless Technology,0.3333
+마이크로파 통신망 치국계획을 수립할 때 고려사항으로 가장 거리가 먼 것은?,3,총 경로손실,통신망의 성능,전력 소모율,총 장비이득,Telecommunications and Wireless Technology,0.3333
+수신기에서 증폭도와 내부잡음에 의하여 영향을 가장 많이 받는 것은 ?,1,감도특성 측정,선택도의 측정,충실도의 측정,안정도의 측정,Telecommunications and Wireless Technology,0.3333
+송신안테나(반파장 안테나)로부터 수신점의 전계강도는 ?,3,거리의 3승에 반비례한다.,거리의 제곱에 반비례한다.,거리에 반비례한다.,거리의 평방근에 반비례한다.,Telecommunications and Wireless Technology,0.3333
+전송 지연보다 데이터 무결성(Data Integrity)이 중요한 서비스는?,2,전화 서비스,파일 전송(FTP) 서비스,TV 서비스,오디오 스트리밍 서비스,Telecommunications and Wireless Technology,0.3333
+기간통신사업자가 전기통신설비의 설치와 보전시 필요한 토지등의 일시 사용기간은?,4,30일 이내,3월 이내,60일 이내,6월 이내,Telecommunications and Wireless Technology,0.3333

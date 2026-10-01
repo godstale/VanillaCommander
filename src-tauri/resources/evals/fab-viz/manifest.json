@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "id": "fab-viz",
+  "version": "1.0.0",
+  "title": {
+    "ko": "시각화",
+    "en": "Visualization"
+  },
+  "description": {
+    "ko": "구조도는 mermaid, 수치 차트는 recharts 블록으로 표현하는 능력 평가",
+    "en": "Evaluates mermaid diagrams and recharts data charts"
+  },
+  "category": "A4",
+  "lang": [
+    "ko",
+    "en"
+  ],
+  "license": {
+    "id": "same-as-app",
+    "attribution": "Fortress 자체 제작"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "scorers": [
+    {
+      "type": "viz_block",
+      "gate": true,
+      "options": {
+        "kind": "any"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 10,
+    "standard": 30,
+    "full": 30
+  },
+  "defaults": {},
+  "systemPrompt": "Diagrams go in ```mermaid fences and numeric data charts go in ```recharts fences as valid JSON with type, xKey, data, and series.",
+  "stratifyBy": "kind",
+  "requires": {}
+}

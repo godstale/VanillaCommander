@@ -1,0 +1,15 @@
+node_modules/
+dist/
+dist-ssr/
+src-tauri/target/
+src-tauri/gen/
+*.local
+.env
+.env.*
+db.sqlite*
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+Docs/monitoring_*_session.json
+

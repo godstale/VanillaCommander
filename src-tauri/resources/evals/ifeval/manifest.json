@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "id": "ifeval",
+  "version": "1.0.0",
+  "title": {
+    "ko": "IFEval 지시사항 준수",
+    "en": "IFEval instruction following"
+  },
+  "description": {
+    "ko": "검증 가능한 지시사항 541개(Q3). strict/loose 두 지표로 평가합니다.",
+    "en": "541 verifiable instructions (Q3), scored with strict and loose metrics."
+  },
+  "category": "Q3",
+  "lang": [
+    "en"
+  ],
+  "license": {
+    "id": "Apache-2.0",
+    "source": "https://huggingface.co/datasets/google/IFEval"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "Follow every instruction in the user message exactly.",
+  "scorers": [
+    {
+      "type": "ifeval",
+      "key": "strict",
+      "options": {
+        "mode": "strict"
+      }
+    },
+    {
+      "type": "ifeval",
+      "key": "loose",
+      "options": {
+        "mode": "loose"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "id": "prompt-strict",
+      "description": {
+        "ko": "프롬프트 통과율(strict)",
+        "en": "Prompt-level pass rate (strict)"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    },
+    {
+      "id": "prompt-loose",
+      "description": {
+        "ko": "프롬프트 통과율(loose)",
+        "en": "Prompt-level pass rate (loose)"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 20,
+    "standard": 100,
+    "full": "all"
+  }
+}

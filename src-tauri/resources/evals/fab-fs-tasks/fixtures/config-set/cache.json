@@ -1,0 +1,8 @@
+{
+  "backend": "memory",
+  "ttlSec": 300,
+  "namespaces": ["sessions", "artifacts"],
+  "limits": {
+    "maxEntries": 10000
+  }
+}

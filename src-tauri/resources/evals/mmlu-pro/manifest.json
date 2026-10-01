@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "id": "mmlu-pro",
+  "version": "1.0.0",
+  "title": {
+    "ko": "MMLU-Pro (14개 분야 층화 1400)",
+    "en": "MMLU-Pro (stratified 1400, 14 subjects)"
+  },
+  "description": {
+    "ko": "MMLU-Pro 테스트의 분야별 층화 표본 1400개(Q1, 10지선다 기준 자동 보정). chain-of-thought는 포함하지 않습니다.",
+    "en": "Stratified sample of the MMLU-Pro test set, 100 per subject x 14 (Q1, 10-way baseline auto). Chain-of-thought content is dropped."
+  },
+  "category": "Q1",
+  "lang": [
+    "en"
+  ],
+  "license": {
+    "id": "MIT",
+    "source": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro",
+    "attribution": "TIGER-Lab (TIGER-Lab/MMLU-Pro)"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "Solve the problem, then write the final line as `ANSWER: X` where X is the letter of the correct choice.",
+  "scorers": [
+    {
+      "type": "choice"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": "auto_choices"
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 28,
+    "standard": 140,
+    "full": "all"
+  },
+  "stratifyBy": "category"
+}

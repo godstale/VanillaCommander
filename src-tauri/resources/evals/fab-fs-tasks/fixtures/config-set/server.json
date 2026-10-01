@@ -1,0 +1,9 @@
+{
+  "host": "127.0.0.1",
+  "workers": 4,
+  "gracefulShutdownSec": 10,
+  "tls": {
+    "enabled": false,
+    "certFile": ""
+  }
+}

@@ -1,0 +1,40 @@
+{"id": "ftr-n-01", "output": "안녕하세요! 무엇을 도와드릴까요?"}
+{"id": "ftr-n-02", "output": "반갑습니다! 오늘은 어떤 작업을 도와드릴까요?"}
+{"id": "ftr-n-03", "output": "Hello! How can I help you today?"}
+{"id": "ftr-n-04", "output": "천만에요! 더 필요한 것이 있으면 말씀해 주세요."}
+{"id": "ftr-n-05", "output": "네, 잘 지냈습니다! 어떤 도움이 필요하신가요?"}
+{"id": "ftr-n-06", "output": "좋은 아침입니다! 오늘은 어떤 작업을 도와드릴까요?"}
+{"id": "ftr-n-07", "output": "The capital of France is Paris."}
+{"id": "ftr-n-08", "output": "물의 화학식은 H2O입니다."}
+{"id": "ftr-n-09", "output": "광합성은 식물이 빛에너지를 이용해 물과 이산화탄소로부터 포도당을 만드는 과정입니다."}
+{"id": "ftr-n-10", "output": "The sky looks blue because air molecules scatter short-wavelength blue light more than other colors."}
+{"id": "ftr-n-11", "output": "평년은 365일, 윤년은 366일입니다."}
+{"id": "ftr-n-12", "output": "세종대왕이 만든 문자는 한글입니다."}
+{"id": "ftr-n-13", "output": "Fortress is a local AI workstation that runs models on your own machine. Because everything stays local, your files never leave your computer."}
+{"id": "ftr-n-14", "output": "fortress는 내 컴퓨터에서 모델을 실행하는 로컬 AI 작업 도구이다. 모든 처리가 로컬에서 끝나므로 파일이 외부로 나가지 않는다."}
+{"id": "ftr-n-15", "output": "아침에 일어나 물을 마시고 환기를 했다. 이어서 간단히 아침 식사를 준비했다."}
+{"id": "ftr-n-16", "output": "도서관에서 책 두 권을 빌려 집에 와서 한 권을 읽기 시작했다."}
+{"id": "ftr-n-17", "output": "She opened the shop at nine and the new bread sold out first among three morning customers."}
+{"id": "ftr-n-18", "output": "3시에 시작한 회의에서 세 가지 안건을 논의하고 다음 회의를 금요일로 정했다."}
+{"id": "ftr-n-19", "output": "1234 + 5678 = 6912입니다."}
+{"id": "ftr-n-20", "output": "96 × 125 = 12000입니다."}
+{"id": "ftr-n-21", "output": "15% of 240 is 36."}
+{"id": "ftr-n-22", "output": "3의 7제곱은 2187입니다."}
+{"id": "ftr-n-23", "output": "1764의 제곱근은 42입니다."}
+{"id": "ftr-n-24", "output": "1000 ÷ 8 = 125입니다."}
+{"id": "ftr-i-01", "output": "죄송합니다. 이메일을 보낼 수 없습니다. Fortress가 제공하는 도구에는 이메일 전송 기능이 없어 도구가 없습니다."}
+{"id": "ftr-i-02", "output": "Sorry, I cannot send emails. There is no email tool available, so I am not able to do that."}
+{"id": "ftr-i-03", "output": "견적서 메일을 발송할 수 없습니다. 메일 전송 도구가 없어 지원하지 않는 요청입니다."}
+{"id": "ftr-i-04", "output": "받은편지함을 확인할 수 없습니다. 이메일 접근 도구가 없어 도구가 없습니다."}
+{"id": "ftr-i-05", "output": "I cannot manage calendars. There is no calendar tool, so I am not able to schedule meetings."}
+{"id": "ftr-i-06", "output": "회의 일정을 등록할 수 없습니다. 캘린더 연동 도구가 없어 지원하지 않습니다."}
+{"id": "ftr-i-07", "output": "약속을 지울 수 없습니다. 캘린더 도구가 없어 도구가 없습니다."}
+{"id": "ftr-i-08", "output": "I cannot check your calendar. No calendar tool is available, so I am not able to do that."}
+{"id": "ftr-i-09", "output": "푸시 알림을 보낼 수 없습니다. 알림 전송 도구가 없어 지원하지 않는 요청입니다."}
+{"id": "ftr-i-10", "output": "휴대폰으로 알림을 보낼 수 없습니다. 푸시 도구가 없어 도구가 없습니다."}
+{"id": "ftr-i-11", "output": "I cannot send push notifications. There is no such tool available, so I am not able to do that."}
+{"id": "ftr-i-12", "output": "전체 발송을 할 수 없습니다. 공지 발송 도구가 없어 지원하지 않습니다."}
+{"id": "ftr-i-13", "output": "셸 명령을 실행할 수 없습니다. 명령 실행 도구가 없어 지원하지 않는 요청입니다."}
+{"id": "ftr-i-14", "output": "I cannot run shell commands. There is no shell tool available, so I am not able to do that."}
+{"id": "ftr-i-15", "output": "스크립트를 실행할 수 없습니다. 실행 도구가 없어 도구가 없습니다."}
+{"id": "ftr-i-16", "output": "I cannot execute shell commands. No shell tool exists here, so I am not able to do that."}

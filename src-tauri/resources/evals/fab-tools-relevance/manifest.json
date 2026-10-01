@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "id": "fab-tools-relevance",
+  "version": "1.0.0",
+  "title": {
+    "ko": "도구 사용 판단",
+    "en": "Tool Relevance"
+  },
+  "description": {
+    "ko": "도구가 필요 없는 요청과 도구로 해결할 수 없는 요청을 구분하는 능력 평가",
+    "en": "Evaluates knowing when no tool is needed and when no tool can help"
+  },
+  "category": "A2",
+  "lang": [
+    "ko",
+    "en"
+  ],
+  "license": {
+    "id": "same-as-app",
+    "attribution": "Fortress 자체 제작"
+  },
+  "kind": "tool_call",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "scorers": [
+    {
+      "type": "no_tool_call"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0.5
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 10,
+    "standard": 40,
+    "full": 40
+  },
+  "defaults": {},
+  "tools": "fortress-default",
+  "stratifyBy": "subtype",
+  "requires": {
+    "toolCalling": true
+  }
+}

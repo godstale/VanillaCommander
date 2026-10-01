@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "id": "gsm8k-perturb",
+  "version": "1.0.0",
+  "title": {
+    "ko": "GSM8K 변형(고정 시드 숫자/이름 치환)",
+    "en": "GSM8K perturbed variants (fixed seed)"
+  },
+  "description": {
+    "ko": "GSM8K 테스트의 숫자/이름 변형 100개(Q2). 정답은 원본 풀이의 연산을 재계산하여 구했으며 파싱 불가 문항은 제외했습니다.",
+    "en": "100 number/name variants of GSM8K test items (Q2). Answers were recomputed by re-evaluating the original arithmetic; unparseable items excluded."
+  },
+  "category": "Q2",
+  "lang": [
+    "en"
+  ],
+  "license": {
+    "id": "MIT",
+    "source": "https://huggingface.co/datasets/openai/gsm8k",
+    "attribution": "Derived from OpenAI openai/gsm8k (MIT); perturbed by Fortress converter"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "jsonl",
+    "file": "samples.jsonl"
+  },
+  "systemPrompt": "Solve the problem. Write the final line as `ANSWER: <number>` and nothing else on that line.",
+  "scorers": [
+    {
+      "type": "numeric"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": 0
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 20,
+    "standard": 100,
+    "full": 100
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "id": "kmmlu",
+  "version": "1.0.0",
+  "title": {
+    "ko": "KMMLU 한국어 학문 지식",
+    "en": "KMMLU Korean academic knowledge"
+  },
+  "description": {
+    "ko": "45개 분야 한국어 4지선다(Q1). 원본 CSV를 수정 없이 그대로 묶었으며(CC-BY-ND) 런타임에 kmmlu-csv 어댑터로 읽습니다.",
+    "en": "45-subject Korean 4-way multiple choice (Q1). Origin CSVs are bundled unmodified (CC-BY-ND) and read at runtime via the kmmlu-csv adapter."
+  },
+  "category": "Q1",
+  "lang": [
+    "ko"
+  ],
+  "license": {
+    "id": "CC-BY-ND-4.0",
+    "source": "https://huggingface.co/datasets/HAERAE-HUB/KMMLU",
+    "attribution": "HAERAE-HUB (HAERAE-HUB/KMMLU); unmodified originals"
+  },
+  "kind": "single_turn",
+  "source": {
+    "type": "kmmlu-csv",
+    "files": [
+      "data/Accounting-test.csv",
+      "data/Agricultural-Sciences-test.csv",
+      "data/Aviation-Engineering-and-Maintenance-test.csv",
+      "data/Biology-test.csv",
+      "data/Chemical-Engineering-test.csv",
+      "data/Chemistry-test.csv",
+      "data/Civil-Engineering-test.csv",
+      "data/Computer-Science-test.csv",
+      "data/Construction-test.csv",
+      "data/Criminal-Law-test.csv",
+      "data/Ecology-test.csv",
+      "data/Economics-test.csv",
+      "data/Education-test.csv",
+      "data/Electrical-Engineering-test.csv",
+      "data/Electronics-Engineering-test.csv",
+      "data/Energy-Management-test.csv",
+      "data/Environmental-Science-test.csv",
+      "data/Fashion-test.csv",
+      "data/Food-Processing-test.csv",
+      "data/Gas-Technology-and-Engineering-test.csv",
+      "data/Geomatics-test.csv",
+      "data/Health-test.csv",
+      "data/Industrial-Engineer-test.csv",
+      "data/Information-Technology-test.csv",
+      "data/Interior-Architecture-and-Design-test.csv",
+      "data/Law-test.csv",
+      "data/Machine-Design-and-Manufacturing-test.csv",
+      "data/Management-test.csv",
+      "data/Maritime-Engineering-test.csv",
+      "data/Marketing-test.csv",
+      "data/Materials-Engineering-test.csv",
+      "data/Mechanical-Engineering-test.csv",
+      "data/Nondestructive-Testing-test.csv",
+      "data/Patent-test.csv",
+      "data/Political-Science-and-Sociology-test.csv",
+      "data/Psychology-test.csv",
+      "data/Public-Safety-test.csv",
+      "data/Railway-and-Automotive-Engineering-test.csv",
+      "data/Real-Estate-test.csv",
+      "data/Refrigerating-Machinery-test.csv",
+      "data/Social-Welfare-test.csv",
+      "data/Taxation-test.csv",
+      "data/Telecommunications-and-Wireless-Technology-test.csv",
+      "data/korean-history-test.csv",
+      "data/math-test.csv"
+    ]
+  },
+  "systemPrompt": "문제를 풀고 마지막 줄에 `정답: X`라고 쓰세요. X는 정답 선택지의 알파벳입니다.",
+  "scorers": [
+    {
+      "type": "choice"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "accuracy",
+      "description": {
+        "ko": "정확도",
+        "en": "Accuracy"
+      },
+      "source": "score",
+      "aggregation": "mean",
+      "lowerIsBetter": false,
+      "scoreType": "binary",
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "normalization": {
+        "kind": "baseline",
+        "baseline": "auto_choices"
+      }
+    }
+  ],
+  "tiers": {
+    "smoke": 45,
+    "standard": 450,
+    "full": 2250
+  },
+  "stratifyBy": "subject"
+}
