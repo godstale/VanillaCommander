@@ -70,13 +70,13 @@ export function ParetoScatter({ candidates, aggregates, trials, pareto }: Pareto
             return [value, pt.label ? `${pt.label} (${String(name)})` : String(name)];
           }}
         />
-        <Scatter name="candidates" data={points} dataKey="y" fill="#8884d8" />
+        <Scatter name="candidates" data={points} dataKey="y" fill="hsl(var(--chart-1))" />
         {frontier.length > 1 && (
           <Line
             data={frontier}
             dataKey="y"
             name={t('eval.report.pareto.frontier')}
-            stroke="#82ca9d"
+            stroke="hsl(var(--chart-2))"
             dot={false}
             strokeDasharray="5 5"
           />

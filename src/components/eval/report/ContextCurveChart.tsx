@@ -89,9 +89,9 @@ export function ContextCurveChart({ trials, scores }: ContextCurveChartProps) {
         {hasDecode && <YAxis yAxisId="dec" orientation="right" tick={{ fontSize: 11 }} />}
         <Tooltip />
         <Legend wrapperStyle={{ fontSize: 11 }} />
-        <Line yAxisId="acc" type="monotone" dataKey="acc" name={t('eval.report.context.accuracy')} stroke="#8884d8" dot={false} connectNulls />
+        <Line yAxisId="acc" type="monotone" dataKey="acc" name={t('eval.report.context.accuracy')} stroke="hsl(var(--chart-1))" dot={false} connectNulls />
         {hasDecode && (
-          <Line yAxisId="dec" type="monotone" dataKey="decode" name={t('eval.report.context.decode')} stroke="#82ca9d" dot={false} connectNulls />
+          <Line yAxisId="dec" type="monotone" dataKey="decode" name={t('eval.report.context.decode')} stroke="hsl(var(--chart-2))" dot={false} connectNulls />
         )}
       </LineChart>
     </div>

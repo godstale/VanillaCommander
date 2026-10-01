@@ -574,7 +574,7 @@ export function ChatInput({
 
       {/* Lock banner when another session is busy */}
       {isLockedByOtherSession && !isAgentDeleted && (
-        <div className="flex items-center gap-2 px-3.5 py-1.5 text-xs text-amber-500 bg-amber-500/10 border-b border-amber-500/20 font-medium select-none">
+        <div className="flex items-center gap-2 px-3.5 py-1.5 text-xs text-warning bg-warning/10 border-b border-warning/20 font-medium select-none">
           <Lock className="h-3.5 w-3.5 shrink-0" />
           <span className="truncate">
             {busySessionTitle

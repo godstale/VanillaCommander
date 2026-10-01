@@ -39,7 +39,7 @@ export function ChatQueueFloatingDock({
         className={cn(
           'rounded-xl border backdrop-blur-md shadow-md p-2.5 space-y-2 transition-colors',
           isPaused
-            ? 'border-amber-500/40 bg-amber-500/5 dark:bg-amber-950/20'
+            ? 'border-warning/40 bg-warning/5'
             : 'border-primary/30 bg-card/95',
         )}
       >
@@ -50,7 +50,7 @@ export function ChatQueueFloatingDock({
               className={cn(
                 'h-5 w-5 rounded-md flex items-center justify-center shrink-0',
                 isPaused
-                  ? 'bg-amber-500/15 text-amber-500'
+                  ? 'bg-warning/15 text-warning'
                   : 'bg-primary/10 text-primary',
               )}
             >
@@ -68,7 +68,7 @@ export function ChatQueueFloatingDock({
                 className={cn(
                   'px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold',
                   isPaused
-                    ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400'
+                    ? 'bg-warning/20 text-warning'
                     : 'bg-primary/15 text-primary',
                 )}
               >
