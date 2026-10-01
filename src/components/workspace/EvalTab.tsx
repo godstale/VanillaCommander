@@ -85,7 +85,7 @@ export function EvalTab({ tab }: EvalTabProps) {
 
   const projectPacks = packs.filter((p) => p.scope === 'project');
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    <div className="flex h-full min-h-0 flex-col bg-editor">
       <div className="min-h-0 flex-1 overflow-auto">{content}</div>
       <SaveCaseDialog projectPacks={projectPacks} />
     </div>

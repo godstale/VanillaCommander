@@ -93,7 +93,7 @@ const CHART_COLORS = {
   prefill: 'hsl(var(--chart-4))',
   decoding: 'hsl(var(--chart-5))',
   thinking: 'hsl(var(--chart-1))',
-  tool: '#f59e0b',
+  tool: 'hsl(var(--warning))',
   generating: 'hsl(var(--chart-3))',
   approval: 'hsl(var(--destructive))',
 } as const;
@@ -103,7 +103,7 @@ const TOKEN_STATUS_ORDER: Array<{ key: TokenStatusKey; label: string; color: str
   { key: 'prefill', label: 'Prefill', color: 'hsl(var(--chart-4))' },
   { key: 'decoding', label: 'Decoding', color: 'hsl(var(--chart-5))' },
   { key: 'generating', label: 'Generating', color: 'hsl(var(--chart-3))' },
-  { key: 'executing_tool', label: 'Tool', color: '#f59e0b' },
+  { key: 'executing_tool', label: 'Tool', color: 'hsl(var(--warning))' },
   { key: 'waiting_approval', label: 'Wait', color: 'hsl(var(--destructive))' },
 ];
 
@@ -941,7 +941,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
   const statusBadge = getStatusBadge(currentSnapshot?.agentStatus || 'idle');
 
   return (
-    <div className="flex-1 h-full overflow-y-auto p-5 bg-background text-foreground space-y-5 select-text">
+    <div className="flex-1 h-full overflow-y-auto p-5 bg-editor text-foreground space-y-5 select-text">
       {/* Top Header & Real-time Controls */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-border gap-4">
         <div>
@@ -1011,7 +1011,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
               </>
             ) : isCollecting ? (
               <>
-                <Pause className="h-3.5 w-3.5 fill-current text-amber-500 dark:text-amber-400" />
+                <Pause className="h-3.5 w-3.5 fill-current text-warning" />
                 <span>{t('monitor.pause')}</span>
               </>
             ) : (

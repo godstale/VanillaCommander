@@ -94,9 +94,9 @@ export function SkillViewerTab({ tab }: SkillViewerTabProps) {
   }
 
   return (
-    <div className="flex flex-col h-full w-full bg-background overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-editor overflow-hidden">
       {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-card/40 text-xs shrink-0">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-tabbar text-xs shrink-0">
         <div className="flex items-center gap-2 font-medium min-w-0">
           <Puzzle className="h-4 w-4 text-tertiary shrink-0" />
           <span className="font-semibold text-foreground truncate">{skillName}</span>

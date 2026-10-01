@@ -7,7 +7,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { FortressMark } from '@/components/brand/FortressMark';
+import { AppMark } from '@/components/brand/AppMark';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { invoke } from '@tauri-apps/api/core';
@@ -28,14 +28,14 @@ export function WelcomeGuide() {
   };
 
   return (
-    <div className="flex-1 h-full overflow-y-auto flex flex-col items-center justify-center p-8 select-none bg-background text-foreground">
+    <div className="flex-1 h-full overflow-y-auto flex flex-col items-center justify-center p-8 select-none bg-editor text-foreground">
       <div className="max-w-xl w-full space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
-        {/* Fortress Title */}
+        {/* App Title */}
         <div className="text-center space-y-3">
           <div className="inline-flex h-16 w-16 rounded-2xl bg-card border border-border items-center justify-center text-brand shadow-sm">
-            <FortressMark className="h-10 w-10" />
+            <AppMark className="h-10 w-10" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Fortress</h1>
+          <h1 className="text-2xl font-bold tracking-tight">VanillaCommander</h1>
           <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
             {t('welcome.subtitle')}
             <br />

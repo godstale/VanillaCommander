@@ -37,7 +37,7 @@ export function WorkspaceLayout({
         collapsible
         collapsedSize={0}
         ref={sidePanelRef}
-        className="min-w-0 h-full overflow-hidden"
+        className="min-w-0 h-full overflow-hidden bg-panel"
       >
         {sidePanel}
       </Panel>

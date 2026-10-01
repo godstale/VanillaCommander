@@ -360,7 +360,7 @@ export function MonitoringListPanel() {
     deletedEntries.length === 0;
 
   return (
-    <div className="flex flex-col h-full bg-sidebar select-none">
+    <div className="flex flex-col h-full bg-panel select-none">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-border">
         <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">

@@ -617,9 +617,9 @@ export function ChatTab({ tab }: ChatTabProps) {
   }, [sessionId]);
 
   return (
-    <div className="flex flex-col h-full w-full bg-background overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-editor overflow-hidden">
       {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-card/40 text-xs shrink-0 select-none">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-tabbar text-xs shrink-0 select-none">
         <div className="flex items-center gap-2 font-medium min-w-0">
           <Bot className="h-4 w-4 text-primary shrink-0" />
           <span className="truncate">{tab.title}</span>
