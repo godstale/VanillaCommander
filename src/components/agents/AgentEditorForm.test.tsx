@@ -44,6 +44,8 @@ describe('AgentEditorForm', () => {
 
     expect(screen.getByText('기본 정보')).toBeInTheDocument();
     expect(screen.getByText('LLM Provider')).toBeInTheDocument();
+    // 고급 항목은 접혀 있으므로 먼저 펼친다 (P11-21).
+    fireEvent.click(screen.getByRole('button', { name: '고급' }));
     expect(screen.getByText('LLM 생성 옵션')).toBeInTheDocument();
     expect(screen.getByText('도구 승인 정책')).toBeInTheDocument();
     expect(screen.getByText('자동 모니터링')).toBeInTheDocument();
@@ -201,5 +203,21 @@ describe('AgentEditorForm', () => {
       expect(saved.model).toBe('llama3.2:3b');
       expect(saved.isDefault).toBe(false);
     });
+  });
+
+  it('collapses advanced settings by default (P11-21)', async () => {
+    render(
+      <TestWrapper>
+        <AgentEditorForm mode="create" onSave={vi.fn()} />
+      </TestWrapper>,
+    );
+
+    await screen.findByText(/Provider·모델 변경 시/);
+    // 기본 정보·프로바이더는 보이고, 시스템 프롬프트는 접혀 있다.
+    expect(screen.getByPlaceholderText(/예: 문서 분석 전문가/)).toBeInTheDocument();
+    expect(screen.queryByText('시스템 프롬프트 (페르소나 / 지침)')).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: '고급' }));
+    expect(await screen.findByText('시스템 프롬프트 (페르소나 / 지침)')).toBeInTheDocument();
   });
 });
