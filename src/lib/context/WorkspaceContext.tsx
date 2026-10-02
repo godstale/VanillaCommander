@@ -15,6 +15,13 @@ import { chatQueueManager } from '@/lib/agent/chatQueueManager';
 
 const TRUST_STORAGE_KEY = 'vanilla-commander_trusted_workspaces';
 
+/** 마지막으로 Rust에 동기화한 허용 루트 (D1, 프롬프트 표시용). */
+let lastAllowedRoots: string[] = [];
+
+export function getLastAllowedRoots(): string[] {
+  return [...lastAllowedRoots];
+}
+
 function getStoredTrustMap(): Record<string, boolean> {
   try {
     const raw = localStorage.getItem(TRUST_STORAGE_KEY);
@@ -120,6 +127,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       );
       if (roots.length > 0) {
         await invoke('set_agent_allowed_roots', { roots });
+        lastAllowedRoots = roots;
       }
     } catch {
       // ignore in non-Tauri

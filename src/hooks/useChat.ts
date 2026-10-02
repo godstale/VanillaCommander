@@ -44,6 +44,15 @@ export interface UseChatOptions {
   apiKey?: string;
   streamChatFn?: LlmStreamChatFn;
   cwd?: string;
+  /** D10 백업 위치. 미지정 시 워크스페이스 작업 폴더를 쓴다. */
+  workFolder?: string;
+  /** P11-24: 탐색기 위치·선택·작업 폴더를 프롬프트에 전달한다. */
+  commanderContext?: {
+    location?: string;
+    selection?: string[];
+    workFolder?: string;
+    allowedRoots?: string[];
+  };
   skills?: SkillManifest[];
   contextFiles?: ContextFileItem[];
   /** 전역 압축 기본값 (SettingsModel). 0=auto 항목의 단계표 해석에 쓴다. */
@@ -136,12 +145,15 @@ export function useChat(
 
   // Build tools from agent's enabledBuiltinTools.
   // P11-23: 외부 에이전트는 자체 도구를 쓰므로 우리 루프 도구를 제공하지 않는다.
+  // P11-24: workFolder를 함께 넘겨 D10 백업 위치로 쓴다.
   const isExternalAgent = agentConfig.llmProvider === 'external-agent';
+  const workFolderForTools = options.workFolder ?? workspaceCtx?.workFolder ?? undefined;
   const tools = useMemo(() => {
     return getBuiltinTools(isExternalAgent ? [] : agentConfig.enabledBuiltinTools, {
       workspaceRoot: effectiveCwd,
+      workFolder: workFolderForTools,
     });
-  }, [isExternalAgent, agentConfig.enabledBuiltinTools, effectiveCwd]);
+  }, [isExternalAgent, agentConfig.enabledBuiltinTools, effectiveCwd, workFolderForTools]);
 
   // Read skills and context files from options or context
   const rawSkills = useMemo(() => {
@@ -172,8 +184,9 @@ export function useChat(
       skills: filteredSkills,
       visualization: getVisualizationPromptSection(),
       cwd: effectiveCwd,
+      commander: options.commanderContext,
     });
-  }, [agentConfig.systemPrompt, tools, rawContextFiles, filteredSkills, effectiveCwd]);
+  }, [agentConfig.systemPrompt, tools, rawContextFiles, filteredSkills, effectiveCwd, options.commanderContext]);
 
   const systemPrompt = useMemo(() => {
     return formatSystemPrompt(currentSections);
@@ -193,6 +206,14 @@ export function useChat(
     toolsRef.current = tools;
     optionsRef.current = options;
   });
+
+  // D1: 세션 cwd(현재 탐색기 탭 경로 등)를 에이전트 허용 루트에 올린다.
+  useEffect(() => {
+    if (effectiveCwd) {
+      workspaceCtx?.addSessionRoots([effectiveCwd]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId, effectiveCwd]);
 
   // Agent instance ref
   const agentRef = useRef<VanillaAgent | null>(null);

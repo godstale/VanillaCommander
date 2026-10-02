@@ -9,7 +9,7 @@ import { MessageList } from '@/components/chat/MessageList';
 import { MentionPopup } from '@/components/chat/MentionPopup';
 import { useMention } from '@/hooks/useMention';
 import { resolveMentions } from '@/lib/chat/mentions';
-import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
+import { getLastAllowedRoots, useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import * as sessionsRepo from '@/lib/db/repositories/sessionsRepo';
 import { cn } from '@/lib/utils';
 
@@ -32,8 +32,16 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
   const { defaultAgent } = useAgents();
   const { openTab } = useWorkspaceTabs();
   const sessionId = `explorer-${tabId}`;
-  const chat = useChat(sessionId, defaultAgent, { cwd: cwd || undefined });
   const workspace = useSafeWorkspace();
+  const chat = useChat(sessionId, defaultAgent, {
+    cwd: cwd || undefined,
+    commanderContext: {
+      location: cwd,
+      selection: selectedPaths,
+      workFolder: workspace?.workFolder ?? undefined,
+      allowedRoots: getLastAllowedRoots(),
+    },
+  });
   const inputRef = useRef<HTMLInputElement>(null);
   const mention = useMention(cwd || null);
   const [text, setText] = useState('');

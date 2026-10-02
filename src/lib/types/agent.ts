@@ -167,7 +167,18 @@ export type BuiltinToolId =
   | 'shell'
   | 'web_search'
   | 'web_fetch'
-  | 'wiki';
+  | 'wiki'
+  | 'fs_copy'
+  | 'fs_move'
+  | 'fs_rename'
+  | 'fs_mkdir'
+  | 'fs_trash'
+  | 'fs_zip'
+  | 'fs_unzip'
+  | 'fs_info'
+  | 'fs_search'
+  | 'explorer'
+  | 'doc_read';
 
 /**
  * LLM Provider 종류. Ollama 네이티브 규격(/api/chat, NDJSON)과

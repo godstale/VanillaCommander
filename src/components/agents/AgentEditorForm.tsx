@@ -40,6 +40,7 @@ import {
 } from '@/lib/llm/providerRuntime';
 import { resolveCompactionSettings } from '@/lib/compaction/settings';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { APP_DEFAULT_BUILTIN_TOOLS, APP_DEFAULT_SKILLS } from '@/lib/agent/defaults';
 import {
   listIntegrations,
   saveIntegration,
@@ -211,6 +212,17 @@ const ALL_BUILTIN_TOOLS: { id: BuiltinToolId; risk: string }[] = [
   { id: 'shell', risk: 'critical' },
   { id: 'web_search', risk: 'low' },
   { id: 'web_fetch', risk: 'low' },
+  { id: 'fs_copy', risk: 'high' },
+  { id: 'fs_move', risk: 'high' },
+  { id: 'fs_rename', risk: 'high' },
+  { id: 'fs_mkdir', risk: 'high' },
+  { id: 'fs_trash', risk: 'high' },
+  { id: 'fs_zip', risk: 'high' },
+  { id: 'fs_unzip', risk: 'high' },
+  { id: 'fs_info', risk: 'low' },
+  { id: 'fs_search', risk: 'low' },
+  { id: 'explorer', risk: 'low' },
+  { id: 'doc_read', risk: 'low' },
 ];
 
 export interface AgentEditorFormProps {
@@ -317,19 +329,10 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
   const [enabledBuiltinTools, setEnabledBuiltinTools] = useState<BuiltinToolId[]>(
     initialAgent?.enabledBuiltinTools
       ? initialAgent.enabledBuiltinTools.filter((t) => t !== 'wiki')
-      : [
-        'read',
-        'write',
-        'edit',
-        'ls',
-        'grep',
-        'find',
-        'web_search',
-        'web_fetch',
-      ],
+      : [...APP_DEFAULT_BUILTIN_TOOLS],
   );
   const [enabledSkills, setEnabledSkills] = useState<string[]>(
-    initialAgent?.enabledSkills || [],
+    initialAgent?.enabledSkills || [...APP_DEFAULT_SKILLS],
   );
 
   // Model list & capabilities (Provider-aware)

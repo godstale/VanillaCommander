@@ -6,7 +6,7 @@ import type { ApprovalMode, BuiltinToolId } from '@/lib/types/agent';
 /** 기본 승인 모드 (V4·V6: dangerous-only). */
 export const APP_DEFAULT_APPROVAL_MODE: ApprovalMode = 'dangerous-only';
 
-/** 새 에이전트 기본 내장 도구 (V6: 셸 제외 전체). */
+/** 새 에이전트 기본 내장 도구 (V6: 셸 제외 전체 + P11-24 파일 커맨더). */
 export const APP_DEFAULT_BUILTIN_TOOLS: BuiltinToolId[] = [
   'read',
   'ls',
@@ -17,6 +17,17 @@ export const APP_DEFAULT_BUILTIN_TOOLS: BuiltinToolId[] = [
   'web_search',
   'web_fetch',
   'wiki',
+  'fs_copy',
+  'fs_move',
+  'fs_rename',
+  'fs_mkdir',
+  'fs_trash',
+  'fs_zip',
+  'fs_unzip',
+  'fs_info',
+  'fs_search',
+  'explorer',
+  'doc_read',
 ];
 
 /** 새 에이전트 기본 스킬 (V6: basic-llm-wiki). */

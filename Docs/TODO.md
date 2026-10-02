@@ -180,7 +180,7 @@
   - [x] P11-21 에이전트 편집 화면 단순화(Advanced 접기)
   - [x] P11-22 프로바이더 3분류 + 외부 연동 등록 통합
   - [x] P11-23 외부 에이전트 런타임
-  - [ ] P11-24 파일 커맨더 시스템 프롬프트 + 도구
+  - [x] P11-24 파일 커맨더 시스템 프롬프트 + 도구
   - [ ] P11-25 기본 에이전트 폴백 동의
   - [ ] P11-26 이미지 첨부 + 비전
   - [ ] P11-27 모니터링 메뉴 정리
@@ -255,6 +255,7 @@
 | 2026-10-03 | P11-20 | 에이전트 카드 단순화 완료: 이름·배지·상태·설명·모델·ctx만 표시, 대화 시작·수정 버튼만. 모니터링·통계·로그 버튼 삭제, `AgentStatsTab`·`AgentStatsPanel` 삭제(진입점은 상단 메뉴 유지). 검증: `lint`·`typecheck` 통과, 카드 테스트 7건, `test` 413/414(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-21 | 편집 화면 단순화 완료: 기본 정보·프로바이더만 노출, 시스템 프롬프트·생성 옵션·승인·모니터링·도구·스킬은 `고급 설정` 1개로 접기. 파일 분할은 생략(단일 순차 실행, 충돌 회피 목적 달성 불가 — P11-22/26이 재작업하는 카드만 분리 예정, TODO 기록). 검증: `lint`·`typecheck` 통과, 편집 폼 8건, `test` 414/415(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-22 | 프로바이더 3분류 + 외부 연동 등록 완료: `external-agent` 종류·`externalAgentId` 컬럼, 4번째 연동 그룹(agent-cli 선택 + 인라인 등록/CLI 프리셋/PATH 탐지), llm-api→클라우드 에이전트 1회 변환, 저장 시 동의 게이트, `find_executable` 명령. 테스트 모크의 위치 기반 파싱도 30컬럼 대응. 검증: `lint`·`typecheck`·`build` 통과, `cargo test` 29건, `test` 416/417(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-23 | 외부 에이전트 런타임 완료: `externalAgentClient`(게이트웨이 경유 CLI 1회 실행·단일 청크·cwd 전달), `providerRuntime` 분기, `useChat` 연결(자체 도구 없음), 연결 확인(`find_executable`), 편집 화면 도구/스킬 비활성 표시. 검증: `lint`·`typecheck` 통과, 런타임 테스트 4건, `test` 420/421(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |
 
 ---

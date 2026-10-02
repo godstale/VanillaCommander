@@ -24,6 +24,7 @@ import { useSettings } from '@/lib/context/SettingsContext';
 import { useSearchParams } from 'react-router-dom';
 import { SetupWizard } from '@/components/setup/SetupWizard';
 import { ConflictDialogHost, CommanderStatusPublishers } from '@/components/explorer/CommanderOverlays';
+import { ExplorerBridgeHost } from '@/components/explorer/ExplorerBridgeHost';
 
 function WorkspaceContent() {
   useKeyboardShortcuts();
@@ -126,6 +127,7 @@ function WorkspaceContent() {
       <StatusBar />
       <ConflictDialogHost />
       <CommanderStatusPublishers />
+      <ExplorerBridgeHost />
       {wizardOpen && <SetupWizard onClose={closeWizard} />}
     </div>
   );
