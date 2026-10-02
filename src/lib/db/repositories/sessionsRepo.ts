@@ -6,16 +6,21 @@ interface SessionRow {
   id: string;
   agent_id: string;
   workspace_root: string | null;
+  origin?: string | null;
   title: string;
   created_at: string;
   updated_at: string;
 }
 
 function parseSessionRow(row: SessionRow): ChatSession {
+  const origin = row.origin === 'explorer' || row.origin === 'macro' || row.origin === 'wiki'
+    ? row.origin
+    : 'chat';
   return {
     id: row.id,
     agentId: row.agent_id,
     workspaceRoot: row.workspace_root,
+    origin,
     title: row.title,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -143,11 +148,12 @@ export async function createSession(
   }
 
   await db.execute(
-    'INSERT INTO sessions (id, agent_id, workspace_root, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
+    'INSERT INTO sessions (id, agent_id, workspace_root, origin, title, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
     [
       session.id,
       session.agentId,
       session.workspaceRoot ?? null,
+      session.origin ?? 'chat',
       session.title,
       createdAt,
       updatedAt,
@@ -158,6 +164,7 @@ export async function createSession(
     id: session.id,
     agentId: session.agentId,
     workspaceRoot: session.workspaceRoot ?? null,
+    origin: session.origin ?? 'chat',
     title: session.title,
     createdAt,
     updatedAt,

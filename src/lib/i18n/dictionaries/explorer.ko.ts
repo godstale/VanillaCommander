@@ -86,4 +86,10 @@ export const explorerKo: Dict = {
   'explorer.system': '시스템 폴더',
   'explorer.moveUp': '위로 이동',
   'explorer.moveDown': '아래로 이동',
+
+  'explorer.chatPlaceholder': '에이전트에게 묻기 (Enter 전송)...',
+  'explorer.chatEmpty': '아직 대화가 없습니다. 파일 작업을 말로 지시해 보세요.',
+  'explorer.chatSessionTitle': '탐색기: {path}',
+  'explorer.toggleResults': '결과 보기 전환',
+  'explorer.openInChat': '채팅 탭에서 열기',
 };

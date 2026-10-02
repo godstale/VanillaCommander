@@ -3,10 +3,13 @@ import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import type { ApprovalMode } from '@/lib/types/agent';
 import type { ParserSettings, WikiSettings } from '@/lib/db/repositories/settingsRepo';
 
+export type ChatSessionOrigin = 'chat' | 'explorer' | 'macro' | 'wiki';
+
 export interface ChatSession {
   id: string;
   agentId: string;
   workspaceRoot: string | null;
+  origin: ChatSessionOrigin;
   title: string;
   createdAt: string;
   updatedAt: string;

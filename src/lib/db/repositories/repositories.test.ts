@@ -914,6 +914,7 @@ describe('SQLite Repositories (P4-02)', () => {
           id: 'session-1',
           agentId: 'agent-1',
           workspaceRoot: 'C:/proj',
+          origin: 'chat',
           title: 'Initial Title',
         },
         db,

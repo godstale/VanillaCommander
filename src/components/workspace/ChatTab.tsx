@@ -281,6 +281,7 @@ export function ChatTab({ tab }: ChatTabProps) {
             id: sessionId,
             agentId: activeAgent.id,
             workspaceRoot: workspaceRoot ?? null,
+            origin: 'chat',
             title: tab.title || t('chatTab.newChat'),
           });
           await refreshSessions();

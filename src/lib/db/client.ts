@@ -44,6 +44,7 @@ export const MIGRATION_STATEMENTS: string[] = [
     id TEXT PRIMARY KEY,
     agent_id TEXT NOT NULL,
     workspace_root TEXT,
+    origin TEXT NOT NULL DEFAULT 'chat',
     title TEXT NOT NULL,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
@@ -589,12 +590,17 @@ export class MemorySqlFallback implements SqlDatabase {
     }
 
     if (q.startsWith('INSERT INTO sessions')) {
-      const [id, agent_id, workspace_root, title, created_at, updated_at] =
-        bindValues;
+      const [id, agent_id, workspace_root, ...rest] = bindValues;
+      // 신규 7컬럼(origin 포함) 또는 구 6컬럼.
+      const [origin, title, created_at, updated_at] =
+        rest.length === 4
+          ? (rest as [unknown, unknown, unknown, unknown])
+          : [ 'chat', ...(rest as [unknown, unknown, unknown]) ];
       this.tables.get('sessions')?.set(id as string, {
         id,
         agent_id,
         workspace_root,
+        origin,
         title,
         created_at,
         updated_at,
@@ -1738,6 +1744,7 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     "ALTER TABLE app_settings ADD COLUMN agent_allowed_roots TEXT NOT NULL DEFAULT '[]'",
     "ALTER TABLE app_settings ADD COLUMN wiki_settings TEXT NOT NULL DEFAULT '{}'",
     "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE sessions ADD COLUMN origin TEXT NOT NULL DEFAULT 'chat'",
   ];
   for (const alter of alterColumns) {
     try {

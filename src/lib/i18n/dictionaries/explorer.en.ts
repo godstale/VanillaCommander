@@ -86,4 +86,10 @@ export const explorerEn: Dict = {
   'explorer.system': 'System folders',
   'explorer.moveUp': 'Move up',
   'explorer.moveDown': 'Move down',
+
+  'explorer.chatPlaceholder': 'Ask the agent (Enter to send)...',
+  'explorer.chatEmpty': 'No conversation yet. Describe the file work in words.',
+  'explorer.chatSessionTitle': 'Explorer: {path}',
+  'explorer.toggleResults': 'Toggle results',
+  'explorer.openInChat': 'Open in chat tab',
 };

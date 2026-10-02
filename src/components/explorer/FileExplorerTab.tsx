@@ -29,6 +29,7 @@ import { ExplorerToolbar } from './ExplorerToolbar';
 import { FileList, type SortKey, type SortDir } from './FileList';
 import { PropertiesDialog } from './dialogs/PropertiesDialog';
 import { SearchResultsView } from './dialogs/SearchResultsView';
+import { ExplorerChatBar } from './ExplorerChatBar';
 
 interface ExplorerMeta {
   path?: string;
@@ -712,6 +713,12 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         </div>
       )}
       {propsPaths && <PropertiesDialog paths={propsPaths} onClose={() => setPropsPaths(null)} />}
+      <ExplorerChatBar
+        tabId={tab.id}
+        cwd={path}
+        selectedPaths={selected}
+        onFilesChanged={() => setRefreshSeq((s) => s + 1)}
+      />
     </div>
   );
 }

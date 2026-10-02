@@ -46,6 +46,7 @@ describe('Project DB vs Global DB separation', () => {
       id: 'session-a',
       agentId: 'agent-1',
       title: 'Session in A',
+      origin: 'chat',
       workspaceRoot: '/workspace/A',
     });
     const listA = await sessionsRepo.listSessions();
