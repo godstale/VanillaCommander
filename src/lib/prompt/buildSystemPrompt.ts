@@ -38,7 +38,7 @@ export function buildSystemPromptSections(
   // 1. preamble (NOT wrapped in tag)
   const preamble =
     options.agent.systemPrompt?.trim() ||
-    'You are Fortress, an AI assistant workstation for development, documents, and research.';
+    'You are Vanilla Commander, an AI assistant workstation for development, documents, and research.';
   sections['preamble'] = preamble;
 
   // 2. tools

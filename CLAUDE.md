@@ -10,9 +10,9 @@
 
 ## 2. 이 리포지토리의 `.agents/`, `.claude/` 폴더에 대한 주의
 
-리포지토리 루트의 `.agents/skills/`와 `.claude/skills/`에는 `caveman`, `grill-me`, `llm-wiki`, `ponytail`, `vercel-react-best-practices` 등의 폴더가 이미 존재합니다. 이것들은 **Claude Code 자체의 전역 스킬이 이 프로젝트 디렉터리로 미러링된 것**이며, Fortress 앱이 런타임에 읽는 사용자 워크스페이스용 `.agents/skills/`(`Docs/Architecture.md` §6에서 정의하는 앱 기능)와는 **완전히 무관**합니다.
+리포지토리 루트의 `.agents/skills/`와 `.claude/skills/`에는 `caveman`, `grill-me`, `llm-wiki`, `ponytail`, `vercel-react-best-practices` 등의 폴더가 이미 존재합니다. 이것들은 **Claude Code 자체의 전역 스킬이 이 프로젝트 디렉터리로 미러링된 것**이며, Vanilla Commander 앱이 런타임에 읽는 사용자 워크스페이스용 `.agents/skills/`(`Docs/Architecture.md` §6에서 정의하는 앱 기능)와는 **완전히 무관**합니다.
 
-- 이 폴더들을 Fortress 앱의 스킬 로더 구현(Phase 3) 대상으로 착각하지 마십시오. Phase 3의 스킬 스캐너는 **Fortress 앱이 실행될 때 사용자가 지정한 별도의 워크스페이스 폴더**를 스캔하는 것이지, 이 리포지토리 자체의 `.agents/skills/`를 스캔하는 것이 아닙니다.
+- 이 폴더들을 Vanilla Commander 앱의 스킬 로더 구현(Phase 3) 대상으로 착각하지 마십시오. Phase 3의 스킬 스캐너는 **Vanilla Commander 앱이 실행될 때 사용자가 지정한 별도의 워크스페이스 폴더**를 스캔하는 것이지, 이 리포지토리 자체의 `.agents/skills/`를 스캔하는 것이 아닙니다.
 - 이 폴더들의 내용을 수정/삭제하지 마십시오(Claude Code 도구 설정의 일부입니다).
 
 ## 3. 문서 갱신 습관

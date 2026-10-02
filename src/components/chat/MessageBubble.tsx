@@ -99,8 +99,8 @@ export const MessageBubble = memo(function MessageBubble({ message, isStreaming,
       return (
         <div className="py-2 flex justify-center w-full">
           <div className="max-w-3xl w-full px-4">
-            <div className="flex items-start gap-2 px-3.5 py-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-foreground">
-              <Info className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2 px-3.5 py-2.5 rounded-xl bg-warning/10 border border-warning/30 text-xs text-foreground">
+              <Info className="h-3.5 w-3.5 text-warning shrink-0 mt-0.5" />
               <p className="whitespace-pre-wrap leading-relaxed select-text">{message.content}</p>
             </div>
           </div>

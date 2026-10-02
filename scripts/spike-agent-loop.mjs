@@ -43,7 +43,7 @@ function executeMockTool(name, args) {
   if (name === 'read_file') {
     if (args.path?.includes('package.json')) {
       return JSON.stringify({
-        name: 'fortress',
+        name: 'vanilla-commander',
         version: '0.1.0',
         description: 'Local AI agent workstation',
       });

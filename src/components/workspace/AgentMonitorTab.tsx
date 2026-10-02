@@ -93,7 +93,7 @@ const CHART_COLORS = {
   prefill: 'hsl(var(--chart-4))',
   decoding: 'hsl(var(--chart-5))',
   thinking: 'hsl(var(--chart-1))',
-  tool: '#f59e0b',
+  tool: 'hsl(var(--warning))',
   generating: 'hsl(var(--chart-3))',
   approval: 'hsl(var(--destructive))',
 } as const;
@@ -103,7 +103,7 @@ const TOKEN_STATUS_ORDER: Array<{ key: TokenStatusKey; label: string; color: str
   { key: 'prefill', label: 'Prefill', color: 'hsl(var(--chart-4))' },
   { key: 'decoding', label: 'Decoding', color: 'hsl(var(--chart-5))' },
   { key: 'generating', label: 'Generating', color: 'hsl(var(--chart-3))' },
-  { key: 'executing_tool', label: 'Tool', color: '#f59e0b' },
+  { key: 'executing_tool', label: 'Tool', color: 'hsl(var(--warning))' },
   { key: 'waiting_approval', label: 'Wait', color: 'hsl(var(--destructive))' },
 ];
 
@@ -268,7 +268,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
   const ROW1_CARD_IDS = ['sysres', 'memdist', 'realtime'] as const;
   const [row1Order, setRow1Order] = useState<string[]>(() => {
     try {
-      const saved = window.localStorage.getItem('fortress.monitorRow1Order');
+      const saved = window.localStorage.getItem('vanilla-commander.monitorRow1Order');
       if (saved) {
         const parsed = JSON.parse(saved) as string[];
         if (
@@ -297,7 +297,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
       const at = next.indexOf(targetId);
       next.splice(at >= 0 ? at : next.length, 0, row1DragId);
       try {
-        window.localStorage.setItem('fortress.monitorRow1Order', JSON.stringify(next));
+        window.localStorage.setItem('vanilla-commander.monitorRow1Order', JSON.stringify(next));
       } catch {
         // 영속 실패는 무시 (인메모리 순서는 유지)
       }
@@ -941,7 +941,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
   const statusBadge = getStatusBadge(currentSnapshot?.agentStatus || 'idle');
 
   return (
-    <div className="flex-1 h-full overflow-y-auto p-5 bg-background text-foreground space-y-5 select-text">
+    <div className="flex-1 h-full overflow-y-auto p-5 bg-editor text-foreground space-y-5 select-text">
       {/* Top Header & Real-time Controls */}
       <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-border gap-4">
         <div>
@@ -1011,7 +1011,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
               </>
             ) : isCollecting ? (
               <>
-                <Pause className="h-3.5 w-3.5 fill-current text-amber-500 dark:text-amber-400" />
+                <Pause className="h-3.5 w-3.5 fill-current text-warning" />
                 <span>{t('monitor.pause')}</span>
               </>
             ) : (

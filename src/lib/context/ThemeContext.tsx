@@ -11,7 +11,7 @@ export interface ThemeContextValue {
   setTheme: (theme: ThemeMode) => void;
 }
 
-const STORAGE_KEY = 'fortress-theme';
+const STORAGE_KEY = 'vanilla-commander-theme';
 
 export function resolveTheme(theme: ThemeMode): 'light' | 'dark' {
   if (theme === 'system') {

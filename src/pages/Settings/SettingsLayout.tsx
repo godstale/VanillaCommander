@@ -56,7 +56,7 @@ export function SettingsLayout() {
         </div>
 
         <div className="text-[11px] text-muted-foreground p-2 border-t border-border">
-          <p className="font-semibold text-foreground">Fortress v0.1.0</p>
+          <p className="font-semibold text-foreground">Vanilla Commander v0.1.0</p>
           <p className="opacity-70 mt-0.5">{t('settings.footer')}</p>
         </div>
       </div>

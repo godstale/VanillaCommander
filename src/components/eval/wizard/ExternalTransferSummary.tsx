@@ -63,7 +63,7 @@ export function ExternalTransferSummary({
         </>
       )}
       {declined && !proceedWithoutExternal && (
-        <div className="space-y-1 rounded border border-amber-500/40 p-2">
+        <div className="space-y-1 rounded border border-warning/40 p-2">
           <div className="text-muted-foreground">{t('eval.wizard.external.proceedWithoutNote')}</div>
           <Button type="button" size="sm" variant="outline" onClick={() => onProceedWithoutChange(true)}>
             {t('eval.wizard.external.proceedWithout')}

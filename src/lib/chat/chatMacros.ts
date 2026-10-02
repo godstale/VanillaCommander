@@ -6,7 +6,7 @@ export interface ChatMacro {
   agentId?: string;
 }
 
-export const CHAT_MACRO_STORAGE_KEY = 'fortress:chat-macros';
+export const CHAT_MACRO_STORAGE_KEY = 'vanilla-commander:chat-macros';
 export const CHAT_MACRO_LIMIT = 50;
 
 function readRaw(): ChatMacro[] {
@@ -76,10 +76,10 @@ export function deleteChatMacro(id: string): ChatMacro[] {
   return next.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }
 
-/** 구버전 세션별 단일 로그(fortress:chat-log:<sessionId>)를 매크로로 승격한다. */
+/** 구버전 세션별 단일 로그(vanilla-commander:chat-log:<sessionId>)를 매크로로 승격한다. */
 export function migrateLegacySessionLog(sessionId: string): ChatMacro | null {
   try {
-    const raw = window.localStorage.getItem(`fortress:chat-log:${sessionId}`);
+    const raw = window.localStorage.getItem(`vanilla-commander:chat-log:${sessionId}`);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as { items?: unknown; agentId?: unknown };
     if (!Array.isArray(parsed.items)) return null;
@@ -90,7 +90,7 @@ export function migrateLegacySessionLog(sessionId: string): ChatMacro | null {
     const macro = saveChatMacro(items, {
       agentId: typeof parsed.agentId === 'string' ? parsed.agentId : undefined,
     });
-    window.localStorage.removeItem(`fortress:chat-log:${sessionId}`);
+    window.localStorage.removeItem(`vanilla-commander:chat-log:${sessionId}`);
     return macro;
   } catch {
     return null;

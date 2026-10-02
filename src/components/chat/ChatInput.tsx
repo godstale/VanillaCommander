@@ -93,7 +93,7 @@ export interface ChatInputProps {
   hasSavedLog?: boolean;
   /**
    * 프롬프트 히스토리(↑/↓)의 스코프. 채팅 세션 ID를 넘기면 해당 채팅창만의
-   * 히스토리(`fortress:prompt-history:<sessionId>`)를 사용한다. 미지정 시
+   * 히스토리(`vanilla-commander:prompt-history:<sessionId>`)를 사용한다. 미지정 시
    * 전역 키를 사용한다(테스트/레거시 호환).
    */
   sessionId?: string;
@@ -148,7 +148,7 @@ export function ChatInput({
   // while browsing so ArrowDown past the end restores what was typed.
   // 각 채팅창은 자기 세션의 히스토리만 조회한다.
   const historyKey = useMemo(
-    () => (sessionId ? `fortress:prompt-history:${sessionId}` : 'fortress:prompt-history'),
+    () => (sessionId ? `vanilla-commander:prompt-history:${sessionId}` : 'vanilla-commander:prompt-history'),
     [sessionId],
   );
   const HISTORY_LIMIT = 100;
@@ -574,7 +574,7 @@ export function ChatInput({
 
       {/* Lock banner when another session is busy */}
       {isLockedByOtherSession && !isAgentDeleted && (
-        <div className="flex items-center gap-2 px-3.5 py-1.5 text-xs text-amber-500 bg-amber-500/10 border-b border-amber-500/20 font-medium select-none">
+        <div className="flex items-center gap-2 px-3.5 py-1.5 text-xs text-warning bg-warning/10 border-b border-warning/20 font-medium select-none">
           <Lock className="h-3.5 w-3.5 shrink-0" />
           <span className="truncate">
             {busySessionTitle

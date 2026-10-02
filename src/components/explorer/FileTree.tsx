@@ -591,7 +591,7 @@ export function FileTree() {
 
   return (
     <div
-      className="flex flex-col h-full bg-sidebar select-none min-w-0"
+      className="flex flex-col h-full select-none min-w-0"
       onContextMenu={handleEmptyContextMenu}
     >
       {/* Header */}

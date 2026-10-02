@@ -272,7 +272,7 @@ export function StepCandidates(props: StepCandidatesProps) {
                     {props.candidates.map((c, i) => <option key={i} value={i}>{c.label}</option>)}
                   </select>
                 </label>
-                {quantFamilyMismatch && <div className="text-amber-600">{t('eval.wizard.quant.sameFamily')}</div>}
+                {quantFamilyMismatch && <div className="text-warning">{t('eval.wizard.quant.sameFamily')}</div>}
               </>
             )}
           </div>

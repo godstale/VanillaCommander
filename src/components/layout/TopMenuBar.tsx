@@ -33,7 +33,7 @@ import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useGlobalLlmBusy } from '@/lib/agent/chatQueueManager';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { FortressMark } from '@/components/brand/FortressMark';
+import { AppMark } from '@/components/brand/AppMark';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export function TopMenuBar() {
@@ -165,13 +165,13 @@ export function TopMenuBar() {
     <header
       data-tauri-drag-region
       onMouseDown={handleMouseDown}
-      className="h-8 w-full bg-sidebar border-b border-border/80 flex items-center justify-between pl-2 pr-0 select-none text-xs text-muted-foreground shrink-0 z-40"
+      className="h-8 w-full bg-titlebar border-b border-border/80 flex items-center justify-between pl-2 pr-0 select-none text-xs text-muted-foreground shrink-0 z-40"
     >
       {/* Left: App title & Dropdown Menus */}
       <div className="flex items-center gap-1" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
         <div className="flex items-center gap-1.5 px-2 font-semibold text-foreground tracking-wide mr-1">
-          <FortressMark compact className="h-4 w-4 text-brand" />
-          <span className="text-[11px]">Fortress</span>
+          <AppMark compact className="h-4 w-4 text-brand" />
+          <span className="text-[11px]">Vanilla Commander</span>
         </div>
 
         {/* File Menu */}
@@ -179,7 +179,7 @@ export function TopMenuBar() {
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="px-2 py-0.5 rounded text-[11px] text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
+              className="px-2 py-0.5 rounded text-[11px] text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] transition-colors"
             >
               {t('topMenu.file')}
             </button>
@@ -271,7 +271,7 @@ export function TopMenuBar() {
                 'px-2 py-0.5 rounded text-[11px] transition-colors',
                 !hasWorkspace
                   ? 'opacity-40 cursor-not-allowed hover:bg-transparent pointer-events-none'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/70 cursor-pointer',
+                  : 'text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] cursor-pointer',
               )}
             >
               {t('topMenu.agent')}
@@ -305,7 +305,7 @@ export function TopMenuBar() {
                 'px-2 py-0.5 rounded text-[11px] transition-colors',
                 !hasWorkspace
                   ? 'opacity-40 cursor-not-allowed hover:bg-transparent pointer-events-none'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/70 cursor-pointer',
+                  : 'text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] cursor-pointer',
               )}
             >
               {t('topMenu.view')}
@@ -389,7 +389,7 @@ export function TopMenuBar() {
         <button
           type="button"
           onClick={handleMinimize}
-          className="h-full w-11 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors cursor-pointer"
+          className="h-full w-11 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] transition-colors cursor-pointer"
           title={t('topMenu.minimize')}
         >
           <Minus className="h-3.5 w-3.5" />
@@ -398,7 +398,7 @@ export function TopMenuBar() {
         <button
           type="button"
           onClick={handleToggleMaximize}
-          className="h-full w-11 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors cursor-pointer"
+          className="h-full w-11 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] transition-colors cursor-pointer"
           title={isMaximized ? t('topMenu.restore') : t('topMenu.maximize')}
         >
           {isMaximized ? (

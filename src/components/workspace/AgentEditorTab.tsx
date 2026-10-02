@@ -63,9 +63,9 @@ export function AgentEditorTab({ tab }: AgentEditorTabProps) {
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-background overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-editor overflow-hidden">
       {/* Header Bar */}
-      <div className="flex items-center justify-between px-6 py-3 border-b border-border bg-card/30 shrink-0">
+      <div className="flex items-center justify-between px-6 py-3 border-b border-border bg-tabbar shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="h-7 w-7 rounded-md bg-primary/10 flex items-center justify-center text-primary">
             <Bot className="h-4 w-4" />

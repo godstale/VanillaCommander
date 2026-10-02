@@ -10,7 +10,7 @@ import type { EvalAggregateRow, EvalCandidateRow } from '@/lib/eval/types';
 import { findAggregate } from './reportData';
 
 const DIMS = ['Q', 'A', 'P', 'R', 'S'] as const;
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#8dd1e1', '#a4de6c'];
+const COLORS = [1, 2, 3, 4, 5].map((n) => `hsl(var(--chart-${n}))`).concat('hsl(var(--warning))');
 
 export interface DimensionRadarProps {
   candidates: EvalCandidateRow[];

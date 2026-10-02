@@ -65,7 +65,7 @@ function formatDate(iso: string, t: TFn): string {
   }
 }
 
-const FILTER_STORAGE_KEY = 'fortress:session-filter';
+const FILTER_STORAGE_KEY = 'vanilla-commander:session-filter';
 
 function readStoredFilterMode(): SessionFilterMode {
   try {
@@ -349,7 +349,7 @@ export function ChatSessionList() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-sidebar select-none">
+    <div className="flex flex-col h-full bg-panel select-none">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-border">
         <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">

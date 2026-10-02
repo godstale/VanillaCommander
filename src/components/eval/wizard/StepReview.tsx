@@ -195,7 +195,7 @@ export function StepReview({ draft, onUpdate, refs, onProfileSaved }: StepReview
         <div className="font-semibold">{t('eval.wizard.review.preflight')}</div>
         {!loaded && !loadError && <div className="text-muted-foreground">{t('eval.wizard.review.loading')}</div>}
         {loadError && <div className="text-destructive">{t('eval.wizard.review.loadFailed', { err: loadError })}</div>}
-        {report?.chatBusy && <div className="text-amber-600">{t('eval.wizard.review.chatBusy')}</div>}
+        {report?.chatBusy && <div className="text-warning">{t('eval.wizard.review.chatBusy')}</div>}
         {report && (
           <table className="mt-1 w-full border-collapse text-[11px]">
             <thead>
@@ -269,7 +269,7 @@ export function StepReview({ draft, onUpdate, refs, onProfileSaved }: StepReview
       {(pythonCount > 0 || jsCount > 0) && (
         <div className="space-y-1 rounded-lg border border-border p-3 text-xs">
           <div className="font-semibold">{t('eval.wizard.code.title')}</div>
-          {pythonCount > 0 && <div className="text-amber-600">{t('eval.wizard.code.pythonNotice', { n: pythonCount })}</div>}
+          {pythonCount > 0 && <div className="text-warning">{t('eval.wizard.code.pythonNotice', { n: pythonCount })}</div>}
           {jsCount > 0 && <div className="text-muted-foreground">{t('eval.wizard.code.jsNotice', { n: jsCount })}</div>}
           {needsCode && (
             <label className="flex items-center gap-2 font-semibold">
@@ -292,7 +292,7 @@ export function StepReview({ draft, onUpdate, refs, onProfileSaved }: StepReview
             <DialogTitle className="text-sm">{t('eval.wizard.create.done')}</DialogTitle>
           </DialogHeader>
           <p className="text-xs text-muted-foreground">{t('eval.wizard.create.doneDesc')}</p>
-          {lock && <div className="text-xs text-amber-600">{t('eval.wizard.create.locked')}</div>}
+          {lock && <div className="text-xs text-warning">{t('eval.wizard.create.locked')}</div>}
           <DialogFooter>
             <Button type="button" size="sm" variant="outline" onClick={handleCloseDialog}>
               {t('eval.wizard.create.startLater')}

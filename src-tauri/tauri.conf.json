@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "Fortress",
+  "productName": "Vanilla Commander",
   "version": "0.1.0",
-  "identifier": "com.fortress.app",
+  "identifier": "com.vanillacommander.app",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:14200",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Fortress",
+        "title": "Vanilla Commander",
         "width": 1280,
         "height": 800,
         "resizable": true,

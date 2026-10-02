@@ -1,7 +1,7 @@
-# AGENTS.md — Fortress 리포지토리 작업 지침
+# AGENTS.md — Vanilla Commander 리포지토리 작업 지침
 
-> 이 파일은 Fortress **리포지토리 자체**를 개발하는 AI 코딩 에이전트(Claude Code, Codex 등 무엇이든)를 위한 지침입니다.
-> Fortress _앱이 런타임에_ 사용자의 워크스페이스에서 읽는 `AGENTS.md`/`.agents/skills/`(앱 기능)와는 **다른 문서**입니다 — 그 기능의 설계는 `Docs/Architecture.md` §6을 참고하세요.
+> 이 파일은 Vanilla Commander **리포지토리 자체**를 개발하는 AI 코딩 에이전트(Claude Code, Codex 등 무엇이든)를 위한 지침입니다.
+> Vanilla Commander _앱이 런타임에_ 사용자의 워크스페이스에서 읽는 `AGENTS.md`/`.agents/skills/`(앱 기능)와는 **다른 문서**입니다 — 그 기능의 설계는 `Docs/Architecture.md` §6을 참고하세요.
 
 ## 0. 시작하기 전에 반드시 읽을 것
 
@@ -12,7 +12,7 @@
 
 ## 1. 프로젝트 개요
 
-Fortress는 Tauri 2 + React 19 + TypeScript로 만드는 데스크탑 앱으로, Ollama 로컬 LLM을 이용해 문서 작성·비즈니스 로직 작성·시각화를 돕는 로컬 AI 에이전트 워크스테이션입니다. UI 레이아웃은 `VivoStudio`(좌측 사이드바/패널 + 우측 탭 콘텐츠), 에이전트 관리·채팅 UX는 `VivoAcademy`, **에이전트 런타임(루프·도구·압축·스킬·세션)은 `pi`**([earendil-works/pi](https://github.com/earendil-works/pi), 로컬 체크아웃 `..\pi`)를 참고했습니다.
+Vanilla Commander는 Tauri 2 + React 19 + TypeScript로 만드는 데스크탑 파일 커맨더 앱으로, 로컬 LLM 에이전트를 결합해 채팅으로 파일 작업을 지시하고 위키·매크로 등 자동화 작업을 수행합니다(전환 계획: `Docs/phases/Phase11-VanillaCommander.md`). UI 레이아웃은 `VivoStudio`(좌측 사이드바/패널 + 우측 탭 콘텐츠), 에이전트 관리·채팅 UX는 `VivoAcademy`, **에이전트 런타임(루프·도구·압축·스킬·세션)은 `pi`**([earendil-works/pi](https://github.com/earendil-works/pi), 로컬 체크아웃 `..\pi`)를 참고했습니다.
 
 ## 2. 기술 스택 (고정)
 
@@ -57,7 +57,7 @@ pnpm check:ollama    # Ollama 서버/모델 상태 확인 (Phase 2 이상 로컬
 
 ## 5. Git / 커밋 규칙 (단순 운용 + 세세한 히스토리)
 
-- 원격 저장소: `origin = https://github.com/godstale/FortressAgent.git`. **`git push`는 사용자의 명시적 승인 없이 실행하지 않습니다.** 로컬 커밋까지는 자유롭게 진행하되, 원격에 반영하는 시점은 항상 확인을 받습니다.
+- 원격 저장소: `origin = https://github.com/godstale/VanillaCommander.git`. **`git push`는 사용자의 명시적 승인 없이 실행하지 않습니다.** 로컬 커밋까지는 자유롭게 진행하되, 원격에 반영하는 시점은 항상 확인을 받습니다.
 - **main 직접 커밋 금지.** 코드/파일 변경 전에는 반드시 main에서 새 브랜치를 만듭니다.
   - 시작 시: `git status -sb`로 dirty 여부 확인 → `git checkout main` → `git pull --ff-only`(가능하면) → `git checkout -b <type>/<short-topic>`
   - 브랜치명: `feat/`·`fix/`·`chore/`·`docs/`·`refactor/`·`test/` + 짧은 영어 토픽. 예: `feat/chat-stream-stop`
@@ -73,7 +73,7 @@ pnpm check:ollama    # Ollama 서버/모델 상태 확인 (Phase 2 이상 로컬
 - **기본은 현재 클론에서 브랜치를 만들어 작업합니다.** worktree를 기본 작업 방식으로 사용하지 않습니다.
 - **worktree는 코드를 분리할 필요가 있는 특별한 경우에만 사용합니다.** 다른 에이전트가 같은 클론에서 진행중인 작업이 있어 격리가 필요할 때(예: 서로의 uncommitted 변경이 충돌하거나, 장시간 실행 작업을 병렬로 유지해야 할 때)에만 사용합니다.
   - 사용 전 `git worktree list`와 `Docs/TODO.md`의 `[~]` 항목으로 충돌 여부를 확인합니다.
-  - 예: `git worktree add ../Fortress-<topic> -b feat/<topic> main`. 작업이 끝나면 worktree를 정리합니다(`git worktree remove`).
+  - 예: `git worktree add ../VanillaCommander-<topic> -b feat/<topic> main`. 작업이 끝나면 worktree를 정리합니다(`git worktree remove`).
 - 작업 시작 시 `Docs/TODO.md`에서 대상 항목을 `[ ]` → `[~]`로 변경하고 나서 코드를 작성합니다(선점 표시).
 - 자신의 작업 ID가 "소유"하지 않는 파일은 수정하지 않습니다. 여러 작업이 같은 파일을 나눠 소유하는 경우(예: `package.json`의 서로 다른 필드) 해당 Phase 문서에 명시된 "이 필드만 담당" 지침을 정확히 지킵니다.
 - 다른 작업 ID가 이미 `[~]`(진행중)이면 그 파일을 건드리지 않고, 필요하면 해당 작업이 끝난 뒤 이어서 진행합니다.
@@ -96,7 +96,7 @@ pnpm check:ollama    # Ollama 서버/모델 상태 확인 (Phase 2 이상 로컬
 
 ## 8. 앱 런타임 `AGENTS.md`/스킬 포맷 (참고용 요약)
 
-Fortress 앱이 사용자 워크스페이스에서 인식하는 `AGENTS.md`/`.agents/skills/` 포맷은 `Docs/Architecture.md` §6에 정의되어 있으며, [Agent Skills 표준](https://agentskills.io/specification)을 따릅니다. 이 리포지토리 루트의 이 파일과 혼동하지 마십시오.
+Vanilla Commander 앱이 사용자 워크스페이스에서 인식하는 `AGENTS.md`/`.agents/skills/` 포맷은 `Docs/Architecture.md` §6에 정의되어 있으며, [Agent Skills 표준](https://agentskills.io/specification)을 따릅니다. 이 리포지토리 루트의 이 파일과 혼동하지 마십시오.
 
 핵심: **스킬은 도구가 아닙니다.** 시스템 프롬프트에는 이름·설명·경로만 노출되고, 모델이 `read` 도구로 `SKILL.md` 본문을 로드합니다(프로그레시브 디스클로저). 스킬을 `AgentTool`로 등록하는 코드를 작성하지 마십시오.
 

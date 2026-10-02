@@ -286,7 +286,7 @@ describe('ChatInput component', () => {
   });
 
   it('recalls the previous prompt with ArrowUp and restores draft with ArrowDown', () => {
-    window.localStorage.removeItem('fortress:prompt-history');
+    window.localStorage.removeItem('vanilla-commander:prompt-history');
     const onSend = vi.fn();
     render(
       <ChatInput
@@ -312,7 +312,7 @@ describe('ChatInput component', () => {
     expect(textarea).toHaveValue('second prompt');
     fireEvent.keyDown(textarea, { key: 'ArrowDown' });
     expect(textarea).toHaveValue('');
-    window.localStorage.removeItem('fortress:prompt-history');
+    window.localStorage.removeItem('vanilla-commander:prompt-history');
   });
 
   it('renders save/load macro buttons before the context gauge', () => {
@@ -335,7 +335,7 @@ describe('ChatInput component', () => {
   });
 
   it('navigates history from the first line of a multiline input, keeps native caret motion inside', () => {
-    window.localStorage.removeItem('fortress:prompt-history');
+    window.localStorage.removeItem('vanilla-commander:prompt-history');
     const onSend = vi.fn();
     render(
       <ChatInput
@@ -368,12 +368,12 @@ describe('ChatInput component', () => {
     textarea.selectionStart = textarea.selectionEnd = 'second prompt'.length;
     fireEvent.keyDown(textarea, { key: 'ArrowDown' });
     expect(textarea).toHaveValue('line1\nline2');
-    window.localStorage.removeItem('fortress:prompt-history');
+    window.localStorage.removeItem('vanilla-commander:prompt-history');
   });
 
   it('keeps prompt history scoped per chat session', () => {
-    window.localStorage.removeItem('fortress:prompt-history:session-a');
-    window.localStorage.removeItem('fortress:prompt-history:session-b');
+    window.localStorage.removeItem('vanilla-commander:prompt-history:session-a');
+    window.localStorage.removeItem('vanilla-commander:prompt-history:session-b');
     const onSend = vi.fn();
     const { unmount } = render(
       <ChatInput
@@ -406,8 +406,8 @@ describe('ChatInput component', () => {
     fireEvent.keyDown(textareaB, { key: 'ArrowUp' });
     expect(textareaB).toHaveValue('');
 
-    window.localStorage.removeItem('fortress:prompt-history:session-a');
-    window.localStorage.removeItem('fortress:prompt-history:session-b');
+    window.localStorage.removeItem('vanilla-commander:prompt-history:session-a');
+    window.localStorage.removeItem('vanilla-commander:prompt-history:session-b');
   });
 });
 

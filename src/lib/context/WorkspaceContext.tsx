@@ -13,7 +13,7 @@ import * as settingsRepo from '@/lib/db/repositories/settingsRepo';
 import { setActiveWorkspaceRoot } from '@/lib/db/client';
 import { chatQueueManager } from '@/lib/agent/chatQueueManager';
 
-const TRUST_STORAGE_KEY = 'fortress_trusted_workspaces';
+const TRUST_STORAGE_KEY = 'vanilla-commander_trusted_workspaces';
 
 function getStoredTrustMap(): Record<string, boolean> {
   try {
@@ -32,7 +32,7 @@ function saveTrustMap(map: Record<string, boolean>): void {
   }
 }
 
-const RECENT_WORKSPACES_KEY = 'fortress_recent_workspaces';
+const RECENT_WORKSPACES_KEY = 'vanilla-commander_recent_workspaces';
 
 function getStoredRecentWorkspaces(): string[] {
   try {
@@ -70,7 +70,7 @@ const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [workspaceRoot, setWorkspaceRootState] = useState<string | null>(() => {
-    return localStorage.getItem('fortress_current_workspace_root');
+    return localStorage.getItem('vanilla-commander_current_workspace_root');
   });
   const workspaceRootRef = useRef<string | null>(workspaceRoot);
   useEffect(() => {
@@ -80,14 +80,14 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [recentWorkspaces, setRecentWorkspaces] = useState<string[]>(getStoredRecentWorkspaces);
 
   const [trustModalOpen, setTrustModalOpen] = useState<boolean>(() => {
-    const initialRoot = localStorage.getItem('fortress_current_workspace_root');
+    const initialRoot = localStorage.getItem('vanilla-commander_current_workspace_root');
     if (!initialRoot) return false;
     const map = getStoredTrustMap();
     return map[initialRoot] === undefined;
   });
 
   const [isTrusted, setIsTrusted] = useState<boolean>(() => {
-    const initialRoot = localStorage.getItem('fortress_current_workspace_root');
+    const initialRoot = localStorage.getItem('vanilla-commander_current_workspace_root');
     if (!initialRoot) return false;
     const map = getStoredTrustMap();
     return Boolean(map[initialRoot]);
@@ -105,7 +105,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
         if (!workspaceRoot && settings.lastWorkspaceRoot) {
           setActiveWorkspaceRoot(settings.lastWorkspaceRoot);
           setWorkspaceRootState(settings.lastWorkspaceRoot);
-          localStorage.setItem('fortress_current_workspace_root', settings.lastWorkspaceRoot);
+          localStorage.setItem('vanilla-commander_current_workspace_root', settings.lastWorkspaceRoot);
           try {
             await invoke('set_active_workspace', { path: settings.lastWorkspaceRoot });
           } catch {
@@ -160,7 +160,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       // ignore in non-Tauri
     }
     if (root) {
-      localStorage.setItem('fortress_current_workspace_root', root);
+      localStorage.setItem('vanilla-commander_current_workspace_root', root);
       setRecentWorkspaces((prev) => {
         const next = [root, ...prev.filter((p) => p !== root)].slice(0, 10);
         saveRecentWorkspaces(next);
@@ -177,7 +177,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       }
       void settingsRepo.updateSettings({ lastWorkspaceRoot: root });
     } else {
-      localStorage.removeItem('fortress_current_workspace_root');
+      localStorage.removeItem('vanilla-commander_current_workspace_root');
       setIsTrusted(false);
       setTrustModalOpen(false);
       void settingsRepo.updateSettings({ lastWorkspaceRoot: null });

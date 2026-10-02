@@ -6,7 +6,7 @@ import type { AgentEvent, AgentMessage } from '@/lib/agent/types';
 import { SYSTEM_AUTO_GUIDE_PREFIX } from '@/lib/agent/types';
 import type { SkillManifest } from '@/lib/types/skill';
 import type { ContextFileItem } from '@/lib/skills/contextFiles';
-import { FortressAgent } from '@/lib/agent/agent';
+import { VanillaAgent } from '@/lib/agent/agent';
 import { getBuiltinTools } from '@/lib/tools/registry';
 import { buildSystemPromptSections, formatSystemPrompt } from '@/lib/prompt/buildSystemPrompt';
 import { getVisualizationPromptSection } from '@/lib/prompt/visualizationSection';
@@ -194,7 +194,7 @@ export function useChat(
   });
 
   // Agent instance ref
-  const agentRef = useRef<FortressAgent | null>(null);
+  const agentRef = useRef<VanillaAgent | null>(null);
   const llmRuntimeRef = useRef(llmRuntime);
   const cwdRef = useRef(effectiveCwd);
   useEffect(() => {
@@ -378,7 +378,7 @@ export function useChat(
         opts.baseUrl,
       );
 
-      const newAgent = new FortressAgent({
+      const newAgent = new VanillaAgent({
         sessionId,
         agent: {
           id: cfg.id,

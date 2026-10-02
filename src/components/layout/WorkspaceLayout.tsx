@@ -26,24 +26,24 @@ export function WorkspaceLayout({
   return (
     <PanelGroup
       direction="horizontal"
-      autoSaveId="fortress-layout-v1"
+      autoSaveId="vanilla-commander-layout-v1"
       className="h-full w-full overflow-hidden"
     >
       <Panel
-        id="fortress-side-panel"
+        id="vanilla-commander-side-panel"
         order={1}
         defaultSize={20}
         minSize={16}
         collapsible
         collapsedSize={0}
         ref={sidePanelRef}
-        className="min-w-0 h-full overflow-hidden"
+        className="min-w-0 h-full overflow-hidden bg-panel"
       >
         {sidePanel}
       </Panel>
       <ResizeHandle />
       <Panel
-        id="fortress-center-workspace"
+        id="vanilla-commander-center-workspace"
         order={2}
         minSize={40}
         className="min-w-0 h-full overflow-hidden"

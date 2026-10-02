@@ -60,7 +60,7 @@ class AppLogger {
     });
 
     // Mirror to browser console for Developer Tools inspection
-    const prefix = `[Fortress][${category.toUpperCase()}]`;
+    const prefix = `[VanillaCommander][${category.toUpperCase()}]`;
     const consoleArgs: unknown[] = [
       `%c${prefix} ${message}`,
       level === 'error'

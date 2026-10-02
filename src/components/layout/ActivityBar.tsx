@@ -39,7 +39,7 @@ export function ActivityBar({ activeView, onSelect }: ActivityBarProps) {
     <TooltipProvider delayDuration={300}>
       <aside
         aria-label="Activity Bar"
-        className="w-12 shrink-0 h-full flex flex-col items-center justify-between bg-sidebar border-r border-border py-2 select-none"
+        className="w-12 shrink-0 h-full flex flex-col items-center justify-between bg-activitybar border-r border-border py-2 select-none"
       >
         <div className="flex flex-col items-center gap-1 w-full">
           {ITEMS.map(({ view, icon: Icon, labelKey }) => {
@@ -63,7 +63,7 @@ export function ActivityBar({ activeView, onSelect }: ActivityBarProps) {
                       'w-10 h-10 flex items-center justify-center rounded-md transition-colors relative',
                       isItemDisabled
                         ? 'text-muted-foreground/30 cursor-not-allowed hover:bg-transparent'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-sidebar-accent cursor-pointer',
+                        : 'text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] cursor-pointer',
                       isActive && 'text-primary bg-primary/10 hover:text-primary hover:bg-primary/15 font-medium',
                     )}
                   >
@@ -93,7 +93,7 @@ export function ActivityBar({ activeView, onSelect }: ActivityBarProps) {
               <Link
                 to="/settings"
                 aria-label={t('activityBar.settings')}
-                className="w-10 h-10 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors cursor-pointer"
+                className="w-10 h-10 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/[0.08] transition-colors cursor-pointer"
               >
                 <Settings className="h-5 w-5" />
               </Link>

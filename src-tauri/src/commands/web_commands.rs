@@ -460,17 +460,17 @@ pub async fn open_in_browser(app: tauri::AppHandle, url: String) -> Result<(), S
         .parse::<tauri::Url>()
         .map_err(|e| format!("Invalid URL: {}", e))?;
 
-    if let Some(window) = app.get_webview_window("fortress-browser") {
+    if let Some(window) = app.get_webview_window("vanilla-commander-browser") {
         let _ = window.navigate(parsed_url);
         let _ = window.show();
         let _ = window.set_focus();
     } else {
         tauri::WebviewWindowBuilder::new(
             &app,
-            "fortress-browser",
+            "vanilla-commander-browser",
             tauri::WebviewUrl::External(parsed_url),
         )
-        .title("Fortress Browser")
+        .title("Vanilla Commander Browser")
         .inner_size(1100.0, 750.0)
         .build()
         .map_err(|e| format!("Failed to open browser window: {}", e))?;

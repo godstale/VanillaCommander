@@ -26,9 +26,9 @@ export function ImageViewerTab({ tab }: ImageViewerTabProps) {
   const resetZoom = () => setZoom(100);
 
   return (
-    <div className="flex flex-col h-full w-full min-h-0 bg-background select-none">
+    <div className="flex flex-col h-full w-full min-h-0 bg-editor select-none">
       {/* Top status bar */}
-      <div className="h-9 shrink-0 flex items-center justify-between px-3 border-b border-border bg-card/30">
+      <div className="h-9 shrink-0 flex items-center justify-between px-3 border-b border-border bg-tabbar">
         <span className="text-xs font-mono text-muted-foreground truncate">
           {basename(filePath)}
         </span>

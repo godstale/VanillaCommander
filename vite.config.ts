@@ -16,7 +16,7 @@ export default defineConfig({
     watch: {
       ignored: [
         '**/src-tauri/**',
-        '**/.fortress/**',
+        '**/.vanilla-commander/**',
         '**/*.db',
         '**/*.db-*',
         '**/*.sqlite*',
@@ -32,7 +32,7 @@ export default defineConfig({
       '**/node_modules/**',
       '**/dist/**',
       '**/src-tauri/**',
-      '**/.fortress/**',
+      '**/.vanilla-commander/**',
     ],
   },
 });

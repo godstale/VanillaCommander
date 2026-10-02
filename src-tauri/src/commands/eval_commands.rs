@@ -2,8 +2,8 @@
 //!
 //! Roots: builtin packs live under `resource_dir()/resources/evals` (read-only),
 //! user packs under `app_data_dir/evals/packs`, project packs under
-//! `{workspaceRoot}/.fortress/evals/packs`. Sandboxes live under
-//! `temp_dir()/fortress-eval/<unique>` and export/import paths are
+//! `{workspaceRoot}/.vanilla-commander/evals/packs`. Sandboxes live under
+//! `temp_dir()/vanilla-commander-eval/<unique>` and export/import paths are
 //! frontend dialog-picked absolute paths.
 
 use std::path::{Component, Path, PathBuf};
@@ -228,7 +228,7 @@ fn project_root(workspace_root: Option<String>) -> Result<PathBuf, String> {
             ));
         }
     }
-    let root = Path::new(&ws).join(".fortress").join("evals").join("packs");
+    let root = Path::new(&ws).join(".vanilla-commander").join("evals").join("packs");
     std::fs::create_dir_all(&root)
         .map_err(|e| format!("Failed to create project packs dir: {}", e))?;
     Ok(root)
@@ -247,7 +247,7 @@ fn scope_root<R: Runtime>(
 }
 
 fn sandbox_base() -> PathBuf {
-    std::env::temp_dir().join("fortress-eval")
+    std::env::temp_dir().join("vanilla-commander-eval")
 }
 
 fn unique_sandbox_name() -> String {
@@ -474,7 +474,7 @@ fn validate_run_id(run_id: &str) -> Result<(), String> {
     Ok(())
 }
 
-/// `{workspaceRoot}/.fortress/eval-runs`. Same active-workspace check as
+/// `{workspaceRoot}/.vanilla-commander/eval-runs`. Same active-workspace check as
 /// `project_root` so logs never escape the session workspace.
 fn eval_runs_root(workspace_root: Option<String>) -> Result<PathBuf, String> {
     let active = get_active_workspace_internal();
@@ -495,7 +495,7 @@ fn eval_runs_root(workspace_root: Option<String>) -> Result<PathBuf, String> {
             ));
         }
     }
-    let root = Path::new(&ws).join(".fortress").join("eval-runs");
+    let root = Path::new(&ws).join(".vanilla-commander").join("eval-runs");
     std::fs::create_dir_all(&root)
         .map_err(|e| format!("Failed to create eval-runs dir: {}", e))?;
     Ok(root)
@@ -931,7 +931,7 @@ pub async fn eval_run_python(code: String, timeout_ms: u64) -> Result<PythonRunR
     let res = tauri::async_runtime::spawn_blocking(move || {
         use std::io::Read;
         let run_dir = std::env::temp_dir()
-            .join("fortress-eval")
+            .join("vanilla-commander-eval")
             .join(format!("pyrun-{}", unique_sandbox_name()));
         std::fs::create_dir_all(&run_dir)
             .map_err(|e| format!("Failed to create run dir: {}", e))?;
@@ -1189,7 +1189,7 @@ mod tests {
 
     fn tmp_root(name: &str) -> PathBuf {
         let root = std::env::temp_dir()
-            .join("fortress-eval-test")
+            .join("vanilla-commander-eval-test")
             .join(name);
         let _ = std::fs::remove_dir_all(&root);
         std::fs::create_dir_all(&root).unwrap();

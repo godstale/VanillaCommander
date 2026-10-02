@@ -268,7 +268,7 @@ export function AgentStatsTab({ tab }: { tab: WorkspaceTab }) {
     : [];
 
   return (
-    <div className="flex-1 h-full overflow-y-auto p-6 bg-background text-foreground space-y-6">
+    <div className="flex-1 h-full overflow-y-auto p-6 bg-editor text-foreground space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-border gap-3 select-none">
         <div>

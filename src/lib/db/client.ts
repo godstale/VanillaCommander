@@ -1633,7 +1633,7 @@ const projectDbs = new Map<string, SqlDatabase>();
 
 let activeWorkspaceRoot: string | null =
   typeof window !== 'undefined'
-    ? localStorage.getItem('fortress_current_workspace_root')
+    ? localStorage.getItem('vanilla-commander_current_workspace_root')
     : null;
 
 export function setActiveWorkspaceRoot(root: string | null): void {
@@ -1695,6 +1695,15 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     } catch {
       // Column may already exist or table created with it; safe to ignore
     }
+  }
+
+  // Fortress 시절 시드된 기본 에이전트 이름만 바꾼다(사용자가 바꾼 이름은 유지)
+  try {
+    await db.execute(`UPDATE agents SET name = ? WHERE name = 'Fortress Default'`, [
+      DEFAULT_AGENT.name,
+    ]);
+  } catch {
+    // 메모리 폴백 등에서 UPDATE 미지원 시 무시
   }
 
   // Ensure default agent exists if agents table is empty
@@ -1786,7 +1795,7 @@ export async function getGlobalDatabase(): Promise<SqlDatabase> {
     return globalDb;
   }
 
-  const db = await Database.load('sqlite:fortress.db');
+  const db = await Database.load('sqlite:vanilla-commander.db');
   globalDb = db;
   await runMigrations(db);
   globalMigrationDone = true;
@@ -1808,7 +1817,7 @@ export async function getProjectDatabase(
     workspaceRoot ??
     activeWorkspaceRoot ??
     (typeof window !== 'undefined'
-      ? localStorage.getItem('fortress_current_workspace_root')
+      ? localStorage.getItem('vanilla-commander_current_workspace_root')
       : null);
 
   if (!root) {
@@ -1827,18 +1836,18 @@ export async function getProjectDatabase(
     return memDb;
   }
 
-  // Ensure .fortress directory exists before attempting Database.load
+  // Ensure .vanilla-commander directory exists before attempting Database.load
   try {
-    await invoke('ensure_fortress_dir', { workspaceRoot: root });
+    await invoke('ensure_app_data_dir', { workspaceRoot: root });
   } catch (err) {
     console.warn(
-      'ensure_fortress_dir invoke failed, proceeding with Database.load:',
+      'ensure_app_data_dir invoke failed, proceeding with Database.load:',
       err,
     );
   }
 
   const normalized = root.replace(/\\/g, '/');
-  const connUrl = `sqlite:${normalized}/.fortress/fortress.db`;
+  const connUrl = `sqlite:${normalized}/.vanilla-commander/vanilla-commander.db`;
   const db = await Database.load(connUrl);
   await runMigrations(db);
   projectDbs.set(root, db);
@@ -1860,7 +1869,7 @@ export async function getDatabase(
     workspaceRoot ??
     activeWorkspaceRoot ??
     (typeof window !== 'undefined'
-      ? localStorage.getItem('fortress_current_workspace_root')
+      ? localStorage.getItem('vanilla-commander_current_workspace_root')
       : null);
 
   if (root) {

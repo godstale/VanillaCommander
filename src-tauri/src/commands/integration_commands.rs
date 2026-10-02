@@ -41,7 +41,7 @@ pub fn validate_executable(executable_path: &str) -> Result<PathBuf, String> {
 
 fn fresh_work_dir() -> Result<PathBuf, String> {
     let dir = std::env::temp_dir().join(format!(
-        "fortress-cli-{}-{}",
+        "vanilla-commander-cli-{}-{}",
         std::process::id(),
         std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -197,9 +197,9 @@ mod tests {
     #[test]
     fn test_missing_absolute_path_rejected() {
         #[cfg(target_os = "windows")]
-        let missing = "C:\\definitely\\not\\here\\fortress-test-binary.exe";
+        let missing = "C:\\definitely\\not\\here\\vanilla-commander-test-binary.exe";
         #[cfg(not(target_os = "windows"))]
-        let missing = "/definitely/not/here/fortress-test-binary";
+        let missing = "/definitely/not/here/vanilla-commander-test-binary";
         assert!(validate_executable(missing).is_err());
     }
 

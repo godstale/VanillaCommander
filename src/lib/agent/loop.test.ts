@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { z } from 'zod';
-import { FortressAgent } from '@/lib/agent/agent';
+import { VanillaAgent } from '@/lib/agent/agent';
 import type { AgentTool, AgentEvent } from '@/lib/agent/types';
 import type { OllamaChunk } from '@/lib/llm/ollamaClient';
 
@@ -11,7 +11,7 @@ async function* createMockStream(chunks: OllamaChunk[]): AsyncIterable<OllamaChu
   }
 }
 
-describe('FortressAgent and runAgentLoop', () => {
+describe('VanillaAgent and runAgentLoop', () => {
   it('(a) text-only response', async () => {
     const mockStreamFn = vi.fn().mockImplementation(() => {
       return createMockStream([
@@ -21,7 +21,7 @@ describe('FortressAgent and runAgentLoop', () => {
     });
 
     const events: AgentEvent[] = [];
-    const agent = new FortressAgent({
+    const agent = new VanillaAgent({
       agent: { model: 'test-model' },
       streamChatFn: mockStreamFn,
     });
@@ -84,7 +84,7 @@ describe('FortressAgent and runAgentLoop', () => {
       },
     };
 
-    const agent = new FortressAgent({
+    const agent = new VanillaAgent({
       agent: { model: 'test-model' },
       tools: [calcTool],
       streamChatFn: mockStreamFn,
@@ -145,7 +145,7 @@ describe('FortressAgent and runAgentLoop', () => {
       },
     };
 
-    const agent = new FortressAgent({
+    const agent = new VanillaAgent({
       agent: { model: 'test-model' },
       tools: [toolA, toolB],
       streamChatFn: mockStreamFn,
@@ -194,7 +194,7 @@ describe('FortressAgent and runAgentLoop', () => {
       },
     };
 
-    const agent = new FortressAgent({
+    const agent = new VanillaAgent({
       agent: { model: 'test-model' },
       tools: [failingTool],
       streamChatFn: mockStreamFn,
@@ -230,7 +230,7 @@ describe('FortressAgent and runAgentLoop', () => {
       })();
     });
 
-    const agent = new FortressAgent({
+    const agent = new VanillaAgent({
       agent: { model: 'test-model' },
       streamChatFn: mockStreamFn,
     });
@@ -256,7 +256,7 @@ describe('FortressAgent and runAgentLoop', () => {
       return createMockStream([{ content: 'ok', done: true }]);
     });
 
-    const agent = new FortressAgent({
+    const agent = new VanillaAgent({
       agent: { model: 'test-model', think: 'high' },
       streamChatFn: mockStreamFn,
     });

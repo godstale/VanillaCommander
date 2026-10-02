@@ -6,7 +6,7 @@ import type { RetryPolicy } from '@/lib/agent/retry';
 import { runAgentLoop, type LoopAgentConfig } from '@/lib/agent/loop';
 import type { LlmStreamChatFn } from '@/lib/llm/providerRuntime';
 
-export interface FortressAgentConfig {
+export interface VanillaAgentConfig {
   sessionId?: string;
   agent: LoopAgentConfig;
   tools?: AgentTool[];
@@ -20,8 +20,8 @@ export interface FortressAgentConfig {
 
 export type AgentState = 'idle' | 'running';
 
-export class FortressAgent {
-  private config: FortressAgentConfig;
+export class VanillaAgent {
+  private config: VanillaAgentConfig;
   private hooks: AgentHooks;
   private messages: AgentMessage[];
   private steeringQueue: MessageQueue;
@@ -31,7 +31,7 @@ export class FortressAgent {
   private currentState: AgentState = 'idle';
   private idleResolvers: Array<() => void> = [];
 
-  constructor(config: FortressAgentConfig) {
+  constructor(config: VanillaAgentConfig) {
     this.config = config;
     this.hooks = composeHooks(getRegisteredHooks(), config.hooks ?? {});
     this.messages = config.initialMessages ? [...config.initialMessages] : [];

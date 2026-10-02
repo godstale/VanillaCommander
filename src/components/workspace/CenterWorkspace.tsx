@@ -149,12 +149,12 @@ function WorkspacePane({
   const isThisPaneDropping = splitDropTarget?.pane === pane;
 
   return (
-    <div className="flex flex-col h-full w-full min-h-0 bg-background overflow-hidden relative">
+    <div className="flex flex-col h-full w-full min-h-0 bg-editor overflow-hidden relative">
       {/* Tab Strip */}
       <div
         onDragOver={onContainerDragOver}
         onDrop={(e) => onContainerDrop(e, pane)}
-        className="min-h-9 shrink-0 flex flex-wrap items-center bg-card/60 border-b border-border select-none p-0"
+        className="min-h-9 shrink-0 flex flex-wrap items-center bg-tabbar border-b border-border select-none p-0"
       >
         <div className="flex flex-wrap items-center min-w-0 flex-1">
           {paneTabs.map((tab) => {
@@ -183,7 +183,7 @@ function WorkspacePane({
                 className={cn(
                   'h-9 box-border flex items-center gap-2 px-3.5 text-xs border-t-2 border-r border-b cursor-pointer transition-colors max-w-[15rem] shrink-0 relative group select-none cursor-grab active:cursor-grabbing',
                   isActive
-                    ? 'border-t-primary border-r-border/80 border-b-transparent bg-background text-foreground font-medium shadow-xs'
+                    ? 'border-t-primary border-r-border/80 border-b-transparent bg-editor text-foreground font-medium shadow-xs'
                     : 'border-t-transparent border-r-border/80 border-b-border/80 text-muted-foreground hover:text-foreground hover:bg-accent/40',
                   isBeingDragged &&
                     'opacity-40 scale-95 border-dashed border-primary',
@@ -731,7 +731,7 @@ export function CenterWorkspace() {
   };
 
   return (
-    <div className="flex flex-col h-full w-full min-h-0 bg-background overflow-hidden relative">
+    <div className="flex flex-col h-full w-full min-h-0 bg-editor overflow-hidden relative">
       {!isSplit ? (
         <WorkspacePane
           pane="primary"
@@ -771,7 +771,7 @@ export function CenterWorkspace() {
           className="h-full w-full overflow-hidden"
         >
           <Panel
-            id="fortress-pane-primary"
+            id="vanilla-commander-pane-primary"
             defaultSize={50}
             minSize={20}
             className="min-w-0 h-full overflow-hidden"
@@ -811,7 +811,7 @@ export function CenterWorkspace() {
           </Panel>
           <SplitResizeHandle direction={splitDirection} />
           <Panel
-            id="fortress-pane-secondary"
+            id="vanilla-commander-pane-secondary"
             defaultSize={50}
             minSize={20}
             className="min-w-0 h-full overflow-hidden"

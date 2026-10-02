@@ -124,8 +124,8 @@ export function SettingsIntegrations() {
         const out = await runIntegrationCli({
           executablePath: integration.cli.executablePath,
           args: integration.cli.args,
-          stdinText: 'Fortress connection test',
-          promptFileText: 'Fortress connection test',
+          stdinText: 'Vanilla Commander connection test',
+          promptFileText: 'Vanilla Commander connection test',
           timeoutMs: Math.min(integration.cli.timeoutMs, 30000),
         });
         if (out.timedOut || out.exitCode !== 0) {
