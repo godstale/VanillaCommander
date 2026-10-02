@@ -111,7 +111,7 @@ describe('Workspace without selected folder', () => {
     expect(result.current.activeView).toBeNull();
   });
 
-  it('WorkspaceTabsContext prevents opening tabs when no folder is selected', () => {
+  it('WorkspaceTabsContext allows opening tabs when no folder is selected (P11-11, D2)', () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <WorkspaceProvider>
         <WorkspaceTabsProvider>{children}</WorkspaceTabsProvider>
@@ -125,10 +125,10 @@ describe('Workspace without selected folder', () => {
         type: 'chat',
         title: 'New Chat',
       });
-      expect(tabId).toBe('');
+      expect(tabId).not.toBe('');
     });
 
-    expect(result.current.tabs).toHaveLength(0);
-    expect(result.current.activeTabId).toBeNull();
+    expect(result.current.tabs).toHaveLength(1);
+    expect(result.current.activeTabId).not.toBeNull();
   });
 });

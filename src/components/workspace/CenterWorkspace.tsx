@@ -33,6 +33,7 @@ import { ImageViewerTab } from '@/components/workspace/ImageViewerTab';
 import { SkillViewerTab } from '@/components/workspace/SkillViewerTab';
 import { AgentEditorTab } from '@/components/workspace/AgentEditorTab';
 import { AgentMonitorTab } from '@/components/workspace/AgentMonitorTab';
+import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
 import { WelcomeGuide } from '@/components/workspace/WelcomeGuide';
 import { PanelPlaceholder } from '@/components/sidepanel/PanelPlaceholder';
 import { cn } from '@/lib/utils';
@@ -70,8 +71,7 @@ function renderTabContent(tab: WorkspaceTab, t: (key: string) => string) {
     case 'skill-viewer':
       return <SkillViewerTab tab={tab} />;
     case 'file-explorer':
-      // P11-11에서 FileExplorerTab으로 교체.
-      return <PanelPlaceholder icon={Files} title={tab.title} description={t('tabPlaceholder.desc')} />;
+      return <FileExplorerTab tab={tab} />;
     case 'document-viewer':
       // P11-14에서 DocumentViewerTab으로 교체.
       return <PanelPlaceholder icon={FileText} title={tab.title} description={t('tabPlaceholder.desc')} />;
@@ -418,7 +418,9 @@ function WorkspacePane({
 
 export function CenterWorkspace() {
   const { t } = useLanguage();
-  const { workspaceRoot } = useWorkspace();
+  // P11-11(V7·D2): 작업 폴더가 있으면 폴더로 취급한다.
+  const { workspaceRoot: wsRoot, workFolder } = useWorkspace();
+  const workspaceRoot = workFolder ?? wsRoot;
   const {
     tabs,
     activeTabId,

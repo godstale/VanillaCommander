@@ -28,7 +28,8 @@ import { ConflictDialogHost, CommanderStatusPublishers } from '@/components/expl
 function WorkspaceContent() {
   useKeyboardShortcuts();
   const { t } = useLanguage();
-  const { workspaceRoot } = useWorkspace();
+  const { workspaceRoot: wsRoot, workFolder } = useWorkspace();
+  const effectiveRoot = workFolder ?? wsRoot;
   const { activeView, setActiveView } = useSidePanel();
   const { tabs, openTab, isTabsLoaded } = useWorkspaceTabs();
   const { settings, loading: settingsLoading } = useSettings();
@@ -61,30 +62,31 @@ function WorkspaceContent() {
     }
   };
 
-  // Automatically open a default chat tab on startup if workspaceRoot exists and no tabs after restoration
+  // P11-11(V7): 탭이 없으면 파일 탐색기 탭 1개를 연다 (폴더가 없어도 시스템 폴더 보기).
   useEffect(() => {
     if (autoOpenedRef.current) return;
     if (!isTabsLoaded) return;
-    if (workspaceRoot && tabs.length === 0) {
+    if (tabs.length === 0) {
       autoOpenedRef.current = true;
-      const newId = `chat:${Date.now()}`;
+      const root = effectiveRoot ?? '';
+      const newId = `explorer:${Date.now()}`;
       openTab({
-        type: 'chat',
+        type: 'file-explorer',
         id: newId,
-        title: t('workspace.newChat'),
-        meta: { sessionId: newId.slice(5) },
+        title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+        meta: { path: root },
       });
     }
-  }, [isTabsLoaded, openTab, tabs.length, workspaceRoot, t]);
+  }, [isTabsLoaded, openTab, tabs.length, effectiveRoot, t]);
 
   // P11-01(D2): 폴더 미선택 상태에서도 전부 선택 가능.
   useEffect(() => {
-    if (!workspaceRoot) {
+    if (!effectiveRoot) {
       if (sidePanelRef.current?.isCollapsed()) {
         sidePanelRef.current.expand();
       }
     }
-  }, [workspaceRoot]);
+  }, [effectiveRoot]);
 
   const handleActivityBarSelect = (view: Exclude<SidePanelView, null>) => {
     const panel = sidePanelRef.current;
