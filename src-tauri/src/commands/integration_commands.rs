@@ -257,7 +257,8 @@ mod tests {
 
     #[test]
     fn test_cwd_resolution() {
-        use crate::commands::fs_commands::set_active_workspace_internal;
+        use crate::commands::fs_commands::{scope_test_lock, set_allowed_roots_internal};
+        let _guard = scope_test_lock();
 
         let stamp = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -272,7 +273,7 @@ mod tests {
         let fallback = base.join("fallback");
         std::fs::create_dir_all(&fallback).unwrap();
 
-        set_active_workspace_internal(Some(ws.to_string_lossy().into_owned()));
+        set_allowed_roots_internal(vec![ws.to_string_lossy().into_owned()]);
         let sub = ws.join("sub");
         std::fs::create_dir_all(&sub).unwrap();
         assert!(resolve_cwd_for_cli(&Some(sub.to_string_lossy().into_owned()), &fallback).is_ok());
@@ -285,7 +286,7 @@ mod tests {
         );
         assert_eq!(resolve_cwd_for_cli(&None, &fallback).unwrap(), fallback);
 
-        set_active_workspace_internal(None);
+        set_allowed_roots_internal(Vec::new());
         let _ = std::fs::remove_dir_all(&base);
     }
 }

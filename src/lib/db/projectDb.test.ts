@@ -69,14 +69,15 @@ describe('Project DB vs Global DB separation', () => {
     });
 
     const settingsA = await settingsRepo.getSettings();
-    expect(settingsA.theme).toBe('light');
+    // P11-04: 메모리 폴백의 전체 갱신 유실 버그 수정 후 전역 theme이 올바히 유지된다.
+    expect(settingsA.theme).toBe('dark');
     expect(settingsA.openTabs).toHaveLength(1);
     expect(settingsA.openTabs[0].id).toBe('tab-a');
 
     // Workspace B has different tabs
     setActiveWorkspaceRoot('/workspace/B');
     const settingsB = await settingsRepo.getSettings();
-    expect(settingsB.theme).toBe('light'); // shared global setting
+    expect(settingsB.theme).toBe('dark'); // shared global setting
     expect(settingsB.openTabs).toHaveLength(0); // isolated project tabs
 
     // Workspace B sets its own tabs

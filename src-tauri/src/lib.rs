@@ -40,7 +40,8 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             pick_project_folder,
-            set_active_workspace,
+            set_agent_allowed_roots,
+            ensure_work_folder_layout,
             ensure_app_data_dir,
             get_app_paths,
             read_project_folder_tree,

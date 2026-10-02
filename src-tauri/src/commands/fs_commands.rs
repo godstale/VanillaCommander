@@ -4,27 +4,52 @@ use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Runtime};
 use tauri_plugin_dialog::DialogExt;
 
-static ACTIVE_WORKSPACE: RwLock<Option<String>> = RwLock::new(None);
+static AGENT_ALLOWED_ROOTS: RwLock<Vec<String>> = RwLock::new(Vec::new());
 
-pub fn set_active_workspace_internal(path: Option<String>) {
-    if let Some(ref p) = path {
-        let _ = std::env::set_current_dir(Path::new(p));
-    }
-    if let Ok(mut lock) = ACTIVE_WORKSPACE.write() {
-        *lock = path;
+pub fn set_allowed_roots_internal(roots: Vec<String>) {
+    // starts_with 비교가 동작하도록 canonical 형태로 보관한다 (Windows \\?\ 접두 등).
+    let canonical: Vec<String> = roots
+        .into_iter()
+        .map(|r| {
+            Path::new(&r)
+                .canonicalize()
+                .map(|p| p.to_string_lossy().into_owned())
+                .unwrap_or(r)
+        })
+        .collect();
+    if let Ok(mut lock) = AGENT_ALLOWED_ROOTS.write() {
+        *lock = canonical;
     }
 }
 
-pub fn get_active_workspace_internal() -> Option<String> {
-    ACTIVE_WORKSPACE.read().ok().and_then(|lock| lock.clone())
+pub fn get_allowed_roots_internal() -> Vec<String> {
+    AGENT_ALLOWED_ROOTS
+        .read()
+        .map(|lock| lock.clone())
+        .unwrap_or_default()
 }
 
+/// 허용 루트 static을 건드리는 테스트끼리 직렬화한다 (integration_commands 포함).
+#[cfg(test)]
+pub fn scope_test_lock() -> std::sync::MutexGuard<'static, ()> {
+    static LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+    LOCK.lock().unwrap_or_else(|e| e.into_inner())
+}
+
+/// 에이전트 허용 루트 설정 (D1, P11-04). 존재하는 디렉터리만 등록한다.
 #[tauri::command]
-pub fn set_active_workspace(path: Option<String>) -> Result<(), String> {
-    set_active_workspace_internal(path.clone());
-    if let Some(ref p) = path {
-        let _ = ensure_app_data_dir(p.clone());
+pub fn set_agent_allowed_roots(roots: Vec<String>) -> Result<(), String> {
+    let mut canonical: Vec<String> = Vec::new();
+    for r in roots {
+        let p = Path::new(&r)
+            .canonicalize()
+            .map_err(|e| format!("Allowed root '{}' error: {}", r, e))?;
+        if !p.is_dir() {
+            return Err(format!("Allowed root is not a directory: {}", r));
+        }
+        canonical.push(p.to_string_lossy().into_owned());
     }
+    set_allowed_roots_internal(canonical);
     Ok(())
 }
 
@@ -93,7 +118,7 @@ pub fn get_app_paths<R: Runtime>(app: AppHandle<R>) -> Result<AppPathsInfo, Stri
         .app_log_dir()
         .map(|p| p.to_string_lossy().to_string())
         .unwrap_or_default();
-    let current_ws = get_active_workspace_internal();
+    let current_ws = get_allowed_roots_internal().into_iter().next();
 
     Ok(AppPathsInfo {
         app_data_dir: data_dir,
@@ -110,7 +135,7 @@ pub fn resolve_path(path_str: &str, workspace_root: Option<&str>) -> PathBuf {
 
     let root_opt = workspace_root
         .map(|s| s.to_string())
-        .or_else(get_active_workspace_internal)
+        .or_else(|| get_allowed_roots_internal().into_iter().next())
         .or_else(|| std::env::current_dir().ok().map(|d| d.to_string_lossy().to_string()));
 
     if let Some(ws) = root_opt {
@@ -127,97 +152,141 @@ pub fn resolve_path(path_str: &str, workspace_root: Option<&str>) -> PathBuf {
     }
 }
 
+fn is_within_roots(canonical: &Path, roots: &[PathBuf]) -> bool {
+    roots.iter().any(|r| canonical.starts_with(r))
+}
+
 pub fn resolve_and_verify_workspace_path(
     path_str: &str,
     workspace_root: Option<&str>,
     must_exist: bool,
 ) -> Result<PathBuf, String> {
-    let active_ws = get_active_workspace_internal();
-    let ws_opt = workspace_root.or(active_ws.as_deref());
-    let resolved = resolve_path(path_str, ws_opt);
+    let roots = get_allowed_roots_internal()
+        .into_iter()
+        .map(PathBuf::from)
+        .collect::<Vec<_>>();
 
-    if let Some(ws) = ws_opt {
-        if !ws.trim().is_empty() {
-            let ws_canonical = Path::new(ws)
+    // 검증 기준: 명시 루트(허용 루트 안에 있을 때만 인정) + 허용 루트 전체.
+    // 허용 루트가 비어 있으면 명시 루트만 쓴다(기존 호환).
+    let mut bases: Vec<PathBuf> = Vec::new();
+    if let Some(ws) = workspace_root.filter(|s| !s.trim().is_empty()) {
+        let ws_canonical = Path::new(ws)
+            .canonicalize()
+            .map_err(|e| format!("Workspace '{}' error: {}", ws, e))?;
+        if !roots.is_empty() && !is_within_roots(&ws_canonical, &roots) {
+            return Err(format!(
+                "Access denied: workspace '{}' is outside allowed roots",
+                ws
+            ));
+        }
+        bases.push(ws_canonical);
+    }
+    bases.extend(roots);
+
+    let base_opt = bases.first().map(|p| p.to_string_lossy().into_owned());
+    let resolved = resolve_path(path_str, base_opt.as_deref());
+
+    if bases.is_empty() {
+        return Ok(resolved);
+    }
+    let within = |c: &Path| {
+        if is_within_roots(c, &bases) {
+            Ok(())
+        } else {
+            Err(format!(
+                "Access denied: path '{}' is outside allowed roots",
+                resolved.display()
+            ))
+        }
+    };
+
+    if must_exist {
+        let canonical = resolved
+            .canonicalize()
+            .map_err(|e| format!("Path '{}' error: {}", resolved.display(), e))?;
+        within(&canonical)?;
+        return Ok(canonical);
+    }
+
+    if resolved.exists() {
+        let canonical = resolved
+            .canonicalize()
+            .map_err(|e| format!("Path '{}' error: {}", resolved.display(), e))?;
+        within(&canonical)?;
+        return Ok(canonical);
+    }
+
+    // File does not exist yet; find nearest existing ancestor
+    let mut ancestor = resolved.parent();
+    let mut remaining_components = Vec::new();
+    if let Some(file_name) = resolved.file_name() {
+        remaining_components.push(file_name);
+    }
+
+    let mut existing_ancestor_canonical = None;
+    while let Some(parent) = ancestor {
+        if parent.exists() {
+            let anc_canon = parent
                 .canonicalize()
-                .map_err(|e| format!("Workspace '{}' error: {}", ws, e))?;
-
-            if must_exist {
-                let canonical = resolved
-                    .canonicalize()
-                    .map_err(|e| format!("Path '{}' error: {}", resolved.display(), e))?;
-                if !canonical.starts_with(&ws_canonical) {
-                    return Err(format!(
-                        "Access denied: path '{}' is outside workspace '{}'",
-                        resolved.display(),
-                        ws
-                    ));
-                }
-                return Ok(canonical);
-            } else {
-                if resolved.exists() {
-                    let canonical = resolved
-                        .canonicalize()
-                        .map_err(|e| format!("Path '{}' error: {}", resolved.display(), e))?;
-                    if !canonical.starts_with(&ws_canonical) {
-                        return Err(format!(
-                            "Access denied: path '{}' is outside workspace '{}'",
-                            resolved.display(),
-                            ws
-                        ));
-                    }
-                    return Ok(canonical);
-                }
-
-                // File does not exist yet; find nearest existing ancestor
-                let mut ancestor = resolved.parent();
-                let mut remaining_components = Vec::new();
-                if let Some(file_name) = resolved.file_name() {
-                    remaining_components.push(file_name);
-                }
-
-                let mut existing_ancestor_canonical = None;
-                while let Some(parent) = ancestor {
-                    if parent.exists() {
-                        let anc_canon = parent
-                            .canonicalize()
-                            .map_err(|e| format!("Ancestor path '{}' error: {}", parent.display(), e))?;
-                        existing_ancestor_canonical = Some(anc_canon);
-                        break;
-                    } else {
-                        if let Some(name) = parent.file_name() {
-                            remaining_components.push(name);
-                        }
-                        ancestor = parent.parent();
-                    }
-                }
-
-                let base = existing_ancestor_canonical.unwrap_or_else(|| ws_canonical.clone());
-                if !base.starts_with(&ws_canonical) {
-                    return Err(format!(
-                        "Access denied: path '{}' is outside workspace '{}'",
-                        resolved.display(),
-                        ws
-                    ));
-                }
-
-                let mut full_path = base;
-                for comp in remaining_components.into_iter().rev() {
-                    let s = comp.to_string_lossy();
-                    if s == ".." {
-                        return Err(format!(
-                            "Access denied: parent directory traversal in '{}'",
-                            path_str
-                        ));
-                    } else if s != "." {
-                        full_path.push(comp);
-                    }
-                }
-                return Ok(full_path);
+                .map_err(|e| format!("Ancestor path '{}' error: {}", parent.display(), e))?;
+            existing_ancestor_canonical = Some(anc_canon);
+            break;
+        } else {
+            if let Some(name) = parent.file_name() {
+                remaining_components.push(name);
             }
+            ancestor = parent.parent();
         }
     }
 
+    let base = match existing_ancestor_canonical {
+        Some(canon) => canon,
+        None => {
+            return Err(format!(
+                "Access denied: no existing ancestor for '{}'",
+                resolved.display()
+            ))
+        }
+    };
+    within(&base)?;
+
+    let mut full_path = base;
+    for comp in remaining_components.into_iter().rev() {
+        let s = comp.to_string_lossy();
+        if s == ".." {
+            return Err(format!(
+                "Access denied: parent directory traversal in '{}'",
+                path_str
+            ));
+        } else if s != "." {
+            full_path.push(comp);
+        }
+    }
+    Ok(full_path)
+}
+
+/// 사용자 UI용 경로 해석 (D1). 스코프 검사는 하지 않고 canonicalize와
+/// 상위 traversal 방지만 수행한다. 에이전트 도구에는 사용하지 않는다.
+pub fn resolve_user_path(path_str: &str, must_exist: bool) -> Result<PathBuf, String> {
+    let resolved = Path::new(path_str).to_path_buf();
+    if must_exist {
+        return resolved
+            .canonicalize()
+            .map_err(|e| format!("Path '{}' error: {}", resolved.display(), e));
+    }
+    if resolved.exists() {
+        return resolved
+            .canonicalize()
+            .map_err(|e| format!("Path '{}' error: {}", resolved.display(), e));
+    }
+    for comp in resolved.components() {
+        if matches!(comp, std::path::Component::ParentDir) {
+            return Err(format!(
+                "Access denied: parent directory traversal in '{}'",
+                path_str
+            ));
+        }
+    }
     Ok(resolved)
 }
 
@@ -287,10 +356,7 @@ pub async fn pick_project_folder<R: Runtime>(app: AppHandle<R>) -> Result<Option
         .map(|picked| picked.map(|p| p.to_string()))
         .map_err(|e| e.to_string())?;
 
-    if let Some(ref path) = picked_opt {
-        set_active_workspace_internal(Some(path.clone()));
-    }
-
+    // 허용 루트 등록은 호출자(JS)가 set_agent_allowed_roots로 수행한다.
     Ok(picked_opt)
 }
 
@@ -453,7 +519,10 @@ pub fn copy_path(from: String, to: String, workspace_root: Option<String>) -> Re
 
 #[tauri::command]
 pub fn reveal_in_explorer(path: String, workspace_root: Option<String>) -> Result<(), String> {
-    let verified = resolve_and_verify_workspace_path(&path, workspace_root.as_deref(), true)?;
+    // 사용자 UI 동작이므로 스코프 검사 없이 canonicalize만 한다 (D1).
+    // workspace_root 인자는 하위 호환용으로 받되 사용하지 않는다.
+    let _ = workspace_root;
+    let verified = resolve_user_path(&path, true)?;
 
     #[cfg(target_os = "windows")]
     {
@@ -485,5 +554,122 @@ pub fn reveal_in_explorer(path: String, workspace_root: Option<String>) -> Resul
     }
 
     Ok(())
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct WorkFolderLayout {
+    pub work_folder: String,
+    pub wiki_dir: String,
+    pub inbox_dir: String,
+    pub backup_dir: String,
+    pub config_dir: String,
+    pub skills_dir: String,
+}
+
+/// 작업 폴더 하위 레이아웃 생성 (D2, P11-04): wiki/·wiki-inbox/·backup/·config/·skills/.
+#[tauri::command]
+pub fn ensure_work_folder_layout(work_folder: String) -> Result<WorkFolderLayout, String> {
+    let root = Path::new(&work_folder);
+    if !root.is_dir() {
+        return Err(format!("Work folder is not a valid directory: {}", work_folder));
+    }
+    let canonical = root
+        .canonicalize()
+        .map_err(|e| format!("Work folder '{}' error: {}", work_folder, e))?;
+    let sub = |name: &str| -> Result<String, String> {
+        let dir = canonical.join(name);
+        std::fs::create_dir_all(&dir)
+            .map_err(|e| format!("Failed to create {} dir: {}", name, e))?;
+        Ok(dir.to_string_lossy().into_owned())
+    };
+    Ok(WorkFolderLayout {
+        work_folder: canonical.to_string_lossy().into_owned(),
+        wiki_dir: sub("wiki")?,
+        inbox_dir: sub("wiki-inbox")?,
+        backup_dir: sub("backup")?,
+        config_dir: sub("config")?,
+        skills_dir: sub("skills")?,
+    })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::commands::fs_commands::scope_test_lock;
+
+    fn unique_base(tag: &str) -> PathBuf {
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0);
+        std::env::temp_dir().join(format!("vc-fs-scope-test-{}-{}-{}", tag, std::process::id(), stamp))
+    }
+
+    #[test]
+    fn test_allowed_roots_verify() {
+        let _guard = scope_test_lock();
+        let base = unique_base("roots");
+        let allowed = base.join("allowed");
+        let outside = base.join("outside");
+        std::fs::create_dir_all(&allowed).unwrap();
+        std::fs::create_dir_all(&outside).unwrap();
+
+        set_allowed_roots_internal(vec![allowed.to_string_lossy().into_owned()]);
+        let file = allowed.join("a.txt");
+        std::fs::write(&file, "x").unwrap();
+        // 허용 루트 안: 명시 루트와 무관하게 통과
+        assert!(resolve_and_verify_workspace_path(&file.to_string_lossy(), None, true).is_ok());
+        assert!(resolve_and_verify_workspace_path(
+            &file.to_string_lossy(),
+            Some(&allowed.to_string_lossy()),
+            true
+        )
+        .is_ok());
+        // 허용 루트 밖: 거부
+        assert!(resolve_and_verify_workspace_path(&outside.to_string_lossy(), None, true).is_err());
+        // 명시 루트 자체가 허용 밖이면 루트 지정 우회 불가
+        assert!(resolve_and_verify_workspace_path(
+            &file.to_string_lossy(),
+            Some(&outside.to_string_lossy()),
+            true
+        )
+        .is_err());
+
+        set_allowed_roots_internal(Vec::new());
+        let _ = std::fs::remove_dir_all(&base);
+    }
+
+    #[test]
+    fn test_user_path_no_scope_check() {
+        let _guard = scope_test_lock();
+        let base = unique_base("user");
+        std::fs::create_dir_all(&base).unwrap();
+        set_allowed_roots_internal(vec![base.join("elsewhere").to_string_lossy().into_owned()]);
+        // 스코프 밖이어도 실존 경로면 통과
+        assert!(resolve_user_path(&base.to_string_lossy(), true).is_ok());
+        // 미존재 + traversal은 거부
+        assert!(resolve_user_path("nope/../evil", false).is_err());
+        set_allowed_roots_internal(Vec::new());
+        let _ = std::fs::remove_dir_all(&base);
+    }
+
+    #[test]
+    fn test_work_folder_layout() {
+        let base = unique_base("layout");
+        std::fs::create_dir_all(&base).unwrap();
+        let layout = ensure_work_folder_layout(base.to_string_lossy().into_owned()).unwrap();
+        for dir in [
+            &layout.wiki_dir,
+            &layout.inbox_dir,
+            &layout.backup_dir,
+            &layout.config_dir,
+            &layout.skills_dir,
+        ] {
+            assert!(Path::new(dir).is_dir(), "missing {}", dir);
+        }
+        // 존재하지 않는 폴더는 거부
+        assert!(ensure_work_folder_layout(base.join("nope").to_string_lossy().into_owned()).is_err());
+        let _ = std::fs::remove_dir_all(&base);
+    }
 }
 

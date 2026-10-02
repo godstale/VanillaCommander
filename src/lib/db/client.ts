@@ -72,7 +72,13 @@ export const MIGRATION_STATEMENTS: string[] = [
     default_approval_mode TEXT NOT NULL DEFAULT 'dangerous-only',
     trusted_workspaces TEXT NOT NULL DEFAULT '[]',
     last_workspace_root TEXT,
-    monitoring_interval_ms INTEGER NOT NULL DEFAULT 1000
+    monitoring_interval_ms INTEGER NOT NULL DEFAULT 1000,
+    setup_completed_at TEXT,
+    work_folder TEXT,
+    favorites TEXT NOT NULL DEFAULT '[]',
+    agent_allowed_roots TEXT NOT NULL DEFAULT '[]',
+    wiki_settings TEXT NOT NULL DEFAULT '{}',
+    parser_settings TEXT NOT NULL DEFAULT '{}'
   )`,
   `CREATE TABLE IF NOT EXISTS execution_logs (
     id TEXT PRIMARY KEY,
@@ -688,6 +694,12 @@ export class MemorySqlFallback implements SqlDatabase {
         trusted_workspaces,
         last_workspace_root,
         monitoring_interval_ms,
+        setup_completed_at,
+        work_folder,
+        favorites,
+        agent_allowed_roots,
+        wiki_settings,
+        parser_settings,
       ] = bindValues;
       this.tables.get('app_settings')?.set(id as string, {
         id,
@@ -704,11 +716,22 @@ export class MemorySqlFallback implements SqlDatabase {
         trusted_workspaces,
         last_workspace_root,
         monitoring_interval_ms: (monitoring_interval_ms as number) ?? 1000,
+        setup_completed_at: (setup_completed_at as string | null) ?? null,
+        work_folder: (work_folder as string | null) ?? null,
+        favorites: (favorites as string | null) ?? '[]',
+        agent_allowed_roots: (agent_allowed_roots as string | null) ?? '[]',
+        wiki_settings: (wiki_settings as string | null) ?? '{}',
+        parser_settings: (parser_settings as string | null) ?? '{}',
       });
       return { rowsAffected: 1 };
     }
 
-    if (q.startsWith('UPDATE app_settings SET open_tabs = ?, active_tab_id = ?')) {
+    // P11-04: 바인드 2개일 때만 탭 전용 갱신이다. 전체 갱신(13/19개)도 같은
+    // prefix로 시작하므로 길이 검사가 없으면 전체 값이 유실된다.
+    if (
+      q.startsWith('UPDATE app_settings SET open_tabs = ?, active_tab_id = ?') &&
+      bindValues.length === 2
+    ) {
       const [open_tabs, active_tab_id] = bindValues;
       const settings = this.tables.get('app_settings')?.get('singleton');
       if (settings) {
@@ -764,6 +787,12 @@ export class MemorySqlFallback implements SqlDatabase {
           trusted_workspaces,
           last_workspace_root,
           monitoring_interval_ms,
+          setup_completed_at,
+          work_folder,
+          favorites,
+          agent_allowed_roots,
+          wiki_settings,
+          parser_settings,
         ] = bindValues;
         Object.assign(settings, {
           open_tabs,
@@ -781,6 +810,12 @@ export class MemorySqlFallback implements SqlDatabase {
           ...(monitoring_interval_ms !== undefined
             ? { monitoring_interval_ms }
             : {}),
+          ...(setup_completed_at !== undefined ? { setup_completed_at } : {}),
+          ...(work_folder !== undefined ? { work_folder } : {}),
+          ...(favorites !== undefined ? { favorites } : {}),
+          ...(agent_allowed_roots !== undefined ? { agent_allowed_roots } : {}),
+          ...(wiki_settings !== undefined ? { wiki_settings } : {}),
+          ...(parser_settings !== undefined ? { parser_settings } : {}),
         });
       }
       return { rowsAffected: 1 };
@@ -1697,6 +1732,12 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     'ALTER TABLE agents ADD COLUMN llm_base_url TEXT',
     'ALTER TABLE agents ADD COLUMN llm_api_key TEXT',
     'ALTER TABLE agents ADD COLUMN auto_monitor INTEGER NOT NULL DEFAULT 1',
+    'ALTER TABLE app_settings ADD COLUMN setup_completed_at TEXT',
+    'ALTER TABLE app_settings ADD COLUMN work_folder TEXT',
+    "ALTER TABLE app_settings ADD COLUMN favorites TEXT NOT NULL DEFAULT '[]'",
+    "ALTER TABLE app_settings ADD COLUMN agent_allowed_roots TEXT NOT NULL DEFAULT '[]'",
+    "ALTER TABLE app_settings ADD COLUMN wiki_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
   ];
   for (const alter of alterColumns) {
     try {
