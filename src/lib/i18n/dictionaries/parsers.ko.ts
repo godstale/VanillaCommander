@@ -1,4 +1,32 @@
 import type { Dict } from './ko';
 
-// P11-01 골격. 실제 문구는 P11-34(문서 파싱 연동)에서 추가한다.
-export const parsersKo: Dict = {};
+// P11-34 문서 파싱 연동 문구.
+export const parsersKo: Dict = {
+  'parsers.title': '문서 파싱 연동',
+  'parsers.desc': 'PDF·Office 문서의 텍스트 추출 방식을 확장자별로 정합니다. 외부 파서는 로컬에서 실행되므로 별도 동의가 필요 없습니다.',
+  'parsers.tableTitle': '확장자별 사용 파서',
+  'parsers.tableExt': '확장자',
+  'parsers.tableParser': '파서',
+  'parsers.tableStatus': '상태',
+  'parsers.builtin': '내장',
+  'parsers.installed': '사용 가능',
+  'parsers.missing': '미설치',
+  'parsers.addTitle': '외부 파서 등록',
+  'parsers.extLabel': '확장자',
+  'parsers.extPlaceholder': 'pdf',
+  'parsers.commandLabel': '명령 템플릿',
+  'parsers.commandPlaceholder': 'markitdown "{input}"',
+  'parsers.modeLabel': '출력 방식',
+  'parsers.modeStdout': 'stdout',
+  'parsers.modeFile': '파일',
+  'parsers.addButton': '등록',
+  'parsers.deleteTitle': '외부 파서 삭제',
+  'parsers.saved': '저장했습니다. 다음 파싱부터 적용됩니다.',
+  'parsers.testTitle': '파서 테스트',
+  'parsers.recheck': '설치 여부 다시 확인',
+  'parsers.sampleLabel': '샘플 파일 경로',
+  'parsers.samplePlaceholder': 'C:/path/to/sample.pdf',
+  'parsers.runTest': '실행',
+  'parsers.testing': '실행 중...',
+  'parsers.testMethod': '{method} · {n}자',
+};

@@ -5,6 +5,7 @@ import SettingsGeneral from '@/pages/Settings/SettingsGeneral';
 import SettingsModel from '@/pages/Settings/SettingsModel';
 import SettingsApproval from '@/pages/Settings/SettingsApproval';
 import SettingsIntegrations from '@/pages/Settings/SettingsIntegrations';
+import SettingsParsers from '@/pages/Settings/SettingsParsers';
 
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { SettingsProvider } from '@/lib/context/SettingsContext';
@@ -24,6 +25,8 @@ export default function App() {
                 <Route path="model" element={<SettingsModel />} />
                 <Route path="approval" element={<SettingsApproval />} />
                 <Route path="integrations" element={<SettingsIntegrations />} />
+                {/* P11-34: 파서 화면. P11-50 설정 재구성에서 라우트 정리 예정. */}
+                <Route path="parsers" element={<SettingsParsers />} />
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

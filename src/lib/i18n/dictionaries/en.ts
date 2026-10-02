@@ -148,6 +148,7 @@ const en: Dict = {
   'settings.navGeneral': 'General (theme/language)',
   'settings.navModel': 'Model & LLM',
   'settings.navApproval': 'Tool approval policy',
+  'settings.navParsers': 'Document parsers',
 
   'settingsGeneral.title': 'General settings',
   'settingsGeneral.desc': 'Set the app visual theme and basic interface options.',

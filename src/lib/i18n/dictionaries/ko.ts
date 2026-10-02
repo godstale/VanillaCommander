@@ -158,6 +158,7 @@ const ko: Dict = {
   'settings.navGeneral': '일반 (테마/언어)',
   'settings.navModel': '모델 및 LLM',
   'settings.navApproval': '도구 승인 정책',
+  'settings.navParsers': '문서 파싱 연동',
 
   'settingsGeneral.title': '일반 설정',
   'settingsGeneral.desc': '앱의 시각적 테마와 기본 인터페이스 옵션을 설정합니다.',
