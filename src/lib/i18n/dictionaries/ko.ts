@@ -302,6 +302,17 @@ const ko: Dict = {
   'mention.header': '파일/폴더 참조 (@)',
   'mention.hint': '↑↓ 탐색, Enter 확정',
 
+  'agentFallback.title': '기본 에이전트에 연결할 수 없습니다',
+  'agentFallback.desc': '"{name}" 에이전트가 응답하지 않습니다. 이번 대화에 사용할 다른 에이전트를 고르세요 (기본 에이전트는 바뀌지 않습니다).',
+  'agentFallback.noCandidates': '사용 가능한 다른 에이전트가 없습니다.',
+  'agentFallback.external': '외부',
+  'agentFallback.externalConfirm': '대화 내용과 참조 파일이 외부로 전송될 수 있음을 이해했고 동의합니다.',
+  'agentFallback.dontAsk': '다시 묻지 않기',
+  'agentFallback.dontAskLocalOnly': '로컬 에이전트를 고를 때만 다시 묻지 않을 수 있습니다.',
+  'agentFallback.cancel': '취소',
+  'agentFallback.continue': '이 에이전트로 계속',
+  'agentFallback.switched': '"{name}"(으)로 전환했습니다. 다시 Enter를 눌러 전송하세요.',
+
   'toolCard.failed': '실패',
   'toolCard.done': '완료',
 

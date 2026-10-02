@@ -290,6 +290,17 @@ const en: Dict = {
   'mention.header': 'File/folder reference (@)',
   'mention.hint': '↑↓ navigate, Enter to pick',
 
+  'agentFallback.title': 'Cannot reach the default agent',
+  'agentFallback.desc': 'The "{name}" agent is not responding. Pick another agent for this chat (the default stays unchanged).',
+  'agentFallback.noCandidates': 'No other agents available.',
+  'agentFallback.external': 'External',
+  'agentFallback.externalConfirm': 'I understand and agree that chat content and referenced files may be sent externally.',
+  'agentFallback.dontAsk': "Don't ask again",
+  'agentFallback.dontAskLocalOnly': 'Skipping future prompts is only allowed for local agents.',
+  'agentFallback.cancel': 'Cancel',
+  'agentFallback.continue': 'Continue with this agent',
+  'agentFallback.switched': 'Switched to "{name}". Press Enter again to send.',
+
   'toolCard.failed': 'Failed',
   'toolCard.done': 'Done',
 

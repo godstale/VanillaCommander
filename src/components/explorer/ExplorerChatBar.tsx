@@ -33,6 +33,7 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
   const { openTab } = useWorkspaceTabs();
   const sessionId = `explorer-${tabId}`;
   const workspace = useSafeWorkspace();
+  const [sendError, setSendError] = useState<string | null>(null);
   const chat = useChat(sessionId, defaultAgent, {
     cwd: cwd || undefined,
     commanderContext: {
@@ -40,6 +41,21 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
       selection: selectedPaths,
       workFolder: workspace?.workFolder ?? undefined,
       allowedRoots: getLastAllowedRoots(),
+    },
+    // P11-25: 탐색기 입력창에는 폴백 다이얼로그를 띄우지 않고 차단 + 안내한다.
+    onResolveSendAgent: async (agent) => {
+      try {
+        const { checkAgentConnection } = await import('@/lib/llm/agentStatus');
+        const status = await checkAgentConnection(agent);
+        if (status === 'connected') {
+          setSendError(null);
+          return true;
+        }
+      } catch {
+        // fall through
+      }
+      setSendError(t('explorer.fallbackBlocked'));
+      return false;
     },
   });
   const inputRef = useRef<HTMLInputElement>(null);
@@ -152,6 +168,14 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
 
   return (
     <div className="border-t border-border shrink-0 bg-tabbar">
+      {sendError && (
+        <div className="px-3 py-1 text-[11px] text-destructive bg-destructive/10 border-b border-destructive/20 flex items-center justify-between gap-2">
+          <span className="truncate">{sendError}</span>
+          <button type="button" onClick={() => setSendError(null)} className="shrink-0 hover:opacity-70">
+            {t('workspace.close')}
+          </button>
+        </div>
+      )}
       {drawerOpen && (
         <div className="h-56 border-b border-border overflow-hidden flex flex-col">
           <div className="flex items-center gap-2 px-2 py-1 shrink-0">

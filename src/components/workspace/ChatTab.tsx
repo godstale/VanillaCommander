@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Bot, Cpu, Sparkles, MessageSquare, Terminal, Zap, Layers, Activity } from 'lucide-react';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import type { ReasoningEffort, ReasoningMode } from '@/lib/types/agent';
+import type { Agent } from '@/lib/types/agent';
 import { chatConfigSignature, DEFAULT_TEMPERATURE } from '@/lib/types/agent';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useChatSessions } from '@/lib/context/ChatSessionsContext';
+import { useStatusBar } from '@/lib/context/StatusBarContext';
 import { useSafeSkills } from '@/lib/context/SkillsContext';
 import { useChat } from '@/hooks/useChat';
 import { useChatQueue, chatQueueManager } from '@/lib/agent/chatQueueManager';
@@ -38,6 +40,15 @@ import { setActiveApprovalMode } from '@/lib/approval/register';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { getProviderPreset } from '@/lib/llm/providers';
 import { monitoringCollector } from '@/lib/monitoring/monitoringCollector';
+import { AgentFallbackDialog } from '@/components/agents/AgentFallbackDialog';
+import {
+  buildCandidates,
+  checkCandidatesHealth,
+  getStoredFallbackAgentId,
+  storeFallbackAgentId,
+  type FallbackCandidate,
+} from '@/lib/agent/resolveAgent';
+import { checkAgentConnection } from '@/lib/llm/agentStatus';
 import { cn } from '@/lib/utils';
 
 export interface ChatTabProps {
@@ -46,7 +57,7 @@ export interface ChatTabProps {
 
 export function ChatTab({ tab }: ChatTabProps) {
   const { t } = useLanguage();
-  const { getAgent, defaultAgent, loading: agentsLoading } = useAgents();
+  const { getAgent, defaultAgent, agents, loading: agentsLoading } = useAgents();
   const { settings } = useSettings();
   const { updateTab, openTab } = useWorkspaceTabs();
   const { workspaceRoot } = useWorkspace();
@@ -139,6 +150,67 @@ export function ChatTab({ tab }: ChatTabProps) {
 
   const activeAgent = getAgent(effectiveAgentId) || defaultAgent;
   const providerPreset = getProviderPreset(activeAgent.llmProvider);
+  const { notify } = useStatusBar();
+
+  // P11-25: 전송 직전 폴백 결정. 선택은 tab meta에 이번 세션 한정으로 기록한다.
+  const [fallbackOpen, setFallbackOpen] = useState(false);
+  const [fallbackCandidates, setFallbackCandidates] = useState<FallbackCandidate[]>([]);
+  const [fallbackAgentName, setFallbackAgentName] = useState('');
+  const fallbackResolveRef = useRef<((proceed: boolean) => void) | null>(null);
+
+  const applySessionAgent = useCallback((agentId: string) => {
+    updateTab(tab.id, { meta: { ...(tab.meta ?? {}), agentId } });
+  }, [updateTab, tab.id, tab.meta]);
+
+  const finishFallback = useCallback((proceed: boolean) => {
+    setFallbackOpen(false);
+    const resolve = fallbackResolveRef.current;
+    fallbackResolveRef.current = null;
+    resolve?.(proceed);
+  }, []);
+
+  const handleFallbackPick = useCallback((agent: Agent, opts: { dontAsk: boolean }) => {
+    if (opts.dontAsk) {
+      storeFallbackAgentId(agent.id);
+    }
+    applySessionAgent(agent.id);
+    notify(t('agentFallback.switched', { name: agent.name }));
+    finishFallback(false);
+  }, [applySessionAgent, notify, t, finishFallback]);
+
+  const handleFallbackCancel = useCallback(() => {
+    finishFallback(false);
+  }, [finishFallback]);
+
+  const resolveSendAgent = useCallback(async (agent: Agent): Promise<boolean> => {
+    try {
+      if ((await checkAgentConnection(agent)) === 'connected') return true;
+    } catch {
+      return false;
+    }
+    // 저장된 폴백(로컬만)이 살아 있으면 조용히 적용한다.
+    try {
+      const storedId = getStoredFallbackAgentId();
+      const stored = storedId ? getAgent(storedId) : undefined;
+      if (stored) {
+        const storedStatus = await checkAgentConnection(stored);
+        if (storedStatus === 'connected') {
+          applySessionAgent(stored.id);
+          notify(t('agentFallback.switched', { name: stored.name }));
+          return false;
+        }
+      }
+    } catch {
+      // fall through to dialog
+    }
+    const statuses = await checkCandidatesHealth(agents, checkAgentConnection);
+    setFallbackCandidates(buildCandidates(agents, statuses, agent.id));
+    setFallbackAgentName(agent.name);
+    setFallbackOpen(true);
+    return new Promise<boolean>((resolve) => {
+      fallbackResolveRef.current = resolve;
+    });
+  }, [agents, getAgent, applySessionAgent, notify, t]);
 
   const [isMonitoringActive, setIsMonitoringActive] = useState<boolean>(() =>
     monitoringCollector.isRunning(activeAgent.id),
@@ -239,6 +311,7 @@ export function ChatTab({ tab }: ChatTabProps) {
   } = useChat(sessionId, activeAgent, {
     cwd: effectiveCwd,
     thinkOverride,
+    onResolveSendAgent: resolveSendAgent,
     // 구 Agent(Provider 미설정)는 전역 Ollama 주소를 그대로 사용한다.
     // Agent 고유 llmBaseUrl이 있으면 useChat 내부에서 그쪽이 우선한다.
     baseUrl: settings.ollamaBaseUrl,
@@ -853,6 +926,15 @@ export function ChatTab({ tab }: ChatTabProps) {
         macros={macros}
         onSelect={handleSelectMacro}
         onDelete={handleDeleteMacro}
+      />
+
+      {/* P11-25: 기본 에이전트 장애 시 폴백 선택 */}
+      <AgentFallbackDialog
+        open={fallbackOpen}
+        candidates={fallbackCandidates}
+        failedAgentName={fallbackAgentName}
+        onPick={handleFallbackPick}
+        onCancel={handleFallbackCancel}
       />
     </div>
   );

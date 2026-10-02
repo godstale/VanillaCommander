@@ -92,4 +92,5 @@ export const explorerKo: Dict = {
   'explorer.chatSessionTitle': '탐색기: {path}',
   'explorer.toggleResults': '결과 보기 전환',
   'explorer.openInChat': '채팅 탭에서 열기',
+  'explorer.fallbackBlocked': '기본 에이전트에 연결할 수 없어 전송하지 못했습니다. 채팅 탭에서 폴백 에이전트를 고르세요.',
 };

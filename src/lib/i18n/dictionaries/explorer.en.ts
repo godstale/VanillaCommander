@@ -92,4 +92,5 @@ export const explorerEn: Dict = {
   'explorer.chatSessionTitle': 'Explorer: {path}',
   'explorer.toggleResults': 'Toggle results',
   'explorer.openInChat': 'Open in chat tab',
+  'explorer.fallbackBlocked': "Cannot reach the default agent, so this was not sent. Pick a fallback agent in a chat tab.",
 };

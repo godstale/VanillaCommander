@@ -46,6 +46,11 @@ export interface UseChatOptions {
   cwd?: string;
   /** D10 백업 위치. 미지정 시 워크스페이스 작업 폴더를 쓴다. */
   workFolder?: string;
+  /**
+   * P11-25: 전송 직전 에이전트 폴백 결정. true를 반환해야 전송이 진행된다.
+   * 세션 한정 변경(기본 에이전트 교체 아님)은 호출자가 tab meta 등으로 적용한다.
+   */
+  onResolveSendAgent?: (agent: Agent) => Promise<boolean>;
   /** P11-24: 탐색기 위치·선택·작업 폴더를 프롬프트에 전달한다. */
   commanderContext?: {
     location?: string;
@@ -507,6 +512,11 @@ export function useChat(
   const sendMessage = useCallback(
     async (text: string): Promise<void> => {
       if (!text.trim()) return;
+      // P11-25: 전송 직전 폴백 결정 (기본 에이전트 장애 시 대체 선택).
+      if (optionsRef.current.onResolveSendAgent) {
+        const proceed = await optionsRef.current.onResolveSendAgent(agentConfigRef.current);
+        if (!proceed) return;
+      }
       lastPromptRef.current = text;
       setError(null);
       bindSessionToAgent(sessionId, agentConfigRef.current.id);
