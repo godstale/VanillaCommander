@@ -2,6 +2,7 @@ pub mod commands;
 
 use commands::fs_commands::*;
 use commands::commander_commands::*;
+use commands::watch_commands::*;
 use commands::integration_commands::*;
 use commands::search_commands::*;
 use commands::shell_commands::*;
@@ -88,6 +89,10 @@ pub fn run() {
             fc_read_file_bytes,
             fc_read_text_head,
             fc_write_bytes,
+            wiki_watch_set,
+            wiki_watch_stop,
+            wiki_watch_status,
+            wiki_default_watch_folder,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
