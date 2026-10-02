@@ -10,7 +10,12 @@ import {
 import { checkProviderModel, listProviderModels } from '@/lib/llm/providerRuntime';
 import { resolveAgentLlmRuntime } from '@/lib/llm/providers';
 import { evalDetectRuntimes } from '../ipc';
-import { checkPermission } from '../integrations/gateway';
+import { checkPermission } from '@/lib/integrations/gateway';
+import type { IntegrationPurpose } from '@/lib/integrations/types';
+
+// P11-02: 평가 목적은 게이트웨이에서 제거됨. consent-v2는 평가 목적을 부여하지
+// 않으므로 이 경로는 항상 거부된다. 이 파일은 P11-03에서 삭제.
+const LEGACY_EVAL_PURPOSE = 'candidate' as unknown as IntegrationPurpose;
 import { getIntegrationSettings, listIntegrations } from '@/lib/db/repositories/integrationsRepo';
 import type {
   CandidateSnapshot,
@@ -191,7 +196,7 @@ export async function preflight(
         externalPermission = 'blocked';
         externalReason = 'no-consented-integration';
       } else {
-        const perm = checkPermission(match, settings, 'candidate', ['public-bundled']);
+        const perm = checkPermission(match, settings, LEGACY_EVAL_PURPOSE, ['public-bundled']);
         if (perm.ok) {
           externalPermission = 'ok';
           transfers.push({

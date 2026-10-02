@@ -2,13 +2,13 @@ import { getIntegrationSettings, listIntegrations } from '@/lib/db/repositories/
 import type { appendAudit as appendAuditFn } from '@/lib/db/repositories/integrationsRepo';
 import { getProviderPreset } from '@/lib/llm/providers';
 import { getStreamChatFn } from '@/lib/llm/providerRuntime';
-import { CONSENT_TEXT_VERSION } from '../constants';
+import { CONSENT_TEXT_VERSION } from './types';
 import type {
   DataClass,
   ExternalIntegration,
   IntegrationPurpose,
   IntegrationSettings,
-} from '../types';
+} from './types';
 import {
   extractJsonPath,
   formatMessagesAsPrompt,
@@ -28,6 +28,8 @@ export interface ExternalRequest {
   responseFormat?: 'text' | 'json';
   maxTokens?: number;
   temperature?: number;
+  /** agent-cli 실행 cwd (D3). 미지정 시 임시 디렉터리. P11-23에서 탐색기 경로를 넘긴다. */
+  cwd?: string;
 }
 
 export type PermissionResult = { ok: true } | { ok: false; reasonKey: string };
@@ -292,6 +294,7 @@ async function callAgentCli(
     stdinText: prompt,
     promptFileText: prompt,
     timeoutMs: cli.timeoutMs,
+    cwd: req.cwd,
   });
   if (out.timedOut) throw new Error(`CLI timed out after ${cli.timeoutMs}ms`);
   if (out.exitCode !== 0) {

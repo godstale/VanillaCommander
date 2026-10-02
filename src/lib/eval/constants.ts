@@ -156,5 +156,5 @@ export const DEFAULT_RUN_OPTIONS = {
 
 export const EVAL_TOOLS_ALLOWED: BuiltinToolId[] = ['read', 'ls', 'grep', 'find', 'write', 'edit'];
 
-export const CONSENT_TEXT_VERSION = 'consent-v1';
+// P11-02: 동의 상수는 src/lib/integrations/types.ts(CONSENT_TEXT_VERSION, consent-v2)로 이관.
 export const JUDGE_PROMPT_VERSION = 'judge-v1';

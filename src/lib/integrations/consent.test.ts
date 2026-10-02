@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CONSENT_TEXT_VERSION } from '../constants';
+import { CONSENT_TEXT_VERSION } from './types';
 import {
   INTEGRATION_CONSENT_TEXT,
   INTEGRATION_CONSENT_TEXT_VERSION,
@@ -14,15 +14,15 @@ describe('consent', () => {
 
   it('requires consent when there is no previous consent', () => {
     expect(
-      needsReconsent(null, { purposes: ['judge'], dataClasses: ['public-bundled'] }),
+      needsReconsent(null, { purposes: ['chat-agent'], dataClasses: ['public-bundled'] }),
     ).toBe(true);
   });
 
   it('returns true when purposes widen', () => {
     expect(
       needsReconsent(
-        { purposes: ['judge'], dataClasses: ['public-bundled'] },
-        { purposes: ['judge', 'candidate'], dataClasses: ['public-bundled'] },
+        { purposes: ['chat-agent'], dataClasses: ['public-bundled'] },
+        { purposes: ['chat-agent', 'wiki-ingest'], dataClasses: ['public-bundled'] },
       ),
     ).toBe(true);
   });
@@ -30,8 +30,8 @@ describe('consent', () => {
   it('returns true when data classes widen', () => {
     expect(
       needsReconsent(
-        { purposes: ['judge'], dataClasses: ['public-bundled'] },
-        { purposes: ['judge'], dataClasses: ['public-bundled', 'personal'] },
+        { purposes: ['chat-agent'], dataClasses: ['public-bundled'] },
+        { purposes: ['chat-agent'], dataClasses: ['public-bundled', 'personal'] },
       ),
     ).toBe(true);
   });
@@ -39,14 +39,14 @@ describe('consent', () => {
   it('returns false when scope narrows or stays equal', () => {
     expect(
       needsReconsent(
-        { purposes: ['judge', 'candidate'], dataClasses: ['public-bundled', 'personal'] },
-        { purposes: ['judge'], dataClasses: ['public-bundled'] },
+        { purposes: ['chat-agent', 'wiki-ingest'], dataClasses: ['public-bundled', 'personal'] },
+        { purposes: ['chat-agent'], dataClasses: ['public-bundled'] },
       ),
     ).toBe(false);
     expect(
       needsReconsent(
-        { purposes: ['judge'], dataClasses: ['public-bundled'] },
-        { purposes: ['judge'], dataClasses: ['public-bundled'] },
+        { purposes: ['chat-agent'], dataClasses: ['public-bundled'] },
+        { purposes: ['chat-agent'], dataClasses: ['public-bundled'] },
       ),
     ).toBe(false);
   });

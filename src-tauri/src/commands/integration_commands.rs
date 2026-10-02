@@ -1,9 +1,12 @@
-//! 외부 에이전트 CLI 실행 (평가 D3 외부 연동용).
+//! 외부 에이전트 CLI 실행 (외부 연동용).
 //!
 //! - 셸을 거치지 않고 `Command::new`로 직접 실행한다.
-//! - 실행 파일은 절대 경로·존재 필수, cwd는 매번 새로 만드는 임시 디렉터리.
-//! - 인자의 `{promptFile}` 토큰은 임시 `prompt.txt` 경로로 치환된다.
+//! - 실행 파일은 절대 경로·존재 필수.
+//! - cwd 미지정 시 매번 새로 만드는 임시 디렉터리에서 실행한다.
+//! - cwd 지정 시 활성 워크스페이스 안의 실존 디렉터리여야 한다 (D3, P11-02).
+//!   허용 루트 목록 검사는 P11-04(`set_agent_allowed_roots`)에서 일반화한다.
 
+use super::fs_commands::resolve_and_verify_workspace_path;
 use serde::{Deserialize, Serialize};
 use std::io::Write;
 use std::path::PathBuf;
@@ -96,6 +99,16 @@ fn cap_output(text: String) -> String {
     format!("{}…[truncated at 2MB]", &text[..end])
 }
 
+/// CLI 실행 디렉터리 결정. cwd 지정 시 워크스페이스 containment 검사 후
+/// 사용하고, 미지정이면 프롬프트용 임시 디렉터리에서 실행한다.
+pub fn resolve_cwd_for_cli(cwd: &Option<String>, fallback: &PathBuf) -> Result<PathBuf, String> {
+    match cwd {
+        Some(dir) if !dir.trim().is_empty() => resolve_and_verify_workspace_path(dir, None, true)
+            .map_err(|e| format!("INTEGRATION_CLI invalid cwd: {}", e)),
+        _ => Ok(fallback.clone()),
+    }
+}
+
 #[tauri::command]
 pub async fn integration_run_cli(
     executable_path: String,
@@ -103,12 +116,14 @@ pub async fn integration_run_cli(
     stdin_text: Option<String>,
     prompt_file_text: Option<String>,
     timeout_ms: Option<u64>,
+    cwd: Option<String>,
 ) -> Result<CliRunOutput, String> {
     let exe = validate_executable(&executable_path)?;
     let (work_dir, resolved_args) = prepare_work_dir(&args, prompt_file_text.as_deref())?;
+    let run_dir = resolve_cwd_for_cli(&cwd, &work_dir)?;
     let timeout_duration = Duration::from_millis(timeout_ms.unwrap_or(180_000).max(1));
 
-    let work_dir_for_cmd = work_dir.clone();
+    let work_dir_for_cmd = run_dir.clone();
     let result = tauri::async_runtime::spawn_blocking(move || {
         let mut cmd = Command::new(&exe);
         cmd.args(&resolved_args)
@@ -238,5 +253,39 @@ mod tests {
         assert!(capped.len() <= OUTPUT_CAP_BYTES + 64);
         assert!(capped.contains("truncated"));
         assert_eq!(cap_output("small".to_string()), "small");
+    }
+
+    #[test]
+    fn test_cwd_resolution() {
+        use crate::commands::fs_commands::set_active_workspace_internal;
+
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0);
+        let base =
+            std::env::temp_dir().join(format!("vc-cli-cwd-test-{}-{}", std::process::id(), stamp));
+        let ws = base.join("ws");
+        let outside = base.join("outside");
+        std::fs::create_dir_all(&ws).unwrap();
+        std::fs::create_dir_all(&outside).unwrap();
+        let fallback = base.join("fallback");
+        std::fs::create_dir_all(&fallback).unwrap();
+
+        set_active_workspace_internal(Some(ws.to_string_lossy().into_owned()));
+        let sub = ws.join("sub");
+        std::fs::create_dir_all(&sub).unwrap();
+        assert!(resolve_cwd_for_cli(&Some(sub.to_string_lossy().into_owned()), &fallback).is_ok());
+        assert!(
+            resolve_cwd_for_cli(&Some(outside.to_string_lossy().into_owned()), &fallback).is_err()
+        );
+        assert!(
+            resolve_cwd_for_cli(&Some(base.join("nope").to_string_lossy().into_owned()), &fallback)
+                .is_err()
+        );
+        assert_eq!(resolve_cwd_for_cli(&None, &fallback).unwrap(), fallback);
+
+        set_active_workspace_internal(None);
+        let _ = std::fs::remove_dir_all(&base);
     }
 }

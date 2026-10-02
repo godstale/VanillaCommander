@@ -59,8 +59,9 @@ export function StepCandidates(props: StepCandidatesProps) {
 
   useEffect(() => {
     let alive = true;
+    // P11-02: 저장소가 새 타입을 반환한다. 이 화면은 P11-03에서 삭제되므로 경계에서 캐스트한다.
     listIntegrations().then(
-      (list) => { if (alive) setIntegrations(list); },
+      (list) => { if (alive) setIntegrations(list as unknown as ExternalIntegration[]); },
       () => { if (alive) setIntegrations([]); },
     );
     return () => { alive = false; };

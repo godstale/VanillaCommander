@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import type { IntegrationAuditRow } from '@/lib/eval/types';
+import type { IntegrationAuditRow } from '@/lib/integrations/types';
 
 interface AuditLogTableProps {
   rows: IntegrationAuditRow[];

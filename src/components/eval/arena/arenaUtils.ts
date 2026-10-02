@@ -1,5 +1,5 @@
 import { resolveThinkValue } from '@/lib/types/agent';
-import { classifyEndpoint } from '@/lib/eval/integrations/endpointClass';
+import { classifyEndpoint } from '@/lib/integrations/endpointClass';
 import type { LlmChatRequest } from '@/lib/llm/providerRuntime';
 import { sha256Hex } from '@/lib/eval/packs/hash';
 import type {

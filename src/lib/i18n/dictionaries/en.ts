@@ -1,5 +1,6 @@
 import type { Dict } from './ko';
 import { evalEn } from './eval/index';
+import { integrationsEn } from './integrations.en';
 import { explorerEn } from './explorer.en';
 import { wikiEn } from './wiki.en';
 import { macrosEn } from './macros.en';
@@ -1061,6 +1062,7 @@ const en: Dict = {
   'monitoringList.clearConfirmTitle': 'Delete all monitoring records',
   'monitoringList.clearConfirmDesc': 'Delete all {n} monitoring records? (cannot be undone)',
 
+  ...integrationsEn,
   ...explorerEn,
   ...wikiEn,
   ...macrosEn,

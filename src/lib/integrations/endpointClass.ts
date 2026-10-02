@@ -1,4 +1,4 @@
-import type { IntegrationSettings } from '../types';
+import type { IntegrationSettings } from './types';
 
 export type EndpointClass = 'local' | 'lan-trusted' | 'external';
 

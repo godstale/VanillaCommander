@@ -8,8 +8,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import { INTEGRATION_CONSENT_TEXT_VERSION } from '@/lib/eval/integrations/consent';
-import type { DataClass, IntegrationPurpose } from '@/lib/eval/types';
+import { INTEGRATION_CONSENT_TEXT_VERSION } from '@/lib/integrations/consent';
+import type { DataClass, IntegrationPurpose } from '@/lib/integrations/types';
 
 interface ConsentDialogProps {
   open: boolean;

@@ -77,8 +77,9 @@ export function StepReview({ draft, onUpdate, refs, onProfileSaved }: StepReview
         if (alive) setLoadError(err instanceof Error ? err.message : String(err));
       }
     })();
+    // P11-02: 저장소가 새 타입을 반환한다. 이 화면은 P11-03에서 삭제되므로 경계에서 캐스트한다.
     listIntegrations().then(
-      (list) => { if (alive) setIntegrations(list); },
+      (list) => { if (alive) setIntegrations(list as unknown as ExternalIntegration[]); },
       () => undefined,
     );
     return () => { alive = false; };

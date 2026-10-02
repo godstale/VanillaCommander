@@ -34,7 +34,12 @@ import type {
 } from '../types';
 import { loadPack, listPacks, type LoadedPack } from '../packs/packLoader';
 import { tauriPackFs, type PackFs } from '../packs/packFs';
-import { checkPermission } from '../integrations/gateway';
+import { checkPermission } from '@/lib/integrations/gateway';
+import type { IntegrationPurpose } from '@/lib/integrations/types';
+
+// P11-02: 평가 목적은 게이트웨이에서 제거됨. consent-v2는 평가 목적을 부여하지
+// 않으므로 이 경로는 항상 거부된다. 이 파일은 P11-03에서 삭제.
+const LEGACY_EVAL_PURPOSE = 'candidate' as unknown as IntegrationPurpose;
 import { classifyOutcome } from './outcome';
 import { ResourceSampler } from './resourceSampler';
 import { registerEvalExtensions } from '../registerAll';
@@ -567,11 +572,11 @@ export class EvalRunner {
           it.llm?.baseUrl === candidate.snapshot.baseUrl,
       );
       if (!match) return false;
-      const perm = checkPermission(match, settings, 'candidate', ['public-bundled']);
+      const perm = checkPermission(match, settings, LEGACY_EVAL_PURPOSE, ['public-bundled']);
       if (!perm.ok) return false;
       await appendAudit({
         integrationId: match.id,
-        purpose: 'candidate',
+        purpose: LEGACY_EVAL_PURPOSE,
         dataClasses: ['public-bundled'],
         runId: candidate.runId,
         requestCount: config.packs.reduce((a, p) => a + p.sampleIds.length * p.epochs, 0),

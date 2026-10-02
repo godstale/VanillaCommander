@@ -16,8 +16,8 @@ import {
   type DataClass,
   type ExternalIntegration,
   type IntegrationPurpose,
-} from '@/lib/eval/types';
-import { INTEGRATION_CONSENT_TEXT_VERSION } from '@/lib/eval/integrations/consent';
+} from '@/lib/integrations/types';
+import { INTEGRATION_CONSENT_TEXT_VERSION } from '@/lib/integrations/consent';
 import { LLM_PROVIDER_ORDER, LLM_PROVIDER_PRESETS } from '@/lib/llm/providers';
 import { listProviderModels } from '@/lib/llm/providerRuntime';
 import type { LlmProviderKind } from '@/lib/types/agent';
@@ -52,7 +52,7 @@ export function IntegrationEditorDialog({ open, initial, onClose, onSave }: Inte
   const [outputFormat, setOutputFormat] = useState<'text' | 'json'>(initial?.cli?.outputFormat ?? 'text');
   const [jsonPath, setJsonPath] = useState(initial?.cli?.jsonPath ?? '');
   const [timeoutMs, setTimeoutMs] = useState(String(initial?.cli?.timeoutMs ?? DEFAULT_TIMEOUT_MS));
-  const [purposes, setPurposes] = useState<IntegrationPurpose[]>([...(initial?.allowedPurposes ?? ['judge'])]);
+  const [purposes, setPurposes] = useState<IntegrationPurpose[]>([...(initial?.allowedPurposes ?? ['chat-agent'])]);
   const [dataClasses, setDataClasses] = useState<DataClass[]>([...(initial?.allowedDataClasses ?? ['public-bundled'])]);
   const [models, setModels] = useState<string[]>([]);
   const [lookingUp, setLookingUp] = useState(false);

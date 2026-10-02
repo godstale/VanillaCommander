@@ -6,7 +6,6 @@ import { evalWizardKo } from './wizard.ko';
 import { evalProgressKo } from './progress.ko';
 import { evalReportKo } from './report.ko';
 import { evalJudgeKo } from './judge.ko';
-import { evalIntegrationsKo } from './integrations.ko';
 import { evalPersonalKo } from './personal.ko';
 import { evalArenaKo } from './arena.ko';
 import { evalInteropKo } from './interop.ko';
@@ -18,7 +17,6 @@ import { evalWizardEn } from './wizard.en';
 import { evalProgressEn } from './progress.en';
 import { evalReportEn } from './report.en';
 import { evalJudgeEn } from './judge.en';
-import { evalIntegrationsEn } from './integrations.en';
 import { evalPersonalEn } from './personal.en';
 import { evalArenaEn } from './arena.en';
 import { evalInteropEn } from './interop.en';
@@ -32,7 +30,6 @@ export const evalKo: Dict = {
   ...evalProgressKo,
   ...evalReportKo,
   ...evalJudgeKo,
-  ...evalIntegrationsKo,
   ...evalPersonalKo,
   ...evalArenaKo,
   ...evalInteropKo,
@@ -47,7 +44,6 @@ export const evalEn: Dict = {
   ...evalProgressEn,
   ...evalReportEn,
   ...evalJudgeEn,
-  ...evalIntegrationsEn,
   ...evalPersonalEn,
   ...evalArenaEn,
   ...evalInteropEn,

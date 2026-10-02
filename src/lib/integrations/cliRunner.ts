@@ -41,6 +41,8 @@ export interface CliRunParams {
   /** `{promptFile}` 토큰 치환용 프롬프트 파일 내용 */
   promptFileText?: string;
   timeoutMs: number;
+  /** CLI 실행 cwd (D3). 미지정 시 백엔드가 임시 디렉터리를 쓴다. */
+  cwd?: string;
 }
 
 export interface CliRunResult {
@@ -61,5 +63,6 @@ export async function runIntegrationCli(params: CliRunParams): Promise<CliRunRes
     stdinText: params.stdinText ?? null,
     promptFileText: params.promptFileText ?? null,
     timeoutMs: params.timeoutMs,
+    cwd: params.cwd ?? null,
   });
 }

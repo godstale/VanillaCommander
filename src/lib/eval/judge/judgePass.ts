@@ -31,7 +31,8 @@ import { JUDGE_PROMPT_VERSION, buildPairwisePrompt, buildRubricPrompt } from './
 import {
   callIntegration as defaultCallIntegration,
   type ExternalCallResult,
-} from '../integrations/gateway';
+} from '@/lib/integrations/gateway';
+import type { IntegrationPurpose } from '@/lib/integrations/types';
 
 /** Fixed seed for deterministic judging (temperature is always 0). */
 export const JUDGE_SEED = 42;
@@ -186,7 +187,9 @@ function makeCaller(
         const res = await callIntegration(
           integrationId,
           {
-            purpose: 'judge',
+            // P11-02: 평가 목적은 게이트웨이에서 제거됨. consent-v2는 평가 목적을
+            // 부여하지 않으므로 이 경로는 거부된다. 파일 전체는 P11-03에서 삭제.
+            purpose: 'judge' as unknown as IntegrationPurpose,
             dataClasses: judgeDataClasses(pack),
             runId,
             messages: [{ role: 'user', content: prompt }],

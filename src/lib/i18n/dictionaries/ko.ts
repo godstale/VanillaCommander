@@ -1,6 +1,7 @@
 export type Dict = Record<string, string>;
 
 import { evalKo } from './eval/index';
+import { integrationsKo } from './integrations.ko';
 import { explorerKo } from './explorer.ko';
 import { wikiKo } from './wiki.ko';
 import { macrosKo } from './macros.ko';
@@ -1077,6 +1078,7 @@ const ko: Dict = {
   'monitoringList.clearConfirmTitle': '모니터링 기록 전체 삭제',
   'monitoringList.clearConfirmDesc': '총 {n}개의 모니터링 기록을 모두 삭제하시겠습니까? (복구할 수 없습니다)',
 
+  ...integrationsKo,
   ...explorerKo,
   ...wikiKo,
   ...macrosKo,

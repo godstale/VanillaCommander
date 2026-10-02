@@ -162,7 +162,7 @@
 
 - **W0 — 정리·기반**
   - [x] P11-01 정보 구조 재편(ActivityBar·패널·탭 타입)
-  - [ ] P11-02 외부 연동 모듈 이관(`src/lib/integrations`)
+  - [x] P11-02 외부 연동 모듈 이관(`src/lib/integrations`)
   - [ ] P11-03 평가 기능 제거
   - [ ] P11-04 앱 설정 모델 + 작업 폴더 + 기본값 상수 + 허용 루트
   - [ ] P11-05 StatusBar
@@ -241,6 +241,7 @@
 | 2026-10-02 | RENAME | 앱 내 Fortress 명칭 → Vanilla Commander 일괄 변경: 화면 문구·프롬프트·창 제목(productName `Vanilla Commander`)·로그 파일명·localStorage 키(`fortress*` → `vanilla-commander*`)·DB(`fortress.db` → `vanilla-commander.db`)·워크스페이스 폴더(`.fortress` → `.vanilla-commander`)·`FortressAgent` → `VanillaAgent`·`ensure_fortress_dir` → `ensure_app_data_dir`. 구 데이터는 첫 실행 시 자동 이관(`legacyStorageMigration.ts`, Rust `rename_legacy_db_files`, DB의 `Fortress Default` 에이전트명 갱신). 평가 모듈 내부 포맷 식별자(`fortress-default` 등)와 Docs/ 과거 기록 문서는 유지(P11-03 삭제·P11-51 문서 정리에서 처리). 참고: `core.autocrlf=true` 체크아웃으로 SKILL.md·평가 팩이 CRLF가 되어 테스트 4건 실패(기존 문제, `.gitattributes`로 `eol=lf` 지정 필요) | 해결됨 |
 | 2026-10-02 | P11-00 | Phase 11 설계 결정 D1~D10 사용자 확인 완료 — 전부 제안대로 확정. 이에 따라 P11-01 착수(브랜치 `feat/phase11-w0-foundation`). | 해결됨 |
 | 2026-10-02 | P11-01 | 소유 파일 밖 최소 수정(빌드 유지 목적, 원 소유 작업에서 인수 예정): `WorkspaceTabsContext.tsx`(복원 시 삭제된 탭 타입 필터 5줄, 확인 기준 요구) · `Workspace.tsx`(폴더 미선택 게이팅 해제, D2) · `SidePanelContext.tsx`(폴더 미선택 강제 explorer 해제, D2 — ActivityBar 게이팅 제거와 세트) · `EvalTab.tsx`(EvalTabView import 제거, P11-03 인수) · `openEvalTab.ts`+test(단일 캐스트 상수, P11-03 인수) · `AgentListPanel.tsx`(통계/로그 버튼 → agent-monitor 임시 연결, P11-20 인수) · `WorkspaceNoFolder.test.tsx`(게이팅 제거 반영). CenterWorkspace의 eval/agent-stats case 삭제 + 신규 5종 placeholder. V7(기본 탭=파일 탐색기)은 FileExplorerTab이 나오는 P11-11에서 전환(지금은 채팅 유지). 검증: `lint`·`typecheck`·`build` 통과, `test` 1003/1007(실패 4건은 기존 bundledSkills·fab-b·public-packs CRLF 문제와 동일). | 해결됨 |
+| 2026-10-02 | P11-02 | 외부 연동 이관 완료(git mv로 히스토리 유지): `lib/eval/integrations` 4모듈+테스트 → `lib/integrations/`, 다이얼로그 3종 → `components/integrations/`, 연동 i18n → 신규 `integrations.{ko,en}.ts`(평가 문구 개정·신규 목적 키). `integrations/types.ts` 신설(목적 chat-agent/wiki-ingest/doc-parse, consent-v2로 기존 동의 무효화). `integration_run_cli`에 `cwd` 선택 인자 + 워크스페이스 containment 검사(Rust 테스트 포함). 소유 밖 최소 수정(P11-03 인수): judgePass·runner·preflight·StepReview·StepCandidates·arenaUtils의 구 목적 캐스트/경로. 검증: `lint`·`typecheck` 통과, `cargo test integration_commands` 7건 통과, `test` 1003/1007(실패 4건은 기존 CRLF 문제와 동일). | 해결됨 |
 
 ---
 

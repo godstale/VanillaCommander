@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
-import { CONSENT_TEXT_VERSION } from '../constants';
+import { CONSENT_TEXT_VERSION } from './types';
 import type {
   DataClass,
   ExternalIntegration,
   IntegrationPurpose,
   IntegrationSettings,
-} from '../types';
+} from './types';
 import {
   callIntegration,
   checkPermission,
@@ -21,12 +21,12 @@ function makeIntegration(overrides?: Partial<ExternalIntegration>): ExternalInte
     kind: 'llm-api',
     enabled: true,
     llm: { provider: 'openai', baseUrl: 'https://api.openai.com/v1', model: 'gpt-4o-mini' },
-    allowedPurposes: ['judge'],
+    allowedPurposes: ['chat-agent'],
     allowedDataClasses: ['public-bundled'],
     consent: {
       version: CONSENT_TEXT_VERSION,
       grantedAt: new Date().toISOString(),
-      purposes: ['judge'],
+      purposes: ['chat-agent'],
       dataClasses: ['public-bundled'],
     },
     createdAt: new Date().toISOString(),
@@ -43,7 +43,7 @@ const SETTINGS_ON: IntegrationSettings = {
 
 describe('checkPermission 5-step denials', () => {
   const base = makeIntegration();
-  const purpose: IntegrationPurpose = 'judge';
+  const purpose: IntegrationPurpose = 'chat-agent';
   const data: DataClass[] = ['public-bundled'];
 
   it('denies when master switch is off', () => {
@@ -70,7 +70,7 @@ describe('checkPermission 5-step denials', () => {
       consent: {
         version: 'consent-v0',
         grantedAt: new Date().toISOString(),
-        purposes: ['judge'],
+        purposes: ['chat-agent'],
         dataClasses: ['public-bundled'],
       },
     });
@@ -81,7 +81,7 @@ describe('checkPermission 5-step denials', () => {
   });
 
   it('denies a disallowed purpose', () => {
-    expect(checkPermission(base, SETTINGS_ON, 'candidate', data)).toEqual({
+    expect(checkPermission(base, SETTINGS_ON, 'wiki-ingest', data)).toEqual({
       ok: false,
       reasonKey: 'eval.integrations.denied.purpose',
     });
@@ -134,7 +134,7 @@ describe('callIntegration', () => {
     const { deps, audit } = depsWith(integration, { streamFn, cliRun });
     const res = await callIntegration(
       'int-1',
-      { purpose: 'judge', dataClasses: ['public-bundled'], messages: [{ role: 'user', content: 'x' }] },
+      { purpose: 'chat-agent', dataClasses: ['public-bundled'], messages: [{ role: 'user', content: 'x' }] },
       undefined,
       deps,
     );
@@ -155,7 +155,7 @@ describe('callIntegration', () => {
     const messages = [{ role: 'user', content: 'héllo' }];
     const res = await callIntegration(
       'int-1',
-      { purpose: 'judge', dataClasses: ['public-bundled'], messages },
+      { purpose: 'chat-agent', dataClasses: ['public-bundled'], messages },
       undefined,
       deps,
     );
@@ -176,7 +176,7 @@ describe('callIntegration', () => {
     const streamFn = vi.fn().mockImplementation(() => chunks());
     const { deps, audit } = depsWith(integration, { streamFn });
     const req = {
-      purpose: 'judge' as IntegrationPurpose,
+      purpose: 'chat-agent' as IntegrationPurpose,
       dataClasses: ['public-bundled'] as DataClass[],
       runId: 'run-batch-1',
       messages: [{ role: 'user', content: 'ab' }],
@@ -210,7 +210,7 @@ describe('callIntegration', () => {
     const { deps } = depsWith(integration, { cliRun });
     const res = await callIntegration(
       'int-1',
-      { purpose: 'judge', dataClasses: ['public-bundled'], messages: [{ role: 'user', content: 'q' }] },
+      { purpose: 'chat-agent', dataClasses: ['public-bundled'], messages: [{ role: 'user', content: 'q' }] },
       undefined,
       deps,
     );
@@ -222,7 +222,7 @@ describe('callIntegration', () => {
     const audit = vi.fn().mockResolvedValue(undefined);
     const res = await callIntegration(
       'missing',
-      { purpose: 'judge', dataClasses: ['public-bundled'], messages: [] },
+      { purpose: 'chat-agent', dataClasses: ['public-bundled'], messages: [] },
       undefined,
       {
         loadIntegration: async () => undefined,

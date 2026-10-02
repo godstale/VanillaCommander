@@ -7,9 +7,9 @@ import type {
   ExternalIntegration,
   IntegrationAuditRow,
   IntegrationSettings,
-} from '@/lib/eval/types';
-import { CONSENT_TEXT_VERSION } from '@/lib/eval/constants';
-import { classifyEndpoint } from '@/lib/eval/integrations/endpointClass';
+} from '@/lib/integrations/types';
+import { CONSENT_TEXT_VERSION } from '@/lib/integrations/types';
+import { classifyEndpoint } from '@/lib/integrations/endpointClass';
 import {
   clearAudit,
   deleteIntegration,
@@ -21,9 +21,9 @@ import {
 } from '@/lib/db/repositories/integrationsRepo';
 import { checkProviderModel } from '@/lib/llm/providerRuntime';
 import { getProviderPreset } from '@/lib/llm/providers';
-import { runIntegrationCli } from '@/lib/eval/integrations/cliRunner';
-import { AuditLogTable } from '@/components/eval/integrations/AuditLogTable';
-import { IntegrationEditorDialog } from '@/components/eval/integrations/IntegrationEditorDialog';
+import { runIntegrationCli } from '@/lib/integrations/cliRunner';
+import { AuditLogTable } from '@/components/integrations/AuditLogTable';
+import { IntegrationEditorDialog } from '@/components/integrations/IntegrationEditorDialog';
 
 export function SettingsIntegrations() {
   const { t } = useLanguage();
