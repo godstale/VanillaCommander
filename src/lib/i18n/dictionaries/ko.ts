@@ -603,6 +603,7 @@ const ko: Dict = {
   'agentForm.exeDetectFailed': '실행 파일 탐지 실패: {err}',
   'agentForm.externalTestOk': '외부 에이전트 실행 확인됨',
   'agentForm.consentNote': '클라우드·외부 에이전트는 대화 내용과 참조 파일이 외부로 전송될 수 있어 저장 시 동의를 구합니다.',
+  'agentForm.externalToolsNote': '외부 에이전트는 자체 도구로 파일을 직접 다룹니다. 이 에이전트에서는 내장 도구·스킬 선택이 적용되지 않습니다.',
   'agentForm.expandTitle': '펼쳐서 수정',
   'agentForm.customizedCount': '{n}개 지정됨',
   'agentForm.approval': '도구 승인 정책',

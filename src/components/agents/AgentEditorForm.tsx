@@ -1884,6 +1884,13 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
           <h3 className="text-sm font-semibold text-foreground">{t('agentForm.activeTools')}</h3>
         </div>
 
+        {/* P11-23: 외부 에이전트는 자체 도구를 쓰므로 선택을 비활성화한다. */}
+        {isExternalAgent && (
+          <p className="text-[11px] text-muted-foreground leading-relaxed">
+            {t('agentForm.externalToolsNote')}
+          </p>
+        )}
+
         {showReadToolWarning && (
           <div className="p-2.5 rounded bg-warning/10 border border-warning/30 text-warning text-xs flex items-center gap-1.5">
             <AlertTriangle className="h-4 w-4 shrink-0" />
@@ -1897,7 +1904,11 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
             return (
               <label
                 key={tool.id}
-                className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer transition-colors ${
+                className={`flex items-start gap-2.5 p-2.5 rounded-lg border transition-colors ${
+                  isExternalAgent
+                    ? 'border-border/40 opacity-50 cursor-not-allowed'
+                    : 'cursor-pointer'
+                } ${
                   isChecked
                     ? 'border-primary/50 bg-primary/5'
                     : 'border-border/60 hover:bg-muted/40'
@@ -1906,8 +1917,9 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
                 <input
                   type="checkbox"
                   checked={isChecked}
+                  disabled={isExternalAgent}
                   onChange={() => toggleTool(tool.id)}
-                  className="rounded border-border text-primary focus:ring-primary h-3.5 w-3.5 mt-0.5 accent-primary"
+                  className="rounded border-border text-primary focus:ring-primary h-3.5 w-3.5 mt-0.5 accent-primary disabled:cursor-not-allowed"
                 />
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
@@ -1952,6 +1964,13 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
           </div>
         </div>
 
+        {/* P11-23: 외부 에이전트는 자체 도구를 쓰므로 선택을 비활성화한다. */}
+        {isExternalAgent && (
+          <p className="text-[11px] text-muted-foreground leading-relaxed">
+            {t('agentForm.externalToolsNote')}
+          </p>
+        )}
+
         {skillsLoading && safeSkills.length === 0 ? (
           <p className="text-[11px] text-muted-foreground">{t('agentForm.skillsLoading')}</p>
         ) : safeSkills.length === 0 ? (
@@ -1966,7 +1985,11 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
               return (
                 <label
                   key={skill.name}
-                  className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer transition-colors ${
+                  className={`flex items-start gap-2.5 p-2.5 rounded-lg border transition-colors ${
+                    isExternalAgent
+                      ? 'border-border/40 opacity-50 cursor-not-allowed'
+                      : 'cursor-pointer'
+                  } ${
                     isChecked
                       ? 'border-primary/50 bg-primary/5'
                       : 'border-border/60 hover:bg-muted/40'
@@ -1975,8 +1998,9 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
                   <input
                     type="checkbox"
                     checked={isChecked}
+                    disabled={isExternalAgent}
                     onChange={() => toggleSkill(skill.name)}
-                    className="rounded border-border text-primary focus:ring-primary h-3.5 w-3.5 mt-0.5 accent-primary"
+                    className="rounded border-border text-primary focus:ring-primary h-3.5 w-3.5 mt-0.5 accent-primary disabled:cursor-not-allowed"
                   />
                   <div className="min-w-0">
                     <span className="text-xs font-mono font-medium text-foreground">

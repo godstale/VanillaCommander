@@ -134,12 +134,14 @@ export function useChat(
     });
   }, [sessionId, agentConfig.model, llmRuntime, compactionSettings]);
 
-  // Build tools from agent's enabledBuiltinTools
+  // Build tools from agent's enabledBuiltinTools.
+  // P11-23: 외부 에이전트는 자체 도구를 쓰므로 우리 루프 도구를 제공하지 않는다.
+  const isExternalAgent = agentConfig.llmProvider === 'external-agent';
   const tools = useMemo(() => {
-    return getBuiltinTools(agentConfig.enabledBuiltinTools, {
+    return getBuiltinTools(isExternalAgent ? [] : agentConfig.enabledBuiltinTools, {
       workspaceRoot: effectiveCwd,
     });
-  }, [agentConfig.enabledBuiltinTools, effectiveCwd]);
+  }, [isExternalAgent, agentConfig.enabledBuiltinTools, effectiveCwd]);
 
   // Read skills and context files from options or context
   const rawSkills = useMemo(() => {
@@ -409,7 +411,14 @@ export function useChat(
         baseUrl: runtime.baseUrl,
         apiKey: runtime.apiKey,
         initialMessages: initial,
-        streamChatFn: getStreamChatFn(runtime, opts.streamChatFn),
+        streamChatFn: getStreamChatFn(
+          {
+            ...runtime,
+            externalAgentId: cfg.externalAgentId,
+            cwd: cwdRef.current,
+          },
+          opts.streamChatFn,
+        ),
       });
 
       newAgent.subscribe((e) => eventHandlerRef.current(e));

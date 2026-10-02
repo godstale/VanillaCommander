@@ -590,6 +590,7 @@ const en: Dict = {
   'agentForm.exeDetectFailed': 'Executable detection failed: {err}',
   'agentForm.externalTestOk': 'External agent run verified',
   'agentForm.consentNote': 'Cloud and external agents may send chat content and referenced files externally, so saving asks for consent.',
+  'agentForm.externalToolsNote': 'External agents manipulate files with their own tools. Built-in tool and skill selections do not apply to this agent.',
   'agentForm.expandTitle': 'Expand to edit',
   'agentForm.customizedCount': '{n} set',
   'agentForm.approval': 'Tool approval policy',

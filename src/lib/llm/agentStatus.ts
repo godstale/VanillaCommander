@@ -32,12 +32,26 @@ function resolveRuntime(agent: Agent, baseUrl?: string): {
 
 /**
  * Check connection status of a single agent (Provider-aware).
+ * P11-23: 외부 에이전트는 CLI 실행 파일 존재로 판단한다.
  */
 export async function checkAgentConnection(
   agent: Agent,
   baseUrl?: string,
 ): Promise<'connected' | 'disconnected'> {
   const runtime = resolveRuntime(agent, baseUrl);
+  if (runtime.kind === 'external-agent') {
+    try {
+      const { invoke } = await import('@tauri-apps/api/core');
+      const { listIntegrations } = await import('@/lib/db/repositories/integrationsRepo');
+      const list = await listIntegrations();
+      const integ = list.find((it) => it.id === agent.externalAgentId);
+      if (!integ?.cli) return 'disconnected';
+      await invoke('find_executable', { name: integ.cli.executablePath });
+      return 'connected';
+    } catch {
+      return 'disconnected';
+    }
+  }
   try {
     if (runtime.kind !== 'ollama') {
       // OpenAI 호환 규격은 모델 ID 목록만 제공하므로 목록 기준으로 판단한다.
@@ -76,9 +90,11 @@ export async function checkAllAgentsConnection(
     return result;
   }
 
-  // Provider/URL별로 그룹화해 목록 조회를 1회씩만 수행한다
+  // Provider/URL별로 그룹화해 목록 조회를 1회씩만 수행한다.
+  // P11-23: 외부 에이전트는 그룹 조회에서 제외하고 개별 확인한다.
+  const rest = agents.filter((a) => (a.llmProvider ?? 'ollama') !== 'external-agent');
   const groups = new Map<string, { kind: LlmProviderKind; baseUrl: string; apiKey?: string; ids: string[] }>();
-  for (const agent of agents) {
+  for (const agent of rest) {
     const runtime = resolveRuntime(agent, baseUrl);
     const key = `${runtime.kind}::${runtime.baseUrl}::${runtime.apiKey ?? ''}`;
     const g = groups.get(key);
@@ -90,6 +106,25 @@ export async function checkAllAgentsConnection(
   }
 
   const byId = new Map(agents.map((a) => [a.id, a]));
+
+  // P11-23: 외부 에이전트는 개별 확인한다 (CLI 존재 검사).
+  const externalIds = agents
+    .filter((a) => (a.llmProvider ?? 'ollama') === 'external-agent')
+    .map((a) => a.id);
+  await Promise.all(
+    externalIds.map(async (id) => {
+      const agent = byId.get(id);
+      if (!agent) return;
+      try {
+        result[id] = await checkAgentConnection(agent, baseUrl);
+      } catch {
+        result[id] = 'disconnected';
+      }
+    }),
+  );
+  if (rest.length === 0) {
+    return result;
+  }
 
   for (const g of groups.values()) {
     if (g.kind !== 'ollama') {
