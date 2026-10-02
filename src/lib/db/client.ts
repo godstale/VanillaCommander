@@ -268,6 +268,15 @@ export const MIGRATION_STATEMENTS: string[] = [
     created_at TEXT NOT NULL
   )`,
   `CREATE INDEX IF NOT EXISTS idx_integration_audit_created ON integration_audit_log(created_at)`,
+  // P11-03: 평가 테이블 폐기. 외부 연동 3종(external_integrations/integration_settings/
+  // integration_audit_log)은 유지한다. 기존 CREATE는 이력으로 남기고 DROP을 뒤에 둔다.
+  `DROP TABLE IF EXISTS eval_scores`,
+  `DROP TABLE IF EXISTS eval_trials`,
+  `DROP TABLE IF EXISTS eval_candidates`,
+  `DROP TABLE IF EXISTS arena_votes`,
+  `DROP TABLE IF EXISTS eval_aggregates`,
+  `DROP TABLE IF EXISTS eval_profiles`,
+  `DROP TABLE IF EXISTS eval_runs`,
 ];
 
 export class MemorySqlFallback implements SqlDatabase {

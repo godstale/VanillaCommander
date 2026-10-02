@@ -163,7 +163,7 @@
 - **W0 — 정리·기반**
   - [x] P11-01 정보 구조 재편(ActivityBar·패널·탭 타입)
   - [x] P11-02 외부 연동 모듈 이관(`src/lib/integrations`)
-  - [ ] P11-03 평가 기능 제거
+  - [x] P11-03 평가 기능 제거
   - [ ] P11-04 앱 설정 모델 + 작업 폴더 + 기본값 상수 + 허용 루트
   - [ ] P11-05 StatusBar
   - [ ] P11-06 셋업 위저드
@@ -242,6 +242,7 @@
 | 2026-10-02 | P11-00 | Phase 11 설계 결정 D1~D10 사용자 확인 완료 — 전부 제안대로 확정. 이에 따라 P11-01 착수(브랜치 `feat/phase11-w0-foundation`). | 해결됨 |
 | 2026-10-02 | P11-01 | 소유 파일 밖 최소 수정(빌드 유지 목적, 원 소유 작업에서 인수 예정): `WorkspaceTabsContext.tsx`(복원 시 삭제된 탭 타입 필터 5줄, 확인 기준 요구) · `Workspace.tsx`(폴더 미선택 게이팅 해제, D2) · `SidePanelContext.tsx`(폴더 미선택 강제 explorer 해제, D2 — ActivityBar 게이팅 제거와 세트) · `EvalTab.tsx`(EvalTabView import 제거, P11-03 인수) · `openEvalTab.ts`+test(단일 캐스트 상수, P11-03 인수) · `AgentListPanel.tsx`(통계/로그 버튼 → agent-monitor 임시 연결, P11-20 인수) · `WorkspaceNoFolder.test.tsx`(게이팅 제거 반영). CenterWorkspace의 eval/agent-stats case 삭제 + 신규 5종 placeholder. V7(기본 탭=파일 탐색기)은 FileExplorerTab이 나오는 P11-11에서 전환(지금은 채팅 유지). 검증: `lint`·`typecheck`·`build` 통과, `test` 1003/1007(실패 4건은 기존 bundledSkills·fab-b·public-packs CRLF 문제와 동일). | 해결됨 |
 | 2026-10-02 | P11-02 | 외부 연동 이관 완료(git mv로 히스토리 유지): `lib/eval/integrations` 4모듈+테스트 → `lib/integrations/`, 다이얼로그 3종 → `components/integrations/`, 연동 i18n → 신규 `integrations.{ko,en}.ts`(평가 문구 개정·신규 목적 키). `integrations/types.ts` 신설(목적 chat-agent/wiki-ingest/doc-parse, consent-v2로 기존 동의 무효화). `integration_run_cli`에 `cwd` 선택 인자 + 워크스페이스 containment 검사(Rust 테스트 포함). 소유 밖 최소 수정(P11-03 인수): judgePass·runner·preflight·StepReview·StepCandidates·arenaUtils의 구 목적 캐스트/경로. 검증: `lint`·`typecheck` 통과, `cargo test integration_commands` 7건 통과, `test` 1003/1007(실패 4건은 기존 CRLF 문제와 동일). | 해결됨 |
+| 2026-10-02 | P11-03 | 평가 기능 제거 완료(약 200파일): `components/eval`·`lib/eval`·`EvalContext`·`evalRepo`·`EvalTab`·eval i18n·`eval_commands.rs`(핸들러 15종 제거)·`resources/evals`(번들 해제)·채팅 evalLock 차단 코드·메시지 저장 버튼. DB는 append-only 원칙대로 CREATE 유지 + DROP 7종 추가(연동 3종 유지). `EvaluationGuide`·Phase10 문서에 폐기 헤더. 검증: `lint`·`typecheck`·`build`·`cargo check/test`(18건) 통과, 잔여 eval import 0건(Ollama `prompt_eval_*` 제외), `test` 383/384(유일 실패는 기존 bundledSkills CRLF — fab-b·public-packs 실패는 테스트 파일 삭제로 해소). | 해결됨 |
 
 ---
 

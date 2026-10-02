@@ -34,7 +34,6 @@ import { appLogger } from '@/lib/logger/logger';
 import { bindSessionToAgent } from '@/lib/monitoring/agentPhaseTracker';
 import { monitoringCollector } from '@/lib/monitoring/monitoringCollector';
 import { isAutoMonitorEnabled } from '@/lib/types/agent';
-import { evalLock } from '@/lib/eval/evalLock';
 
 export type { ChatPersistence };
 
@@ -478,10 +477,6 @@ export function useChat(
   const sendMessage = useCallback(
     async (text: string): Promise<void> => {
       if (!text.trim()) return;
-      // 평가 실행 중에는 어떤 채팅도 LLM으로 전송·큐잉하지 않는다(D5).
-      // UI(입력 비활성화·배너)가 1차 방어선이며, 이 가드는 최후 방어선이다.
-      // useChat에는 번역 컨텍스트가 없으므로 조용히 복귀한다(알림은 UI 층이 담당).
-      if (evalLock.get()) return;
       lastPromptRef.current = text;
       setError(null);
       bindSessionToAgent(sessionId, agentConfigRef.current.id);

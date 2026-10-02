@@ -7,7 +7,6 @@ use commands::shell_commands::*;
 use commands::web_commands::*;
 use commands::system_commands::*;
 use commands::llm_commands::*;
-use commands::eval_commands::*;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -65,22 +64,6 @@ pub fn run() {
             llm_http_post_text,
             llm_http_post_stream,
             integration_run_cli,
-            eval_list_packs,
-            eval_read_pack_file,
-            eval_write_pack_files,
-            eval_delete_pack,
-            eval_append_run_log,
-            eval_read_run_log,
-            eval_sandbox_create,
-            eval_sandbox_create_from_files,
-            eval_sandbox_snapshot,
-            eval_sandbox_destroy,
-            eval_sandbox_cleanup_all,
-            eval_detect_runtimes,
-            eval_run_python,
-            eval_download_file,
-            eval_export_write,
-            eval_read_import_file,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

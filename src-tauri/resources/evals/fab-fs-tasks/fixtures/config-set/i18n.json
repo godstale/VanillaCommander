@@ -1,5 +1,0 @@
-{
-  "defaultLocale": "ko",
-  "supported": ["ko", "en"],
-  "fallback": "ko"
-}

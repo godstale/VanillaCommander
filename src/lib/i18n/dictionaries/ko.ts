@@ -1,6 +1,5 @@
 export type Dict = Record<string, string>;
 
-import { evalKo } from './eval/index';
 import { integrationsKo } from './integrations.ko';
 import { explorerKo } from './explorer.ko';
 import { wikiKo } from './wiki.ko';
@@ -1085,7 +1084,6 @@ const ko: Dict = {
   ...setupKo,
   ...statusBarKo,
   ...parsersKo,
-  ...evalKo,
 };
 
 export type KoDict = typeof ko;

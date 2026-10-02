@@ -1,5 +1,4 @@
 import type { Dict } from './ko';
-import { evalEn } from './eval/index';
 import { integrationsEn } from './integrations.en';
 import { explorerEn } from './explorer.en';
 import { wikiEn } from './wiki.en';
@@ -1069,7 +1068,6 @@ const en: Dict = {
   ...setupEn,
   ...statusBarEn,
   ...parsersEn,
-  ...evalEn,
 };
 
 export default en;
