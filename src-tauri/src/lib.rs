@@ -1,6 +1,7 @@
 pub mod commands;
 
 use commands::fs_commands::*;
+use commands::commander_commands::*;
 use commands::integration_commands::*;
 use commands::search_commands::*;
 use commands::shell_commands::*;
@@ -65,6 +66,24 @@ pub fn run() {
             llm_http_post_text,
             llm_http_post_stream,
             integration_run_cli,
+            fc_list_dir,
+            fc_system_folders,
+            fc_stat,
+            fc_copy,
+            fc_move,
+            fc_cancel,
+            fc_resolve_conflict,
+            fc_trash,
+            fc_delete_permanent,
+            fc_rename,
+            fc_mkdir,
+            fc_create_file,
+            fc_search,
+            fc_zip,
+            fc_unzip,
+            fc_archive_list,
+            fc_open_default,
+            fc_reveal,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
