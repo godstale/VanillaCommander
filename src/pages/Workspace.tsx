@@ -13,6 +13,7 @@ import { WorkspaceProvider, useWorkspace } from '@/lib/context/WorkspaceContext'
 import { SkillsProvider } from '@/lib/context/SkillsContext';
 import { AgentsProvider } from '@/lib/context/AgentsContext';
 import { ChatSessionsProvider } from '@/lib/context/ChatSessionsContext';
+import { JobsProvider } from '@/lib/commander/jobs';
 import { TrustWorkspaceDialog } from '@/components/workspace/TrustWorkspaceDialog';
 import { ApprovalDialog } from '@/components/chat/ApprovalDialog';
 import type { SidePanelView } from '@/lib/types/workspaceTab';
@@ -22,6 +23,7 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useSearchParams } from 'react-router-dom';
 import { SetupWizard } from '@/components/setup/SetupWizard';
+import { ConflictDialogHost, CommanderStatusPublishers } from '@/components/explorer/CommanderOverlays';
 
 function WorkspaceContent() {
   useKeyboardShortcuts();
@@ -120,6 +122,8 @@ function WorkspaceContent() {
         </div>
       </div>
       <StatusBar />
+      <ConflictDialogHost />
+      <CommanderStatusPublishers />
       {wizardOpen && <SetupWizard onClose={closeWizard} />}
     </div>
   );
@@ -132,6 +136,7 @@ export function Workspace() {
       <SkillsProvider>
         <AgentsProvider>
           <ChatSessionsProvider>
+            <JobsProvider>
             <WorkspaceTabsProvider>
               <SidePanelProvider>
                 <WorkspaceContent />
@@ -139,6 +144,7 @@ export function Workspace() {
                 <ApprovalDialog />
               </SidePanelProvider>
             </WorkspaceTabsProvider>
+            </JobsProvider>
           </ChatSessionsProvider>
         </AgentsProvider>
       </SkillsProvider>
