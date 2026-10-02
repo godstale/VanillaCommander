@@ -166,7 +166,7 @@
   - [x] P11-03 평가 기능 제거
   - [x] P11-04 앱 설정 모델 + 작업 폴더 + 기본값 상수 + 허용 루트
   - [x] P11-05 StatusBar
-  - [ ] P11-06 셋업 위저드
+  - [x] P11-06 셋업 위저드
 - **W1 — 파일 탐색기**
   - [ ] P11-10 Rust 파일 커맨더 커맨드
   - [ ] P11-11 FileExplorerTab
@@ -245,6 +245,7 @@
 | 2026-10-02 | P11-03 | 평가 기능 제거 완료(약 200파일): `components/eval`·`lib/eval`·`EvalContext`·`evalRepo`·`EvalTab`·eval i18n·`eval_commands.rs`(핸들러 15종 제거)·`resources/evals`(번들 해제)·채팅 evalLock 차단 코드·메시지 저장 버튼. DB는 append-only 원칙대로 CREATE 유지 + DROP 7종 추가(연동 3종 유지). `EvaluationGuide`·Phase10 문서에 폐기 헤더. 검증: `lint`·`typecheck`·`build`·`cargo check/test`(18건) 통과, 잔여 eval import 0건(Ollama `prompt_eval_*` 제외), `test` 383/384(유일 실패는 기존 bundledSkills CRLF — fab-b·public-packs 실패는 테스트 파일 삭제로 해소). | 해결됨 |
 | 2026-10-02 | P11-05 | StatusBar 완료: `StatusBarContext`(슬롯 publish/clear + 5초 일시 메시지 notify), 하단 `StatusBar`(좌측 슬롯 + 우측 메시지), 기본 퍼블리셔(기본 에이전트명·모델·연결 상태·실행 중, 60초 재확인), `statusBar` 사전, 컨텍스트 테스트 3건. 나머지 슬롯은 각 기능 작업이 퍼블리시한다. 검증: `lint`·`typecheck` 통과, `test` 389/390(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-04 | 설정 모델 + 작업 폴더 + 허용 루트 완료: `agent/defaults.ts` 신설(V4·V6: 승인 dangerous-only·셸 제외 전체 도구·basic-llm-wiki·temperature 0.2) + `DEFAULT_AGENT` 연결. settings에 setupCompletedAt·workFolder·favorites·agentAllowedRoots·wiki·parsers 블록 추가(6 컬럼, zod 검증, 메모리 폴백·ALTER 동기화, round-trip 테스트 3건). `WorkspaceContext`에 workFolder/setWorkFolder/ensureWorkFolderLayout + Rust 허용 루트 동기화. Rust: `set_active_workspace` → `set_agent_allowed_roots`(정규화 저장), 검증은 허용 루트 기준(명시 루트 우회 차단), 사용자 명령은 canonicalize만(`resolve_user_path`, reveal 적용), `ensure_work_folder_layout` 신설(Rust 테스트 3건). 부수 수정: 메모리 폴백의 전체 UPDATE 유실 버그(탭 전용 prefix 오매칭) 수정 + projectDb 테스트 기대값 정정. fc_* 분할(P11-10)이 D1 사용자/에이전트 분리를 완성한다. 검증: `lint`·`typecheck`·`build`·`cargo test`(21건) 통과, `test` 386/387(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-06 | 셋업 위저드 완료: 6단계(언어·작업 폴더·에이전트·위키·매크로·완료) + 단계별 적용/건너뛰기, 재실행은 현재값 프리필, 완료 시 기본 에이전트 편집 탭 자동 오픈(D9). `LanguageSelectDialog`는 위저드 1단계로 흡수(파일 삭제). 진입점 `/?setup=1`(설정 > 일반에 재실행 버튼 — P11-50 화면 소유이나 최소 버튼 1개 추가). 첫 실행 판정은 `setupCompletedAt == null`. 검증: `lint`·`typecheck`·`build` 통과, 위저드 테스트 1건(6단계 완주·setupCompletedAt·에이전트 생성) 통과, `test` 390/391(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 
 ---
 

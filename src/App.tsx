@@ -9,7 +9,6 @@ import SettingsIntegrations from '@/pages/Settings/SettingsIntegrations';
 import { ThemeProvider } from '@/lib/context/ThemeContext';
 import { SettingsProvider } from '@/lib/context/SettingsContext';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
-import { LanguageSelectDialog } from '@/components/language/LanguageSelectDialog';
 
 export default function App() {
   return (
@@ -28,7 +27,6 @@ export default function App() {
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-            <LanguageSelectDialog />
           </HashRouter>
         </SettingsProvider>
       </LanguageProvider>

@@ -1,9 +1,10 @@
-import { Moon, Sun, Monitor, Activity } from 'lucide-react';
+import { Moon, Sun, Monitor, Activity, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { DEFAULT_MONITORING_INTERVAL_MS } from '@/lib/db/repositories/settingsRepo';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const MONITORING_INTERVAL_OPTIONS = [1000, 2000, 3000, 5000, 10000];
@@ -12,6 +13,7 @@ export function SettingsGeneral() {
   const { theme, setTheme } = useTheme();
   const { locale, setLocale, markChosen, t } = useLanguage();
   const { settings, updateSettings } = useSettings();
+  const navigate = useNavigate();
   const monitoringIntervalMs =
     settings.monitoringIntervalMs ?? DEFAULT_MONITORING_INTERVAL_MS;
 
@@ -108,6 +110,21 @@ export function SettingsGeneral() {
             {t('languageSelect.enLabel')}
           </Button>
         </div>
+      </div>
+
+      <div className="border border-border rounded-xl p-5 bg-card/40 space-y-3">
+        <div>
+          <h3 className="text-sm font-semibold flex items-center gap-1.5">
+            <Wand2 className="h-4 w-4 text-primary" />
+            {t('setup.rerunTitle')}
+          </h3>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {t('setup.rerunDesc')}
+          </p>
+        </div>
+        <Button variant="outline" size="sm" onClick={() => navigate('/?setup=1')}>
+          {t('setup.rerun')}
+        </Button>
       </div>
 
       <div className="border border-border rounded-xl p-5 bg-card/40 space-y-3">

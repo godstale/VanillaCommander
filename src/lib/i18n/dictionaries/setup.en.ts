@@ -1,4 +1,41 @@
 import type { Dict } from './ko';
 
-// P11-01 skeleton. Real strings land in P11-06 (setup wizard).
-export const setupEn: Dict = {};
+// P11-06 setup wizard strings.
+export const setupEn: Dict = {
+  'setup.title': 'Vanilla Commander setup',
+  'setup.stepOf': 'Step {a} of {b}',
+  'setup.back': 'Back',
+  'setup.next': 'Next',
+  'setup.skip': 'Skip',
+  'setup.finish': 'Finish',
+  'setup.lang.title': 'Choose a language',
+  'setup.lang.desc': 'Pick the display language. You can change it anytime in Settings.',
+  'setup.folder.title': 'Work folder',
+  'setup.folder.desc': 'Pick the work folder for wiki, backups, and settings. You can change it later in Settings.',
+  'setup.folder.browse': 'Browse...',
+  'setup.folder.change': 'Change...',
+  'setup.folder.none': 'No work folder (you can set one later).',
+  'setup.folder.failed': 'Folder pick failed: {err}',
+  'setup.agent.title': 'Agent guide',
+  'setup.agent.desc': 'Choose the model for the default chat agent. External APIs and external agents can be added later in the agent editor.',
+  'setup.agent.checking': 'Checking Ollama connection...',
+  'setup.agent.connected': 'Ollama connected ({n} models)',
+  'setup.agent.disconnected': 'Cannot reach Ollama. Type a model ID manually; you can connect later.',
+  'setup.agent.model': 'Model',
+  'setup.agent.baseUrl': 'Ollama URL',
+  'setup.agent.created': 'Default agent created.',
+  'setup.agent.updated': 'Default agent model updated.',
+  'setup.agent.failed': 'Failed to save agent: {err}',
+  'setup.wiki.title': 'Wiki guide',
+  'setup.wiki.desc': 'New files piling up in the download folder are tidied into the wiki automatically. Watching can be turned off anytime in Settings.',
+  'setup.wiki.watch': 'Watch download folder',
+  'setup.wiki.move': 'Move originals after ingest',
+  'setup.wiki.saved': 'Wiki settings saved.',
+  'setup.macro.title': 'Macro guide',
+  'setup.macro.desc': 'Save prompt bundles you reuse as macros, then load them in chat or run them on a schedule. Create them from the Macros menu.',
+  'setup.done.title': 'All set',
+  'setup.done.desc': 'Starting with the default agent editor open. Tune the model, tools, and skills there.',
+  'setup.rerunTitle': 'Setup wizard',
+  'setup.rerunDesc': 'Walk through the 6 first-run steps again. Current values are prefilled.',
+  'setup.rerun': 'Re-run wizard',
+};

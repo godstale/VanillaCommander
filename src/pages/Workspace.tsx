@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import type { ImperativePanelHandle } from 'react-resizable-panels';
 import { TopMenuBar } from '@/components/layout/TopMenuBar';
 import { ActivityBar } from '@/components/layout/ActivityBar';
@@ -19,6 +19,9 @@ import type { SidePanelView } from '@/lib/types/workspaceTab';
 
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { useSettings } from '@/lib/context/SettingsContext';
+import { useSearchParams } from 'react-router-dom';
+import { SetupWizard } from '@/components/setup/SetupWizard';
 
 function WorkspaceContent() {
   useKeyboardShortcuts();
@@ -26,8 +29,35 @@ function WorkspaceContent() {
   const { workspaceRoot } = useWorkspace();
   const { activeView, setActiveView } = useSidePanel();
   const { tabs, openTab, isTabsLoaded } = useWorkspaceTabs();
+  const { settings, loading: settingsLoading } = useSettings();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [wizardOpen, setWizardOpen] = useState(false);
+  const wizardShownRef = useRef(false);
   const sidePanelRef = useRef<ImperativePanelHandle | null>(null);
   const autoOpenedRef = useRef(false);
+
+  // P11-06(V8): 최초 1회 자동 실행 + ?setup=1 재실행. 기존 DB 사용자는 값이 프리필된다.
+  // 게이트성 1회 오픈이라 set-state-in-effect 규칙을 예외 적용한다.
+  useEffect(() => {
+    if (wizardShownRef.current || settingsLoading) return;
+    if (searchParams.get('setup') === '1') {
+      wizardShownRef.current = true;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setWizardOpen(true);
+      return;
+    }
+    if (settings.setupCompletedAt == null) {
+      wizardShownRef.current = true;
+      setWizardOpen(true);
+    }
+  }, [settings, settingsLoading, searchParams]);
+
+  const closeWizard = () => {
+    setWizardOpen(false);
+    if (searchParams.get('setup') === '1') {
+      setSearchParams({});
+    }
+  };
 
   // Automatically open a default chat tab on startup if workspaceRoot exists and no tabs after restoration
   useEffect(() => {
@@ -90,6 +120,7 @@ function WorkspaceContent() {
         </div>
       </div>
       <StatusBar />
+      {wizardOpen && <SetupWizard onClose={closeWizard} />}
     </div>
   );
 }
