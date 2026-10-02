@@ -47,4 +47,5 @@ export const macrosEn: Dict = {
   'macros.weekday4': 'Thu',
   'macros.weekday5': 'Fri',
   'macros.weekday6': 'Sat',
+  'macros.approvalWaiting': 'Macro "{name}" is waiting for approval. Confirm it in the approval dialog.',
 };

@@ -47,4 +47,5 @@ export const macrosKo: Dict = {
   'macros.weekday4': '목',
   'macros.weekday5': '금',
   'macros.weekday6': '토',
+  'macros.approvalWaiting': '매크로 "{name}" 실행이 승인 대기 중입니다. 승인 대화상자에서 확인하세요.',
 };

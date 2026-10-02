@@ -1,13 +1,21 @@
 // P11-40: 매크로 사이드 패널. 목록·실행·스케줄 표시 + [새 매크로].
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Zap, Plus, Play, Pencil, Trash2, MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { useMacros } from '@/lib/macros/useMacros';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useChatSessions } from '@/lib/context/ChatSessionsContext';
+import { useStatusBar } from '@/lib/context/StatusBarContext';
 import { describeSchedule, isScheduleEnabled, type Macro } from '@/lib/macros/types';
 import { launchMacroRun } from '@/lib/macros/launch';
+import {
+  configureMacroScheduler,
+  startMacroScheduler,
+  tickMacroScheduler,
+} from '@/lib/macros/scheduler';
+import { updateMacro } from '@/lib/macros/macrosRepo';
+import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 
 export function MacroPanel() {
   const { t } = useLanguage();
@@ -15,6 +23,8 @@ export function MacroPanel() {
   const { getAgent, defaultAgent } = useAgents();
   const { openTab } = useWorkspaceTabs();
   const { refreshSessions } = useChatSessions();
+  const { notify } = useStatusBar();
+  const workspace = useSafeWorkspace();
 
   const runMacro = useCallback(async (macro: Macro) => {
     const agentId = (macro.agentId && getAgent(macro.agentId)?.id) || defaultAgent.id;
@@ -40,6 +50,28 @@ export function MacroPanel() {
       meta: { sessionId, agentId },
     });
   }, [getAgent, defaultAgent.id, openTab]);
+
+  // P11-41: 인앱 스케줄러. 매크로 목록·기본 에이전트를 바인딩하고 1분 틱으로 돌린다.
+  // 승인 요청은 자동 처리하지 않고 StatusBar 일시 메시지로 알린다.
+  useEffect(() => {
+    const workspaceRoot = workspace?.workspaceRoot ?? null;
+    configureMacroScheduler({
+      listMacros: () => import('@/lib/macros/macrosRepo').then((m) => m.listMacros(workspaceRoot)),
+      getDefaultAgentId: () => defaultAgent.id,
+      resolveAgentId: (macro) =>
+        (macro.agentId && getAgent(macro.agentId)?.id) || defaultAgent.id,
+      openChatTab: (tab) => openTab(tab),
+      recordRun: (id, patch) => updateMacro(id, patch, workspaceRoot).then(() => undefined),
+      onApprovalNeeded: (macro) => {
+        notify(t('macros.approvalWaiting', { name: macro.name }), 15000);
+      },
+    });
+    startMacroScheduler();
+    return () => {
+      // 패널이 닫혀도 스케줄은 유지한다 (앱 실행 중 동작, D7).
+      void tickMacroScheduler();
+    };
+  }, [workspace?.workspaceRoot, getAgent, defaultAgent.id, openTab, notify, t]);
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
