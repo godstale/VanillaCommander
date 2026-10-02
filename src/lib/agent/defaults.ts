@@ -1,7 +1,7 @@
 import type { ApprovalMode, BuiltinToolId } from '@/lib/types/agent';
 
 // P11-04(V4): 앱 전역 기본값 상수. 설정 화면의 전역 모델/승인값 대신 사용한다.
-// P11-50에서 SettingsModel·SettingsApproval 화면을 삭제하면 이 상수만 남는다.
+// P11-04/V4·V6: 전역 모델·승인 설정 화면 대신 이 상수가 유일한 기본값이다.
 
 /** 기본 승인 모드 (V4·V6: dangerous-only). */
 export const APP_DEFAULT_APPROVAL_MODE: ApprovalMode = 'dangerous-only';

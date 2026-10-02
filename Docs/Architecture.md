@@ -1,4 +1,4 @@
-# Fortress 아키텍처 설계서
+# Vanilla Commander 아키텍처 설계서
 
 > 이 문서는 [ImplementationPlan.md](./ImplementationPlan.md)의 모든 Phase 작업이 공통으로 참조하는 **단일 진실 공급원(Source of Truth)**입니다.
 > 어떤 Phase/작업을 담당하는 에이전트든, 구현을 시작하기 전에 이 문서 전체를 읽어야 합니다.
@@ -6,17 +6,17 @@
 
 ## 0. 한눈에 보는 요약
 
-- **앱 이름**: Fortress
+- **앱 이름**: Vanilla Commander (구 Fortress — 로컬 LLM 워크벤치에서 파일 커맨더로 전환, Phase 11)
 - **형태**: Tauri 2 기반 데스크탑 앱 (Windows 우선, macOS/Linux는 추후 고려)
 - **프런트엔드**: React 19 + TypeScript(strict) + Vite 7
 - **UI 시스템**: shadcn/ui("new-york") + Radix UI + Tailwind CSS 3 + lucide-react 아이콘
-- **레이아웃 참고**: `VivoStudio` (좌측 아이콘 사이드바 + 좌측 리사이저블 패널 + 우측 탭 콘텐츠 영역 + 파일 뷰어)
-- **에이전트 관리/채팅 참고**: `VivoAcademy`의 "에이전트 관리" 메뉴 및 강좌 화면 채팅 UI (단, Fortress는 채팅이 **메인 기능**이며 우측 탭 콘텐츠의 기본 탭으로 위치)
+- **레이아웃 참고**: `VivoStudio` (좌측 아이콘 사이드바 + 좌측 리사이저블 패널 + 우측 탭 콘텐츠 영역 + 파일 뷰어 + 하단 StatusBar)
+- **에이전트 관리/채팅 참고**: `VivoAcademy`의 "에이전트 관리" 메뉴 및 강좌 화면 채팅 UI (단, Vanilla Commander는 **파일 탐색기 탭이 기본**이며 채팅·에이전트·위키·매크로가 이를 보조)
 - **에이전트 런타임 참고**: `pi`([earendil-works/pi](https://github.com/earendil-works/pi), 로컬 체크아웃 `..\pi`) — 루프/도구/압축/스킬/세션 설계의 기준 (§1.3)
-- **LLM 실행**: Ollama(로컬) + **자체 에이전트 루프**(TypeScript, 렌더러 프로세스에서 직접 실행). LangGraph.js 그래프 모델은 채택하지 않음 (§5.0)
-- **저장소**: SQLite (`tauri-plugin-sql`) — append-only 엔트리 기반 세션/에이전트/설정 (§4.3)
+- **LLM 실행**: Ollama(로컬) + OpenAI 호환 런타임 + 외부 에이전트 CLI + **자체 에이전트 루프**(TypeScript, 렌더러 프로세스에서 직접 실행). LangGraph.js 그래프 모델은 채택하지 않음 (§5.0)
+- **저장소**: SQLite (`tauri-plugin-sql`) — append-only 엔트리 기반 세션/에이전트/설정 + 위키·매크로 테이블 (§4.3, §4.5)
 - **패키지 매니저**: pnpm
-- **Git**: `https://github.com/godstale/FortressAgent.git` (origin)
+- **Git**: `https://github.com/godstale/VanillaCommander.git` (origin)
 
 ---
 
@@ -26,21 +26,21 @@
 
 리서치 결과(에이전트 조사 완료, 2026-09-18) 기준으로 아래 패턴을 **동일한 방식으로 재사용**합니다.
 
-| 영역                                        | VivoStudio 참고 파일                                                                                                          | Fortress 대응 위치                                                                                                     |
+| 영역                                        | VivoStudio 참고 파일                                                                                                          | 대응 위치                                                                                                     |
 | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | 좌측 아이콘 사이드바                        | `src/components/layout/ActivityBar.tsx`                                                                                       | `src/components/layout/ActivityBar.tsx`                                                                                |
 | 좌측 리사이저블 패널 + 접기/펼치기          | `src/components/layout/WorkspaceLayout.tsx` (react-resizable-panels, `ImperativePanelHandle`)                                 | `src/components/layout/WorkspaceLayout.tsx`                                                                            |
 | 좌측 패널 콘텐츠 라우팅                     | `src/components/explorer/ExplorerPanel.tsx`                                                                                   | `src/components/sidepanel/SidePanel.tsx`                                                                               |
 | 우측 탭 바 + 탭 콘텐츠 라우팅               | `src/components/workspace/CenterWorkspace.tsx`                                                                                | `src/components/workspace/CenterWorkspace.tsx`                                                                         |
 | 탭 상태 관리(Context, 멱등 openTab, 영속화) | `src/lib/context/WorkspaceTabsContext.tsx`                                                                                    | `src/lib/context/WorkspaceTabsContext.tsx`                                                                             |
-| 파일 트리 탐색기                            | `src/components/explorer/FileTree.tsx`                                                                                        | `src/components/explorer/FileTree.tsx`                                                                                 |
+| 파일 트리 탐색기                            | `src/components/explorer/FileTree.tsx`                                                                                        | 프로젝트 트리 개념 폐지(D2). 대신 `FileExplorerTab`(커맨더 탭) + `ExplorerPanel`(탭 목록·즐겨찾기·시스템 폴더) |
 | 이미지 뷰어 탭                              | `src/components/workspace/ImageViewerTab.tsx` (`convertFileSrc` + 줌)                                                         | `src/components/workspace/ImageViewerTab.tsx`                                                                          |
 | 텍스트 파일 편집 탭                         | `src/components/workspace/EditorTab.tsx` (textarea 기반, autosave)                                                            | `src/components/workspace/EditorTab.tsx` (단, **CodeMirror 6로 실제 문법 강조 추가** — VivoStudio는 없었음, 개선 사항) |
 | Context per concern 상태관리                | `src/lib/context/*`                                                                                                           | `src/lib/context/*`                                                                                                    |
 | 다크 우선 테마(CSS 변수)                    | `src/index.css`, `ThemeContext.tsx`                                                                                           | 동일 + **Midnight Rampart 디자인 시스템**(`design/` 토큰·프리셋, 규칙은 `DESIGN.md`)                                   |
 | Tauri IPC 파일 커맨드 네이밍                | `read_text_file`, `write_text_file`, `read_project_folder_tree`, `create_file`, `create_folder`, `rename_path`, `delete_path` | 동일한 커맨드명 재사용 (일관성 유지)                                                                                   |
 
-**가져오지 않는 것**: VivoStudio의 "fake Supabase" DB 클라이언트, 강좌(Course) 관련 기능, TTS, 3D/애니메이션 카드 렌더러, CLI 에이전트(Claude Code/Codex) 터미널 런처, 스플릿 탭 드래그앤드롭(1단계 고정 분할)은 **1차 스코프에서 제외**(Phase 7 이후 "선택적 확장"으로만 고려).
+**가져오지 않는 것**: VivoStudio의 "fake Supabase" DB 클라이언트, 강좌(Course) 관련 기능, TTS, 3D/애니메이션 카드 렌더러. 스플릿 탭·CLI 에이전트 연동은 Phase 11에서 도입했으므로 제외 목록에서 빠진다.
 
 ### 1.2 VivoAcademy에서 가져오는 패턴 (에이전트 관리 UI + 채팅)
 
@@ -51,24 +51,24 @@
 | 스트리밍 아키텍처                               | `src/lib/agent/client.ts`의 `sendAgentChat` (요청-스코프 이벤트 리스너 → 최종 메시지 resolve) | **인터페이스 형태**만 참고. Fortress는 Ollama `/api/chat`을 프런트엔드에서 직접 스트리밍하고, UI는 §5.4의 `AgentEvent` 스트림만 구독 | Rust SSE 파서 자체는 불필요(로컬 LLM 호출은 JS에서 직접)                                                                                                  |
 | 히든 메시지 시그널링(`<!-- HIDDEN_MESSAGE -->`) | 두 채팅 화면 모두                                                                             | **가져오지 않음.** Fortress는 Ollama의 정식 tool-calling과 §5.4의 구조화된 이벤트를 사용                                             |
 
-**중요한 설계 차이 (사용자 확정 사항)**: VivoAcademy의 "Agent"는 외부 서버 연결 프로필이지만, Fortress의 "Agent"는 **단일 공용 에이전트 런타임에 주입되는 설정값(페르소나/프리셋)**입니다. 즉 Agent마다 별도의 런타임을 만들지 않고, 하나의 `FortressAgent` 인스턴스가 `systemPrompt`, `model`, `enabledSkills`, `enabledBuiltinTools`, `temperature`, `contextSize` 등의 설정을 파라미터로 받아 동작합니다. (§4.2, §5)
+**중요한 설계 차이 (사용자 확정 사항)**: VivoAcademy의 "Agent"는 외부 서버 연결 프로필이지만, Vanilla Commander의 "Agent"는 **단일 공용 에이전트 런타임에 주입되는 설정값(페르소나/프리셋)**입니다. 즉 Agent마다 별도의 런타임을 만들지 않고, 하나의 `VanillaAgent` 인스턴스가 `systemPrompt`, `model`, `enabledSkills`, `enabledBuiltinTools`, `temperature`, `contextSize` 등의 설정을 파라미터로 받아 동작합니다. (§4.2, §5). 외부 에이전트(`llmProvider: 'external-agent'`, Phase 11)만 예외로, 우리 루프 대신 CLI 1회 실행으로 동작합니다 (§5.9).
 
 ### 1.3 pi에서 가져오는 패턴 (에이전트 런타임)
 
-`pi`는 프로덕션에서 쓰이는 TypeScript 에이전트 하네스이며, Fortress가 만들려는 것과 구조가 가장 가깝습니다. **코드를 복사하지 않고 설계만 재구현**합니다(라이선스는 MIT이나 의존성 스택이 다름 — `AGENTS.md` 참고).
+`pi`는 프로덕션에서 쓰이는 TypeScript 에이전트 하네스이며, 만들려는 것과 구조가 가장 가깝습니다. **코드를 복사하지 않고 설계만 재구현**합니다(라이선스는 MIT이나 의존성 스택이 다름 — `AGENTS.md` 참고).
 
-| 영역                    | pi 참고 위치                                                                                      | Fortress가 가져오는 것                                                                                                                                                                                                                      | 가져오지 않는 것                                                                                                            |
+| 영역                    | pi 참고 위치                                                                                      | 가져오는 것                                                                                                                                                                                                                      | 가져오지 않는 것                                                                                                            |
 | ----------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | 에이전트 루프 + 확장 훅 | `packages/agent/src/types.ts`(`AgentLoopConfig`), `src/agent.ts`(`Agent`)                         | `beforeToolCall`/`afterToolCall`/`transformContext`/`shouldStopAfterTurn`/`prepareNextTurn` 콜백 구조, steering/follow-up 큐, `abort()`, 이벤트 스트림 이름                                                                                 | `Context`/telemetry 전파, 멀티 프로바이더 추상화(`packages/ai`)                                                             |
-| 내구성 런타임           | `packages/agent/docs/harness.md` (operation state machine, 3-store)                               | **개념만** — "턴 경계에서만 영속화한다"는 원칙                                                                                                                                                                                              | 트랜잭션 단위 재시작점, intent/settlement 2-commit, 크래시 복구, 브랜치 트리. Fortress는 단일 사용자 데스크탑 앱이므로 과잉 |
+| 내구성 런타임           | `packages/agent/docs/harness.md` (operation state machine, 3-store)                               | **개념만** — "턴 경계에서만 영속화한다"는 원칙                                                                                                                                                                                              | 트랜잭션 단위 재시작점, intent/settlement 2-commit, 크래시 복구, 브랜치 트리. 단일 사용자 데스크탑 앱이므로 과잉 |
 | 컨텍스트 압축           | `packages/agent/src/harness/compaction/compaction.ts`, `packages/coding-agent/docs/compaction.md` | 트리거식(`reserveTokens`), usage 기반 토큰 추정, `keepRecentTokens` 컷 포인트 탐색, toolResult 분리 금지, 구조화 요약 포맷, 증분(previousSummary) 업데이트, 파일 조작 누적 추적, overflow 복구                                              | 브랜치 요약(`/tree`), split-turn 2단 요약(1차 스코프 제외, §13)                                                             |
 | 스킬                    | `packages/coding-agent/src/core/skills.ts`, `docs/skills.md`                                      | [Agent Skills 표준](https://agentskills.io/specification) 준수 — SKILL.md 스캔, frontmatter 검증, 이름 충돌 처리, `<available_skills>` XML 프롬프트 노출, **프로그레시브 디스클로저**(도구가 아니라 `read`로 로드), `/skill:name` 명시 호출 | 패키지(`pi.skills`) 소스, 확장(extension) 시스템                                                                            |
-| AGENTS.md               | `packages/coding-agent/src/core/resource-loader.ts` (`loadProjectContextFiles`)                   | 후보 파일명 순서, **조상 디렉터리 계층 수집**, 루트→cwd 병합 순서                                                                                                                                                                           | git worktree 그림자 처리(Fortress는 워크스페이스 1개만 염)                                                                  |
+| AGENTS.md               | `packages/coding-agent/src/core/resource-loader.ts` (`loadProjectContextFiles`)                   | 후보 파일명 순서, **조상 디렉터리 계층 수집**, 루트→cwd 병합 순서                                                                                                                                                                           | git worktree 그림자 처리(워크스페이스 1개만 염두)                                                                  |
 | 시스템 프롬프트         | `packages/coding-agent/src/core/system-prompt.ts`                                                 | 순서 있는 **섹션 맵** + `diffSystemPromptSections()` 부분 갱신                                                                                                                                                                              | pi 자체 문서 섹션                                                                                                           |
-| 도구 세트               | `packages/coding-agent/src/core/tools/`                                                           | `read`(offset/limit + 줄번호) / `write` / `edit`(부분 치환) / `ls` / `grep` / `find` / 셸, 출력 이중 상한 절단(`truncate.ts`)                                                                                                               | `powershell`/`bash` 이원화(Fortress는 단일 `shell` 도구로 OS별 분기), 파일 변경 큐                                          |
+| 도구 세트               | `packages/coding-agent/src/core/tools/`                                                           | `read`(offset/limit + 줄번호) / `write` / `edit`(부분 치환) / `ls` / `grep` / `find` / 셸, 출력 이중 상한 절단(`truncate.ts`)                                                                                                               | `powershell`/`bash` 이원화(단일 `shell` 도구로 OS별 분기), 파일 변경 큐                                          |
 | 세션 저장               | `packages/coding-agent/docs/session-format.md`, `harness.md` Part 1–2                             | append-only **엔트리**(`message`/`compaction`/`custom`) + `parent_id` + JSON payload, `firstKeptEntryId`로 압축 경계 표현                                                                                                                   | JSONL 백엔드, 값/리스트 스토어, usage ledger, 브랜치 인덱스                                                                 |
 
-**pi에서 의도적으로 가져오지 않는 가장 큰 것**: pi의 harness는 "프로세스가 임의 시점에 죽어도 정착된 부수효과를 반복하지 않는" 내구성을 위해 스토리지 트랜잭션 단위의 상태 기계를 갖습니다. Fortress는 단일 사용자 로컬 데스크탑 앱이므로 이 비용을 지불하지 않고, **턴 경계에서만 엔트리를 영속화**합니다. 그 대가로 "스트리밍/도구 실행/승인 대기 중 앱이 강제 종료되면 해당 턴은 폐기되고 마지막 완료 턴까지만 복원된다"는 한계를 받아들입니다 (§4.3, §8.3에 명시).
+**pi에서 의도적으로 가져오지 않는 가장 큰 것**: pi의 harness는 "프로세스가 임의 시점에 죽어도 정착된 부수효과를 반복하지 않는" 내구성을 위해 스토리지 트랜잭션 단위의 상태 기계를 갖습니다. 단일 사용자 로컬 데스크탑 앱이므로 이 비용을 지불하지 않고, **턴 경계에서만 엔트리를 영속화**합니다. 그 대가로 "스트리밍/도구 실행/승인 대기 중 앱이 강제 종료되면 해당 턴은 폐기되고 마지막 완료 턴까지만 복원된다"는 한계를 받아들입니다 (§4.3, §8.3에 명시).
 
 ---
 
@@ -77,7 +77,7 @@
 Phase 0에서 골격을 만들고, 이후 Phase에서 하위 폴더를 채워 나갑니다. **각 Phase 문서는 자신이 새로 만드는 파일/폴더만 명시하며, 아래 트리는 최종 완성 모습입니다.**
 
 ```
-Fortress/
+VanillaCommander/
 ├── AGENTS.md
 ├── CLAUDE.md
 ├── .gitignore
@@ -107,11 +107,13 @@ Fortress/
 │       ├── Phase5-Visualization-HITL.md
 │       ├── Phase6-Agent-Management-UI.md
 │       ├── Phase7-Polish-QA.md
-│       ├── Phase10-Evaluation.md      # 자동 평가 구현 계획 (§14)
-│       └── Phase10-Eval-Packs.md      # 평가 팩(데이터셋) 제작 명세
+│       ├── Phase10-Evaluation.md      # 자동 평가 — 폐기됨(Vanilla 전환, P11-03)
+│       ├── Phase10-Eval-Packs.md      # 평가 팩 — 폐기됨(P11-03)
+│       └── Phase11-VanillaCommander.md # 파일 커맨더 전환 계획 (유효)
 │   └── plan/
-│       ├── LLM_Evaluation_Plan.md     # 자동 평가 확정 기획서
-│       └── LLM_Evaluation_Research.md # 평가 방법론 조사
+│       ├── LLM_Evaluation_Plan.md     # 자동 평가 기획서 — 폐기됨(P11-03)
+│       ├── LLM_Evaluation_Research.md # 평가 방법론 조사 — 참고용 보존
+│       └── Multiple_LLM_Providers.md  # 멀티 프로바이더 리서치
 ├── src/
 │   ├── main.tsx
 │   ├── App.tsx                     # HashRouter, Provider 조합
@@ -119,47 +121,57 @@ Fortress/
 │   ├── pages/
 │   │   └── Settings/                # 전체 화면 라우트 (탭이 아님, VivoStudio Settings 패턴)
 │   │       ├── SettingsLayout.tsx
-│   │       ├── SettingsGeneral.tsx     # 언어/테마
-│   │       ├── SettingsModel.tsx       # Ollama 연결, 기본 모델, contextSize, 압축 임계값
-│   │       ├── SettingsApproval.tsx    # HITL 승인 모드 기본값
-│   │       └── SettingsIntegrations.tsx # 외부 연동(외부 API/에이전트 CLI) 등록·동의·감사 로그 (§14.5)
+│   │       ├── SettingsGeneral.tsx     # 언어/테마/작업 폴더/허용 폴더/위저드 재실행/감사 로그
+│   │       ├── SettingsParsers.tsx     # 문서 파싱 연동 (§17 파서 등록·테스트)
+│   │       └── SettingsUpdate.tsx      # 버전 표시 + 준비 중 안내
 │   ├── components/
 │   │   ├── brand/
-│   │   │   └── FortressMark.tsx         # 목책 요새 로고(인라인 SVG, currentColor)
+│   │   │   └── AppMark.tsx             # 앱 로고(인라인 SVG, currentColor)
 │   │   ├── layout/
-│   │   │   ├── ActivityBar.tsx          # 좌측 아이콘 사이드바
+│   │   │   ├── ActivityBar.tsx          # 좌측 아이콘 사이드바 (탐색기·채팅·에이전트·위키·매크로 + 설정)
 │   │   │   ├── WorkspaceLayout.tsx      # 좌/우 리사이저블 스플릿
+│   │   │   ├── StatusBar.tsx            # 하단 상태바 (슬롯 publish/clear)
 │   │   │   └── TitleBar.tsx             # 커스텀 타이틀바(선택)
 │   │   ├── sidepanel/
-│   │   │   └── SidePanel.tsx            # activeView에 따라 4개 패널 라우팅
+│   │   │   └── SidePanel.tsx            # activeView에 따라 5개 패널 라우팅
 │   │   ├── explorer/
-│   │   │   └── FileTree.tsx
+│   │   │   ├── FileExplorerTab.tsx      # 파일 커맨더 탭 (목록·단축키·컨텍스트 메뉴·검색)
+│   │   │   ├── ExplorerPanel.tsx        # 열린 탭·즐겨찾기·시스템 폴더
+│   │   │   ├── ExplorerChatBar.tsx      # 탐색기 하단 1줄 채팅 (숨은 세션 origin='explorer')
+│   │   │   └── dialogs/                 # ConflictDialog · PropertiesDialog · SearchResultsView
 │   │   ├── chatsessions/
 │   │   │   └── ChatSessionList.tsx      # 대화 목록 패널
 │   │   ├── agents/
-│   │   │   ├── AgentListPanel.tsx
+│   │   │   ├── AgentListPanel.tsx       # 카드: 모델명·ctx만 + 대화 시작·수정
 │   │   │   ├── AgentCard.tsx
-│   │   │   └── AgentEditorForm.tsx
-│   │   ├── skills/
-│   │   │   └── SkillListPanel.tsx       # 사이드바에서는 제거. 스킬 on/off는 AgentEditorForm 카드에서 수행
-│   │   ├── monitoring/
-│   │   │   └── MonitoringListPanel.tsx  # 저장된 모니터링 기록 목록 패널 (필터/그룹화/개별·전체 삭제)
-│   │   ├── eval/                        # 자동 평가 UI (§14) — 세부 파일은 Phase10-Evaluation.md
-│   │   │   ├── EvalListPanel.tsx        # 사이드 패널: 실행 목록·새 평가·평가셋 관리
-│   │   │   ├── EvalLockBanner.tsx       # 평가 중 채팅 차단 배너
-│   │   │   ├── wizard/  progress/  report/  packs/  arena/  integrations/  interop/
+│   │   │   ├── AgentEditorForm.tsx      # 기본 정보·프로바이더·비전 + ▸고급 설정
+│   │   │   └── AgentFallbackDialog.tsx  # 전송 직전 폴백 선택 (P11-25)
+│   │   ├── wiki/
+│   │   │   ├── WikiPanel.tsx            # 감시 상태·대기열·최근 처리·페이지 목록 (§16)
+│   │   │   └── WikiTab.tsx              # 위키 설정 + 처리 이력 (§16)
+│   │   ├── macros/
+│   │   │   ├── MacroPanel.tsx           # 매크로 목록·실행·스케줄 (§17)
+│   │   │   └── MacroEditorTab.tsx       # 매크로 편집 탭 (§17)
+│   │   ├── viewers/
+│   │   │   ├── DocumentViewerTab.tsx    # PDF/DOCX/XLSX/PPTX 뷰어
+│   │   │   └── ArchiveViewerTab.tsx     # ZIP 목록·해제
+│   │   ├── setup/
+│   │   │   └── SetupWizard.tsx          # 6단계 셋업 위저드 (§3.5)
 │   │   ├── workspace/
 │   │   │   ├── CenterWorkspace.tsx      # 탭 바 + 탭 콘텐츠 라우팅
 │   │   │   ├── ChatTab.tsx
 │   │   │   ├── EditorTab.tsx
 │   │   │   ├── ImageViewerTab.tsx
 │   │   │   ├── AgentEditorTab.tsx
-│   │   │   ├── SkillViewerTab.tsx
-│   │   │   └── EvalTab.tsx              # 평가 탭(마법사/진행/리포트/팩/Arena 라우팅)
+│   │   │   ├── AgentMonitorTab.tsx      # TopMenuBar 에이전트 메뉴에서만 진입 (V3)
+│   │   │   └── SkillViewerTab.tsx
 │   │   ├── chat/
 │   │   │   ├── MessageList.tsx
-│   │   │   ├── MessageBubble.tsx
-│   │   │   ├── ChatInput.tsx
+│   │   │   ├── MessageBubble.tsx        # 위키 저장 액션 포함
+│   │   │   ├── ChatInput.tsx            # 이미지 첨부·`@` 멘션·슬래시·대기 큐
+│   │   │   ├── MentionPopup.tsx         # `@` 파일/폴더 참조
+│   │   │   ├── ChatMacroDialog.tsx      # 매크로 저장 목록 (DB 저장소 사용)
+│   │   │   ├── ChatQueueFloatingDock.tsx
 │   │   │   ├── MermaidViewer.tsx
 │   │   │   ├── RechartsViewer.tsx
 │   │   │   └── ApprovalDialog.tsx        # HITL 승인 팝업
@@ -175,15 +187,38 @@ Fortress/
 │   │   │   └── ThemeContext.tsx
 │   │   ├── agent/                          # 에이전트 런타임 (§5)
 │   │   │   ├── types.ts                    # AgentTool / AgentToolResult / AgentEvent / AgentMessage
-│   │   │   ├── agent.ts                    # FortressAgent 클래스 (공개 표면 + 이벤트)
+│   │   │   ├── agent.ts                    # VanillaAgent 클래스 (공개 표면 + 이벤트)
 │   │   │   ├── loop.ts                     # 턴 루프 (스트림 → 도구 실행 → 반복)
 │   │   │   ├── hooks.ts                    # AgentHooks 타입 + composeHooks
 │   │   │   ├── hookRegistry.ts             # 확장점: Phase 4/5가 훅을 등록 (§5.6)
 │   │   │   ├── queue.ts                    # steering / follow-up 큐
-│   │   │   └── retry.ts                    # RetryPolicy + 지수 백오프
-│   │   ├── llm/
-│   │   │   ├── ollamaClient.ts             # /api/chat 스트리밍, /api/tags, /api/show
-│   │   │   └── messageMapper.ts            # AgentMessage ↔ Ollama 메시지 변환
+│   │   │   ├── retry.ts                    # RetryPolicy + 지수 백오프
+│   │   │   ├── chatQueueManager.ts         # 전역 LLM 실행 잠금 + 세션별 대기 큐
+│   │   │   ├── resolveAgent.ts             # 전송 직전 폴백 결정 (P11-25)
+│   │   │   └── defaults.ts                 # 앱 기본값 상수 (V4·V6 — 전역 모델/승인 설정 대체)
+│   │   │   ├── llm/
+│   │   │   │   ├── ollamaClient.ts             # /api/chat 스트리밍, /api/tags, /api/show
+│   │   │   │   ├── openAiCompatibleClient.ts   # OpenAI 호환 규격 (SSE)
+│   │   │   │   ├── providerRuntime.ts          # Provider 분기 + 외부 에이전트 분기
+│   │   │   │   ├── externalAgentClient.ts      # CLI 1회 실행 런타임 (D3)
+│   │   │   │   ├── providers.ts                # 프리셋·카테고리·연결 확인
+│   │   │   │   ├── agentStatus.ts              # 에이전트 연결 상태 확인
+│   │   │   │   ├── vision.ts                   # 비전 판정·이미지 경로 확정
+│   │   │   │   └── messageMapper.ts            # AgentMessage ↔ Ollama/OpenAI 메시지 변환
+│   │   │   ├── commander/                      # 파일 커맨더 IPC·작업·클립보드 (§3.6)
+│   │   │   │   ├── ipc.ts  types.ts  jobs.tsx  clipboard.ts  format.ts  openFile.ts
+│   │   │   ├── integrations/                   # 외부 연동 (§15, 구 eval/integrations 이관)
+│   │   │   │   ├── gateway.ts  consent.ts  cliRunner.ts  endpointClass.ts  types.ts
+│   │   │   ├── wiki/                           # 위키 설정·파이프라인 (§16)
+│   │   │   │   ├── settings.ts  pipeline.ts
+│   │   │   ├── macros/                         # 매크로 저장소·실행·스케줄러 (§17)
+│   │   │   │   ├── types.ts  macrosRepo.ts  migrate.ts  launch.ts  scheduler.ts
+│   │   │   │   ├── MacrosProvider.tsx  macrosContext.ts  useMacros.ts
+│   │   │   │   └── chatMacros.ts               # 구 localStorage 매크로 (이관용 유지)
+│   │   │   ├── parsers/                        # 문서 파서 계층 (§16: 외부→내장→실패)
+│   │   │   │   ├── index.ts  external.ts  builtin.ts
+│   │   │   ├── chat/
+│   │   │   │   └── mentions.ts                 # `@` 파일/폴더 참조 해석
 │   │   ├── prompt/
 │   │   │   ├── buildSystemPrompt.ts        # 순서 있는 섹션 맵 생성 (§5.5)
 │   │   │   └── diffSections.ts             # 변경된 섹션만 패치
@@ -195,8 +230,9 @@ Fortress/
 │   │   │   ├── ls.ts    grep.ts   find.ts
 │   │   │   ├── shell.ts                    # OS별 셸 실행 (항상 승인, §8.1)
 │   │   │   ├── wiki.ts                     # 개인 지식 베이스 (ingest/query/list/delete, wiki/ 스코프, risk low)
-│   │   │   └── webSearch.ts
-│   │   ├── skills/                         # §6
+│   │   │   ├── webSearch.ts
+│   │   │   └── commander/                  # 파일 커맨더 도구 (fs_copy/move/rename/mkdir/trash/zip/unzip/info/search/explorer/doc_read)
+│   │   ├── skills/                         # §6 (+ bundled/basic-llm-wiki)
 │   │   │   ├── contextFiles.ts             # AGENTS.md 계층 수집
 │   │   │   ├── scanner.ts                  # SKILL.md 스캔 + frontmatter 검증
 │   │   │   ├── frontmatter.ts
@@ -214,24 +250,24 @@ Fortress/
 │   │   ├── db/
 │   │   │   ├── client.ts                   # tauri-plugin-sql 래퍼
 │   │   │   ├── migrations/
-│   │   │   │   └── 0001_init.sql
+│   │   │   │   ├── 0001_init.sql
+│   │   │   │   ├── 0002_wiki_jobs.sql      # 위키 처리 이력 (§16)
+│   │   │   │   └── 0003_macros.sql         # 매크로 저장소 (§17)
 │   │   │   ├── buildContext.ts             # 엔트리 → LLM 컨텍스트 재구성 (§4.3)
 │   │   │   └── repositories/
 │   │   │       ├── sessionsRepo.ts
 │   │   │       ├── entriesRepo.ts
 │   │   │       ├── agentsRepo.ts
-│   │   │       └── settingsRepo.ts
+│   │   │       ├── settingsRepo.ts
+│   │   │       ├── wikiJobsRepo.ts         # 위키 처리 이력 (§16)
+│   │   │       ├── macrosRepo.ts           # 매크로 CRUD — lib/macros에서 호출 (§17)
+│   │   │       ├── integrationsRepo.ts     # 외부 연동·감사 로그 (§15)
+│   │   │       ├── monitoringRepo.ts       # 모니터 탭용 스냅샷
+│   │   │       └── logsRepo.ts
 │   │   ├── markdown/
 │   │   │   └── parseVisualBlocks.ts       # mermaid/recharts 코드펜스 파서
-│   │   ├── eval/                          # 자동 평가 순수 로직 (§14, UI import 금지)
-│   │   │   ├── types.ts  constants.ts  evalLock.ts  ipc.ts
-│   │   │   ├── packs/                     # 팩 로더·샘플링·해시·소스 어댑터·생성기
-│   │   │   ├── scorers/                   # 채점기 레지스트리 + 채점기(ifeval/ 포함)
-│   │   │   ├── runner/                    # 러너·후보·사전점검·솔버·샌드박스 정책·자원 샘플러
-│   │   │   ├── stats/  scoring/           # 통계(부트스트랩·BT·pass@k) / 정규화·집계·추천
-│   │   │   ├── judge/  logprobs/  runtimes/
-│   │   │   ├── integrations/              # 외부 연동 게이트웨이·동의·엔드포인트 분류
-│   │   │   ├── personal/  arena/  interop/  ui/
+│   │   ├── eval/                            # 삭제됨 (P11-03, §14 폐기)
+│   │   │   └── (구 integrations → lib/integrations로 이관, §15)
 │   │   ├── types/
 │   │   │   ├── agent.ts
 │   │   │   ├── chat.ts
@@ -249,16 +285,18 @@ Fortress/
         ├── main.rs
         ├── lib.rs
         └── commands/
-            ├── fs_commands.rs             # read_text_file/write_text_file/... (VivoStudio 네이밍 재사용)
+            ├── fs_commands.rs             # read_text_file/write_text_file/... + 허용 루트(D1)
+            ├── commander_commands.rs      # 파일 커맨더 (fc_* + job 이벤트)
+            ├── watch_commands.rs          # 위키 폴더 감시 (wiki://file-event, §16)
             ├── search_commands.rs         # grep_files / find_files (walkdir + regex + ignore)
             ├── shell_commands.rs          # run_shell (OS별 셸, 타임아웃)
             ├── web_commands.rs            # web_search
-            ├── eval_commands.rs           # 평가 팩 IO·샌드박스·다운로드·런타임 감지·Python 실행 (§14)
-            └── integration_commands.rs    # 외부 에이전트 CLI 실행 (§14.5)
-    └── resources/evals/                   # 번들 평가 팩 (Tauri bundle.resources, §14.3)
+            ├── system_commands.rs         # GPU·시스템 정보, 폴더 선택
+            ├── llm_commands.rs            # Tauri HTTP 우회 (LLM 스트리밍)
+            └── integration_commands.rs    # 외부 에이전트 CLI 실행 + 실행 파일 탐지 (§15)
 ```
 
-> `.agents/skills/`와 `.claude/skills/`는 **Claude Code 자체의 전역 스킬 미러**이며 Fortress 앱이 런타임에 읽는 `.agents/skills/`(워크스페이스 스킬 폴더)와는 별개입니다. 혼동하지 않도록 §6에서 명확히 구분합니다.
+> `.agents/skills/`와 `.claude/skills/`는 **Claude Code 자체의 전역 스킬 미러**이며 앱이 런타임에 읽는 작업 폴더 `skills/`·워크스페이스 `.agents/skills/`(신뢰 확인 후 로드)와는 별개입니다. 혼동하지 않도록 §6에서 명확히 구분합니다.
 
 ---
 
@@ -269,18 +307,18 @@ Fortress/
 VivoStudio의 `ActivityBar.tsx` 패턴을 그대로 재사용합니다: 데이터 기반 배열, 순수 컨트롤드 컴포넌트, 활성 아이콘에 좌측 accent bar 표시.
 
 ```ts
-type SidePanelView = 'chat-sessions' | 'explorer' | 'agents' | 'monitoring' | 'evaluation' | null;
+type SidePanelView = 'chat-sessions' | 'explorer' | 'agents' | 'wiki' | 'macros' | null;
 
 const ITEMS: {
   view: Exclude<SidePanelView, null>;
   icon: LucideIcon;
   title: string;
 }[] = [
+  { view: 'explorer', icon: Files, title: '파일 탐색기' },
   { view: 'chat-sessions', icon: MessageSquare, title: '채팅' },
   { view: 'agents', icon: Bot, title: '에이전트 관리' },
-  { view: 'explorer', icon: Files, title: '파일 탐색기' },
-  { view: 'monitoring', icon: Activity, title: '모니터링' },
-  { view: 'evaluation', icon: FlaskConical, title: '평가' }, // §14
+  { view: 'wiki', icon: BookOpen, title: '위키' },
+  { view: 'macros', icon: Zap, title: '매크로' },
 ];
 // 하단 고정: Settings (별도 라우트로 이동, 탭/패널 아님 — VivoStudio와 동일 패턴)
 ```
@@ -293,12 +331,12 @@ const ITEMS: {
 - `react-resizable-panels`의 `PanelGroup`(`direction="horizontal"`, `autoSaveId="fortress-layout-v1"`) 사용.
 - 사이드패널: `defaultSize={20} minSize={16} collapsible collapsedSize={0}`, `ImperativePanelHandle` ref로 ActivityBar와 연동.
 - 센터 워크스페이스: `minSize={40}`.
-- `SidePanel.tsx`는 `activeView`에 따라 4개 컴포넌트 중 하나를 렌더링하는 얇은 라우터(VivoStudio `ExplorerPanel.tsx`와 동일한 패턴):
+- `SidePanel.tsx`는 `activeView`에 따라 5개 컴포넌트 중 하나를 렌더링하는 얇은 라우터(VivoStudio `ExplorerPanel.tsx`와 동일한 패턴):
   - `chat-sessions` → `ChatSessionList.tsx` (세션 목록, 클릭 시 해당 세션의 `chat` 탭을 열거나 포커스. 삭제된 에이전트의 세션도 기억된 이름으로 취소선 표시, 전체 삭제는 확인 팝업 후 일괄 삭제)
-  - `agents` → `AgentListPanel.tsx` (Agent 카드 목록, "새 대화 시작"/"편집"/"삭제")
-  - `explorer` → `FileTree.tsx`
-  - `monitoring` → `MonitoringListPanel.tsx` (저장된 모니터링 스냅샷 목록, 대화 목록과 동일한 필터/그룹화, 개별 삭제 + 전체 삭제(확인 팝업))
-  - `evaluation` → `EvalListPanel.tsx` (새 평가, 실행 중/최근 평가 목록, 이어하기, 평가셋 관리 — §14)
+  - `agents` → `AgentListPanel.tsx` (Agent 카드 목록: 모델명·컨텍스트만 + "대화 시작"/"수정")
+  - `explorer` → `ExplorerPanel.tsx` (열린 탐색기 탭 목록·즐겨찾기·시스템 폴더, 탭이 없으면 1개 자동 생성)
+  - `wiki` → `WikiPanel.tsx` (감시 상태·대기열·최근 처리·페이지 목록 — §16)
+  - `macros` → `MacroPanel.tsx` (매크로 목록·실행·스케줄 — §17)
 - 스킬 사이드바는 제공하지 않는다. 스킬은 인식되면 자동으로 `AgentEditorForm`의 "활성 스킬 (Agent Skills)" 카드에 표시되며, 여기서 on/off + refresh 버튼으로 재스캔한다.
 
 ### 3.3 우측 탭 콘텐츠 영역 (`CenterWorkspace.tsx`)
@@ -307,8 +345,8 @@ VivoStudio의 탭 데이터 모델과 `openTab`/`closeTab` 멱등 로직을 그�
 
 ```ts
 type WorkspaceTabType =
-  'chat' | 'editor' | 'image-viewer' | 'agent-editor' | 'agent-stats' | 'agent-monitor' | 'skill-viewer'
-  | 'eval'; // §14: meta.view = 'wizard' | 'run' | 'packs' | 'pack' | 'arena'
+  'file-explorer' | 'chat' | 'editor' | 'image-viewer' | 'document-viewer' | 'archive-viewer'
+  | 'agent-editor' | 'agent-monitor' | 'skill-viewer' | 'wiki' | 'macro-editor';
 
 interface WorkspaceTab {
   id: string; // 예: "chat:${sessionId}", "editor:${filePath}", "agent-editor:${agentId}"
@@ -318,16 +356,26 @@ interface WorkspaceTab {
 }
 ```
 
-- **앱 시작 시 기본 동작**: 열린 탭이 하나도 없으면(최초 실행 또는 복원 실패 시) 자동으로 새 `chat` 탭을 하나 열고 기본 Agent로 새 세션을 시작합니다. → **채팅이 메인 기능**이라는 요구사항의 구현 지점.
-- 탭 아이콘 매핑: `chat`→`MessageSquare`, `editor`→`FileCode`, `image-viewer`→`Image`, `agent-editor`→`Bot`, `skill-viewer`→`Puzzle`.
+- **앱 시작 시 기본 동작**: 저장된 탭을 복원하고, 탭이 하나도 없으면(최초 실행 또는 복원 실패 시) **파일 탐색기 탭**을 하나 연다(V7). 삭제된 탭 타입(`eval`·`agent-stats`)은 복원 시 조용히 버린다.
+- 탭 아이콘 매핑: `file-explorer`→`Files`, `chat`→`MessageSquare`, `editor`→`FileCode`, `image-viewer`→`Image`, `agent-editor`→`Bot`, `agent-monitor`→`Activity`, `skill-viewer`→`Puzzle`, `document-viewer`→`FileText`, `archive-viewer`→`Archive`, `wiki`→`BookOpen`, `macro-editor`→`Zap`.
 - 탭 콘텐츠는 VivoStudio처럼 **모두 마운트 유지 + `hidden` 클래스로 숨김 전환**(비활성 채팅 탭도 스트리밍 상태 유지).
-- 탭 목록/활성 탭 ID는 SQLite `app_settings` 테이블에 디바운스(500ms) 저장 후 재시작 시 복원(`chat` 탭은 세션 ID만 복원하면 메시지는 DB에서 다시 로드되므로 완전 복원 가능 — VivoStudio가 `terminal` 탭을 복원 제외했던 것과 달리 Fortress는 모든 탭 타입을 복원 가능).
+- 탭 목록/활성 탭 ID는 SQLite `app_settings` 테이블에 디바운스(500ms) 저장 후 재시작 시 복원(`chat` 탭은 세션 ID만 복원하면 메시지는 DB에서 다시 로드되므로 완전 복원 가능).
+- 분할 보기: `CenterWorkspace`의 primary/secondary 분할. F5/F6의 "반대 창" = 다른 pane의 활성 탐색기 탭.
 
-### 3.4 파일 뷰어
+### 3.4 파일 뷰어·커맨더
 
-- `EditorTab.tsx`: VivoStudio와 달리 **CodeMirror 6**을 사용해 실제 문법 강조를 제공합니다(VivoStudio는 textarea였음 — 의도적 개선). 확장자별 language extension 매핑은 VivoStudio의 `CodeEditorPane.tsx`(`src/components/learn/CodeEditorPane.tsx`) 패턴을 참고. Markdown 파일은 원본/분할/미리보기 3단 토글(react-markdown+remark-gfm) 유지.
-- `ImageViewerTab.tsx`: VivoStudio 구현을 그대로 이식(`convertFileSrc` + 25~400% 줌).
-- PDF 뷰어는 VivoStudio에도 없으며 **1차 스코프 제외**.
+- `EditorTab.tsx`: VivoStudio와 달리 **CodeMirror 6**을 사용해 실제 문법 강조를 제공합니다. Markdown은 원본/미리보기 토글, 대용량 텍스트는 읽기 전용 앞부분 표시.
+- `ImageViewerTab.tsx`: `convertFileSrc` + 25~400% 줌.
+- `DocumentViewerTab.tsx`: PDF(pdfjs 렌더)·DOCX(mammoth HTML)·XLSX/CSV(SheetJS 표)·PPTX(슬라이드 아웃라인, D8).
+- `ArchiveViewerTab.tsx`: ZIP 목록·선택 해제.
+- `openFile.ts` 라우팅: 텍스트/코드/MD/JSON/CSV → 에디터, 이미지 → 이미지 뷰어, 문서 → DocumentViewer, ZIP → ArchiveViewer, HTML → 외부 브라우저, 동영상/음악/실행 파일 → 시스템 기본 앱. 모든 뷰어에 "시스템 기본 앱으로 열기".
+- `FileExplorerTab.tsx`: 주소창(브레드크럼/직접 입력)·상세 목록(정렬·다중 선택·키보드 탐색)·툴바·단축키(Commander 관례: F5 복사/F6 이동/F7 폴더/Del 휴지통/Shift+Del 영구 삭제)·컨텍스트 메뉴·탐색기 탭 내부 검색. 하단 `ExplorerChatBar`(1줄 입력 + 접이식 결과 드로어, 숨은 `origin='explorer'` 세션).
+- 파일 작업(복사/이동/압축/해제/검색/정보)은 Rust job + `fc://progress` 이벤트로 진행률·취소·충돌 처리(`ConflictDialog`).
+
+### 3.5 셋업 위저드 + StatusBar
+
+- `SetupWizard.tsx` (6단계: 언어 → 작업 폴더 → 에이전트 안내 → 위키 안내 → 매크로 안내 → 완료). 최초 1회 자동 실행(`setupCompletedAt`), 설정 > 일반에서 재실행(값 프리필). 완료 시 기본 에이전트 편집 탭 자동 오픈(D9).
+- `StatusBar.tsx`: 좌측 슬롯(`agent`·`jobs`·`wiki`·`tab`·`clipboard`) + 우측 일시 메시지. 각 기능이 `StatusBarContext`의 `publish(slot, item)`/`clear(slot)`로 자기 슬롯만 갱신.
 
 ---
 
@@ -367,17 +415,26 @@ export interface Agent {
   enabledBuiltinTools: BuiltinToolId[];
   approvalMode: ApprovalMode; // HITL 세분화, 기본 "dangerous-only"
   autoMonitor: boolean; // 대화 시작 시 모니터링 자동 시작/완료 시 중단, 기본 true(미지정 구 행도 true)
+  /** LLM Provider 종류. 미지정(구 DB 행) 시 'ollama' (P9-03, Phase 11 확장) */
+  llmProvider?: LlmProviderKind; // 'ollama' | 'lmstudio' | 'llamacpp' | 'vllm' | 'jan' | 'openai-compatible' | 'openai' | 'anthropic' | 'gemini' | 'xai' | 'deepseek' | 'openrouter' | 'mistral' | 'moonshot' | 'together' | 'opencode' | 'external-agent'
+  /** 이미지 입력(비전) 지원. 미지정 시 'auto' (P11-26) */
+  vision?: VisionSupport; // 'auto' | 'yes' | 'no'
+  llmBaseUrl?: string; // 미지정 시 프리셋 기본값 (Ollama는 전역 설정)
+  llmApiKey?: string; // 클라우드/인증 서버용. 로컬에는 보통 불필요
+  externalAgentId?: string; // llmProvider==='external-agent'일 때 external_integrations 참조 (P11-22)
   isDefault: boolean; // 정확히 하나만 true (VivoAcademy의 is_ai_tutor 불변식과 동일 패턴)
   createdAt: string; // ISO 8601
   updatedAt: string;
 }
 
 export type BuiltinToolId =
-  'read' | 'write' | 'edit' | 'ls' | 'grep' | 'find' | 'shell' | 'web_search' | 'web_fetch' | 'wiki';
+  'read' | 'write' | 'edit' | 'ls' | 'grep' | 'find' | 'shell' | 'web_search' | 'web_fetch' | 'wiki'
+  | 'fs_copy' | 'fs_move' | 'fs_rename' | 'fs_mkdir' | 'fs_trash' | 'fs_zip' | 'fs_unzip'
+  | 'fs_info' | 'fs_search' | 'explorer' | 'doc_read'; // 파일 커맨더 도구 (P11-24)
 ```
 
 - **기본 Agent 불변식**: Agent가 1개 이상 존재하면 정확히 하나는 `isDefault === true`. 최초 생성된 Agent가 자동으로 기본이 되고, 기본 Agent 삭제 시 다음 Agent가 승격됩니다. (VivoAcademy `external-agents.ts`의 `is_ai_tutor` 로직을 참고해 `agentsRepo.ts`에 동일하게 구현.)
-- **새 Agent의 기본 활성 도구**: `["read", "ls", "grep", "find", "write", "edit"]`. `shell`과 `web_search`는 기본 비활성이며 사용자가 명시적으로 켜야 합니다. `wiki` 내장 도구는 에디터 UI에서 제거되었으며(기존 저장값과의 호환을 위해 런타임 등록은 유지), 지식 베이스 용도는 `basic-llm-wiki` 스킬("활성 스킬"에서 on/off)을 사용합니다.
+- **새 Agent의 기본값** (`src/lib/agent/defaults.ts`, V4·V6): 내장 도구 = 셸 제외 전체, 스킬 = `basic-llm-wiki`, 승인 = `dangerous-only`, temperature = 0.2. 전역 "모델·승인" 설정 화면은 삭제되었고 이 상수가 유일한 기본값이다 (P11-04).
 - **`enabledSkills`가 도구 목록이 아닌 이유**: 스킬은 도구로 등록되지 않고 시스템 프롬프트에 이름/설명만 노출됩니다(§6.2). 따라서 `enabledSkills`는 "프롬프트에 노출할 스킬 화이트리스트"이며, 스킬을 실제로 사용하려면 `read` 도구(및 스크립트형 스킬은 `shell`)가 활성화되어 있어야 합니다. `AgentEditorForm`은 스킬을 켜면서 `read`가 꺼져 있으면 경고를 표시합니다.
 - **`visualizationTool`을 내장 도구 목록에 넣지 않은 이유**: 로컬 LLM의 함수 호출(tool-calling) 신뢰도가 모델마다 크게 다르므로, 시각화는 "도구 호출"이 아니라 **출력 형식 규약**(시스템 프롬프트에 "필요시 \`\`\`mermaid / \`\`\`recharts 코드펜스로 응답하라"는 지침 포함 + 렌더러가 후처리 파싱)으로 구현합니다. Phase 5에서 상세 설계.
 
@@ -390,6 +447,7 @@ export interface ChatSession {
   id: string;
   agentId: string;
   workspaceRoot: string | null; // 이 세션의 cwd (도구/스킬 스코프의 기준)
+  origin: ChatSessionOrigin; // 'chat' | 'explorer' | 'macro' | 'wiki' — 목록에는 'chat'만 표시
   title: string; // 최초 사용자 메시지 앞부분으로 자동 생성, 추후 수정 가능
   createdAt: string;
   updatedAt: string;
@@ -484,34 +542,30 @@ export interface SkillDiagnostic {
 
 §6에서 스캔 절차와 프롬프트 노출 형식을 정의합니다.
 
-### 4.5 저장소 분리 원칙: 전역 데이터 vs 프로젝트 데이터 (`.fortress`)
+### 4.5 저장소: 작업 폴더 + 전역 DB (D2, Phase 11)
 
-Fortress는 프로젝트 종속 데이터와 앱 전역 데이터를 명확히 분리하여 저장합니다:
+"프로젝트(워크스페이스) 폴더" 개념은 폐지되었다. 세션·탭·매크로는 전역 DB에 두고, 위키·백업·설정 파일은 **작업 폴더(Work Folder)**에 둔다.
 
-1. **프로젝트 종속 데이터 (`{workspaceRoot}/.fortress/`)**:
-   - **위치**: 워크스페이스 루트 내 `.fortress/` 폴더
-   - **프로젝트 DB (`.fortress/fortress.db`)**:
-     - `sessions`: 해당 프로젝트에서 생성된 대화 세션 목록
-     - `entries`: 세션 대화 메시지, 도구 호출, compaction 엔트리
-     - `execution_logs`: 해당 프로젝트 세션 및 에이전트 실행 로그
-     - `app_settings` (프로젝트 스코프): 프로젝트별 열려있던 탭 목록(`open_tabs`), 활성 탭(`active_tab_id`)
-   - **로그 및 관리 파일**:
-     - `.fortress/logs/`: 프로젝트 런타임 로그
-     - `.fortress/.gitignore`: SQLite DB/WAL 파일 및 로그 무시 규칙 자동 생성 (`*.db`, `*.db-*`, `logs/`)
-2. **전역 데이터 (앱 데이터 디렉터리, `%APPDATA%/com.fortress.app/`)**:
-   - **위치**: 운영체제 표준 AppData 디렉터리
-   - **전역 DB (`fortress.db`)**:
-     - `agents`: 전역 등록 에이전트 목록 (프로젝트와 무관하게 공통 사용)
-     - 평가(§14): `eval_runs`, `eval_candidates`, `eval_trials`, `eval_scores`, `eval_aggregates`, `eval_profiles`, `arena_votes` — 평가 결과는 PC·모델 단위 자산이므로 **항상 전역 DB**에 저장합니다(프로젝트와 무관하게 비교 가능)
-     - 외부 연동(§14.5): `external_integrations`, `integration_settings`, `integration_audit_log`
-   - **전역 평가 팩 폴더**: `%APPDATA%/com.fortress.app/evals/packs/` (사용자가 가져오거나 만든 팩)
-   - 프로젝트 쪽에는 개인 평가 팩 **파일**만 `{workspaceRoot}/.fortress/evals/packs/`에 둡니다(DB 아님)
-     - `app_settings` (전역 스코프): 전역 UI 테마(`theme`), 언어(`language`), Ollama 서버 URL(`ollama_base_url`), 기본 컨텍스트 크기(`default_context_size`), 도구 승인 모드 기본값(`default_approval_mode`), 신뢰 워크스페이스 목록(`trusted_workspaces`), 마지막 작업 워크스페이스(`last_workspace_root`)
-3. **런타임 동작**:
-   - 워크스페이스가 열려있을 때 세션/대화/로그/탭 상태는 해당 프로젝트의 `.fortress/fortress.db`에만 저장/복원됩니다.
-   - 워크스페이스가 없는 상태에서는 전역 DB가 fallback으로 동작합니다.
-   - 폴더(프로젝트) 전환 시 이전 프로젝트의 탭 상태를 해당 프로젝트 DB에 먼저 플러시한 뒤 새 프로젝트의 탭을 로드합니다. 다음 앱 로드 시 마지막 워크스페이스와 그 탭 상태가 그대로 복원됩니다.
-   - 어떤 세션에서든 LLM 추론 또는 대기 큐가 진행 중(`chatQueueManager` busy)일 때는 폴더 변경(열기/최근 폴더/닫기)을 금지합니다. 에이전트 설정은 전역이므로 폴더 변경 후에도 그대로 사용할 수 있습니다.
+```
+<WorkFolder>/
+  wiki/            # basic-llm-wiki 레이아웃 (index.md, log.md, sources/)
+  wiki-inbox/      # 위키 처리 후 이동된 원본 파일
+  backup/          # 에이전트 변경 전 스냅샷 (YYYY-MM-DD/<원래 경로 해시>/파일, D10)
+  config/          # 사용자 편집 가능한 설정(위키 프롬프트, 파서 설정 export 등)
+  skills/          # 사용자 스킬 (신뢰 확인은 이 폴더 로드에만 적용)
+  chat-images/     # 채팅 첨부 이미지 복사본 (DB에는 경로만 저장)
+```
+
+1. **전역 DB** (운영체제 표준 AppData 디렉터리, `vanilla-commander.db`):
+   - `agents`: 등록 에이전트 목록
+   - `sessions` + `entries`: 대화 세션·append-only 엔트리 (`origin`으로 chat/explorer/macro 구분)
+   - `execution_logs`, `agent_monitoring_snapshots`, `conversation_token_summaries`
+   - `external_integrations`, `integration_settings`, `integration_audit_log` (§15)
+   - `wiki_jobs`: 위키 처리 이력 (§16)
+   - `macros`: 매크로 저장소 (§17)
+   - `app_settings`: UI 테마·언어·Ollama 주소·작업 폴더·즐겨찾기·허용 루트·위키/파서 설정·열린 탭
+2. **구 `.fortress/` 경로·`fortress:` storage 키**: 첫 실행 시 자동 이관(`legacyStorageMigration`, Rust `rename_legacy_db_files`)으로만 유지한다. 신규 기록은 전부 `vanilla-commander` 이름을 쓴다 (P11-51 결정).
+3. 어떤 세션에서든 LLM 추론 또는 대기 큐가 진행 중(`chatQueueManager` busy)일 때는 작업 폴더 변경을 금지한다. 에이전트 설정은 전역이므로 그대로 사용할 수 있다.
 
 ---
 
@@ -534,7 +588,7 @@ LangChain/LangGraph 의존성은 제거하고, Ollama HTTP API를 직접 호출�
 
 ### 5.1 단일 공용 런타임 원칙
 
-Agent(페르소나)마다 별도 런타임을 만들지 않습니다. `FortressAgent` 인스턴스 하나가 세션 하나를 담당하며, `Agent` 설정값(`systemPrompt`/`model`/`temperature`/도구/스킬)을 생성 시 주입받습니다. 세션이 바뀌면 인스턴스를 새로 만듭니다.
+Agent(페르소나)마다 별도 런타임을 만들지 않습니다. `VanillaAgent` 인스턴스 하나가 세션 하나를 담당하며, `Agent` 설정값(`systemPrompt`/`model`/`temperature`/도구/스킬)을 생성 시 주입받습니다. 세션이 바뀌면 인스턴스를 새로 만듭니다.
 
 ### 5.2 메시지 / 도구 타입 (`src/lib/agent/types.ts`)
 
@@ -652,14 +706,15 @@ prompt(userMessage)
 시스템 프롬프트를 한 덩어리 문자열이 아니라 **순서 있는 섹션 맵**으로 만듭니다.
 
 ```ts
-buildSystemPromptSections({ agent, tools, contextFiles, skills, cwd }): Record<string, string>
+buildSystemPromptSections({ agent, tools, contextFiles, skills, cwd, commander }): Record<string, string>
 // 순서: preamble → tools → rules → addendum → project_context
-//       → skills → visualization → cwd
+//       → skills → visualization → cwd → commander
 ```
 
 - `preamble`을 제외한 각 섹션은 `<section_name>…</section_name>`로 감쌉니다(모델이 나중 갱신을 같은 섹션에 대응시킬 수 있게).
 - 세션 도중 스킬 토글·워크스페이스 변경·도구 활성화가 일어나면 프롬프트 전체를 다시 보내지 않고 `diffSections(previous, current)`로 **변경된 섹션만** 새 system 메시지로 주입합니다.
 - `visualization` 섹션 내용은 §10.
+- `commander` 섹션(P11-24): 현재 탐색기 위치·선택 항목·작업 폴더·허용 루트 + 파일 관리 비서 지침.
 
 ### 5.6 확장점(훅) 규약 — Phase 간 파일 충돌 방지
 
@@ -729,22 +784,29 @@ export function getRegisteredHooks(): AgentHooks; // 등록 순서대로 합성
 - `GET /api/tags`로 설치된 모델 목록, `POST /api/show`로 모델의 컨텍스트 길이(`model_info`의 `*.context_length`)를 조회합니다. Agent의 `contextSize`가 0이면 이 값을 씁니다.
 - **Reasoning 제어**: `POST /api/chat`의 최상위 `think` 필드에 Agent의 `reasoning`/`reasoningEffort` 해석값(`resolveThinkValue`)을 실어 보냅니다. `default`면 필드 생략(모델 기본값), `off`면 `false`, `on`이면 effort 문자열(`low`/`medium`/`high`). `/api/show` 응답의 `thinking.{values,default}`로 모델별 지원 범위를 확인해 Agent 편집 폼에 힌트로 표시합니다. `think`는 메시지 배열과 무관하므로 채팅 화면에서 세션 단위로 바꿔도 시스템 프롬프트 diff나 prefill 토큰 증가가 없습니다.
 - **생성 파라미터**: `src/lib/llm/generationParams.ts`의 지원 매트릭스가 단일 진실 공급원입니다. 양쪽 규격 공통(`top_p`·`seed`·`stop`·`max_tokens`/`num_predict`), Ollama 전용(`top_k`·`repeat_penalty`), OpenAI 호환 전용(`frequency_penalty`·`presence_penalty`)으로 나뉘며, Agent 편집 폼은 미지원 항목을 잠그고(값은 유지) 런타임은 각 클라이언트가 자신의 규격 키로만 변환합니다. `undefined`는 "자동"으로 필드 자체를 생략합니다.
-- 기본 baseUrl: `http://127.0.0.1:11434` (Settings에서 변경 가능, `SettingsContext`).
+- 기본 baseUrl: `http://127.0.0.1:11434` (Agent 고유값 우선, 없으면 전역 설정, `resolveAgentLlmRuntime`).
+- **멀티 프로바이더** (P9-03, Phase 11 확장): `providers.ts` 프리셋(ollama/lmstudio/llamacpp/vllm/jan/openai-compatible/openai/anthropic/gemini/…/external-agent). Ollama 네이티브(`/api/chat`, NDJSON)와 OpenAI 호환(`/v1/chat/completions`, SSE) 클라이언트로 나뉘며 `providerRuntime.ts`가 분기한다. OpenAI 호환 서버는 컨텍스트 길이를 보고하지 않으므로 "컨텍스트 크기"를 수동 설정한다.
+- **외부 에이전트** (§5.9): `llmProvider: 'external-agent'`.
 - Tauri v2 CSP의 `connect-src`에 `ipc: http://ipc.localhost`(웹뷰↔Rust IPC 호출용), `http://127.0.0.1:11434 http://localhost:11434`(Ollama 직접 호출용)를 허용해야 합니다 (`src-tauri/tauri.conf.json`의 `app.security.csp`, Phase 0 → TAURI-BLANK에서 IPC 항목 추가). CSP를 바꿀 때는 이 항목이 빠지지 않았는지 먼저 확인하십시오 — 빠지면 Tauri 창이 빈 화면이 됩니다.
 - **모델 호환성**: tool-calling을 지원하지 않는 모델이 선택되면 도구 없이 동작하고 UI에 경고 배지를 표시합니다. 어떤 모델이 멀티턴 tool-calling을 견디는지는 P0-08 스파이크에서 먼저 확인합니다.
+- **이미지 입력** (P11-26): 사용자 메시지의 `images`(경로 또는 data URL)를 전송 직전 data URL로 해석해 Ollama `images` / OpenAI `image_url`로 변환합니다. DB에는 경로만 저장합니다(작업 폴더 밖 파일은 `chat-images/`에 복사). `Agent.vision`이 `no`면 전송 시 폴백 다이얼로그로 비전 에이전트를 제안합니다.
+
+### 5.9 외부 에이전트 런타임 (D3, P11-22·P11-23)
+
+`llmProvider: 'external-agent'`인 에이전트는 우리 루프의 도구를 쓰지 않습니다. 매 턴 대화를 프롬프트로 만들어 등록된 CLI(`externalAgentId` 참조)에 1회 실행하고 결과를 단일 청크로 반환합니다 (`externalAgentClient.ts`, `providerRuntime.ts` 분기). `cwd`는 대화가 시작된 탐색기 경로(채팅 탭이면 작업 폴더)이며, 권한 검사·감사 로그는 `callIntegration` 게이트웨이를 거쳐 유지합니다. 외부 에이전트는 우리 승인 훅 밖에서 파일을 바꿀 수 있으므로, 연결 시 "데이터 외부 노출 + 직접 수정 가능" 동의를 받고 카드에 배지로 표시합니다. 편집 화면에서는 해당 에이전트의 도구·스킬 섹션을 비활성화 표시합니다.
 
 ---
 
-## 6. AGENTS.md / 스킬 로더 설계 (Fortress 앱 런타임 기능)
+## 6. AGENTS.md / 스킬 로더 설계 (앱 런타임 기능)
 
-> **주의**: 이것은 Fortress *앱이 연 워크스페이스 폴더*를 스캔하는 기능입니다. Fortress *리포지토리 자체*의 루트 `AGENTS.md`(개발 지침 파일)나 `.agents/skills/`(Claude Code 전역 스킬 미러)와는 무관합니다.
+> **주의**: 이것은 앱이 여는 폴더를 스캔하는 기능입니다. *리포지토리 자체*의 루트 `AGENTS.md`(개발 지침 파일)나 `.agents/skills/`(Claude Code 전역 스킬 미러)와는 무관합니다.
 
 ### 6.1 AGENTS.md(컨텍스트 파일) 수집 — `src/lib/skills/contextFiles.ts`
 
 pi의 `loadProjectContextFiles`와 동일한 규칙입니다.
 
 1. 한 디렉터리에서의 후보 파일명 **우선순위**: `AGENTS.override.md` → `AGENTS.md` → `AGENTS.MD` → `CLAUDE.md` → `CLAUDE.MD`. 첫 번째로 존재하는 것 하나만 씁니다.
-2. **전역** 설정 디렉터리(`%APPDATA%/Fortress/AGENTS.md`)를 먼저 수집합니다.
+2. **전역** 설정 디렉터리(`%APPDATA%/VanillaCommander/AGENTS.md`)를 먼저 수집합니다.
 3. 워크스페이스 루트에서 **파일시스템 루트까지 모든 조상 디렉터리**를 올라가며 수집하되, 최종 순서는 **루트 → 워크스페이스**(바깥쪽이 먼저, 안쪽이 나중에 와서 덮어씀)입니다.
 4. 각 파일은 시스템 프롬프트의 `project_context` 섹션에 경로와 함께 들어갑니다:
    ```
@@ -762,7 +824,7 @@ pi의 `loadProjectContextFiles`와 동일한 규칙입니다.
 
 | 스코프      | 경로                                                     |
 | ----------- | -------------------------------------------------------- |
-| `global`    | `%APPDATA%/Fortress/skills/`                             |
+| `global`    | 앱 전역 스킬 폴더 + 작업 폴더 `skills/` (신뢰 확인 후 로드)            |
 | `workspace` | 워크스페이스의 `.agents/skills/` (루트 및 조상 디렉터리) |
 
 **앱 기본 제공 스킬** (`src/lib/skills/bundledSkills.ts`): `basic-llm-wiki`(위키 등록/조회/삭제만 남긴 최소 스킬, 원본 `src/lib/skills/bundled/basic-llm-wiki/SKILL.md`, Vite `?raw`로 번들). 워크스페이스에 없어도 에이전트 편집 폼의 "활성 스킬" 목록에 `앱 기본 제공` 배지와 함께 노출되며, 활성화 후 저장하면 현재 워크스페이스의 `.agents/skills/basic-llm-wiki/`로 복사(기존 파일은 덮어쓰지 않음)된 뒤 스캐너가 일반 `workspace` 스킬로 로드합니다.
@@ -833,12 +895,13 @@ cd <skill dir> && npm install
 
 초안의 "QuickJS 3단계 샌드박스"는 폐기했습니다. 이유: `index.json`/`index.js` 코드 스킬은 Agent Skills 표준에 없는 개념이고, 이를 위해 `rquickjs` 통합과 JSON Schema→zod 변환기를 자체 구현하는 비용이 얻는 것보다 큽니다. 스킬은 마크다운 문서이고, 실행이 필요하면 스킬이 제공하는 스크립트를 `shell` 도구로 돌립니다.
 
-남는 안전 경계는 두 겹입니다.
+남는 안전 경계는 두 겹이다 (D1, Phase 11 — 사용자 조작과 에이전트 조작을 분리).
 
-| 레이어                | 기술                                                                                                                                          | 구현 위치                                                            |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Layer 1: OS/FS 스코프 | 모든 파일 도구가 Rust 커맨드에서 **세션의 `workspaceRoot` 밖 경로를 거부**. 심링크는 canonicalize 후 재검사. Tauri 2 Capabilities로 이중 방어 | `src-tauri/src/commands/fs_commands.rs`, `capabilities/default.json` |
-| Layer 2: 사람의 승인  | `beforeToolCall` 훅이 위험 도구 실행 전 사용자 확인                                                                                           | §8, `src/lib/approval/`                                              |
+| 레이어 | 기술 | 구현 위치 |
+| --- | --- | --- |
+| Layer 1a: 사용자 파일 작업 | 탐색기 UI의 파일 커맨드는 OS 권한 내 전체 허용. 시스템 폴더 쓰기는 `warning` 플래그로 경고 | `commander_commands.rs` (`resolve_user_path`: canonicalize만) |
+| Layer 1b: 에이전트 허용 루트 | 에이전트 도구는 허용 루트(작업 폴더 + 탐색기 탭 경로 + `@` 참조 + 등록 폴더) 안에서만 동작. 심링크는 canonicalize 후 재검사. Tauri 2 Capabilities로 이중 방어 | `fs_commands.rs` (`set_agent_allowed_roots`), `capabilities/default.json` |
+| Layer 2: 사람의 승인 | `beforeToolCall` 훅이 위험 도구 실행 전 사용자 확인 | §8, `src/lib/approval/` |
 
 **셸 도구는 스코프로 막을 수 없습니다.** `run_shell`은 `cwd`만 워크스페이스로 고정할 뿐 임의 명령을 실행할 수 있으므로, **`approvalMode`와 무관하게 항상 승인을 요구**합니다(§8.1). 승인 다이얼로그에 실행될 명령 전문을 그대로 보여줍니다. Agent의 `enabledBuiltinTools`에서 `shell`은 기본 비활성이며, Settings에 위험 경고를 함께 표시합니다.
 
@@ -884,7 +947,9 @@ cd <skill dir> && npm install
 
 승인 대기 중 앱이 강제 종료되면 해당 턴은 복원되지 않습니다. 재시작 시 마지막으로 완료된 턴까지만 복원되고, 사용자는 직전 질문을 다시 보낼 수 있습니다. pi처럼 내구성 있는 재개를 하려면 연산 상태 기계와 스토리지 트랜잭션이 필요한데(§1.3), 단일 사용자 데스크탑 앱에 그 비용은 과합니다.
 
-### 8.4 평가 샌드박스 정책 — 승인 훅의 유일한 예외 (2026-09-25 결정)
+### 8.4 평가 샌드박스 정책 — 폐기됨 (P11-03)
+
+자동 평가(§14)가 삭제되면서 이 절의 샌드박스 정책도 함께 폐기되었다. 승인 훅에 예외는 없으며, 백그라운드 작업(위키·매크로)에서 승인이 필요하면 자동 승인하지 않고 일시정지 + 사용자 확인을 요청한다 (§16, §17). 아래는 이력으로만 남긴다.
 
 자동 평가(§14)의 에이전트형 과제는 사람의 승인 없이 수십~수백 번 `write`/`edit`을 실행해야 하므로 §8.2의 승인 다이얼로그를 쓸 수 없습니다. 대신 평가 러너는 전역 훅(`getRegisteredHooks()`)을 쓰지 않고 **평가 전용 정책 훅**(`src/lib/eval/runner/sandboxPolicy.ts`)을 붙입니다. 이 예외는 아래 조건을 **모두** 만족할 때만 성립하며, 조건을 완화하는 변경은 이 절을 먼저 개정해야 합니다.
 
@@ -908,7 +973,7 @@ cd <skill dir> && npm install
 압축 트리거:  contextTokens > contextSize - reserveTokens
 ```
 
-`reserveTokens`는 "요약 프롬프트와 다음 응답을 위해 비워둘 양"입니다. Agent에 명시값이 없으면(0) 전역 기본값 → 컨텍스트 크기별 단계표 순으로 파생합니다 (`src/lib/compaction/settings.ts`의 `defaultReserveForContext`/`defaultKeepForContext`, 전역값은 "앱 설정 > 모델 및 LLM"에서 변경):
+`reserveTokens`는 "요약 프롬프트와 다음 응답을 위해 비워둘 양"입니다. Agent에 명시값이 없으면(0) 전역 기본값 → 컨텍스트 크기별 단계표 순으로 파생합니다 (`src/lib/compaction/settings.ts`의 `defaultReserveForContext`/`defaultKeepForContext`, 전역값은 앱 설정에 저장):
 
 ```
 8K 이하 → reserve 2048 / keep 1024
@@ -1013,26 +1078,31 @@ VivoStudio와 동일하게 **Redux/Zustand 등 전역 스토어 라이브러리 
 
 ## 12. IPC 커맨드 목록 (Rust ↔ TypeScript)
 
-모든 경로 인자는 Rust 쪽에서 **세션 `workspaceRoot` 하위인지 canonicalize 후 검증**하고, 벗어나면 에러를 반환합니다 (§7 Layer 1).
+사용자 조작 커맨드(`fc_*`·폴더 선택 등)는 경로를 canonicalize만 하고, **에이전트 도구 경로**는 Rust 쪽에서 허용 루트(`set_agent_allowed_roots`) 안인지 canonicalize 후 검증한다. 벗어나면 에러를 반환한다 (§7 Layer 1a/1b).
 
 | 커맨드                                         | 위치                 | 설명                                                                              | 대응 도구          |
 | ---------------------------------------------- | -------------------- | --------------------------------------------------------------------------------- | ------------------ |
 | `read_text_file(path)`                         | `fs_commands.rs`     | 텍스트 파일 읽기                                                                  | `read`, EditorTab  |
 | `write_text_file(path, content)`               | `fs_commands.rs`     | 텍스트 파일 쓰기                                                                  | `write`, EditorTab |
-| `read_project_folder_tree(folderPath)`         | `fs_commands.rs`     | 파일 트리 조회                                                                    | FileTree           |
+| `read_project_folder_tree(folderPath)`         | `fs_commands.rs`     | 파일 트리 조회 (구 프로젝트 트리용, 유지)                                         | —                  |
 | `list_dir(path)`                               | `fs_commands.rs`     | 한 단계 목록(이름/종류/크기)                                                      | `ls`, 스킬 스캐너  |
-| `create_file(path)` / `create_folder(path)`    | `fs_commands.rs`     | 생성                                                                              | FileTree           |
-| `rename_path(from, to)`                        | `fs_commands.rs`     | 이름변경/이동                                                                     | FileTree           |
-| `delete_path(path)`                            | `fs_commands.rs`     | 삭제                                                                              | FileTree           |
+| `create_file(path)` / `create_folder(path)`    | `fs_commands.rs`     | 생성                                                                              | 탐색기             |
+| `rename_path(from, to)`                        | `fs_commands.rs`     | 이름변경/이동                                                                     | 탐색기             |
+| `delete_path(path)`                            | `fs_commands.rs`     | 삭제                                                                              | 탐색기             |
 | `grep_files(pattern, path, glob?, maxResults)` | `search_commands.rs` | 내용 검색 (`regex` + `ignore` 크레이트, gitignore 존중)                           | `grep`             |
 | `find_files(pattern, path, maxResults)`        | `search_commands.rs` | 파일명 glob 검색 (`ignore` 크레이트)                                              | `find`             |
 | `run_shell(command, cwd, timeoutMs)`           | `shell_commands.rs`  | OS별 셸 실행(Windows=PowerShell). stdout/stderr/exitCode 반환, 타임아웃 강제 종료 | `shell`            |
 | `web_search(query)`                            | `web_commands.rs`    | 웹 검색 결과 파싱(reqwest + scraper)                                              | `web_search`       |
-| `eval_list_packs` / `eval_read_pack_file` / `eval_write_pack_files` / `eval_delete_pack` | `eval_commands.rs` | 평가 팩 IO. 허용 루트: 번들 리소스(읽기 전용)·앱데이터 `evals/packs`·프로젝트 `.fortress/evals/packs` | 평가(§14) |
-| `eval_sandbox_create` / `eval_sandbox_create_from_files` / `eval_sandbox_snapshot` / `eval_sandbox_destroy` / `eval_sandbox_cleanup_all` | `eval_commands.rs` | 에이전트형 평가용 임시 샌드박스(`%TEMP%/fortress-eval/<uuid>`) | 평가(§8.4) |
-| `eval_detect_runtimes` / `eval_run_python`     | `eval_commands.rs`   | 코드 실행 채점(Python 옵트인, 셸 미경유)                                          | 평가(§8.4) |
-| `eval_download_file` / `eval_read_import_file` / `eval_export_write` | `eval_commands.rs` | 데이터셋 다운로드(huggingface.co·raw.githubusercontent.com만), 가져오기, 결과 내보내기 | 평가(§14) |
-| `integration_run_cli(executablePath, args, stdin?, promptFile?, timeoutMs)` | `integration_commands.rs` | 등록·동의된 외부 에이전트 CLI 실행(셸 미경유, 임시 cwd) | 외부 연동(§14.5) |
+| `fc_list_dir` / `fc_system_folders` / `fc_stat` | `commander_commands.rs` | 탐색기 목록·시스템 폴더·정보(재귀 크기) + job 진행률 | 탐색기, `fs_info` |
+| `fc_copy` / `fc_move` (+`fc_cancel`, `fc_resolve_conflict`) | `commander_commands.rs` | job id + `fc://progress` 이벤트, 충돌 정책 ask/overwrite/skip/rename | `fs_copy`, `fs_move`, 위키 이동 |
+| `fc_trash` / `fc_delete_permanent` / `fc_rename` / `fc_mkdir` / `fc_create_file` | `commander_commands.rs` | 휴지통(D10)·영구 삭제·이름 변경·생성 | 탐색기, `fs_trash` 등 |
+| `fc_search` | `commander_commands.rs` | 이름/내용 검색 스트리밍 (ignore 워커 재사용) | `fs_search`, `@` 팝업 |
+| `fc_zip` / `fc_unzip` / `fc_archive_list` | `commander_commands.rs` | 압축/해제/목록 (job 기반) | `fs_zip`, `fs_unzip` |
+| `fc_open_default` / `fc_reveal` | `commander_commands.rs` | 기본 앱으로 열기·탐색기에서 보기 | 뷰어, 위키/매크로 |
+| `fc_read_file_bytes` / `fc_read_text_head` / `fc_write_bytes` | `commander_commands.rs` | 바이너리/텍스트 앞부분 읽기·쓰기 | 뷰어, 이미지 첨부 |
+| `fc_office_text(path)` | `commander_commands.rs` | pptx/docx XML 텍스트 직접 추출 (200K 캡) | `doc_read`, 파서 (§16) |
+| `wiki_watch_set(folders)` / `wiki_watch_stop` / `wiki_watch_status` / `wiki_default_watch_folder` | `watch_commands.rs` | notify-debouncer-full(2초) → `wiki://file-event {path, kind}`. 임시 파일 제외·크기 안정화 후 발행 | 위키 감시 (§16) |
+| `integration_run_cli(executablePath, args, stdin?, promptFile?, timeoutMs, cwd?)` | `integration_commands.rs` | 등록·동의된 외부 에이전트 CLI 실행(셸 미경유, 임시 cwd) + `find_executable` PATH 탐지 | 외부 연동(§15), 파서 (§16) |
 
 - `edit` 도구는 전용 커맨드 없이 `read_text_file` + 문자열 치환 + `write_text_file` 조합으로 프런트엔드에서 구현합니다. 치환 대상이 0건이거나 2건 이상이면 실패시키고 모델에게 더 긴 컨텍스트를 요구합니다.
 - **`web_search`는 유지보수 리스크가 있습니다.** HTML 구조 변경·봇 차단으로 깨지기 쉬우므로, 파싱 실패 시 예외 대신 "검색 결과를 가져오지 못했습니다" 결과를 반환해 대화를 끊지 않습니다. 장기적으로는 내장 도구 대신 검색 스킬(§6)로 대체하는 것을 권장합니다.
@@ -1044,80 +1114,53 @@ VivoStudio와 동일하게 **Redux/Zustand 등 전역 스토어 라이브러리 
 
 - 멀티 에이전트 협업(supervisor → sub-agent 호출) — Agent를 "설정값 프리셋"으로 정의했으므로 서브 에이전트를 도구로 노출하는 방식으로 확장 가능하나 1차 스코프 아님. **이 요구가 확정되면 §5.0의 "그래프 대신 루프" 결정을 재검토**합니다.
 - **대화 브랜치 / 트리 탐색** — 엔트리에 `parentId`를 남겨 두었으므로 나중에 추가 가능. pi의 브랜치 요약(`/tree`)도 이때 함께 검토.
-- **split-turn 2단 요약** — 단일 턴이 `keepRecentTokens`를 초과할 때 pi는 턴 앞부분을 별도 요약해 병합하지만, Fortress 1차 스코프는 컷 지점을 턴 시작까지 앞당기는 방식으로 단순화했습니다 (§9.3).
+- **split-turn 2단 요약** — 단일 턴이 `keepRecentTokens`를 초과할 때 pi는 턴 앞부분을 별도 요약해 병합하지만, 컷 지점을 턴 시작까지 앞당기는 방식으로 단순화했습니다 (§9.3).
 - **크래시 복원력** — 스트리밍/도구 실행/승인 대기 중 강제 종료 시 해당 턴은 폐기됩니다 (§8.3). pi 수준의 내구성이 필요해지면 harness의 연산 상태 기계를 참고.
 - **코드 스킬 / 스크립트 샌드박스** — Agent Skills 표준에 없는 개념이라 1차 스코프에서 제외했습니다 (§7). 신뢰할 수 없는 스킬을 격리 실행할 필요가 생기면 QuickJS 또는 컨테이너화를 재검토.
-- 탭 스플릿 드래그앤드롭, 터미널 탭, CLI 에이전트 런처 — VivoStudio에는 있으나 Fortress 1차 스코프 제외.
+- 터미널 탭 — VivoStudio에는 있으나 스코프 제외.
 - macOS/Linux 패키징 — Windows 우선, 이후 확장. (`run_shell`의 OS 분기는 처음부터 넣어 둡니다.)
-- 멀티모달(이미지 입력) — 요구사항에서 명시적으로 제외됨.
+- 백그라운드 상주(트레이) — 위키 감시·매크로 스케줄러는 앱 실행 중에만 동작한다. 상주가 필요해지면 후속 과제로 (§16, §17).
 
 이 섹션에 항목을 추가/제거할 때는 반드시 `Docs/TODO.md`와 본 문서를 함께 갱신하십시오.
 
 ---
 
-## 14. 자동 평가 시스템 (Phase 10, 2026-09-25 확정)
+## 14. 자동 평가 시스템 — 폐기됨 (P11-03)
 
-> 상세 구현: `Docs/phases/Phase10-Evaluation.md` · 팩 제작: `Docs/phases/Phase10-Eval-Packs.md` · 기획 근거: `Docs/plan/LLM_Evaluation_Plan.md`, `Docs/plan/LLM_Evaluation_Research.md`
+> Phase 10(2026-09-25 확정)으로 구현했던 자동 평가 기능은 Vanilla Commander 전환(P11-03)에서 삭제되었다. 코드는 제거되었고 DB 테이블은 신규 마이그레이션으로 DROP한다. 아래는 이력 요약이며, 상세는 `Docs/phases/Phase10-Evaluation.md`(폐기 헤더付き)를 참고한다.
+>
+> - 같은 평가셋을 여러 후보에 자동 실행해 5개 차원으로 비교·추천하던 시스템 (EvalRunner·Scorer·Arena·EEE 내보내기).
+> - 평가 전용 승인 예외(§8.4 샌드박스 정책)도 함께 폐기 — 승인 훅에 예외는 없다.
+> - 살아남은 것: 외부 연동 모듈만 `src/lib/integrations/`로 이관해 §15가 되었다.
 
-### 14.1 개요
+---
 
-같은 평가셋을 같은 조건으로 여러 **후보**(에이전트 설정 스냅샷, 또는 기준 에이전트에서 만든 매트릭스 조합)에 자동 실행하고, 5개 차원(Q 품질 · A 에이전트 · P 성능 · R 자원 · S 신뢰성), 19개 카테고리를 0~100으로 정규화해 비교한 뒤 작업 프로파일에 맞는 후보를 추천합니다.
+## 15. 외부 연동 (구 §14.5, P11-02 이관)
 
-```
-팩(manifest + samples) ─┐
-후보 스냅샷 ─────────────┼─▶ EvalRunner ─▶ Solver(single/multi/tool_call/agentic/perf/long/compaction/logprob)
-프로파일(가중치·앵커) ───┘        │            └─ 기존 providerRuntime / runAgentLoop 재사용
-                                   ├─▶ Scorer(결정적 → 상태/궤적 → 코드 실행 → Judge → 사람)
-                                   ├─▶ eval_trials / eval_scores (전역 DB, Trial마다 커밋 → 이어하기)
-                                   └─▶ aggregate(정규화·부트스트랩 CI) ─▶ recommend(제약·파레토·구분불가) ─▶ 리포트
-```
+- 에이전트 편집 화면의 프로바이더 선택에서 등록·관리한다 (설정 > 외부 연동 화면은 삭제, P11-50). 종류: `agent-cli`(Claude Code·Codex·Gemini CLI 등, PATH 자동 탐지 + 프리셋) — 평가 시절의 `llm-api` 종류는 클라우드 프로바이더 에이전트로 1회 변환 후 폐지.
+- 허용 용도: `chat-agent`·`wiki-ingest`·`doc-parse` (평가 전용 목적은 제거). 동의 문구는 "채팅·파일 내용이 외부로 전송될 수 있음"으로 개정 → **동의 버전 상향(consent-v2, 기존 동의 무효화)**.
+- **모든 외부 전송은 `src/lib/integrations/gateway.ts` 한 곳을 통과**한다. 마스터 스위치 → 활성화 → 동의·버전 → 용도 → 데이터 분류를 차례로 검사하고, 실패하면 전송하지 않는다. 성공·실패 모두 `integration_audit_log`에 기록하며, 설정 > 일반에서 감사 로그를 볼 수 있다.
+- 채팅의 외부 에이전트 실행(P11-23)은 `callIntegration`을 거쳐 권한 검사·감사를 유지한다. 위키 파이프라인은 `wiki-ingest` 목적이 허용된 연동(또는 로컬 에이전트)만 쓴다 (§16).
 
-### 14.2 확정 결정 사항
+---
 
-| ID | 결정 |
-| --- | --- |
-| D1 | 전 범위(26개 작업)를 Phase 10에서 구현. 순서는 웨이브로만 나눈다 |
-| D2 | 평가 결과는 전역 DB(§4.5). 개인 팩 파일만 프로젝트 `.fortress/evals/` |
-| D3 | 외부 API·외부 에이전트는 사용자가 허락한 경우에만(§14.5) |
-| D4 | 데이터셋을 앱에 번들(Tauri 리소스). 라이선스상 불가한 셋(HAE-RAE: NC-ND, GPQA: 평문 공개 금지 요청, CLIcK·LogicKor: 라이선스 미확인)은 임포터만. KMMLU(ND)는 원본 CSV 무수정 번들 |
-| D5 | 평가 중 채팅 금지: `evalLock` + 전송·큐잉 차단. 가상 세션 `eval:<runId>`로 기존 전역 busy 가드(폴더 전환·에이전트 편집) 재사용 |
-| D6 | 사용자가 가중치·기준값을 확인한 뒤 **수동으로** 시작. 자동·예약 실행 없음. 중단된 실행의 이어하기도 수동 |
-| D7 | 평가는 `monitoringCollector`/`agent_monitoring_snapshots`를 쓰지 않고 자체 자원 샘플러로 Trial별 VRAM 피크·GPU 사용률을 기록(스냅샷 테이블의 `agents` FK 때문에 저장되지 않은 매트릭스 후보를 기록할 수 없음) |
-| D8 | 평가 에이전트 도구는 `read/ls/grep/find/write/edit`만. 샌드박스 정책 훅이 승인 훅을 대체(§8.4) |
-| D9 | 코드 실행: JS Worker 기본, Python은 옵트인 + 실행별 확인(§8.4) |
-| D10 | logprobs 기능(객관식 확률 모드, 양자화 충실도 Q8)은 Ollama ≥ 0.12.11에서만, 그 외 N/A |
-| D11 | Judge는 로컬 모델 기본. 외부 Judge는 §14.5 게이트웨이 경유. 같은 모델 자기 채점 금지 |
-| D12 | 신규 npm/crate 의존성 없음. 통계·채점·CSV 파서·IFEval 체커는 직접 구현 |
+## 16. 위키 (Phase 11 W3)
 
-### 14.3 평가 팩
+다운로드 폴더 감시 → 자동 분류·등록 파이프라인.
 
-- 3계층: `builtin`(`src-tauri/resources/evals/`, 읽기 전용) < `user`(앱데이터 `evals/packs`) < `project`(`.fortress/evals/packs`). 같은 id는 project > user > builtin 순으로 우선합니다.
-- 팩 = `manifest.json`(EvalPackManifest) + 샘플 소스(`jsonl` | `kmmlu-csv` 원본 | `generator`) + (선택) 픽스처. 매니페스트와 샘플 소스로 `contentHash`를 계산하고, 실행 설정에 고정합니다. 해시가 바뀌면 이어하기·실행 비교를 막습니다.
-- tier(smoke/standard/full)별 샘플은 `(해시, tier, seed)`로 결정적으로 선택하고, 실행을 만들 때 `sampleIds`를 확정합니다.
+- **감시** (`watch_commands.rs`, P11-30): `wiki_watch_set(folders)`가 `notify-debouncer-full`(2초)로 묶인 이벤트를 `wiki://file-event {path, kind}`으로 발행. 임시 다운로드 파일(`.crdownload`, `.part`, `.tmp`, `~$*`) 제외, **크기 안정화**(1초 간격 2회 동일) 후 발행. 기본 감시 폴더 = OS 다운로드 폴더.
+- **설정** (`settings.wiki`, P11-31): 감시 on/off·폴더 목록·이동 여부·보관 폴더(기본 `<WorkFolder>/wiki-inbox`)·분류 규칙(D6: 자동/날짜/순번/빈도)·필터(확장자 화이트리스트·최대 크기·제외 glob)·처리 프롬프트(기본값 + 초기화)·처리 에이전트(D5: 기본 = 기본 에이전트).
+- **파이프라인** (`lib/wiki/pipeline.ts`, P11-32): 이벤트 → 필터 → 직렬 1건씩(채팅 실행 중이면 대기, `chatQueueManager` 조정) → ① 내용 추출(텍스트 직접·문서는 §16 파서·이미지는 비전 에이전트, 없으면 `waiting-vision`) → ② **LLM 1회 호출**로 `{classification, folderName, title, slug, summary, tags}` JSON 생성(zod 검증, 1회 재시도 후 날짜순 폴백; 에이전트 루프를 돌리지 않음) → ③ (옵션) 이동 + 원본 경로 기록 → ④ `wiki` 도구 ingest(출처: 이동 후 경로). 외부 처리 에이전트는 `wiki-ingest` 동의·목적 허용 시에만. StatusBar 위키 슬롯에 진행 표시. 처리 이력은 DB `wiki_jobs`.
+- **문서 파서** (`lib/parsers/`, P11-33): `parseDocument(path)` — 우선순위: 사용자 지정 외부 파서(확장자별 CLI 템플릿 `{input}`/`{output}`/`{outputDir}`, stdout 또는 출력 파일; 프리셋 MarkItDown·Docling·Pandoc·LibreOffice; 실행 파일 검증·타임아웃은 `integration_run_cli` 규칙 재사용, 로컬 실행이라 동의 대상 아님) → 내장(pdfjs 텍스트 레이어·DOCX mammoth·XLSX/CSV SheetJS·PPTX Rust zip XML·텍스트) → 실패. 스캔 PDF(텍스트 레이어 없음)는 "외부 파서(OCR) 또는 비전 에이전트 필요"로 실패 사유 반환. `doc_read` 도구와 위키 파이프라인이 재사용. 설정 > 문서 파싱 연동에서 등록·테스트(P11-34).
+- **UI**: `WikiPanel`(감시 토글·대기열·최근 처리·페이지 목록 → MD 뷰어), `WikiTab`(설정 편집 + 이력·재처리·원본 열기).
 
-### 14.4 정규화 스킴 요약
+---
 
-- 품질·에이전트 지표: `clamp((raw − baseline)/(ceiling − baseline), 0, 1) × 100` (k지선다 baseline 1/k, 이진 판단 0.5, 생성형 0)
-- 성능·자원: 고정 앵커(`ANCHORS_V1`) 로그/선형 효용 함수. 앵커와 가중치는 실행 전에 사용자가 확인·수정합니다(D6). 원시값은 항상 보존하므로 앵커를 바꾸면 다시 계산할 수 있습니다.
-- 종합 점수: 카테고리 → 차원 → 종합의 가중 산술평균(N/A 제외 재정규화). 치명적 약점은 하드 제약으로 거릅니다. Q8(양자화 충실도)은 종합 점수에서 제외합니다.
-- 불확실성: 팩 점수는 Wilson/부트스트랩(군집 반영) 95% CI, 종합 점수는 전 계층 부트스트랩, 후보 간 비교는 쌍대 부트스트랩("구분 불가" 그룹), Arena는 Bradley-Terry + 부트스트랩.
-- 성능·자원 지표는 하드웨어 지문이 같은 실행끼리만 비교합니다.
+## 17. 매크로 (Phase 11 W4)
 
-### 14.5 외부 연동 (D3)
+채팅 프롬프트 묶음의 저장·편의 실행·스케줄 자동 실행.
 
-- 설정 > 외부 연동(`/settings/integrations`): 마스터 스위치(기본 꺼짐), 연동 등록(`llm-api`: 기존 Provider 프리셋 재사용 / `agent-cli`: 절대 경로 실행 파일 + 고정 인자, 프롬프트는 stdin·임시 파일로만 전달), 허용 용도(`judge`·`reference-generation`·`pack-drafting`·`candidate`), 허용 데이터 분류(`public-bundled`·`personal`·`fixture-files`), 동의(문구 버전 관리, 범위를 넓힐 때 재동의), 신뢰 LAN 호스트, 로컬 코드 실행 허용, 감사 로그.
-- **모든 외부 전송은 `src/lib/eval/integrations/gateway.ts` 한 곳을 통과**합니다. 게이트웨이는 마스터 스위치 → 활성화 → 동의·버전 → 용도 → 데이터 분류를 차례로 검사하고, 실패하면 전송하지 않습니다. 성공·실패 모두 `integration_audit_log`에 기록합니다.
-- 후보의 엔드포인트가 loopback이나 신뢰 LAN 호스트가 아니면(`external`) `candidate` 용도로 동의된 연동이 있어야 평가할 수 있습니다. 실행 마법사는 외부 전송 요약(연동·용도·데이터 분류·예상 요청 수·토큰)을 보여주고 실행별 확인을 받습니다.
-- 채팅 기능의 기존 클라우드 Provider 사용(P9-03)은 이 게이트의 대상이 아닙니다(평가 기능에만 적용).
-
-### 14.6 결과 내보내기 (Every Eval Ever 대응)
-
-| Fortress | EEE |
-| --- | --- |
-| run id + candidate id | `evaluation_id` |
-| 앱 이름·버전, third_party | `source_metadata` |
-| 후보 스냅샷 모델 + `/api/show` 메타 | `model_info` |
-| 스냅샷의 temperature/topP/maxOutputTokens/reasoning | `generation_config` |
-| pack 단위 aggregate + MetricSpec | `evaluation_results[].metric_config`(`lower_is_better`, `score_type`, `min/max_score`) + `score_details` + CI |
-| trials + scores | `{uuid}_samples.jsonl`(single_turn/multi_turn/agentic, token_usage, performance) |
-| 하드웨어 지문 | EEE 확장 필드(스키마 버전 확인 후) |
+- **저장소** (P11-40): DB `macros` 테이블(이름·프롬프트 목록·에이전트·실행 위치·스케줄·마지막 실행 결과). localStorage에서 첫 실행 시 1회 이관. `MacrosContext` + `lib/macros/`(types·macrosRepo·migrate·launch·scheduler).
+- **실행** (`launch.ts`): 매크로 전용 숨은 세션(`origin='macro'`)을 만들고 프롬프트를 대기 큐에 넣은 뒤 채팅 탭을 연다 (큐 처리는 `ChatTab`이 담당하므로 실행 중 대화 확인·승인 응답이 그대로 동작).
+- **스케줄러** (`scheduler.ts`, P11-41, D7): `interval(분)`·`daily(HH:mm)`·`weekly(요일+HH:mm)`, 1분 틱, 동시 실행 1개, 채팅 실행 중이면 대기. 놓친 실행은 `catchUp` 옵션 시 1회 보충, 아니면 소진. 승인이 필요한 도구 호출이 나오면 **자동 승인하지 않고** 일시정지 + StatusBar 알림으로 사용자 확인 요청 (§8 — 승인 우회 금지). 앱 종료 중에는 동작하지 않는다 (OS 스케줄러 미사용, 트레이 상주 없음 — §13).
+- **UI**: `MacroPanel`(목록·실행·스케줄 표시·세션 열기·새 매크로), `MacroEditorTab`(프롬프트 순서 편집·`@` 참조·에이전트·위치·스케줄·테스트 실행). 채팅의 매크로 저장 다이얼로그는 같은 저장소를 쓴다.

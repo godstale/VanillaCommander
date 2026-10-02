@@ -60,7 +60,7 @@ export interface UseChatOptions {
   };
   skills?: SkillManifest[];
   contextFiles?: ContextFileItem[];
-  /** 전역 압축 기본값 (SettingsModel). 0=auto 항목의 단계표 해석에 쓴다. */
+  /** 전역 압축 기본값 (defaults.ts). 0=auto 항목의 단계표 해석에 쓴다. */
   globalCompactionDefaults?: {
     defaultContextSize?: number;
     defaultReserveTokens?: number;
