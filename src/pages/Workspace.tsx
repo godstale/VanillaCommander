@@ -2,10 +2,12 @@ import { useRef, useEffect } from 'react';
 import type { ImperativePanelHandle } from 'react-resizable-panels';
 import { TopMenuBar } from '@/components/layout/TopMenuBar';
 import { ActivityBar } from '@/components/layout/ActivityBar';
+import { StatusBar } from '@/components/layout/StatusBar';
 import { WorkspaceLayout } from '@/components/layout/WorkspaceLayout';
 import { SidePanel } from '@/components/sidepanel/SidePanel';
 import { CenterWorkspace } from '@/components/workspace/CenterWorkspace';
 import { SidePanelProvider, useSidePanel } from '@/lib/context/SidePanelContext';
+import { StatusBarProvider } from '@/lib/context/StatusBarContext';
 import { WorkspaceTabsProvider, useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { WorkspaceProvider, useWorkspace } from '@/lib/context/WorkspaceContext';
 import { SkillsProvider } from '@/lib/context/SkillsContext';
@@ -87,12 +89,14 @@ function WorkspaceContent() {
           />
         </div>
       </div>
+      <StatusBar />
     </div>
   );
 }
 
 export function Workspace() {
   return (
+    <StatusBarProvider>
     <WorkspaceProvider>
       <SkillsProvider>
         <AgentsProvider>
@@ -108,6 +112,7 @@ export function Workspace() {
         </AgentsProvider>
       </SkillsProvider>
     </WorkspaceProvider>
+    </StatusBarProvider>
   );
 }
 
