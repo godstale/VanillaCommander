@@ -6,6 +6,7 @@ import { WorkspaceTabsProvider, useWorkspaceTabs } from '@/lib/context/Workspace
 import { EvalProvider } from '@/lib/context/EvalContext';
 import { useOpenEvalTab } from '@/lib/eval/ui/openEvalTab';
 import { EvalTab } from '@/components/workspace/EvalTab';
+import type { WorkspaceTabType } from '@/lib/types/workspaceTab';
 
 function Probe() {
   const { openEvalWizard, openEvalRun, openEvalPacks, openEvalPack, openArenaList } = useOpenEvalTab();
@@ -46,7 +47,8 @@ describe('eval tab helpers', () => {
     render(
       <WorkspaceTabsProvider>
         <EvalProvider>
-          <EvalTab tab={{ id: 'eval:packs', type: 'eval', title: 'p', meta: { view: 'packs' } }} />
+          {/* P11-01: 'eval' 타입은 유니온에서 제거됨. P11-03에서 이 테스트도 삭제 예정. */}
+          <EvalTab tab={{ id: 'eval:packs', type: 'eval' as unknown as WorkspaceTabType, title: 'p', meta: { view: 'packs' } }} />
         </EvalProvider>
       </WorkspaceTabsProvider>,
     );

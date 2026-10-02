@@ -1,5 +1,5 @@
 import type { PackScope } from '@/lib/eval/types';
-import type { WorkspaceTab, EvalTabView } from '@/lib/types/workspaceTab';
+import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import { useEval } from '@/lib/context/EvalContext';
 import { useOpenEvalTab } from '@/lib/eval/ui/openEvalTab';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -49,7 +49,8 @@ export function EvalTab({ tab }: EvalTabProps) {
   const { t } = useLanguage();
   const { packs } = useEval();
   const { openEvalPack } = useOpenEvalTab();
-  const view = (tab.meta?.view as EvalTabView | undefined) ?? 'wizard';
+  // P11-01: EvalTabView는 삭제됨. 이 파일은 P11-03에서 삭제 예정이라 문자열로만 판별한다.
+  const view = (tab.meta?.view as string | undefined) ?? 'wizard';
 
   let content: React.ReactNode;
   switch (view) {

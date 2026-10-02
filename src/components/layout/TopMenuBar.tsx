@@ -8,8 +8,6 @@ import {
   Bot,
   MessageSquare,
   Files,
-  Activity,
-  FlaskConical,
   Clock,
   Minus,
   Square,
@@ -30,6 +28,7 @@ import {
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useSidePanel } from '@/lib/context/SidePanelContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
+import { useAgents } from '@/lib/context/AgentsContext';
 import { useGlobalLlmBusy } from '@/lib/agent/chatQueueManager';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -41,6 +40,7 @@ export function TopMenuBar() {
   const { workspaceRoot, setWorkspaceRoot, recentWorkspaces = [] } = useWorkspace();
   const { setActiveView } = useSidePanel();
   const { openTab } = useWorkspaceTabs();
+  const { agents, defaultAgent } = useAgents();
   const navigate = useNavigate();
   const hasWorkspace = Boolean(workspaceRoot);
   // LLM 동작 중에는 폴더(프로젝트) 변경을 금지한다.
@@ -90,6 +90,20 @@ export function TopMenuBar() {
       id: `agent-editor:new-${Date.now()}`,
       type: 'agent-editor',
       title: t('topMenu.newAgent'),
+    });
+  };
+
+  // P11-01(V3): 모니터링 진입점은 상단 에이전트 메뉴의 직접 열기 하나.
+  const handleOpenMonitor = () => {
+    if (agents.length === 0) {
+      setActiveView('agents');
+      return;
+    }
+    openTab({
+      id: `agent-monitor:${defaultAgent.id}`,
+      type: 'agent-monitor',
+      title: t('agentList.monitor', { name: defaultAgent.name }),
+      meta: { agentId: defaultAgent.id },
     });
   };
 
@@ -290,6 +304,10 @@ export function TopMenuBar() {
                 <Bot className="h-3.5 w-3.5 text-muted-foreground" />
                 <span>{t('topMenu.agentPanel')}</span>
               </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleOpenMonitor} className="gap-2 cursor-pointer text-[11px] py-1">
+                <Bot className="h-3.5 w-3.5 text-muted-foreground" />
+                <span>{t('topMenu.openMonitor')}</span>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           )}
         </DropdownMenu>
@@ -326,20 +344,6 @@ export function TopMenuBar() {
               >
                 <MessageSquare className="h-3.5 w-3.5 text-success" />
                 <span>{t('topMenu.chatList')}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setActiveView('monitoring')}
-                className="gap-2 cursor-pointer text-[11px] py-1"
-              >
-                <Activity className="h-3.5 w-3.5 text-warning" />
-                <span>{t('topMenu.monitoring')}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setActiveView('evaluation')}
-                className="gap-2 cursor-pointer text-[11px] py-1"
-              >
-                <FlaskConical className="h-3.5 w-3.5 text-primary" />
-                <span>{t('eval.common.nav.evaluation')}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           )}

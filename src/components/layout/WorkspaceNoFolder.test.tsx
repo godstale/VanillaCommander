@@ -8,6 +8,7 @@ import { TopMenuBar } from './TopMenuBar';
 import { SidePanelProvider, useSidePanel } from '@/lib/context/SidePanelContext';
 import { WorkspaceTabsProvider, useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { WorkspaceProvider } from '@/lib/context/WorkspaceContext';
+import { AgentsProvider } from '@/lib/context/AgentsContext';
 import { ChatSessionsProvider } from '@/lib/context/ChatSessionsContext';
 import { renderHook, act } from '@testing-library/react';
 
@@ -39,7 +40,7 @@ vi.mock('@/lib/db/repositories/settingsRepo', () => ({
 }));
 
 describe('Workspace without selected folder', () => {
-  it('ActivityBar has explorer enabled and other buttons disabled when no folder is selected', () => {
+  it('ActivityBar has all five menus enabled even when no folder is selected (P11-01, D2)', () => {
     render(
       <MemoryRouter>
         <WorkspaceProvider>
@@ -48,36 +49,27 @@ describe('Workspace without selected folder', () => {
       </MemoryRouter>,
     );
 
-    // Explorer should be enabled
-    const explorerBtn = screen.getByRole('button', { name: /파일 탐색기/i });
-    expect(explorerBtn).toBeEnabled();
+    for (const name of [/파일 탐색기/i, /대화 목록/i, /에이전트 관리/i, /위키/i, /매크로/i]) {
+      expect(screen.getByRole('button', { name })).toBeEnabled();
+    }
 
-    // Other views should be disabled
-    const chatBtn = screen.getByRole('button', { name: /대화 목록/i });
-    expect(chatBtn).toBeDisabled();
-
-    const agentsBtn = screen.getByRole('button', { name: /에이전트 관리/i });
-    expect(agentsBtn).toBeDisabled();
-
-    const monitoringBtn = screen.getByRole('button', { name: /모니터링/i });
-    expect(monitoringBtn).toBeDisabled();
-
-    // Settings in activity bar should be disabled
-    const settingsBtn = screen.getByRole('button', { name: /설정/i });
-    expect(settingsBtn).toBeDisabled();
+    // Settings is always available (no folder gating since P11-01).
+    expect(screen.getByRole('link', { name: /설정/i })).toBeEnabled();
   });
 
   it('TopMenuBar has File menu enabled but Agent and View menus disabled when no folder is selected', () => {
     render(
       <MemoryRouter>
         <WorkspaceProvider>
-          <ChatSessionsProvider>
-            <WorkspaceTabsProvider>
-              <SidePanelProvider>
-                <TopMenuBar />
-              </SidePanelProvider>
-            </WorkspaceTabsProvider>
-          </ChatSessionsProvider>
+          <AgentsProvider>
+            <ChatSessionsProvider>
+              <WorkspaceTabsProvider>
+                <SidePanelProvider>
+                  <TopMenuBar />
+                </SidePanelProvider>
+              </WorkspaceTabsProvider>
+            </ChatSessionsProvider>
+          </AgentsProvider>
         </WorkspaceProvider>
       </MemoryRouter>,
     );
@@ -94,7 +86,7 @@ describe('Workspace without selected folder', () => {
     expect(viewMenuBtn).toBeDisabled();
   });
 
-  it('SidePanelContext defaults to explorer and prevents selecting other views when no folder is selected', () => {
+  it('SidePanelContext allows selecting any view when no folder is selected (P11-01, D2)', () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <WorkspaceProvider>
         <SidePanelProvider initialView="chat-sessions">{children}</SidePanelProvider>
@@ -103,20 +95,20 @@ describe('Workspace without selected folder', () => {
 
     const { result } = renderHook(() => useSidePanel(), { wrapper });
 
-    // Should default to explorer because workspaceRoot is null
-    expect(result.current.activeView).toBe('explorer');
+    // Initial view is respected (no forced explorer since P11-01).
+    expect(result.current.activeView).toBe('chat-sessions');
 
-    // Attempting to switch to agents should be ignored
+    // Switching to another view works without a folder.
     act(() => {
       result.current.setActiveView('agents');
     });
-    expect(result.current.activeView).toBe('explorer');
+    expect(result.current.activeView).toBe('agents');
 
-    // Attempting to toggle explorer should stay on explorer
+    // Toggling the active view collapses it.
     act(() => {
-      result.current.toggleView('explorer');
+      result.current.toggleView('agents');
     });
-    expect(result.current.activeView).toBe('explorer');
+    expect(result.current.activeView).toBeNull();
   });
 
   it('WorkspaceTabsContext prevents opening tabs when no folder is selected', () => {

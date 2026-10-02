@@ -7,7 +7,11 @@ import {
   Bot,
   Puzzle,
   Activity,
-  FlaskConical,
+  Files,
+  FileText,
+  Archive,
+  BookOpen,
+  Zap,
   X,
   Plus,
   Columns2,
@@ -28,10 +32,9 @@ import { EditorTab } from '@/components/workspace/EditorTab';
 import { ImageViewerTab } from '@/components/workspace/ImageViewerTab';
 import { SkillViewerTab } from '@/components/workspace/SkillViewerTab';
 import { AgentEditorTab } from '@/components/workspace/AgentEditorTab';
-import { AgentStatsTab } from '@/components/workspace/AgentStatsTab';
 import { AgentMonitorTab } from '@/components/workspace/AgentMonitorTab';
-import { EvalTab } from '@/components/workspace/EvalTab';
 import { WelcomeGuide } from '@/components/workspace/WelcomeGuide';
+import { PanelPlaceholder } from '@/components/sidepanel/PanelPlaceholder';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
@@ -43,13 +46,16 @@ const TAB_ICONS: Record<WorkspaceTabType, LucideIcon> = {
   editor: FileCode,
   'image-viewer': ImageIcon,
   'agent-editor': Bot,
-  'agent-stats': Activity,
   'agent-monitor': Activity,
   'skill-viewer': Puzzle,
-  eval: FlaskConical,
+  'file-explorer': Files,
+  'document-viewer': FileText,
+  'archive-viewer': Archive,
+  wiki: BookOpen,
+  'macro-editor': Zap,
 };
 
-function renderTabContent(tab: WorkspaceTab) {
+function renderTabContent(tab: WorkspaceTab, t: (key: string) => string) {
   switch (tab.type) {
     case 'chat':
       return <ChatTab tab={tab} />;
@@ -59,14 +65,25 @@ function renderTabContent(tab: WorkspaceTab) {
       return <ImageViewerTab tab={tab} />;
     case 'agent-editor':
       return <AgentEditorTab tab={tab} />;
-    case 'agent-stats':
-      return <AgentStatsTab tab={tab} />;
     case 'agent-monitor':
       return <AgentMonitorTab tab={tab} />;
     case 'skill-viewer':
       return <SkillViewerTab tab={tab} />;
-    case 'eval':
-      return <EvalTab tab={tab} />;
+    case 'file-explorer':
+      // P11-11에서 FileExplorerTab으로 교체.
+      return <PanelPlaceholder icon={Files} title={tab.title} description={t('tabPlaceholder.desc')} />;
+    case 'document-viewer':
+      // P11-14에서 DocumentViewerTab으로 교체.
+      return <PanelPlaceholder icon={FileText} title={tab.title} description={t('tabPlaceholder.desc')} />;
+    case 'archive-viewer':
+      // P11-14에서 ArchiveViewerTab으로 교체.
+      return <PanelPlaceholder icon={Archive} title={tab.title} description={t('tabPlaceholder.desc')} />;
+    case 'wiki':
+      // P11-31에서 WikiTab으로 교체.
+      return <PanelPlaceholder icon={BookOpen} title={tab.title} description={t('tabPlaceholder.desc')} />;
+    case 'macro-editor':
+      // P11-40에서 MacroEditorTab으로 교체.
+      return <PanelPlaceholder icon={Zap} title={tab.title} description={t('tabPlaceholder.desc')} />;
     default:
       return null;
   }
@@ -323,7 +340,7 @@ function WorkspacePane({
                   isHidden && 'hidden',
                 )}
               >
-                {renderTabContent(tab)}
+                {renderTabContent(tab, t)}
               </div>
             );
           })

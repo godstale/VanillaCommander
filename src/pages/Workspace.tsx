@@ -44,26 +44,16 @@ function WorkspaceContent() {
     }
   }, [isTabsLoaded, openTab, tabs.length, workspaceRoot, t]);
 
-  // When no workspaceRoot, make sure side panel is on explorer and expanded
+  // P11-01(D2): 폴더 미선택 상태에서도 전부 선택 가능.
   useEffect(() => {
     if (!workspaceRoot) {
-      setActiveView('explorer');
       if (sidePanelRef.current?.isCollapsed()) {
         sidePanelRef.current.expand();
       }
     }
-  }, [workspaceRoot, setActiveView]);
+  }, [workspaceRoot]);
 
   const handleActivityBarSelect = (view: Exclude<SidePanelView, null>) => {
-    if (!workspaceRoot) {
-      // Cannot select other menus when no folder is selected
-      if (view !== 'explorer') return;
-      if (sidePanelRef.current?.isCollapsed()) {
-        sidePanelRef.current.expand();
-      }
-      setActiveView('explorer');
-      return;
-    }
     const panel = sidePanelRef.current;
     if (!panel) return;
     if (activeView === view && !panel.isCollapsed()) {

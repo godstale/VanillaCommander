@@ -7,6 +7,7 @@ import React, {
   useRef,
 } from 'react';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
+import { isSupportedTabType } from '@/lib/types/workspaceTab';
 import * as settingsRepo from '@/lib/db/repositories/settingsRepo';
 import { useSafeWorkspace } from './WorkspaceContext';
 
@@ -108,10 +109,14 @@ export function WorkspaceTabsProvider({
       try {
         const settings = await settingsRepo.getSettings();
         if (active && (!hasWorkspaceContext || workspaceRoot)) {
-          if (settings.openTabs && settings.openTabs.length > 0) {
-            setInternalTabs(settings.openTabs);
-            const savedPrimary = settings.openTabs.filter((t) => (t.pane ?? 'primary') === 'primary');
-            const savedSecondary = settings.openTabs.filter((t) => t.pane === 'secondary');
+          // P11-01: 삭제된 탭 타입('eval', 'agent-stats')은 복원 시 조용히 버린다.
+          const supportedTabs = settings.openTabs.filter((t) =>
+            isSupportedTabType(t.type),
+          );
+          if (supportedTabs.length > 0) {
+            setInternalTabs(supportedTabs);
+            const savedPrimary = supportedTabs.filter((t) => (t.pane ?? 'primary') === 'primary');
+            const savedSecondary = supportedTabs.filter((t) => t.pane === 'secondary');
             setInternalActiveTabId(
               settings.activeTabId && savedPrimary.some((t) => t.id === settings.activeTabId)
                 ? settings.activeTabId

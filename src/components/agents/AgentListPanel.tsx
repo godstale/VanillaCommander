@@ -100,21 +100,23 @@ export function AgentListPanel() {
     });
   };
 
+  // P11-01: 'agent-stats' 탭은 제거됨. 통계·로그 버튼은 P11-20에서 삭제 예정이라,
+  // 그전까지는 에이전트 모니터 탭으로 연결한다.
   const handleShowStats = (agent: Agent) => {
     openTab({
-      id: `agent-stats:${agent.id}`,
-      type: 'agent-stats',
+      id: `agent-monitor:${agent.id}`,
+      type: 'agent-monitor',
       title: t('agentList.stats', { name: agent.name }),
-      meta: { agentId: agent.id, view: 'stats' },
+      meta: { agentId: agent.id },
     });
   };
 
   const handleShowLogs = (agent: Agent) => {
     openTab({
-      id: `agent-logs:${agent.id}`,
-      type: 'agent-stats',
+      id: `agent-monitor:${agent.id}`,
+      type: 'agent-monitor',
       title: t('agentList.log', { name: agent.name }),
-      meta: { agentId: agent.id, view: 'logs' },
+      meta: { agentId: agent.id },
     });
   };
 

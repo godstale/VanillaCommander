@@ -1,6 +1,12 @@
 export type Dict = Record<string, string>;
 
 import { evalKo } from './eval/index';
+import { explorerKo } from './explorer.ko';
+import { wikiKo } from './wiki.ko';
+import { macrosKo } from './macros.ko';
+import { setupKo } from './setup.ko';
+import { statusBarKo } from './statusBar.ko';
+import { parsersKo } from './parsers.ko';
 
 const ko: Dict = {
   // ---- language select (first-run) ----
@@ -14,6 +20,8 @@ const ko: Dict = {
   'activityBar.explorer': '파일 탐색기',
   'activityBar.chatSessions': '대화 목록',
   'activityBar.agents': '에이전트 관리',
+  'activityBar.wiki': '위키',
+  'activityBar.macros': '매크로',
   'activityBar.skills': '스킬 관리',
   'activityBar.needFolder': '(폴더 선택 필요)',
   'activityBar.settingsNeedFolder': '설정 (파일 메뉴 이용)',
@@ -36,6 +44,7 @@ const ko: Dict = {
   'topMenu.view': '보기 (View)',
   'topMenu.explorer': '파일 탐색기',
   'topMenu.chatList': '대화 목록',
+  'topMenu.openMonitor': '모니터링 열기',
   'topMenu.skills': '스킬 관리',
   'topMenu.clickToChangeFolder': '(클릭하여 폴더 변경)',
   'topMenu.folderChangeBlocked': '에이전트 동작 중에는 폴더를 변경할 수 없습니다',
@@ -1068,6 +1077,12 @@ const ko: Dict = {
   'monitoringList.clearConfirmTitle': '모니터링 기록 전체 삭제',
   'monitoringList.clearConfirmDesc': '총 {n}개의 모니터링 기록을 모두 삭제하시겠습니까? (복구할 수 없습니다)',
 
+  ...explorerKo,
+  ...wikiKo,
+  ...macrosKo,
+  ...setupKo,
+  ...statusBarKo,
+  ...parsersKo,
   ...evalKo,
 };
 

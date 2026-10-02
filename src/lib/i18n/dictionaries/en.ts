@@ -1,5 +1,11 @@
 import type { Dict } from './ko';
 import { evalEn } from './eval/index';
+import { explorerEn } from './explorer.en';
+import { wikiEn } from './wiki.en';
+import { macrosEn } from './macros.en';
+import { setupEn } from './setup.en';
+import { statusBarEn } from './statusBar.en';
+import { parsersEn } from './parsers.en';
 
 const en: Dict = {
   'languageSelect.title': 'Select language',
@@ -11,6 +17,8 @@ const en: Dict = {
   'activityBar.explorer': 'Explorer',
   'activityBar.chatSessions': 'Chats',
   'activityBar.agents': 'Agents',
+  'activityBar.wiki': 'Wiki',
+  'activityBar.macros': 'Macros',
   'activityBar.skills': 'Skills',
   'activityBar.needFolder': '(folder required)',
   'activityBar.settingsNeedFolder': 'Settings (via File menu)',
@@ -32,6 +40,7 @@ const en: Dict = {
   'topMenu.view': 'View',
   'topMenu.explorer': 'Explorer',
   'topMenu.chatList': 'Chats',
+  'topMenu.openMonitor': 'Open monitor',
   'topMenu.skills': 'Skills',
   'topMenu.clickToChangeFolder': '(click to change folder)',
   'topMenu.folderChangeBlocked': 'Cannot change folders while the agent is running',
@@ -1052,6 +1061,12 @@ const en: Dict = {
   'monitoringList.clearConfirmTitle': 'Delete all monitoring records',
   'monitoringList.clearConfirmDesc': 'Delete all {n} monitoring records? (cannot be undone)',
 
+  ...explorerEn,
+  ...wikiEn,
+  ...macrosEn,
+  ...setupEn,
+  ...statusBarEn,
+  ...parsersEn,
   ...evalEn,
 };
 
