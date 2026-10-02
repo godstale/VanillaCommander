@@ -2,7 +2,7 @@ import { BookOpen, Zap } from 'lucide-react';
 import type { SidePanelView } from '@/lib/types/workspaceTab';
 import { ChatSessionList } from '@/components/chatsessions/ChatSessionList';
 import { AgentListPanel } from '@/components/agents/AgentListPanel';
-import { FileTree } from '@/components/explorer/FileTree';
+import { ExplorerPanel } from '@/components/explorer/ExplorerPanel';
 import { PanelPlaceholder } from './PanelPlaceholder';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
@@ -23,7 +23,7 @@ export function SidePanel({ activeView }: SidePanelProps) {
     case 'agents':
       return <AgentListPanel />;
     case 'explorer':
-      return <FileTree />;
+      return <ExplorerPanel />;
     case 'wiki':
       // P11-31에서 WikiPanel로 교체.
       return <PanelPlaceholder icon={BookOpen} title={t('activityBar.wiki')} description={t('tabPlaceholder.desc')} />;

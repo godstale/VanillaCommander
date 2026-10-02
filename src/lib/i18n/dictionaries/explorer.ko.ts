@@ -75,4 +75,15 @@ export const explorerKo: Dict = {
   'explorer.newFolderName': '새 폴더',
   'explorer.statusSelected': '{sel}개 선택',
   'explorer.statusTotal': '{total}개 · {size}',
+
+  'explorer.openTabs': '열린 탐색기',
+  'explorer.noOpenTabs': '열린 탐색기 탭이 없습니다.',
+  'explorer.newTab': '새 탐색기 탭',
+  'explorer.favorites': '즐겨찾기',
+  'explorer.noFavorites': '즐겨찾기가 없습니다. 폴더를 추가하세요.',
+  'explorer.addFavorite': '현재 폴더 추가',
+  'explorer.removeFavorite': '즐겨찾기 제거',
+  'explorer.system': '시스템 폴더',
+  'explorer.moveUp': '위로 이동',
+  'explorer.moveDown': '아래로 이동',
 };

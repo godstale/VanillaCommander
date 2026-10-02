@@ -170,7 +170,7 @@
 - **W1 — 파일 탐색기**
   - [x] P11-10 Rust 파일 커맨더 커맨드
   - [x] P11-11 FileExplorerTab
-  - [ ] P11-12 탐색기 사이드 패널(탭 목록·즐겨찾기·시스템 폴더)
+  - [x] P11-12 탐색기 사이드 패널(탭 목록·즐겨찾기·시스템 폴더)
   - [x] P11-13 파일 작업 큐·충돌 처리·정보
   - [ ] P11-14 파일 뷰어(PDF/DOCX/XLSX/PPTX/ZIP + 외부 앱)
   - [ ] P11-15 탐색기 1줄 채팅 입력
@@ -247,6 +247,7 @@
 | 2026-10-02 | P11-04 | 설정 모델 + 작업 폴더 + 허용 루트 완료: `agent/defaults.ts` 신설(V4·V6: 승인 dangerous-only·셸 제외 전체 도구·basic-llm-wiki·temperature 0.2) + `DEFAULT_AGENT` 연결. settings에 setupCompletedAt·workFolder·favorites·agentAllowedRoots·wiki·parsers 블록 추가(6 컬럼, zod 검증, 메모리 폴백·ALTER 동기화, round-trip 테스트 3건). `WorkspaceContext`에 workFolder/setWorkFolder/ensureWorkFolderLayout + Rust 허용 루트 동기화. Rust: `set_active_workspace` → `set_agent_allowed_roots`(정규화 저장), 검증은 허용 루트 기준(명시 루트 우회 차단), 사용자 명령은 canonicalize만(`resolve_user_path`, reveal 적용), `ensure_work_folder_layout` 신설(Rust 테스트 3건). 부수 수정: 메모리 폴백의 전체 UPDATE 유실 버그(탭 전용 prefix 오매칭) 수정 + projectDb 테스트 기대값 정정. fc_* 분할(P11-10)이 D1 사용자/에이전트 분리를 완성한다. 검증: `lint`·`typecheck`·`build`·`cargo test`(21건) 통과, `test` 386/387(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-06 | 셋업 위저드 완료: 6단계(언어·작업 폴더·에이전트·위키·매크로·완료) + 단계별 적용/건너뛰기, 재실행은 현재값 프리필, 완료 시 기본 에이전트 편집 탭 자동 오픈(D9). `LanguageSelectDialog`는 위저드 1단계로 흡수(파일 삭제). 진입점 `/?setup=1`(설정 > 일반에 재실행 버튼 — P11-50 화면 소유이나 최소 버튼 1개 추가). 첫 실행 판정은 `setupCompletedAt == null`. 검증: `lint`·`typecheck`·`build` 통과, 위저드 테스트 1건(6단계 완주·setupCompletedAt·에이전트 생성) 통과, `test` 390/391(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-13 | 파일 작업 큐·충돌·정보 완료(W1 순서 조정: 11보다 먼저 infra 구축): `lib/commander`(types·ipc·jobs/useJobs·clipboard·format), `ConflictDialog`·`PropertiesDialog`·`SearchResultsView`, StatusBar 작업/클립보드 슬롯, `JobsProvider` 배선. lint 규칙상 JobsContext/useJobs 분리. 검증: `lint`·`typecheck` 통과, `test` 394/395(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-11 | 탐색기 탭 완료: `FileExplorerTab`(툴바·주소창·목록·정렬·히스토리·다중 선택·단축키·컨텍스트 메뉴·검색 모드·정보·즐겨찾기) + 탭 메타 영속 + StatusBar 탭 슬롯. D2 완성(폴더 없이 탭 열림·복원·저장) + V7(기본 탭=탐색기). "에이전트에게 묻기"는 P11-15까지 비활성, 파일 열기 라우팅은 P11-14 `openFile`로 교체 예정. 검증: `lint`·`typecheck`·`build` 통과, 탭 테스트 4건, `test` 398/399(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |
 
 ---

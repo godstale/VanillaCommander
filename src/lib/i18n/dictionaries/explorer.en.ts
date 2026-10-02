@@ -75,4 +75,15 @@ export const explorerEn: Dict = {
   'explorer.newFolderName': 'New folder',
   'explorer.statusSelected': '{sel} selected',
   'explorer.statusTotal': '{total} · {size}',
+
+  'explorer.openTabs': 'Open explorers',
+  'explorer.noOpenTabs': 'No open explorer tabs.',
+  'explorer.newTab': 'New explorer tab',
+  'explorer.favorites': 'Favorites',
+  'explorer.noFavorites': 'No favorites yet. Add a folder.',
+  'explorer.addFavorite': 'Add current folder',
+  'explorer.removeFavorite': 'Remove favorite',
+  'explorer.system': 'System folders',
+  'explorer.moveUp': 'Move up',
+  'explorer.moveDown': 'Move down',
 };
