@@ -87,6 +87,7 @@ pub fn run() {
             fc_reveal,
             fc_read_file_bytes,
             fc_read_text_head,
+            fc_write_bytes,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -18,10 +18,13 @@ import {
   Lock,
   Brain,
   Save,
+  ImagePlus,
+  X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { SkillManifest } from '@/lib/types/skill';
 import type { ReasoningEffort, ReasoningMode } from '@/lib/types/agent';
+import type { VisionVerdict } from '@/lib/llm/vision';
 import { useSafeSkills } from '@/lib/context/SkillsContext';
 import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { resolveSkillInvocation, parseSkillCommand } from '@/lib/skills/invokeSkill';
@@ -55,8 +58,8 @@ const BUILTIN_SLASH_COMMANDS: SlashCommandOption[] = [
 ];
 
 export interface ChatInputProps {
-  onSend: (text: string) => void;
-  onSteer: (text: string) => void;
+  onSend: (text: string, images?: string[]) => void;
+  onSteer: (text: string, images?: string[]) => void;
   onStop: () => void;
   onCompact?: (instructions?: string) => Promise<void> | void;
   onOpenCompactDialog?: () => void;
@@ -66,6 +69,7 @@ export interface ChatInputProps {
     type: 'message' | 'slash_command' | 'skill';
     commandName?: string;
     commandArgs?: string;
+    images?: string[];
   }) => void;
   isStreaming: boolean;
   isLockedByOtherSession?: boolean;
@@ -102,6 +106,11 @@ export interface ChatInputProps {
   sessionId?: string;
   /** `@` 참조 해석 기준 폴더. 미지정 시 상대 `@`는 텍스트 그대로 남는다. */
   cwd?: string | null;
+  /**
+   * P11-26: 귀속 에이전트의 비전 판정. 'no'면 이미지 첨부 시 전송 단계에서
+   * 폴백 다이얼로그가 열린다(첨부 자체는 막지 않는다).
+   */
+  vision?: VisionVerdict;
 }
 
 export function ChatInput({
@@ -134,6 +143,7 @@ export function ChatInput({
   hasSavedLog = false,
   sessionId,
   cwd = null,
+  vision = 'unknown',
 }: ChatInputProps) {
   const { t } = useLanguage();
   const workspace = useSafeWorkspace();
@@ -147,6 +157,58 @@ export function ChatInput({
   const [autocompleteDismissed, setAutocompleteDismissed] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // P11-26: 첨부 이미지(data URL). DB에는 경로 저장이 원칙이나, 입력 단계의
+  // 클립보드·드래그·파일 선택은 브라우저 File 객체이므로 data URL로 들고
+  // 전송 직전 messageMapper가 Ollama images/OpenAI image_url로 변환한다.
+  const MAX_IMAGES = 4;
+  const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+  const [images, setImages] = useState<string[]>([]);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const readFileAsDataUrl = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result ?? ''));
+      reader.onerror = () => reject(new Error('read failed'));
+      reader.readAsDataURL(file);
+    });
+
+  const addImageFiles = async (files: FileList | File[]) => {
+    const list = Array.from(files).filter((f) => f.type.startsWith('image/'));
+    if (list.length === 0) return;
+    const room = MAX_IMAGES - images.length;
+    if (room <= 0) {
+      setErrorMessage(t('chatInput.imageLimit', { n: MAX_IMAGES }));
+      return;
+    }
+    const accepted = list.slice(0, room);
+    if (list.length > room) {
+      setErrorMessage(t('chatInput.imageLimit', { n: MAX_IMAGES }));
+    }
+    const next: string[] = [];
+    for (const file of accepted) {
+      if (file.size > MAX_IMAGE_BYTES) {
+        setErrorMessage(t('chatInput.imageTooBig'));
+        continue;
+      }
+      try {
+        const url = await readFileAsDataUrl(file);
+        if (url.startsWith('data:image/')) next.push(url);
+      } catch {
+        setErrorMessage(t('chatInput.imageReadFailed'));
+      }
+    }
+    if (next.length > 0) {
+      setImages((prev) => [...prev, ...next].slice(0, MAX_IMAGES));
+      setErrorMessage(null);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -303,7 +365,7 @@ export function ChatInput({
   const handleSubmit = async () => {
     if (isLockedByOtherSession || isAgentDeleted) return;
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed && images.length === 0) return;
 
     setErrorMessage(null);
 
@@ -325,11 +387,16 @@ export function ChatInput({
     const resetAfterSend = () => {
       pushHistory(trimmed);
       setText('');
+      setImages([]);
       setAutocompleteDismissed(false);
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
     };
+
+    // 첨부 이미지는 텍스트와 함께 전달한다. 텍스트가 비어 있으면
+    // 이미지 설명 요청으로 취급하되 빈 전송은 막는다.
+    const attachedImages = images.length > 0 ? [...images] : undefined;
 
     // If this session is busy (running LLM or has pending queue items) and onQueue is available,
     // enqueue the request instead of executing immediately or overwriting
@@ -344,6 +411,7 @@ export function ChatInput({
           type: 'slash_command',
           commandName,
           commandArgs: args,
+          images: attachedImages,
         });
         resetAfterSend();
         return;
@@ -354,6 +422,7 @@ export function ChatInput({
         onQueue({
           text: sendText,
           type: 'skill',
+          images: attachedImages,
         });
         resetAfterSend();
         return;
@@ -363,6 +432,7 @@ export function ChatInput({
       onQueue({
         text: sendText,
         type: 'message',
+        images: attachedImages,
       });
       resetAfterSend();
       return;
@@ -415,9 +485,11 @@ export function ChatInput({
     }
 
     if (isStreaming) {
-      onSteer(messageToSend);
+      if (attachedImages) onSteer(messageToSend, attachedImages);
+      else onSteer(messageToSend);
     } else {
-      onSend(messageToSend);
+      if (attachedImages) onSend(messageToSend, attachedImages);
+      else onSend(messageToSend);
     }
 
     resetAfterSend();
@@ -529,6 +601,29 @@ export function ChatInput({
     }
   };
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const files = e.clipboardData?.files;
+    if (files && files.length > 0) {
+      const imgs = Array.from(files).filter((f) => f.type.startsWith('image/'));
+      if (imgs.length > 0) {
+        e.preventDefault();
+        void addImageFiles(imgs);
+      }
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) {
+      const imgs = Array.from(files).filter((f) => f.type.startsWith('image/'));
+      if (imgs.length > 0) {
+        e.preventDefault();
+        setIsDragOver(false);
+        void addImageFiles(imgs);
+      }
+    }
+  };
+
   const defaultPlaceholder = isAgentDeleted
     ? t('chatInput.agentDeletedPlaceholder')
     : isLockedByOtherSession
@@ -546,9 +641,18 @@ export function ChatInput({
   return (
     <div
       style={customHeight ? { height: `${customHeight}px` } : undefined}
+      onDragOver={(e) => {
+        if (e.dataTransfer?.types.includes('Files')) {
+          e.preventDefault();
+          setIsDragOver(true);
+        }
+      }}
+      onDragLeave={() => setIsDragOver(false)}
+      onDrop={handleDrop}
       className={cn(
         'relative border border-border rounded-xl bg-background shadow-xs focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all',
         customHeight ? 'flex flex-col overflow-hidden' : '',
+        isDragOver && 'ring-1 ring-primary border-primary',
       )}
     >
       {/* Mention popup (@ 파일 참조) */}
@@ -767,6 +871,33 @@ export function ChatInput({
       </div>
 
       <div className={cn('relative', customHeight ? 'flex-1 min-h-0 flex flex-col' : '')}>
+        {/* P11-26: 첨부 이미지 썸네일 */}
+        {images.length > 0 && (
+          <div className="flex items-center gap-2 px-3.5 pt-2 overflow-x-auto">
+            {images.map((src, i) => (
+              <div key={`${i}-${src.slice(0, 32)}`} className="relative shrink-0 group/thumb">
+                <img
+                  src={src}
+                  alt={t('chatInput.imageAlt', { n: i + 1 })}
+                  className="h-14 w-14 rounded-lg object-cover border border-border"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeImage(i)}
+                  aria-label={t('chatInput.imageRemove', { n: i + 1 })}
+                  className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover/thumb:opacity-100 focus:opacity-100 transition-opacity cursor-pointer"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {vision === 'no' && images.length > 0 && (
+          <p className="px-3.5 pt-1 text-[11px] text-warning">
+            {t('chatInput.noVisionHint')}
+          </p>
+        )}
         <textarea
           ref={textareaRef}
           rows={1}
@@ -774,6 +905,7 @@ export function ChatInput({
           onChange={(e) => handleTextChange(e.target.value, e.target.selectionStart ?? e.target.value.length)}
           onSelect={(e) => mention.sync(text, e.currentTarget.selectionStart ?? text.length)}
           onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
           disabled={isLockedByOtherSession || isAgentDeleted}
           placeholder={placeholder || defaultPlaceholder}
           style={customHeight ? undefined : { maxHeight: `${maxHeight}px` }}
@@ -787,6 +919,30 @@ export function ChatInput({
         />
 
         <div className="absolute right-2.5 bottom-2 flex items-center gap-1.5">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+            aria-hidden
+            tabIndex={-1}
+            onChange={(e) => {
+              if (e.target.files) void addImageFiles(e.target.files);
+              e.target.value = '';
+            }}
+          />
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isLockedByOtherSession || isAgentDeleted}
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors disabled:opacity-30"
+            title={vision === 'no' ? t('chatInput.attachNoVision') : t('chatInput.attach')}
+          >
+            <ImagePlus className="h-4 w-4" />
+          </Button>
           {isStreaming && (
             <Button
               type="button"
@@ -804,7 +960,7 @@ export function ChatInput({
             type="button"
             size="icon"
             onClick={() => void handleSubmit()}
-            disabled={isLockedByOtherSession || isAgentDeleted || !text.trim()}
+            disabled={isLockedByOtherSession || isAgentDeleted || (!text.trim() && images.length === 0)}
             className="h-8 w-8 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-30 disabled:pointer-events-none"
             title={
               isAgentDeleted

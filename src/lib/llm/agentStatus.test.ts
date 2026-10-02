@@ -60,6 +60,7 @@ describe('agentStatus', () => {
       vi.spyOn(ollamaClient, 'showModel').mockResolvedValue({
         contextLength: 4096,
         supportsTools: true,
+        supportsVision: false,
       });
 
       const status = await checkAgentConnection(mockAgent);

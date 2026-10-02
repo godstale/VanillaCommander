@@ -209,6 +209,11 @@ export type LlmProviderKind =
 
 export const DEFAULT_LLM_PROVIDER: LlmProviderKind = 'ollama';
 
+/** 이미지 입력(비전) 지원 여부. 'auto'는 Ollama capabilities로 판정, 판정 불가면 수동 선택 안내. */
+export type VisionSupport = 'auto' | 'yes' | 'no';
+
+export const DEFAULT_VISION_SUPPORT: VisionSupport = 'auto';
+
 export function isOpenAiCompatibleProvider(kind?: LlmProviderKind): boolean {
   return (kind ?? DEFAULT_LLM_PROVIDER) !== 'ollama';
 }
@@ -251,7 +256,8 @@ export interface Agent {
   maxOutputTokens?: number;
   /** LLM Provider 종류. 미지정(구 DB 행) 시 'ollama'로 해석 */
   llmProvider?: LlmProviderKind;
-  /** Provider Base URL. 미지정 시 프리셋 기본값(또는 Ollama는 전역 설정) 사용 */
+  /** 이미지 입력(비전) 지원. 미지정(구 DB 행) 시 'auto'로 해석 (P11-26). */
+  vision?: VisionSupport;  /** Provider Base URL. 미지정 시 프리셋 기본값(또는 Ollama는 전역 설정) 사용 */
   llmBaseUrl?: string;
   /** 클라우드/인증 필요 서버용 API 키. 로컬 런타임은 보통 불필요(Jan은 임의 문자열 가능) */
   llmApiKey?: string;

@@ -147,7 +147,7 @@ describe('checkProviderModel', () => {
 
   it('falls back to /api/show for unlisted Ollama models', async () => {
     mockedListOllamaModels.mockResolvedValue([{ name: 'a', size: 0, digest: '', modified_at: '' }]);
-    mockedShowOllamaModel.mockResolvedValue({ contextLength: 8192, supportsTools: true });
+    mockedShowOllamaModel.mockResolvedValue({ contextLength: 8192, supportsTools: true, supportsVision: false });
     await expect(
       checkProviderModel(ollamaRuntime('http://127.0.0.1:11434'), 'b'),
     ).resolves.toBe('connected');

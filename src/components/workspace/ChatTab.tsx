@@ -49,6 +49,9 @@ import {
   type FallbackCandidate,
 } from '@/lib/agent/resolveAgent';
 import { checkAgentConnection } from '@/lib/llm/agentStatus';
+import { resolveVisionSupport, type VisionVerdict } from '@/lib/llm/vision';
+import { createWikiTool } from '@/lib/tools/wiki';
+import type { AgentMessage } from '@/lib/agent/types';
 import { cn } from '@/lib/utils';
 
 export interface ChatTabProps {
@@ -157,6 +160,20 @@ export function ChatTab({ tab }: ChatTabProps) {
   const [fallbackCandidates, setFallbackCandidates] = useState<FallbackCandidate[]>([]);
   const [fallbackAgentName, setFallbackAgentName] = useState('');
   const fallbackResolveRef = useRef<((proceed: boolean) => void) | null>(null);
+
+  // P11-26: 귀속 에이전트의 비전 판정. 이미지 첨부 시 전송 게이트로 쓴다.
+  const [visionVerdict, setVisionVerdict] = useState<VisionVerdict>('unknown');
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 비동기 판정 전 로딩 상태로 초기화
+    setVisionVerdict('unknown');
+    void resolveVisionSupport(activeAgent).then((v) => {
+      if (!cancelled) setVisionVerdict(v);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeAgent]);
 
   const applySessionAgent = useCallback((agentId: string) => {
     updateTab(tab.id, { meta: { ...(tab.meta ?? {}), agentId } });
@@ -340,9 +357,22 @@ export function ChatTab({ tab }: ChatTabProps) {
   }, [configSnapshot, messages.length, isAgentDeleted, isStreaming, injectConfigNotice, t]);
 
   const handleSendMessage = useCallback(
-    async (text: string) => {
+    async (text: string, images?: string[]) => {
       // 삭제된 에이전트 설정의 채팅은 대화를 지속할 수 없다.
       if (isAgentDeleted) return;
+      // P11-26: 비전 미지원 에이전트에 이미지를 보내면 폴백 다이얼로그로
+      // 비전 에이전트를 제안한다. 이번 전송은 중단하고 사용자가 다시 보낸다.
+      if (images && images.length > 0 && visionVerdict === 'no') {
+        try {
+          const statuses = await checkCandidatesHealth(agents, checkAgentConnection);
+          setFallbackCandidates(buildCandidates(agents, statuses, activeAgent.id));
+          setFallbackAgentName(activeAgent.name);
+          setFallbackOpen(true);
+        } catch (err) {
+          console.error('Failed to open vision fallback dialog:', err);
+        }
+        return;
+      }
       chatQueueManager.setSessionBusy(sessionId);
       const isFirstUserMessage = messages.filter((m) => m.role === 'user').length === 0;
 
@@ -363,7 +393,7 @@ export function ChatTab({ tab }: ChatTabProps) {
         console.error('Failed to ensure session before sending message:', err);
       }
 
-      await sendMessage(text);
+      await sendMessage(text, images && images.length > 0 ? { images } : undefined);
 
       // If this is the first message, extract title and sync to tab & sessions list
       if (isFirstUserMessage) {
@@ -380,7 +410,7 @@ export function ChatTab({ tab }: ChatTabProps) {
         }
       }
     },
-    [messages, sessionId, activeAgent.id, workspaceRoot, tab.title, tab.id, sendMessage, updateSessionTitle, updateTab, refreshSessions, t, isAgentDeleted],
+    [messages, sessionId, activeAgent.id, activeAgent.name, agents, visionVerdict, workspaceRoot, tab.title, tab.id, sendMessage, updateSessionTitle, updateTab, refreshSessions, t, isAgentDeleted],
   );
 
   const handleSlashCommand = useCallback(
@@ -539,7 +569,7 @@ export function ChatTab({ tab }: ChatTabProps) {
       if (item.type === 'slash_command' && item.commandName) {
         await handleSlashCommand(item.commandName, item.commandArgs);
       } else {
-        await handleSendMessage(item.text);
+        await handleSendMessage(item.text, item.images);
       }
     } catch (err) {
       console.error('Error executing queued item:', err);
@@ -606,7 +636,7 @@ export function ChatTab({ tab }: ChatTabProps) {
         if (item.type === 'slash_command' && item.commandName) {
           await handleSlashCommand(item.commandName, item.commandArgs);
         } else {
-          await handleSendMessage(item.text);
+          await handleSendMessage(item.text, item.images);
         }
       } catch (err) {
         console.error('Error running selected queued item:', err);
@@ -614,6 +644,28 @@ export function ChatTab({ tab }: ChatTabProps) {
     },
     [resumeQueue, dequeueItem, handleSlashCommand, handleSendMessage, isAgentDeleted],
   );
+
+  // P11-26: 어시스턴트 응답을 위키에 저장한다 (이미지 원본 경로는 출처 기록 불가 —
+  // 입력 단계 data URL이므로 본문만 저장하고 출처는 세션 제목으로 남긴다).
+  const [isSavingToWiki, setIsSavingToWiki] = useState(false);
+  const handleSaveToWiki = useCallback(async (message: AgentMessage) => {
+    if (message.role !== 'assistant' || !message.content.trim()) return;
+    setIsSavingToWiki(true);
+    try {
+      const tool = createWikiTool({ workspaceRoot: effectiveCwd });
+      const firstLine = message.content.trim().split('\n')[0].replace(/^#+\s*/, '').slice(0, 60);
+      const result = await tool.execute(
+        crypto.randomUUID(),
+        { action: 'ingest', title: firstLine || t('chat.wikiUntitled'), content: message.content },
+        new AbortController().signal,
+      );
+      injectInfoMessage(t('chat.wikiSaved', { detail: result.content }));
+    } catch (err) {
+      injectInfoMessage(t('chat.wikiSaveFailed', { error: err instanceof Error ? err.message : String(err) }));
+    } finally {
+      setIsSavingToWiki(false);
+    }
+  }, [effectiveCwd, injectInfoMessage, t]);
 
   // Conversation macros: user prompts bundled into one auto-input unit.
   // Load enqueues everything paused so the user reviews/runs via the queue dock.
@@ -780,7 +832,13 @@ export function ChatTab({ tab }: ChatTabProps) {
           <span>{isMonitoringActive ? t('chatTab.monitoringActive') : t('chatTab.monitoringIdle')}</span>
         </button>
         {viewMode === 'chat' ? (
-          <MessageList messages={messages} isStreaming={isStreaming} fallbackConfig={configSnapshot} />
+          <MessageList
+            messages={messages}
+            isStreaming={isStreaming}
+            fallbackConfig={configSnapshot}
+            onSaveToWiki={handleSaveToWiki}
+            isSavingToWiki={isSavingToWiki}
+          />
         ) : (
           <ChatExecutionLog sessionId={tab.id} messages={messages} />
         )}
@@ -845,6 +903,7 @@ export function ChatTab({ tab }: ChatTabProps) {
           isAgentDeleted={isAgentDeleted}
           sessionId={sessionId}
           cwd={effectiveCwd}
+          vision={visionVerdict}
         />
       </div>
 

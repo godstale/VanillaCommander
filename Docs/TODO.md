@@ -182,7 +182,7 @@
   - [x] P11-23 외부 에이전트 런타임
   - [x] P11-24 파일 커맨더 시스템 프롬프트 + 도구
   - [x] P11-25 기본 에이전트 폴백 동의
-  - [ ] P11-26 이미지 첨부 + 비전
+  - [x] P11-26 이미지 첨부 + 비전
   - [ ] P11-27 모니터링 메뉴 정리
 - **W3 — 위키**
   - [ ] P11-30 폴더 감시(Rust)
@@ -257,6 +257,8 @@
 | 2026-10-03 | P11-22 | 프로바이더 3분류 + 외부 연동 등록 완료: `external-agent` 종류·`externalAgentId` 컬럼, 4번째 연동 그룹(agent-cli 선택 + 인라인 등록/CLI 프리셋/PATH 탐지), llm-api→클라우드 에이전트 1회 변환, 저장 시 동의 게이트, `find_executable` 명령. 테스트 모크의 위치 기반 파싱도 30컬럼 대응. 검증: `lint`·`typecheck`·`build` 통과, `cargo test` 29건, `test` 416/417(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-23 | 외부 에이전트 런타임 완료: `externalAgentClient`(게이트웨이 경유 CLI 1회 실행·단일 청크·cwd 전달), `providerRuntime` 분기, `useChat` 연결(자체 도구 없음), 연결 확인(`find_executable`), 편집 화면 도구/스킬 비활성 표시. 검증: `lint`·`typecheck` 통과, 런타임 테스트 4건, `test` 420/421(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-24 | 파일 커맨더 프롬프트·도구 완료: 11종 도구(복사·이동·이름변경·폴더·휴지통·압축·해제·정보·검색·탐색기·문서읽기, zod 별칭 흡수·위험도 분류·D10 백업), 기본 프롬프트 재작성 + `<commander>` 동적 섹션, 탐색기 브리지, 내장 파서(`parsers/builtin`, P11-33 인계), 새 에이전트 기본값 포함. 검증: `lint`·`typecheck`·`build` 통과, 도구 테스트 8건, `test` 429/430(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-25 | 폴백 동의 완료: `resolveAgent`(외부 판정·후보·백그라운드 선택·저장), `AgentFallbackDialog`(외부 별도 체크·로컬만 다시 묻지 않기), `useChat` 전송 게이트 1곳, 채팅탭 세션 한정 적용 + 전환 안내, 탐색기는 차단·안내. 검증: `lint`·`typecheck` 통과, 폴백 5건, `test` 434/435(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-26 | 이미지 첨부 + 비전 완료: `Agent.vision`(auto/yes/no, DB 컬럼·리포·기본값) + `resolveVisionSupport`(auto는 Ollama capabilities, OpenAI 호환은 unknown) + `ensureChatImage`(작업 폴더 밖은 chat-images 복사) + 매퍼(Ollama images/OpenAI image_url, 전송 직전 data URL 해석) + `ChatInput` 첨부 UI(버튼·붙여넣기·드래그·썸네일, 최대 4개·5MB) + `ChatTab` 비전 게이트(미지원 시 폴백 다이얼로그로 전환 제안)·응답 위키 저장 버튼 + 편집 화면 비전 라디오 + `useChatQueue` enqueue images 전달. 부수 수정: `resolveRequestImages` 제네릭 완화(OpenAI 메시지 합집합 대응)·`vision.ts` 중복 구현을 매퍼 재export로 통합·showModel 목 2건에 supportsVision 추가. 검증: `lint`·`typecheck`·`build` 통과, 신규 `vision.test.ts` 10건, 전체 `test` 444/445(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |
 
 ---

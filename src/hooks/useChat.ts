@@ -85,7 +85,7 @@ export interface UseChatReturn {
   effectiveThink: boolean | string | undefined;
   /** 전송 시점에 캡처한 유효 실행 설정 (말풍선 [i]·변경 안내의 기준) */
   configSnapshot: ChatConfigSnapshot;
-  sendMessage: (text: string) => Promise<void>;
+  sendMessage: (text: string, opts?: { images?: string[] }) => Promise<void>;
   steer: (text: string) => void;
   stop: () => void;
   error: Error | null;
@@ -510,7 +510,7 @@ export function useChat(
   }, [currentSections, messages.length]);
 
   const sendMessage = useCallback(
-    async (text: string): Promise<void> => {
+    async (text: string, opts?: { images?: string[] }): Promise<void> => {
       if (!text.trim()) return;
       // P11-25: 전송 직전 폴백 결정 (기본 에이전트 장애 시 대체 선택).
       if (optionsRef.current.onResolveSendAgent) {
@@ -535,7 +535,12 @@ export function useChat(
           optionsRef.current.thinkOverride?.effort ?? agentConfigRef.current.reasoningEffort,
         ),
       );
-      const userMsg: AgentMessage = { role: 'user', content: text, config: snapshot };
+      const userMsg: AgentMessage = {
+        role: 'user',
+        content: text,
+        config: snapshot,
+        ...(opts?.images && opts.images.length > 0 ? { images: [...opts.images] } : {}),
+      };
       setMessages((prev) => [...prev, userMsg]);
       persistedCountRef.current += 1;
       await persistence.saveUserMessage?.(sessionId, userMsg);

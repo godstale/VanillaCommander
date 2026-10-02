@@ -17,8 +17,8 @@ import {
   ChevronRight,
   Activity,
 } from 'lucide-react';
-import type { Agent, ApprovalMode, BuiltinToolId, LlmProviderKind, ReasoningEffort, ReasoningMode } from '@/lib/types/agent';
-import { DEFAULT_TEMPERATURE } from '@/lib/types/agent';
+import type { Agent, ApprovalMode, BuiltinToolId, LlmProviderKind, ReasoningEffort, ReasoningMode, VisionSupport } from '@/lib/types/agent';
+import { DEFAULT_TEMPERATURE, DEFAULT_VISION_SUPPORT } from '@/lib/types/agent';
 import { Button } from '@/components/ui/button';
 import { HelpTooltip } from '@/components/ui/help-tooltip';
 import { useSafeSkills } from '@/lib/context/SkillsContext';
@@ -282,6 +282,10 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
   // P11-22: 외부 에이전트 연동.
   const [externalAgentId, setExternalAgentId] = useState<string | null>(
     initialAgent?.externalAgentId ?? null,
+  );
+  // P11-26: 이미지 입력(비전) 지원. auto는 Ollama capabilities로 판정한다.
+  const [vision, setVision] = useState<VisionSupport>(
+    initialAgent?.vision ?? DEFAULT_VISION_SUPPORT,
   );
   const [integrations, setIntegrations] = useState<ExternalIntegration[]>([]);
   const [integrationDialogOpen, setIntegrationDialogOpen] = useState(false);
@@ -719,6 +723,7 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
       setLlmApiKey(initialAgent.llmApiKey ?? '');
       setExternalAgentId(initialAgent.externalAgentId ?? null);
       setConsentedKey(null);
+      setVision(initialAgent.vision ?? DEFAULT_VISION_SUPPORT);
       setReasoning(initialAgent.reasoning ?? 'default');
       setReasoningEffort(initialAgent.reasoningEffort ?? 'medium');
       setContextSize(initialAgent.contextSize);
@@ -851,6 +856,8 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
         ...normalizedProvider,
         // P11-22: 외부 에이전트 연동 ID. 다른 종류면 비운다.
         externalAgentId: isExternalAgent ? (externalAgentId ?? undefined) : undefined,
+        // P11-26: 이미지 입력(비전) 지원.
+        vision,
         // 명시적 undefined 포함: 자동(auto)으로 비운 값이 기존 저장값을 덮어 지운다.
         // 미지원 Provider의 값도 함께 저장하되(값 유실 방지) 런타임 전송에서는 제외된다.
         topP: generation.topP,
@@ -1240,6 +1247,43 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
           )}
         </div>
         </>)}
+        {/* P11-26: 이미지 입력(비전) 지원. auto는 Ollama /api/show capabilities로
+            판정하고, OpenAI 호환 등은 판정 불가이므로 수동 선택이 필요하다. */}
+        {!isExternalAgent && (
+        <div>
+          <span className="block text-xs font-medium text-muted-foreground mb-1">
+            {t('agentForm.vision')}
+          </span>
+          <div className="flex items-center gap-1.5" role="radiogroup" aria-label={t('agentForm.vision')}>
+            {(
+              [
+                { id: 'auto', label: t('agentForm.visionAuto'), desc: t('agentForm.visionAutoDesc') },
+                { id: 'yes', label: t('agentForm.visionYes'), desc: t('agentForm.visionYesDesc') },
+                { id: 'no', label: t('agentForm.visionNo'), desc: t('agentForm.visionNoDesc') },
+              ] as Array<{ id: VisionSupport; label: string; desc: string }>
+            ).map((opt) => (
+              <button
+                key={opt.id}
+                type="button"
+                role="radio"
+                aria-checked={vision === opt.id}
+                onClick={() => setVision(opt.id)}
+                title={opt.desc}
+                className={`px-2.5 py-1 text-xs rounded-md border transition-colors cursor-pointer ${
+                  vision === opt.id
+                    ? 'border-primary bg-primary/10 text-foreground font-semibold'
+                    : 'border-border text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+          <span className="text-[10px] text-muted-foreground block leading-tight mt-1.5">
+            {t('agentForm.visionHelp')}
+          </span>
+        </div>
+        )}
         <div className="flex items-center gap-2 pt-1">
           <Button
             type="button"

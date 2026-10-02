@@ -7,6 +7,7 @@ export interface QueuedItem {
   type: 'message' | 'slash_command' | 'skill';
   commandName?: string;
   commandArgs?: string;
+  images?: string[];
   createdAt: number;
 }
 
@@ -173,6 +174,7 @@ export class ChatQueueManager {
       type: 'message' | 'slash_command' | 'skill';
       commandName?: string;
       commandArgs?: string;
+      images?: string[];
     },
   ): QueuedItem {
     this.setSessionBusy(sessionId);
@@ -184,6 +186,7 @@ export class ChatQueueManager {
       type: item.type,
       commandName: item.commandName,
       commandArgs: item.commandArgs,
+      images: item.images,
       createdAt: Date.now(),
     };
 
@@ -351,6 +354,7 @@ export function useChatQueue(sessionId: string) {
       type: 'message' | 'slash_command' | 'skill';
       commandName?: string;
       commandArgs?: string;
+      images?: string[];
     }) => chatQueueManager.enqueue(sessionId, item),
     [sessionId],
   );

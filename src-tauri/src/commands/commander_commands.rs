@@ -1538,6 +1538,23 @@ pub fn fc_reveal(path: String) -> Result<(), String> {
     reveal_in_explorer(path, None)
 }
 
+/// 바이너리 쓰기 (P11-26 채팅 이미지 복사 등). 부모 디렉터리를 만든다.
+#[tauri::command]
+pub fn fc_write_bytes(path: String, base64: String) -> Result<u64, String> {
+    use base64::Engine;
+    let target = Path::new(&path).to_path_buf();
+    // 미존재 경로는 traversal만 검사한다.
+    resolve_user_path(&path, false)?;
+    if let Some(parent) = target.parent() {
+        std::fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+    }
+    let bytes = base64::engine::general_purpose::STANDARD
+        .decode(base64.trim())
+        .map_err(|e| format!("Invalid base64: {}", e))?;
+    std::fs::write(&target, &bytes).map_err(|e| e.to_string())?;
+    Ok(bytes.len() as u64)
+}
+
 #[derive(Debug, Clone, Serialize)]
 pub struct FcFileBytes {
     pub base64: String,

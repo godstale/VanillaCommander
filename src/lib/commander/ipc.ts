@@ -126,6 +126,10 @@ export async function fcReadTextHead(path: string, maxBytes?: number): Promise<F
   });
 }
 
+export async function fcWriteBytes(path: string, base64: string): Promise<number> {
+  return invoke<number>('fc_write_bytes', { path, base64 });
+}
+
 export async function fcReveal(path: string): Promise<void> {
   return invoke<void>('fc_reveal', { path });
 }

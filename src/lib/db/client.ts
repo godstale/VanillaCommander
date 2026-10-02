@@ -36,6 +36,7 @@ export const MIGRATION_STATEMENTS: string[] = [
     llm_base_url TEXT,
     llm_api_key TEXT,
     external_agent_id TEXT,
+    vision TEXT NOT NULL DEFAULT 'auto',
     auto_monitor INTEGER NOT NULL DEFAULT 1,
     is_default INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL,
@@ -354,10 +355,11 @@ export class MemorySqlFallback implements SqlDatabase {
         reasoning_effort,
         ...rest
       ] = bindValues;
-      // 신규 스키마(30개 바인드): [..., top_p, top_k, repeat_penalty, frequency_penalty,
+      // 신규 스키마(31개 바인드): [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, external_agent_id,
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id, vision,
       //   auto_monitor, is_default, created_at, updated_at]
+      // 이전 스키마(30개 바인드): vision 없음 → auto로 해석
       // 이전 스키마(29개 바인드): external_agent_id 없음
       // 이전 스키마(28개 바인드): auto_monitor 없음 → 켜짐(1)으로 해석
       // 과도기 스키마(20개 바인드): [..., llm_provider, llm_base_url, llm_api_key, is_default, created_at, updated_at]
@@ -374,11 +376,32 @@ export class MemorySqlFallback implements SqlDatabase {
       let llm_base_url: unknown = null;
       let llm_api_key: unknown = null;
       let external_agent_id: unknown = null;
+      let vision: unknown = 'auto';
       let auto_monitor: unknown = 1;
       let is_default: unknown;
       let created_at: unknown;
       let updated_at: unknown;
-      if (rest.length >= 16) {
+      if (rest.length >= 17) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          vision,
+          auto_monitor,
+          is_default,
+          created_at,
+          updated_at,
+        ] = rest;
+      } else if (rest.length >= 16) {
         [
           top_p,
           top_k,
@@ -464,6 +487,7 @@ export class MemorySqlFallback implements SqlDatabase {
         llm_base_url,
         llm_api_key,
         external_agent_id,
+        vision,
         auto_monitor,
         is_default,
         created_at,
@@ -513,9 +537,9 @@ export class MemorySqlFallback implements SqlDatabase {
       ] = bindValues;
       // 신규 스키마: [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, external_agent_id,
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id, vision,
       //   auto_monitor, is_default, updated_at, id]
-      // 이전 스키마: external_agent_id 없음 / auto_monitor 없음
+      // 이전 스키마: vision 없음
       // 과도기 스키마: [..., llm_provider, llm_base_url, llm_api_key, is_default, updated_at, id]
       // 구 스키마: [..., is_default, updated_at, id]
       let top_p: unknown;
@@ -530,11 +554,32 @@ export class MemorySqlFallback implements SqlDatabase {
       let llm_base_url: unknown;
       let llm_api_key: unknown;
       let external_agent_id: unknown;
+      let vision: unknown;
       let auto_monitor: unknown;
       let is_default: unknown;
       let updated_at: unknown;
       let id: unknown;
-      if (rest.length >= 16) {
+      if (rest.length >= 17) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          vision,
+          auto_monitor,
+          is_default,
+          updated_at,
+          id,
+        ] = rest;
+      } else if (rest.length >= 16) {
         [
           top_p,
           top_k,
@@ -621,6 +666,7 @@ export class MemorySqlFallback implements SqlDatabase {
           ...(llm_base_url !== undefined ? { llm_base_url } : {}),
           ...(llm_api_key !== undefined ? { llm_api_key } : {}),
           ...(external_agent_id !== undefined ? { external_agent_id } : {}),
+          ...(vision !== undefined ? { vision } : {}),
           ...(auto_monitor !== undefined ? { auto_monitor } : {}),
           is_default,
           updated_at,
@@ -1785,6 +1831,7 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     'ALTER TABLE agents ADD COLUMN llm_api_key TEXT',
     'ALTER TABLE agents ADD COLUMN auto_monitor INTEGER NOT NULL DEFAULT 1',
     'ALTER TABLE agents ADD COLUMN external_agent_id TEXT',
+    "ALTER TABLE agents ADD COLUMN vision TEXT NOT NULL DEFAULT 'auto'",
     'ALTER TABLE app_settings ADD COLUMN setup_completed_at TEXT',
     'ALTER TABLE app_settings ADD COLUMN work_folder TEXT',
     "ALTER TABLE app_settings ADD COLUMN favorites TEXT NOT NULL DEFAULT '[]'",

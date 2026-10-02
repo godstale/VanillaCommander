@@ -33,6 +33,7 @@ interface AgentRowMock {
   llm_base_url: string | null;
   llm_api_key: string | null;
   external_agent_id?: string | null;
+  vision?: string | null;
   auto_monitor?: number | null;
   is_default: number;
   created_at: string;
@@ -110,10 +111,11 @@ class MemorySqlDatabase implements SqlDatabase {
         reasoning_effort,
         ...rest
       ] = bindValues;
-      // 신규 스키마(30개): [..., top_p, top_k, repeat_penalty, frequency_penalty,
+      // 신규 스키마(31개): [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, external_agent_id,
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id, vision,
       //   auto_monitor, is_default, created_at, updated_at]
+      // 이전 스키마(30개): vision 없음 → auto로 해석
       // 이전 스키마(29개): external_agent_id 없음
       // 이전 스키마(28개): auto_monitor 없음 → 켜짐(1)으로 해석
       // 과도기 스키마(20개): [..., llm_provider, llm_base_url, llm_api_key, is_default, created_at, updated_at]
@@ -130,11 +132,32 @@ class MemorySqlDatabase implements SqlDatabase {
       let llm_base_url: unknown = null;
       let llm_api_key: unknown = null;
       let external_agent_id: unknown = null;
+      let vision: unknown = 'auto';
       let auto_monitor: unknown = 1;
       let is_default: unknown;
       let created_at: unknown;
       let updated_at: unknown;
-      if (rest.length >= 16) {
+      if (rest.length >= 17) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          vision,
+          auto_monitor,
+          is_default,
+          created_at,
+          updated_at,
+        ] = rest;
+      } else if (rest.length >= 16) {
         [
           top_p,
           top_k,
@@ -220,6 +243,7 @@ class MemorySqlDatabase implements SqlDatabase {
         llm_base_url: (llm_base_url as string) ?? null,
         llm_api_key: (llm_api_key as string) ?? null,
         external_agent_id: (external_agent_id as string) ?? null,
+        vision: (vision as string) ?? 'auto',
         auto_monitor: auto_monitor as number | null,
         is_default: is_default as number,
         created_at: created_at as string,
@@ -269,9 +293,9 @@ class MemorySqlDatabase implements SqlDatabase {
       ] = bindValues;
       // 신규 스키마: [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, external_agent_id,
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id, vision,
       //   auto_monitor, is_default, updated_at, id]
-      // 이전 스키마: external_agent_id 없음 / auto_monitor 없음
+      // 이전 스키마: vision 없음
       // 과도기 스키마: [..., llm_provider, llm_base_url, llm_api_key, is_default, updated_at, id]
       // 구 스키마: [..., is_default, updated_at, id]
       let top_p: unknown;
@@ -286,11 +310,32 @@ class MemorySqlDatabase implements SqlDatabase {
       let llm_base_url: unknown;
       let llm_api_key: unknown;
       let external_agent_id: unknown;
+      let vision: unknown;
       let auto_monitor: unknown;
       let is_default: unknown;
       let updated_at: unknown;
       let id: unknown;
-      if (rest.length >= 16) {
+      if (rest.length >= 17) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          vision,
+          auto_monitor,
+          is_default,
+          updated_at,
+          id,
+        ] = rest;
+      } else if (rest.length >= 16) {
         [
           top_p,
           top_k,
@@ -387,6 +432,7 @@ class MemorySqlDatabase implements SqlDatabase {
           ...(llm_base_url !== undefined ? { llm_base_url: (llm_base_url as string) ?? null } : {}),
           ...(llm_api_key !== undefined ? { llm_api_key: (llm_api_key as string) ?? null } : {}),
           ...(external_agent_id !== undefined ? { external_agent_id: (external_agent_id as string) ?? null } : {}),
+          ...(vision !== undefined ? { vision: (vision as string) ?? 'auto' } : {}),
           ...(auto_monitor !== undefined ? { auto_monitor: auto_monitor as number | null } : {}),
           is_default: is_default as number,
           updated_at: updated_at as string,
