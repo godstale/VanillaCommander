@@ -186,7 +186,7 @@
   - [x] P11-27 모니터링 메뉴 정리
 - **W3 — 위키**
   - [x] P11-30 폴더 감시(Rust)
-  - [ ] P11-31 위키 설정 + 위키 패널/탭
+  - [x] P11-31 위키 설정 + 위키 패널/탭
   - [ ] P11-32 위키 처리 파이프라인
   - [x] P11-33 문서 파서 계층
   - [ ] P11-34 설정 > 문서 파싱 연동
@@ -260,6 +260,7 @@
 | 2026-10-03 | P11-25 | 폴백 동의 완료: `resolveAgent`(외부 판정·후보·백그라운드 선택·저장), `AgentFallbackDialog`(외부 별도 체크·로컬만 다시 묻지 않기), `useChat` 전송 게이트 1곳, 채팅탭 세션 한정 적용 + 전환 안내, 탐색기는 차단·안내. 검증: `lint`·`typecheck` 통과, 폴백 5건, `test` 434/435(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-26 | 이미지 첨부 + 비전 완료: `Agent.vision`(auto/yes/no, DB 컬럼·리포·기본값) + `resolveVisionSupport`(auto는 Ollama capabilities, OpenAI 호환은 unknown) + `ensureChatImage`(작업 폴더 밖은 chat-images 복사) + 매퍼(Ollama images/OpenAI image_url, 전송 직전 data URL 해석) + `ChatInput` 첨부 UI(버튼·붙여넣기·드래그·썸네일, 최대 4개·5MB) + `ChatTab` 비전 게이트(미지원 시 폴백 다이얼로그로 전환 제안)·응답 위키 저장 버튼 + 편집 화면 비전 라디오 + `useChatQueue` enqueue images 전달. 부수 수정: `resolveRequestImages` 제네릭 완화(OpenAI 메시지 합집합 대응)·`vision.ts` 중복 구현을 매퍼 재export로 통합·showModel 목 2건에 supportsVision 추가. 검증: `lint`·`typecheck`·`build` 통과, 신규 `vision.test.ts` 10건, 전체 `test` 444/445(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-27 | 모니터링 메뉴 정리 완료: `MonitoringListPanel`·`monitoringGroups(.test)` 삭제(이미 참조 없음, groups는 테스트만 사용), 미사용 i18n 키 제거(`monitoringList` 16종·`activityBar/topMenu.monitoring`·`agentStats` 7종·`agentList.stats/log`). `AgentMonitorTab`·수집기·TopMenuBar 진입 유지. 검증: `lint`·`typecheck` 통과, 관련 21건 통과. | 해결됨 |
+| 2026-10-03 | P11-31 | 위키 설정 + 패널/탭 완료: `wiki_jobs` 테이블(`0002_wiki_jobs.sql` 신규 + `0001_init.sql`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화 — P10-02 선례) + `wikiJobsRepo`(생성·갱신·이력·상태별) + `lib/wiki/settings.ts`(기본 프롬프트·inbox 해석·glob·필터 판정) + `WikiPanel`(감시 토글·대기열·최근·페이지 목록·MD 열기) + `WikiTab`(감시·이동·분류·필터·프롬프트·처리 에이전트 + 이력 표·재처리·원본 열기) + wiki 사전 + SidePanel/CenterWorkspace 배선. 검증: `lint`·`typecheck` 통과, 신규 7건·관련 42건 통과. | 해결됨 |
 | 2026-10-03 | P11-33 | 문서 파서 계층 완료: `parsers/index.ts`(외부 오버라이드→내장→실패 디스패치, `ParseError` 사유 4종, 스캔 PDF 판정) + `parsers/external.ts`(4 프리셋·토큰 치환·`find_executable`+`runIntegrationCli` 재사용, file 모드는 유지 cwd 필수) + `builtin`은 `parseBuiltinDocument`로 개명(pdf `pages` 추가·pptx/docx Rust 우선+JS 폴백) + `doc_read`가 신 디스패치 사용(실패 사유 반환). Rust `fc_office_text`(pptx 슬라이드 `<a:t>`/docx `<w:t>` 추출, 200K 캡, 테스트용 zip 생성). 검증: `lint`·`typecheck`·`cargo test` 34건·신규 파서 9건 통과. **신규 의존성 없음**. | 해결됨 |
 | 2026-10-03 | P11-30 | 폴더 감시 완료: `watch_commands.rs` 신설(`wiki_watch_set`/`wiki_watch_stop`/`wiki_watch_status`/`wiki_default_watch_folder`, `wiki://file-event {path,kind}` 발행). `notify` 8 + `notify-debouncer-full` 0.5 (신규 의존성 — 표준 크로스플랫폼 감시, Phase 문서 §3.2 승인분). 임시 다운로드 파일 제외 + 크기 안정화(1초 간격 2회 동일) 후 발행 + 5초 중복 쿨다운. 검증: `cargo check`·`cargo test watch_commands` 4건 통과. JS 구독 래퍼는 P11-31에서. | 해결됨 |
 | 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |

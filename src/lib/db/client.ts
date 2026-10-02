@@ -277,6 +277,21 @@ export const MIGRATION_STATEMENTS: string[] = [
     created_at TEXT NOT NULL
   )`,
   `CREATE INDEX IF NOT EXISTS idx_integration_audit_created ON integration_audit_log(created_at)`,
+  // P11-31: 위키 처리 이력. 패널/탭 표시 + P11-32 파이프라인 큐.
+  `CREATE TABLE IF NOT EXISTS wiki_jobs (
+    id TEXT PRIMARY KEY,
+    source_path TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'queued',
+    reason TEXT,
+    title TEXT,
+    slug TEXT,
+    folder TEXT,
+    agent_id TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_wiki_jobs_status ON wiki_jobs(status)`,
+  `CREATE INDEX IF NOT EXISTS idx_wiki_jobs_created ON wiki_jobs(created_at)`,
   // P11-03: 평가 테이블 폐기. 외부 연동 3종(external_integrations/integration_settings/
   // integration_audit_log)은 유지한다. 기존 CREATE는 이력으로 남기고 DROP을 뒤에 둔다.
   `DROP TABLE IF EXISTS eval_scores`,
@@ -299,6 +314,7 @@ export class MemorySqlFallback implements SqlDatabase {
     this.tables.set('execution_logs', new Map());
     this.tables.set('agent_monitoring_snapshots', new Map());
     this.tables.set('conversation_token_summaries', new Map());
+    this.tables.set('wiki_jobs', new Map());
     this.tables.set('eval_runs', new Map());
     this.tables.set('eval_candidates', new Map());
     this.tables.set('eval_trials', new Map());
@@ -1099,6 +1115,49 @@ export class MemorySqlFallback implements SqlDatabase {
       return { rowsAffected: 1 };
     }
 
+    // P11-31: 위키 처리 이력.
+    if (q.startsWith('INSERT INTO wiki_jobs')) {
+      const [
+        id,
+        source_path,
+        status,
+        reason,
+        title,
+        slug,
+        folder,
+        agent_id,
+        created_at,
+        updated_at,
+      ] = bindValues;
+      this.tables.get('wiki_jobs')?.set(id as string, {
+        id,
+        source_path,
+        status,
+        reason,
+        title,
+        slug,
+        folder,
+        agent_id,
+        created_at,
+        updated_at,
+      });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('UPDATE wiki_jobs SET')) {
+      const [status, reason, title, slug, folder, agent_id, updated_at, id] = bindValues;
+      const row = this.tables.get('wiki_jobs')?.get(id as string);
+      if (!row) return { rowsAffected: 0 };
+      Object.assign(row, { status, reason, title, slug, folder, agent_id, updated_at });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('DELETE FROM wiki_jobs WHERE id = ?')) {
+      const [id] = bindValues;
+      const removed = this.tables.get('wiki_jobs')?.delete(id as string) ?? false;
+      return { rowsAffected: removed ? 1 : 0 };
+    }
+
     if (q.startsWith('DELETE FROM agent_monitoring_snapshots WHERE agent_id = ? AND timestamp < ?')) {
       const [agentId, cutoff] = bindValues;
       const snapMap = this.tables.get('agent_monitoring_snapshots');
@@ -1682,6 +1741,29 @@ export class MemorySqlFallback implements SqlDatabase {
       const rows = Array.from(this.tables.get('conversation_token_summaries')?.values() ?? [])
         .sort((a, b) => (b.started_at as string).localeCompare(a.started_at as string));
       return rows as unknown as T;
+    }
+
+    // P11-31: 위키 처리 이력.
+    if (q.includes('FROM wiki_jobs WHERE id = ?')) {
+      const [id] = bindValues;
+      const row = this.tables.get('wiki_jobs')?.get(id as string);
+      return (row ? [row] : []) as unknown as T;
+    }
+
+    if (q.includes('FROM wiki_jobs WHERE status = ?')) {
+      const [status] = bindValues;
+      const rows = Array.from(this.tables.get('wiki_jobs')?.values() ?? [])
+        .filter((r) => r.status === status)
+        .sort((a, b) => (a.created_at as string).localeCompare(b.created_at as string));
+      return rows as unknown as T;
+    }
+
+    if (q.includes('FROM wiki_jobs')) {
+      const rows = Array.from(this.tables.get('wiki_jobs')?.values() ?? [])
+        .sort((a, b) => (b.created_at as string).localeCompare(a.created_at as string));
+      const [limit] = bindValues;
+      const capped = typeof limit === 'number' ? rows.slice(0, limit) : rows;
+      return capped as unknown as T;
     }
 
     // -- Phase 10 evaluation tables (global DB) --

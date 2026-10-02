@@ -1,8 +1,9 @@
-import { BookOpen, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import type { SidePanelView } from '@/lib/types/workspaceTab';
 import { ChatSessionList } from '@/components/chatsessions/ChatSessionList';
 import { AgentListPanel } from '@/components/agents/AgentListPanel';
 import { ExplorerPanel } from '@/components/explorer/ExplorerPanel';
+import { WikiPanel } from '@/components/wiki/WikiPanel';
 import { PanelPlaceholder } from './PanelPlaceholder';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
@@ -25,8 +26,7 @@ export function SidePanel({ activeView }: SidePanelProps) {
     case 'explorer':
       return <ExplorerPanel />;
     case 'wiki':
-      // P11-31에서 WikiPanel로 교체.
-      return <PanelPlaceholder icon={BookOpen} title={t('activityBar.wiki')} description={t('tabPlaceholder.desc')} />;
+      return <WikiPanel />;
     case 'macros':
       // P11-40에서 MacroPanel로 교체.
       return <PanelPlaceholder icon={Zap} title={t('activityBar.macros')} description={t('tabPlaceholder.desc')} />;

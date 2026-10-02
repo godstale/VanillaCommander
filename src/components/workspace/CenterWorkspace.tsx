@@ -36,6 +36,7 @@ import { AgentMonitorTab } from '@/components/workspace/AgentMonitorTab';
 import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
 import { DocumentViewerTab } from '@/components/viewers/DocumentViewerTab';
 import { ArchiveViewerTab } from '@/components/viewers/ArchiveViewerTab';
+import { WikiTab } from '@/components/wiki/WikiTab';
 import { WelcomeGuide } from '@/components/workspace/WelcomeGuide';
 import { PanelPlaceholder } from '@/components/sidepanel/PanelPlaceholder';
 import { cn } from '@/lib/utils';
@@ -79,8 +80,7 @@ function renderTabContent(tab: WorkspaceTab, t: (key: string) => string) {
     case 'archive-viewer':
       return <ArchiveViewerTab tab={tab} />;
     case 'wiki':
-      // P11-31에서 WikiTab으로 교체.
-      return <PanelPlaceholder icon={BookOpen} title={tab.title} description={t('tabPlaceholder.desc')} />;
+      return <WikiTab />;
     case 'macro-editor':
       // P11-40에서 MacroEditorTab으로 교체.
       return <PanelPlaceholder icon={Zap} title={tab.title} description={t('tabPlaceholder.desc')} />;
