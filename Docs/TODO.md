@@ -174,7 +174,7 @@
   - [x] P11-13 파일 작업 큐·충돌 처리·정보
   - [x] P11-14 파일 뷰어(PDF/DOCX/XLSX/PPTX/ZIP + 외부 앱)
   - [x] P11-15 탐색기 1줄 채팅 입력
-  - [ ] P11-16 `@` 파일/폴더 참조
+  - [x] P11-16 `@` 파일/폴더 참조
 - **W2 — 에이전트**
   - [ ] P11-20 에이전트 카드 단순화
   - [ ] P11-21 에이전트 편집 화면 단순화(Advanced 접기)
@@ -250,6 +250,7 @@
 | 2026-10-02 | P11-11 | 탐색기 탭 완료: `FileExplorerTab`(툴바·주소창·목록·정렬·히스토리·다중 선택·단축키·컨텍스트 메뉴·검색 모드·정보·즐겨찾기) + 탭 메타 영속 + StatusBar 탭 슬롯. D2 완성(폴더 없이 탭 열림·복원·저장) + V7(기본 탭=탐색기). "에이전트에게 묻기"는 P11-15까지 비활성, 파일 열기 라우팅은 P11-14 `openFile`로 교체 예정. 검증: `lint`·`typecheck`·`build` 통과, 탭 테스트 4건, `test` 398/399(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-12 | 탐색기 패널 완료: `ExplorerPanel`(탭 없으면 자동 생성·열린 탭 목록·즐겨찾기 추가/삭제/순서/드롭·시스템 폴더), `FileTree` 삭제. 검증: `lint`·`typecheck` 통과, 패널 테스트 3건, `test` 398/399(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-14 | 파일 뷰어 완료: `openFile` 라우팅(이미지·문서·아카이브·에디터·외부앱, 대용량 텍스트 읽기전용), `DocumentViewerTab`(PDF 렌더·DOCX·XLSX/CSV 표·PPTX 아웃라인)·`ArchiveViewerTab`(목록·전체 해제), `fc_read_file_bytes`·`fc_read_text_head` + `EditorTab` 읽기전용 지원. 신규 의존성 `pdfjs-dist`·`mammoth`·`jszip`·`xlsx`(공식 tarball) — TODO 기록. `FileExplorerTab`이 신 라우팅 사용. 검증: `lint`·`typecheck`·`build` 통과, `cargo test` 28건, `test` 406/407(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-15 | 탐색기 1줄 채팅 완료: `ExplorerChatBar`(위치·선택 자동 첨부, 접이식 결과 드로어 + 채팅탭 열기, 도구 결과 시 목록 새로고침), 탭별 숨은 세션(`origin='explorer'`, 대화 목록 제외). sessions `origin` 컬럼 추가(ALTER·폴백·리포 동기화). 검증: `lint`·`typecheck` 통과, 채팅바 테스트 1건, `test` 407/408(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |
 
 ---

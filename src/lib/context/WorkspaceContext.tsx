@@ -79,6 +79,11 @@ export interface WorkspaceContextValue {
   setWorkFolder: (folder: string | null) => Promise<boolean>;
   /** 현재 작업 폴더에 wiki/wiki-inbox/backup/config/skills를 만든다. */
   ensureWorkFolderLayout: () => Promise<WorkFolderLayout | null>;
+  /**
+   * `@` 참조 경로를 허용 루트에 세션 한정으로 추가한다 (D1, P11-16).
+   * 폴더 변경 시 초기화된다.
+   */
+  addSessionRoots: (paths: string[]) => void;
 }
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -100,13 +105,15 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     workFolderRef.current = workFolder;
   }, [workFolder]);
 
+  const sessionRootsRef = useRef<string[]>([]);
+
   /** 에이전트 허용 루트(작업 폴더 + 등록 폴더)를 Rust에 동기화한다 (D1). */
   const pushAllowedRoots = useCallback(async (extraRoots: string[]) => {
     try {
       const settings = await settingsRepo.getSettings();
       const roots = Array.from(
         new Set(
-          [...extraRoots, ...(settings.agentAllowedRoots ?? [])].filter(
+          [...extraRoots, ...(settings.agentAllowedRoots ?? []), ...sessionRootsRef.current].filter(
             (r): r is string => typeof r === 'string' && r.length > 0,
           ),
         ),
@@ -118,6 +125,18 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       // ignore in non-Tauri
     }
   }, []);
+
+  const addSessionRoots = useCallback((paths: string[]) => {
+    const next = Array.from(
+      new Set(
+        [...sessionRootsRef.current, ...paths].filter(
+          (p): p is string => typeof p === 'string' && p.length > 0,
+        ),
+      ),
+    );
+    sessionRootsRef.current = next;
+    void pushAllowedRoots(next);
+  }, [pushAllowedRoots]);
 
   const [trustModalOpen, setTrustModalOpen] = useState<boolean>(() => {
     const initialRoot = localStorage.getItem('vanilla-commander_current_workspace_root');
@@ -190,6 +209,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       console.warn('Workspace change blocked: LLM session is running.');
       return false;
     }
+    // 폴더가 바뀌면 세션 한정 루트를 초기화한다.
+    sessionRootsRef.current = [];
     setActiveWorkspaceRoot(root);
     setWorkspaceRootState(root);
     void pushAllowedRoots(
@@ -241,6 +262,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       console.warn('Work folder change blocked: LLM session is running.');
       return false;
     }
+    // 폴더가 바뀌면 세션 한정 루트를 초기화한다.
+    sessionRootsRef.current = [];
     if (folder) {
       try {
         await invoke('ensure_work_folder_layout', { workFolder: folder });
@@ -322,6 +345,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       workFolder,
       setWorkFolder,
       ensureWorkFolderLayout,
+      addSessionRoots,
     }),
     [
       workspaceRoot,
@@ -334,6 +358,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       workFolder,
       setWorkFolder,
       ensureWorkFolderLayout,
+      addSessionRoots,
     ],
   );
 

@@ -13,7 +13,9 @@ import { StatusBarProvider } from '@/lib/context/StatusBarContext';
 import { JobsProvider } from '@/lib/commander/jobs';
 import { ExplorerChatBar } from './ExplorerChatBar';
 
-const mockSend = vi.fn(async () => {});
+const mockSend = vi.fn(async (text: string) => {
+  void text;
+});
 
 vi.mock('@/hooks/useChat', () => ({
   useChat: () => ({
@@ -68,7 +70,7 @@ describe('ExplorerChatBar', () => {
     fireEvent.keyDown(input, { key: 'Enter' });
 
     await waitFor(() => expect(mockSend).toHaveBeenCalledTimes(1));
-    const sent = mockSend.mock.calls[0][0] as string;
+    const sent = mockSend.mock.calls[0]?.[0] as unknown as string;
     expect(sent).toContain('[위치] C:/work');
     expect(sent).toContain('a.txt');
     expect(sent).toContain('요약해줘');

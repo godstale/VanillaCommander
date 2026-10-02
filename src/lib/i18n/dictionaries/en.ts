@@ -286,6 +286,10 @@ const en: Dict = {
   'chatInput.macroLoadTitle': 'Queue all prompts of this macro (paused)',
   'chatInput.macroDelete': 'Delete macro',
 
+  'mention.popupLabel': 'File reference autocomplete',
+  'mention.header': 'File/folder reference (@)',
+  'mention.hint': '↑↓ navigate, Enter to pick',
+
   'toolCard.failed': 'Failed',
   'toolCard.done': 'Done',
 

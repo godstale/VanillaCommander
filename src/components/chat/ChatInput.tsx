@@ -23,7 +23,11 @@ import { Button } from '@/components/ui/button';
 import type { SkillManifest } from '@/lib/types/skill';
 import type { ReasoningEffort, ReasoningMode } from '@/lib/types/agent';
 import { useSafeSkills } from '@/lib/context/SkillsContext';
+import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { resolveSkillInvocation, parseSkillCommand } from '@/lib/skills/invokeSkill';
+import { resolveMentions } from '@/lib/chat/mentions';
+import { MentionPopup } from './MentionPopup';
+import { useMention } from '@/hooks/useMention';
 
 import { ContextGauge } from './ContextGauge';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -96,6 +100,8 @@ export interface ChatInputProps {
    * 전역 키를 사용한다(테스트/레거시 호환).
    */
   sessionId?: string;
+  /** `@` 참조 해석 기준 폴더. 미지정 시 상대 `@`는 텍스트 그대로 남는다. */
+  cwd?: string | null;
 }
 
 export function ChatInput({
@@ -127,8 +133,11 @@ export function ChatInput({
   canSaveLog = false,
   hasSavedLog = false,
   sessionId,
+  cwd = null,
 }: ChatInputProps) {
   const { t } = useLanguage();
+  const workspace = useSafeWorkspace();
+  const mention = useMention(cwd);
   const safeSkillsCtx = useSafeSkills();
   const availableSkills = useMemo(() => {
     return skillsProp ?? safeSkillsCtx?.skills ?? [];
@@ -298,6 +307,21 @@ export function ChatInput({
 
     setErrorMessage(null);
 
+    // P11-16: `@` 참조를 먼저 해석한다 (파일 인라인 + 허용 루트 등록).
+    // `@`가 없으면 동기 경로를 유지한다 (기존 테스트·동작 호환).
+    let sendText = trimmed;
+    if (trimmed.includes('@')) {
+      try {
+        const resolved = await resolveMentions(trimmed, { cwd: cwd ?? undefined });
+        if (resolved.refs.length > 0) {
+          workspace?.addSessionRoots(resolved.refs.map((r) => r.path));
+        }
+        sendText = resolved.text;
+      } catch {
+        // 해석 실패는 원문 전송으로 폴백한다.
+      }
+    }
+
     const resetAfterSend = () => {
       pushHistory(trimmed);
       setText('');
@@ -311,12 +335,12 @@ export function ChatInput({
     // enqueue the request instead of executing immediately or overwriting
     if ((isThisSessionBusy || isStreaming) && onQueue) {
       // 1. Check if slash command
-      const slashMatch = trimmed.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
+      const slashMatch = sendText.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
       if (slashMatch) {
         const commandName = slashMatch[1].toLowerCase();
         const args = slashMatch[2]?.trim();
         onQueue({
-          text: trimmed,
+          text: sendText,
           type: 'slash_command',
           commandName,
           commandArgs: args,
@@ -326,9 +350,9 @@ export function ChatInput({
       }
 
       // 2. Check if skill command
-      if (parseSkillCommand(trimmed)) {
+      if (parseSkillCommand(sendText)) {
         onQueue({
-          text: trimmed,
+          text: sendText,
           type: 'skill',
         });
         resetAfterSend();
@@ -337,7 +361,7 @@ export function ChatInput({
 
       // 3. Normal user message
       onQueue({
-        text: trimmed,
+        text: sendText,
         type: 'message',
       });
       resetAfterSend();
@@ -345,7 +369,7 @@ export function ChatInput({
     }
 
     // Check built-in slash commands
-    const slashMatch = trimmed.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
+    const slashMatch = sendText.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
     if (slashMatch) {
       const commandName = slashMatch[1].toLowerCase();
       const args = slashMatch[2]?.trim();
@@ -374,11 +398,11 @@ export function ChatInput({
       }
     }
 
-    let messageToSend = trimmed;
+    let messageToSend = sendText;
 
-    if (parseSkillCommand(trimmed)) {
+    if (parseSkillCommand(sendText)) {
       try {
-        const resolved = await resolveSkillInvocation(trimmed, availableSkills);
+        const resolved = await resolveSkillInvocation(sendText, availableSkills);
         if (resolved) {
           messageToSend = resolved;
         }
@@ -403,6 +427,39 @@ export function ChatInput({
     // Prevent sending during IME composition (e.g. Korean / Japanese / Chinese typing)
     if (e.nativeEvent.isComposing) {
       return;
+    }
+
+    // P11-16: `@` 참조 팝업이 열려 있으면 슬래시 자동완성보다 우선한다.
+    if (mention.open) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        mention.move(1);
+        return;
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        mention.move(-1);
+        return;
+      }
+      if (e.key === 'Enter' || e.key === 'Tab') {
+        e.preventDefault();
+        mention.pickCurrent(text, (next, cursor) => {
+          setText(next);
+          requestAnimationFrame(() => {
+            const el = textareaRef.current;
+            if (el) {
+              el.focus();
+              el.setSelectionRange(cursor, cursor);
+            }
+          });
+        });
+        return;
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        mention.close();
+        return;
+      }
     }
 
     if (isAutocompleteOpen) {
@@ -462,8 +519,9 @@ export function ChatInput({
     }
   };
 
-  const handleTextChange = (val: string) => {
+  const handleTextChange = (val: string, cursor: number) => {
     setText(val);
+    mention.sync(val, cursor);
     setAutocompleteDismissed(false);
     if (histIndex !== null) setHistIndex(null);
     if (errorMessage) {
@@ -493,6 +551,26 @@ export function ChatInput({
         customHeight ? 'flex flex-col overflow-hidden' : '',
       )}
     >
+      {/* Mention popup (@ 파일 참조) */}
+      {mention.open && !isAutocompleteOpen && (
+        <MentionPopup
+          items={mention.items}
+          index={mention.index}
+          onPick={() => {
+            mention.pickCurrent(text, (next, cursor) => {
+              setText(next);
+              requestAnimationFrame(() => {
+                const el = textareaRef.current;
+                if (el) {
+                  el.focus();
+                  el.setSelectionRange(cursor, cursor);
+                }
+              });
+            });
+          }}
+          onHover={(i) => mention.move(i - mention.index)}
+        />
+      )}
       {/* Autocomplete popup */}
       {isAutocompleteOpen && (
         <div
@@ -693,7 +771,8 @@ export function ChatInput({
           ref={textareaRef}
           rows={1}
           value={text}
-          onChange={(e) => handleTextChange(e.target.value)}
+          onChange={(e) => handleTextChange(e.target.value, e.target.selectionStart ?? e.target.value.length)}
+          onSelect={(e) => mention.sync(text, e.currentTarget.selectionStart ?? text.length)}
           onKeyDown={handleKeyDown}
           disabled={isLockedByOtherSession || isAgentDeleted}
           placeholder={placeholder || defaultPlaceholder}

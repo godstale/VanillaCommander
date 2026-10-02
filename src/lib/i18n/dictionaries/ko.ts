@@ -298,6 +298,10 @@ const ko: Dict = {
   'chatInput.macroLoadTitle': '이 매크로를 대기 큐에 모두 추가합니다 (일시정지 상태로 대기)',
   'chatInput.macroDelete': '매크로 삭제',
 
+  'mention.popupLabel': '파일 참조 자동완성',
+  'mention.header': '파일/폴더 참조 (@)',
+  'mention.hint': '↑↓ 탐색, Enter 확정',
+
   'toolCard.failed': '실패',
   'toolCard.done': '완료',
 

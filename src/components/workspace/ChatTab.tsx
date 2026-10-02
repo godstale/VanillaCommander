@@ -771,6 +771,7 @@ export function ChatTab({ tab }: ChatTabProps) {
           customHeight={customInputHeight ? Math.max(60, customInputHeight - 24) : null}
           isAgentDeleted={isAgentDeleted}
           sessionId={sessionId}
+          cwd={effectiveCwd}
         />
       </div>
 

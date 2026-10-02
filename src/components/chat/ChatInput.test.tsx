@@ -18,6 +18,17 @@ vi.mock('@tauri-apps/api/core', () => ({
   }),
 }));
 
+vi.mock('@/lib/commander/ipc', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/commander/ipc')>();
+  return {
+    ...actual,
+    fcListDir: vi.fn(async () => [
+      { name: 'notes.txt', path: 'C:/work/notes.txt', kind: 'file', size: 11, modified_ms: 1, hidden: false, readonly: false, symlink: false, warning: false },
+    ]),
+    fcReadTextHead: vi.fn(async () => ({ text: 'hello notes', size: 11, truncated: false })),
+  };
+});
+
 describe('ChatInput component', () => {
   const mockSkills: SkillManifest[] = [
     {
@@ -153,8 +164,7 @@ describe('ChatInput component', () => {
     });
   });
 
-  it('shows error banner when skill is not found', async () => {
-    const onSend = vi.fn();
+  it('shows error banner when skill is not found', async () => {    const onSend = vi.fn();
     render(
       <ChatInput
         onSend={onSend}
@@ -399,6 +409,35 @@ describe('ChatInput component', () => {
 
     window.localStorage.removeItem('vanilla-commander:prompt-history:session-a');
     window.localStorage.removeItem('vanilla-commander:prompt-history:session-b');
+  });
+
+  it('completes @ file references and inlines content on send', async () => {
+    const onSend = vi.fn();
+    render(
+      <ChatInput
+        onSend={onSend}
+        onSteer={vi.fn()}
+        onStop={vi.fn()}
+        isStreaming={false}
+        cwd="C:/work"
+      />,
+    );
+
+    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+    fireEvent.change(textarea, { target: { value: '요약 @note' } });
+    textarea.selectionStart = textarea.selectionEnd = '요약 @note'.length;
+
+    expect(await screen.findByText('notes.txt')).toBeInTheDocument();
+    fireEvent.keyDown(textarea, { key: 'Enter' });
+    expect(textarea).toHaveValue('요약 @C:/work/notes.txt ');
+
+    fireEvent.keyDown(textarea, { key: 'Enter' });
+    await waitFor(() => {
+      expect(onSend).toHaveBeenCalledTimes(1);
+    });
+    const sent = onSend.mock.calls[0]?.[0] as unknown as string;
+    expect(sent).toContain('@C:/work/notes.txt (파일 내용)');
+    expect(sent).toContain('hello notes');
   });
 });
 

@@ -6,6 +6,10 @@ import { useAgents } from '@/lib/context/AgentsContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useChat } from '@/hooks/useChat';
 import { MessageList } from '@/components/chat/MessageList';
+import { MentionPopup } from '@/components/chat/MentionPopup';
+import { useMention } from '@/hooks/useMention';
+import { resolveMentions } from '@/lib/chat/mentions';
+import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import * as sessionsRepo from '@/lib/db/repositories/sessionsRepo';
 import { cn } from '@/lib/utils';
 
@@ -29,6 +33,9 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
   const { openTab } = useWorkspaceTabs();
   const sessionId = `explorer-${tabId}`;
   const chat = useChat(sessionId, defaultAgent, { cwd: cwd || undefined });
+  const workspace = useSafeWorkspace();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mention = useMention(cwd || null);
   const [text, setText] = useState('');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const lastCountRef = useRef(0);
@@ -55,6 +62,7 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
     const trimmed = text.trim();
     if (!trimmed || chat.isStreaming) return;
     setText('');
+    mention.close();
     setDrawerOpen(true);
     try {
       const existing = await sessionsRepo.getSession(sessionId);
@@ -74,7 +82,55 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
       selectedPaths.length > 0
         ? `[위치] ${cwd}\n[선택] ${baseNames(selectedPaths)}`
         : `[위치] ${cwd}`;
-    await chat.sendMessage(`${contextLine}\n${trimmed}`);
+    let full = `${contextLine}\n${trimmed}`;
+    try {
+      const resolved = await resolveMentions(trimmed, { cwd: cwd || undefined });
+      if (resolved.refs.length > 0) {
+        workspace?.addSessionRoots(resolved.refs.map((r) => r.path));
+      }
+      full = `${contextLine}\n${resolved.text}`;
+    } catch {
+      // 해석 실패는 원문 전송으로 폴백한다.
+    }
+    await chat.sendMessage(full);
+  };
+
+  const applyPick = (next: string, cursor: number) => {
+    setText(next);
+    requestAnimationFrame(() => {
+      const el = inputRef.current;
+      if (el) {
+        el.focus();
+        el.setSelectionRange(cursor, cursor);
+      }
+    });
+  };
+
+  const handleInputKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (mention.open) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        mention.move(1);
+        return;
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        mention.move(-1);
+        return;
+      }
+      if (e.key === 'Enter' || e.key === 'Tab') {
+        e.preventDefault();
+        mention.pickCurrent(text, applyPick);
+        return;
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        mention.close();
+        return;
+      }
+    }
+    e.stopPropagation();
+    if (e.key === 'Enter') void send();
   };
 
   const openInChatTab = () => {
@@ -123,7 +179,7 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
           </div>
         </div>
       )}
-      <div className="flex items-center gap-1 px-2 py-1.5">
+      <div className="relative flex items-center gap-1 px-2 py-1.5">
         <Button
           variant="ghost"
           size="icon"
@@ -133,13 +189,23 @@ export function ExplorerChatBar({ tabId, cwd, selectedPaths, onFilesChanged }: E
         >
           {drawerOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
         </Button>
+        {mention.open && (
+          <MentionPopup
+            items={mention.items}
+            index={mention.index}
+            onPick={() => mention.pickCurrent(text, applyPick)}
+            onHover={(i) => mention.move(i - mention.index)}
+          />
+        )}
         <input
+          ref={inputRef}
           value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
-            e.stopPropagation();
-            if (e.key === 'Enter') void send();
+          onChange={(e) => {
+            setText(e.target.value);
+            mention.sync(e.target.value, e.target.selectionStart ?? e.target.value.length);
           }}
+          onSelect={(e) => mention.sync(text, e.currentTarget.selectionStart ?? text.length)}
+          onKeyDown={handleInputKey}
           placeholder={t('explorer.chatPlaceholder')}
           disabled={chat.isStreaming}
           className={cn(
