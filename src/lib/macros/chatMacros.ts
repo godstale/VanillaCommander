@@ -9,6 +9,9 @@ export interface ChatMacro {
 export const CHAT_MACRO_STORAGE_KEY = 'vanilla-commander:chat-macros';
 export const CHAT_MACRO_LIMIT = 50;
 
+// P11-40: 이름 규칙은 `lib/macros/types`로 일원화. 기존 import 호환용 래퍼.
+import { buildMacroName as buildMacroNameFromPrompts } from './types';
+
 function readRaw(): ChatMacro[] {
   try {
     const raw = window.localStorage.getItem(CHAT_MACRO_STORAGE_KEY);
@@ -38,17 +41,10 @@ function writeRaw(macros: ChatMacro[]): void {
 
 /** 첫 프롬프트 앞부분으로 매크로 이름을 자동 할당한다. 중복 시 (2), (3)을 붙인다. */
 export function buildMacroName(items: string[], existing: ChatMacro[] = []): string {
-  const first = (items[0] ?? '').replace(/^[/#]\w+:\w+\s*/, '').replace(/\s+/g, ' ').trim();
-  const snippet = first.length > 24 ? `${first.slice(0, 24)}...` : first;
-  const base = snippet
-    ? items.length > 1
-      ? `${snippet} 외 ${items.length - 1}건`
-      : snippet
-    : `Macro ${new Date().toLocaleString()} (${items.length}건)`;
-  if (!existing.some((m) => m.name === base)) return base;
-  let n = 2;
-  while (existing.some((m) => m.name === `${base} (${n})`)) n++;
-  return `${base} (${n})`;
+  return buildMacroNameFromPrompts(
+    items,
+    existing.map((m) => m.name),
+  );
 }
 
 export function loadChatMacros(): ChatMacro[] {

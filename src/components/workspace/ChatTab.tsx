@@ -17,13 +17,11 @@ import { ChatQueueFloatingDock } from '@/components/chat/ChatQueueFloatingDock';
 import { MessageList } from '@/components/chat/MessageList';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { ChatMacroDialog } from '@/components/chat/ChatMacroDialog';
+import { useMacros } from '@/lib/macros/useMacros';
 import {
-  deleteChatMacro,
-  loadChatMacros,
   migrateLegacySessionLog,
-  saveChatMacro,
-  type ChatMacro,
-} from '@/lib/chat/chatMacros';
+} from '@/lib/macros/chatMacros';
+import { buildMacroName, type Macro } from '@/lib/macros/types';
 import { ChatExecutionLog } from '@/components/chat/ChatExecutionLog';
 import { ErrorBanner } from '@/components/chat/ErrorBanner';
 import {
@@ -669,14 +667,13 @@ export function ChatTab({ tab }: ChatTabProps) {
 
   // Conversation macros: user prompts bundled into one auto-input unit.
   // Load enqueues everything paused so the user reviews/runs via the queue dock.
+  // P11-40: DB 저장소를 쓴다 (localStorage는 최초 1회 이관 후 미사용).
   const userPromptCount = messages.filter((m) => m.role === 'user').length;
-  const [macros, setMacros] = useState<ChatMacro[]>([]);
+  const { macros, create: createMacro, remove: removeMacro } = useMacros();
   const [macroDialogOpen, setMacroDialogOpen] = useState(false);
 
   useEffect(() => {
     migrateLegacySessionLog(sessionId);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate macro list on session switch
-    setMacros(loadChatMacros());
   }, [sessionId]);
 
   const handleSaveLog = useCallback(() => {
@@ -688,21 +685,26 @@ export function ChatTab({ tab }: ChatTabProps) {
     if (items.length === 0) return;
     // 시스템 자동 안내 등은 role이 system이라 위 필터에서 이미 제외된다.
     // 저장된 매크로는 프롬프트 히스토리(↑/↓)의 대상이 아니다.
-    const macro = saveChatMacro(items, { agentId: effectiveAgentId });
-    if (!macro) return;
-    setMacros(loadChatMacros());
-    injectInfoMessage(t('chatInput.macroSaved', { name: macro.name, n: items.length }));
-  }, [messages, effectiveAgentId, injectInfoMessage, t, isAgentDeleted]);
+    void (async () => {
+      const macro = await createMacro({
+        name: buildMacroName(items, macros.map((m) => m.name)),
+        prompts: items,
+        agentId: effectiveAgentId,
+        runRoot: '',
+        schedule: { kind: 'none' },
+      });
+      injectInfoMessage(t('chatInput.macroSaved', { name: macro.name, n: items.length }));
+    })();
+  }, [messages, effectiveAgentId, injectInfoMessage, t, isAgentDeleted, createMacro, macros]);
 
   const handleLoadLog = useCallback(() => {
     if (isAgentDeleted) return;
-    setMacros(loadChatMacros());
     setMacroDialogOpen(true);
   }, [isAgentDeleted]);
 
-  const handleSelectMacro = useCallback((macro: ChatMacro) => {
+  const handleSelectMacro = useCallback((macro: Macro) => {
     if (isAgentDeleted) return;
-    const items = macro.items.filter((s) => s.trim().length > 0);
+    const items = macro.prompts.filter((s) => s.trim().length > 0);
     if (items.length === 0) {
       injectInfoMessage(t('chatInput.noSavedLog'));
       return;
@@ -726,8 +728,8 @@ export function ChatTab({ tab }: ChatTabProps) {
   }, [enqueue, pauseQueue, injectInfoMessage, t, isAgentDeleted]);
 
   const handleDeleteMacro = useCallback((id: string) => {
-    setMacros(deleteChatMacro(id));
-  }, []);
+    void removeMacro(id);
+  }, [removeMacro]);
 
   useEffect(() => {
     return () => {

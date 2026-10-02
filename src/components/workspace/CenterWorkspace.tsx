@@ -37,8 +37,8 @@ import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
 import { DocumentViewerTab } from '@/components/viewers/DocumentViewerTab';
 import { ArchiveViewerTab } from '@/components/viewers/ArchiveViewerTab';
 import { WikiTab } from '@/components/wiki/WikiTab';
+import { MacroEditorTab } from '@/components/macros/MacroEditorTab';
 import { WelcomeGuide } from '@/components/workspace/WelcomeGuide';
-import { PanelPlaceholder } from '@/components/sidepanel/PanelPlaceholder';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
@@ -59,7 +59,7 @@ const TAB_ICONS: Record<WorkspaceTabType, LucideIcon> = {
   'macro-editor': Zap,
 };
 
-function renderTabContent(tab: WorkspaceTab, t: (key: string) => string) {
+function renderTabContent(tab: WorkspaceTab) {
   switch (tab.type) {
     case 'chat':
       return <ChatTab tab={tab} />;
@@ -82,8 +82,7 @@ function renderTabContent(tab: WorkspaceTab, t: (key: string) => string) {
     case 'wiki':
       return <WikiTab />;
     case 'macro-editor':
-      // P11-40에서 MacroEditorTab으로 교체.
-      return <PanelPlaceholder icon={Zap} title={tab.title} description={t('tabPlaceholder.desc')} />;
+      return <MacroEditorTab tab={tab} />;
     default:
       return null;
   }
@@ -340,7 +339,7 @@ function WorkspacePane({
                   isHidden && 'hidden',
                 )}
               >
-                {renderTabContent(tab, t)}
+                {renderTabContent(tab)}
               </div>
             );
           })

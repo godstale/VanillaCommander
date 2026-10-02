@@ -14,6 +14,7 @@ import { SkillsProvider } from '@/lib/context/SkillsContext';
 import { AgentsProvider } from '@/lib/context/AgentsContext';
 import { ChatSessionsProvider } from '@/lib/context/ChatSessionsContext';
 import { JobsProvider } from '@/lib/commander/jobs';
+import { MacrosProvider } from '@/lib/macros/MacrosProvider';
 import { TrustWorkspaceDialog } from '@/components/workspace/TrustWorkspaceDialog';
 import { ApprovalDialog } from '@/components/chat/ApprovalDialog';
 import type { SidePanelView } from '@/lib/types/workspaceTab';
@@ -141,6 +142,8 @@ export function Workspace() {
         <AgentsProvider>
           <ChatSessionsProvider>
             <JobsProvider>
+            {/* P11-40: 매크로 저장소. 스케줄러(P11-41)가 같은 컨텍스트를 쓴다. */}
+            <MacrosProvider>
             <WorkspaceTabsProvider>
               <SidePanelProvider>
                 <WorkspaceContent />
@@ -148,6 +151,7 @@ export function Workspace() {
                 <ApprovalDialog />
               </SidePanelProvider>
             </WorkspaceTabsProvider>
+            </MacrosProvider>
             </JobsProvider>
           </ChatSessionsProvider>
         </AgentsProvider>

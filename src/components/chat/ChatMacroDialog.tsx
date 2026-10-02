@@ -7,14 +7,14 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import type { ChatMacro } from '@/lib/chat/chatMacros';
+import type { Macro } from '@/lib/macros/types';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export interface ChatMacroDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  macros: ChatMacro[];
-  onSelect: (macro: ChatMacro) => void;
+  macros: Macro[];
+  onSelect: (macro: Macro) => void;
   onDelete: (id: string) => void;
 }
 
@@ -46,10 +46,10 @@ export function ChatMacroDialog({ open, onOpenChange, macros, onSelect, onDelete
                   <div className="flex items-center gap-2 min-w-0">
                     <span className="text-xs font-semibold text-foreground truncate">{macro.name}</span>
                     <span className="text-[10px] font-mono text-muted-foreground shrink-0">
-                      {t('chatInput.macroItems', { n: macro.items.length })}
+                      {t('chatInput.macroItems', { n: macro.prompts.length })}
                     </span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground truncate mt-0.5">{macro.items[0]}</p>
+                  <p className="text-[11px] text-muted-foreground truncate mt-0.5">{macro.prompts[0]}</p>
                   <p className="text-[10px] font-mono text-muted-foreground/70 mt-0.5">
                     {new Date(macro.createdAt).toLocaleString()}
                   </p>

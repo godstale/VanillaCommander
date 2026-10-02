@@ -191,7 +191,7 @@
   - [x] P11-33 문서 파서 계층
   - [x] P11-34 설정 > 문서 파싱 연동
 - **W4 — 매크로**
-  - [ ] P11-40 매크로 저장소 + 화면
+  - [x] P11-40 매크로 저장소 + 화면
   - [ ] P11-41 매크로 스케줄러
 - **W5 — 마무리**
   - [ ] P11-50 설정 재구성
@@ -260,6 +260,7 @@
 | 2026-10-03 | P11-25 | 폴백 동의 완료: `resolveAgent`(외부 판정·후보·백그라운드 선택·저장), `AgentFallbackDialog`(외부 별도 체크·로컬만 다시 묻지 않기), `useChat` 전송 게이트 1곳, 채팅탭 세션 한정 적용 + 전환 안내, 탐색기는 차단·안내. 검증: `lint`·`typecheck` 통과, 폴백 5건, `test` 434/435(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-26 | 이미지 첨부 + 비전 완료: `Agent.vision`(auto/yes/no, DB 컬럼·리포·기본값) + `resolveVisionSupport`(auto는 Ollama capabilities, OpenAI 호환은 unknown) + `ensureChatImage`(작업 폴더 밖은 chat-images 복사) + 매퍼(Ollama images/OpenAI image_url, 전송 직전 data URL 해석) + `ChatInput` 첨부 UI(버튼·붙여넣기·드래그·썸네일, 최대 4개·5MB) + `ChatTab` 비전 게이트(미지원 시 폴백 다이얼로그로 전환 제안)·응답 위키 저장 버튼 + 편집 화면 비전 라디오 + `useChatQueue` enqueue images 전달. 부수 수정: `resolveRequestImages` 제네릭 완화(OpenAI 메시지 합집합 대응)·`vision.ts` 중복 구현을 매퍼 재export로 통합·showModel 목 2건에 supportsVision 추가. 검증: `lint`·`typecheck`·`build` 통과, 신규 `vision.test.ts` 10건, 전체 `test` 444/445(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
 | 2026-10-03 | P11-27 | 모니터링 메뉴 정리 완료: `MonitoringListPanel`·`monitoringGroups(.test)` 삭제(이미 참조 없음, groups는 테스트만 사용), 미사용 i18n 키 제거(`monitoringList` 16종·`activityBar/topMenu.monitoring`·`agentStats` 7종·`agentList.stats/log`). `AgentMonitorTab`·수집기·TopMenuBar 진입 유지. 검증: `lint`·`typecheck` 통과, 관련 21건 통과. | 해결됨 |
+| 2026-10-03 | P11-40 | 매크로 저장소 + 화면 완료: `macros` 테이블(`0003_macros.sql` 신규 + `0001_init.sql`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화) + `lib/macros/`(types·macrosRepo·이관·실행·컨텍스트, `chatMacros` 이동·래퍼 유지) + `MacroPanel`(목록·실행·스케줄·세션 열기) + `MacroEditorTab`(프롬프트 순서·`@` 참조·에이전트·위치·스케줄·테스트 실행) + 채팅 저장 다이얼로그 신 저장소 전환 + SidePanel/CenterWorkspace/Workspace 배선. 검증: `lint`·`typecheck` 통과, 신규 13건·관련 36건 통과. **신규 의존성 없음**. | 해결됨 |
 | 2026-10-03 | P11-34 | 문서 파싱 연동 화면 완료: `SettingsParsers`(확장자별 파서 표·외부 파서 등록/삭제·프리셋 4종·`find_executable` 설치 감지·샘플 파일 실행 미리보기) + parsers 사전 + 라우트·내비 1줄씩(App·Layout은 P11-50 소유, 재구성 예정 명시). 검증: `lint`·`typecheck` 통과, 신규 2건 통과. **신규 의존성 없음**. | 해결됨 |
 | 2026-10-03 | P11-32 | 위키 처리 파이프라인 완료: `lib/wiki/pipeline.ts`(이벤트→필터→직렬 1건·채팅 busy 시 10초 대기→추출(P11-33 파서·이미지/스캔PDF는 비전 기술)→LLM 1회 분류(zod·1회 재시도·날짜 폴백)→이동(fc_move rename + 완료 대기)→wiki ingest→jobs 행 갱신). 외부 처리 에이전트는 wiki-ingest 동의·목적 확인, 미충족 시 로컬 폴백·스킵. StatusBar 위키 슬롯은 패널 브리지로 퍼블리시. 파이프라인 시작은 WikiPanel 마운트에서 멱등 실행(앱 전역 자동시작은 후속). 검증: `lint`·`typecheck` 통과, 신규 8건·관련 24건 통과. **신규 의존성 없음**. | 해결됨 |
 | 2026-10-03 | P11-31 | 위키 설정 + 패널/탭 완료: `wiki_jobs` 테이블(`0002_wiki_jobs.sql` 신규 + `0001_init.sql`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화 — P10-02 선례) + `wikiJobsRepo`(생성·갱신·이력·상태별) + `lib/wiki/settings.ts`(기본 프롬프트·inbox 해석·glob·필터 판정) + `WikiPanel`(감시 토글·대기열·최근·페이지 목록·MD 열기) + `WikiTab`(감시·이동·분류·필터·프롬프트·처리 에이전트 + 이력 표·재처리·원본 열기) + wiki 사전 + SidePanel/CenterWorkspace 배선. 검증: `lint`·`typecheck` 통과, 신규 7건·관련 42건 통과. | 해결됨 |

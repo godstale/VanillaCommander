@@ -1,19 +1,15 @@
-import { Zap } from 'lucide-react';
 import type { SidePanelView } from '@/lib/types/workspaceTab';
 import { ChatSessionList } from '@/components/chatsessions/ChatSessionList';
 import { AgentListPanel } from '@/components/agents/AgentListPanel';
 import { ExplorerPanel } from '@/components/explorer/ExplorerPanel';
 import { WikiPanel } from '@/components/wiki/WikiPanel';
-import { PanelPlaceholder } from './PanelPlaceholder';
-import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { MacroPanel } from '@/components/macros/MacroPanel';
 
 export interface SidePanelProps {
   activeView: SidePanelView;
 }
 
 export function SidePanel({ activeView }: SidePanelProps) {
-  const { t } = useLanguage();
-
   if (!activeView) {
     return null;
   }
@@ -28,8 +24,7 @@ export function SidePanel({ activeView }: SidePanelProps) {
     case 'wiki':
       return <WikiPanel />;
     case 'macros':
-      // P11-40에서 MacroPanel로 교체.
-      return <PanelPlaceholder icon={Zap} title={t('activityBar.macros')} description={t('tabPlaceholder.desc')} />;
+      return <MacroPanel />;
     default:
       return null;
   }

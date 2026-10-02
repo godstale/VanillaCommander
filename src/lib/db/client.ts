@@ -292,6 +292,20 @@ export const MIGRATION_STATEMENTS: string[] = [
   )`,
   `CREATE INDEX IF NOT EXISTS idx_wiki_jobs_status ON wiki_jobs(status)`,
   `CREATE INDEX IF NOT EXISTS idx_wiki_jobs_created ON wiki_jobs(created_at)`,
+  // P11-40: 매크로 저장소.
+  `CREATE TABLE IF NOT EXISTS macros (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    prompts_json TEXT NOT NULL DEFAULT '[]',
+    agent_id TEXT,
+    run_root TEXT NOT NULL DEFAULT '',
+    schedule_json TEXT NOT NULL DEFAULT '{"kind":"none"}',
+    last_result TEXT,
+    last_run_at TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_macros_updated ON macros(updated_at)`,
   // P11-03: 평가 테이블 폐기. 외부 연동 3종(external_integrations/integration_settings/
   // integration_audit_log)은 유지한다. 기존 CREATE는 이력으로 남기고 DROP을 뒤에 둔다.
   `DROP TABLE IF EXISTS eval_scores`,
@@ -315,6 +329,7 @@ export class MemorySqlFallback implements SqlDatabase {
     this.tables.set('agent_monitoring_snapshots', new Map());
     this.tables.set('conversation_token_summaries', new Map());
     this.tables.set('wiki_jobs', new Map());
+    this.tables.set('macros', new Map());
     this.tables.set('eval_runs', new Map());
     this.tables.set('eval_candidates', new Map());
     this.tables.set('eval_trials', new Map());
@@ -1158,6 +1173,50 @@ export class MemorySqlFallback implements SqlDatabase {
       return { rowsAffected: removed ? 1 : 0 };
     }
 
+    // P11-40: 매크로 저장소.
+    if (q.startsWith('INSERT INTO macros')) {
+      const [
+        id,
+        name,
+        prompts_json,
+        agent_id,
+        run_root,
+        schedule_json,
+        last_result,
+        last_run_at,
+        created_at,
+        updated_at,
+      ] = bindValues;
+      this.tables.get('macros')?.set(id as string, {
+        id,
+        name,
+        prompts_json,
+        agent_id,
+        run_root,
+        schedule_json,
+        last_result,
+        last_run_at,
+        created_at,
+        updated_at,
+      });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('UPDATE macros SET')) {
+      const [name, prompts_json, agent_id, run_root, schedule_json, last_result, last_run_at, updated_at, id] =
+        bindValues;
+      const row = this.tables.get('macros')?.get(id as string);
+      if (!row) return { rowsAffected: 0 };
+      Object.assign(row, { name, prompts_json, agent_id, run_root, schedule_json, last_result, last_run_at, updated_at });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('DELETE FROM macros WHERE id = ?')) {
+      const [id] = bindValues;
+      const removed = this.tables.get('macros')?.delete(id as string) ?? false;
+      return { rowsAffected: removed ? 1 : 0 };
+    }
+
     if (q.startsWith('DELETE FROM agent_monitoring_snapshots WHERE agent_id = ? AND timestamp < ?')) {
       const [agentId, cutoff] = bindValues;
       const snapMap = this.tables.get('agent_monitoring_snapshots');
@@ -1764,6 +1823,19 @@ export class MemorySqlFallback implements SqlDatabase {
       const [limit] = bindValues;
       const capped = typeof limit === 'number' ? rows.slice(0, limit) : rows;
       return capped as unknown as T;
+    }
+
+    // P11-40: 매크로 저장소.
+    if (q.includes('FROM macros WHERE id = ?')) {
+      const [id] = bindValues;
+      const row = this.tables.get('macros')?.get(id as string);
+      return (row ? [row] : []) as unknown as T;
+    }
+
+    if (q.includes('FROM macros')) {
+      const rows = Array.from(this.tables.get('macros')?.values() ?? [])
+        .sort((a, b) => (b.updated_at as string).localeCompare(a.updated_at as string));
+      return rows as unknown as T;
     }
 
     // -- Phase 10 evaluation tables (global DB) --
