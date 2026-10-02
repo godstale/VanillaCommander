@@ -132,7 +132,7 @@
 
 - `:root`(= `.dark`)가 **다크 기본값**, `<html class="light">`가 라이트입니다(`index.html`은 라이트로 시작해 FOUC 방지).
 - `.dark` / `.light` 클래스를 중첩 요소에 달면 그 영역만 해당 테마로 보입니다.
-- `ThemeContext`가 `light | dark | system`을 `localStorage('fortress-theme')`에 저장하고 `<html>`에 클래스를 토글합니다.
+- `ThemeContext`가 `light | dark | system`을 `localStorage('vanilla-commander-theme')`에 저장하고 `<html>`에 클래스를 토글합니다.
 - 컴포넌트는 가능하면 `dark:` 변형 없이 **토큰만으로** 양쪽 테마를 처리합니다(입력 필드의 다크 전용 배경 정도만 예외).
 
 ## 8. 색을 바꾸고 싶을 때

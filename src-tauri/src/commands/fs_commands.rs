@@ -23,30 +23,54 @@ pub fn get_active_workspace_internal() -> Option<String> {
 pub fn set_active_workspace(path: Option<String>) -> Result<(), String> {
     set_active_workspace_internal(path.clone());
     if let Some(ref p) = path {
-        let _ = ensure_fortress_dir(p.clone());
+        let _ = ensure_app_data_dir(p.clone());
     }
     Ok(())
 }
 
+/// Fortress 시절 데이터(`.fortress/fortress.db*`)를 새 이름으로 옮긴다. 새 폴더가 이미 있으면 건드리지 않는다.
+fn migrate_legacy_data_dir(ws_path: &Path, app_data_dir: &Path) {
+    let legacy_dir = ws_path.join(".fortress");
+    if app_data_dir.exists() || !legacy_dir.is_dir() {
+        return;
+    }
+    if std::fs::rename(&legacy_dir, app_data_dir).is_err() {
+        return;
+    }
+    rename_legacy_db_files(app_data_dir);
+}
+
+/// `fortress.db`, `fortress.db-wal`, `fortress.db-shm` → `vanilla-commander.db*`
+pub fn rename_legacy_db_files(dir: &Path) {
+    for suffix in ["", "-wal", "-shm"] {
+        let from = dir.join(format!("fortress.db{}", suffix));
+        let to = dir.join(format!("vanilla-commander.db{}", suffix));
+        if from.exists() && !to.exists() {
+            let _ = std::fs::rename(&from, &to);
+        }
+    }
+}
+
 #[tauri::command]
-pub fn ensure_fortress_dir(workspace_root: String) -> Result<String, String> {
+pub fn ensure_app_data_dir(workspace_root: String) -> Result<String, String> {
     let ws_path = Path::new(&workspace_root);
     if !ws_path.is_dir() {
         return Err(format!("Workspace root is not a valid directory: {}", workspace_root));
     }
-    let fortress_dir = ws_path.join(".fortress");
-    if !fortress_dir.exists() {
-        std::fs::create_dir_all(&fortress_dir).map_err(|e| format!("Failed to create .fortress dir: {}", e))?;
+    let app_data_dir = ws_path.join(".vanilla-commander");
+    migrate_legacy_data_dir(ws_path, &app_data_dir);
+    if !app_data_dir.exists() {
+        std::fs::create_dir_all(&app_data_dir).map_err(|e| format!("Failed to create .vanilla-commander dir: {}", e))?;
     }
-    let gitignore_path = fortress_dir.join(".gitignore");
+    let gitignore_path = app_data_dir.join(".gitignore");
     if !gitignore_path.exists() {
         let _ = std::fs::write(&gitignore_path, "*.db\n*.db-*\nlogs/\n");
     }
-    let logs_dir = fortress_dir.join("logs");
+    let logs_dir = app_data_dir.join("logs");
     if !logs_dir.exists() {
         let _ = std::fs::create_dir_all(&logs_dir);
     }
-    Ok(fortress_dir.to_string_lossy().to_string())
+    Ok(app_data_dir.to_string_lossy().to_string())
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -29,7 +29,7 @@ export interface AgentsContextValue {
   getKnownAgentName: (id: string) => string | undefined;
 }
 
-const KNOWN_AGENT_NAMES_KEY = 'fortress_known_agent_names';
+const KNOWN_AGENT_NAMES_KEY = 'vanilla-commander_known_agent_names';
 
 function loadKnownAgentNames(): Record<string, string> {
   try {

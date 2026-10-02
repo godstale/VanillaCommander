@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "VanillaCommander",
+  "productName": "Vanilla Commander",
   "version": "0.1.0",
   "identifier": "com.vanillacommander.app",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "VanillaCommander",
+        "title": "Vanilla Commander",
         "width": 1280,
         "height": 800,
         "resizable": true,

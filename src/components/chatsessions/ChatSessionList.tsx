@@ -65,7 +65,7 @@ function formatDate(iso: string, t: TFn): string {
   }
 }
 
-const FILTER_STORAGE_KEY = 'fortress:session-filter';
+const FILTER_STORAGE_KEY = 'vanilla-commander:session-filter';
 
 function readStoredFilterMode(): SessionFilterMode {
   try {

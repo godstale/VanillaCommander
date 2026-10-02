@@ -156,6 +156,48 @@
 - **W4 — 마무리**
   - [x] P10-26 통합 QA(시나리오 10종)·UserGuide·QA-Checklist·README
 
+## Phase 11 — Vanilla Commander 전환 `[ ]`
+
+> 구현 계획: `Docs/phases/Phase11-VanillaCommander.md`. **§1.2 D1~D10은 사용자 확인 전까지 "제안" 상태** — 확인된 항목만 착수.
+
+- **W0 — 정리·기반**
+  - [ ] P11-01 정보 구조 재편(ActivityBar·패널·탭 타입)
+  - [ ] P11-02 외부 연동 모듈 이관(`src/lib/integrations`)
+  - [ ] P11-03 평가 기능 제거
+  - [ ] P11-04 앱 설정 모델 + 작업 폴더 + 기본값 상수 + 허용 루트
+  - [ ] P11-05 StatusBar
+  - [ ] P11-06 셋업 위저드
+- **W1 — 파일 탐색기**
+  - [ ] P11-10 Rust 파일 커맨더 커맨드
+  - [ ] P11-11 FileExplorerTab
+  - [ ] P11-12 탐색기 사이드 패널(탭 목록·즐겨찾기·시스템 폴더)
+  - [ ] P11-13 파일 작업 큐·충돌 처리·정보
+  - [ ] P11-14 파일 뷰어(PDF/DOCX/XLSX/PPTX/ZIP + 외부 앱)
+  - [ ] P11-15 탐색기 1줄 채팅 입력
+  - [ ] P11-16 `@` 파일/폴더 참조
+- **W2 — 에이전트**
+  - [ ] P11-20 에이전트 카드 단순화
+  - [ ] P11-21 에이전트 편집 화면 단순화(Advanced 접기)
+  - [ ] P11-22 프로바이더 3분류 + 외부 연동 등록 통합
+  - [ ] P11-23 외부 에이전트 런타임
+  - [ ] P11-24 파일 커맨더 시스템 프롬프트 + 도구
+  - [ ] P11-25 기본 에이전트 폴백 동의
+  - [ ] P11-26 이미지 첨부 + 비전
+  - [ ] P11-27 모니터링 메뉴 정리
+- **W3 — 위키**
+  - [ ] P11-30 폴더 감시(Rust)
+  - [ ] P11-31 위키 설정 + 위키 패널/탭
+  - [ ] P11-32 위키 처리 파이프라인
+  - [ ] P11-33 문서 파서 계층
+  - [ ] P11-34 설정 > 문서 파싱 연동
+- **W4 — 매크로**
+  - [ ] P11-40 매크로 저장소 + 화면
+  - [ ] P11-41 매크로 스케줄러
+- **W5 — 마무리**
+  - [ ] P11-50 설정 재구성
+  - [ ] P11-51 문서·브랜딩 정리
+  - [ ] P11-52 통합 QA
+
 ---
 
 ## 이슈 로그
@@ -196,6 +238,7 @@
 | 2026-09-27 | EVAL-MONITOR-ROW1 | 평가 모니터링 1행 3카드도 모니터링 화면과 동일 구조로 교체. 오프로딩: GPU 오프로딩 비율 이중 바+가속/분배 라벨+GPU VRAM/시스템 RAM 박스(피크 기반 여유 계산, RAM 여유 미측정 시 전체만). 메모리 분배: VRAM(사용 피크+여유 스택)/RAM(전체) `BarChart`(범례·단위·집계중 문구 동일). 추이: trial 시각 X축+좌 %/우 GB 이중축 `AreaChart`+범례+건수 타이틀. 카드 크롬 통일(아이콘+`rounded-xl`+`p-4`). trial 자원으로 계산 불가한 KV/가중치 분할은 두지 않고 사용(피크)/여유/전체로 정직 표기(신규 `memUsed`·`memTotal` 키). 대체된 eval 문구 7건 제거(ko/en 패리티 유지). `lint`·`typecheck`·관련 24건 통과. **신규 의존성 없음**. | 해결됨 |
 | 2026-09-29 | CHAT-MONITOR-MD-UX | 채팅·모니터링·설정 UX 10건 일괄. ① 빈 새 채팅 lazy 생성(대화 목록 5개 진입점의 즉시 `createSession` 제거, 첫 전송 시에만 DB 등록 + `ChatSessionsContext.refreshSessions`에서 빈 세션 숨김·60초 경과분 정리 + `ChatTab` 언마운트 정리). ② macOS 통합 메모리(`system_commands.rs`에 sysctl/vm_stat RAM 조회 + Apple GPU면 전체 풀을 VRAM으로 미러, Linux는 `/proc/meminfo` 추가) + 모니터링 수집기 통합 메모리 판정(가중치·KV 전량 VRAM 귀속, 모델 매칭 exact 우선으로 `qwen3.5:*` 오귀속 방지, KV는 모델 contextLimit 클램프+양자화별 원자 크기+`head_dim` 지원, dims 누락 시 0 반환으로 허수 GB 차단). ③ `/api/show` 별칭 파싱(`hidden_size`·`num_layers`·`num_attention_heads`·`num_key_value_heads`·`intermediate_size`·`max_position_embeddings` 등, MLX 키 대응) + 아키텍처 카드 `Q4_K` 하드코딩 제거 + 통합 메모리 배지(`monitor.unified` ko/en). ④ 채팅 MD(`.chat-markdown` CSS: bold/표/리스트/인용/제목) + `MessageBubble` memo + `language-[\w+#-]+` 수정 + 스트리밍 중 mermaid 렌더 보류·디바운스 250ms·테마 초기화 1회·`securityLevel strict`·안정 id. ⑤ 입력창 프롬프트 히스토리(↑/↓, 전역 최근 100, 초안 보존, 한 줄 입력에서만) + 대화 로그 저장/불러오기(세션별 localStorage, 불러오면 전량 일시정지 큐로). ⑥ temperature 기본 0.2(`DEFAULT_TEMPERATURE`, 슬라이더 상한 2.0으로 정정) + 압축 단계표(8K→2K/1K·16K→4K/2K·24K→6K/4K·32K±→8K/8K, `Architecture.md` §4.2·§9.1 동기화). ⑦ 전역 기본값 3종(`defaultTemperature`·`defaultReserveTokens`·`defaultKeepRecentTokens`, `app_settings` 마이그레이션+메모리 폴백+`SettingsModel` 전면 개편·항목별 [?]·적용값 미리보기). ⑧ 내장 `wiki` 도구 에디터 UI 제거(런타임 등록은 기존값 호환 유지, `basic-llm-wiki` 스킬로 대체). `lint`·`typecheck` 통과, `test` 990/994(실패 4건은 기존 bundledSkills·fab-b·public-packs). **신규 의존성 없음**. | 해결됨 |
 | 2026-09-30 | TAURI-BLANK | `pnpm tauri dev`에서 Tauri 창이 완전 빈 화면(브라우저 `localhost:14200`은 정상). 원인 확정: `tauri.conf.json` CSP의 `connect-src`에 Tauri IPC(`ipc: http://ipc.localhost`) 누락 — 공식 예제(`v2.tauri.app/security/csp`)는 포함. `img-src`에 `http://asset.localhost` 추가. 프록시 없음·WebView2 154 확인. CSP 수정 후 `tauri dev` 정상 표시 확인. | 해결됨 |
+| 2026-10-02 | RENAME | 앱 내 Fortress 명칭 → Vanilla Commander 일괄 변경: 화면 문구·프롬프트·창 제목(productName `Vanilla Commander`)·로그 파일명·localStorage 키(`fortress*` → `vanilla-commander*`)·DB(`fortress.db` → `vanilla-commander.db`)·워크스페이스 폴더(`.fortress` → `.vanilla-commander`)·`FortressAgent` → `VanillaAgent`·`ensure_fortress_dir` → `ensure_app_data_dir`. 구 데이터는 첫 실행 시 자동 이관(`legacyStorageMigration.ts`, Rust `rename_legacy_db_files`, DB의 `Fortress Default` 에이전트명 갱신). 평가 모듈 내부 포맷 식별자(`fortress-default` 등)와 Docs/ 과거 기록 문서는 유지(P11-03 삭제·P11-51 문서 정리에서 처리). 참고: `core.autocrlf=true` 체크아웃으로 SKILL.md·평가 팩이 CRLF가 되어 테스트 4건 실패(기존 문제, `.gitattributes`로 `eol=lf` 지정 필요) | 해결됨 |
 
 ---
 

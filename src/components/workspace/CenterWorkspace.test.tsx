@@ -44,7 +44,7 @@ function TabInitializer() {
 
 describe('CenterWorkspace tab header', () => {
   beforeEach(() => {
-    localStorage.setItem('fortress_current_workspace_root', '/test/project');
+    localStorage.setItem('vanilla-commander_current_workspace_root', '/test/project');
   });
 
   afterEach(() => {

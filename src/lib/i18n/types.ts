@@ -4,8 +4,8 @@ export const SUPPORTED_LOCALES: readonly Locale[] = ['ko', 'en'] as const;
 
 export const DEFAULT_LOCALE: Locale = 'ko';
 
-export const LOCALE_STORAGE_KEY = 'fortress-locale';
-export const LOCALE_CHOSEN_KEY = 'fortress-locale-chosen';
+export const LOCALE_STORAGE_KEY = 'vanilla-commander-locale';
+export const LOCALE_CHOSEN_KEY = 'vanilla-commander-locale-chosen';
 
 export function isLocale(value: unknown): value is Locale {
   return value === 'ko' || value === 'en';

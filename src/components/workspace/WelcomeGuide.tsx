@@ -35,7 +35,7 @@ export function WelcomeGuide() {
           <div className="inline-flex h-16 w-16 rounded-2xl bg-card border border-border items-center justify-center text-brand shadow-sm">
             <AppMark className="h-10 w-10" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">VanillaCommander</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Vanilla Commander</h1>
           <p className="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
             {t('welcome.subtitle')}
             <br />

@@ -1,4 +1,4 @@
-// Tailwind v3 preset for the VanillaCommander "Vanilla" theme.
+// Tailwind v3 preset for the Vanilla Commander "Vanilla" theme.
 // Pair it with design/theme.css (the CSS variables) — see DESIGN.md §6 for porting steps.
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';

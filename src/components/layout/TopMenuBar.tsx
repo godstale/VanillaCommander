@@ -171,7 +171,7 @@ export function TopMenuBar() {
       <div className="flex items-center gap-1" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
         <div className="flex items-center gap-1.5 px-2 font-semibold text-foreground tracking-wide mr-1">
           <AppMark compact className="h-4 w-4 text-brand" />
-          <span className="text-[11px]">VanillaCommander</span>
+          <span className="text-[11px]">Vanilla Commander</span>
         </div>
 
         {/* File Menu */}

@@ -12,7 +12,7 @@ import { scanSkills } from '@/lib/skills/scanner';
 import { loadProjectContextFiles, type ContextFileItem } from '@/lib/skills/contextFiles';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 
-const SKILL_OVERRIDES_KEY = 'fortress_skill_active_overrides';
+const SKILL_OVERRIDES_KEY = 'vanilla-commander_skill_active_overrides';
 
 function getStoredSkillOverrides(): Record<string, boolean> {
   try {

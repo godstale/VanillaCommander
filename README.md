@@ -1,9 +1,9 @@
-<p align="center"><img src="./design/brand/app-banner.jpg" alt="VanillaCommander" width="100%" /></p>
+<p align="center"><img src="./design/brand/app-banner.jpg" alt="Vanilla Commander" width="100%" /></p>
 <p align="right"><sub>사진: <a href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%ED%9D%91%EB%B0%B1-%EC%A7%81%EC%84%A0-GA6WtJ7DtSo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>의 <a href="https://unsplash.com/ko/@molnj?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jocelyn Morales</a></sub></p>
 
-# VanillaCommander
+# Vanilla Commander
 
-**VanillaCommander**는 **Fortress**를 기반으로 만드는 **file commander 앱**입니다.  
+**Vanilla Commander**는 로컬 LLM 에이전트를 결합해 채팅으로 제어하는 **file commander 앱**입니다.  
 Tauri 2와 React 19로 구축되었으며, 외부 프레임워크 오버헤드(No LangChain) 없이 자체 경량 런타임(`pi` 아키텍처)을 통해 자율 에이전트 루프, 실시간 시각화, 파일 조작 도구, 그리고 하드웨어/추론 모니터링을 단일 데스크탑 앱에서 통합 제공합니다.
 
 ---
@@ -27,7 +27,7 @@ Tauri 2와 React 19로 구축되었으며, 외부 프레임워크 오버헤드(N
   - 워크스페이스의 `.agents/skills/*/SKILL.md` 및 `AGENTS.md` 자동 탐색.
   - 프로그레시브 디스클로저(필요 시에만 스킬 본문 로드)를 통해 컨텍스트 낭비 방지.
 - 🗄 **로컬 퍼스트 & 프로젝트 격리 스토리지**
-  - 대화 및 모니터링 스냅샷은 워크스페이스 내 `.fortress/fortress.db` (SQLite)에 Append-Only 이벤트 소싱 방식으로 안전하게 보관.
+  - 대화 및 모니터링 스냅샷은 워크스페이스 내 `.vanilla-commander/vanilla-commander.db` (SQLite)에 Append-Only 이벤트 소싱 방식으로 안전하게 보관.
 - 🛡 **인간 개입 승인 (Human-in-the-Loop, HITL)**
   - 파일 쓰기/편집 및 중요 도구 호출 시 사용자의 사전 승인을 강제하는 보안 계층.
 - 🧪 **자동 평가 (Evaluation)**
@@ -90,7 +90,7 @@ pnpm tauri build
 
 1. **워크스페이스 폴더 열기**
    - 상단 메뉴의 `File` → `Open Folder`를 눌러 작업할 프로젝트 폴더를 선택합니다.
-   - 좌측 패널에 파일 트리가 나타나며, 프로젝트 전용 데이터베이스(`.fortress/fortress.db`)가 자동 생성됩니다.
+   - 좌측 패널에 파일 트리가 나타나며, 프로젝트 전용 데이터베이스(`.vanilla-commander/vanilla-commander.db`)가 자동 생성됩니다.
 2. **에이전트 선택 및 설정**
    - 좌측 하단 `Agents` 패널에서 기본 에이전트를 확인하거나 새 에이전트를 생성할 수 있습니다.
    - 에이전트 수정 탭에서 모델, 시스템 프롬프트, 도구 활성화 여부, 컨텍스트 크기(예: 32k, 64k)를 조정할 수 있습니다.
@@ -114,7 +114,7 @@ pnpm tauri build
 
 ## 🧪 자동 평가 사용법 (Evaluation)
 
-**Fortress 평가**는 같은 평가셋을 같은 조건으로 여러 후보(모델×설정)에 자동 실행해
+**자동 평가**는 같은 평가셋을 같은 조건으로 여러 후보(모델×설정)에 자동 실행해
 품질·에이전트·성능·자원·신뢰성을 0~100 공통 척도로 비교하고, 이 PC와 작업에 가장 맞는 후보를 추천합니다.
 
 ### 실행 흐름 (마법사 4단계)
@@ -154,7 +154,7 @@ pnpm tauri build
 
 ## 📚 Docs 문서 및 개발 참고 자료 가이드
 
-Fortress의 내부 구조 파악, 커스텀 에이전트 개발, 벤치마크 분석 및 시스템 재구현에 필요한 문서들이 `Docs/` 폴더에 체계적으로 구성되어 있습니다.
+Vanilla Commander의 내부 구조 파악, 커스텀 에이전트 개발, 벤치마크 분석 및 시스템 재구현에 필요한 문서들이 `Docs/` 폴더에 체계적으로 구성되어 있습니다.
 
 ### 📌 추천 읽기 순서
 1. **신규 개발자 / 앱 재구현자**: `Docs/ReimplementationGuide.md` → `Docs/Architecture.md`
@@ -177,7 +177,7 @@ Fortress의 내부 구조 파악, 커스텀 에이전트 개발, 벤치마크 �
 | **진행상황 트래커** | **[TODO.md](./Docs/TODO.md)**<br>전체 작업 항목의 완료 상태 트래커 및 과거 이슈 해결 기록. | [바로가기](./Docs/TODO.md) |
 | **품질 검증 체크리스트** | **[QA-Checklist.md](./Docs/QA-Checklist.md)**<br>기능, 성능, 보안, UX 각 영역별 테스트 시나리오 및 품질 검증 기준. | [바로가기](./Docs/QA-Checklist.md) |
 | **디자인 시스템** | **[DESIGN.md](./DESIGN.md)**<br>Midnight Rampart 라이트/다크 테마의 색상 토큰, 타이포그래피, 컴포넌트 패턴, 다른 앱으로의 포팅 가이드(`design/` 리소스). | [바로가기](./DESIGN.md) |
-| **AI 에이전트 작업 지침** | **[AGENTS.md](./AGENTS.md)**<br>Fortress 리포지토리를 개발하는 AI 코딩 에이전트를 위한 컨벤션, 코딩 규칙, 커밋 수칙. | [바로가기](./AGENTS.md) |
+| **AI 에이전트 작업 지침** | **[AGENTS.md](./AGENTS.md)**<br>Vanilla Commander 리포지토리를 개발하는 AI 코딩 에이전트를 위한 컨벤션, 코딩 규칙, 커밋 수칙. | [바로가기](./AGENTS.md) |
 
 ---
 

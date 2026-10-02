@@ -60,7 +60,7 @@ export function MessageList({ messages, isStreaming, fallbackConfig }: MessageLi
           <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-xs">
             <Bot className="h-6 w-6" />
           </div>
-          <h2 className="text-base font-semibold">Fortress Local AI Workstation</h2>
+          <h2 className="text-base font-semibold">Vanilla Commander</h2>
           <p className="text-xs text-muted-foreground leading-relaxed">
             {t('chat.emptyGuide')}
           </p>

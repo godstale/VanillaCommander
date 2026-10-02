@@ -19,7 +19,7 @@ pub fn run() {
                 .targets([
                     tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout),
                     tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::LogDir {
-                        file_name: Some("fortress".into()),
+                        file_name: Some("vanilla-commander".into()),
                     }),
                     tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Webview),
                 ])
@@ -30,6 +30,10 @@ pub fn run() {
         )
         .setup(|app| {
             use tauri::Manager;
+            // tauri-plugin-sql은 app_config_dir 기준으로 DB를 연다 — 첫 Database.load 전에 구 파일명을 옮긴다.
+            if let Ok(dir) = app.path().app_config_dir() {
+                rename_legacy_db_files(&dir);
+            }
             for window in app.webview_windows().values() {
                 let _ = window.set_theme(Some(tauri::Theme::Light));
             }
@@ -38,7 +42,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             pick_project_folder,
             set_active_workspace,
-            ensure_fortress_dir,
+            ensure_app_data_dir,
             get_app_paths,
             read_project_folder_tree,
             read_text_file,

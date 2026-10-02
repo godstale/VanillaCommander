@@ -268,7 +268,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
   const ROW1_CARD_IDS = ['sysres', 'memdist', 'realtime'] as const;
   const [row1Order, setRow1Order] = useState<string[]>(() => {
     try {
-      const saved = window.localStorage.getItem('fortress.monitorRow1Order');
+      const saved = window.localStorage.getItem('vanilla-commander.monitorRow1Order');
       if (saved) {
         const parsed = JSON.parse(saved) as string[];
         if (
@@ -297,7 +297,7 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
       const at = next.indexOf(targetId);
       next.splice(at >= 0 ? at : next.length, 0, row1DragId);
       try {
-        window.localStorage.setItem('fortress.monitorRow1Order', JSON.stringify(next));
+        window.localStorage.setItem('vanilla-commander.monitorRow1Order', JSON.stringify(next));
       } catch {
         // 영속 실패는 무시 (인메모리 순서는 유지)
       }

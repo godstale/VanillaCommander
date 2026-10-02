@@ -771,7 +771,7 @@ export function CenterWorkspace() {
           className="h-full w-full overflow-hidden"
         >
           <Panel
-            id="fortress-pane-primary"
+            id="vanilla-commander-pane-primary"
             defaultSize={50}
             minSize={20}
             className="min-w-0 h-full overflow-hidden"
@@ -811,7 +811,7 @@ export function CenterWorkspace() {
           </Panel>
           <SplitResizeHandle direction={splitDirection} />
           <Panel
-            id="fortress-pane-secondary"
+            id="vanilla-commander-pane-secondary"
             defaultSize={50}
             minSize={20}
             className="min-w-0 h-full overflow-hidden"
