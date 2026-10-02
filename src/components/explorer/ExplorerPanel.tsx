@@ -8,6 +8,21 @@ import { fcSystemFolders } from '@/lib/commander/ipc';
 import type { FcSystemFolder } from '@/lib/commander/types';
 import { cn } from '@/lib/utils';
 
+function stripVerbatimPrefix(path: string): string {
+  if (path.startsWith('\\\\?\\UNC\\')) return `\\${path.slice(7)}`;
+  if (path.startsWith('\\\\?\\')) return path.slice(4);
+  return path;
+}
+
+function normExplorerPath(path: string): string {
+  const clean = stripVerbatimPrefix(path).replace(/[\\/]+$/, '');
+  // Windows 경로는 대소문자를 구분하지 않으므로 소문자로 비교한다.
+  if (clean.includes('\\') || /^[a-zA-Z]:/.test(clean) || clean.startsWith('\\\\')) {
+    return clean.replace(/\//g, '\\').toLowerCase();
+  }
+  return clean;
+}
+
 function baseNameOf(path: string): string {
   const parts = path.split(/[\\/]+/).filter(Boolean);
   return parts.length > 0 ? parts[parts.length - 1] : path;
@@ -19,7 +34,7 @@ function defaultPath(workFolder: string | null, workspaceRoot: string | null): s
 
 export function ExplorerPanel() {
   const { t } = useLanguage();
-  const { tabs, activeTabId, openTab, setActiveTab, closeTab, isTabsLoaded } = useWorkspaceTabs();
+  const { tabs, activeTabId, openTab, setActiveTab, closeTab, updateTab, isTabsLoaded } = useWorkspaceTabs();
   const { workFolder, workspaceRoot } = useWorkspace();
   const { settings, updateSettings } = useSettings();
   const [systemFolders, setSystemFolders] = useState<FcSystemFolder[]>([]);
@@ -55,13 +70,23 @@ export function ExplorerPanel() {
   }, []);
 
   const openOrFocus = (path: string) => {
-    const norm = path.replace(/[\\/]+$/, '');
+    const norm = normExplorerPath(path);
     const existing = explorerTabs.find((tb) => {
       const p = ((tb.meta ?? {}) as { path?: string }).path ?? '';
-      return p.replace(/[\\/]+$/, '') === norm;
+      return normExplorerPath(p) === norm;
     });
     if (existing) {
       setActiveTab(existing.id);
+      return;
+    }
+    // 같은 경로의 탭이 없으면 현재 탐색기 탭에서 이동한다. 새 탭을 열지 않는다.
+    const activeExplorer = explorerTabs.find((tb) => tb.id === activeTabId) ?? explorerTabs[0];
+    if (activeExplorer) {
+      updateTab(activeExplorer.id, {
+        title: baseNameOf(path),
+        meta: { ...((activeExplorer.meta ?? {}) as Record<string, unknown>), path },
+      });
+      setActiveTab(activeExplorer.id);
       return;
     }
     openTab({

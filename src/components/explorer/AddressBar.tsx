@@ -8,14 +8,49 @@ export interface AddressBarProps {
   onNavigate: (path: string) => void;
 }
 
+/** Windows canonicalize가 반환하는 `\\?\` verbatim 접두를 UI용 일반 경로로 되돌린다. */
+function stripVerbatimPrefix(path: string): string {
+  if (path.startsWith('\\\\?\\UNC\\')) return `\\${path.slice(7)}`;
+  if (path.startsWith('\\\\?\\')) return path.slice(4);
+  return path;
+}
+
 function splitPath(path: string): string[] {
-  if (!path) return [];
-  // 드라이브 문자(C:)를 첫 세그먼트로 유지한다.
-  const parts = path.split(/[\\/]+/).filter((s) => s.length > 0);
+  const clean = stripVerbatimPrefix(path);
+  if (!clean) return [];
+  const sep = clean.includes('\\') ? '\\' : '/';
+  const isUnc = clean.startsWith('\\\\');
+  const parts = clean.split(/[\\/]+/).filter((s) => s.length > 0);
+  if (parts.length === 0) return clean.startsWith('/') ? ['/'] : [];
+  // 드라이브 문자(C:)를 첫 세그먼트로 유지한다. 구분자는 원본 스타일을 따른다.
   if (/^[a-zA-Z]:$/.test(parts[0] ?? '')) {
-    parts[0] = `${parts[0]}\\`;
+    parts[0] = sep === '\\' ? `${parts[0]}\\` : parts[0];
+    return parts;
+  }
+  if (isUnc && parts.length > 0) {
+    parts[0] = `\\\\${parts[0]}`;
+    return parts;
+  }
+  if (clean.startsWith('/') && parts.length > 0) {
+    return ['/', ...parts];
   }
   return parts;
+}
+
+function buildTargets(path: string, segments: string[]): string[] {
+  const clean = stripVerbatimPrefix(path);
+  const sep = clean.includes('\\') ? '\\' : '/';
+  const targets: string[] = [];
+  let acc = '';
+  segments.forEach((seg) => {
+    if (acc === '') {
+      acc = seg;
+    } else {
+      acc = `${acc}${acc.endsWith('\\') || acc.endsWith('/') ? '' : sep}${seg}`;
+    }
+    targets.push(acc);
+  });
+  return targets;
 }
 
 export function AddressBar({ path, onNavigate }: AddressBarProps) {
@@ -23,6 +58,7 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(path);
   const segments = splitPath(path);
+  const targets = buildTargets(path, segments);
 
   const commit = () => {
     const next = draft.trim();
@@ -55,16 +91,13 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
     );
   }
 
-  let acc = '';
   return (
     <div className="flex items-center gap-0.5 min-w-0 flex-1 overflow-x-auto text-xs">
       {segments.length === 0 ? (
         <span className="text-muted-foreground px-1">{t('explorer.addressPlaceholder')}</span>
       ) : (
         segments.map((seg, idx) => {
-          const prev = acc;
-          acc = idx === 0 && seg.endsWith('\\') ? seg : `${prev}${prev ? '/' : ''}${seg}`;
-          const target = acc;
+          const target = targets[idx] ?? seg;
           const last = idx === segments.length - 1;
           return (
             <span key={`${idx}:${seg}`} className="flex items-center shrink-0">
@@ -72,6 +105,7 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
               <button
                 type="button"
                 onClick={() => {
+                  // 현재 탭에서 이동한다. 새 탭을 열지 않는다.
                   if (!last) onNavigate(target);
                 }}
                 className={cn(

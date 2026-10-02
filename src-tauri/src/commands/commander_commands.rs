@@ -270,6 +270,26 @@ fn emit_to(app: &tauri::AppHandle, event: FcProgressEvent) {
 
 // ---------- 경로 유틸 ----------
 
+/// UI에 전달하는 경로 문자열. Windows canonicalize가 반환하는 `\\?\` verbatim
+/// 접두를 벗겨 일반 경로로 되돌린다. 프런트의 브레드크럼이 verbatim을
+/// `?/C:/...` 형태로 조합해 os error 123을 내는 문제를 막는다.
+#[cfg(target_os = "windows")]
+fn display_path_string(p: &Path) -> String {
+    let s = p.to_string_lossy();
+    if let Some(stripped) = s.strip_prefix(r"\\?\UNC\") {
+        return format!(r"\\{}", stripped);
+    }
+    if let Some(stripped) = s.strip_prefix(r"\\?\") {
+        return stripped.to_string();
+    }
+    s.into_owned()
+}
+
+#[cfg(not(target_os = "windows"))]
+fn display_path_string(p: &Path) -> String {
+    p.to_string_lossy().into_owned()
+}
+
 fn system_write_prefixes() -> Vec<PathBuf> {
     let mut out = Vec::new();
     #[cfg(target_os = "windows")]
@@ -343,8 +363,8 @@ fn entry_of(path: &Path) -> Result<FcEntry, String> {
         name: path
             .file_name()
             .map(|n| n.to_string_lossy().into_owned())
-            .unwrap_or_else(|| path.to_string_lossy().into_owned()),
-        path: path.to_string_lossy().into_owned(),
+            .unwrap_or_else(|| display_path_string(path)),
+        path: display_path_string(path),
         kind,
         size: if ft.is_file() { md.len() } else { 0 },
         modified_ms,
@@ -1073,7 +1093,7 @@ fn run_search(
                     emit(FcProgressEvent::Match {
                         job_id: jid.clone(),
                         m: FcSearchMatch {
-                            path: path.to_string_lossy().into_owned(),
+                            path: display_path_string(path),
                             is_dir: false,
                             line_number: Some(idx + 1),
                             line_content: Some(short),
@@ -1095,7 +1115,7 @@ fn run_search(
         emit(FcProgressEvent::Match {
             job_id: jid.clone(),
             m: FcSearchMatch {
-                path: path.to_string_lossy().into_owned(),
+                path: display_path_string(path),
                 is_dir,
                 line_number: None,
                 line_content: None,
@@ -1744,6 +1764,30 @@ mod tests {
     }
 
     fn silent_emit(_: FcProgressEvent) {}
+
+    #[test]
+    fn test_display_path_string_strips_verbatim_prefix() {
+        // UI로 verbatim(`\\?\`) 경로가 노출되면 브레드크럼이 `?/C:/...`로 조합돼
+        // os error 123을 낸다.
+        #[cfg(target_os = "windows")]
+        {
+            assert_eq!(
+                display_path_string(Path::new(r"\\?\C:\Workspace\test")),
+                r"C:\Workspace\test"
+            );
+            assert_eq!(
+                display_path_string(Path::new(r"\\?\UNC\server\share\dir")),
+                r"\\server\share\dir"
+            );
+        }
+        #[cfg(not(target_os = "windows"))]
+        {
+            assert_eq!(
+                display_path_string(Path::new("/tmp/vanilla-test")),
+                "/tmp/vanilla-test"
+            );
+        }
+    }
 
     #[test]
     fn test_copy_rename_and_skip_conflicts() {

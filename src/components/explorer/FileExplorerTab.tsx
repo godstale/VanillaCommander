@@ -102,6 +102,22 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   );
   const oppositePath = ((oppositeExplorer?.meta ?? {}) as ExplorerMeta).path ?? null;
 
+  // 사이드바 즐겨찾기/시스템 폴더 클릭 등 외부에서 meta.path가 바뀌면 현재 탭에서 이동한다.
+  const metaPath = meta.path ?? '';
+  useEffect(() => {
+    if (metaPath && metaPath !== path) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setBack((prev) => [...prev, path]);
+      setFwd([]);
+      setPath(metaPath);
+      setSelected([]);
+      setActivePath(null);
+      setSearchJobId(null);
+      setSearchText('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [metaPath]);
+
   const persist = useCallback(
     (patch: Partial<ExplorerMeta>, title?: string) => {
       updateTab(tab.id, {
