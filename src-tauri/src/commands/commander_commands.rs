@@ -1620,6 +1620,105 @@ pub fn fc_read_text_head(path: String, max_bytes: Option<u64>) -> Result<FcTextH
     })
 }
 
+/// P11-33: Office Open XML(pptx/docx) 텍스트를 zip에서 직접 추출한다.
+/// pptx는 슬라이드 `ppt/slides/slideN.xml`의 `<a:t>`, docx는
+/// `word/document.xml`의 `<w:t>`를 순서대로 모은다. 전체를 JS 메모리로
+/// 올리지 않아 대용량 문서에 유리하다.
+#[tauri::command]
+pub fn fc_office_text(path: String) -> Result<String, String> {
+    const MAX_CHARS: usize = 200_000;
+    let verified = resolve_user_path(&path, true)?;
+    let ext = verified
+        .extension()
+        .and_then(|e| e.to_str())
+        .map(|e| e.to_lowercase())
+        .unwrap_or_default();
+    let (inner_filter, tag): (Box<dyn Fn(&str) -> bool>, &str) = match ext.as_str() {
+        "pptx" => (
+            Box::new(|n: &str| {
+                n.starts_with("ppt/slides/slide")
+                    && n.ends_with(".xml")
+                    && n["ppt/slides/slide".len()..n.len() - 4]
+                        .chars()
+                        .all(|c| c.is_ascii_digit())
+            }),
+            "a:t",
+        ),
+        "docx" => (Box::new(|n: &str| n == "word/document.xml"), "w:t"),
+        _ => return Err(format!("fc_office_text supports pptx/docx only: {}", path)),
+    };
+
+    let file =
+        std::fs::File::open(&verified).map_err(|e| format!("Cannot open '{}': {}", path, e))?;
+    let mut archive =
+        zip::ZipArchive::new(file).map_err(|e| format!("Not a valid office file: {}", e))?;
+    let mut names: Vec<String> = Vec::new();
+    for i in 0..archive.len() {
+        let entry = archive
+            .by_index(i)
+            .map_err(|e| format!("Zip entry error: {}", e))?;
+        let name = entry.name().to_string();
+        if inner_filter(&name) {
+            names.push(name);
+        }
+    }
+    names.sort();
+    if names.is_empty() {
+        return Err("No readable text found in office file".to_string());
+    }
+
+    let open_tag = format!("<{}>", tag);
+    let open_tag_attr = format!("<{} ", tag);
+    let close_tag = format!("</{}>", tag);
+    let mut out = String::new();
+    for (idx, name) in names.iter().enumerate() {
+        let mut entry = archive
+            .by_name(name)
+            .map_err(|e| format!("Zip entry error: {}", e))?;
+        let mut xml = String::new();
+        std::io::Read::read_to_string(&mut entry, &mut xml)
+            .map_err(|e| format!("Zip entry error: {}", e))?;
+        drop(entry);
+        if ext == "pptx" {
+            out.push_str(&format!("[slide {}]\n", idx + 1));
+        }
+        let mut rest = xml.as_str();
+        while let Some(start) = rest.find(&open_tag).or_else(|| rest.find(&open_tag_attr)) {
+            let after_open = if rest[start..].starts_with(&open_tag) {
+                &rest[start + open_tag.len()..]
+            } else {
+                // `<w:t xml:space="preserve">` 같은 속성형은 '>'까지 건너뛴다.
+                match rest[start..].find('>') {
+                    Some(pos) => &rest[start + pos + 1..],
+                    None => break,
+                }
+            };
+            match after_open.find(&close_tag) {
+                Some(end) => {
+                    let text = after_open[..end].trim();
+                    if !text.is_empty() {
+                        out.push_str(text);
+                        out.push('\n');
+                        if out.len() >= MAX_CHARS {
+                            break;
+                        }
+                    }
+                    rest = &after_open[end + close_tag.len()..];
+                }
+                None => break,
+            }
+        }
+        if out.len() >= MAX_CHARS {
+            break;
+        }
+        out.push('\n');
+    }
+    if out.len() > MAX_CHARS {
+        out.truncate(MAX_CHARS);
+    }
+    Ok(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1901,6 +2000,68 @@ mod tests {
         assert!(bytes.truncated);
         assert_eq!(bytes.size as usize, content.as_bytes().len());
         assert_eq!(bytes.base64.len(), 12); // 8 bytes -> 12 base64 chars
+
+        let _ = std::fs::remove_dir_all(&base);
+    }
+
+    fn write_office_zip(path: &std::path::Path, entries: &[(&str, &str)]) {
+        let file = std::fs::File::create(path).unwrap();
+        let mut zip = zip::ZipWriter::new(file);
+        let options =
+            zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored);
+        for (name, content) in entries {
+            zip.start_file(*name, options).unwrap();
+            std::io::Write::write_all(&mut zip, content.as_bytes()).unwrap();
+        }
+        zip.finish().unwrap();
+    }
+
+    #[test]
+    fn test_office_text_extracts_pptx_and_docx() {
+        let _guard = scope_test_lock();
+        let base = unique_base("office");
+        std::fs::create_dir_all(&base).unwrap();
+
+        let pptx = base.join("deck.pptx");
+        write_office_zip(
+            &pptx,
+            &[
+                (
+                    "ppt/slides/slide1.xml",
+                    r#"<p:sld><p:txBody><a:p><a:r><a:t>첫 슬라이드</a:t></a:r></a:p></p:txBody></p:sld>"#,
+                ),
+                (
+                    "ppt/slides/slide2.xml",
+                    r#"<p:sld><a:t>둘째</a:t><a:t>셋째</a:t></p:sld>"#,
+                ),
+                ("ppt/slides/_rels/slide1.xml.rels", "<rels/>"),
+            ],
+        );
+        let text = fc_office_text(pptx.to_string_lossy().into_owned()).unwrap();
+        assert!(text.contains("[slide 1]"), "{}", text);
+        assert!(text.contains("첫 슬라이드"), "{}", text);
+        assert!(text.contains("[slide 2]"), "{}", text);
+        assert!(text.contains("둘째"), "{}", text);
+
+        let docx = base.join("doc.docx");
+        write_office_zip(
+            &docx,
+            &[(
+                "word/document.xml",
+                r#"<w:document><w:body><w:p><w:r><w:t>본문</w:t></w:r><w:r><w:t xml:space="preserve"> 두번째</w:t></w:r></w:p></w:body></w:document>"#,
+            )],
+        );
+        let text = fc_office_text(docx.to_string_lossy().into_owned()).unwrap();
+        assert!(text.contains("본문"), "{}", text);
+        assert!(text.contains("두번째"), "{}", text);
+
+        // 미지원 확장자·깨진 zip은 실패한다.
+        let txt = base.join("plain.txt");
+        std::fs::write(&txt, "hi").unwrap();
+        assert!(fc_office_text(txt.to_string_lossy().into_owned()).is_err());
+        let broken = base.join("broken.pptx");
+        std::fs::write(&broken, "not a zip").unwrap();
+        assert!(fc_office_text(broken.to_string_lossy().into_owned()).is_err());
 
         let _ = std::fs::remove_dir_all(&base);
     }

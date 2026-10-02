@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import type { AgentTool, AgentToolResult } from '@/lib/agent/types';
 import { strArg } from './common';
-import { parseDocument } from '@/lib/parsers/builtin';
+// P11-33: 외부 오버라이드 → 내장 우선순위 디스패치를 쓴다.
+import { parseDocument, ParseError } from '@/lib/parsers/index';
 
 const RawParams = z.object({
   path: z.string().min(1).describe('Document path (pdf/docx/xlsx/csv/pptx/text)'),
@@ -38,7 +39,21 @@ export function createDocReadTool(): AgentTool<typeof Params> {
       _toolCallId: string,
       params: z.infer<typeof Params>,
     ): Promise<AgentToolResult> {
-      const parsed = await parseDocument(params.path);
+      let parsed;
+      try {
+        parsed = await parseDocument(params.path);
+      } catch (err) {
+        // 스캔 PDF 등은 실패 사유를 그대로 돌려준다 (OCR·비전 안내 포함).
+        const message = err instanceof ParseError ? err.message : err instanceof Error ? err.message : String(err);
+        return {
+          content: `[${params.path}] parse failed: ${message}`,
+          details: {
+            path: params.path,
+            reason: err instanceof ParseError ? err.reason : 'read-failed',
+          },
+          isError: true,
+        };
+      }
       const text =
         parsed.text.length > (params.maxChars ?? 20000)
           ? parsed.text.slice(0, params.maxChars ?? 20000)

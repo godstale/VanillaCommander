@@ -38,9 +38,11 @@ vi.mock('@tauri-apps/api/event', () => ({
 
 vi.mock('@/lib/parsers/builtin', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@/lib/parsers/builtin')>();
+  const stub = async () => ({ text: 'parsed text', truncated: false, method: 'text' });
   return {
     ...actual,
-    parseDocument: vi.fn(async () => ({ text: 'parsed text', truncated: false, method: 'text' })),
+    parseDocument: vi.fn(stub),
+    parseBuiltinDocument: vi.fn(stub),
   };
 });
 

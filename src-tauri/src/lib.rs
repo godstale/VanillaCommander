@@ -89,6 +89,7 @@ pub fn run() {
             fc_read_file_bytes,
             fc_read_text_head,
             fc_write_bytes,
+            fc_office_text,
             wiki_watch_set,
             wiki_watch_stop,
             wiki_watch_status,

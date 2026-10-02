@@ -4,7 +4,7 @@ import * as pdfjs from 'pdfjs-dist';
 import mammoth from 'mammoth';
 import * as XLSX from 'xlsx';
 import JSZip from 'jszip';
-import { fcReadFileBytes } from '@/lib/commander/ipc';
+import { fcOfficeText, fcReadFileBytes } from '@/lib/commander/ipc';
 import { extOf } from '@/lib/commander/openFile';
 
 export const MAX_PARSE_CHARS = 100_000;
@@ -19,7 +19,7 @@ function cap(text: string): { text: string; truncated: boolean } {
   return { text: text.slice(0, MAX_PARSE_CHARS), truncated: true };
 }
 
-async function parsePdf(bytes: Uint8Array): Promise<{ text: string; truncated: boolean }> {
+async function parsePdf(bytes: Uint8Array): Promise<{ text: string; truncated: boolean; pages: number }> {
   const task = pdfjs.getDocument({ data: toArrayBuffer(bytes) });
   const doc = await task.promise;
   try {
@@ -38,6 +38,7 @@ async function parsePdf(bytes: Uint8Array): Promise<{ text: string; truncated: b
     return {
       ...cap(out),
       truncated: out.length > MAX_PARSE_CHARS || doc.numPages > pages,
+      pages: doc.numPages,
     };
   } finally {
     await task.destroy().catch(() => {});
@@ -93,16 +94,32 @@ export interface ParsedDocument {
   text: string;
   truncated: boolean;
   method: string;
+  /** PDF 총 페이지 수 (스캔 판정용, pdfjs만 설정). */
+  pages?: number;
 }
 
-export async function parseDocument(path: string): Promise<ParsedDocument> {
+/**
+ * 내장 파서 직접 실행 (외부 오버라이드 없이). P11-33 `parsers/index`의
+ * `parseDocument`가 외부→내장 우선순위를 담당하므로, 도구·UI는 그쪽을 쓴다.
+ */
+export async function parseBuiltinDocument(path: string): Promise<ParsedDocument> {
   const ext = extOf(path.split(/[\\/]/).pop() ?? path);
+  // P11-33: Office XML은 Rust에서 먼저 추출한다 (대용량을 JS 메모리에
+  // 올리지 않음). 실패하면 기존 JS 구현으로 폴백한다.
+  if (ext === 'pptx' || ext === 'docx') {
+    try {
+      const text = await fcOfficeText(path);
+      return { ...cap(text), method: 'office-rust' };
+    } catch {
+      // JS 폴백으로 계속한다.
+    }
+  }
   const res = await fcReadFileBytes(path);
   const raw = Uint8Array.from(atob(res.base64), (c) => c.charCodeAt(0));
   switch (ext) {
     case 'pdf': {
       const r = await parsePdf(raw);
-      return { ...r, method: 'pdfjs' };
+      return { text: r.text, truncated: r.truncated, method: 'pdfjs', pages: r.pages };
     }
     case 'docx': {
       const r = await parseDocx(raw);
@@ -124,3 +141,6 @@ export async function parseDocument(path: string): Promise<ParsedDocument> {
     }
   }
 }
+
+/** 기존 이름 호환 별칭. 신규 코드는 `parseBuiltinDocument`를 쓴다. */
+export const parseDocument = parseBuiltinDocument;

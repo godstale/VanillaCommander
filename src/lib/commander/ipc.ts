@@ -130,6 +130,11 @@ export async function fcWriteBytes(path: string, base64: string): Promise<number
   return invoke<number>('fc_write_bytes', { path, base64 });
 }
 
+/** P11-33: Office Open XML(pptx/docx) 텍스트를 Rust에서 직접 추출한다. */
+export async function fcOfficeText(path: string): Promise<string> {
+  return invoke<string>('fc_office_text', { path });
+}
+
 export async function fcReveal(path: string): Promise<void> {
   return invoke<void>('fc_reveal', { path });
 }
