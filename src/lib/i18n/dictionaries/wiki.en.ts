@@ -15,6 +15,7 @@ export const wikiEn: Dict = {
   'wiki.pagesEmpty': 'No saved pages',
   'wiki.openSettings': 'Wiki settings',
   'wiki.refresh': 'Refresh',
+  'wiki.pipelineActive': 'Processing wiki files',
   'wiki.status.queued': 'Queued',
   'wiki.status.processing': 'Processing',
   'wiki.status.done': 'Done',

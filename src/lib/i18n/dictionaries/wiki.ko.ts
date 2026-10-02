@@ -15,6 +15,7 @@ export const wikiKo: Dict = {
   'wiki.pagesEmpty': '저장된 페이지가 없습니다',
   'wiki.openSettings': '위키 설정',
   'wiki.refresh': '새로고침',
+  'wiki.pipelineActive': '위키 처리 중',
   'wiki.status.queued': '대기',
   'wiki.status.processing': '처리 중',
   'wiki.status.done': '완료',
