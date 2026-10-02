@@ -93,12 +93,10 @@ describe('AgentCard connection status', () => {
     expect(onCheckConnection).toHaveBeenCalledWith(mockAgent);
   });
 
-  it('triggers onOpenMonitor when clicking the status icon button if onOpenMonitor is provided', () => {
-    const onOpenMonitor = vi.fn();
+  it('shows only model and context badges plus chat/edit buttons (P11-20)', () => {
     render(
       <AgentCard
         agent={mockAgent}
-        onOpenMonitor={onOpenMonitor}
         onStartChat={vi.fn()}
         onEdit={vi.fn()}
         onSetDefault={vi.fn()}
@@ -106,10 +104,12 @@ describe('AgentCard connection status', () => {
       />,
     );
 
-    const statusButton = screen.getByRole('button', { name: /에이전트 연결 상태/i });
-    fireEvent.click(statusButton);
-
-    expect(onOpenMonitor).toHaveBeenCalledWith(mockAgent);
+    expect(screen.getByText('qwen2.5:7b')).toBeInTheDocument();
+    expect(screen.getByText('8k ctx')).toBeInTheDocument();
+    expect(screen.getByText('대화 시작')).toBeInTheDocument();
+    expect(screen.queryByText('모니터링')).toBeNull();
+    expect(screen.queryByText('통계')).toBeNull();
+    expect(screen.queryByText('로그')).toBeNull();
   });
 
   it('triggers onCheckConnection when clicking the header refresh button', () => {
@@ -125,7 +125,7 @@ describe('AgentCard connection status', () => {
       />,
     );
 
-    const refreshButton = screen.getByTitle('연결 상태 확인');
+    const refreshButton = screen.getByRole('button', { name: '연결 상태 확인' });
     fireEvent.click(refreshButton);
 
     expect(onCheckConnection).toHaveBeenCalledWith(mockAgent);
@@ -145,6 +145,6 @@ describe('AgentCard connection status', () => {
 
     const statusButton = screen.getByRole('button', { name: /에이전트 연결 상태/i });
     expect(statusButton).toBeDisabled();
-    expect(statusButton.getAttribute('title')).toContain('확인 중');
+    expect(statusButton.getAttribute('title')).toBe('연결 상태 확인');
   });
 });

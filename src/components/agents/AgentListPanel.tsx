@@ -91,35 +91,6 @@ export function AgentListPanel() {
     });
   };
 
-  const handleOpenMonitor = (agent: Agent) => {
-    openTab({
-      id: `agent-monitor:${agent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.monitor', { name: agent.name }),
-      meta: { agentId: agent.id },
-    });
-  };
-
-  // P11-01: 'agent-stats' 탭은 제거됨. 통계·로그 버튼은 P11-20에서 삭제 예정이라,
-  // 그전까지는 에이전트 모니터 탭으로 연결한다.
-  const handleShowStats = (agent: Agent) => {
-    openTab({
-      id: `agent-monitor:${agent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.stats', { name: agent.name }),
-      meta: { agentId: agent.id },
-    });
-  };
-
-  const handleShowLogs = (agent: Agent) => {
-    openTab({
-      id: `agent-monitor:${agent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.log', { name: agent.name }),
-      meta: { agentId: agent.id },
-    });
-  };
-
   const handleEditAgent = (agent: Agent) => {
     openTab({
       id: `agent-editor:${agent.id}`,
@@ -235,11 +206,8 @@ export function AgentListPanel() {
               status={statuses[agent.id] ?? 'unknown'}
               isChecking={!!checkingMap[agent.id] || isCheckingAll}
               onCheckConnection={handleCheckSingle}
-              onOpenMonitor={handleOpenMonitor}
               isOnlyAgent={agents.length <= 1}
               onStartChat={handleStartChat}
-              onShowStats={handleShowStats}
-              onShowLogs={handleShowLogs}
               onEdit={handleEditAgent}
               onDuplicate={handleDuplicate}
               onSetDefault={handleSetDefault}

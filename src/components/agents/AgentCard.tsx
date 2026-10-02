@@ -7,12 +7,7 @@ import {
   Copy,
   Star,
   Cpu,
-  Thermometer,
-  Wrench,
-  BookOpen,
   Layers,
-  Activity,
-  Terminal,
   RefreshCw,
   Loader2,
 } from 'lucide-react';
@@ -34,26 +29,21 @@ export interface AgentCardProps {
   status?: AgentConnectionStatus;
   isChecking?: boolean;
   onCheckConnection?: (agent: Agent) => void;
-  onOpenMonitor?: (agent: Agent) => void;
   onStartChat: (agent: Agent) => void;
-  onShowStats?: (agent: Agent) => void;
-  onShowLogs?: (agent: Agent) => void;
   onEdit: (agent: Agent) => void;
   onDuplicate?: (agent: Agent) => void;
   onSetDefault: (agent: Agent) => void;
   onDelete: (agent: Agent) => void;
 }
 
+// P11-20: 이름·기본 배지·상태·설명·모델·컨텍스트만 표시. 버튼은 대화 시작·수정.
 export const AgentCard: React.FC<AgentCardProps> = ({
   agent,
   isOnlyAgent,
   status = 'unknown',
   isChecking = false,
   onCheckConnection,
-  onOpenMonitor,
   onStartChat,
-  onShowStats,
-  onShowLogs,
   onEdit,
   onDuplicate,
   onSetDefault,
@@ -105,10 +95,10 @@ export const AgentCard: React.FC<AgentCardProps> = ({
           <div className="flex flex-1 items-center gap-2 min-w-0">
             <button
               type="button"
-              onClick={() => (onOpenMonitor ? onOpenMonitor(agent) : onCheckConnection?.(agent))}
+              onClick={() => onCheckConnection?.(agent)}
               disabled={isChecking}
               className={`relative h-8 w-8 rounded-lg border flex items-center justify-center shrink-0 transition-all cursor-pointer hover:opacity-85 hover:scale-105 active:scale-95 focus:outline-none focus:ring-1 focus:ring-ring ${statusConfig.containerClass}`}
-              title={t('agentCard.statusTitle', { label: statusConfig.label, checking: isChecking ? t('agentCard.checking') : '' })}
+              title={t('agentCard.check')}
               aria-label={t('agentCard.statusLabel', { label: statusConfig.label })}
             >
               {isChecking ? (
@@ -181,7 +171,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({
           </div>
         </div>
 
-        {/* Metadata Badges */}
+        {/* Metadata Badges: 모델·컨텍스트만 */}
         <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-muted-foreground">
           <span className="flex items-center gap-1 bg-muted/60 px-1.5 py-0.5 rounded">
             <Cpu className="h-3 w-3 text-primary" />
@@ -195,24 +185,10 @@ export const AgentCard: React.FC<AgentCardProps> = ({
                 : '8k ctx'}
             </span>
           </span>
-          <span className="flex items-center gap-1 bg-muted/60 px-1.5 py-0.5 rounded">
-            <Thermometer className="h-3 w-3" />
-            <span>{agent.temperature}</span>
-          </span>
-          <span className="flex items-center gap-1 bg-muted/60 px-1.5 py-0.5 rounded">
-            <Wrench className="h-3 w-3" />
-            <span>{t('agentCard.tools', { n: agent.enabledBuiltinTools.length })}</span>
-          </span>
-          {agent.enabledSkills.length > 0 && (
-            <span className="flex items-center gap-1 bg-muted/60 px-1.5 py-0.5 rounded">
-              <BookOpen className="h-3 w-3 text-primary" />
-              <span>{t('agentCard.skills', { n: agent.enabledSkills.length })}</span>
-            </span>
-          )}
         </div>
 
-        {/* Action Buttons: Start Conversation + Edit side-by-side, Statistics & Logs */}
-        <div className="pt-1 space-y-1.5">
+        {/* Action Buttons: 대화 시작 + 수정 */}
+        <div className="pt-1">
           <div className="flex gap-1.5">
             <Button
               type="button"
@@ -234,44 +210,6 @@ export const AgentCard: React.FC<AgentCardProps> = ({
             >
               <Edit2 className="h-3.5 w-3.5" />
               <span>{t('agentCard.editShort')}</span>
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-3 gap-1.5">
-            <Button
-              type="button"
-              size="sm"
-              variant="ghost"
-              onClick={() => onOpenMonitor?.(agent)}
-              className="w-full h-7 text-[10px] px-1 flex items-center justify-center gap-1 text-primary hover:text-primary hover:bg-primary/10 transition-colors border border-primary/30 cursor-pointer"
-              title={t('agentCard.monitorTitle')}
-            >
-              <Activity className="h-3 w-3 text-primary" />
-              <span>{t('agentCard.monitor')}</span>
-            </Button>
-
-            <Button
-              type="button"
-              size="sm"
-              variant="ghost"
-              onClick={() => onShowStats?.(agent)}
-              className="w-full h-7 text-[10px] px-1 flex items-center justify-center gap-1 text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors border border-border/40 cursor-pointer"
-              title={t('agentCard.statsTitle')}
-            >
-              <Cpu className="h-3 w-3 text-warning" />
-              <span>{t('agentCard.stats')}</span>
-            </Button>
-
-            <Button
-              type="button"
-              size="sm"
-              variant="ghost"
-              onClick={() => onShowLogs?.(agent)}
-              className="w-full h-7 text-[10px] px-1 flex items-center justify-center gap-1 text-muted-foreground hover:text-foreground hover:bg-accent/60 transition-colors border border-border/40 cursor-pointer"
-              title={t('agentCard.logTitle')}
-            >
-              <Terminal className="h-3 w-3 text-primary" />
-              <span>{t('agentCard.log')}</span>
             </Button>
           </div>
         </div>
