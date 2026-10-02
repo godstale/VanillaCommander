@@ -2,6 +2,7 @@ export type Dict = Record<string, string>;
 
 import { integrationsKo } from './integrations.ko';
 import { explorerKo } from './explorer.ko';
+import { viewersKo } from './viewers.ko';
 import { wikiKo } from './wiki.ko';
 import { macrosKo } from './macros.ko';
 import { setupKo } from './setup.ko';
@@ -1079,6 +1080,7 @@ const ko: Dict = {
 
   ...integrationsKo,
   ...explorerKo,
+  ...viewersKo,
   ...wikiKo,
   ...macrosKo,
   ...setupKo,

@@ -23,6 +23,7 @@ import {
 } from '@/lib/commander/ipc';
 import { formatBytes } from '@/lib/commander/format';
 import type { FcEntry } from '@/lib/commander/types';
+import { buildFileTab, extOf, planOpenFile } from '@/lib/commander/openFile';
 import { AddressBar } from './AddressBar';
 import { ExplorerToolbar } from './ExplorerToolbar';
 import { FileList, type SortKey, type SortDir } from './FileList';
@@ -36,20 +37,6 @@ interface ExplorerMeta {
   sortKey?: SortKey;
   sortDir?: SortDir;
   showHidden?: boolean;
-}
-
-const IMAGE_EXTS = new Set(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'ico']);
-const TEXT_EXTS = new Set([
-  'txt', 'md', 'markdown', 'json', 'jsonl', 'csv', 'tsv', 'log',
-  'js', 'jsx', 'ts', 'tsx', 'mjs', 'cjs', 'py', 'rs', 'go', 'java',
-  'c', 'h', 'cpp', 'hpp', 'cs', 'rb', 'php', 'swift', 'kt', 'toml',
-  'yaml', 'yml', 'xml', 'html', 'htm', 'css', 'scss', 'sql', 'sh',
-  'ps1', 'bat', 'cmd', 'ini', 'cfg', 'conf', 'env', 'gitignore',
-]);
-
-function extOf(name: string): string {
-  const idx = name.lastIndexOf('.');
-  return idx >= 0 ? name.slice(idx + 1).toLowerCase() : '';
 }
 
 function baseNameOf(path: string): string {
@@ -273,42 +260,27 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   }, [navigate, path]);
 
   const openPath = useCallback(
-    (target: string, isDir: boolean, name?: string) => {
+    (target: string, isDir: boolean, size = 0) => {
       if (isDir) {
         navigate(target);
         return;
       }
-      const fileName = name ?? baseNameOf(target);
-      const ext = extOf(fileName);
-      if (IMAGE_EXTS.has(ext)) {
-        openTab({
-          id: `image-viewer:${target}`,
-          type: 'image-viewer',
-          title: fileName,
-          meta: { filePath: target },
+      // P11-14: 파일 종류별 라우팅은 openFile에 위임한다.
+      const plan = planOpenFile(target, size);
+      if (plan.action === 'external') {
+        void fcOpenDefault(target).catch((err) => {
+          setError(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
         });
         return;
       }
-      if (TEXT_EXTS.has(ext)) {
-        openTab({
-          id: `editor:${target}`,
-          type: 'editor',
-          title: fileName,
-          meta: { filePath: target },
-        });
-        return;
-      }
-      // P11-14의 openFile 라우팅으로 교체 예정. 그전까지 기본 앱으로 연다.
-      void fcOpenDefault(target).catch((err) => {
-        setError(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
-      });
+      openTab(buildFileTab(plan));
     },
     [navigate, openTab, t],
   );
 
   const openEntry = useCallback(
     (entry: FcEntry) => {
-      openPath(entry.path, entry.kind === 'dir', entry.name);
+      openPath(entry.path, entry.kind === 'dir', entry.size);
     },
     [openPath],
   );

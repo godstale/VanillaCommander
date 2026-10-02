@@ -5,9 +5,11 @@ import type {
   ConflictPolicy,
   FcArchiveEntry,
   FcEntry,
+  FcFileBytes,
   FcOpResult,
   FcStatResult,
   FcSystemFolder,
+  FcTextHead,
 } from './types';
 
 export async function fcListDir(path: string, showHidden = false): Promise<FcEntry[]> {
@@ -108,6 +110,20 @@ export async function fcArchiveList(archive: string): Promise<FcArchiveEntry[]> 
 
 export async function fcOpenDefault(path: string): Promise<void> {
   return invoke<void>('fc_open_default', { path });
+}
+
+export async function fcReadFileBytes(path: string, maxBytes?: number): Promise<FcFileBytes> {
+  return invoke<FcFileBytes>('fc_read_file_bytes', {
+    path,
+    maxBytes: maxBytes ?? null,
+  });
+}
+
+export async function fcReadTextHead(path: string, maxBytes?: number): Promise<FcTextHead> {
+  return invoke<FcTextHead>('fc_read_text_head', {
+    path,
+    maxBytes: maxBytes ?? null,
+  });
 }
 
 export async function fcReveal(path: string): Promise<void> {

@@ -48,6 +48,18 @@ export interface FcOpResult {
   warning: boolean;
 }
 
+export interface FcFileBytes {
+  base64: string;
+  size: number;
+  truncated: boolean;
+}
+
+export interface FcTextHead {
+  text: string;
+  size: number;
+  truncated: boolean;
+}
+
 export type FcJobKind = 'copy' | 'move' | 'zip' | 'unzip' | 'stat' | 'search';
 export type FcJobStatus = 'running' | 'done' | 'error' | 'cancelled';
 

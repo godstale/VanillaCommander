@@ -1,6 +1,7 @@
 import type { Dict } from './ko';
 import { integrationsEn } from './integrations.en';
 import { explorerEn } from './explorer.en';
+import { viewersEn } from './viewers.en';
 import { wikiEn } from './wiki.en';
 import { macrosEn } from './macros.en';
 import { setupEn } from './setup.en';
@@ -1063,6 +1064,7 @@ const en: Dict = {
 
   ...integrationsEn,
   ...explorerEn,
+  ...viewersEn,
   ...wikiEn,
   ...macrosEn,
   ...setupEn,

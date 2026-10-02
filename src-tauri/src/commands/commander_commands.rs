@@ -1538,6 +1538,71 @@ pub fn fc_reveal(path: String) -> Result<(), String> {
     reveal_in_explorer(path, None)
 }
 
+#[derive(Debug, Clone, Serialize)]
+pub struct FcFileBytes {
+    pub base64: String,
+    pub size: u64,
+    pub truncated: bool,
+}
+
+fn read_capped(path: &Path, max_bytes: u64) -> Result<(Vec<u8>, u64, bool), String> {
+    let md = std::fs::metadata(path)
+        .map_err(|e| format!("Cannot stat '{}': {}", path.display(), e))?;
+    if md.is_dir() {
+        return Err(format!("Not a file: {}", path.display()));
+    }
+    let size = md.len();
+    let take = size.min(max_bytes);
+    let file =
+        std::fs::File::open(path).map_err(|e| format!("Cannot open '{}': {}", path.display(), e))?;
+    let mut buf = Vec::with_capacity(take.min(16 * 1024 * 1024) as usize);
+    let mut limited = file.take(take);
+    std::io::copy(&mut limited, &mut buf).map_err(|e| e.to_string())?;
+    Ok((buf, size, size > max_bytes))
+}
+
+/// 바이너리 뷰어용 앞부분 읽기 (base64). CSP·asset 우회 목적.
+#[tauri::command]
+pub fn fc_read_file_bytes(path: String, max_bytes: Option<u64>) -> Result<FcFileBytes, String> {
+    use base64::Engine;
+    let verified = resolve_user_path(&path, true)?;
+    let (buf, size, truncated) = read_capped(&verified, max_bytes.unwrap_or(64 * 1024 * 1024))?;
+    Ok(FcFileBytes {
+        base64: base64::engine::general_purpose::STANDARD.encode(&buf),
+        size,
+        truncated,
+    })
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct FcTextHead {
+    pub text: String,
+    pub size: u64,
+    pub truncated: bool,
+}
+
+/// 대용량 텍스트 앞부분 읽기 (문자 경계 절단).
+#[tauri::command]
+pub fn fc_read_text_head(path: String, max_bytes: Option<u64>) -> Result<FcTextHead, String> {
+    let verified = resolve_user_path(&path, true)?;
+    let (buf, size, mut truncated) = read_capped(&verified, max_bytes.unwrap_or(200_000))?;
+    let mut end = buf.len();
+    while !std::str::from_utf8(&buf[..end]).is_ok() && end > 0 {
+        end -= 1;
+    }
+    if end != buf.len() {
+        truncated = true;
+    }
+    let text = std::str::from_utf8(&buf[..end])
+        .map_err(|e| e.to_string())?
+        .to_string();
+    Ok(FcTextHead {
+        text,
+        size,
+        truncated,
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1792,6 +1857,34 @@ mod tests {
         std::fs::write(&target, "x").unwrap();
         fc_trash(vec![target.to_string_lossy().into_owned()]).unwrap();
         assert!(!target.exists());
+        let _ = std::fs::remove_dir_all(&base);
+    }
+
+    #[test]
+    fn test_read_bytes_and_text_head() {
+        let _guard = scope_test_lock();
+        let base = unique_base("readcap");
+        std::fs::create_dir_all(&base).unwrap();
+        let target = base.join("data.bin");
+        let content = "가나다라".repeat(100);
+        std::fs::write(&target, content.as_bytes()).unwrap();
+        let p = target.to_string_lossy().into_owned();
+
+        let head = fc_read_text_head(p.clone(), Some(10)).unwrap();
+        assert!(head.truncated);
+        assert!(head.text.chars().count() <= 10);
+        // 문자 경계에서 잘렸는지 확인 (replacement character 없음).
+        assert!(!head.text.contains('�'));
+
+        let full = fc_read_text_head(p.clone(), None).unwrap();
+        assert!(!full.truncated);
+        assert_eq!(full.text, content);
+
+        let bytes = fc_read_file_bytes(p, Some(8)).unwrap();
+        assert!(bytes.truncated);
+        assert_eq!(bytes.size as usize, content.as_bytes().len());
+        assert_eq!(bytes.base64.len(), 12); // 8 bytes -> 12 base64 chars
+
         let _ = std::fs::remove_dir_all(&base);
     }
 }
