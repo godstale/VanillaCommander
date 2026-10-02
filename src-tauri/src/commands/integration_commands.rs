@@ -109,6 +109,44 @@ pub fn resolve_cwd_for_cli(cwd: &Option<String>, fallback: &PathBuf) -> Result<P
     }
 }
 
+/// PATH에서 실행 파일을 찾아 절대 경로로 반환한다 (P11-22 외부 에이전트 자동 탐지).
+#[tauri::command]
+pub fn find_executable(name: String) -> Result<String, String> {
+    let trimmed = name.trim();
+    if trimmed.is_empty() {
+        return Err("Empty executable name".to_string());
+    }
+    // 절대/상대 경로 지정은 그대로 검증한다.
+    if trimmed.contains('/') || trimmed.contains('\\') {
+        return Ok(validate_executable(trimmed)?.to_string_lossy().into_owned());
+    }
+    let path_var = std::env::var_os("PATH").unwrap_or_default();
+    let mut dirs: Vec<PathBuf> = std::env::split_paths(&path_var).collect();
+    // Windows 흔한 설치 경로를 뒤에 붙인다.
+    #[cfg(target_os = "windows")]
+    {
+        if let Ok(local) = std::env::var("LOCALAPPDATA") {
+            dirs.push(PathBuf::from(local).join("Programs"));
+        }
+        if let Ok(home) = std::env::var("USERPROFILE") {
+            dirs.push(PathBuf::from(home).join(".local").join("bin"));
+        }
+    }
+    #[cfg(target_os = "windows")]
+    let exts = ["", ".exe", ".cmd", ".bat"];
+    #[cfg(not(target_os = "windows"))]
+    let exts = [""];
+    for dir in &dirs {
+        for ext in exts {
+            let candidate = dir.join(format!("{}{}", trimmed, ext));
+            if candidate.is_file() {
+                return Ok(candidate.to_string_lossy().into_owned());
+            }
+        }
+    }
+    Err(format!("Executable not found in PATH: {}", trimmed))
+}
+
 #[tauri::command]
 pub async fn integration_run_cli(
     executable_path: String,
@@ -202,6 +240,12 @@ pub async fn integration_run_cli(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_find_executable_missing() {
+        assert!(find_executable("definitely-not-a-real-binary-xyz".to_string()).is_err());
+        assert!(find_executable("  ".to_string()).is_err());
+    }
 
     #[test]
     fn test_relative_path_rejected() {

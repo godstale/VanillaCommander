@@ -66,6 +66,7 @@ pub fn run() {
             llm_http_post_text,
             llm_http_post_stream,
             integration_run_cli,
+            find_executable,
             fc_list_dir,
             fc_system_folders,
             fc_stat,

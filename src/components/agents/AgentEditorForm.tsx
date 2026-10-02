@@ -41,6 +41,14 @@ import {
 import { resolveCompactionSettings } from '@/lib/compaction/settings';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import {
+  listIntegrations,
+  saveIntegration,
+} from '@/lib/db/repositories/integrationsRepo';
+import type { ExternalIntegration } from '@/lib/integrations/types';
+import { IntegrationEditorDialog } from '@/components/integrations/IntegrationEditorDialog';
+import { ConsentDialog } from '@/components/integrations/ConsentDialog';
+import { runIntegrationCli } from '@/lib/integrations/cliRunner';
+import {
   GENERATION_PARAM_META,
   isGenerationParamSupported,
   normalizeGenerationParams,
@@ -255,11 +263,20 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
     setTemperature((prev) => (prev === DEFAULT_TEMPERATURE ? globalDefault : prev));
   }, [mode, initialAgent, settings.defaultTemperature]);
   // LLM Provider (기본 정보 카드 바로 아래 섹션)
-  const [llmProvider, setLlmProvider] = useState<LlmProviderKind>(
-    initialAgent?.llmProvider ?? 'ollama',
+  const [llmProvider, setLlmProvider] = useState<LlmProviderKind>(    initialAgent?.llmProvider ?? 'ollama',
   );
   const [llmBaseUrl, setLlmBaseUrl] = useState(initialAgent?.llmBaseUrl ?? '');
   const [llmApiKey, setLlmApiKey] = useState(initialAgent?.llmApiKey ?? '');
+  // P11-22: 외부 에이전트 연동.
+  const [externalAgentId, setExternalAgentId] = useState<string | null>(
+    initialAgent?.externalAgentId ?? null,
+  );
+  const [integrations, setIntegrations] = useState<ExternalIntegration[]>([]);
+  const [integrationDialogOpen, setIntegrationDialogOpen] = useState(false);
+  const [consentOpen, setConsentOpen] = useState(false);
+  const [consentedKey, setConsentedKey] = useState<string | null>(null);
+  const isExternalAgent = llmProvider === 'external-agent';
+  const selectedIntegration = integrations.find((it) => it.id === externalAgentId) ?? null;
   const [reasoning, setReasoning] = useState<ReasoningMode>(
     initialAgent?.reasoning ?? 'default',
   );
@@ -377,6 +394,8 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
 
   /** 모델 목록 새로고침. openAfter=true면 성공 시 드롭다운을 펼쳐 선택을 유도한다. */
   const refreshModels = async (openAfter = false) => {
+    // P11-22: 외부 에이전트는 모델 목록 조회를 하지 않는다.
+    if (llmProvider === 'external-agent') return;
     setModelsLoading(true);
     try {
       const runtime = resolveAgentLlmRuntime(
@@ -423,6 +442,10 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
    *   자동 성공으로 보지 않고, 안내 배너의 "이 주소로 변경"으로 적용 후 재테스트한다.
    */
   useEffect(() => {
+    // P11-22: 외부 에이전트는 모델 목록 조회를 하지 않는다 (목록은 숨겨진다).
+    if (llmProvider === 'external-agent') {
+      return;
+    }
     let active = true;
     void (async () => {
       setModelsLoading(true);
@@ -483,7 +506,82 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [llmProvider, settings.ollamaBaseUrl, autoTestSeq]);
 
+  // P11-22: 외부 에이전트 연동 목록 (agent-cli만).
+  useEffect(() => {
+    let active = true;
+    void listIntegrations()
+      .then((list) => {
+        if (active) setIntegrations(list.filter((it) => it.kind === 'agent-cli'));
+      })
+      .catch(() => {
+        if (active) setIntegrations([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const refreshIntegrations = async (): Promise<ExternalIntegration[]> => {
+    try {
+      const list = await listIntegrations();
+      const filtered = list.filter((it) => it.kind === 'agent-cli');
+      setIntegrations(filtered);
+      return filtered;
+    } catch {
+      return [];
+    }
+  };
+
+  const handleSelectIntegration = (id: string) => {
+    if (id === '__new__') {
+      setIntegrationDialogOpen(true);
+      return;
+    }
+    const integ = integrations.find((it) => it.id === id) ?? null;
+    setExternalAgentId(id || null);
+    if (integ && !model.trim()) {
+      setModel(integ.name);
+    }
+    setConsentedKey(null);
+    setConnStatus('idle');
+    setConnMessage('');
+  };
+
   const handleTestConnection = async () => {
+    // P11-22: 외부 에이전트는 실행 파일 --version으로 확인한다.
+    if (isExternalAgent) {
+      const integ = integrations.find((it) => it.id === externalAgentId);
+      if (!integ?.cli) {
+        setConnStatus('fail');
+        setConnMessage(t('agentForm.externalAgentNone'));
+        return;
+      }
+      if (!model.trim()) {
+        setConnStatus('fail');
+        setConnMessage(t('agentForm.modelRequired'));
+        return;
+      }
+      setConnStatus('checking');
+      setConnMessage('');
+      try {
+        const out = await runIntegrationCli({
+          executablePath: integ.cli.executablePath,
+          args: ['--version'],
+          timeoutMs: 15000,
+        });
+        if (out.timedOut || out.exitCode !== 0) {
+          setConnStatus('fail');
+          setConnMessage(t('agentForm.disconnected'));
+        } else {
+          setConnStatus('ok');
+          setConnMessage(t('agentForm.externalTestOk'));
+        }
+      } catch (err) {
+        setConnStatus('fail');
+        setConnMessage(err instanceof Error ? err.message : String(err));
+      }
+      return;
+    }
     if (!model.trim()) {
       setConnStatus('fail');
       setConnMessage(t('agentForm.modelRequired'));
@@ -523,6 +621,10 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
   const handleProviderChange = (next: LlmProviderKind) => {
     const prevPreset = getProviderPreset(llmProvider);
     setLlmProvider(next);
+    setConsentedKey(null);
+    if (next !== 'external-agent') {
+      setExternalAgentId(null);
+    }
     setConnStatus('idle');
     setConnMessage('');
     setModelListOpen(false);
@@ -612,6 +714,8 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
       setLlmProvider(initialAgent.llmProvider ?? 'ollama');
       setLlmBaseUrl(initialAgent.llmBaseUrl ?? '');
       setLlmApiKey(initialAgent.llmApiKey ?? '');
+      setExternalAgentId(initialAgent.externalAgentId ?? null);
+      setConsentedKey(null);
       setReasoning(initialAgent.reasoning ?? 'default');
       setReasoningEffort(initialAgent.reasoningEffort ?? 'medium');
       setContextSize(initialAgent.contextSize);
@@ -678,12 +782,21 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
   const initialProvider = initialAgent?.llmProvider ?? 'ollama';
   const initialBaseUrl = (initialAgent?.llmBaseUrl ?? '').trim();
   const initialModel = (initialAgent?.model ?? '').trim();
+  const initialExternalAgentId = initialAgent?.externalAgentId ?? null;
   const fundamentalChanged =
     mode === 'edit' &&
     !!initialAgent &&
     (llmProvider !== initialProvider ||
       llmBaseUrl.trim() !== initialBaseUrl ||
-      model.trim() !== initialModel);
+      model.trim() !== initialModel ||
+      (externalAgentId ?? null) !== initialExternalAgentId);
+
+  // P11-22: 클라우드·외부 에이전트는 저장 시 외부 전송 동의를 받는다.
+  const needsConsent =
+    providerPreset.category === 'cloud' ||
+    providerPreset.category === 'gateway' ||
+    isExternalAgent;
+  const consentKey = `${llmProvider}:${externalAgentId ?? ''}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -697,7 +810,14 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
       setError(t('agentForm.saveBlocked'));
       return;
     }
+    if (needsConsent && consentedKey !== consentKey) {
+      setConsentOpen(true);
+      return;
+    }
+    await doSave();
+  };
 
+  const doSave = async () => {
     setIsSaving(true);
     setError(null);
 
@@ -726,6 +846,8 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
         reasoning,
         reasoningEffort,
         ...normalizedProvider,
+        // P11-22: 외부 에이전트 연동 ID. 다른 종류면 비운다.
+        externalAgentId: isExternalAgent ? (externalAgentId ?? undefined) : undefined,
         // 명시적 undefined 포함: 자동(auto)으로 비운 값이 기존 저장값을 덮어 지운다.
         // 미지원 Provider의 값도 함께 저장하되(값 유실 방지) 런타임 전송에서는 제외된다.
         topP: generation.topP,
@@ -841,8 +963,22 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
               {t('agentForm.provider')}
             </label>
             <select
-              value={llmProvider}
-              onChange={(e) => handleProviderChange(e.target.value as LlmProviderKind)}
+              value={isExternalAgent ? (externalAgentId ? `external:${externalAgentId}` : '__new__') : llmProvider}
+              aria-label={t('agentForm.provider')}
+              onChange={(e) => {
+                const v = e.target.value;
+                if (v === '__new__' || v.startsWith('external:')) {
+                  if (llmProvider !== 'external-agent') {
+                    setLlmProvider('external-agent');
+                    setConsentedKey(null);
+                    setConnStatus('idle');
+                    setConnMessage('');
+                  }
+                  handleSelectIntegration(v === '__new__' ? '__new__' : v.slice('external:'.length));
+                  return;
+                }
+                handleProviderChange(v as LlmProviderKind);
+              }}
               className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
             >
               <optgroup label={t('agentForm.providerGroupLocal')}>
@@ -872,12 +1008,21 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
                   </option>
                 ))}
               </optgroup>
+              <optgroup label={t('agentForm.providerGroupExternal')}>
+                {integrations.map((it) => (
+                  <option key={it.id} value={`external:${it.id}`}>
+                    {it.name}
+                  </option>
+                ))}
+                <option value="__new__">{t('agentForm.newIntegration')}</option>
+              </optgroup>
             </select>
             <span className="text-[10px] text-muted-foreground block leading-tight mt-1.5">
               {providerPreset.hint}
             </span>
           </div>
 
+          {!isExternalAgent && (
           <div>
             <div className="flex items-center justify-between mb-1">
               <label className="text-xs font-medium text-muted-foreground">
@@ -911,9 +1056,27 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
               {t('agentForm.baseUrlAuto', { url: providerPreset.defaultBaseUrl })}
             </span>
           </div>
+          )}
         </div>
 
-        {providerPreset.supportsApiKey && (
+        {isExternalAgent && (
+          <div className="space-y-1.5 rounded-lg border border-border p-3">
+            <label className="font-medium text-xs">{t('agentForm.externalAgent')}</label>
+            {selectedIntegration?.cli ? (
+              <div className="text-[11px] text-muted-foreground space-y-0.5 font-mono break-all">
+                <div>{selectedIntegration.cli.executablePath}</div>
+                <div className="opacity-70">{selectedIntegration.cli.args.join(' ')}</div>
+              </div>
+            ) : (
+              <p className="text-[11px] text-warning">{t('agentForm.externalAgentNone')}</p>
+            )}
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              {t('agentForm.consentNote')}
+            </p>
+          </div>
+        )}
+
+        {!isExternalAgent && providerPreset.supportsApiKey && (
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
               {t('agentForm.apiKey')}
@@ -938,6 +1101,8 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
 
         {/* 모델 선택 (Provider 섹션): 목록 선택 + 직접 입력 콤보박스.
             목록을 가져올 수 없는 경우에도 수동 입력으로 저장 전 연결 테스트가 가능하다. */}
+        {!isExternalAgent && (
+        <>
         <div>
           <div className="flex items-center justify-between mb-1">
             <label
@@ -1071,7 +1236,7 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
             </div>
           )}
         </div>
-
+        </>)}
         <div className="flex items-center gap-2 pt-1">
           <Button
             type="button"
@@ -1125,7 +1290,7 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
           </div>
         )}
 
-        {!isOllamaProvider && (
+        {!isOllamaProvider && !isExternalAgent && (
           <div className="p-2.5 rounded bg-muted/40 border border-border/70 text-[11px] text-muted-foreground leading-relaxed">
             {t('agentForm.manualContextNote')}
           </div>
@@ -1871,6 +2036,38 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
           <span>{fundamentalChanged ? t('agentForm.saveAsNew') : mode === 'edit' ? t('agentForm.save') : t('agentForm.create')}</span>
         </Button>
       </div>
+
+      {integrationDialogOpen && (
+        <IntegrationEditorDialog
+          open
+          initial={null}
+          fixedKind="agent-cli"
+          onClose={() => setIntegrationDialogOpen(false)}
+          onSave={async (draft) => {
+            await saveIntegration(draft);
+            const list = await refreshIntegrations();
+            setIntegrationDialogOpen(false);
+            const created = list.find((it) => it.id === draft.id);
+            if (created) {
+              setLlmProvider('external-agent');
+              handleSelectIntegration(created.id);
+              if (!model.trim()) setModel(created.name);
+            }
+          }}
+        />
+      )}
+
+      <ConsentDialog
+        open={consentOpen}
+        purposes={['chat-agent']}
+        dataClasses={['personal']}
+        onApprove={() => {
+          setConsentedKey(consentKey);
+          setConsentOpen(false);
+          void doSave();
+        }}
+        onDecline={() => setConsentOpen(false)}
+      />
     </form>
   );
 };

@@ -193,7 +193,8 @@ export type LlmProviderKind =
   | 'mistral'
   | 'moonshot'
   | 'together'
-  | 'opencode';
+  | 'opencode'
+  | 'external-agent';
 
 export const DEFAULT_LLM_PROVIDER: LlmProviderKind = 'ollama';
 
@@ -243,6 +244,11 @@ export interface Agent {
   llmBaseUrl?: string;
   /** 클라우드/인증 필요 서버용 API 키. 로컬 런타임은 보통 불필요(Jan은 임의 문자열 가능) */
   llmApiKey?: string;
+  /**
+   * 외부 에이전트 연동 ID (`llmProvider === 'external-agent'`일 때 사용, P11-22).
+   * `external_integrations`의 agent-cli 레코드를 가리킨다.
+   */
+  externalAgentId?: string;
   /**
    * 대화 시작 시 모니터링 자동 시작 여부. 미지정(구 DB 행) 시 true(켜짐)로 해석.
    * on이면 대화 시작 시 자동으로 모니터링 상태로 전환하고,

@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
   useMemo,
+  useRef,
 } from 'react';
 import type { Agent } from '@/lib/types/agent';
 import { DEFAULT_AGENT } from '@/lib/agent/defaultAgent';
@@ -62,6 +63,7 @@ export const AgentsContext = createContext<AgentsContextValue | undefined>(undef
 export function AgentsProvider({ children }: { children: React.ReactNode }) {
   const [agents, setAgents] = useState<Agent[]>([DEFAULT_AGENT]);
   const [loading, setLoading] = useState(true);
+  const migrationDoneRef = useRef(false);
   // 삭제 후에도 대화 목록에서 이름을 표시하기 위한 id → name 캐시 (localStorage 영속).
   const [knownNames, setKnownNames] = useState<Record<string, string>>(
     loadKnownAgentNames,
@@ -108,6 +110,20 @@ export function AgentsProvider({ children }: { children: React.ReactNode }) {
               // ignore transient error
             }
           }
+        }
+      }
+
+      // P11-22: 평가 시절 llm-api 연동을 클라우드 에이전트로 1회 변환한다.
+      if (!migrationDoneRef.current) {
+        migrationDoneRef.current = true;
+        try {
+          const { migrateLlmApiToAgents } = await import('@/lib/integrations/migration');
+          const n = await migrateLlmApiToAgents();
+          if (n > 0) {
+            list = await agentsRepo.listAgents();
+          }
+        } catch {
+          // ignore transient error
         }
       }
 

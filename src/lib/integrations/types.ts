@@ -27,6 +27,7 @@ const IntegrationLlmProviderSchema = z.enum([
   'moonshot',
   'together',
   'opencode',
+  'external-agent',
 ]) satisfies z.ZodType<LlmProviderKind>;
 
 // 동의 개정(채팅·파일 내용 외부 전송) 시 올린다. 버전이 다르면 기존 동의는 무효.

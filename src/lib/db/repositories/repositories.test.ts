@@ -32,6 +32,7 @@ interface AgentRowMock {
   llm_provider: string | null;
   llm_base_url: string | null;
   llm_api_key: string | null;
+  external_agent_id?: string | null;
   auto_monitor?: number | null;
   is_default: number;
   created_at: string;
@@ -42,6 +43,7 @@ interface SessionRowMock {
   id: string;
   agent_id: string;
   workspace_root: string | null;
+  origin?: string | null;
   title: string;
   created_at: string;
   updated_at: string;
@@ -108,9 +110,11 @@ class MemorySqlDatabase implements SqlDatabase {
         reasoning_effort,
         ...rest
       ] = bindValues;
-      // 신규 스키마(29개): [..., top_p, top_k, repeat_penalty, frequency_penalty,
+      // 신규 스키마(30개): [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, auto_monitor, is_default, created_at, updated_at]
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id,
+      //   auto_monitor, is_default, created_at, updated_at]
+      // 이전 스키마(29개): external_agent_id 없음
       // 이전 스키마(28개): auto_monitor 없음 → 켜짐(1)으로 해석
       // 과도기 스키마(20개): [..., llm_provider, llm_base_url, llm_api_key, is_default, created_at, updated_at]
       // 구 스키마(17개): [..., is_default, created_at, updated_at]
@@ -125,11 +129,31 @@ class MemorySqlDatabase implements SqlDatabase {
       let llm_provider: unknown = 'ollama';
       let llm_base_url: unknown = null;
       let llm_api_key: unknown = null;
+      let external_agent_id: unknown = null;
       let auto_monitor: unknown = 1;
       let is_default: unknown;
       let created_at: unknown;
       let updated_at: unknown;
-      if (rest.length >= 15) {
+      if (rest.length >= 16) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          auto_monitor,
+          is_default,
+          created_at,
+          updated_at,
+        ] = rest;
+      } else if (rest.length >= 15) {
         [
           top_p,
           top_k,
@@ -195,6 +219,7 @@ class MemorySqlDatabase implements SqlDatabase {
         llm_provider: (llm_provider as string) ?? null,
         llm_base_url: (llm_base_url as string) ?? null,
         llm_api_key: (llm_api_key as string) ?? null,
+        external_agent_id: (external_agent_id as string) ?? null,
         auto_monitor: auto_monitor as number | null,
         is_default: is_default as number,
         created_at: created_at as string,
@@ -244,8 +269,9 @@ class MemorySqlDatabase implements SqlDatabase {
       ] = bindValues;
       // 신규 스키마: [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, auto_monitor, is_default, updated_at, id]
-      // 이전 스키마: auto_monitor 없음
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id,
+      //   auto_monitor, is_default, updated_at, id]
+      // 이전 스키마: external_agent_id 없음 / auto_monitor 없음
       // 과도기 스키마: [..., llm_provider, llm_base_url, llm_api_key, is_default, updated_at, id]
       // 구 스키마: [..., is_default, updated_at, id]
       let top_p: unknown;
@@ -259,11 +285,31 @@ class MemorySqlDatabase implements SqlDatabase {
       let llm_provider: unknown;
       let llm_base_url: unknown;
       let llm_api_key: unknown;
+      let external_agent_id: unknown;
       let auto_monitor: unknown;
       let is_default: unknown;
       let updated_at: unknown;
       let id: unknown;
-      if (rest.length >= 15) {
+      if (rest.length >= 16) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          auto_monitor,
+          is_default,
+          updated_at,
+          id,
+        ] = rest;
+      } else if (rest.length >= 15) {
         [
           top_p,
           top_k,
@@ -340,6 +386,7 @@ class MemorySqlDatabase implements SqlDatabase {
           ...(llm_provider !== undefined ? { llm_provider: llm_provider as string } : {}),
           ...(llm_base_url !== undefined ? { llm_base_url: (llm_base_url as string) ?? null } : {}),
           ...(llm_api_key !== undefined ? { llm_api_key: (llm_api_key as string) ?? null } : {}),
+          ...(external_agent_id !== undefined ? { external_agent_id: (external_agent_id as string) ?? null } : {}),
           ...(auto_monitor !== undefined ? { auto_monitor: auto_monitor as number | null } : {}),
           is_default: is_default as number,
           updated_at: updated_at as string,
@@ -355,12 +402,16 @@ class MemorySqlDatabase implements SqlDatabase {
     }
 
     if (q.startsWith('INSERT INTO sessions')) {
-      const [id, agent_id, workspace_root, title, created_at, updated_at] =
-        bindValues;
+      const [id, agent_id, workspace_root, ...rest] = bindValues;
+      const [origin, title, created_at, updated_at] =
+        rest.length === 4
+          ? (rest as [unknown, unknown, unknown, unknown])
+          : ['chat', ...(rest as [unknown, unknown, unknown])];
       this.sessions.set(id as string, {
         id: id as string,
         agent_id: agent_id as string,
         workspace_root: (workspace_root as string) ?? null,
+        origin: (origin as string) ?? 'chat',
         title: title as string,
         created_at: created_at as string,
         updated_at: updated_at as string,

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { open as openFileDialog } from '@tauri-apps/plugin-dialog';
+import { invoke } from '@tauri-apps/api/core';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -28,16 +29,45 @@ interface IntegrationEditorDialogProps {
   initial: ExternalIntegration | null;
   onClose: () => void;
   onSave: (integration: ExternalIntegration) => Promise<void> | void;
+  /** 지정하면 종류 토글이 숨겨지고 이 종류로 고정된다 (P11-22 에이전트 편집용). */
+  fixedKind?: 'agent-cli';
 }
 
 const DEFAULT_TIMEOUT_MS = 180000;
 
-export function IntegrationEditorDialog({ open, initial, onClose, onSave }: IntegrationEditorDialogProps) {
+/** 외부 에이전트 CLI 프리셋 (P11-22, 비대화형 플래그 기준 — 실행 전 연결 테스트 권장). */
+const CLI_PRESETS = {
+  claude: {
+    exe: 'claude',
+    args: ['-p', '--output-format', 'json', '{promptFile}'],
+    promptVia: 'stdin' as const,
+    outputFormat: 'json' as const,
+    jsonPath: 'result',
+  },
+  codex: {
+    exe: 'codex',
+    args: ['exec', '{promptFile}'],
+    promptVia: 'file' as const,
+    outputFormat: 'text' as const,
+    jsonPath: '',
+  },
+  gemini: {
+    exe: 'gemini',
+    args: ['-p', '{promptFile}'],
+    promptVia: 'file' as const,
+    outputFormat: 'text' as const,
+    jsonPath: '',
+  },
+} as const;
+
+type CliPresetKey = keyof typeof CLI_PRESETS;
+
+export function IntegrationEditorDialog({ open, initial, onClose, onSave, fixedKind }: IntegrationEditorDialogProps) {
   const { t } = useLanguage();
   // Mounted fresh on every open (parent renders conditionally), so initializers
   // seed the form from `initial` without a prop-sync effect.
   const [name, setName] = useState(initial?.name ?? '');
-  const [kind, setKind] = useState<'llm-api' | 'agent-cli'>(initial?.kind ?? 'llm-api');
+  const [kind, setKind] = useState<'llm-api' | 'agent-cli'>(fixedKind ?? initial?.kind ?? 'llm-api');
   const [provider, setProvider] = useState<LlmProviderKind>(initial?.llm?.provider ?? 'openai');
   const [baseUrl, setBaseUrl] = useState(
     initial?.llm?.baseUrl ?? LLM_PROVIDER_PRESETS.openai.defaultBaseUrl,
@@ -56,6 +86,7 @@ export function IntegrationEditorDialog({ open, initial, onClose, onSave }: Inte
   const [dataClasses, setDataClasses] = useState<DataClass[]>([...(initial?.allowedDataClasses ?? ['public-bundled'])]);
   const [models, setModels] = useState<string[]>([]);
   const [lookingUp, setLookingUp] = useState(false);
+  const [detectingExe, setDetectingExe] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [consentOpen, setConsentOpen] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -97,6 +128,31 @@ export function IntegrationEditorDialog({ open, initial, onClose, onSave }: Inte
       if (typeof picked === 'string') setExe(picked);
     } catch {
       // dialog cancelled or unavailable; keep manual input
+    }
+  };
+
+  const applyCliPreset = (key: CliPresetKey) => {
+    const preset = CLI_PRESETS[key];
+    setExe(preset.exe);
+    setArgsText(preset.args.join('\n'));
+    setPromptVia(preset.promptVia);
+    setOutputFormat(preset.outputFormat);
+    setJsonPath(preset.jsonPath);
+    setError(null);
+  };
+
+  const handleDetectExe = async () => {
+    const base = exe.trim() || 'claude';
+    const name = base.split(/[\\/]/).pop() ?? base;
+    setDetectingExe(true);
+    setError(null);
+    try {
+      const found = await invoke<string>('find_executable', { name });
+      setExe(found);
+    } catch (err) {
+      setError(t('agentForm.exeDetectFailed', { err: err instanceof Error ? err.message : String(err) }));
+    } finally {
+      setDetectingExe(false);
     }
   };
 
@@ -201,6 +257,7 @@ export function IntegrationEditorDialog({ open, initial, onClose, onSave }: Inte
               <Input value={name} onChange={(e) => setName(e.target.value)} className="text-xs" />
             </div>
 
+            {!fixedKind && (
             <div className="space-y-1.5">
               <label className="font-medium">{t('eval.integrations.fieldKind')}</label>
               <div className="flex gap-2">
@@ -220,6 +277,7 @@ export function IntegrationEditorDialog({ open, initial, onClose, onSave }: Inte
                 </Button>
               </div>
             </div>
+            )}
 
             {kind === 'llm-api' ? (
               <div className="space-y-3 rounded-lg border border-border p-3">
@@ -278,9 +336,26 @@ export function IntegrationEditorDialog({ open, initial, onClose, onSave }: Inte
               <div className="space-y-3 rounded-lg border border-border p-3">
                 <p className="text-[11px] text-muted-foreground">{t('eval.integrations.presetNote')}</p>
                 <div className="space-y-1.5">
+                  <label className="font-medium">{t('agentForm.cliPreset')}</label>
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="outline" size="sm" onClick={() => applyCliPreset('claude')}>
+                      {t('agentForm.cliPresetClaude')}
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => applyCliPreset('codex')}>
+                      {t('agentForm.cliPresetCodex')}
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => applyCliPreset('gemini')}>
+                      {t('agentForm.cliPresetGemini')}
+                    </Button>
+                  </div>
+                </div>
+                <div className="space-y-1.5">
                   <label className="font-medium">{t('eval.integrations.fieldExe')}</label>
                   <div className="flex gap-2">
                     <Input value={exe} onChange={(e) => setExe(e.target.value)} className="text-xs font-mono flex-1" />
+                    <Button variant="outline" size="sm" onClick={() => void handleDetectExe()} disabled={detectingExe}>
+                      {detectingExe ? '...' : t('agentForm.detectExe')}
+                    </Button>
                     <Button variant="outline" size="sm" onClick={() => void handleBrowse()}>
                       {t('eval.integrations.browse')}
                     </Button>
