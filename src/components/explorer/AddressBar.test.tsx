@@ -1,3 +1,4 @@
+import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { screen, fireEvent } from '@testing-library/react';
@@ -71,6 +72,19 @@ describe('AddressBar', () => {
     );
     const input = screen.getByPlaceholderText('경로 입력...') as HTMLInputElement;
     expect(input.value).toBe('C:/work/docs');
+  });
+
+  it('does not enter edit mode on mount under StrictMode (P13-06)', () => {
+    render(
+      <React.StrictMode>
+        <SettingsProvider>
+          <AddressBar path="C:/work/docs" onNavigate={vi.fn()} editSignal={0} />
+        </SettingsProvider>
+      </React.StrictMode>,
+    );
+    // 이중 마운트에도 직접 입력창이 뜨지 않고 브레드크럼이 유지된다.
+    expect(screen.queryByPlaceholderText('경로 입력...')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'docs' })).toBeInTheDocument();
   });
 
   it('shows a context menu on segment right-click with terminal entry', () => {

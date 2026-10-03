@@ -38,8 +38,24 @@ export function ExplorerChatDock({
   };
 
   // P13-05: 도크가 열리면 채팅 입력창에 자동으로 포커스를 준다 (커서 표시).
+  // P13-06: 입력창이 비동기로 늦게 렌더링돼도 잡을 수 있도록 감시한다.
   useEffect(() => {
-    dockRef.current?.querySelector('textarea')?.focus({ preventScroll: true });
+    const root = dockRef.current;
+    if (!root) return;
+    const focusInput = () => {
+      const el = root.querySelector('textarea:not([disabled])');
+      if (el) {
+        (el as HTMLElement).focus({ preventScroll: true });
+        return true;
+      }
+      return false;
+    };
+    if (focusInput()) return;
+    const mo = new MutationObserver(() => {
+      if (focusInput()) mo.disconnect();
+    });
+    mo.observe(root, { childList: true, subtree: true });
+    return () => mo.disconnect();
   }, []);
 
   return (

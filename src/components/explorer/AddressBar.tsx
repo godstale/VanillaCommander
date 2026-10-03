@@ -82,12 +82,13 @@ export function AddressBar({ path, onNavigate, editSignal, onError }: AddressBar
   }, [path]);
 
   // P13-01: Alt+D 신호가 오면 직접 입력 상태로 전환한다.
-  const firstSignal = useRef(true);
+  // 최초 마운트는 이전 값과 비교해 걸러낸다. firstSignal 플래그 방식은
+  // StrictMode 이중 마운트에서 두 번째 이펙트가 편집 모드를 켜 버려
+  // 분할·채팅 토글 때마다 주소 입력창이 포커스를 가로챘다 (P13-06).
+  const prevSignal = useRef(editSignal);
   useEffect(() => {
-    if (firstSignal.current) {
-      firstSignal.current = false;
-      return;
-    }
+    if (prevSignal.current === editSignal) return;
+    prevSignal.current = editSignal;
     setDraft(path);
     setEditing(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
