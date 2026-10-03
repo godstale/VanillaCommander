@@ -66,12 +66,26 @@ function TreeNode({
   const children = childrenOf.get(norm) ?? [];
   const isLoading = loading.has(norm);
   const isFailed = failed.has(norm);
+  const activeRef = useRef<HTMLDivElement>(null);
+
+  // 현재 폴더가 트리 밖에 있으면(깊은 경로) 보이도록 스크롤한다.
+  useEffect(() => {
+    if (isActive) {
+      const el = activeRef.current;
+      if (el && typeof el.scrollIntoView === 'function') {
+        el.scrollIntoView({ block: 'nearest' });
+      }
+    }
+  }, [isActive]);
 
   return (
     <div>
       <div
+        ref={activeRef}
         role="treeitem"
         aria-expanded={isOpen}
+        aria-current={isActive ? 'true' : undefined}
+        tabIndex={isActive ? 0 : -1}
         onClick={() => onNavigate(entry.path)}
         className={cn(
           'group flex items-center gap-1 pr-2 py-1 cursor-pointer text-xs',

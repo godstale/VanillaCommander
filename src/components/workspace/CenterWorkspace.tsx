@@ -13,6 +13,7 @@ import {
   BookOpen,
   Zap,
   X,
+  Plus,
   Columns2,
   Rows2,
   type LucideIcon,
@@ -244,7 +245,7 @@ function WorkspacePane({
               onClick={() => onNewExplorer(pane)}
               title={t('explorer.newTab')}
             >
-              <Files className="h-4 w-4" />
+              <Plus className="h-4 w-4" />
             </Button>
 
             {/* Split trigger or layout control */}

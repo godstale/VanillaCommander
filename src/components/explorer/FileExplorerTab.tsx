@@ -35,6 +35,7 @@ interface ExplorerTabMeta {
   activePane?: number;
   split?: SplitCount;
   treeOpen?: boolean;
+  treeOpenByPane?: Record<number, boolean>;
   chatOpen?: boolean;
 }
 
@@ -103,7 +104,13 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   });
   const [activePane, setActivePane] = useState(meta.activePane ?? 0);
   const [split, setSplit] = useState<SplitCount>(meta.split === 2 || meta.split === 4 ? meta.split : 1);
-  const [treeOpen, setTreeOpen] = useState(meta.treeOpen ?? true);
+  // 분할 창마다 폴더 트리 열림 상태를 따로 기억한다 (구 treeOpen은 0번 창의 값으로 승계).
+  const [treeOpenByPane, setTreeOpenByPane] = useState<Record<number, boolean>>(() => {
+    if (meta.treeOpenByPane && typeof meta.treeOpenByPane === 'object') {
+      return { ...meta.treeOpenByPane };
+    }
+    return typeof meta.treeOpen === 'boolean' ? { 0: meta.treeOpen } : {};
+  });
   const [chatOpen, setChatOpen] = useState(meta.chatOpen ?? false);
   const [refreshSignal, setRefreshSignal] = useState(0);
   const [systemFolders, setSystemFolders] = useState<FcSystemFolder[]>([]);
@@ -151,13 +158,14 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
       panes: ExplorerPaneState[];
       activePane: number;
       split: SplitCount;
-      treeOpen: boolean;
+      treeOpenByPane: Record<number, boolean>;
       chatOpen: boolean;
     }) => {
       const activePath = next.panes[next.activePane]?.path ?? '';
       updateTab(tab.id, {
         title: baseNameOf(activePath) || t('activityBar.explorer'),
-        meta: { ...(tab.meta ?? {}), ...next },
+        // 구버전 호환: treeOpen에는 활성 창의 값을 함께 저장한다.
+        meta: { ...(tab.meta ?? {}), ...next, treeOpen: next.treeOpenByPane[next.activePane] ?? true },
       });
     },
     [updateTab, tab.id, tab.meta, t],
@@ -172,9 +180,9 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
       }
       next[index] = patch;
       setPanes(next);
-      persist({ panes: next, activePane, split, treeOpen, chatOpen });
+      persist({ panes: next, activePane, split, treeOpenByPane, chatOpen });
     },
-    [panes, activePane, fallbackPath, persist, split, treeOpen, chatOpen],
+    [panes, activePane, fallbackPath, persist, split, treeOpenByPane, chatOpen],
   );
 
   const handlePaneStats = useCallback((index: number, s: PaneStats) => {
@@ -225,22 +233,23 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     (next: SplitCount) => {
       setSplit(next);
       setActivePane((prev) => Math.min(prev, next - 1));
-      persist({ panes, activePane: Math.min(activePane, next - 1), split: next, treeOpen, chatOpen });
+      persist({ panes, activePane: Math.min(activePane, next - 1), split: next, treeOpenByPane, chatOpen });
     },
-    [panes, activePane, treeOpen, chatOpen, persist],
+    [panes, activePane, treeOpenByPane, chatOpen, persist],
   );
 
+  const isTreeOpen = treeOpenByPane[activePane] ?? true;
   const toggleTree = useCallback(() => {
-    const next = !treeOpen;
-    setTreeOpen(next);
-    persist({ panes, activePane, split, treeOpen: next, chatOpen });
-  }, [panes, activePane, split, chatOpen, treeOpen, persist]);
+    const nextMap = { ...treeOpenByPane, [activePane]: !(treeOpenByPane[activePane] ?? true) };
+    setTreeOpenByPane(nextMap);
+    persist({ panes, activePane, split, treeOpenByPane: nextMap, chatOpen });
+  }, [panes, activePane, split, chatOpen, treeOpenByPane, persist]);
 
   const toggleChat = useCallback(() => {
     const next = !chatOpen;
     setChatOpen(next);
-    persist({ panes, activePane, split, treeOpen, chatOpen: next });
-  }, [panes, activePane, split, treeOpen, chatOpen, persist]);
+    persist({ panes, activePane, split, treeOpenByPane, chatOpen: next });
+  }, [panes, activePane, split, treeOpenByPane, chatOpen, persist]);
 
   const handleAddFavorite = useCallback(() => {
     if (!activePath) return;
@@ -273,7 +282,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         canForward={activeStats?.canForward ?? false}
         canUp={activeStats?.canUp ?? false}
         showHidden={activeStats?.showHidden ?? false}
-        treeOpen={treeOpen}
+        treeOpen={isTreeOpen}
         split={split}
         favorites={settings.favorites}
         systemFolders={systemFolders}
@@ -289,7 +298,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         onAddFavorite={handleAddFavorite}
       />
       <div className="flex flex-1 min-h-0">
-        {treeOpen && (
+        {isTreeOpen && (
           <div className="w-56 shrink-0 h-full min-h-0 overflow-y-auto border-r border-border bg-panel">
             <FolderTree currentPath={activePath} onNavigate={handleOpenPath} />
           </div>

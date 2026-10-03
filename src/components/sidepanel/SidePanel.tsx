@@ -1,7 +1,6 @@
 import type { SidePanelView } from '@/lib/types/workspaceTab';
 import { ChatSessionList } from '@/components/chatsessions/ChatSessionList';
 import { AgentListPanel } from '@/components/agents/AgentListPanel';
-import { ExplorerPanel } from '@/components/explorer/ExplorerPanel';
 import { WikiPanel } from '@/components/wiki/WikiPanel';
 import { MacroPanel } from '@/components/macros/MacroPanel';
 
@@ -20,7 +19,8 @@ export function SidePanel({ activeView }: SidePanelProps) {
     case 'agents':
       return <AgentListPanel />;
     case 'explorer':
-      return <ExplorerPanel />;
+      // P12-02/P12-03: 탐색기 메뉴는 패널 대신 탐색기 탭을 쓴다. 패널은 비워 둔다.
+      return null;
     case 'wiki':
       return <WikiPanel />;
     case 'macros':

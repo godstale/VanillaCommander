@@ -219,6 +219,24 @@ export function ExplorerPane({
     return arr;
   }, [entries, sortKey, sortDir]);
 
+  // 리스트 최상단은 항상 ".."(상위 폴더) 행이다. 탐색용이며 집계·일괄 선택에서는 제외한다.
+  const parentPath = parentOf(path);
+  const displayEntries = useMemo(() => {
+    if (!parentPath) return sorted;
+    const up: FcEntry = {
+      name: '..',
+      path: parentPath,
+      kind: 'dir',
+      size: 0,
+      modified_ms: null,
+      hidden: false,
+      readonly: false,
+      symlink: false,
+      warning: false,
+    };
+    return [up, ...sorted];
+  }, [sorted, parentPath]);
+
   const selectedSet = useMemo(() => new Set(selected), [selected]);
   const totalBytes = useMemo(() => entries.reduce((s, e) => s + e.size, 0), [entries]);
   const selEntries = useMemo(
@@ -364,6 +382,13 @@ export function ExplorerPane({
     return [];
   }, [selected, activePath]);
 
+  // ".." 행(상위 폴더 경로)은 파일 작업 대상에서 제외한다.
+  const opTargets = useCallback((): string[] => {
+    const targets = effectivePaths();
+    if (!parentPath) return targets;
+    return targets.filter((p) => p !== parentPath);
+  }, [effectivePaths, parentPath]);
+
   const runJob = useCallback(
     async (kind: 'copy' | 'move' | 'zip' | 'unzip', label: string, start: () => Promise<string>) => {
       try {
@@ -378,7 +403,7 @@ export function ExplorerPane({
 
   const doCopyMove = useCallback(
     (isMove: boolean) => {
-      const sources = effectivePaths();
+      const sources = opTargets();
       if (sources.length === 0 || !path) return;
       const dest = oppositePath && oppositePath !== path ? oppositePath : path;
       const sameDir = dest === path;
@@ -387,7 +412,7 @@ export function ExplorerPane({
         isMove ? fcMove(sources, dest, sameDir ? 'rename' : 'ask') : fcCopy(sources, dest, sameDir ? 'rename' : 'ask'),
       );
     },
-    [effectivePaths, path, oppositePath, runJob, t],
+    [opTargets, path, oppositePath, runJob, t],
   );
 
   const doPaste = useCallback(() => {
@@ -401,7 +426,7 @@ export function ExplorerPane({
 
   const doDelete = useCallback(
     async (permanent: boolean) => {
-      const targets = effectivePaths();
+      const targets = opTargets();
       if (targets.length === 0) return;
       if (permanent) {
         if (!window.confirm(t('explorer.permanentConfirm', { n: String(targets.length) }))) return;
@@ -422,33 +447,37 @@ export function ExplorerPane({
         setError(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
       }
     },
-    [effectivePaths, t],
+    [opTargets, t],
   );
 
   const doZip = useCallback(() => {
-    const sources = effectivePaths();
+    const sources = opTargets();
     if (sources.length === 0 || !path) return;
     const dest = joinPath(path, 'archive.zip');
     void runJob('zip', `${t('explorer.ctxZip')} → archive.zip`, () => fcZip(sources, dest));
-  }, [effectivePaths, path, runJob, t]);
+  }, [opTargets, path, runJob, t]);
 
   const doUnzip = useCallback(() => {
-    const sources = effectivePaths().filter((p) => p.toLowerCase().endsWith('.zip'));
+    const sources = opTargets().filter((p) => p.toLowerCase().endsWith('.zip'));
     if (sources.length === 0 || !path) return;
     const first = sources[0];
     void runJob('unzip', `${t('explorer.ctxUnzip')}`, () => fcUnzip(first, path));
-  }, [effectivePaths, path, runJob, t]);
+  }, [opTargets, path, runJob, t]);
 
   const doFavorite = useCallback(() => {
-    const dirs = effectivePaths().filter((p) => entries.some((e) => e.path === p && e.kind === 'dir'));
+    const dirs = opTargets().filter((p) => entries.some((e) => e.path === p && e.kind === 'dir'));
     const toAdd = dirs.length > 0 ? dirs : path ? [path] : [];
     if (toAdd.length === 0) return;
     const next = Array.from(new Set([...settings.favorites, ...toAdd]));
     void updateSettings({ favorites: next });
-  }, [effectivePaths, entries, path, settings.favorites, updateSettings]);
+  }, [opTargets, entries, path, settings.favorites, updateSettings]);
 
   const commitRename = useCallback(async () => {
     if (!editing) return;
+    if (editing.path === parentPath) {
+      setEditing(null);
+      return;
+    }
     const value = editing.value.trim();
     setEditing(null);
     if (!value || baseNameOf(editing.path) === value) return;
@@ -459,7 +488,7 @@ export function ExplorerPane({
     } catch (err) {
       setError(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
     }
-  }, [editing, path, t]);
+  }, [editing, path, parentPath, t]);
 
   const commitMkdir = useCallback(async () => {
     const value = mkdirValue.trim();
@@ -483,7 +512,7 @@ export function ExplorerPane({
         return;
       }
       if (mode === 'range' && anchorRef.current) {
-        const order = sorted.map((e) => e.path);
+        const order = displayEntries.map((e) => e.path);
         const a = order.indexOf(anchorRef.current);
         const b = order.indexOf(target);
         if (a >= 0 && b >= 0) {
@@ -495,15 +524,15 @@ export function ExplorerPane({
       setSelected([target]);
       anchorRef.current = target;
     },
-    [sorted],
+    [displayEntries],
   );
 
   const moveActive = useCallback(
     (delta: number, extend: boolean) => {
-      if (sorted.length === 0) return;
-      const idx = activePath ? sorted.findIndex((e) => e.path === activePath) : -1;
-      const next = Math.min(sorted.length - 1, Math.max(0, (idx < 0 ? (delta > 0 ? -1 : 0) : idx) + delta));
-      const target = sorted[next].path;
+      if (displayEntries.length === 0) return;
+      const idx = activePath ? displayEntries.findIndex((e) => e.path === activePath) : -1;
+      const next = Math.min(displayEntries.length - 1, Math.max(0, (idx < 0 ? (delta > 0 ? -1 : 0) : idx) + delta));
+      const target = displayEntries[next].path;
       if (extend) {
         select(target, 'range');
       } else {
@@ -511,7 +540,7 @@ export function ExplorerPane({
       }
       setActivePath(target);
     },
-    [sorted, activePath, select],
+    [displayEntries, activePath, select],
   );
 
   const startSearch = useCallback(async () => {
@@ -547,8 +576,12 @@ export function ExplorerPane({
         case 'Enter':
           e.preventDefault();
           if (activePath) {
-            const entry = entries.find((en) => en.path === activePath);
-            if (entry) openEntry(entry);
+            if (activePath === parentPath) {
+              goUp();
+            } else {
+              const entry = displayEntries.find((en) => en.path === activePath);
+              if (entry) openEntry(entry);
+            }
           }
           break;
         case 'Backspace':
@@ -557,7 +590,7 @@ export function ExplorerPane({
           break;
         case 'F2':
           e.preventDefault();
-          if (activePath) {
+          if (activePath && activePath !== parentPath) {
             setEditing({ path: activePath, value: baseNameOf(activePath) });
           }
           break;
@@ -588,11 +621,11 @@ export function ExplorerPane({
       }
       if (ctrl && (e.key === 'c' || e.key === 'C')) {
         e.preventDefault();
-        const targets = effectivePaths();
+        const targets = opTargets();
         if (targets.length > 0) setFileClipboard('copy', targets);
       } else if (ctrl && (e.key === 'x' || e.key === 'X')) {
         e.preventDefault();
-        const targets = effectivePaths();
+        const targets = opTargets();
         if (targets.length > 0) setFileClipboard('cut', targets);
       } else if (ctrl && (e.key === 'v' || e.key === 'V')) {
         e.preventDefault();
@@ -616,7 +649,7 @@ export function ExplorerPane({
         moveActive(e.key === 'ArrowDown' ? 1 : -1, false);
       }
     },
-    [activePath, entries, openEntry, goUp, doCopyMove, doDelete, doPaste, effectivePaths, sorted, moveActive, t],
+    [activePath, displayEntries, openEntry, goUp, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, t],
   );
 
   const openCtxMenu = useCallback(
@@ -703,7 +736,7 @@ export function ExplorerPane({
         </div>
       ) : (
         <FileList
-          entries={sorted}
+          entries={displayEntries}
           selected={selectedSet}
           activePath={activePath}
           sortKey={sortKey}
@@ -744,7 +777,7 @@ export function ExplorerPane({
           onClick={(e) => e.stopPropagation()}
           onContextMenu={(e) => e.preventDefault()}
         >
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (activePath) { const en = entries.find((x) => x.path === activePath); if (en) openEntry(en); } }}>
+          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (activePath) { const en = displayEntries.find((x) => x.path === activePath); if (en) openEntry(en); } }}>
             {t('explorer.ctxOpen')}
           </button>
           <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); for (const p of ctxTargets) void fcOpenDefault(p).catch(() => {}); }}>
@@ -760,7 +793,7 @@ export function ExplorerPane({
           <button type="button" role="menuitem" className={menuItem} disabled={!clip || !path} onClick={() => { setCtxMenu(null); doPaste(); }}>
             {t('explorer.ctxPaste')}
           </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length !== 1} onClick={() => { setCtxMenu(null); const p = ctxTargets[0]; if (p) setEditing({ path: p, value: baseNameOf(p) }); }}>
+          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length !== 1 || ctxTargets[0] === parentPath} onClick={() => { setCtxMenu(null); const p = ctxTargets[0]; if (p) setEditing({ path: p, value: baseNameOf(p) }); }}>
             {t('explorer.ctxRename')}
           </button>
           <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); void doDelete(false); }}>

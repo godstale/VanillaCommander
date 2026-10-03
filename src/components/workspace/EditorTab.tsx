@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { invoke } from '@tauri-apps/api/core';
 import { basicSetup } from 'codemirror';
 import { EditorView, keymap, type ViewUpdate } from '@codemirror/view';
 import { EditorState, type Extension } from '@codemirror/state';
@@ -32,6 +31,7 @@ import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import { cn } from '@/lib/utils';
 import { getFileIcon } from '@/lib/fileIcons';
 import { CodeViewer } from '@/components/chat/CodeViewer';
+import { fcReadTextHead, fcWriteBytes } from '@/lib/commander/ipc';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
@@ -139,6 +139,20 @@ const lightHighlightStyle = HighlightStyle.define([
 
 const EDITOR_FONT =
   "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+
+// 탐색기에서 여는 파일은 사용자 경로(fc_*)로 읽고 쓴다. read/write_text_file은
+// 에이전트 허용 루트 검사를 타서 허용 밖 폴더의 MD 등을 열지 못한다.
+const FC_FULL_TEXT_MAX = 5 * 1024 * 1024;
+
+function textToBase64(text: string): string {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  const CHUNK = 0x8000;
+  for (let i = 0; i < bytes.length; i += CHUNK) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + CHUNK));
+  }
+  return btoa(binary);
+}
 
 /**
  * Modern Dark Editor Theme
@@ -339,10 +353,7 @@ export function EditorTab({ tab }: EditorTabProps) {
     async (newContent: string) => {
       setSaveStatus('saving');
       try {
-        await invoke('write_text_file', {
-          path: filePath,
-          contents: newContent,
-        });
+        await fcWriteBytes(filePath, textToBase64(newContent));
         setSaveStatus('saved');
       } catch (err) {
         console.error('Failed to save file:', err);
@@ -373,9 +384,7 @@ export function EditorTab({ tab }: EditorTabProps) {
   useEffect(() => {
     let cancelled = false;
 
-    const load = readOnlyHead
-      ? invoke<{ text: string }>('fc_read_text_head', { path: filePath }).then((r) => r.text)
-      : invoke<string>('read_text_file', { path: filePath });
+    const load = fcReadTextHead(filePath, readOnlyHead ? 200_000 : FC_FULL_TEXT_MAX).then((r) => r.text);
     load
       .then((data) => {
         if (cancelled) return;

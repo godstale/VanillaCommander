@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Pencil } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -59,6 +59,15 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
   const [draft, setDraft] = useState(path);
   const segments = splitPath(path);
   const targets = buildTargets(path, segments);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // 탐색 깊이가 깊어 경로가 길어지면 우측 끝(현재 폴더)이 보이도록 스크롤한다.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) {
+      el.scrollLeft = el.scrollWidth;
+    }
+  }, [path]);
 
   const commit = () => {
     const next = draft.trim();
@@ -92,7 +101,7 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
   }
 
   return (
-    <div className="flex items-center gap-0.5 min-w-0 flex-1 overflow-x-auto text-xs">
+    <div ref={scrollRef} className="flex items-center gap-0.5 min-w-0 flex-1 overflow-x-auto text-xs">
       {segments.length === 0 ? (
         <span className="text-muted-foreground px-1">{t('explorer.addressPlaceholder')}</span>
       ) : (
