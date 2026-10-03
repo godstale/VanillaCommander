@@ -1586,6 +1586,87 @@ pub fn fc_reveal(path: String) -> Result<(), String> {
     reveal_in_explorer(path, None)
 }
 
+/// P13-01: OS 외부 터미널을 해당 위치에서 연다 (사용자 직접 실행, D1).
+/// 파일이 지정되면 부모 폴더를 연다. 내부 PTY는 제공하지 않는다.
+#[tauri::command]
+pub fn fc_open_terminal(path: String) -> Result<(), String> {
+    let verified = resolve_user_path(&path, true)?;
+    let dir = if verified.is_dir() {
+        verified
+    } else {
+        verified
+            .parent()
+            .map(|p| p.to_path_buf())
+            .ok_or_else(|| format!("Cannot determine parent of '{}'", verified.display()))?
+    };
+    #[cfg(target_os = "windows")]
+    {
+        std::process::Command::new("cmd")
+            .args([
+                "/C",
+                "start",
+                "VanillaCommander",
+                "cmd",
+                "/K",
+                &format!("cd /d \"{}\"", dir.display()),
+            ])
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    #[cfg(target_os = "macos")]
+    {
+        std::process::Command::new("open")
+            .args(["-a", "Terminal"])
+            .arg(&dir)
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    #[cfg(target_os = "linux")]
+    {
+        let dir_str = dir.to_string_lossy().into_owned();
+        // 지원하는 에뮬레이터를 순서대로 시도한다. 첫 성공이 최종 결과다.
+        let candidates: Vec<(&str, Vec<String>)> = vec![
+            ("x-terminal-emulator", vec![]),
+            (
+                "gnome-terminal",
+                vec![format!("--working-directory={}", dir_str)],
+            ),
+            ("konsole", vec!["--workdir".to_string(), dir_str.clone()]),
+            (
+                "xfce4-terminal",
+                vec![format!("--working-directory={}", dir_str)],
+            ),
+        ];
+        let mut last_err = String::from("No supported terminal emulator found");
+        let mut ok = false;
+        for (bin, args) in &candidates {
+            let mut cmd = std::process::Command::new(bin);
+            cmd.args(args);
+            // 일부 에뮬레이터는 cwd 인자를 무시하므로 current_dir도 함께 지정한다.
+            cmd.current_dir(&dir);
+            match cmd.spawn() {
+                Ok(_) => {
+                    ok = true;
+                    break;
+                }
+                Err(e) => {
+                    let msg = e.to_string();
+                    // 실행 파일 자체가 없으면 다음 후보로, 그 외 오류는 즉시 반환한다.
+                    if e.kind() == std::io::ErrorKind::NotFound {
+                        last_err = format!("{}: {}", bin, msg);
+                        continue;
+                    }
+                    return Err(format!("Failed to open terminal: {}", msg));
+                }
+            }
+        }
+        if !ok {
+            return Err(last_err);
+        }
+    }
+    Ok(())
+}
+
 /// 바이너리 쓰기 (P11-26 채팅 이미지 복사 등). 부모 디렉터리를 만든다.
 #[tauri::command]
 pub fn fc_write_bytes(path: String, base64: String) -> Result<u64, String> {
@@ -2046,6 +2127,14 @@ mod tests {
         fc_trash(vec![target.to_string_lossy().into_owned()]).unwrap();
         assert!(!target.exists());
         let _ = std::fs::remove_dir_all(&base);
+    }
+
+    #[test]
+    fn test_open_terminal_rejects_missing_path() {
+        // 존재하지 않는 경로는 터미널을 띄우지 않고 에러를 반환한다.
+        let _guard = scope_test_lock();
+        let missing = unique_base("no-terminal").join("gone");
+        assert!(fc_open_terminal(missing.to_string_lossy().into_owned()).is_err());
     }
 
     #[test]

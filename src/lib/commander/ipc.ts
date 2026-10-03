@@ -139,6 +139,11 @@ export async function fcReveal(path: string): Promise<void> {
   return invoke<void>('fc_reveal', { path });
 }
 
+/** P13-01: OS 외부 터미널을 해당 위치에서 연다. */
+export async function fcOpenTerminal(path: string): Promise<void> {
+  return invoke<void>('fc_open_terminal', { path });
+}
+
 export function isFcStatResult(value: unknown): value is FcStatResult {
   if (typeof value !== 'object' || value === null) return false;
   const v = value as Record<string, unknown>;

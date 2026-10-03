@@ -86,6 +86,7 @@ pub fn run() {
             fc_archive_list,
             fc_open_default,
             fc_reveal,
+            fc_open_terminal,
             fc_read_file_bytes,
             fc_read_text_head,
             fc_write_bytes,
