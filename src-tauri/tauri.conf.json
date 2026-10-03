@@ -5,7 +5,7 @@
   "identifier": "com.vanillacommander.app",
   "build": {
     "frontendDist": "../dist",
-    "devUrl": "http://localhost:14200",
+    "devUrl": "http://127.0.0.1:14200",
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build"
   },
@@ -23,7 +23,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost 'self' http://127.0.0.1:11434 http://localhost:11434; img-src 'self' asset: http://asset.localhost https://asset.localhost blob: data:; style-src 'self' 'unsafe-inline'",
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://127.0.0.1:14200 http://localhost:14200; connect-src ipc: http://ipc.localhost 'self' http://127.0.0.1:14200 http://localhost:14200 ws://127.0.0.1:14200 ws://localhost:14200 ws://127.0.0.1:14201 ws://localhost:14201 http://127.0.0.1:11434 http://localhost:11434; img-src 'self' asset: http://asset.localhost https://asset.localhost blob: data: http://127.0.0.1:14200 http://localhost:14200; style-src 'self' 'unsafe-inline' http://127.0.0.1:14200 http://localhost:14200; font-src 'self' data: http://127.0.0.1:14200 http://localhost:14200; worker-src 'self' blob:",
       "assetProtocol": {
         "enable": true,
         "scope": ["**"]
