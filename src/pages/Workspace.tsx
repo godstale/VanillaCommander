@@ -33,7 +33,7 @@ function WorkspaceContent() {
   const { workspaceRoot: wsRoot, workFolder } = useWorkspace();
   const effectiveRoot = workFolder ?? wsRoot;
   const { activeView, setActiveView } = useSidePanel();
-  const { tabs, openTab, isTabsLoaded } = useWorkspaceTabs();
+  const { tabs, openTab, setActiveTab, isTabsLoaded } = useWorkspaceTabs();
   const { settings, loading: settingsLoading } = useSettings();
   const [searchParams, setSearchParams] = useSearchParams();
   const [wizardOpen, setWizardOpen] = useState(false);
@@ -82,17 +82,44 @@ function WorkspaceContent() {
   }, [isTabsLoaded, openTab, tabs.length, effectiveRoot, t]);
 
   // P11-01(D2): 폴더 미선택 상태에서도 전부 선택 가능.
+  // P12-03: 첫 선택이 탐색기면 패널은 접힌 채로 시작한다.
   useEffect(() => {
-    if (!effectiveRoot) {
+    if (activeView === 'explorer' && !sidePanelRef.current?.isCollapsed()) {
+      sidePanelRef.current?.collapse();
+    }
+  }, [activeView]);
+  useEffect(() => {
+    if (!effectiveRoot && activeView !== 'explorer') {
       if (sidePanelRef.current?.isCollapsed()) {
         sidePanelRef.current.expand();
       }
     }
-  }, [effectiveRoot]);
+  }, [effectiveRoot, activeView]);
 
   const handleActivityBarSelect = (view: Exclude<SidePanelView, null>) => {
     const panel = sidePanelRef.current;
     if (!panel) return;
+    // P12-02: 파일 탐색기 메뉴는 패널을 열지 않는다. 대신 탐색기 탭을
+    // 열거나(없으면 생성) 포커스한다. 즐겨찾기·시스템 폴더는 탭 상단 메뉴바에서 연다.
+    // P12-03: 탐색기를 고르면 실행 중인 패널은 닫는다.
+    if (view === 'explorer') {
+      if (!panel.isCollapsed()) {
+        panel.collapse();
+      }
+      setActiveView(view);
+      const existing = tabs.find((tb) => tb.type === 'file-explorer');
+      if (existing) {
+        setActiveTab(existing.id);
+      } else {
+        const root = effectiveRoot ?? '';
+        openTab({
+          type: 'file-explorer',
+          title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+          meta: { path: root },
+        });
+      }
+      return;
+    }
     if (activeView === view && !panel.isCollapsed()) {
       panel.collapse();
       setActiveView(null);
@@ -103,6 +130,31 @@ function WorkspaceContent() {
       setActiveView(view);
     }
   };
+
+  // P13-04: 사이드 메뉴 전역 단축키 (Alt+A/S/G/F/M, 앱 전용은 Alt 조합).
+  // handleActivityBarSelect와 동일한 동작을 키보드로 수행한다.
+  const selectRef = useRef(handleActivityBarSelect);
+  useEffect(() => {
+    selectRef.current = handleActivityBarSelect;
+  });
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const k = e.key.toLowerCase();
+      const view: Exclude<SidePanelView, null> | null =
+        k === 'a' ? 'explorer'
+        : k === 's' ? 'chat-sessions'
+        : k === 'g' ? 'agents'
+        : k === 'f' ? 'wiki'
+        : k === 'm' ? 'macros'
+        : null;
+      if (!view) return;
+      e.preventDefault();
+      selectRef.current(view);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   // Prevent any residual window-level scroll offsets in desktop webview
   useEffect(() => {

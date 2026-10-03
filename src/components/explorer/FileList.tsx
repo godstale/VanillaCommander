@@ -1,7 +1,7 @@
-import { Folder, File as FileIcon, FileImage, Link2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import type { FcEntry } from '@/lib/commander/types';
 import { formatBytes } from '@/lib/commander/format';
+import { FileKindIcon } from './FileIcon';
 import { cn } from '@/lib/utils';
 
 export type SortKey = 'name' | 'size' | 'kind' | 'modified';
@@ -27,15 +27,6 @@ export interface FileListProps {
   onMkdirChange: (value: string) => void;
   onMkdirCommit: () => void;
   onMkdirCancel: () => void;
-}
-
-function KindIcon({ entry }: { entry: FcEntry }) {
-  if (entry.symlink) return <Link2 className="h-4 w-4 text-muted-foreground shrink-0" />;
-  if (entry.kind === 'dir') return <Folder className="h-4 w-4 text-warning shrink-0" />;
-  if (/\.(png|jpe?g|gif|bmp|webp|svg|ico)$/i.test(entry.name)) {
-    return <FileImage className="h-4 w-4 text-primary shrink-0" />;
-  }
-  return <FileIcon className="h-4 w-4 text-muted-foreground shrink-0" />;
 }
 
 function formatTime(ms: number | null): string {
@@ -97,7 +88,7 @@ export function FileList(props: FileListProps) {
         {creatingMkdir && (
           <div className="grid grid-cols-[1fr_90px_130px_150px] gap-1 px-2 py-1 items-center border-b border-border/50">
             <span className="flex items-center gap-2 min-w-0">
-              <Folder className="h-4 w-4 text-warning shrink-0" />
+              <FileKindIcon name="__dir__" kind="dir" />
               <input
                 autoFocus
                 value={mkdirValue}
@@ -142,7 +133,7 @@ export function FileList(props: FileListProps) {
               )}
             >
               <span className="flex items-center gap-2 min-w-0">
-                <KindIcon entry={entry} />
+                <FileKindIcon name={entry.name} kind={entry.kind} symlink={entry.symlink} />
                 {isEditing ? (
                   <input
                     autoFocus

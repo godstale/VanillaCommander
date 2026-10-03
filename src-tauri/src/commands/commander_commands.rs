@@ -1043,6 +1043,9 @@ fn run_search(
     builder.git_ignore(use_gitignore);
     let mut count = 0usize;
     let mut batch = 0usize;
+    // 이름 필터가 없을 때의 name_hit=true는 "전체 순회" 의미이므로
+    // 이름 행을 별도로 보고하지 않는다. 아래 OR 조건의 기준이다.
+    let has_name_filter = name_matcher.is_some() || name_substring.is_some();
     for result in builder.build() {
         if cancelled(&ctl) {
             emit(FcProgressEvent::Cancelled { job_id: jid.clone() });
@@ -1058,15 +1061,31 @@ fn run_search(
         };
         let path = entry.path();
         let file_name = entry.file_name().to_string_lossy().to_lowercase();
+        // 이름 일치는 "*q*" 포함 여부까지 본다. fc_search 호출자는
+        // 일반 검색어를 그대로 넘기면 부분 일치로 처리된다.
         let name_hit = match (&name_matcher, &name_substring) {
             (Some(m), _) => m.is_match(path) || m.is_match(entry.file_name()),
             (None, Some(sub)) => file_name.contains(sub),
             (None, None) => true,
         };
-        if !name_hit {
-            continue;
-        }
         let is_dir = entry.file_type().map(|f| f.is_dir()).unwrap_or(false);
+        // 이름 조건과 내용 조건은 OR이다. 기존 AND(둘 다 만족해야 보고)는
+        // 일반 찾기에서 빈 결과를 내는 원인이었다.
+        if has_name_filter && name_hit {
+            emit(FcProgressEvent::Match {
+                job_id: jid.clone(),
+                m: FcSearchMatch {
+                    path: display_path_string(path),
+                    is_dir,
+                    line_number: None,
+                    line_content: None,
+                },
+            });
+            count += 1;
+            if count >= max_results {
+                break;
+            }
+        }
         if let Some(re) = &content_re {
             if is_dir {
                 continue;
@@ -1112,16 +1131,18 @@ fn run_search(
             let _ = batch;
             continue;
         }
-        emit(FcProgressEvent::Match {
-            job_id: jid.clone(),
-            m: FcSearchMatch {
-                path: display_path_string(path),
-                is_dir,
-                line_number: None,
-                line_content: None,
-            },
-        });
-        count += 1;
+        if !has_name_filter {
+            emit(FcProgressEvent::Match {
+                job_id: jid.clone(),
+                m: FcSearchMatch {
+                    path: display_path_string(path),
+                    is_dir,
+                    line_number: None,
+                    line_content: None,
+                },
+            });
+            count += 1;
+        }
     }
     let value = serde_json::json!({ "count": count });
     emit(FcProgressEvent::Done {
@@ -1150,12 +1171,19 @@ pub async fn fc_search(
     let (name_matcher, name_substring) = match name_pattern {
         Some(p) if !p.trim().is_empty() => {
             let pat = p.trim().to_string();
-            match globset::GlobBuilder::new(&pat)
-                .case_insensitive(true)
-                .build()
-            {
-                Ok(g) => (Some(g.compile_matcher()), None),
-                Err(_) => (None, Some(pat.to_lowercase())),
+            // glob 메타문자가 없으면 부분 일치(대소문자 무시)로 검색한다.
+            // 기존에는 리터럴도 glob으로 컴파일되어 정확히 일치하는 이름만
+            // 찾아 "찾기"가 빈 결과를 반환했다.
+            if !pat.chars().any(|c| c == '*' || c == '?' || c == '[') {
+                (None, Some(pat.to_lowercase()))
+            } else {
+                match globset::GlobBuilder::new(&pat)
+                    .case_insensitive(true)
+                    .build()
+                {
+                    Ok(g) => (Some(g.compile_matcher()), None),
+                    Err(_) => (None, Some(pat.to_lowercase())),
+                }
             }
         }
         _ => (None, None),
@@ -1556,6 +1584,87 @@ pub fn fc_open_default(path: String) -> Result<(), String> {
 #[tauri::command]
 pub fn fc_reveal(path: String) -> Result<(), String> {
     reveal_in_explorer(path, None)
+}
+
+/// P13-01: OS 외부 터미널을 해당 위치에서 연다 (사용자 직접 실행, D1).
+/// 파일이 지정되면 부모 폴더를 연다. 내부 PTY는 제공하지 않는다.
+#[tauri::command]
+pub fn fc_open_terminal(path: String) -> Result<(), String> {
+    let verified = resolve_user_path(&path, true)?;
+    let dir = if verified.is_dir() {
+        verified
+    } else {
+        verified
+            .parent()
+            .map(|p| p.to_path_buf())
+            .ok_or_else(|| format!("Cannot determine parent of '{}'", verified.display()))?
+    };
+    #[cfg(target_os = "windows")]
+    {
+        std::process::Command::new("cmd")
+            .args([
+                "/C",
+                "start",
+                "VanillaCommander",
+                "cmd",
+                "/K",
+                &format!("cd /d \"{}\"", dir.display()),
+            ])
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    #[cfg(target_os = "macos")]
+    {
+        std::process::Command::new("open")
+            .args(["-a", "Terminal"])
+            .arg(&dir)
+            .spawn()
+            .map_err(|e| format!("Failed to open terminal: {}", e))?;
+    }
+    #[cfg(target_os = "linux")]
+    {
+        let dir_str = dir.to_string_lossy().into_owned();
+        // 지원하는 에뮬레이터를 순서대로 시도한다. 첫 성공이 최종 결과다.
+        let candidates: Vec<(&str, Vec<String>)> = vec![
+            ("x-terminal-emulator", vec![]),
+            (
+                "gnome-terminal",
+                vec![format!("--working-directory={}", dir_str)],
+            ),
+            ("konsole", vec!["--workdir".to_string(), dir_str.clone()]),
+            (
+                "xfce4-terminal",
+                vec![format!("--working-directory={}", dir_str)],
+            ),
+        ];
+        let mut last_err = String::from("No supported terminal emulator found");
+        let mut ok = false;
+        for (bin, args) in &candidates {
+            let mut cmd = std::process::Command::new(bin);
+            cmd.args(args);
+            // 일부 에뮬레이터는 cwd 인자를 무시하므로 current_dir도 함께 지정한다.
+            cmd.current_dir(&dir);
+            match cmd.spawn() {
+                Ok(_) => {
+                    ok = true;
+                    break;
+                }
+                Err(e) => {
+                    let msg = e.to_string();
+                    // 실행 파일 자체가 없으면 다음 후보로, 그 외 오류는 즉시 반환한다.
+                    if e.kind() == std::io::ErrorKind::NotFound {
+                        last_err = format!("{}: {}", bin, msg);
+                        continue;
+                    }
+                    return Err(format!("Failed to open terminal: {}", msg));
+                }
+            }
+        }
+        if !ok {
+            return Err(last_err);
+        }
+    }
+    Ok(())
 }
 
 /// 바이너리 쓰기 (P11-26 채팅 이미지 복사 등). 부모 디렉터리를 만든다.
@@ -2021,6 +2130,14 @@ mod tests {
     }
 
     #[test]
+    fn test_open_terminal_rejects_missing_path() {
+        // 존재하지 않는 경로는 터미널을 띄우지 않고 에러를 반환한다.
+        let _guard = scope_test_lock();
+        let missing = unique_base("no-terminal").join("gone");
+        assert!(fc_open_terminal(missing.to_string_lossy().into_owned()).is_err());
+    }
+
+    #[test]
     fn test_read_bytes_and_text_head() {
         let _guard = scope_test_lock();
         let base = unique_base("readcap");
@@ -2107,6 +2224,56 @@ mod tests {
         std::fs::write(&broken, "not a zip").unwrap();
         assert!(fc_office_text(broken.to_string_lossy().into_owned()).is_err());
 
+        let _ = std::fs::remove_dir_all(&base);
+    }
+
+    #[test]
+    fn test_search_plain_text_matches_name_or_content() {
+        // P12-01: 일반 검색어는 이름 부분 일치 OR 내용 일치로 보고한다.
+        // 기존 AND 조건에서는 파일명에 검색어가 있어도 내용이 없으면 빈 결과였다.
+        let base = unique_base("search-or");
+        std::fs::create_dir_all(base.join("sub")).unwrap();
+        std::fs::write(base.join("VanillaStudioSample01.txt"), "unrelated body").unwrap();
+        std::fs::write(base.join("notes.txt"), "contains VanillaStudioSample01 inside").unwrap();
+        std::fs::write(base.join("other.txt"), "nothing relevant").unwrap();
+
+        let (ctl, _rx) = test_ctl();
+        let found: std::sync::Arc<std::sync::Mutex<Vec<FcSearchMatch>>> =
+            std::sync::Arc::new(std::sync::Mutex::new(Vec::new()));
+        let captured = found.clone();
+        let emit: Box<dyn Fn(FcProgressEvent) + Send> = Box::new(move |e| {
+            if let FcProgressEvent::Match { m, .. } = e {
+                captured.lock().unwrap().push(m);
+            }
+        });
+        run_search(
+            "test-search-or".to_string(),
+            ctl,
+            emit,
+            base.clone(),
+            None,
+            Some("vanillastudiosample01".to_string()),
+            Some(regex::Regex::new("VanillaStudioSample01").unwrap()),
+            200,
+            false,
+        );
+        let found = found.lock().unwrap();
+        let paths: Vec<String> = found.iter().map(|m| m.path.clone()).collect();
+        assert!(
+            paths.iter().any(|p| p.ends_with("VanillaStudioSample01.txt")),
+            "name hit missing: {:?}",
+            paths
+        );
+        assert!(
+            paths.iter().any(|p| p.ends_with("notes.txt")),
+            "content hit missing: {:?}",
+            paths
+        );
+        assert!(
+            !paths.iter().any(|p| p.ends_with("other.txt")),
+            "unrelated file reported: {:?}",
+            paths
+        );
         let _ = std::fs::remove_dir_all(&base);
     }
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-  Folder,
   FolderOpen,
   FolderX,
   FilePlus,
@@ -27,6 +26,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useSidePanel } from '@/lib/context/SidePanelContext';
+import { useOpenAgentWorkbench } from '@/lib/agent/agentWorkbench';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useGlobalLlmBusy } from '@/lib/agent/chatQueueManager';
@@ -37,9 +37,10 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export function TopMenuBar() {
   const { t } = useLanguage();
-  const { workspaceRoot, setWorkspaceRoot, recentWorkspaces = [] } = useWorkspace();
+  const { workspaceRoot, workFolder, setWorkspaceRoot, recentWorkspaces = [] } = useWorkspace();
   const { setActiveView } = useSidePanel();
   const { openTab } = useWorkspaceTabs();
+  const openAgentWorkbench = useOpenAgentWorkbench();
   const { agents, defaultAgent } = useAgents();
   const navigate = useNavigate();
   const hasWorkspace = Boolean(workspaceRoot);
@@ -93,23 +94,24 @@ export function TopMenuBar() {
     });
   };
 
+  // P12-02: 탐색기 메뉴는 패널 대신 탐색기 탭을 연다.
+  const handleOpenExplorer = () => {
+    const root = workFolder ?? workspaceRoot ?? '';
+    openTab({
+      type: 'file-explorer',
+      title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+      meta: { path: root },
+    });
+  };
+
   // P11-01(V3): 모니터링 진입점은 상단 에이전트 메뉴의 직접 열기 하나.
   const handleOpenMonitor = () => {
     if (agents.length === 0) {
       setActiveView('agents');
       return;
     }
-    openTab({
-      id: `agent-monitor:${defaultAgent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.monitor', { name: defaultAgent.name }),
-      meta: { agentId: defaultAgent.id },
-    });
+    openAgentWorkbench(defaultAgent, 'monitor');
   };
-
-  const folderName = workspaceRoot
-    ? workspaceRoot.split(/[\\/]/).filter(Boolean).pop() || workspaceRoot
-    : null;
 
   const [isMaximized, setIsMaximized] = useState(false);
 
@@ -332,7 +334,7 @@ export function TopMenuBar() {
           {hasWorkspace && (
             <DropdownMenuContent align="start" className="w-48 text-[11px] p-1 [&_[role=menuitem]]:text-[11px] [&_[role=menuitem]]:py-1 [&_[role=menuitem]]:gap-2 [&_[role=menuitem]_svg]:size-3.5">
               <DropdownMenuItem
-                onClick={() => setActiveView('explorer')}
+                onClick={handleOpenExplorer}
                 className="gap-2 cursor-pointer text-[11px] py-1"
               >
                 <Files className="h-3.5 w-3.5 text-primary" />
@@ -350,40 +352,11 @@ export function TopMenuBar() {
         </DropdownMenu>
       </div>
 
-      {/* Center: Current Workspace Title (Draggable region with interactive center) */}
+      {/* Center: empty draggable spacer */}
       <div
         data-tauri-drag-region
-        className="flex-1 flex items-center justify-center px-4 overflow-hidden h-full cursor-default"
-      >
-        {workspaceRoot ? (
-          <div
-            data-no-drag="true"
-            className={cn(
-              'flex items-center gap-1.5 text-[11px] text-muted-foreground/80 font-mono truncate px-2 py-0.5 rounded transition-colors',
-              isLlmBusy
-                ? 'opacity-50 cursor-not-allowed'
-                : 'cursor-pointer hover:text-foreground hover:bg-muted/40',
-            )}
-            onClick={isLlmBusy ? undefined : handlePickFolder}
-            title={isLlmBusy ? folderChangeBlockedTitle : `${workspaceRoot} ${t('topMenu.clickToChangeFolder')}`}
-          >
-            <Folder className="h-3 w-3 text-warning shrink-0" />
-            <span className="font-semibold text-foreground">{folderName}</span>
-            <span className="opacity-50 text-[10px] truncate max-w-sm hidden sm:inline">
-              — {workspaceRoot}
-            </span>
-          </div>
-        ) : (
-          <div
-            data-no-drag="true"
-            className="flex items-center gap-1.5 text-[11px] text-warning/80 font-medium cursor-pointer hover:text-warning transition-colors px-2 py-0.5 rounded hover:bg-muted/40"
-            onClick={handlePickFolder}
-          >
-            <FolderOpen className="h-3 w-3" />
-            <span>{t('topMenu.selectProjectFolder')}</span>
-          </div>
-        )}
-      </div>
+        className="flex-1 h-full"
+      />
 
       {/* Right: Window Controls (Minimize, Maximize/Restore, Close) */}
       <div

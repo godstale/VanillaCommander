@@ -10,6 +10,7 @@ import {
 } from '@/lib/context/StatusBarContext';
 import { StatusBar } from './StatusBar';
 import { AgentsProvider } from '@/lib/context/AgentsContext';
+import { WorkspaceTabsProvider } from '@/lib/context/WorkspaceTabsContext';
 
 vi.mock('@tauri-apps/api/core', () => ({
   invoke: vi.fn().mockRejectedValue(new Error('no tauri')),
@@ -51,7 +52,9 @@ describe('StatusBarContext', () => {
   const wrap = (ui: ReactNode) =>
     render(
       <StatusBarProvider>
-        <AgentsProvider>{ui}</AgentsProvider>
+        <AgentsProvider>
+          <WorkspaceTabsProvider>{ui}</WorkspaceTabsProvider>
+        </AgentsProvider>
       </StatusBarProvider>,
     );
 
@@ -96,7 +99,9 @@ describe('StatusBarContext', () => {
       <MemoryRouter>
         <StatusBarProvider>
           <AgentsProvider>
-            <StatusBar />
+            <WorkspaceTabsProvider>
+              <StatusBar />
+            </WorkspaceTabsProvider>
           </AgentsProvider>
         </StatusBarProvider>
       </MemoryRouter>,

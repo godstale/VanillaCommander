@@ -29,6 +29,7 @@ export interface AgentCardProps {
   status?: AgentConnectionStatus;
   isChecking?: boolean;
   onCheckConnection?: (agent: Agent) => void;
+  onOpenMonitor?: (agent: Agent) => void;
   onStartChat: (agent: Agent) => void;
   onEdit: (agent: Agent) => void;
   onDuplicate?: (agent: Agent) => void;
@@ -43,6 +44,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({
   status = 'unknown',
   isChecking = false,
   onCheckConnection,
+  onOpenMonitor,
   onStartChat,
   onEdit,
   onDuplicate,
@@ -95,10 +97,9 @@ export const AgentCard: React.FC<AgentCardProps> = ({
           <div className="flex flex-1 items-center gap-2 min-w-0">
             <button
               type="button"
-              onClick={() => onCheckConnection?.(agent)}
-              disabled={isChecking}
+              onClick={() => onOpenMonitor?.(agent)}
               className={`relative h-8 w-8 rounded-lg border flex items-center justify-center shrink-0 transition-all cursor-pointer hover:opacity-85 hover:scale-105 active:scale-95 focus:outline-none focus:ring-1 focus:ring-ring ${statusConfig.containerClass}`}
-              title={t('agentCard.check')}
+              title={t('agentCard.openMonitor')}
               aria-label={t('agentCard.statusLabel', { label: statusConfig.label })}
             >
               {isChecking ? (

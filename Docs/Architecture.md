@@ -135,9 +135,13 @@ VanillaCommander/
 │   │   ├── sidepanel/
 │   │   │   └── SidePanel.tsx            # activeView에 따라 5개 패널 라우팅
 │   │   ├── explorer/
-│   │   │   ├── FileExplorerTab.tsx      # 파일 커맨더 탭 (목록·단축키·컨텍스트 메뉴·검색)
-│   │   │   ├── ExplorerPanel.tsx        # 열린 탭·즐겨찾기·시스템 폴더
-│   │   │   ├── ExplorerChatBar.tsx      # 탐색기 하단 1줄 채팅 (숨은 세션 origin='explorer')
+│   │   │   ├── FileExplorerTab.tsx      # 파일 커맨더 탭 컨테이너 (툴바·트리·분할 창·상태바·채팅 도크)
+│   │   │   ├── ExplorerPane.tsx         # 분할 창 1개분 (주소창·찾기·목록·정렬·다중 선택·단축키·컨텍스트 메뉴)
+│   │   │   ├── FolderTree.tsx           # 좌측 폴더 트리 (즐겨찾기·시스템 폴더 루트, 접기/펼치기)
+│   │   │   ├── FileIcon.tsx             # 뷰어 지원 파일 전용 컬러 아이콘
+│   │   │   ├── ExplorerStatusBar.tsx    # 탭 하단 상태바 (경로·전체·선택 정보)
+│   │   │   ├── ExplorerChatDock.tsx     # 우측 채팅 도크 (ChatTab 재사용, origin='chat' 세션)
+│   │   │   ├── ExplorerPanel.tsx        # (미사용) 탐색기 메뉴는 패널 대신 탐색기 탭을 연다 (P12-02)
 │   │   │   └── dialogs/                 # ConflictDialog · PropertiesDialog · SearchResultsView
 │   │   ├── chatsessions/
 │   │   │   └── ChatSessionList.tsx      # 대화 목록 패널
@@ -334,7 +338,7 @@ const ITEMS: {
 - `SidePanel.tsx`는 `activeView`에 따라 5개 컴포넌트 중 하나를 렌더링하는 얇은 라우터(VivoStudio `ExplorerPanel.tsx`와 동일한 패턴):
   - `chat-sessions` → `ChatSessionList.tsx` (세션 목록, 클릭 시 해당 세션의 `chat` 탭을 열거나 포커스. 삭제된 에이전트의 세션도 기억된 이름으로 취소선 표시, 전체 삭제는 확인 팝업 후 일괄 삭제)
   - `agents` → `AgentListPanel.tsx` (Agent 카드 목록: 모델명·컨텍스트만 + "대화 시작"/"수정")
-  - `explorer` → `ExplorerPanel.tsx` (열린 탐색기 탭 목록·즐겨찾기·시스템 폴더, 탭이 없으면 1개 자동 생성)
+  - `explorer` → `ExplorerPanel.tsx` (P12-02부터 미사용. 탐색기 메뉴는 패널 대신 탐색기 탭을 열고, 즐겨찾기·시스템 폴더는 탭 상단 메뉴바에서 연다)
   - `wiki` → `WikiPanel.tsx` (감시 상태·대기열·최근 처리·페이지 목록 — §16)
   - `macros` → `MacroPanel.tsx` (매크로 목록·실행·스케줄 — §17)
 - 스킬 사이드바는 제공하지 않는다. 스킬은 인식되면 자동으로 `AgentEditorForm`의 "활성 스킬 (Agent Skills)" 카드에 표시되며, 여기서 on/off + refresh 버튼으로 재스캔한다.
@@ -369,7 +373,7 @@ interface WorkspaceTab {
 - `DocumentViewerTab.tsx`: PDF(pdfjs 렌더)·DOCX(mammoth HTML)·XLSX/CSV(SheetJS 표)·PPTX(슬라이드 아웃라인, D8).
 - `ArchiveViewerTab.tsx`: ZIP 목록·선택 해제.
 - `openFile.ts` 라우팅: 텍스트/코드/MD/JSON/CSV → 에디터, 이미지 → 이미지 뷰어, 문서 → DocumentViewer, ZIP → ArchiveViewer, HTML → 외부 브라우저, 동영상/음악/실행 파일 → 시스템 기본 앱. 모든 뷰어에 "시스템 기본 앱으로 열기".
-- `FileExplorerTab.tsx`: 주소창(브레드크럼/직접 입력)·상세 목록(정렬·다중 선택·키보드 탐색)·툴바·단축키(Commander 관례: F5 복사/F6 이동/F7 폴더/Del 휴지통/Shift+Del 영구 삭제)·컨텍스트 메뉴·탐색기 탭 내부 검색. 하단 `ExplorerChatBar`(1줄 입력 + 접이식 결과 드로어, 숨은 `origin='explorer'` 세션).
+- `FileExplorerTab.tsx`: 탭 상단 툴바(뒤/앞/위/새로고침/새 폴더/압축/이미지 앨범/숨김/트리 토글/즐겨찾기·시스템 폴더 메뉴/1·가로2·세로2 분할) + 좌측 접이식 `FolderTree`(탭당 하나, 활성 창 경로까지 자동 펼침) + 분할 창(`ExplorerPane`: 주소창·찾기 아이콘 토글·상세 목록/앨범 보기·정렬·다중 선택·키보드 탐색·단축키(F3 정보·F4 압축·F9 앨범·F5 새로고침·Tab 창 전환)·컨텍스트 메뉴·마우스 뒤/앞 버튼) + 탭 하단 `ExplorerStatusBar`(좌측: 백그라운드 에이전트·작업·실패, 평상시 단축키 안내 / 우측: 전체·선택 정보, 경로 없음) + 활성 창 추가 분할형 `ExplorerChatDock`(`ChatTab` dense 재사용, `origin='chat'` 세션이라 대화 목록에 등록됨; 좌우 분할 중에는 상하로, 그 외에는 좌우로 나눈다). 찾기(`fc_search`)는 이름 부분 일치 OR 내용 일치이며, 평소에는 아이콘만 보이고 Ctrl+F·버튼으로 토글한다. 백 버튼·빈 검색어·폴더 이동 시 원래 목록으로 복원된다. 이전/다음은 Alt+←/→로도 동작한다.
 - 파일 작업(복사/이동/압축/해제/검색/정보)은 Rust job + `fc://progress` 이벤트로 진행률·취소·충돌 처리(`ConflictDialog`).
 
 ### 3.5 셋업 위저드 + StatusBar

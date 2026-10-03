@@ -181,16 +181,20 @@ export function WorkspaceTabsProvider({
     ) => {
       // P11-11(D2): 폴더 없이도 탭을 연다.
       const targetId = tab.id ?? generateTabId(tab.type);
+      // 이미 열린 탭은 원래 있던 창(pane)에서 활성화한다. 다른 창의 탭 id를
+      // 현재 창의 활성 id로 넣으면 그 창에는 보이는 탭이 없어 흰 화면이 된다.
+      const existingPane = tabsSnapshotRef.current.find((t) => t.id === targetId)?.pane;
+      const targetPane = existingPane ?? tab.pane ?? pane;
 
       setInternalTabs((prev) => {
         const existing = prev.find((t) => t.id === targetId);
         if (existing) {
           return prev;
         }
-        return [...prev, { ...tab, id: targetId, pane: tab.pane ?? pane }];
+        return [...prev, { ...tab, id: targetId, pane: targetPane }];
       });
 
-      if (pane === 'secondary') {
+      if (targetPane === 'secondary') {
         setInternalSecondaryActiveTabId(targetId);
       } else {
         setInternalActiveTabId(targetId);

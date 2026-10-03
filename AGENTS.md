@@ -66,6 +66,7 @@ pnpm check:ollama    # Ollama 서버/모델 상태 확인 (Phase 2 이상 로컬
 - 하나의 커밋은 하나의 작업 ID(P#-##)에 대응하는 것을 권장합니다. 커밋 메시지 본문에 관련 작업 ID를 남기면 추적이 쉬워집니다.
 - `--no-verify`, `--force`, `git reset --hard` 등 파괴적/훅 우회 명령은 사용자 명시적 지시 없이 사용하지 않습니다.
 - `Docs/TODO.md` 상태 갱신은 관련 코드 변경과 **같은 커밋**에 포함시키는 것을 권장합니다.
+- 브랜치 수명·머지·PR 규칙은 `Docs/Branch-Policy.md`를 따릅니다 (main 병합은 `merge --no-ff`, squash 금지, 머지 후 브랜치 삭제).
 
 ## 6. 멀티 에이전트 협업 규칙 (브랜치 기본 + worktree 예외)
 

@@ -10,24 +10,125 @@
   </head>
   <body>
     <div id="root">
-      <!-- TAURI-BLANK 재발 방지용 정적 부트 폴백 (CSP 안전: 인라인 스크립트 없음).
+      <!-- TAURI-BLANK 재발 방지용 정적 부트 스플래시 (DESIGN.md §9 브랜드 계열).
         React가 마운트되면 createRoot가 이 내용을 치우고, src/main.tsx의
         워치독이 타임아웃 시 data-boot-timed-out으로 원인을 노출한다.
-        pre-React 정적 HTML이라 i18n 사전(t키)을 쓸 수 없어 한/영 병기한다. -->
-      <div
-        id="vc-boot-fallback"
-        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: #f4f4f4; color: #111; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.7;"
-      >
-        <div style="max-width: 460px; text-align: center;">
-          <p style="font-weight: 700;">Vanilla Commander를 불러오는 중…</p>
-          <p style="opacity: 0.7;">Loading Vanilla Commander…</p>
-          <p data-boot-hint hidden style="margin-top: 12px; text-align: left; opacity: 0.85;">
-            이 화면이 계속 흰 화면으로 멈춰 있으면: ① dev 서버 동작 확인
-            (<code>pnpm dev</code> → http://127.0.0.1:14200) ② Tauri 창 새로고침(Ctrl+R)
-            ③ <code>pnpm check:tauri-blank</code> 실행.
-            <br />If this stays blank: ① ensure the dev server is up ② reload the Tauri
-            window (Ctrl+R) ③ run <code>pnpm check:tauri-blank</code>.
-          </p>
+        CSP 안전: 인라인 <script> 없음(<style>·인라인 스타일·정적 이미지만 사용).
+        pre-React 정적 HTML이라 i18n 사전(t키)을 쓸 수 없어 한/영 병기한다.
+        필요한 훅(검사 스크립트·워치독): #vc-boot-fallback, [data-boot-hint]. -->
+      <div id="vc-boot-fallback">
+        <style>
+          .vc-boot {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background-color: #f4f4f4;
+            font-family: system-ui, "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+          }
+          .vc-boot-inner {
+            max-width: 420px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid #e4ddd0;
+            border-radius: 20px;
+            padding: 36px 40px 30px;
+            box-shadow: 0 18px 50px rgba(90, 31, 26, 0.12);
+          }
+          .vc-boot-art {
+            width: 128px;
+            height: 128px;
+            object-fit: contain;
+          }
+          .vc-boot-title {
+            margin: 16px 0 0;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #1c1c1c;
+          }
+          .vc-boot-sub {
+            margin: 6px 0 0;
+            font-size: 12.5px;
+            line-height: 1.7;
+            color: #6b6b6b;
+          }
+          .vc-boot-bar {
+            margin: 22px auto 0;
+            width: 200px;
+            height: 5px;
+            border-radius: 999px;
+            background: #e7dfcf;
+            overflow: hidden;
+            position: relative;
+          }
+          .vc-boot-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40%;
+            border-radius: 999px;
+            background: #5a1f1a;
+            animation: vc-boot-slide 1.1s ease-in-out infinite alternate;
+          }
+          @keyframes vc-boot-slide {
+            from { left: -40%; }
+            to { left: 100%; }
+          }
+          .vc-boot-loading {
+            margin: 12px 0 0;
+            font-size: 12px;
+            color: #8f8f8f;
+          }
+          .vc-boot-hint {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #e4ddd0;
+            font-size: 11.5px;
+            line-height: 1.7;
+            text-align: left;
+            color: #6b6b6b;
+          }
+          @media (prefers-color-scheme: dark) {
+            .vc-boot { background-color: #0a0a0a; }
+            .vc-boot-inner {
+              background: rgba(20, 20, 20, 0.88);
+              border-color: #2a2a2a;
+              box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+            }
+            .vc-boot-title { color: #ededed; }
+            .vc-boot-sub { color: #a3a3a3; }
+            .vc-boot-bar { background: #2a2a2a; }
+            .vc-boot-bar::after { background: #f59a4a; }
+            .vc-boot-loading { color: #8f8f8f; }
+            .vc-boot-hint { border-top-color: #2a2a2a; color: #a3a3a3; }
+          }
+        </style>
+        <div class="vc-boot">
+          <div class="vc-boot-inner">
+            <img
+              class="vc-boot-art"
+              src="/brand/vanilla-art.png"
+              alt=""
+              aria-hidden="true"
+              draggable="false"
+            />
+            <p class="vc-boot-title">Vanilla Commander</p>
+            <p class="vc-boot-sub">File commander with local LLM</p>
+            <div class="vc-boot-bar" aria-hidden="true"></div>
+            <p class="vc-boot-loading">Loading…</p>
+            <p class="vc-boot-hint" data-boot-hint hidden>
+              이 화면에서 멈춰 있으면: ① dev 서버 동작 확인
+              (<code>pnpm dev</code> → http://127.0.0.1:14200) ② Tauri 창 새로고침(Ctrl+R)
+              ③ <code>pnpm check:tauri-blank</code> 실행. 브라우저에서 dev 주소가
+              열린다면 Tauri 문제, 브라우저도 멈춘다면 프런트 문제입니다.
+              <br />If this stays stuck: ① ensure the dev server is up ② reload the Tauri
+              window (Ctrl+R) ③ run <code>pnpm check:tauri-blank</code>. If the dev URL
+              works in a browser, it is a Tauri issue; otherwise a frontend issue.
+            </p>
+          </div>
         </div>
       </div>
     </div>

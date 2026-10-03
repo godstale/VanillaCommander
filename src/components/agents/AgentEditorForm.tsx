@@ -16,6 +16,8 @@ import {
   ChevronDown,
   ChevronRight,
   Activity,
+  Gauge,
+  Zap,
 } from 'lucide-react';
 import type { Agent, ApprovalMode, BuiltinToolId, LlmProviderKind, ReasoningEffort, ReasoningMode, VisionSupport } from '@/lib/types/agent';
 import { DEFAULT_TEMPERATURE, DEFAULT_VISION_SUPPORT } from '@/lib/types/agent';
@@ -26,7 +28,7 @@ import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { BUNDLED_SKILLS, installBundledSkills } from '@/lib/skills/bundledSkills';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useAgents } from '@/lib/context/AgentsContext';
-import { listModels, showModel, type OllamaModel, type OllamaThinkingInfo } from '@/lib/llm/ollamaClient';
+import { getSystemGpuInfo, listModels, showModel, type OllamaModel, type OllamaThinkingInfo } from '@/lib/llm/ollamaClient';
 import {
   LLM_PROVIDER_ORDER,
   getProviderPreset,
@@ -39,6 +41,8 @@ import {
   type ProviderModelInfo,
 } from '@/lib/llm/providerRuntime';
 import { resolveCompactionSettings } from '@/lib/compaction/settings';
+import { recommendContextBudget } from '@/lib/agent/gpuAutoTune';
+import type { SystemGpuInfo } from '@/lib/types/monitoring';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { APP_DEFAULT_BUILTIN_TOOLS, APP_DEFAULT_SKILLS } from '@/lib/agent/defaults';
 import {
@@ -321,6 +325,32 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
   const [maxOutputTokens, setMaxOutputTokens] = useState<number | undefined>(
     initialAgent?.maxOutputTokens,
   );
+  // GPU 기반 컨텍스트 예산 추천. 새 에이전트는 감지 직후 한 번 자동 적용한다.
+  const [gpuInfo, setGpuInfo] = useState<SystemGpuInfo | null>(null);
+  const gpuRecommendation = useMemo(() => (gpuInfo ? recommendContextBudget(gpuInfo) : null), [gpuInfo]);
+  const applyGpuRecommendation = () => {
+    if (!gpuRecommendation) return;
+    setContextSize(gpuRecommendation.contextSize);
+    setReserveTokens(gpuRecommendation.reserveTokens);
+    setKeepRecentTokens(gpuRecommendation.keepRecentTokens);
+  };
+  useEffect(() => {
+    let cancelled = false;
+    void getSystemGpuInfo().then((info) => {
+      if (cancelled) return;
+      setGpuInfo(info);
+      if (mode === 'create' && !initialAgent) {
+        const rec = recommendContextBudget(info);
+        setContextSize((cur) => (cur === 0 ? rec.contextSize : cur));
+        setReserveTokens((cur) => (cur === 0 ? rec.reserveTokens : cur));
+        setKeepRecentTokens((cur) => (cur === 0 ? rec.keepRecentTokens : cur));
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // 생성 파라미터(Advanced) 펼침 상태. 기본은 접힘.
   const [showGeneration, setShowGeneration] = useState(false);
   // P11-21: 고급 설정 접기/펼치기.
@@ -1344,6 +1374,166 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
         )}
       </div>
 
+      {/* 컨텍스트 예산: 채팅 처리 성능에 크게 영향 — 고급 밖 기본 설정 */}
+      <div className="border border-border rounded-xl p-5 bg-card/40 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Gauge className="h-4 w-4 text-primary" />
+            <h3 className="text-sm font-semibold text-foreground">{t('agentForm.budgetSection')}</h3>
+          </div>
+          <Button type="button" variant="outline" size="sm" onClick={applyGpuRecommendation} disabled={!gpuRecommendation} className="flex items-center gap-1.5 text-xs">
+            <Zap className="h-3.5 w-3.5" />
+            <span>{t('agentForm.autoTune')}</span>
+          </Button>
+        </div>
+        <p className="text-[11px] text-muted-foreground leading-relaxed">
+          {gpuRecommendation
+            ? t('agentForm.autoTuneHint', {
+                gpu: gpuInfo?.gpuName || '-',
+                vram: gpuInfo?.vramTotalMb ? `${Math.round(gpuInfo.vramTotalMb / 1024)}GB` : '-',
+                ctx: gpuRecommendation.contextSize.toLocaleString(),
+                reserve: gpuRecommendation.reserveTokens.toLocaleString(),
+                keep: gpuRecommendation.keepRecentTokens.toLocaleString(),
+              })
+            : t('agentForm.autoTuneDetecting')}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Context Size */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
+                <span>{t('agentForm.contextSize')}</span>
+                <ParamInfo label={t('agentForm.contextSize')} help={t('agentForm.contextHelp')} />
+              </label>
+            </div>
+            <select
+              value={
+                [0, 4096, 8192, 12288, 16384, 24576, 32768, 49152, 65536, 98304, 131072, 196608, 262144, 376832, 524288].includes(contextSize)
+                  ? contextSize
+                  : 'custom'
+              }
+              onChange={(e) => {
+                if (e.target.value !== 'custom') {
+                  setContextSize(Number(e.target.value));
+                }
+              }}
+              className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+            >
+              <option value={0}>{t('agentForm.autoTokens')}</option>
+              <option value={4096}>4K (4,096 {t('agentForm.tokenUnit')}</option>
+              <option value={8192}>8K (8,192 {t('agentForm.tokenUnit')}</option>
+              <option value={12288}>12K (12,288 {t('agentForm.tokenUnit')}</option>
+              <option value={16384}>16K (16,384 {t('agentForm.tokenUnit')}</option>
+              <option value={24576}>24K (24,576 {t('agentForm.tokenUnit')}</option>
+              <option value={32768}>32K (32,768 {t('agentForm.tokenUnit')}</option>
+              <option value={49152}>48K (49,152 {t('agentForm.tokenUnit')}</option>
+              <option value={65536}>64K (65,536 {t('agentForm.tokenUnit')}</option>
+              <option value={98304}>96K (98,304 {t('agentForm.tokenUnit')}</option>
+              <option value={131072}>128K (131,072 {t('agentForm.tokenUnit')}</option>
+              <option value={196608}>192K (196,608 {t('agentForm.tokenUnit')}</option>
+              <option value={262144}>256K (262,144 {t('agentForm.tokenUnit')}</option>
+              <option value={376832}>368K (376,832 {t('agentForm.tokenUnit')}</option>
+              <option value={524288}>512K (524,288 {t('agentForm.tokenUnit')}</option>
+              <option value="custom">{t('agentForm.customInput')}</option>
+            </select>
+            <input
+              type="number"
+              value={contextSize}
+              onChange={(e) => setContextSize(parseInt(e.target.value, 10) || 0)}
+              placeholder={t('agentForm.contextPlaceholder')}
+              className="w-full px-3 py-1 text-xs rounded-md border border-border bg-background text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <span className="text-[10px] text-muted-foreground block leading-tight">
+              {t('agentForm.contextHelp')}
+            </span>
+          </div>
+
+          {/* Reserve Tokens (압축 여유분) */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
+                <span>{t('agentForm.reserve')}</span>
+                <ParamInfo label={t('agentForm.reserve')} help={t('agentForm.reserveHelp')} />
+              </label>
+            </div>
+            <select
+              value={
+                [0, 1024, 2048, 4096, 8192, 16384].includes(reserveTokens)
+                  ? reserveTokens
+                  : 'custom'
+              }
+              onChange={(e) => {
+                if (e.target.value !== 'custom') {
+                  setReserveTokens(Number(e.target.value));
+                }
+              }}
+              className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+            >
+              <option value={0}>{t('agentForm.autoReserve', { n: derivedBudget.reserveTokens.toLocaleString() })}</option>
+              <option value={1024}>1K (1,024 {t('agentForm.tokenUnit')}</option>
+              <option value={2048}>2K (2,048 {t('agentForm.tokenUnit')}</option>
+              <option value={4096}>4K (4,096 {t('agentForm.tokenUnit')}</option>
+              <option value={8192}>8K (8,192 {t('agentForm.tokenUnit')}</option>
+              <option value={16384}>16K (16,384 {t('agentForm.tokenUnit')}</option>
+              <option value="custom">{t('agentForm.customInput')}</option>
+            </select>
+            <input
+              type="number"
+              value={reserveTokens}
+              onChange={(e) => setReserveTokens(parseInt(e.target.value, 10) || 0)}
+              placeholder={t('agentForm.reservePlaceholder')}
+              className="w-full px-3 py-1 text-xs rounded-md border border-border bg-background text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <span className="text-[10px] text-muted-foreground block leading-tight">
+              {t('agentForm.reserveHelp')}
+            </span>
+          </div>
+
+          {/* Keep Recent Tokens (최근 보존량) */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
+                <span>{t('agentForm.keepRecent')}</span>
+                <ParamInfo label={t('agentForm.keepRecent')} help={t('agentForm.keepHelp')} />
+              </label>
+            </div>
+            <select
+              value={
+                [0, 1024, 2048, 4096, 8192, 16384, 24576, 32768].includes(keepRecentTokens)
+                  ? keepRecentTokens
+                  : 'custom'
+              }
+              onChange={(e) => {
+                if (e.target.value !== 'custom') {
+                  setKeepRecentTokens(Number(e.target.value));
+                }
+              }}
+              className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+            >
+              <option value={0}>{t('agentForm.autoKeep', { n: derivedBudget.keepRecentTokens.toLocaleString() })}</option>
+              <option value={1024}>1K (1,024 {t('agentForm.tokenUnit')}</option>
+              <option value={2048}>2K (2,048 {t('agentForm.tokenUnit')}</option>
+              <option value={4096}>4K (4,096 {t('agentForm.tokenUnit')}</option>
+              <option value={8192}>8K (8,192 {t('agentForm.tokenUnit')}</option>
+              <option value={16384}>16K (16,384 {t('agentForm.tokenUnit')}</option>
+              <option value={24576}>24K (24,576 {t('agentForm.tokenUnit')}</option>
+              <option value={32768}>32K (32,768 {t('agentForm.tokenUnit')}</option>
+              <option value="custom">{t('agentForm.customInput')}</option>
+            </select>
+            <input
+              type="number"
+              value={keepRecentTokens}
+              onChange={(e) => setKeepRecentTokens(parseInt(e.target.value, 10) || 0)}
+              placeholder={t('agentForm.reservePlaceholder')}
+              className="w-full px-3 py-1 text-xs rounded-md border border-border bg-background text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <span className="text-[10px] text-muted-foreground block leading-tight">
+              {t('agentForm.keepHelp')}
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* ▸ 고급 설정 (P11-21): 시스템 프롬프트·생성 옵션·승인·모니터링·도구·스킬 */}
       <button
         type="button"
@@ -1495,141 +1685,6 @@ export const AgentEditorForm: React.FC<AgentEditorFormProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-border/50">
-          {/* Context Size */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
-                <span>{t('agentForm.contextSize')}</span>
-                <ParamInfo label={t('agentForm.contextSize')} help={t('agentForm.contextHelp')} />
-              </label>
-            </div>
-            <select
-              value={
-                [0, 4096, 8192, 12288, 16384, 24576, 32768, 49152, 65536, 98304, 131072, 196608, 262144, 376832, 524288].includes(contextSize)
-                  ? contextSize
-                  : 'custom'
-              }
-              onChange={(e) => {
-                if (e.target.value !== 'custom') {
-                  setContextSize(Number(e.target.value));
-                }
-              }}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-            >
-              <option value={0}>{t('agentForm.autoTokens')}</option>
-              <option value={4096}>4K (4,096 {t('agentForm.tokenUnit')}</option>
-              <option value={8192}>8K (8,192 {t('agentForm.tokenUnit')}</option>
-              <option value={12288}>12K (12,288 {t('agentForm.tokenUnit')}</option>
-              <option value={16384}>16K (16,384 {t('agentForm.tokenUnit')}</option>
-              <option value={24576}>24K (24,576 {t('agentForm.tokenUnit')}</option>
-              <option value={32768}>32K (32,768 {t('agentForm.tokenUnit')}</option>
-              <option value={49152}>48K (49,152 {t('agentForm.tokenUnit')}</option>
-              <option value={65536}>64K (65,536 {t('agentForm.tokenUnit')}</option>
-              <option value={98304}>96K (98,304 {t('agentForm.tokenUnit')}</option>
-              <option value={131072}>128K (131,072 {t('agentForm.tokenUnit')}</option>
-              <option value={196608}>192K (196,608 {t('agentForm.tokenUnit')}</option>
-              <option value={262144}>256K (262,144 {t('agentForm.tokenUnit')}</option>
-              <option value={376832}>368K (376,832 {t('agentForm.tokenUnit')}</option>
-              <option value={524288}>512K (524,288 {t('agentForm.tokenUnit')}</option>
-              <option value="custom">{t('agentForm.customInput')}</option>
-            </select>
-            <input
-              type="number"
-              value={contextSize}
-              onChange={(e) => setContextSize(parseInt(e.target.value, 10) || 0)}
-              placeholder={t('agentForm.contextPlaceholder')}
-              className="w-full px-3 py-1 text-xs rounded-md border border-border bg-background text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-            <span className="text-[10px] text-muted-foreground block leading-tight">
-              {t('agentForm.contextHelp')}
-            </span>
-          </div>
-
-          {/* Reserve Tokens (압축 여유분) */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
-                <span>{t('agentForm.reserve')}</span>
-                <ParamInfo label={t('agentForm.reserve')} help={t('agentForm.reserveHelp')} />
-              </label>
-            </div>
-            <select
-              value={
-                [0, 1024, 2048, 4096, 8192, 16384].includes(reserveTokens)
-                  ? reserveTokens
-                  : 'custom'
-              }
-              onChange={(e) => {
-                if (e.target.value !== 'custom') {
-                  setReserveTokens(Number(e.target.value));
-                }
-              }}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-            >
-              <option value={0}>{t('agentForm.autoReserve', { n: derivedBudget.reserveTokens.toLocaleString() })}</option>
-              <option value={1024}>1K (1,024 {t('agentForm.tokenUnit')}</option>
-              <option value={2048}>2K (2,048 {t('agentForm.tokenUnit')}</option>
-              <option value={4096}>4K (4,096 {t('agentForm.tokenUnit')}</option>
-              <option value={8192}>8K (8,192 {t('agentForm.tokenUnit')}</option>
-              <option value={16384}>16K (16,384 {t('agentForm.tokenUnit')}</option>
-              <option value="custom">{t('agentForm.customInput')}</option>
-            </select>
-            <input
-              type="number"
-              value={reserveTokens}
-              onChange={(e) => setReserveTokens(parseInt(e.target.value, 10) || 0)}
-              placeholder={t('agentForm.reservePlaceholder')}
-              className="w-full px-3 py-1 text-xs rounded-md border border-border bg-background text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-            <span className="text-[10px] text-muted-foreground block leading-tight">
-              {t('agentForm.reserveHelp')}
-            </span>
-          </div>
-
-          {/* Keep Recent Tokens (최근 보존량) */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
-                <span>{t('agentForm.keepRecent')}</span>
-                <ParamInfo label={t('agentForm.keepRecent')} help={t('agentForm.keepHelp')} />
-              </label>
-            </div>
-            <select
-              value={
-                [0, 1024, 2048, 4096, 8192, 16384, 24576, 32768].includes(keepRecentTokens)
-                  ? keepRecentTokens
-                  : 'custom'
-              }
-              onChange={(e) => {
-                if (e.target.value !== 'custom') {
-                  setKeepRecentTokens(Number(e.target.value));
-                }
-              }}
-              className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
-            >
-              <option value={0}>{t('agentForm.autoKeep', { n: derivedBudget.keepRecentTokens.toLocaleString() })}</option>
-              <option value={1024}>1K (1,024 {t('agentForm.tokenUnit')}</option>
-              <option value={2048}>2K (2,048 {t('agentForm.tokenUnit')}</option>
-              <option value={4096}>4K (4,096 {t('agentForm.tokenUnit')}</option>
-              <option value={8192}>8K (8,192 {t('agentForm.tokenUnit')}</option>
-              <option value={16384}>16K (16,384 {t('agentForm.tokenUnit')}</option>
-              <option value={24576}>24K (24,576 {t('agentForm.tokenUnit')}</option>
-              <option value={32768}>32K (32,768 {t('agentForm.tokenUnit')}</option>
-              <option value="custom">{t('agentForm.customInput')}</option>
-            </select>
-            <input
-              type="number"
-              value={keepRecentTokens}
-              onChange={(e) => setKeepRecentTokens(parseInt(e.target.value, 10) || 0)}
-              placeholder={t('agentForm.reservePlaceholder')}
-              className="w-full px-3 py-1 text-xs rounded-md border border-border bg-background text-foreground font-mono focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-            <span className="text-[10px] text-muted-foreground block leading-tight">
-              {t('agentForm.keepHelp')}
-            </span>
-          </div>
-        </div>
       </div>
 
       {/* 4. 생성 파라미터 (Advanced, 기본 접힘) — Provider 미지원 항목은 잠금 */}

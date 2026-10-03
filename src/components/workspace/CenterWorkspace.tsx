@@ -24,6 +24,7 @@ import {
   PanelResizeHandle,
 } from 'react-resizable-panels';
 import { Button } from '@/components/ui/button';
+import { useAltHeld } from '@/hooks/useAltHeld';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import type { WorkspaceTab, WorkspaceTabType } from '@/lib/types/workspaceTab';
@@ -31,8 +32,7 @@ import { ChatTab } from '@/components/workspace/ChatTab';
 import { EditorTab } from '@/components/workspace/EditorTab';
 import { ImageViewerTab } from '@/components/workspace/ImageViewerTab';
 import { SkillViewerTab } from '@/components/workspace/SkillViewerTab';
-import { AgentEditorTab } from '@/components/workspace/AgentEditorTab';
-import { AgentMonitorTab } from '@/components/workspace/AgentMonitorTab';
+import { AgentWorkbenchTab } from '@/components/workspace/AgentWorkbenchTab';
 import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
 import { DocumentViewerTab } from '@/components/viewers/DocumentViewerTab';
 import { ArchiveViewerTab } from '@/components/viewers/ArchiveViewerTab';
@@ -68,9 +68,8 @@ function renderTabContent(tab: WorkspaceTab) {
     case 'image-viewer':
       return <ImageViewerTab tab={tab} />;
     case 'agent-editor':
-      return <AgentEditorTab tab={tab} />;
     case 'agent-monitor':
-      return <AgentMonitorTab tab={tab} />;
+      return <AgentWorkbenchTab tab={tab} />;
     case 'skill-viewer':
       return <SkillViewerTab tab={tab} />;
     case 'file-explorer':
@@ -117,7 +116,7 @@ interface WorkspacePaneProps {
   onSelectTab: (id: string) => void;
   onCloseTab: (id: string) => void;
   onContextMenu: (e: React.MouseEvent, tabId: string, pane: 'primary' | 'secondary') => void;
-  onNewChat: (pane: 'primary' | 'secondary') => void;
+  onNewExplorer: (pane: 'primary' | 'secondary') => void;
   onSplitTab: (tabId: string, direction: 'horizontal' | 'vertical', side: 'left' | 'right' | 'top' | 'bottom') => void;
   onToggleSplitDirection: () => void;
   onCloseSplit: () => void;
@@ -146,7 +145,7 @@ function WorkspacePane({
   onSelectTab,
   onCloseTab,
   onContextMenu,
-  onNewChat,
+  onNewExplorer,
   onSplitTab,
   onToggleSplitDirection,
   onCloseSplit,
@@ -163,6 +162,14 @@ function WorkspacePane({
 }: WorkspacePaneProps) {
   const { t } = useLanguage();
   const isThisPaneDropping = splitDropTarget?.pane === pane;
+  // P13-03: Alt를 누른 동안 탭 헤더 버튼에 단축키 배지를 표시한다 (버튼 안쪽 우하단).
+  const altHeld = useAltHeld();
+  const headerBadge = (label: string) =>
+    altHeld ? (
+      <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none shadow-sm whitespace-nowrap">
+        {label}
+      </kbd>
+    ) : null;
 
   return (
     <div className="flex flex-col h-full w-full min-h-0 bg-editor overflow-hidden relative">
@@ -238,39 +245,51 @@ function WorkspacePane({
 
           {/* Action buttons */}
           <div className="h-9 px-1.5 shrink-0 flex items-center gap-1 border-t-2 border-t-transparent border-b border-b-transparent">
-            <Button
-              variant="ghost"
-              size="icon"
-              disabled={!workspaceRoot}
-              className={cn(
-                'h-7 w-7 transition-colors',
-                !workspaceRoot
-                  ? 'text-muted-foreground/30 cursor-not-allowed hover:bg-transparent'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
-              onClick={() => onNewChat(pane)}
-              title={
-                workspaceRoot
-                  ? t('workspace.openNewChat')
-                  : t('topMenu.selectFolderFirst')
-              }
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
-
-            {/* Split trigger or layout control */}
-            {!isSplit && pane === 'primary' && paneTabs.length >= 2 && (
+            <span className="relative inline-flex">
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() =>
-                  activeTabId && onSplitTab(activeTabId, 'horizontal', 'right')
-                }
-                title={t('workspace.splitRight')}
+                className="h-7 w-7 transition-colors text-muted-foreground hover:text-foreground"
+                onClick={() => onNewExplorer(pane)}
+                title={`${t('explorer.newTab')} (Alt+T)`}
               >
-                <Columns2 className="h-3.5 w-3.5" />
+                <Plus className="h-4 w-4" />
               </Button>
+              {headerBadge('T')}
+            </span>
+
+            {/* Split trigger or layout control */}
+            {!isSplit && pane === 'primary' && paneTabs.length >= 2 && (
+              <>
+                <span className="relative inline-flex">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() =>
+                      activeTabId && onSplitTab(activeTabId, 'horizontal', 'right')
+                    }
+                    title={`${t('workspace.splitRight')} (Ctrl+Shift+H)`}
+                  >
+                    <Columns2 className="h-3.5 w-3.5" />
+                  </Button>
+                  {headerBadge('Ctrl+Shift+H')}
+                </span>
+                <span className="relative inline-flex">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() =>
+                      activeTabId && onSplitTab(activeTabId, 'vertical', 'bottom')
+                    }
+                    title={`${t('workspace.splitBottom')} (Ctrl+Shift+V)`}
+                  >
+                    <Rows2 className="h-3.5 w-3.5" />
+                  </Button>
+                  {headerBadge('Ctrl+Shift+V')}
+                </span>
+              </>
             )}
 
             {isSplit && pane === 'secondary' && (
@@ -318,14 +337,14 @@ function WorkspacePane({
           <WelcomeGuide />
         ) : paneTabs.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full w-full text-center text-muted-foreground gap-3">
-            <MessageSquare className="h-10 w-10 opacity-30" />
+            <Files className="h-10 w-10 opacity-30" />
             <p className="text-xs">{t('workspace.noTabs')}</p>
             <Button
               size="sm"
-              onClick={() => onNewChat(pane)}
+              onClick={() => onNewExplorer(pane)}
               className="text-xs cursor-pointer"
             >
-              {t('workspace.startNewChat')}
+              {t('explorer.newTab')}
             </Button>
           </div>
         ) : (
@@ -503,16 +522,60 @@ export function CenterWorkspace() {
     setContextMenuState({ tabId, pane, x: e.clientX, y: e.clientY });
   };
 
-  const handleNewChat = (pane: 'primary' | 'secondary' = 'primary') => {
-    if (!workspaceRoot) return;
+  // P12-02: 탭 헤더 "+"는 "새 탐색기"다 (폴더 없이도 열린다, D2).
+  const handleNewExplorer = (pane: 'primary' | 'secondary' = 'primary') => {
+    const root = workspaceRoot ?? '';
     openTab(
       {
-        type: 'chat',
-        title: t('workspace.newChat'),
+        type: 'file-explorer',
+        title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+        meta: { path: root },
       },
       pane,
     );
   };
+
+  // P13-03: 탭 헤더 단축키 — 새 탐색기(Alt+T, 앱 전용), 우측/하단 분할(Ctrl+Shift+H/V 유지).
+  // P13-04: Alt+H/V는 탐색기 숨김 토글과 겹치므로 화면 분할은 Shift 조합을 유지하고 전체를 표시한다.
+  // 입력 요소에서는 동작하지 않는다 (채팅 입력 중 Ctrl+Shift+V 붙여넣기 등 보호).
+  const newExplorerRef = useRef(handleNewExplorer);
+  useEffect(() => {
+    newExplorerRef.current = handleNewExplorer;
+  });
+  const splitTabRef = useRef(splitTab);
+  useEffect(() => {
+    splitTabRef.current = splitTab;
+  });
+  const activeTabRef = useRef(activeTabId);
+  useEffect(() => {
+    activeTabRef.current = activeTabId;
+  }, [activeTabId]);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      // Alt+T: Alt를 누른 채로 T를 누르면 새 탐색기가 열린다.
+      if (e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey && e.key.toLowerCase() === 't') {
+        e.preventDefault();
+        newExplorerRef.current('primary');
+        return;
+      }
+      if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
+      const k = e.key.toLowerCase();
+      if (!e.shiftKey) return;
+      const active = activeTabRef.current;
+      if (!active) return;
+      if (k === 'h') {
+        e.preventDefault();
+        splitTabRef.current(active, 'horizontal', 'right');
+      } else if (k === 'v') {
+        e.preventDefault();
+        splitTabRef.current(active, 'vertical', 'bottom');
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const handleCloseOthers = (targetId: string, pane: 'primary' | 'secondary') => {
     const paneTabs = tabs.filter((t) => (t.pane ?? 'primary') === pane);
@@ -764,7 +827,7 @@ export function CenterWorkspace() {
           onSelectTab={setActiveTab}
           onCloseTab={closeTab}
           onContextMenu={handleTabContextMenu}
-          onNewChat={handleNewChat}
+          onNewExplorer={handleNewExplorer}
           onSplitTab={splitTab}
           onToggleSplitDirection={() =>
             setSplitDirection(
@@ -807,7 +870,7 @@ export function CenterWorkspace() {
               onSelectTab={setActiveTab}
               onCloseTab={closeTab}
               onContextMenu={handleTabContextMenu}
-              onNewChat={handleNewChat}
+              onNewExplorer={handleNewExplorer}
               onSplitTab={splitTab}
               onToggleSplitDirection={() =>
                 setSplitDirection(
@@ -847,7 +910,7 @@ export function CenterWorkspace() {
               onSelectTab={setActiveTab}
               onCloseTab={closeTab}
               onContextMenu={handleTabContextMenu}
-              onNewChat={handleNewChat}
+              onNewExplorer={handleNewExplorer}
               onSplitTab={splitTab}
               onToggleSplitDirection={() =>
                 setSplitDirection(

@@ -14,6 +14,7 @@ use commands::llm_commands::*;
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_window_state::Builder::default().build())
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(
             tauri_plugin_log::Builder::default()
@@ -86,6 +87,7 @@ pub fn run() {
             fc_archive_list,
             fc_open_default,
             fc_reveal,
+            fc_open_terminal,
             fc_read_file_bytes,
             fc_read_text_head,
             fc_write_bytes,

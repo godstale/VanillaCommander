@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders as render } from '@/test-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { ActivityBar } from './ActivityBar';
@@ -55,6 +55,26 @@ describe('Workspace without selected folder', () => {
 
     // Settings is always available (no folder gating since P11-01).
     expect(screen.getByRole('link', { name: /설정/i })).toBeEnabled();
+  });
+
+  it('ActivityBar shows single-key badges for Alt combos and full combo for Ctrl (P13-04)', () => {
+    render(
+      <MemoryRouter>
+        <WorkspaceProvider>
+          <ActivityBar activeView="explorer" onSelect={vi.fn()} />
+        </WorkspaceProvider>
+      </MemoryRouter>,
+    );
+    // 평소에는 배지가 없다.
+    expect(screen.queryByText('A', { selector: 'kbd' })).not.toBeInTheDocument();
+    fireEvent.keyDown(window, { key: 'Alt', altKey: true });
+    // Alt 조합은 키만 표시한다.
+    expect(screen.getByText('A', { selector: 'kbd' })).toBeInTheDocument();
+    expect(screen.getByText('G', { selector: 'kbd' })).toBeInTheDocument();
+    expect(screen.getByText('M', { selector: 'kbd' })).toBeInTheDocument();
+    // Ctrl 조합은 전체를 표시한다.
+    expect(screen.getByText('Ctrl+,', { selector: 'kbd' })).toBeInTheDocument();
+    fireEvent.keyUp(window, { key: 'Alt' });
   });
 
   it('TopMenuBar has File menu enabled but Agent and View menus disabled when no folder is selected', () => {
