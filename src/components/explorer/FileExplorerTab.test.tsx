@@ -151,9 +151,9 @@ describe('FileExplorerTab', () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     // 1 / 가로 2분할 / 세로 2분할 버튼 (단축키 포함 타이틀).
-    expect(screen.getByTitle('1분할 (Ctrl+1)')).toBeInTheDocument();
-    expect(screen.getByTitle('2분할 가로 (상·하) (Ctrl+2)')).toBeInTheDocument();
-    expect(screen.getByTitle('2분할 세로 (좌·우) (Ctrl+3)')).toBeInTheDocument();
+    expect(screen.getByTitle('1분할 (Alt+1)')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할 가로 (상·하) (Alt+2)')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할 세로 (좌·우) (Alt+3)')).toBeInTheDocument();
     // 폴더 트리 (시스템 폴더 보기 기반).
     expect(screen.getByRole('tree')).toBeInTheDocument();
     // 탭 상태바: 전체 개수 표시.
@@ -163,7 +163,7 @@ describe('FileExplorerTab', () => {
   it('splits into two panes', async () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Ctrl+3)'));
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Alt+3)'));
     // 분할되면 같은 파일이 창마다 표시된다.
     await waitFor(() => {
       expect(screen.getAllByText('a.txt').length).toBe(2);
@@ -207,7 +207,7 @@ describe('FileExplorerTab', () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     expect(screen.getByRole('tree')).toBeInTheDocument();
-    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Ctrl+3)'));
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Alt+3)'));
     await waitFor(() => {
       expect(screen.getAllByText('a.txt').length).toBe(2);
     });
@@ -243,7 +243,7 @@ describe('FileExplorerTab', () => {
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
   });
 
-  it('refreshes with Ctrl+R and shows new shortcut titles', async () => {
+  it('refreshes with Alt+R and shows new shortcut titles', async () => {
     // 활성 탭으로 등록해야 탐색기 전역 단축키(window 리스너)가 동작한다.
     function Opener({ children }: { children: React.ReactNode }) {
       const { openTab } = useWorkspaceTabs();
@@ -273,14 +273,14 @@ describe('FileExplorerTab', () => {
     );
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     const before = calls.filter((c) => c.cmd === 'fc_list_dir').length;
-    fireEvent.keyDown(window, { key: 'r', ctrlKey: true });
+    fireEvent.keyDown(window, { key: 'r', altKey: true });
     await waitFor(() => {
       expect(calls.filter((c) => c.cmd === 'fc_list_dir').length).toBeGreaterThan(before);
     });
     // 새로고침·숨김·트리 버튼 타이틀에 단축키가 표시된다.
-    expect(screen.getByTitle('새로고침 (Ctrl+R)')).toBeInTheDocument();
-    expect(screen.getByTitle('숨김 파일 표시 (Ctrl+H)')).toBeInTheDocument();
-    expect(screen.getByTitle('폴더 트리 표시 (Ctrl+B)')).toBeInTheDocument();
+    expect(screen.getByTitle('새로고침 (Alt+R)')).toBeInTheDocument();
+    expect(screen.getByTitle('숨김 파일 표시 (Alt+H)')).toBeInTheDocument();
+    expect(screen.getByTitle('폴더 트리 표시 (Alt+B)')).toBeInTheDocument();
   });
 
   it('does not show folder path in tab status bar', async () => {

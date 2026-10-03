@@ -87,6 +87,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
 
   // P13-01: Alt를 누른 동안 단축키를 알리는 배지. 단축키가 있는 버튼에만 표시한다.
   // 배지는 버튼 우하단 안쪽에 둔다. 상단 바깥(-top)은 툴바 스크롤 영역에 잘리므로 쓰지 않는다.
+  // P13-04: Alt 조합은 키만(R), Ctrl/Shift 조합은 전체(Ctrl+F)를 표시한다.
   const badge = (label: string) =>
     showShortcuts ? (
       <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none shadow-sm">
@@ -119,7 +120,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
         </Button>
       ))}
       {wrapBtn('refresh', 'R', (
-        <Button variant="ghost" size="icon" className={iconBtn} onClick={onRefresh} title={`${t('explorer.refresh')} (Ctrl+R)`}>
+        <Button variant="ghost" size="icon" className={iconBtn} onClick={onRefresh} title={`${t('explorer.refresh')} (Alt+R)`}>
           <RefreshCw className="h-4 w-4" />
         </Button>
       ))}
@@ -134,7 +135,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
           size="icon"
           className={cn(iconBtn, showHidden && 'text-primary')}
           onClick={onToggleHidden}
-          title={`${t('explorer.showHidden')} (Ctrl+H)`}
+          title={`${t('explorer.showHidden')} (Alt+H)`}
         >
           {showHidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
         </Button>
@@ -145,7 +146,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
           size="icon"
           className={cn(iconBtn, treeOpen && 'text-primary')}
           onClick={onToggleTree}
-          title={`${t('explorer.toggleTree')} (Ctrl+B)`}
+          title={`${t('explorer.toggleTree')} (Alt+B)`}
         >
           <PanelLeft className="h-4 w-4" />
         </Button>
@@ -208,7 +209,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
             size="icon"
             className={cn('h-6 w-6', split === 'single' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
             onClick={() => onSplitChange('single')}
-            title={`${t('explorer.splitOne')} (Ctrl+1)`}
+            title={`${t('explorer.splitOne')} (Alt+1)`}
           >
             <Square className="h-3.5 w-3.5" />
           </Button>
@@ -219,7 +220,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
             size="icon"
             className={cn('h-6 w-6', split === 'dual-h' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
             onClick={() => onSplitChange('dual-h')}
-            title={`${t('explorer.splitHor')} (Ctrl+2)`}
+            title={`${t('explorer.splitHor')} (Alt+2)`}
           >
             <Rows2 className="h-3.5 w-3.5" />
           </Button>
@@ -230,7 +231,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
             size="icon"
             className={cn('h-6 w-6', split === 'dual-v' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
             onClick={() => onSplitChange('dual-v')}
-            title={`${t('explorer.splitVer')} (Ctrl+3)`}
+            title={`${t('explorer.splitVer')} (Alt+3)`}
           >
             <Columns2 className="h-3.5 w-3.5" />
           </Button>

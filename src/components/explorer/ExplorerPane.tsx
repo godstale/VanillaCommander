@@ -837,8 +837,8 @@ export function ExplorerPane({
               <Search className="h-3.5 w-3.5" />
             </button>
             {altHeld && (
-              <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] font-mono text-primary pointer-events-none shadow-sm">
-                F
+              <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] font-mono text-primary pointer-events-none shadow-sm whitespace-nowrap">
+                Ctrl+F
               </kbd>
             )}
           </span>

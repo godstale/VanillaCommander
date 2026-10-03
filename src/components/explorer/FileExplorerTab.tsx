@@ -260,27 +260,27 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   }, [panes, activePane, split, treeOpen, chatOpen, persist]);
 
   // P13-03: 탐색기 단축키 (활성 탭에서만, 입력 요소에 포커스가 있을 때는 가로채지 않는다).
+  // P13-04: 앱 전용 단축키는 Alt 조합으로 통일한다 (브라우저 공통 키와 충돌 방지).
   // - Alt+D: 활성 창의 주소창 직접 입력 / Alt+C: 에이전트 채팅 도크 토글
-  // - Ctrl+R: 새로고침 / Ctrl+H: 숨김 표시 / Ctrl+B: 폴더 트리 / Ctrl+1·2·3: 1·가로2·세로2 분할
-  // Ctrl+Shift+계열(사이드 메뉴·채팅 검색 등)과 겹치지 않도록 Shift가 없을 때만 처리한다.
+  // - Alt+R: 새로고침 / Alt+H: 숨김 표시 / Alt+B: 폴더 트리 / Alt+1·2·3: 1·가로2·세로2 분할
+  // Alt를 누른 채로 조합 키를 누르면 그대로 실행된다 (배지=가이드, Alt 홀드 상태).
   useEffect(() => {
     if (!isActive) return;
     const onKey = (e: KeyboardEvent) => {
+      if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-      if (e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'd' || e.key === 'D')) {
+      const k = e.key.toLowerCase();
+      if (k === 'd') {
         e.preventDefault();
         paneRefs.current[activePane]?.focusAddress();
         return;
       }
-      if (e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'c' || e.key === 'C')) {
+      if (k === 'c') {
         e.preventDefault();
         toggleChat();
         return;
       }
-      const mod = e.ctrlKey || e.metaKey;
-      if (!mod || e.altKey || e.shiftKey) return;
-      const k = e.key.toLowerCase();
       if (k === 'r') {
         e.preventDefault();
         paneRefs.current[activePane]?.refresh();

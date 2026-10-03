@@ -25,12 +25,13 @@ interface ActivityBarItem {
 }
 
 // P11-01(V1): 탐색기 · 채팅 · 에이전트 · 위키 · 매크로. D2에 따라 폴더 미선택 비활성화 없음.
+// P13-04: 사이드 메뉴는 Alt+<badge> 전역 단축키 (Alt+D 주소 입력과 겹치지 않도록 D→G, G→M).
 const ITEMS: ActivityBarItem[] = [
   { view: 'explorer', icon: Files, labelKey: 'activityBar.explorer', badge: 'A' },
   { view: 'chat-sessions', icon: MessageSquare, labelKey: 'activityBar.chatSessions', badge: 'S' },
-  { view: 'agents', icon: Bot, labelKey: 'activityBar.agents', badge: 'D' },
+  { view: 'agents', icon: Bot, labelKey: 'activityBar.agents', badge: 'G' },
   { view: 'wiki', icon: BookOpen, labelKey: 'activityBar.wiki', badge: 'F' },
-  { view: 'macros', icon: Zap, labelKey: 'activityBar.macros', badge: 'G' },
+  { view: 'macros', icon: Zap, labelKey: 'activityBar.macros', badge: 'M' },
 ];
 
 export function ActivityBar({ activeView, onSelect }: ActivityBarProps) {
@@ -47,7 +48,7 @@ export function ActivityBar({ activeView, onSelect }: ActivityBarProps) {
         <div className="flex flex-col items-center gap-1 w-full">
           {ITEMS.map(({ view, icon: Icon, labelKey, badge }) => {
             const isActive = activeView === view;
-            const title = `${t(labelKey)} (Ctrl+Shift+${badge})`;
+            const title = `${t(labelKey)} (Alt+${badge})`;
             return (
               <Tooltip key={view}>
                 <TooltipTrigger asChild>
@@ -90,8 +91,8 @@ export function ActivityBar({ activeView, onSelect }: ActivityBarProps) {
             >
               <Settings className="h-5 w-5" />
               {altHeld && (
-                <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none shadow-sm">
-                  ,
+                <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none shadow-sm whitespace-nowrap">
+                  Ctrl+,
                 </kbd>
               )}
             </Link>

@@ -168,7 +168,7 @@ function WorkspacePane({
   const altHeld = useAltHeld();
   const headerBadge = (label: string) =>
     altHeld ? (
-      <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none shadow-sm">
+      <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none shadow-sm whitespace-nowrap">
         {label}
       </kbd>
     ) : null;
@@ -253,7 +253,7 @@ function WorkspacePane({
                 size="icon"
                 className="h-7 w-7 transition-colors text-muted-foreground hover:text-foreground"
                 onClick={() => onNewExplorer(pane)}
-                title={`${t('explorer.newTab')} (Ctrl+T)`}
+                title={`${t('explorer.newTab')} (Alt+T)`}
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -275,7 +275,7 @@ function WorkspacePane({
                   >
                     <Columns2 className="h-3.5 w-3.5" />
                   </Button>
-                  {headerBadge('H')}
+                  {headerBadge('Ctrl+Shift+H')}
                 </span>
                 <span className="relative inline-flex">
                   <Button
@@ -289,7 +289,7 @@ function WorkspacePane({
                   >
                     <Rows2 className="h-3.5 w-3.5" />
                   </Button>
-                  {headerBadge('V')}
+                  {headerBadge('Ctrl+Shift+V')}
                 </span>
               </>
             )}
@@ -537,7 +537,8 @@ export function CenterWorkspace() {
     );
   };
 
-  // P13-03: 탭 헤더 전역 단축키 — 새 탐색기(Ctrl+T), 우측 분할(Ctrl+Shift+H), 하단 분할(Ctrl+Shift+V).
+  // P13-03: 탭 헤더 단축키 — 새 탐색기(Alt+T, 앱 전용), 우측/하단 분할(Ctrl+Shift+H/V 유지).
+  // P13-04: Alt+H/V는 탐색기 숨김 토글과 겹치므로 화면 분할은 Shift 조합을 유지하고 전체를 표시한다.
   // 입력 요소에서는 동작하지 않는다 (채팅 입력 중 Ctrl+Shift+V 붙여넣기 등 보호).
   const newExplorerRef = useRef(handleNewExplorer);
   useEffect(() => {
@@ -553,15 +554,16 @@ export function CenterWorkspace() {
   }, [activeTabId]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-      const k = e.key.toLowerCase();
-      if (!e.shiftKey && k === 't') {
+      // Alt+T: Alt를 누른 채로 T를 누르면 새 탐색기가 열린다.
+      if (e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey && e.key.toLowerCase() === 't') {
         e.preventDefault();
         newExplorerRef.current('primary');
         return;
       }
+      if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
+      const k = e.key.toLowerCase();
       if (!e.shiftKey) return;
       const active = activeTabRef.current;
       if (!active) return;

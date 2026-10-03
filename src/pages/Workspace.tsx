@@ -131,7 +131,7 @@ function WorkspaceContent() {
     }
   };
 
-  // P13-03: 사이드 메뉴 전역 단축키 (Ctrl+Shift+A/S/D/F/G).
+  // P13-04: 사이드 메뉴 전역 단축키 (Alt+A/S/G/F/M, 앱 전용은 Alt 조합).
   // handleActivityBarSelect와 동일한 동작을 키보드로 수행한다.
   const selectRef = useRef(handleActivityBarSelect);
   useEffect(() => {
@@ -139,14 +139,14 @@ function WorkspaceContent() {
   });
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!(e.ctrlKey || e.metaKey) || !e.shiftKey || e.altKey) return;
+      if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       const k = e.key.toLowerCase();
       const view: Exclude<SidePanelView, null> | null =
         k === 'a' ? 'explorer'
         : k === 's' ? 'chat-sessions'
-        : k === 'd' ? 'agents'
+        : k === 'g' ? 'agents'
         : k === 'f' ? 'wiki'
-        : k === 'g' ? 'macros'
+        : k === 'm' ? 'macros'
         : null;
       if (!view) return;
       e.preventDefault();
