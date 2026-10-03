@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-  Folder,
   FolderOpen,
   FolderX,
   FilePlus,
@@ -116,10 +115,6 @@ export function TopMenuBar() {
       meta: { agentId: defaultAgent.id },
     });
   };
-
-  const folderName = workspaceRoot
-    ? workspaceRoot.split(/[\\/]/).filter(Boolean).pop() || workspaceRoot
-    : null;
 
   const [isMaximized, setIsMaximized] = useState(false);
 
@@ -360,40 +355,11 @@ export function TopMenuBar() {
         </DropdownMenu>
       </div>
 
-      {/* Center: Current Workspace Title (Draggable region with interactive center) */}
+      {/* Center: empty draggable spacer */}
       <div
         data-tauri-drag-region
-        className="flex-1 flex items-center justify-center px-4 overflow-hidden h-full cursor-default"
-      >
-        {workspaceRoot ? (
-          <div
-            data-no-drag="true"
-            className={cn(
-              'flex items-center gap-1.5 text-[11px] text-muted-foreground/80 font-mono truncate px-2 py-0.5 rounded transition-colors',
-              isLlmBusy
-                ? 'opacity-50 cursor-not-allowed'
-                : 'cursor-pointer hover:text-foreground hover:bg-muted/40',
-            )}
-            onClick={isLlmBusy ? undefined : handlePickFolder}
-            title={isLlmBusy ? folderChangeBlockedTitle : `${workspaceRoot} ${t('topMenu.clickToChangeFolder')}`}
-          >
-            <Folder className="h-3 w-3 text-warning shrink-0" />
-            <span className="font-semibold text-foreground">{folderName}</span>
-            <span className="opacity-50 text-[10px] truncate max-w-sm hidden sm:inline">
-              — {workspaceRoot}
-            </span>
-          </div>
-        ) : (
-          <div
-            data-no-drag="true"
-            className="flex items-center gap-1.5 text-[11px] text-warning/80 font-medium cursor-pointer hover:text-warning transition-colors px-2 py-0.5 rounded hover:bg-muted/40"
-            onClick={handlePickFolder}
-          >
-            <FolderOpen className="h-3 w-3" />
-            <span>{t('topMenu.selectProjectFolder')}</span>
-          </div>
-        )}
-      </div>
+        className="flex-1 h-full"
+      />
 
       {/* Right: Window Controls (Minimize, Maximize/Restore, Close) */}
       <div
