@@ -13,7 +13,6 @@ import {
   BookOpen,
   Zap,
   X,
-  Plus,
   Columns2,
   Rows2,
   type LucideIcon,
@@ -117,7 +116,7 @@ interface WorkspacePaneProps {
   onSelectTab: (id: string) => void;
   onCloseTab: (id: string) => void;
   onContextMenu: (e: React.MouseEvent, tabId: string, pane: 'primary' | 'secondary') => void;
-  onNewChat: (pane: 'primary' | 'secondary') => void;
+  onNewExplorer: (pane: 'primary' | 'secondary') => void;
   onSplitTab: (tabId: string, direction: 'horizontal' | 'vertical', side: 'left' | 'right' | 'top' | 'bottom') => void;
   onToggleSplitDirection: () => void;
   onCloseSplit: () => void;
@@ -146,7 +145,7 @@ function WorkspacePane({
   onSelectTab,
   onCloseTab,
   onContextMenu,
-  onNewChat,
+  onNewExplorer,
   onSplitTab,
   onToggleSplitDirection,
   onCloseSplit,
@@ -241,21 +240,11 @@ function WorkspacePane({
             <Button
               variant="ghost"
               size="icon"
-              disabled={!workspaceRoot}
-              className={cn(
-                'h-7 w-7 transition-colors',
-                !workspaceRoot
-                  ? 'text-muted-foreground/30 cursor-not-allowed hover:bg-transparent'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
-              onClick={() => onNewChat(pane)}
-              title={
-                workspaceRoot
-                  ? t('workspace.openNewChat')
-                  : t('topMenu.selectFolderFirst')
-              }
+              className="h-7 w-7 transition-colors text-muted-foreground hover:text-foreground"
+              onClick={() => onNewExplorer(pane)}
+              title={t('explorer.newTab')}
             >
-              <Plus className="h-4 w-4" />
+              <Files className="h-4 w-4" />
             </Button>
 
             {/* Split trigger or layout control */}
@@ -318,14 +307,14 @@ function WorkspacePane({
           <WelcomeGuide />
         ) : paneTabs.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full w-full text-center text-muted-foreground gap-3">
-            <MessageSquare className="h-10 w-10 opacity-30" />
+            <Files className="h-10 w-10 opacity-30" />
             <p className="text-xs">{t('workspace.noTabs')}</p>
             <Button
               size="sm"
-              onClick={() => onNewChat(pane)}
+              onClick={() => onNewExplorer(pane)}
               className="text-xs cursor-pointer"
             >
-              {t('workspace.startNewChat')}
+              {t('explorer.newTab')}
             </Button>
           </div>
         ) : (
@@ -503,12 +492,14 @@ export function CenterWorkspace() {
     setContextMenuState({ tabId, pane, x: e.clientX, y: e.clientY });
   };
 
-  const handleNewChat = (pane: 'primary' | 'secondary' = 'primary') => {
-    if (!workspaceRoot) return;
+  // P12-02: 탭 헤더 "+"는 "새 탐색기"다 (폴더 없이도 열린다, D2).
+  const handleNewExplorer = (pane: 'primary' | 'secondary' = 'primary') => {
+    const root = workspaceRoot ?? '';
     openTab(
       {
-        type: 'chat',
-        title: t('workspace.newChat'),
+        type: 'file-explorer',
+        title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+        meta: { path: root },
       },
       pane,
     );
@@ -764,7 +755,7 @@ export function CenterWorkspace() {
           onSelectTab={setActiveTab}
           onCloseTab={closeTab}
           onContextMenu={handleTabContextMenu}
-          onNewChat={handleNewChat}
+          onNewExplorer={handleNewExplorer}
           onSplitTab={splitTab}
           onToggleSplitDirection={() =>
             setSplitDirection(
@@ -807,7 +798,7 @@ export function CenterWorkspace() {
               onSelectTab={setActiveTab}
               onCloseTab={closeTab}
               onContextMenu={handleTabContextMenu}
-              onNewChat={handleNewChat}
+              onNewExplorer={handleNewExplorer}
               onSplitTab={splitTab}
               onToggleSplitDirection={() =>
                 setSplitDirection(
@@ -847,7 +838,7 @@ export function CenterWorkspace() {
               onSelectTab={setActiveTab}
               onCloseTab={closeTab}
               onContextMenu={handleTabContextMenu}
-              onNewChat={handleNewChat}
+              onNewExplorer={handleNewExplorer}
               onSplitTab={splitTab}
               onToggleSplitDirection={() =>
                 setSplitDirection(

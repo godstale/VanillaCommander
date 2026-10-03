@@ -7,6 +7,8 @@ import { setDatabase, MemorySqlFallback } from '@/lib/db/client';
 import { SettingsProvider } from '@/lib/context/SettingsContext';
 import { WorkspaceProvider } from '@/lib/context/WorkspaceContext';
 import { AgentsProvider } from '@/lib/context/AgentsContext';
+import { ChatSessionsProvider } from '@/lib/context/ChatSessionsContext';
+import { MacrosProvider } from '@/lib/macros/MacrosProvider';
 import { WorkspaceTabsProvider, useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { StatusBarProvider } from '@/lib/context/StatusBarContext';
 import { JobsProvider } from '@/lib/commander/jobs';
@@ -142,5 +144,57 @@ describe('FileExplorerTab', () => {
       </MemoryRouter>,
     );
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
+  });
+
+  it('shows split controls, folder tree and tab status bar', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    // 1/2/4 분할 버튼.
+    expect(screen.getByTitle('1분할')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할')).toBeInTheDocument();
+    expect(screen.getByTitle('4분할')).toBeInTheDocument();
+    // 폴더 트리 (시스템 폴더 보기 기반).
+    expect(screen.getByRole('tree')).toBeInTheDocument();
+    // 탭 상태바: 전체 개수 표시.
+    expect(await screen.findByText(/2개/)).toBeInTheDocument();
+  });
+
+  it('splits into two panes', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('2분할'));
+    // 창마다 찾기 입력창이 하나씩 있다.
+    await waitFor(() => {
+      expect(screen.getAllByPlaceholderText(/찾기/).length).toBe(2);
+    });
+  });
+
+  it('opens the agent chat dock with the same chat screen', async () => {
+    render(
+      <MemoryRouter>
+        <SettingsProvider>
+          <WorkspaceProvider>
+            <AgentsProvider>
+              <ChatSessionsProvider>
+                <MacrosProvider>
+                  <JobsProvider>
+                    <WorkspaceTabsProvider>
+                      <StatusBarProvider>
+                        <FileExplorerTab tab={TAB} />
+                      </StatusBarProvider>
+                    </WorkspaceTabsProvider>
+                  </JobsProvider>
+                </MacrosProvider>
+              </ChatSessionsProvider>
+            </AgentsProvider>
+          </WorkspaceProvider>
+        </SettingsProvider>
+      </MemoryRouter>,
+    );
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '에이전트 채팅' }));
+    // 도크는 일반 채팅 탭과 동일한 ChatTab 화면을 재사용한다.
+    expect(await screen.findByText(/위치:/)).toBeInTheDocument();
+    expect(await screen.findByText('대화')).toBeInTheDocument();
   });
 });

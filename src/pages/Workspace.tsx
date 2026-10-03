@@ -33,7 +33,7 @@ function WorkspaceContent() {
   const { workspaceRoot: wsRoot, workFolder } = useWorkspace();
   const effectiveRoot = workFolder ?? wsRoot;
   const { activeView, setActiveView } = useSidePanel();
-  const { tabs, openTab, isTabsLoaded } = useWorkspaceTabs();
+  const { tabs, openTab, setActiveTab, isTabsLoaded } = useWorkspaceTabs();
   const { settings, loading: settingsLoading } = useSettings();
   const [searchParams, setSearchParams] = useSearchParams();
   const [wizardOpen, setWizardOpen] = useState(false);
@@ -93,6 +93,22 @@ function WorkspaceContent() {
   const handleActivityBarSelect = (view: Exclude<SidePanelView, null>) => {
     const panel = sidePanelRef.current;
     if (!panel) return;
+    // P12-02: 파일 탐색기 메뉴는 패널을 열지 않는다. 대신 탐색기 탭을
+    // 열거나(없으면 생성) 포커스한다. 즐겨찾기·시스템 폴더는 탭 상단 메뉴바에서 연다.
+    if (view === 'explorer') {
+      const existing = tabs.find((tb) => tb.type === 'file-explorer');
+      if (existing) {
+        setActiveTab(existing.id);
+      } else {
+        const root = effectiveRoot ?? '';
+        openTab({
+          type: 'file-explorer',
+          title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+          meta: { path: root },
+        });
+      }
+      return;
+    }
     if (activeView === view && !panel.isCollapsed()) {
       panel.collapse();
       setActiveView(null);

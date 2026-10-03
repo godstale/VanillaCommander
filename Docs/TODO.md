@@ -198,10 +198,10 @@
   - [x] P11-51 문서·브랜딩 정리
   - [x] P11-52 통합 QA
 
-## Phase 12 — Explorer UX 개편 `[~]`
+## Phase 12 — Explorer UX 개편 `[x]`
 
 - [x] P12-01 탐색기 찾기 수정 (이름 부분일치 OR 내용 검색·백/초기화 복원)
-- [~] P12-02 탐색기 레이아웃 개편 (패널 제거→탭 메뉴바·폴더 트리·1/2/4 분할·탭 상태바·플로팅 챗·컬러 아이콘·+새 탐색기)
+- [x] P12-02 탐색기 레이아웃 개편 (패널 제거→탭 메뉴바·폴더 트리·1/2/4 분할·탭 상태바·플로팅 챗·컬러 아이콘·+새 탐색기)
 
 ---
 
@@ -279,6 +279,8 @@
 | 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |
 | 2026-10-03 | TAURI-BLANK-2 | `pnpm tauri dev` 흰 화면 고질 문제 영구 수정(브라우저 정상·앱 창만 백지). 원인 3종을 동시 차단: ① CSP가 Vite dev 스크립트/HMR을 막음(브라우저엔 Tauri CSP가 적용 안 돼 증상이 갈림) → `script-src`·dev http/ws·`font-src`·`worker-src` 명시, IPC/Ollama 항목 유지 ② `localhost`의 Windows IPv6(::1) 해석 엇갈림 → `host: 127.0.0.1` 고정 + `devUrl http://127.0.0.1:14200` + HMR 포트 14201 고정 + `strictPort` 유지 ③ 백지 시 진단 불가 → `index.html` 정적 부트 폴백 + `src/main.tsx` 8초 워치독. 재발 방지: `scripts/check-tauri-blank.mjs`(+`pnpm check:tauri-blank`)와 `check-tauri-blank.test.mjs`가 devUrl/호스트/CSP/폴백을 `pnpm test`에서 감시. `Architecture.md` §5.8 CSP 항목 갱신. **신규 의존성 없음**. | 해결됨 |
 | 2026-10-03 | MAIN-SYNC | `main` 최신화: Phase 11 라인(`feat/phase11-w0-foundation` P11-00~P11-52) + `EXPLORER-PATH` + `TAURI-BLANK-2`를 `main`에 머지(7fcd87a). 구 베이스 `main`에서 브랜치를 따서 구 앱이 실행되던 문제의 재발 방지 — 이후 작업은 다시 `main`에서 브랜치 생성. | 해결됨 |
+| 2026-10-03 | P12-01 | 탐색기 찾기 빈 결과 원인 확정·수정: ① Rust `fc_search`가 이름 패턴을 glob 리터럴로 컴파일해 부분 일치가 안 됨 → glob 메타문자 없으면 부분 일치로 처리. ② 이름+내용 동시 지정 시 AND 조건이라 파일명만 맞는 항목이 제외됨 → OR(이름 행 + 내용 행 각각 보고, 이름 필터 없으면 내용 행만)로 변경. ③ 프론트는 내용 쿼리를 리터럴 이스케이프, 빈 검색어·백/앞/상위 이동·결과 닫기 시 원래 목록 복원 + 결과 0건에도 닫기 버튼 표시. Rust 테스트 1건 추가. 검증: `cargo test commander_commands` 10건 통과, `lint`·`typecheck` 통과. | 해결됨 |
+| 2026-10-03 | P12-02 | 탐색기 레이아웃 개편 완료: ① 탐색기 메뉴는 패널 대신 탐색기 탭 오픈/포커스(`Workspace`·`TopMenuBar`), `ExplorerPanel`은 미사용 유지. ② 탭 상단 툴바에 즐겨찾기·시스템 폴더 드롭다운 + 트리 토글 + 1/2/4 분할(`ExplorerToolbar` 재작성). ③ 창별 독립 상태의 `ExplorerPane`(주소창·창별 찾기·정렬·선택·단축키·메뉴, 활성 창 링 표시, F5/F6 반대 창 = 다음 창). ④ 좌측 접이식 `FolderTree`(즐겨찾기·시스템 루트 + 현재 위치 조상 자동 펼침). ⑤ 탭 하단 `ExplorerStatusBar`(경로·전체·선택 n개/크기/이름) — 하단 1줄 채팅(`ExplorerChatBar`) 삭제. ⑥ 우측 플로팅 채팅 도크(`ExplorerChatDock`): `ChatTab` 그대로 재사용 → 스크롤·큐·승인 동일, 세션 `origin='chat'`이라 대화 목록에 "탐색기: 경로"로 등록, 채팅 종료 시 목록 자동 새로고침. ⑦ 뷰어 지원 파일 전용 컬러 아이콘(`FileIcon`, `FileList` 연동). ⑧ 탭 헤더 "+"는 "새 탐색기"(폴더 없이도 동작). 검증: `lint`·`typecheck` 통과, 신규 `FileIcon` 2건·`FolderTree` 1건·탐색기탭 3건(분할·도크 포함), 전체 `test` 496/497(유일 실패는 기존 bundledSkills CRLF). `tauri dev` 실동작은 실머신에서 수행 필요. | 해결됨 |
 
 ---
 

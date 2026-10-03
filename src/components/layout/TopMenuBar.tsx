@@ -37,7 +37,7 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export function TopMenuBar() {
   const { t } = useLanguage();
-  const { workspaceRoot, setWorkspaceRoot, recentWorkspaces = [] } = useWorkspace();
+  const { workspaceRoot, workFolder, setWorkspaceRoot, recentWorkspaces = [] } = useWorkspace();
   const { setActiveView } = useSidePanel();
   const { openTab } = useWorkspaceTabs();
   const { agents, defaultAgent } = useAgents();
@@ -90,6 +90,16 @@ export function TopMenuBar() {
       id: `agent-editor:new-${Date.now()}`,
       type: 'agent-editor',
       title: t('topMenu.newAgent'),
+    });
+  };
+
+  // P12-02: 탐색기 메뉴는 패널 대신 탐색기 탭을 연다.
+  const handleOpenExplorer = () => {
+    const root = workFolder ?? workspaceRoot ?? '';
+    openTab({
+      type: 'file-explorer',
+      title: root ? root.split(/[\\/]/).filter(Boolean).pop() || root : t('activityBar.explorer'),
+      meta: { path: root },
     });
   };
 
@@ -332,7 +342,7 @@ export function TopMenuBar() {
           {hasWorkspace && (
             <DropdownMenuContent align="start" className="w-48 text-[11px] p-1 [&_[role=menuitem]]:text-[11px] [&_[role=menuitem]]:py-1 [&_[role=menuitem]]:gap-2 [&_[role=menuitem]_svg]:size-3.5">
               <DropdownMenuItem
-                onClick={() => setActiveView('explorer')}
+                onClick={handleOpenExplorer}
                 className="gap-2 cursor-pointer text-[11px] py-1"
               >
                 <Files className="h-3.5 w-3.5 text-primary" />
