@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import type { FcEntry } from '@/lib/commander/types';
 import { isAlbumEntry } from '@/lib/commander/openFile';
@@ -18,6 +18,28 @@ export interface AlbumViewProps {
 
 function AlbumThumb({ entry }: { entry: FcEntry }) {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  // 뷰포트 근처 타일만 원본을 요청한다. 100개가 넘는 고해상도 원본을
+  // 동시에 로드·디코드하면 asset 프로토콜·디코더가 밀려 빈 칸으로 보인다.
+  const [nearby, setNearby] = useState(() => typeof IntersectionObserver === 'undefined');
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const ob = new IntersectionObserver(
+      (records) => {
+        if (records.some((r) => r.isIntersecting)) {
+          setNearby(true);
+          ob.disconnect();
+        }
+      },
+      { rootMargin: '300px' },
+    );
+    ob.observe(el);
+    return () => ob.disconnect();
+  }, []);
+
   if (failed) {
     return (
       <span className="flex h-full w-full items-center justify-center">
@@ -26,14 +48,32 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
     );
   }
   return (
-    <img
-      src={convertFileSrc(entry.path)}
-      alt={entry.name}
-      loading="lazy"
-      draggable={false}
-      onError={() => setFailed(true)}
-      className="h-full w-full object-cover"
-    />
+    <div ref={boxRef} className="relative h-full w-full">
+      {!loaded && (
+        <span className="absolute inset-0 flex items-center justify-center bg-muted/20">
+          <FileKindIcon
+            name={entry.name}
+            kind={entry.kind}
+            className="h-10 w-10 opacity-40 animate-pulse"
+          />
+        </span>
+      )}
+      {nearby && (
+        <img
+          src={convertFileSrc(entry.path)}
+          alt={entry.name}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          className={cn(
+            'h-full w-full object-cover transition-opacity',
+            loaded ? 'opacity-100' : 'opacity-0',
+          )}
+        />
+      )}
+    </div>
   );
 }
 
@@ -85,7 +125,7 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
               isActive && !isSelected && 'outline-1 outline -outline-offset-1 outline-primary/50',
             )}
           >
-            <span className="block aspect-square w-full overflow-hidden bg-muted/20">
+            <div className="relative aspect-square w-full overflow-hidden bg-muted/20">
               {isDir ? (
                 <span className="flex h-full w-full items-center justify-center">
                   <FileKindIcon name={entry.name} kind={entry.kind} className="h-10 w-10" />
@@ -93,7 +133,7 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
               ) : (
                 <AlbumThumb entry={entry} />
               )}
-            </span>
+            </div>
             <span className="truncate px-2 py-3 text-[11px] leading-5 text-foreground/90" title={entry.name}>
               {entry.name}
             </span>
