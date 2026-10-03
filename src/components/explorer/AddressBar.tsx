@@ -202,7 +202,7 @@ export function AddressBar({ path, onNavigate, editSignal, onError }: AddressBar
           <Pencil className="h-3 w-3" />
         </button>
         {altHeld && (
-          <kbd className="absolute -top-2 -right-2 rounded border border-primary/50 bg-primary/10 px-1 text-[9px] font-mono text-primary pointer-events-none">
+          <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] font-mono text-primary pointer-events-none shadow-sm">
             D
           </kbd>
         )}

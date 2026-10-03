@@ -131,6 +131,31 @@ function WorkspaceContent() {
     }
   };
 
+  // P13-03: 사이드 메뉴 전역 단축키 (Ctrl+Shift+A/S/D/F/G).
+  // handleActivityBarSelect와 동일한 동작을 키보드로 수행한다.
+  const selectRef = useRef(handleActivityBarSelect);
+  useEffect(() => {
+    selectRef.current = handleActivityBarSelect;
+  });
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey) || !e.shiftKey || e.altKey) return;
+      const k = e.key.toLowerCase();
+      const view: Exclude<SidePanelView, null> | null =
+        k === 'a' ? 'explorer'
+        : k === 's' ? 'chat-sessions'
+        : k === 'd' ? 'agents'
+        : k === 'f' ? 'wiki'
+        : k === 'g' ? 'macros'
+        : null;
+      if (!view) return;
+      e.preventDefault();
+      selectRef.current(view);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   // Prevent any residual window-level scroll offsets in desktop webview
   useEffect(() => {
     window.scrollTo(0, 0);

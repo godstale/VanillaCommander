@@ -115,4 +115,8 @@ export const explorerEn: Dict = {
   'explorer.statusSelectedInfo': '{n} selected ({size})',
   'explorer.statusEmpty': 'No selection',
   'explorer.paneActive': 'Active pane',
+  'explorer.statusAgentBusy': 'Agent running…',
+  'explorer.statusAgentBusyTitle': 'An agent is working in the background',
+  'explorer.statusJobsRunning': '{n} background tasks running',
+  'explorer.statusJobsFailed': '{n} tasks failed',
 };

@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { useEffect } from 'react';
 import '@testing-library/jest-dom/vitest';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithProviders as render } from '@/test-utils';
@@ -149,10 +150,10 @@ describe('FileExplorerTab', () => {
   it('shows split controls, folder tree and tab status bar', async () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    // 1 / 가로 2분할 / 세로 2분할 버튼.
-    expect(screen.getByTitle('1분할')).toBeInTheDocument();
-    expect(screen.getByTitle('2분할 가로 (상·하)')).toBeInTheDocument();
-    expect(screen.getByTitle('2분할 세로 (좌·우)')).toBeInTheDocument();
+    // 1 / 가로 2분할 / 세로 2분할 버튼 (단축키 포함 타이틀).
+    expect(screen.getByTitle('1분할 (Ctrl+1)')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할 가로 (상·하) (Ctrl+2)')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할 세로 (좌·우) (Ctrl+3)')).toBeInTheDocument();
     // 폴더 트리 (시스템 폴더 보기 기반).
     expect(screen.getByRole('tree')).toBeInTheDocument();
     // 탭 상태바: 전체 개수 표시.
@@ -162,7 +163,7 @@ describe('FileExplorerTab', () => {
   it('splits into two panes', async () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우)'));
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Ctrl+3)'));
     // 분할되면 같은 파일이 창마다 표시된다.
     await waitFor(() => {
       expect(screen.getAllByText('a.txt').length).toBe(2);
@@ -171,7 +172,7 @@ describe('FileExplorerTab', () => {
     expect(screen.getAllByTitle('찾기 (Ctrl+F)').length).toBe(2);
   });
 
-  it('opens the agent chat dock with the same chat screen', async () => {
+  it('toggles agent chat dock via floating button and Alt+C', async () => {
     render(
       <MemoryRouter>
         <SettingsProvider>
@@ -194,7 +195,9 @@ describe('FileExplorerTab', () => {
       </MemoryRouter>,
     );
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: '에이전트 채팅' }));
+    // 플로팅 터미널 버튼은 제거됐다 (터미널은 우클릭 메뉴에서 연다).
+    expect(screen.queryByRole('button', { name: '터미널 열기' })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /에이전트 채팅/ }));
     // 도크는 일반 채팅 탭과 동일한 ChatTab 화면을 재사용한다 (좁은 도크라 헤더는 압축 표시).
     expect(await screen.findByText(/위치:/)).toBeInTheDocument();
     expect(await screen.findByTitle('대화')).toBeInTheDocument();
@@ -204,7 +207,7 @@ describe('FileExplorerTab', () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     expect(screen.getByRole('tree')).toBeInTheDocument();
-    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우)'));
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Ctrl+3)'));
     await waitFor(() => {
       expect(screen.getAllByText('a.txt').length).toBe(2);
     });
@@ -240,23 +243,51 @@ describe('FileExplorerTab', () => {
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
   });
 
+  it('refreshes with Ctrl+R and shows new shortcut titles', async () => {
+    // 활성 탭으로 등록해야 탐색기 전역 단축키(window 리스너)가 동작한다.
+    function Opener({ children }: { children: React.ReactNode }) {
+      const { openTab } = useWorkspaceTabs();
+      useEffect(() => {
+        openTab({ id: TAB.id, type: TAB.type, title: TAB.title, meta: TAB.meta });
+      }, [openTab]);
+      return <>{children}</>;
+    }
+    render(
+      <MemoryRouter>
+        <SettingsProvider>
+          <WorkspaceProvider>
+            <AgentsProvider>
+              <JobsProvider>
+                <WorkspaceTabsProvider>
+                  <StatusBarProvider>
+                    <Opener>
+                      <FileExplorerTab tab={TAB} />
+                    </Opener>
+                  </StatusBarProvider>
+                </WorkspaceTabsProvider>
+              </JobsProvider>
+            </AgentsProvider>
+          </WorkspaceProvider>
+        </SettingsProvider>
+      </MemoryRouter>,
+    );
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    const before = calls.filter((c) => c.cmd === 'fc_list_dir').length;
+    fireEvent.keyDown(window, { key: 'r', ctrlKey: true });
+    await waitFor(() => {
+      expect(calls.filter((c) => c.cmd === 'fc_list_dir').length).toBeGreaterThan(before);
+    });
+    // 새로고침·숨김·트리 버튼 타이틀에 단축키가 표시된다.
+    expect(screen.getByTitle('새로고침 (Ctrl+R)')).toBeInTheDocument();
+    expect(screen.getByTitle('숨김 파일 표시 (Ctrl+H)')).toBeInTheDocument();
+    expect(screen.getByTitle('폴더 트리 표시 (Ctrl+B)')).toBeInTheDocument();
+  });
+
   it('does not show folder path in tab status bar', async () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     const status = screen.getByLabelText('explorer-status');
     expect(status.textContent ?? '').not.toContain('C:/work');
-  });
-
-  it('opens an external terminal at the active path via the floating button', async () => {
-    renderTab();
-    expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    // 채팅 아이콘 위에 터미널 아이콘이 있다.
-    fireEvent.click(screen.getByRole('button', { name: '터미널 열기' }));
-    await waitFor(() => {
-      const term = calls.find((c) => c.cmd === 'fc_open_terminal');
-      expect(term).toBeDefined();
-      expect((term?.args as { path: string }).path).toBe('C:/work');
-    });
   });
 
   it('shows shortcut badges on toolbar while Alt is held', async () => {

@@ -4,6 +4,7 @@ import { Search, X } from 'lucide-react';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { useAltHeld } from '@/hooks/useAltHeld';
 import { useJobs } from '@/lib/commander/useJobs';
 import { getFileClipboard, setFileClipboard, clearFileClipboard } from '@/lib/commander/clipboard';
 import {
@@ -136,6 +137,8 @@ export function ExplorerPane({
   const [lastRefresh, setLastRefresh] = useState(() => Date.now());
   const anchorRef = useRef<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  // P13-03: Alt를 누른 동안 찾기 버튼에 단축키 배지를 표시한다 (배지는 버튼 안쪽 우하단).
+  const altHeld = useAltHeld();
 
   // P12-01: 찾기 모드 종료 = job 정리 + 결과 화면 닫기 + 원래 목록 복원.
   const clearSearch = useCallback(() => {
@@ -662,22 +665,34 @@ export function ExplorerPane({
           break;
       }
       if (ctrl && (e.key === 'c' || e.key === 'C')) {
-        e.preventDefault();
-        const targets = opTargets();
-        if (targets.length > 0) setFileClipboard('copy', targets);
+        // Ctrl+Shift+C(에이전트 채팅 토글)와 충돌하지 않도록 Shift가 없을 때만 처리한다.
+        if (!e.shiftKey) {
+          e.preventDefault();
+          const targets = opTargets();
+          if (targets.length > 0) setFileClipboard('copy', targets);
+        }
       } else if (ctrl && (e.key === 'x' || e.key === 'X')) {
-        e.preventDefault();
-        const targets = opTargets();
-        if (targets.length > 0) setFileClipboard('cut', targets);
+        if (!e.shiftKey) {
+          e.preventDefault();
+          const targets = opTargets();
+          if (targets.length > 0) setFileClipboard('cut', targets);
+        }
       } else if (ctrl && (e.key === 'v' || e.key === 'V')) {
-        e.preventDefault();
-        doPaste();
+        if (!e.shiftKey) {
+          e.preventDefault();
+          doPaste();
+        }
       } else if (ctrl && (e.key === 'a' || e.key === 'A')) {
-        e.preventDefault();
-        setSelected(sorted.map((en) => en.path));
+        if (!e.shiftKey) {
+          e.preventDefault();
+          setSelected(sorted.map((en) => en.path));
+        }
       } else if (ctrl && (e.key === 'f' || e.key === 'F')) {
-        e.preventDefault();
-        toggleSearch();
+        // Ctrl+Shift+F(위키 사이드 메뉴)와 충돌하지 않도록 Shift가 없을 때만 처리한다.
+        if (!e.shiftKey) {
+          e.preventDefault();
+          toggleSearch();
+        }
       } else if (e.altKey && (e.key === 'Enter')) {
         e.preventDefault();
         const targets = effectivePaths();
@@ -811,15 +826,22 @@ export function ExplorerPane({
             </button>
           </div>
         ) : (
-          <button
-            type="button"
-            onClick={toggleSearch}
-            title={`${t('explorer.toggleSearch')} (Ctrl+F)`}
-            aria-label={t('explorer.toggleSearch')}
-            className="h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/40"
-          >
-            <Search className="h-3.5 w-3.5" />
-          </button>
+          <span className="relative inline-flex shrink-0">
+            <button
+              type="button"
+              onClick={toggleSearch}
+              title={`${t('explorer.toggleSearch')} (Ctrl+F)`}
+              aria-label={t('explorer.toggleSearch')}
+              className="h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/40"
+            >
+              <Search className="h-3.5 w-3.5" />
+            </button>
+            {altHeld && (
+              <kbd className="absolute bottom-0 right-0 rounded border border-primary/50 bg-background px-1 text-[9px] font-mono text-primary pointer-events-none shadow-sm">
+                F
+              </kbd>
+            )}
+          </span>
         )}
       </div>
       {error && (

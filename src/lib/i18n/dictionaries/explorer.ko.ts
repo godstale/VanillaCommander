@@ -115,4 +115,8 @@ export const explorerKo: Dict = {
   'explorer.statusSelectedInfo': '{n}개 선택 ({size})',
   'explorer.statusEmpty': '선택 없음',
   'explorer.paneActive': '활성 창',
+  'explorer.statusAgentBusy': '에이전트 실행 중…',
+  'explorer.statusAgentBusyTitle': '백그라운드에서 에이전트가 동작 중입니다',
+  'explorer.statusJobsRunning': '백그라운드 작업 {n}개 진행 중',
+  'explorer.statusJobsFailed': '작업 실패 {n}개',
 };

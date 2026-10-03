@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MessageSquare, Terminal } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
@@ -8,7 +8,7 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { useStatusBar } from '@/lib/context/StatusBarContext';
 import { useAltHeld } from '@/hooks/useAltHeld';
 import { useChatQueue } from '@/lib/agent/chatQueueManager';
-import { fcOpenTerminal, fcSystemFolders } from '@/lib/commander/ipc';
+import { fcSystemFolders } from '@/lib/commander/ipc';
 import { formatBytes } from '@/lib/commander/format';
 import type { FcSystemFolder } from '@/lib/commander/types';
 import { ExplorerToolbar, type ExplorerSplit } from './ExplorerToolbar';
@@ -83,7 +83,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   const { openTab, updateTab } = useWorkspaceTabs();
   const { workspaceRoot, workFolder } = useWorkspace();
   const { settings, updateSettings } = useSettings();
-  const { publish, clear, notify } = useStatusBar();
+  const { publish, clear } = useStatusBar();
   const altHeld = useAltHeld();
 
   const meta = (tab.meta ?? {}) as ExplorerTabMeta;
@@ -259,21 +259,51 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     persist({ panes, activePane, split, treeOpen, chatOpen: next });
   }, [panes, activePane, split, treeOpen, chatOpen, persist]);
 
-  // P13-01: Alt+D를 누르면 활성 창의 주소창이 직접 입력 상태로 전환된다.
-  // 입력 요소에 포커스가 있을 때는 가로채지 않는다.
+  // P13-03: 탐색기 단축키 (활성 탭에서만, 입력 요소에 포커스가 있을 때는 가로채지 않는다).
+  // - Alt+D: 활성 창의 주소창 직접 입력 / Alt+C: 에이전트 채팅 도크 토글
+  // - Ctrl+R: 새로고침 / Ctrl+H: 숨김 표시 / Ctrl+B: 폴더 트리 / Ctrl+1·2·3: 1·가로2·세로2 분할
+  // Ctrl+Shift+계열(사이드 메뉴·채팅 검색 등)과 겹치지 않도록 Shift가 없을 때만 처리한다.
   useEffect(() => {
     if (!isActive) return;
     const onKey = (e: KeyboardEvent) => {
-      if (!e.altKey || e.ctrlKey || e.metaKey) return;
-      if (e.key !== 'd' && e.key !== 'D') return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-      e.preventDefault();
-      paneRefs.current[activePane]?.focusAddress();
+      if (e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'd' || e.key === 'D')) {
+        e.preventDefault();
+        paneRefs.current[activePane]?.focusAddress();
+        return;
+      }
+      if (e.altKey && !e.ctrlKey && !e.metaKey && (e.key === 'c' || e.key === 'C')) {
+        e.preventDefault();
+        toggleChat();
+        return;
+      }
+      const mod = e.ctrlKey || e.metaKey;
+      if (!mod || e.altKey || e.shiftKey) return;
+      const k = e.key.toLowerCase();
+      if (k === 'r') {
+        e.preventDefault();
+        paneRefs.current[activePane]?.refresh();
+      } else if (k === 'h') {
+        e.preventDefault();
+        paneRefs.current[activePane]?.toggleHidden();
+      } else if (k === 'b') {
+        e.preventDefault();
+        toggleTree();
+      } else if (k === '1') {
+        e.preventDefault();
+        handleSplitChange('single');
+      } else if (k === '2') {
+        e.preventDefault();
+        handleSplitChange('dual-h');
+      } else if (k === '3') {
+        e.preventDefault();
+        handleSplitChange('dual-v');
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [isActive, activePane]);
+  }, [isActive, activePane, toggleChat, toggleTree, handleSplitChange]);
 
   const handleAddFavorite = useCallback(() => {
     if (!activePath) return;
@@ -298,14 +328,6 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
       meta: { sessionId },
     });
   }, [openTab, sessionId, sessionTitle]);
-
-  // P13-01: 플로팅 터미널 버튼. 활성 창의 현재 위치에서 OS 외부 터미널을 연다.
-  const handleOpenTerminal = useCallback(() => {
-    if (!activePath) return;
-    void fcOpenTerminal(activePath).catch((err) => {
-      notify(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
-    });
-  }, [activePath, notify, t]);
 
   // 채팅 도크는 포커스된 창을 추가 분할하는 형태로 표시한다.
   // 이미 좌우로 나뉜 상태(dual-v)에서는 상하로, 그 외에는 좌우로 나눠 좁아짐을 방지한다.
@@ -398,28 +420,25 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         </div>
       </div>
       <ExplorerStatusBar info={statusInfo} />
-      {/* P13-01: 채팅 아이콘 위의 터미널 아이콘. 외부 터미널을 현재 위치에서 연다. */}
+      {/* P13-03: 플로팅 에이전트 채팅 버튼 (터미널 버튼은 제거, 터미널은 우클릭 메뉴에서 연다). */}
       <div className="absolute bottom-8 right-4 z-30 flex flex-col gap-2">
-        <button
-          type="button"
-          onClick={handleOpenTerminal}
-          disabled={!activePath}
-          title={t('explorer.openTerminal')}
-          aria-label={t('explorer.openTerminal')}
-          className="h-11 w-11 rounded-full bg-secondary text-secondary-foreground border border-border shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
-        >
-          <Terminal className="h-5 w-5" />
-        </button>
         {!chatOpen && (
-          <button
-            type="button"
-            onClick={toggleChat}
-            title={t('explorer.agentChat')}
-            aria-label={t('explorer.agentChat')}
-            className="h-11 w-11 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform cursor-pointer"
-          >
-            <MessageSquare className="h-5 w-5" />
-          </button>
+          <span className="relative inline-flex">
+            <button
+              type="button"
+              onClick={toggleChat}
+              title={`${t('explorer.agentChat')} (Alt+C)`}
+              aria-label={t('explorer.agentChat')}
+              className="h-11 w-11 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+            >
+              <MessageSquare className="h-5 w-5" />
+            </button>
+            {altHeld && (
+              <kbd className="absolute -bottom-1 -right-1 rounded border border-primary/50 bg-background px-1 text-[9px] font-mono text-primary pointer-events-none shadow-sm">
+                C
+              </kbd>
+            )}
+          </span>
         )}
       </div>
     </div>
