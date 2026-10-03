@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import type { FcEntry } from '@/lib/commander/types';
-import { IMAGE_EXTS, extOf } from '@/lib/commander/openFile';
+import { isAlbumEntry } from '@/lib/commander/openFile';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { FileKindIcon } from './FileIcon';
 import { cn } from '@/lib/utils';
@@ -14,9 +14,6 @@ export interface AlbumViewProps {
   onSelect: (target: string, mode: 'single' | 'toggle' | 'range') => void;
   onOpen: (entry: FcEntry) => void;
   onContextMenu: (e: React.MouseEvent, entry: FcEntry | null) => void;
-}
-
-function isAlbumEntry(entry: FcEntry): boolean {  return entry.kind === 'dir' || IMAGE_EXTS.has(extOf(entry.name));
 }
 
 function AlbumThumb({ entry }: { entry: FcEntry }) {
@@ -89,13 +86,13 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
             <span className="block aspect-square w-full overflow-hidden bg-muted/20">
               {isDir ? (
                 <span className="flex h-full w-full items-center justify-center">
-                  <FileKindIcon name={entry.name} kind={entry.kind} className="h-12 w-12" />
+                  <FileKindIcon name={entry.name} kind={entry.kind} className="h-10 w-10" />
                 </span>
               ) : (
                 <AlbumThumb entry={entry} />
               )}
             </span>
-            <span className="truncate px-1.5 py-1 text-[11px] text-foreground/90" title={entry.name}>
+            <span className="truncate px-2 py-2 text-[11px] leading-5 text-foreground/90" title={entry.name}>
               {entry.name}
             </span>
           </div>

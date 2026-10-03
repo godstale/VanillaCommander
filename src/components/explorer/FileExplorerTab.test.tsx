@@ -236,6 +236,43 @@ describe('FileExplorerTab', () => {
     expect(await screen.findByText('b.txt')).toBeInTheDocument();
   });
 
+  it('moves only within album entries with arrows (P13-08)', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    fireEvent.doubleClick(screen.getByText('docs'));
+    expect(await screen.findByText('b.txt')).toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('이미지 앨범 (F9)'));
+    expect(await screen.findByText('photo.png')).toBeInTheDocument();
+    const tileOf = (name: string) => screen.getByText(name).parentElement as HTMLElement;
+    const isSel = (name: string) => (tileOf(name).className ?? '').includes('bg-primary/15');
+    // 아래로 이동하면 첫 앨범 항목('..')이 선택된다.
+    fireEvent.keyDown(screen.getByText('..'), { key: 'ArrowDown' });
+    expect(isSel('..')).toBe(true);
+    // 오른쪽으로 이동하면 텍스트 파일(b.txt)을 건너뛰고 이미지가 선택된다.
+    fireEvent.keyDown(screen.getByText('..'), { key: 'ArrowRight' });
+    expect(isSel('photo.png')).toBe(true);
+    expect(isSel('..')).toBe(false);
+    // 왼쪽으로 돌아온다.
+    fireEvent.keyDown(screen.getByText('photo.png'), { key: 'ArrowLeft' });
+    expect(isSel('..')).toBe(true);
+    // 목록에서는 좌·우가 동작하지 않는다.
+    fireEvent.click(screen.getByTitle('이미지 앨범 (F9)'));
+    expect(await screen.findByText('b.txt')).toBeInTheDocument();
+  });
+
+  it('moves active to the first album entry when toggling (P13-08)', async () => {
+    renderTab();
+    const row = await screen.findByText('a.txt');
+    // 텍스트 파일을 활성 상태로 두고 앨범으로 전환한다.
+    fireEvent.click(row);
+    fireEvent.click(screen.getByTitle('이미지 앨범 (F9)'));
+    expect(await screen.findByText('docs')).toBeInTheDocument();
+    expect(screen.queryByText('a.txt')).not.toBeInTheDocument();
+    // 보이지 않는 a.txt 대신 첫 앨범 항목('..')이 활성이 된다 (선택은 유지, 활성 링 표시).
+    const up = screen.getByText('..').parentElement as HTMLElement;
+    expect(up.className ?? '').toContain('outline-primary/50');
+  });
+
   it('opens properties with F3 and shows idle hints in the status bar', async () => {
     renderActiveTab();
     const row = await screen.findByText('a.txt');

@@ -1,5 +1,6 @@
 // P11-14: 확장자 → 열기 방식 라우팅 (P11-33 문서 파서와 공유).
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
+import type { FcEntry } from './types';
 
 export const LARGE_TEXT_BYTES = 5 * 1024 * 1024;
 
@@ -25,6 +26,11 @@ export type OpenPlan =
 export function extOf(name: string): string {
   const idx = name.lastIndexOf('.');
   return idx >= 0 ? name.slice(idx + 1).toLowerCase() : '';
+}
+
+/** 이미지 앨범에 나오는 항목 (폴더 + 이미지). 목록/앨범 키보드 이동 기준을 통일한다. */
+export function isAlbumEntry(entry: FcEntry): boolean {
+  return entry.kind === 'dir' || IMAGE_EXTS.has(extOf(entry.name));
 }
 
 export function planOpenFile(path: string, size = 0): OpenPlan {

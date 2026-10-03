@@ -24,7 +24,7 @@ import {
   fcUnzip,
 } from '@/lib/commander/ipc';
 import type { FcEntry } from '@/lib/commander/types';
-import { buildFileTab, extOf, planOpenFile } from '@/lib/commander/openFile';
+import { buildFileTab, extOf, isAlbumEntry, planOpenFile } from '@/lib/commander/openFile';
 import { AddressBar } from './AddressBar';
 import { FileList, type SortKey, type SortDir } from './FileList';
 import { AlbumView } from './AlbumView';
@@ -282,6 +282,12 @@ export function ExplorerPane({
     return [up, ...sorted];
   }, [sorted, parentPath]);
 
+  // P13-08: 키보드 이동 기준. 앨범 보기에서는 화면에 보이는 폴더·이미지만 밟는다.
+  const navEntries = useMemo(
+    () => (view === 'album' ? displayEntries.filter(isAlbumEntry) : displayEntries),
+    [view, displayEntries],
+  );
+
   const selectedSet = useMemo(() => new Set(selected), [selected]);
   const totalBytes = useMemo(() => entries.reduce((s, e) => s + e.size, 0), [entries]);
   const selEntries = useMemo(
@@ -510,8 +516,17 @@ export function ExplorerPane({
   }, [effectivePaths]);
 
   const toggleView = useCallback(() => {
+    // 앨범에 없는 항목이 활성 상태면 첫 앨범 항목으로 옮긴다 (보이지 않는 곳을 밟지 않도록).
+    if (view === 'list') {
+      const shown = displayEntries.filter(isAlbumEntry);
+      if (activePath && shown.length > 0 && !shown.some((e) => e.path === activePath)) {
+        const first = shown[0].path;
+        setActivePath(first);
+        anchorRef.current = first;
+      }
+    }
     setView((v) => (v === 'album' ? 'list' : 'album'));
-  }, []);
+  }, [view, displayEntries, activePath]);
 
   useEffect(() => {
     handleRef.current = {
@@ -589,7 +604,7 @@ export function ExplorerPane({
         return;
       }
       if (mode === 'range' && anchorRef.current) {
-        const order = displayEntries.map((e) => e.path);
+        const order = navEntries.map((e) => e.path);
         const a = order.indexOf(anchorRef.current);
         const b = order.indexOf(target);
         if (a >= 0 && b >= 0) {
@@ -601,15 +616,15 @@ export function ExplorerPane({
       setSelected([target]);
       anchorRef.current = target;
     },
-    [displayEntries],
+    [navEntries],
   );
 
   const moveActive = useCallback(
     (delta: number, extend: boolean) => {
-      if (displayEntries.length === 0) return;
-      const idx = activePath ? displayEntries.findIndex((e) => e.path === activePath) : -1;
-      const next = Math.min(displayEntries.length - 1, Math.max(0, (idx < 0 ? (delta > 0 ? -1 : 0) : idx) + delta));
-      const target = displayEntries[next].path;
+      if (navEntries.length === 0) return;
+      const idx = activePath ? navEntries.findIndex((e) => e.path === activePath) : -1;
+      const next = Math.min(navEntries.length - 1, Math.max(0, (idx < 0 ? (delta > 0 ? -1 : 0) : idx) + delta));
+      const target = navEntries[next].path;
       if (extend) {
         select(target, 'range');
       } else {
@@ -617,7 +632,7 @@ export function ExplorerPane({
       }
       setActivePath(target);
     },
-    [displayEntries, activePath, select],
+    [navEntries, activePath, select],
   );
 
   const startSearch = useCallback(async () => {
@@ -737,15 +752,17 @@ export function ExplorerPane({
         const targets = effectivePaths();
         if (targets.length > 0) setPropsPaths(targets);
       }
-      if (e.shiftKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      // P13-08: 앨범 보기에서는 좌·우도 이동한다 (격자 탐색). 목록에서는 상·하만.
+      const arrowDown = e.key === 'ArrowDown';
+      const arrowUp = e.key === 'ArrowUp';
+      const arrowLeft = e.key === 'ArrowLeft';
+      const arrowRight = e.key === 'ArrowRight';
+      if (arrowDown || arrowUp || ((arrowLeft || arrowRight) && view === 'album')) {
         e.preventDefault();
-        moveActive(e.key === 'ArrowDown' ? 1 : -1, true);
-      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        moveActive(e.key === 'ArrowDown' ? 1 : -1, false);
+        moveActive(arrowDown || arrowRight ? 1 : -1, e.shiftKey);
       }
     },
-    [activePath, displayEntries, openEntry, goUp, goBack, goForward, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, toggleSearch, t],
+    [activePath, displayEntries, openEntry, goUp, goBack, goForward, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, toggleSearch, view, t],
   );
 
   const openCtxMenu = useCallback(
