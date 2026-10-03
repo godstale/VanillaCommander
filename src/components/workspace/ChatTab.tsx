@@ -54,9 +54,11 @@ import { cn } from '@/lib/utils';
 
 export interface ChatTabProps {
   tab: WorkspaceTab;
+  /** 탐색기 도크처럼 좁은 공간에 들어갈 때 헤더를 말줄임표 위주로 압축한다. */
+  dense?: boolean;
 }
 
-export function ChatTab({ tab }: ChatTabProps) {
+export function ChatTab({ tab, dense = false }: ChatTabProps) {
   const { t } = useLanguage();
   const { getAgent, defaultAgent, agents, loading: agentsLoading } = useAgents();
   const { settings } = useSettings();
@@ -742,24 +744,28 @@ export function ChatTab({ tab }: ChatTabProps) {
   }, [sessionId]);
 
   return (
-    <div className="flex flex-col h-full w-full bg-editor overflow-hidden">
-      {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-tabbar text-xs shrink-0 select-none">
-        <div className="flex items-center gap-2 font-medium min-w-0">
+    <div className="flex flex-col h-full w-full min-w-0 bg-editor overflow-hidden">
+      {/* Header bar: 좁은 도크에서도 깨지지 않도록 전부 truncate + 필요 정보만 표시 */}
+      <div className="flex items-center gap-2 px-2 py-2 border-b border-border bg-tabbar text-xs shrink-0 select-none min-w-0">
+        <div className="flex items-center gap-1.5 font-medium min-w-0 flex-1 overflow-hidden">
           <Bot className="h-4 w-4 text-primary shrink-0" />
-          <span className="truncate">{tab.title}</span>
-          <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground bg-muted/60 px-2 py-0.5 rounded-md font-mono shrink-0">
-            <Sparkles className="h-3 w-3 text-warning" />
-            <span className="font-semibold text-foreground">{activeAgent.name}</span>
-            <span className="text-muted-foreground/60">•</span>
-            <span>{providerPreset.label}</span>
-            <span className="text-muted-foreground/60">•</span>
-            <Cpu className="h-3 w-3" />
-            <span>{activeAgent.model}</span>
+          <span className="truncate min-w-0 max-w-32" title={tab.title}>{tab.title}</span>
+          <div className="flex items-center gap-1 text-[11px] text-muted-foreground bg-muted/60 px-1.5 py-0.5 rounded-md font-mono shrink-0 min-w-0 max-w-full overflow-hidden whitespace-nowrap">
+            <Sparkles className="h-3 w-3 text-warning shrink-0" />
+            <span className="font-semibold text-foreground truncate min-w-0" title={activeAgent.name}>{activeAgent.name}</span>
+            {!dense && (
+              <>
+                <span className="text-muted-foreground/60 shrink-0">•</span>
+                <span className="truncate" title={providerPreset.label}>{providerPreset.label}</span>
+                <span className="text-muted-foreground/60 shrink-0">•</span>
+                <Cpu className="h-3 w-3 shrink-0" />
+                <span className="truncate" title={activeAgent.model}>{activeAgent.model}</span>
+              </>
+            )}
           </div>
 
           {yoloMode && (
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-destructive/20 text-destructive border border-destructive/30 text-[10px] font-semibold animate-pulse">
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-destructive/20 text-destructive border border-destructive/30 text-[10px] font-semibold animate-pulse shrink-0">
               <Zap className="h-3 w-3 fill-current" />
               <span>YOLO</span>
             </div>
@@ -767,30 +773,32 @@ export function ChatTab({ tab }: ChatTabProps) {
         </div>
 
         {/* View Switcher Button (대화 보기 / 상세 로그 보기) */}
-        <div className="flex items-center rounded-lg bg-muted/60 p-0.5 text-xs">
+        <div className="flex items-center rounded-lg bg-muted/60 p-0.5 text-xs shrink-0">
           <button
             type="button"
             onClick={() => setViewMode('chat')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+            title={t('chatTab.viewChat')}
+            className={`flex items-center gap-1.5 px-2 py-1 rounded-md transition-colors cursor-pointer ${
               viewMode === 'chat'
                 ? 'bg-background text-foreground font-semibold shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             }`}
           >
-            <MessageSquare className="h-3.5 w-3.5" />
-            <span>{t('chatTab.viewChat')}</span>
+            <MessageSquare className="h-3.5 w-3.5 shrink-0" />
+            {!dense && <span className="truncate">{t('chatTab.viewChat')}</span>}
           </button>
           <button
             type="button"
             onClick={() => setViewMode('log')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+            title={t('chatTab.viewLog')}
+            className={`flex items-center gap-1.5 px-2 py-1 rounded-md transition-colors cursor-pointer ${
               viewMode === 'log'
                 ? 'bg-background text-foreground font-semibold shadow-xs'
                 : 'text-muted-foreground hover:text-foreground'
             }`}
           >
-            <Terminal className="h-3.5 w-3.5" />
-            <span>{t('chatTab.viewLog')}</span>
+            <Terminal className="h-3.5 w-3.5 shrink-0" />
+            {!dense && <span className="truncate">{t('chatTab.viewLog')}</span>}
           </button>
         </div>
       </div>

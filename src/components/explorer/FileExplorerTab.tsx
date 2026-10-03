@@ -10,7 +10,7 @@ import { useChatQueue } from '@/lib/agent/chatQueueManager';
 import { fcSystemFolders } from '@/lib/commander/ipc';
 import { formatBytes } from '@/lib/commander/format';
 import type { FcSystemFolder } from '@/lib/commander/types';
-import { ExplorerToolbar } from './ExplorerToolbar';
+import { ExplorerToolbar, type ExplorerSplit } from './ExplorerToolbar';
 import {
   ExplorerPane,
   type ExplorerPaneHandle,
@@ -22,8 +22,6 @@ import { ExplorerStatusBar, type ExplorerStatusInfo } from './ExplorerStatusBar'
 import { ExplorerChatDock } from './ExplorerChatDock';
 import { cn } from '@/lib/utils';
 
-type SplitCount = 1 | 2 | 4;
-
 interface ExplorerTabMeta {
   path?: string;
   back?: string[];
@@ -33,7 +31,8 @@ interface ExplorerTabMeta {
   showHidden?: boolean;
   panes?: ExplorerPaneState[];
   activePane?: number;
-  split?: SplitCount;
+  // 구버전: 1 | 2 | 4 숫자. 신버전: 'single' | 'dual-h' | 'dual-v'.
+  split?: ExplorerSplit | 1 | 2 | 4;
   treeOpen?: boolean;
   treeOpenByPane?: Record<number, boolean>;
   chatOpen?: boolean;
@@ -42,6 +41,12 @@ interface ExplorerTabMeta {
 function baseNameOf(path: string): string {
   const parts = path.split(/[\\/]+/).filter(Boolean);
   return parts.length > 0 ? parts[parts.length - 1] : path;
+}
+
+function normalizeSplit(raw: ExplorerTabMeta['split']): ExplorerSplit {
+  if (raw === 'dual-h' || raw === 'dual-v' || raw === 'single') return raw;
+  if (raw === 2) return 'dual-v';
+  return 'single';
 }
 
 function normalizePane(raw: Partial<ExplorerPaneState>, fallbackPath: string): ExplorerPaneState {
@@ -103,13 +108,16 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     ];
   });
   const [activePane, setActivePane] = useState(meta.activePane ?? 0);
-  const [split, setSplit] = useState<SplitCount>(meta.split === 2 || meta.split === 4 ? meta.split : 1);
-  // 분할 창마다 폴더 트리 열림 상태를 따로 기억한다 (구 treeOpen은 0번 창의 값으로 승계).
-  const [treeOpenByPane, setTreeOpenByPane] = useState<Record<number, boolean>>(() => {
-    if (meta.treeOpenByPane && typeof meta.treeOpenByPane === 'object') {
-      return { ...meta.treeOpenByPane };
+  const [split, setSplit] = useState<ExplorerSplit>(() => normalizeSplit(meta.split));
+  // 폴더 트리 열림 상태는 탭당 하나만 유지한다. 분할 창을 클릭해도 바뀌지 않는다.
+  // 구 treeOpenByPane 저장값은 첫 로드 시에만 활성 창의 값으로 승계한다.
+  const [treeOpen, setTreeOpen] = useState<boolean>(() => {
+    if (typeof meta.treeOpen === 'boolean') return meta.treeOpen;
+    const idx = meta.activePane ?? 0;
+    if (meta.treeOpenByPane && typeof meta.treeOpenByPane[idx] === 'boolean') {
+      return meta.treeOpenByPane[idx] as boolean;
     }
-    return typeof meta.treeOpen === 'boolean' ? { 0: meta.treeOpen } : {};
+    return true;
   });
   const [chatOpen, setChatOpen] = useState(meta.chatOpen ?? false);
   const [refreshSignal, setRefreshSignal] = useState(0);
@@ -117,7 +125,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   const [statsByPane, setStatsByPane] = useState<Record<number, PaneStats>>({});
   const paneRefs = useRef<(ExplorerPaneHandle | null)[]>([]);
 
-  const visibleCount = split;
+  const visibleCount = split === 'single' ? 1 : 2;
   const visiblePanes = useMemo(() => {
     const base = [...panes];
     while (base.length < visibleCount) {
@@ -157,15 +165,14 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     (next: {
       panes: ExplorerPaneState[];
       activePane: number;
-      split: SplitCount;
-      treeOpenByPane: Record<number, boolean>;
+      split: ExplorerSplit;
+      treeOpen: boolean;
       chatOpen: boolean;
     }) => {
       const activePath = next.panes[next.activePane]?.path ?? '';
       updateTab(tab.id, {
         title: baseNameOf(activePath) || t('activityBar.explorer'),
-        // 구버전 호환: treeOpen에는 활성 창의 값을 함께 저장한다.
-        meta: { ...(tab.meta ?? {}), ...next, treeOpen: next.treeOpenByPane[next.activePane] ?? true },
+        meta: { ...(tab.meta ?? {}), ...next, treeOpenByPane: undefined },
       });
     },
     [updateTab, tab.id, tab.meta, t],
@@ -180,9 +187,9 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
       }
       next[index] = patch;
       setPanes(next);
-      persist({ panes: next, activePane, split, treeOpenByPane, chatOpen });
+      persist({ panes: next, activePane, split, treeOpen, chatOpen });
     },
-    [panes, activePane, fallbackPath, persist, split, treeOpenByPane, chatOpen],
+    [panes, activePane, fallbackPath, persist, split, treeOpen, chatOpen],
   );
 
   const handlePaneStats = useCallback((index: number, s: PaneStats) => {
@@ -230,26 +237,25 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   const activeHandle = () => paneRefs.current[activePane] ?? null;
 
   const handleSplitChange = useCallback(
-    (next: SplitCount) => {
+    (next: ExplorerSplit) => {
       setSplit(next);
-      setActivePane((prev) => Math.min(prev, next - 1));
-      persist({ panes, activePane: Math.min(activePane, next - 1), split: next, treeOpenByPane, chatOpen });
+      setActivePane((prev) => Math.min(prev, next === 'single' ? 0 : 1));
+      persist({ panes, activePane: Math.min(activePane, next === 'single' ? 0 : 1), split: next, treeOpen, chatOpen });
     },
-    [panes, activePane, treeOpenByPane, chatOpen, persist],
+    [panes, activePane, treeOpen, chatOpen, persist],
   );
 
-  const isTreeOpen = treeOpenByPane[activePane] ?? true;
   const toggleTree = useCallback(() => {
-    const nextMap = { ...treeOpenByPane, [activePane]: !(treeOpenByPane[activePane] ?? true) };
-    setTreeOpenByPane(nextMap);
-    persist({ panes, activePane, split, treeOpenByPane: nextMap, chatOpen });
-  }, [panes, activePane, split, chatOpen, treeOpenByPane, persist]);
+    const next = !treeOpen;
+    setTreeOpen(next);
+    persist({ panes, activePane, split, treeOpen: next, chatOpen });
+  }, [panes, activePane, split, chatOpen, treeOpen, persist]);
 
   const toggleChat = useCallback(() => {
     const next = !chatOpen;
     setChatOpen(next);
-    persist({ panes, activePane, split, treeOpenByPane, chatOpen: next });
-  }, [panes, activePane, split, treeOpenByPane, chatOpen, persist]);
+    persist({ panes, activePane, split, treeOpen, chatOpen: next });
+  }, [panes, activePane, split, treeOpen, chatOpen, persist]);
 
   const handleAddFavorite = useCallback(() => {
     if (!activePath) return;
@@ -275,6 +281,52 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     });
   }, [openTab, sessionId, sessionTitle]);
 
+  // 채팅 도크는 포커스된 창을 추가 분할하는 형태로 표시한다.
+  // 이미 좌우로 나뉜 상태(dual-v)에서는 상하로, 그 외에는 좌우로 나눠 좁아짐을 방지한다.
+  const chatOrientation: 'row' | 'col' = split === 'dual-v' ? 'col' : 'row';
+
+  const renderPane = (pane: ExplorerPaneState, index: number) => {
+    const isFocused = index === activePane;
+    const paneEl = (
+      <ExplorerPane
+        initial={pane}
+        active={isFocused}
+        oppositePath={visiblePanes[(index + 1) % visiblePanes.length]?.path ?? null}
+        refreshSignal={refreshSignal}
+        handleRef={{
+          get current() {
+            return paneRefs.current[index] ?? null;
+          },
+          set current(v: ExplorerPaneHandle | null) {
+            paneRefs.current[index] = v;
+          },
+        }}
+        onActivate={() => setActivePane(index)}
+        onChange={(patch) => handlePaneChange(index, patch)}
+        onStats={(s) => handlePaneStats(index, s)}
+      />
+    );
+    if (!(chatOpen && isFocused)) {
+      return paneEl;
+    }
+    return (
+      <div className={cn('flex flex-1 min-h-0 min-w-0', chatOrientation === 'row' ? 'flex-row' : 'flex-col')}>
+        <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">{paneEl}</div>
+        <div className={cn('flex min-h-0 min-w-0 overflow-hidden', chatOrientation === 'row' ? 'w-1/2' : 'h-1/2')}>
+          <ExplorerChatDock
+            sessionId={sessionId}
+            title={sessionTitle}
+            cwd={activePath}
+            selCount={activeStats?.selCount ?? 0}
+            orientation={chatOrientation}
+            onClose={toggleChat}
+            onOpenInChatTab={handleOpenInChatTab}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="relative flex flex-col h-full w-full min-h-0 bg-editor">
       <ExplorerToolbar
@@ -282,7 +334,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         canForward={activeStats?.canForward ?? false}
         canUp={activeStats?.canUp ?? false}
         showHidden={activeStats?.showHidden ?? false}
-        treeOpen={isTreeOpen}
+        treeOpen={treeOpen}
         split={split}
         favorites={settings.favorites}
         systemFolders={systemFolders}
@@ -297,8 +349,8 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         onOpenPath={handleOpenPath}
         onAddFavorite={handleAddFavorite}
       />
-      <div className="flex flex-1 min-h-0">
-        {isTreeOpen && (
+      <div className="flex flex-1 min-h-0 min-w-0">
+        {treeOpen && (
           <div className="w-56 shrink-0 h-full min-h-0 overflow-y-auto border-r border-border bg-panel">
             <FolderTree currentPath={activePath} onNavigate={handleOpenPath} />
           </div>
@@ -306,42 +358,17 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         <div
           className={cn(
             'flex-1 min-h-0 min-w-0 grid gap-[1px] bg-border/60',
-            split === 1 ? 'grid-cols-1' : 'grid-cols-2',
-            split === 4 && 'grid-rows-2',
+            split === 'dual-v' && 'grid-cols-2',
+            split === 'dual-h' && 'grid-rows-2 grid-cols-1',
+            split === 'single' && 'grid-cols-1',
           )}
         >
           {visiblePanes.map((pane, index) => (
-            <div key={`${tab.id}-pane-${index}`} className="min-h-0 min-w-0 bg-editor overflow-hidden">
-              <ExplorerPane
-                initial={pane}
-                active={index === activePane}
-                oppositePath={visiblePanes[(index + 1) % visiblePanes.length]?.path ?? null}
-                refreshSignal={refreshSignal}
-                handleRef={{
-                  get current() {
-                    return paneRefs.current[index] ?? null;
-                  },
-                  set current(v: ExplorerPaneHandle | null) {
-                    paneRefs.current[index] = v;
-                  },
-                }}
-                onActivate={() => setActivePane(index)}
-                onChange={(patch) => handlePaneChange(index, patch)}
-                onStats={(s) => handlePaneStats(index, s)}
-              />
+            <div key={`${tab.id}-pane-${index}`} className="min-h-0 min-w-0 bg-editor overflow-hidden flex flex-col">
+              {renderPane(pane, index)}
             </div>
           ))}
         </div>
-        {chatOpen && (
-          <ExplorerChatDock
-            sessionId={sessionId}
-            title={sessionTitle}
-            cwd={activePath}
-            selCount={activeStats?.selCount ?? 0}
-            onClose={toggleChat}
-            onOpenInChatTab={handleOpenInChatTab}
-          />
-        )}
       </div>
       <ExplorerStatusBar info={statusInfo} />
       {!chatOpen && (

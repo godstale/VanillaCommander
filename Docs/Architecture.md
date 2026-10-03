@@ -373,7 +373,7 @@ interface WorkspaceTab {
 - `DocumentViewerTab.tsx`: PDF(pdfjs 렌더)·DOCX(mammoth HTML)·XLSX/CSV(SheetJS 표)·PPTX(슬라이드 아웃라인, D8).
 - `ArchiveViewerTab.tsx`: ZIP 목록·선택 해제.
 - `openFile.ts` 라우팅: 텍스트/코드/MD/JSON/CSV → 에디터, 이미지 → 이미지 뷰어, 문서 → DocumentViewer, ZIP → ArchiveViewer, HTML → 외부 브라우저, 동영상/음악/실행 파일 → 시스템 기본 앱. 모든 뷰어에 "시스템 기본 앱으로 열기".
-- `FileExplorerTab.tsx`: 탭 상단 툴바(뒤/앞/위/새로고침/새 폴더/숨김/트리 토글/즐겨찾기·시스템 폴더 메뉴/1-2-4 분할) + 좌측 접이식 `FolderTree` + 분할 창(`ExplorerPane`: 주소창·창별 찾기·상세 목록·정렬·다중 선택·키보드 탐색·단축키·컨텍스트 메뉴) + 탭 하단 `ExplorerStatusBar`(경로·전체·선택 정보) + 우측 플로팅 `ExplorerChatDock`(`ChatTab` 재사용, `origin='chat'` 세션이라 대화 목록에 등록됨). 찾기(`fc_search`)는 이름 부분 일치 OR 내용 일치이며, 백 버튼·빈 검색어·폴더 이동 시 원래 목록으로 복원된다.
+- `FileExplorerTab.tsx`: 탭 상단 툴바(뒤/앞/위/새로고침/새 폴더/숨김/트리 토글/즐겨찾기·시스템 폴더 메뉴/1·가로2·세로2 분할) + 좌측 접이식 `FolderTree`(탭당 하나, 활성 창 경로까지 자동 펼침) + 분할 창(`ExplorerPane`: 주소창·찾기 아이콘 토글·상세 목록·정렬·다중 선택·키보드 탐색·단축키·컨텍스트 메뉴·마우스 뒤/앞 버튼) + 탭 하단 `ExplorerStatusBar`(전체·선택 정보만, 경로 없음) + 활성 창 추가 분할형 `ExplorerChatDock`(`ChatTab` dense 재사용, `origin='chat'` 세션이라 대화 목록에 등록됨; 좌우 분할 중에는 상하로, 그 외에는 좌우로 나눈다). 찾기(`fc_search`)는 이름 부분 일치 OR 내용 일치이며, 평소에는 아이콘만 보이고 Ctrl+F·버튼으로 토글한다. 백 버튼·빈 검색어·폴더 이동 시 원래 목록으로 복원된다. 이전/다음은 Alt+←/→로도 동작한다.
 - 파일 작업(복사/이동/압축/해제/검색/정보)은 Rust job + `fc://progress` 이벤트로 진행률·취소·충돌 처리(`ConflictDialog`).
 
 ### 3.5 셋업 위저드 + StatusBar

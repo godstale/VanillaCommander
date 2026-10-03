@@ -95,8 +95,11 @@ export const explorerEn: Dict = {
   'explorer.fallbackBlocked': "Cannot reach the default agent, so this was not sent. Pick a fallback agent in a chat tab.",
 
   'explorer.splitOne': 'Single pane',
+  'explorer.splitHor': 'Split horizontal (top/bottom)',
+  'explorer.splitVer': 'Split vertical (left/right)',
   'explorer.splitTwo': 'Split in two',
   'explorer.splitFour': 'Split in four',
+  'explorer.toggleSearch': 'Search',
   'explorer.toggleTree': 'Folder tree',
   'explorer.favoritesMenu': 'Favorites',
   'explorer.systemMenu': 'System folders',

@@ -11,7 +11,7 @@ import {
   PanelLeft,
   Square,
   Columns2,
-  Grid2x2,
+  Rows2,
   Plus,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,13 +26,16 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import type { FcSystemFolder } from '@/lib/commander/types';
 import { cn } from '@/lib/utils';
 
+// 탐색기 분할 모드: 단일 / 가로 2분할(상·하) / 세로 2분할(좌·우). 4분할은 제공하지 않는다.
+export type ExplorerSplit = 'single' | 'dual-h' | 'dual-v';
+
 export interface ExplorerToolbarProps {
   canBack: boolean;
   canForward: boolean;
   canUp: boolean;
   showHidden: boolean;
   treeOpen: boolean;
-  split: 1 | 2 | 4;
+  split: ExplorerSplit;
   favorites: string[];
   systemFolders: FcSystemFolder[];
   onBack: () => void;
@@ -42,7 +45,7 @@ export interface ExplorerToolbarProps {
   onNewFolder: () => void;
   onToggleHidden: () => void;
   onToggleTree: () => void;
-  onSplitChange: (split: 1 | 2 | 4) => void;
+  onSplitChange: (split: ExplorerSplit) => void;
   onOpenPath: (path: string) => void;
   onAddFavorite: () => void;
 }
@@ -76,10 +79,10 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
   } = props;
 
   const iconBtn =
-    'h-7 w-7 text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none';
+    'h-7 w-7 shrink-0 text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none';
 
   return (
-    <div className="flex items-center gap-1 px-2 py-1 border-b border-border shrink-0">
+    <div className="flex items-center gap-1 px-2 py-1 border-b border-border shrink-0 min-w-0 overflow-x-auto">
       <Button variant="ghost" size="icon" className={iconBtn} disabled={!canBack} onClick={onBack} title={t('explorer.back')}>
         <ArrowLeft className="h-4 w-4" />
       </Button>
@@ -161,15 +164,15 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <div className="flex-1" />
+      <div className="flex-1 min-w-2" />
 
-      {/* 1/2/4 분할 */}
-      <div className="flex items-center gap-0.5 rounded-md border border-border/60 p-0.5">
+      {/* 1 / 가로 2분할 / 세로 2분할 */}
+      <div className="flex items-center gap-0.5 rounded-md border border-border/60 p-0.5 shrink-0">
         <Button
           variant="ghost"
           size="icon"
-          className={cn('h-6 w-6', split === 1 ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
-          onClick={() => onSplitChange(1)}
+          className={cn('h-6 w-6', split === 'single' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
+          onClick={() => onSplitChange('single')}
           title={t('explorer.splitOne')}
         >
           <Square className="h-3.5 w-3.5" />
@@ -177,20 +180,20 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
         <Button
           variant="ghost"
           size="icon"
-          className={cn('h-6 w-6', split === 2 ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
-          onClick={() => onSplitChange(2)}
-          title={t('explorer.splitTwo')}
+          className={cn('h-6 w-6', split === 'dual-h' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
+          onClick={() => onSplitChange('dual-h')}
+          title={t('explorer.splitHor')}
         >
-          <Columns2 className="h-3.5 w-3.5" />
+          <Rows2 className="h-3.5 w-3.5" />
         </Button>
         <Button
           variant="ghost"
           size="icon"
-          className={cn('h-6 w-6', split === 4 ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
-          onClick={() => onSplitChange(4)}
-          title={t('explorer.splitFour')}
+          className={cn('h-6 w-6', split === 'dual-v' ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground')}
+          onClick={() => onSplitChange('dual-v')}
+          title={t('explorer.splitVer')}
         >
-          <Grid2x2 className="h-3.5 w-3.5" />
+          <Columns2 className="h-3.5 w-3.5" />
         </Button>
       </div>
     </div>

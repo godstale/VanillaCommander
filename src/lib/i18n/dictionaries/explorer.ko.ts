@@ -95,8 +95,11 @@ export const explorerKo: Dict = {
   'explorer.fallbackBlocked': '기본 에이전트에 연결할 수 없어 전송하지 못했습니다. 채팅 탭에서 폴백 에이전트를 고르세요.',
 
   'explorer.splitOne': '1분할',
+  'explorer.splitHor': '2분할 가로 (상·하)',
+  'explorer.splitVer': '2분할 세로 (좌·우)',
   'explorer.splitTwo': '2분할',
   'explorer.splitFour': '4분할',
+  'explorer.toggleSearch': '찾기',
   'explorer.toggleTree': '폴더 트리 표시',
   'explorer.favoritesMenu': '즐겨찾기',
   'explorer.systemMenu': '시스템 폴더',

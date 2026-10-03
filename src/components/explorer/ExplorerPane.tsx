@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { MutableRefObject } from 'react';
-import { Search } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -59,6 +59,7 @@ export interface ExplorerPaneHandle {
   refresh: () => void;
   newFolder: () => void;
   toggleHidden: () => void;
+  toggleSearch: () => void;
 }
 
 export interface ExplorerPaneProps {
@@ -119,6 +120,7 @@ export function ExplorerPane({
   const [selected, setSelected] = useState<string[]>([]);
   const [activePath, setActivePath] = useState<string | null>(null);
   const [searchText, setSearchText] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
   const [searchJobId, setSearchJobId] = useState<string | null>(null);
   const [propsPaths, setPropsPaths] = useState<string[] | null>(null);
   const [editing, setEditing] = useState<{ path: string; value: string } | null>(null);
@@ -136,6 +138,26 @@ export function ExplorerPane({
     }
     setSearchJobId(null);
   }, [searchJobId, dismissJob]);
+
+  // 찾기 입력창 토글: 평소에는 아이콘만 보이고, Ctrl+F·버튼으로 펼쳤다 접었다 한다.
+  const toggleSearch = useCallback(() => {
+    setSearchOpen((prev) => {
+      if (prev) {
+        if (searchJobId) {
+          dismissJob(searchJobId);
+        }
+        setSearchJobId(null);
+        setSearchText('');
+      }
+      return !prev;
+    });
+  }, [searchJobId, dismissJob]);
+
+  useEffect(() => {
+    if (searchOpen) {
+      searchInputRef.current?.focus();
+    }
+  }, [searchOpen]);
 
   const reload = useCallback(async () => {
     setLoading(true);
@@ -291,6 +313,7 @@ export function ExplorerPane({
       // P12-01: 폴더 이동 시 찾기 모드를 종료하고 원래 목록으로 복원한다.
       clearSearch();
       setSearchText('');
+      setSearchOpen(false);
     },
     [emit, path, back, sortKey, sortDir, showHidden, clearSearch],
   );
@@ -308,6 +331,7 @@ export function ExplorerPane({
     setSelected([]);
     // P12-01: 백 버튼은 찾기 결과에서도 원래 폴더로 복원한다.
     clearSearch();
+    setSearchOpen(false);
   }, [back, fwd, path, emit, sortKey, sortDir, showHidden, clearSearch]);
 
   const goForward = useCallback(() => {
@@ -322,6 +346,7 @@ export function ExplorerPane({
     setPath(next);
     setSelected([]);
     clearSearch();
+    setSearchOpen(false);
   }, [back, fwd, path, emit, sortKey, sortDir, showHidden, clearSearch]);
 
   const goUp = useCallback(() => {
@@ -345,11 +370,11 @@ export function ExplorerPane({
   }, [emit, path, back, fwd, sortKey, sortDir, showHidden]);
 
   useEffect(() => {
-    handleRef.current = { navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden };
+    handleRef.current = { navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch };
     return () => {
       handleRef.current = null;
     };
-  }, [handleRef, navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden]);
+  }, [handleRef, navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch]);
 
   const openPath = useCallback(
     (target: string, isDir: boolean, size = 0) => {
@@ -572,6 +597,17 @@ export function ExplorerPane({
         return;
       }
       const ctrl = e.ctrlKey || e.metaKey;
+      // Alt + ←/→: 이전/다음 폴더 (마우스 네비게이션 버튼과 동일).
+      if (e.altKey && e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goBack();
+        return;
+      }
+      if (e.altKey && e.key === 'ArrowRight') {
+        e.preventDefault();
+        goForward();
+        return;
+      }
       switch (e.key) {
         case 'Enter':
           e.preventDefault();
@@ -635,7 +671,7 @@ export function ExplorerPane({
         setSelected(sorted.map((en) => en.path));
       } else if (ctrl && (e.key === 'f' || e.key === 'F')) {
         e.preventDefault();
-        searchInputRef.current?.focus();
+        toggleSearch();
       } else if (e.altKey && (e.key === 'Enter')) {
         e.preventDefault();
         const targets = effectivePaths();
@@ -649,7 +685,7 @@ export function ExplorerPane({
         moveActive(e.key === 'ArrowDown' ? 1 : -1, false);
       }
     },
-    [activePath, displayEntries, openEntry, goUp, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, t],
+    [activePath, displayEntries, openEntry, goUp, goBack, goForward, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, toggleSearch, t],
   );
 
   const openCtxMenu = useCallback(
@@ -683,25 +719,62 @@ export function ExplorerPane({
         onActivate();
       }}
       onFocus={onActivate}
+      onMouseDown={(e) => {
+        // 마우스 네비게이션 버튼(뒤로/앞으로): 상단 컨트롤 아이콘과 동일 동작.
+        if (e.button === 3) {
+          e.preventDefault();
+          goBack();
+        } else if (e.button === 4) {
+          e.preventDefault();
+          goForward();
+        }
+      }}
     >
       <div className="flex items-center gap-1 px-2 py-1 border-b border-border shrink-0 min-w-0">
         <div className="flex-1 min-w-0">
           <AddressBar path={path} onNavigate={(next) => navigate(next)} />
         </div>
-        <div className="relative w-40 shrink-0">
-          <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60 pointer-events-none" />
-          <input
-            ref={searchInputRef}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={(e) => {
-              e.stopPropagation();
-              if (e.key === 'Enter') void startSearch();
-            }}
-            placeholder={t('explorer.searchPlaceholder')}
-            className="w-full rounded-md border border-input bg-background pl-7 pr-2 py-1 text-xs outline-none focus:border-primary placeholder:text-muted-foreground/60"
-          />
-        </div>
+        {searchOpen ? (
+          <div className="relative w-40 shrink-0 min-w-0">
+            <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/60 pointer-events-none" />
+            <input
+              ref={searchInputRef}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                e.stopPropagation();
+                if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
+                  e.preventDefault();
+                  toggleSearch();
+                  return;
+                }
+                if (e.key === 'Enter') void startSearch();
+                if (e.key === 'Escape') toggleSearch();
+              }}
+              placeholder={t('explorer.searchPlaceholder')}
+              className="w-full rounded-md border border-input bg-background pl-7 pr-7 py-1 text-xs outline-none focus:border-primary placeholder:text-muted-foreground/60"
+            />
+            <button
+              type="button"
+              onClick={toggleSearch}
+              title={t('workspace.close')}
+              aria-label={t('workspace.close')}
+              className="absolute right-1 top-1/2 -translate-y-1/2 p-1 rounded text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={toggleSearch}
+            title={t('explorer.toggleSearch')}
+            aria-label={t('explorer.toggleSearch')}
+            className="h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/40"
+          >
+            <Search className="h-3.5 w-3.5" />
+          </button>
+        )}
       </div>
       {error && (
         <div className="px-3 py-1.5 text-xs text-destructive bg-destructive/10 border-b border-destructive/20 shrink-0 flex items-center justify-between gap-2">

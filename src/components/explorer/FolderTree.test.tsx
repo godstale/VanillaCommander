@@ -41,9 +41,7 @@ describe('FolderTree', () => {
     );
     expect(await screen.findByText('홈')).toBeInTheDocument();
 
-    // 루트 펼치기 → 하위 폴더만 표시된다.
-    const toggles = await screen.findAllByRole('button', { name: '펼치기' });
-    fireEvent.click(toggles[0]);
+    // 현재 경로까지 자동 펼침: 루트 하위 폴더가 별도 클릭 없이 표시된다.
     expect(await screen.findByText('docs')).toBeInTheDocument();
     expect(screen.queryByText('a.txt')).not.toBeInTheDocument();
 

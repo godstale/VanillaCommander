@@ -149,10 +149,10 @@ describe('FileExplorerTab', () => {
   it('shows split controls, folder tree and tab status bar', async () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    // 1/2/4 분할 버튼.
+    // 1 / 가로 2분할 / 세로 2분할 버튼.
     expect(screen.getByTitle('1분할')).toBeInTheDocument();
-    expect(screen.getByTitle('2분할')).toBeInTheDocument();
-    expect(screen.getByTitle('4분할')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할 가로 (상·하)')).toBeInTheDocument();
+    expect(screen.getByTitle('2분할 세로 (좌·우)')).toBeInTheDocument();
     // 폴더 트리 (시스템 폴더 보기 기반).
     expect(screen.getByRole('tree')).toBeInTheDocument();
     // 탭 상태바: 전체 개수 표시.
@@ -162,11 +162,13 @@ describe('FileExplorerTab', () => {
   it('splits into two panes', async () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
-    fireEvent.click(screen.getByTitle('2분할'));
-    // 창마다 찾기 입력창이 하나씩 있다.
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우)'));
+    // 분할되면 같은 파일이 창마다 표시된다.
     await waitFor(() => {
-      expect(screen.getAllByPlaceholderText(/찾기/).length).toBe(2);
+      expect(screen.getAllByText('a.txt').length).toBe(2);
     });
+    // 찾기는 평소에 아이콘만 보인다.
+    expect(screen.getAllByTitle('찾기').length).toBe(2);
   });
 
   it('opens the agent chat dock with the same chat screen', async () => {
@@ -193,8 +195,55 @@ describe('FileExplorerTab', () => {
     );
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: '에이전트 채팅' }));
-    // 도크는 일반 채팅 탭과 동일한 ChatTab 화면을 재사용한다.
+    // 도크는 일반 채팅 탭과 동일한 ChatTab 화면을 재사용한다 (좁은 도크라 헤더는 압축 표시).
     expect(await screen.findByText(/위치:/)).toBeInTheDocument();
-    expect(await screen.findByText('대화')).toBeInTheDocument();
+    expect(await screen.findByTitle('대화')).toBeInTheDocument();
+  });
+
+  it('keeps folder tree open when switching panes', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    expect(screen.getByRole('tree')).toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우)'));
+    await waitFor(() => {
+      expect(screen.getAllByText('a.txt').length).toBe(2);
+    });
+    // 두 번째 창을 클릭해도 트리는 그대로 열린 상태다.
+    const second = screen.getAllByText('a.txt')[1];
+    fireEvent.click(second);
+    expect(screen.getByRole('tree')).toBeInTheDocument();
+  });
+
+  it('toggles search input with button and Ctrl+F', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    // 평소에는 찾기 아이콘만 보인다.
+    expect(screen.getByTitle('찾기')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText(/찾기/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('찾기'));
+    expect(await screen.findByPlaceholderText(/찾기/)).toBeInTheDocument();
+    // Ctrl+F를 다시 누르면 닫힌다.
+    const pane = screen.getAllByText('a.txt')[0];
+    fireEvent.keyDown(pane, { key: 'f', ctrlKey: true });
+    await waitFor(() => {
+      expect(screen.queryByPlaceholderText(/찾기/)).not.toBeInTheDocument();
+    });
+  });
+
+  it('navigates back with Alt+Left', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    fireEvent.doubleClick(screen.getByText('docs'));
+    expect(await screen.findByText('b.txt')).toBeInTheDocument();
+    const row = screen.getByText('b.txt');
+    fireEvent.keyDown(row, { key: 'ArrowLeft', altKey: true });
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+  });
+
+  it('does not show folder path in tab status bar', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    const status = screen.getByLabelText('explorer-status');
+    expect(status.textContent ?? '').not.toContain('C:/work');
   });
 });

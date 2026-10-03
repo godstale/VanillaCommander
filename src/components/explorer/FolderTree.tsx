@@ -239,6 +239,8 @@ export function FolderTree({ currentPath, onNavigate }: FolderTreeProps) {
   );
 
   // 현재 탐색 위치가 속한 루트부터 경로까지 조상을 자동 펼친다.
+  // 즐겨찾기·시스템 폴더가 늦게 로드돼도 다시 시도하도록 roots 서명을 의존성에 포함한다.
+  const rootsKey = useMemo(() => roots.map((r) => r.path).join('\n'), [roots]);
   useEffect(() => {
     if (!currentPath) return;
     let cancelled = false;
@@ -249,9 +251,9 @@ export function FolderTree({ currentPath, onNavigate }: FolderTreeProps) {
       const chain: string[] = [cursor];
       const target = normExplorerPath(currentPath);
       for (let depth = 0; depth < 12; depth += 1) {
-        if (normExplorerPath(cursor) === target) break;
         const kids = await loadChildren(cursor);
         if (cancelled) return;
+        if (normExplorerPath(cursor) === target) break;
         const next = kids.find((k) => isUnderOrEqual(currentPath, k.path));
         if (!next) break;
         cursor = next.path;
@@ -269,7 +271,7 @@ export function FolderTree({ currentPath, onNavigate }: FolderTreeProps) {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentNorm]);
+  }, [currentNorm, rootsKey]);
 
   const favRoots = roots.slice(0, settings.favorites.length);
   const sysRoots = roots.slice(settings.favorites.length);
