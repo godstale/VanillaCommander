@@ -107,8 +107,11 @@ describe('AlbumView thumbnails', () => {
       },
     );
 
-    renderAlbum(['pending.png']);
+    const { container } = renderAlbum(['pending.png']);
     expect(screen.queryByAltText('pending.png')).not.toBeInTheDocument();
     expect(screen.getByText('pending.png')).toBeInTheDocument();
+    // 썸네일 박스는 고정 높이로 붕괴하지 않는다 (aspect-ratio 의존 제거).
+    const box = container.querySelector('[data-album-grid] > div > div');
+    expect(box?.className ?? '').toContain('h-32');
   });
 });

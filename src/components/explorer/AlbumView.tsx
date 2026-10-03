@@ -254,7 +254,10 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
               isActive && !isSelected && 'outline-1 outline -outline-offset-1 outline-primary/50',
             )}
           >
-            <div className="relative aspect-square w-full overflow-hidden bg-muted/20">
+            {/* 썸네일 박스는 고정 높이(h-32)로 둔다. aspect-ratio + %높이 체인은
+                엔진·상태에 따라 높이가 0으로 붕괴해 카드가 납작한 띠로 보일 수 있어,
+                박스·플레이스홀더·파일명이 항상 렌더되도록 확정 높이로 고정한다. */}
+            <div className="relative h-32 w-full overflow-hidden bg-muted/20">
               {isDir ? (
                 <span className="flex h-full w-full items-center justify-center">
                   <FileKindIcon name={entry.name} kind={entry.kind} className="h-10 w-10" />
