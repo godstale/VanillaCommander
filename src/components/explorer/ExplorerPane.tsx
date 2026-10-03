@@ -27,6 +27,7 @@ import type { FcEntry } from '@/lib/commander/types';
 import { buildFileTab, extOf, planOpenFile } from '@/lib/commander/openFile';
 import { AddressBar } from './AddressBar';
 import { FileList, type SortKey, type SortDir } from './FileList';
+import { AlbumView } from './AlbumView';
 import { PropertiesDialog } from './dialogs/PropertiesDialog';
 import { SearchResultsView } from './dialogs/SearchResultsView';
 import { cn } from '@/lib/utils';
@@ -52,6 +53,8 @@ export interface PaneStats {
   canUp: boolean;
   showHidden: boolean;
   searching: boolean;
+  /** P13-07: 이미지 앨범 보기 여부 (툴바 하이라이트용). */
+  view: 'list' | 'album';
 }
 
 export interface ExplorerPaneHandle {
@@ -67,6 +70,12 @@ export interface ExplorerPaneHandle {
   focusAddress: () => void;
   /** P13-05: 창 컨테이너에 DOM 포커스를 준다 (분할 후·Tab 창 전환용). */
   focus: () => void;
+  /** P13-07: 선택 항목 압축하기 (F4). */
+  zipSelected: () => void;
+  /** P13-07: 정보 대화상자 열기 (F3). */
+  showProperties: () => void;
+  /** P13-07: 목록/앨범 보기 전환 (F9). */
+  toggleView: () => void;
 }
 
 export interface ExplorerPaneProps {
@@ -129,6 +138,8 @@ export function ExplorerPane({
   const [searchText, setSearchText] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchJobId, setSearchJobId] = useState<string | null>(null);
+  // P13-07: 이미지 앨범 보기 (폴더+이미지만 격자로, 창별 로컬 상태).
+  const [view, setView] = useState<'list' | 'album'>('list');
   const [propsPaths, setPropsPaths] = useState<string[] | null>(null);
   const [editing, setEditing] = useState<{ path: string; value: string } | null>(null);
   const [mkdir, setMkdir] = useState(false);
@@ -297,9 +308,10 @@ export function ExplorerPane({
       canUp: parentOf(path) !== null,
       showHidden,
       searching: searchJobId !== null,
+      view,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path, entries.length, totalBytes, selected, selBytes, back.length, fwd.length, showHidden, searchJobId]);
+  }, [path, entries.length, totalBytes, selected, selBytes, back.length, fwd.length, showHidden, searchJobId, view]);
 
   const emit = useCallback(
     (next: ExplorerPaneState) => {
@@ -380,24 +392,6 @@ export function ExplorerPane({
     setShowHidden(next);
     emit({ path, back, fwd, sortKey, sortDir, showHidden: next });
   }, [emit, path, back, fwd, sortKey, sortDir, showHidden]);
-
-  useEffect(() => {
-    handleRef.current = {
-      navigate,
-      goBack,
-      goForward,
-      goUp,
-      refresh,
-      newFolder,
-      toggleHidden,
-      toggleSearch,
-      focusAddress: () => setAddressEditSignal((s) => s + 1),
-      focus: () => containerRef.current?.focus({ preventScroll: true }),
-    };
-    return () => {
-      handleRef.current = null;
-    };
-  }, [handleRef, navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch]);
 
   const openPath = useCallback(
     (target: string, isDir: boolean, size = 0) => {
@@ -504,6 +498,41 @@ export function ExplorerPane({
     const dest = joinPath(path, 'archive.zip');
     void runJob('zip', `${t('explorer.ctxZip')} → archive.zip`, () => fcZip(sources, dest));
   }, [opTargets, path, runJob, t]);
+
+  // P13-07: 툴바·F3/F4/F9에서 호출되는 창 동작 (창 핸들로 노출한다).
+  const zipSelected = useCallback(() => {
+    doZip();
+  }, [doZip]);
+
+  const showProperties = useCallback(() => {
+    const targets = effectivePaths();
+    if (targets.length > 0) setPropsPaths(targets);
+  }, [effectivePaths]);
+
+  const toggleView = useCallback(() => {
+    setView((v) => (v === 'album' ? 'list' : 'album'));
+  }, []);
+
+  useEffect(() => {
+    handleRef.current = {
+      navigate,
+      goBack,
+      goForward,
+      goUp,
+      refresh,
+      newFolder,
+      toggleHidden,
+      toggleSearch,
+      focusAddress: () => setAddressEditSignal((s) => s + 1),
+      focus: () => containerRef.current?.focus({ preventScroll: true }),
+      zipSelected,
+      showProperties,
+      toggleView,
+    };
+    return () => {
+      handleRef.current = null;
+    };
+  }, [handleRef, navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch, zipSelected, showProperties, toggleView]);
 
   const doUnzip = useCallback(() => {
     const sources = opTargets().filter((p) => p.toLowerCase().endsWith('.zip'));
@@ -886,6 +915,15 @@ export function ExplorerPane({
         <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground">
           {t('explorer.loading')}
         </div>
+      ) : view === 'album' ? (
+        <AlbumView
+          entries={displayEntries}
+          selected={selectedSet}
+          activePath={activePath}
+          onSelect={select}
+          onOpen={openEntry}
+          onContextMenu={openCtxMenu}
+        />
       ) : (
         <FileList
           entries={displayEntries}
@@ -1012,7 +1050,7 @@ export function ExplorerPane({
               </button>
               <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); setPropsPaths(ctxTargets); }}>
                 {t('explorer.ctxInfo')}
-                {menuKbd('Alt+Enter')}
+                {menuKbd('F3')}
               </button>
               <div className="-mx-1 my-1 h-px bg-border" />
               <button type="button" role="menuitem" className={menuItem} disabled title={t('explorer.ctxAskAgent')}>

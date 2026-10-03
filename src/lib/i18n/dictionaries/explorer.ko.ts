@@ -119,4 +119,7 @@ export const explorerKo: Dict = {
   'explorer.statusAgentBusyTitle': '백그라운드에서 에이전트가 동작 중입니다',
   'explorer.statusJobsRunning': '백그라운드 작업 {n}개 진행 중',
   'explorer.statusJobsFailed': '작업 실패 {n}개',
+  'explorer.albumView': '이미지 앨범',
+  'explorer.albumEmpty': '폴더나 이미지가 없습니다',
+  'explorer.statusHints': 'F2 이름 바꾸기 · F3 속성',
 };

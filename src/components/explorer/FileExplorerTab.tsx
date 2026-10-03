@@ -74,6 +74,7 @@ function statsEqual(a: PaneStats | undefined, b: PaneStats): boolean {
     a.canUp === b.canUp &&
     a.showHidden === b.showHidden &&
     a.searching === b.searching &&
+    a.view === b.view &&
     a.selNames.join('\n') === b.selNames.join('\n')
   );
 }
@@ -279,6 +280,24 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         paneRefs.current[activePane]?.refresh();
         return;
       }
+      // P13-07: F3 정보·F4 압축·F9 앨범 (수식키 없음, Alt+F4 창 닫기 보호).
+      if (!e.altKey && !e.ctrlKey && !e.metaKey) {
+        if (e.key === 'F4') {
+          e.preventDefault();
+          paneRefs.current[activePane]?.zipSelected();
+          return;
+        }
+        if (e.key === 'F9') {
+          e.preventDefault();
+          paneRefs.current[activePane]?.toggleView();
+          return;
+        }
+        if (e.key === 'F3') {
+          e.preventDefault();
+          paneRefs.current[activePane]?.showProperties();
+          return;
+        }
+      }
       // Tab: 분할 창 전환 (단일 창에서는 기본 포커스 이동을 유지한다).
       if (e.key === 'Tab' && !e.altKey && !e.ctrlKey && !e.metaKey && visibleCount > 1) {
         e.preventDefault();
@@ -416,11 +435,14 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         favorites={settings.favorites}
         systemFolders={systemFolders}
         showShortcuts={altHeld}
+        albumActive={activeStats?.view === 'album'}
         onBack={() => activeHandle()?.goBack()}
         onForward={() => activeHandle()?.goForward()}
         onUp={() => activeHandle()?.goUp()}
         onRefresh={() => setRefreshSignal((s) => s + 1)}
         onNewFolder={() => activeHandle()?.newFolder()}
+        onZip={() => activeHandle()?.zipSelected()}
+        onToggleAlbum={() => activeHandle()?.toggleView()}
         onToggleHidden={() => activeHandle()?.toggleHidden()}
         onToggleTree={toggleTree}
         onSplitChange={handleSplitChange}

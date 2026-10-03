@@ -32,13 +32,16 @@ vi.mock('@tauri-apps/api/core', () => ({
       if (path === 'C:/work/docs') {
         return Promise.resolve([
           { name: 'b.txt', path: 'C:/work/docs/b.txt', kind: 'file', size: 5, modified_ms: 1000, hidden: false, readonly: false, symlink: false, warning: false },
+          { name: 'photo.png', path: 'C:/work/docs/photo.png', kind: 'file', size: 20, modified_ms: 1000, hidden: false, readonly: false, symlink: false, warning: false },
         ]);
       }
       return Promise.resolve([]);
     }
     if (cmd === 'fc_system_folders') return Promise.resolve([]);
+    if (cmd === 'fc_zip' || cmd === 'fc_stat') return Promise.resolve(`job-${cmd}`);
     return Promise.resolve({ warning: false });
   },
+  convertFileSrc: (p: string) => `asset://${p}`,
 }));
 
 vi.mock('@tauri-apps/api/event', () => ({
@@ -62,6 +65,36 @@ function renderTab() {
               <WorkspaceTabsProvider>
                 <StatusBarProvider>
                   <FileExplorerTab tab={TAB} />
+                </StatusBarProvider>
+              </WorkspaceTabsProvider>
+            </JobsProvider>
+          </AgentsProvider>
+        </WorkspaceProvider>
+      </SettingsProvider>
+    </MemoryRouter>,
+  );
+}
+
+// 활성 탭으로 등록해 렌더한다. 탐색기 전역 단축키(window 리스너) 테스트용.
+function renderActiveTab() {
+  function Opener({ children }: { children: React.ReactNode }) {
+    const { openTab } = useWorkspaceTabs();
+    useEffect(() => {
+      openTab({ id: TAB.id, type: TAB.type, title: TAB.title, meta: TAB.meta });
+    }, [openTab]);
+    return <>{children}</>;
+  }
+  return render(
+    <MemoryRouter>
+      <SettingsProvider>
+        <WorkspaceProvider>
+          <AgentsProvider>
+            <JobsProvider>
+              <WorkspaceTabsProvider>
+                <StatusBarProvider>
+                  <Opener>
+                    <FileExplorerTab tab={TAB} />
+                  </Opener>
                 </StatusBarProvider>
               </WorkspaceTabsProvider>
             </JobsProvider>
@@ -172,6 +205,47 @@ describe('FileExplorerTab', () => {
     expect(screen.getAllByTitle('찾기 (Ctrl+F)').length).toBe(2);
   });
 
+  it('zips the selection via the toolbar button (F4)', async () => {
+    renderTab();
+    const row = await screen.findByText('a.txt');
+    fireEvent.click(row);
+    fireEvent.click(screen.getByTitle('압축하기 (F4)'));
+    await waitFor(() => {
+      const zip = calls.find((c) => c.cmd === 'fc_zip');
+      expect(zip).toBeDefined();
+      expect((zip?.args as { sources: string[] }).sources).toEqual(['C:/work/a.txt']);
+    });
+  });
+
+  it('toggles the image album with the toolbar button and F9', async () => {
+    renderActiveTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    // docs 폴더로 이동한다 (b.txt + photo.png).
+    fireEvent.doubleClick(screen.getByText('docs'));
+    expect(await screen.findByText('b.txt')).toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('이미지 앨범 (F9)'));
+    // 앨범에서는 폴더·이미지만 보이고 텍스트 파일은 숨겨진다.
+    await waitFor(() => {
+      expect(screen.queryByText('b.txt')).not.toBeInTheDocument();
+    });
+    const thumb = screen.getByAltText('photo.png') as HTMLImageElement;
+    expect(thumb.src).toContain('asset://');
+    expect(screen.getByText('..')).toBeInTheDocument();
+    // F9로 목록으로 복귀한다.
+    fireEvent.keyDown(window, { key: 'F9' });
+    expect(await screen.findByText('b.txt')).toBeInTheDocument();
+  });
+
+  it('opens properties with F3 and shows idle hints in the status bar', async () => {
+    renderActiveTab();
+    const row = await screen.findByText('a.txt');
+    fireEvent.click(row);
+    // 평상시 상태바 좌측에는 자주 쓰는 단축키 안내가 표시된다.
+    expect(screen.getByLabelText('explorer-status').textContent ?? '').toContain('F2');
+    fireEvent.keyDown(window, { key: 'F3' });
+    expect(await screen.findByText('정보')).toBeInTheDocument();
+  });
+
   it('toggles agent chat dock via floating button and Alt+C', async () => {
     render(
       <MemoryRouter>
@@ -244,33 +318,7 @@ describe('FileExplorerTab', () => {
   });
 
   it('refreshes with F5 and shows new shortcut titles', async () => {
-    // 활성 탭으로 등록해야 탐색기 전역 단축키(window 리스너)가 동작한다.
-    function Opener({ children }: { children: React.ReactNode }) {
-      const { openTab } = useWorkspaceTabs();
-      useEffect(() => {
-        openTab({ id: TAB.id, type: TAB.type, title: TAB.title, meta: TAB.meta });
-      }, [openTab]);
-      return <>{children}</>;
-    }
-    render(
-      <MemoryRouter>
-        <SettingsProvider>
-          <WorkspaceProvider>
-            <AgentsProvider>
-              <JobsProvider>
-                <WorkspaceTabsProvider>
-                  <StatusBarProvider>
-                    <Opener>
-                      <FileExplorerTab tab={TAB} />
-                    </Opener>
-                  </StatusBarProvider>
-                </WorkspaceTabsProvider>
-              </JobsProvider>
-            </AgentsProvider>
-          </WorkspaceProvider>
-        </SettingsProvider>
-      </MemoryRouter>,
-    );
+    renderActiveTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     const before = calls.filter((c) => c.cmd === 'fc_list_dir').length;
     fireEvent.keyDown(window, { key: 'F5' });

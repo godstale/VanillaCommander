@@ -46,7 +46,10 @@ export function ExplorerStatusBar({ info }: { info: ExplorerStatusInfo }) {
           <span className={cn('text-destructive font-medium')} title={failed[failed.length - 1]?.error ?? undefined}>
             {t('explorer.statusJobsFailed', { n: String(failed.length) })}
           </span>
-        ) : null}
+        ) : (
+          // P13-07: 평상시에는 자주 쓰는 명령의 단축키를 안내한다.
+          <span className="opacity-70">{t('explorer.statusHints')}</span>
+        )}
       </span>
       <span className="flex items-center gap-3 shrink-0 min-w-0">
         <span className="shrink-0 tabular-nums truncate">

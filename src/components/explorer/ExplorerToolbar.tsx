@@ -4,6 +4,8 @@ import {
   ArrowUp,
   RefreshCw,
   FolderPlus,
+  Archive,
+  Images,
   Eye,
   EyeOff,
   Star,
@@ -41,11 +43,15 @@ export interface ExplorerToolbarProps {
   systemFolders: FcSystemFolder[];
   /** P13-01: true면 단축키가 있는 버튼에 배지를 표시한다. */
   showShortcuts?: boolean;
+  /** P13-07: 앨범 보기 활성 여부 (하이라이트용). */
+  albumActive: boolean;
   onBack: () => void;
   onForward: () => void;
   onUp: () => void;
   onRefresh: () => void;
   onNewFolder: () => void;
+  onZip: () => void;
+  onToggleAlbum: () => void;
   onToggleHidden: () => void;
   onToggleTree: () => void;
   onSplitChange: (split: ExplorerSplit) => void;
@@ -70,11 +76,14 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
     favorites,
     systemFolders,
     showShortcuts,
+    albumActive,
     onBack,
     onForward,
     onUp,
     onRefresh,
     onNewFolder,
+    onZip,
+    onToggleAlbum,
     onToggleHidden,
     onToggleTree,
     onSplitChange,
@@ -127,6 +136,22 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
       {wrapBtn('newFolder', 'F7', (
         <Button variant="ghost" size="icon" className={iconBtn} onClick={onNewFolder} title={`${t('explorer.newFolder')} (F7)`}>
           <FolderPlus className="h-4 w-4" />
+        </Button>
+      ))}
+      {wrapBtn('zip', 'F4', (
+        <Button variant="ghost" size="icon" className={iconBtn} onClick={onZip} title={`${t('explorer.ctxZip')} (F4)`}>
+          <Archive className="h-4 w-4" />
+        </Button>
+      ))}
+      {wrapBtn('album', 'F9', (
+        <Button
+          variant="ghost"
+          size="icon"
+          className={cn(iconBtn, albumActive && 'text-primary')}
+          onClick={onToggleAlbum}
+          title={`${t('explorer.albumView')} (F9)`}
+        >
+          <Images className="h-4 w-4" />
         </Button>
       ))}
       {wrapBtn('hidden', 'H', (

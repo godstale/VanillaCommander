@@ -119,4 +119,7 @@ export const explorerEn: Dict = {
   'explorer.statusAgentBusyTitle': 'An agent is working in the background',
   'explorer.statusJobsRunning': '{n} background tasks running',
   'explorer.statusJobsFailed': '{n} tasks failed',
+  'explorer.albumView': 'Image album',
+  'explorer.albumEmpty': 'No folders or images',
+  'explorer.statusHints': 'F2 Rename · F3 Properties',
 };
