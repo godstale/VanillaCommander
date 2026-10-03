@@ -14,6 +14,7 @@ import {
   Rows2,
   Plus,
 } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -38,6 +39,8 @@ export interface ExplorerToolbarProps {
   split: ExplorerSplit;
   favorites: string[];
   systemFolders: FcSystemFolder[];
+  /** P13-01: true면 단축키가 있는 버튼에 배지를 표시한다. */
+  showShortcuts?: boolean;
   onBack: () => void;
   onForward: () => void;
   onUp: () => void;
@@ -66,6 +69,7 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
     split,
     favorites,
     systemFolders,
+    showShortcuts,
     onBack,
     onForward,
     onUp,
@@ -81,23 +85,46 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
   const iconBtn =
     'h-7 w-7 shrink-0 text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none';
 
+  // P13-01: Alt를 누른 동안 단축키를 알리는 배지. 단축키가 있는 버튼에만 표시한다.
+  const badge = (label: string) =>
+    showShortcuts ? (
+      <kbd className="absolute -top-1.5 -right-1.5 rounded border border-primary/50 bg-primary/10 px-1 text-[9px] leading-3 font-mono text-primary pointer-events-none">
+        {label}
+      </kbd>
+    ) : null;
+
+  const wrapBtn = (key: string, shortcut: string | null, el: ReactNode) => (
+    <span key={key} className="relative inline-flex shrink-0">
+      {el}
+      {shortcut ? badge(shortcut) : null}
+    </span>
+  );
+
   return (
     <div className="flex items-center gap-1 px-2 py-1 border-b border-border shrink-0 min-w-0 overflow-x-auto">
-      <Button variant="ghost" size="icon" className={iconBtn} disabled={!canBack} onClick={onBack} title={t('explorer.back')}>
-        <ArrowLeft className="h-4 w-4" />
-      </Button>
-      <Button variant="ghost" size="icon" className={iconBtn} disabled={!canForward} onClick={onForward} title={t('explorer.forward')}>
-        <ArrowRight className="h-4 w-4" />
-      </Button>
-      <Button variant="ghost" size="icon" className={iconBtn} disabled={!canUp} onClick={onUp} title={t('explorer.up')}>
-        <ArrowUp className="h-4 w-4" />
-      </Button>
+      {wrapBtn('back', '←', (
+        <Button variant="ghost" size="icon" className={iconBtn} disabled={!canBack} onClick={onBack} title={`${t('explorer.back')} (Alt+←)`}>
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+      ))}
+      {wrapBtn('forward', '→', (
+        <Button variant="ghost" size="icon" className={iconBtn} disabled={!canForward} onClick={onForward} title={`${t('explorer.forward')} (Alt+→)`}>
+          <ArrowRight className="h-4 w-4" />
+        </Button>
+      ))}
+      {wrapBtn('up', '⌫', (
+        <Button variant="ghost" size="icon" className={iconBtn} disabled={!canUp} onClick={onUp} title={`${t('explorer.up')} (Backspace)`}>
+          <ArrowUp className="h-4 w-4" />
+        </Button>
+      ))}
       <Button variant="ghost" size="icon" className={iconBtn} onClick={onRefresh} title={t('explorer.refresh')}>
         <RefreshCw className="h-4 w-4" />
       </Button>
-      <Button variant="ghost" size="icon" className={iconBtn} onClick={onNewFolder} title={t('explorer.newFolder')}>
-        <FolderPlus className="h-4 w-4" />
-      </Button>
+      {wrapBtn('newFolder', 'F7', (
+        <Button variant="ghost" size="icon" className={iconBtn} onClick={onNewFolder} title={`${t('explorer.newFolder')} (F7)`}>
+          <FolderPlus className="h-4 w-4" />
+        </Button>
+      ))}
       <Button
         variant="ghost"
         size="icon"

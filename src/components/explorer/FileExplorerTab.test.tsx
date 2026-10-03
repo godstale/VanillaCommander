@@ -168,7 +168,7 @@ describe('FileExplorerTab', () => {
       expect(screen.getAllByText('a.txt').length).toBe(2);
     });
     // 찾기는 평소에 아이콘만 보인다.
-    expect(screen.getAllByTitle('찾기').length).toBe(2);
+    expect(screen.getAllByTitle('찾기 (Ctrl+F)').length).toBe(2);
   });
 
   it('opens the agent chat dock with the same chat screen', async () => {
@@ -218,9 +218,9 @@ describe('FileExplorerTab', () => {
     renderTab();
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     // 평소에는 찾기 아이콘만 보인다.
-    expect(screen.getByTitle('찾기')).toBeInTheDocument();
+    expect(screen.getByTitle('찾기 (Ctrl+F)')).toBeInTheDocument();
     expect(screen.queryByPlaceholderText(/찾기/)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByTitle('찾기'));
+    fireEvent.click(screen.getByTitle('찾기 (Ctrl+F)'));
     expect(await screen.findByPlaceholderText(/찾기/)).toBeInTheDocument();
     // Ctrl+F를 다시 누르면 닫힌다.
     const pane = screen.getAllByText('a.txt')[0];
@@ -245,5 +245,27 @@ describe('FileExplorerTab', () => {
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     const status = screen.getByLabelText('explorer-status');
     expect(status.textContent ?? '').not.toContain('C:/work');
+  });
+
+  it('opens an external terminal at the active path via the floating button', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    // 채팅 아이콘 위에 터미널 아이콘이 있다.
+    fireEvent.click(screen.getByRole('button', { name: '터미널 열기' }));
+    await waitFor(() => {
+      const term = calls.find((c) => c.cmd === 'fc_open_terminal');
+      expect(term).toBeDefined();
+      expect((term?.args as { path: string }).path).toBe('C:/work');
+    });
+  });
+
+  it('shows shortcut badges on toolbar while Alt is held', async () => {
+    renderTab();
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    // 평소에는 배지가 없다.
+    expect(screen.queryByText('←', { selector: 'kbd' })).not.toBeInTheDocument();
+    fireEvent.keyDown(window, { key: 'Alt', altKey: true });
+    expect(await screen.findByText('←', { selector: 'kbd' })).toBeInTheDocument();
+    fireEvent.keyUp(window, { key: 'Alt' });
   });
 });

@@ -16,6 +16,8 @@ import {
   fcRename,
   fcMkdir,
   fcOpenDefault,
+  fcOpenTerminal,
+  fcReveal,
   fcSearch,
   fcZip,
   fcUnzip,
@@ -60,6 +62,8 @@ export interface ExplorerPaneHandle {
   newFolder: () => void;
   toggleHidden: () => void;
   toggleSearch: () => void;
+  /** P13-01: 주소창을 직접 입력 상태로 전환한다 (Alt+D). */
+  focusAddress: () => void;
 }
 
 export interface ExplorerPaneProps {
@@ -126,7 +130,9 @@ export function ExplorerPane({
   const [editing, setEditing] = useState<{ path: string; value: string } | null>(null);
   const [mkdir, setMkdir] = useState(false);
   const [mkdirValue, setMkdirValue] = useState('');
-  const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number } | null>(null);
+  const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number; background: boolean } | null>(null);
+  // P13-01: Alt+D 주소 편집 신호. 값이 바뀔 때마다 AddressBar가 입력 상태로 전환한다.
+  const [addressEditSignal, setAddressEditSignal] = useState(0);
   const [lastRefresh, setLastRefresh] = useState(() => Date.now());
   const anchorRef = useRef<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -370,7 +376,7 @@ export function ExplorerPane({
   }, [emit, path, back, fwd, sortKey, sortDir, showHidden]);
 
   useEffect(() => {
-    handleRef.current = { navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch };
+    handleRef.current = { navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch, focusAddress: () => setAddressEditSignal((s) => s + 1) };
     return () => {
       handleRef.current = null;
     };
@@ -697,6 +703,8 @@ export function ExplorerPane({
       setCtxMenu({
         x: Math.min(e.clientX, window.innerWidth - 230),
         y: Math.min(e.clientY, window.innerHeight - 320),
+        // P13-01: 빈 영역 우클릭은 배경 메뉴만 띄운다 (파일 작업 항목 없음).
+        background: entry === null,
       });
     },
     [selectedSet, select],
@@ -704,7 +712,40 @@ export function ExplorerPane({
 
   const clip = getFileClipboard();
   const ctxTargets = effectivePaths();
+
+  // P13-01: 터미널을 열 위치. 폴더 1개 선택이면 그 폴더, 파일이면 부모, 그 외는 현재 경로.
+  const terminalTarget = useCallback((): string => {
+    if (ctxTargets.length === 1) {
+      const only = ctxTargets[0];
+      const en = entries.find((e) => e.path === only);
+      if (en && en.kind === 'dir') return only;
+      return parentOf(only) ?? path;
+    }
+    return path;
+  }, [ctxTargets, entries, path]);
+
+  const openTerminalAt = useCallback(
+    (target: string) => {
+      if (!target) return;
+      void fcOpenTerminal(target).catch((err) => {
+        setError(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
+      });
+    },
+    [t],
+  );
+
+  const doFavoritePath = useCallback(
+    (target: string) => {
+      if (!target || settings.favorites.includes(target)) return;
+      void updateSettings({ favorites: [...settings.favorites, target] });
+    },
+    [settings.favorites, updateSettings],
+  );
   const menuItem = 'flex w-full items-center rounded-sm px-2 py-1.5 text-xs outline-none transition-colors hover:bg-accent hover:text-accent-foreground text-left cursor-pointer disabled:pointer-events-none disabled:opacity-50';
+  // P13-01: 메뉴 항목 우측의 단축키 힌트 (Alt 배지와 별개로 항상 표시).
+  const menuKbd = (s: string) => (
+    <span className="ml-auto pl-4 text-[10px] font-mono text-muted-foreground/70">{s}</span>
+  );
 
   return (
     <div
@@ -732,7 +773,12 @@ export function ExplorerPane({
     >
       <div className="flex items-center gap-1 px-2 py-1 border-b border-border shrink-0 min-w-0">
         <div className="flex-1 min-w-0">
-          <AddressBar path={path} onNavigate={(next) => navigate(next)} />
+          <AddressBar
+            path={path}
+            onNavigate={(next) => navigate(next)}
+            editSignal={addressEditSignal}
+            onError={(message) => setError(t('explorer.opFailed', { err: message }))}
+          />
         </div>
         {searchOpen ? (
           <div className="relative w-40 shrink-0 min-w-0">
@@ -768,7 +814,7 @@ export function ExplorerPane({
           <button
             type="button"
             onClick={toggleSearch}
-            title={t('explorer.toggleSearch')}
+            title={`${t('explorer.toggleSearch')} (Ctrl+F)`}
             aria-label={t('explorer.toggleSearch')}
             className="h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/40"
           >
@@ -850,51 +896,97 @@ export function ExplorerPane({
           onClick={(e) => e.stopPropagation()}
           onContextMenu={(e) => e.preventDefault()}
         >
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (activePath) { const en = displayEntries.find((x) => x.path === activePath); if (en) openEntry(en); } }}>
-            {t('explorer.ctxOpen')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); for (const p of ctxTargets) void fcOpenDefault(p).catch(() => {}); }}>
-            {t('explorer.ctxOpenDefault')}
-          </button>
-          <div className="-mx-1 my-1 h-px bg-border" />
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (ctxTargets.length > 0) setFileClipboard('copy', ctxTargets); }}>
-            {t('explorer.ctxCopy')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (ctxTargets.length > 0) setFileClipboard('cut', ctxTargets); }}>
-            {t('explorer.ctxCut')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={!clip || !path} onClick={() => { setCtxMenu(null); doPaste(); }}>
-            {t('explorer.ctxPaste')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length !== 1 || ctxTargets[0] === parentPath} onClick={() => { setCtxMenu(null); const p = ctxTargets[0]; if (p) setEditing({ path: p, value: baseNameOf(p) }); }}>
-            {t('explorer.ctxRename')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); void doDelete(false); }}>
-            {t('explorer.ctxDelete')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); void doDelete(true); }}>
-            {t('explorer.ctxPermanentDelete')}
-          </button>
-          <div className="-mx-1 my-1 h-px bg-border" />
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); doZip(); }}>
-            {t('explorer.ctxZip')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={!ctxTargets.some((p) => p.toLowerCase().endsWith('.zip'))} onClick={() => { setCtxMenu(null); doUnzip(); }}>
-            {t('explorer.ctxUnzip')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); const text = ctxTargets.join('\n'); void navigator.clipboard?.writeText(text).catch(() => {}); }}>
-            {t('explorer.ctxCopyPath')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} onClick={() => { setCtxMenu(null); doFavorite(); }}>
-            {t('explorer.ctxFavorite')}
-          </button>
-          <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); setPropsPaths(ctxTargets); }}>
-            {t('explorer.ctxInfo')}
-          </button>
-          <div className="-mx-1 my-1 h-px bg-border" />
-          <button type="button" role="menuitem" className={menuItem} disabled title={t('explorer.ctxAskAgent')}>
-            {t('explorer.ctxAskAgent')}
-          </button>
+          {ctxMenu.background ? (
+            <>
+              <button type="button" role="menuitem" className={menuItem} onClick={() => { setCtxMenu(null); newFolder(); }}>
+                {t('explorer.newFolder')}
+                {menuKbd('F7')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={!clip || !path} onClick={() => { setCtxMenu(null); doPaste(); }}>
+                {t('explorer.ctxPaste')}
+                {menuKbd('Ctrl+V')}
+              </button>
+              <div className="-mx-1 my-1 h-px bg-border" />
+              <button type="button" role="menuitem" className={menuItem} disabled={!path} onClick={() => { setCtxMenu(null); openTerminalAt(path); }}>
+                {t('explorer.ctxOpenTerminal')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={!path} onClick={() => { setCtxMenu(null); void fcReveal(path).catch(() => {}); }}>
+                {t('explorer.ctxReveal')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} onClick={() => { setCtxMenu(null); refresh(); }}>
+                {t('explorer.refresh')}
+              </button>
+              <div className="-mx-1 my-1 h-px bg-border" />
+              <button type="button" role="menuitem" className={menuItem} disabled={!path} onClick={() => { setCtxMenu(null); const text = path; void navigator.clipboard?.writeText(text).catch(() => {}); }}>
+                {t('explorer.ctxCopyPath')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={!path} onClick={() => { setCtxMenu(null); doFavoritePath(path); }}>
+                {t('explorer.ctxFavorite')}
+              </button>
+            </>
+          ) : (
+            <>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (activePath) { const en = displayEntries.find((x) => x.path === activePath); if (en) openEntry(en); } }}>
+                {t('explorer.ctxOpen')}
+                {menuKbd('Enter')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); for (const p of ctxTargets) void fcOpenDefault(p).catch(() => {}); }}>
+                {t('explorer.ctxOpenDefault')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} onClick={() => { setCtxMenu(null); openTerminalAt(terminalTarget()); }}>
+                {t('explorer.ctxOpenTerminal')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length !== 1} onClick={() => { setCtxMenu(null); const p = ctxTargets[0]; if (p) void fcReveal(p).catch(() => {}); }}>
+                {t('explorer.ctxReveal')}
+              </button>
+              <div className="-mx-1 my-1 h-px bg-border" />
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (ctxTargets.length > 0) setFileClipboard('copy', ctxTargets); }}>
+                {t('explorer.ctxCopy')}
+                {menuKbd('Ctrl+C')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); if (ctxTargets.length > 0) setFileClipboard('cut', ctxTargets); }}>
+                {t('explorer.ctxCut')}
+                {menuKbd('Ctrl+X')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={!clip || !path} onClick={() => { setCtxMenu(null); doPaste(); }}>
+                {t('explorer.ctxPaste')}
+                {menuKbd('Ctrl+V')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length !== 1 || ctxTargets[0] === parentPath} onClick={() => { setCtxMenu(null); const p = ctxTargets[0]; if (p) setEditing({ path: p, value: baseNameOf(p) }); }}>
+                {t('explorer.ctxRename')}
+                {menuKbd('F2')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); void doDelete(false); }}>
+                {t('explorer.ctxDelete')}
+                {menuKbd('Del')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); void doDelete(true); }}>
+                {t('explorer.ctxPermanentDelete')}
+                {menuKbd('Shift+Del')}
+              </button>
+              <div className="-mx-1 my-1 h-px bg-border" />
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); doZip(); }}>
+                {t('explorer.ctxZip')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={!ctxTargets.some((p) => p.toLowerCase().endsWith('.zip'))} onClick={() => { setCtxMenu(null); doUnzip(); }}>
+                {t('explorer.ctxUnzip')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); const text = ctxTargets.join('\n'); void navigator.clipboard?.writeText(text).catch(() => {}); }}>
+                {t('explorer.ctxCopyPath')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} onClick={() => { setCtxMenu(null); doFavorite(); }}>
+                {t('explorer.ctxFavorite')}
+              </button>
+              <button type="button" role="menuitem" className={menuItem} disabled={ctxTargets.length === 0} onClick={() => { setCtxMenu(null); setPropsPaths(ctxTargets); }}>
+                {t('explorer.ctxInfo')}
+                {menuKbd('Alt+Enter')}
+              </button>
+              <div className="-mx-1 my-1 h-px bg-border" />
+              <button type="button" role="menuitem" className={menuItem} disabled title={t('explorer.ctxAskAgent')}>
+                {t('explorer.ctxAskAgent')}
+              </button>
+            </>
+          )}
         </div>
       )}
       {propsPaths && <PropertiesDialog paths={propsPaths} onClose={() => setPropsPaths(null)} />}

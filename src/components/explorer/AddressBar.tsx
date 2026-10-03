@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { Pencil } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { useSettings } from '@/lib/context/SettingsContext';
+import { useAltHeld } from '@/hooks/useAltHeld';
+import { fcOpenTerminal, fcReveal } from '@/lib/commander/ipc';
 import { cn } from '@/lib/utils';
 
 export interface AddressBarProps {
   path: string;
   onNavigate: (path: string) => void;
+  /** P13-01: 값이 바뀌면 직접 입력 상태로 전환한다 (Alt+D). */
+  editSignal?: number;
+  onError?: (message: string) => void;
 }
 
 /** Windows canonicalize가 반환하는 `\\?\` verbatim 접두를 UI용 일반 경로로 되돌린다. */
@@ -53,10 +59,16 @@ function buildTargets(path: string, segments: string[]): string[] {
   return targets;
 }
 
-export function AddressBar({ path, onNavigate }: AddressBarProps) {
+const menuItem =
+  'flex w-full items-center rounded-sm px-2 py-1.5 text-xs outline-none transition-colors hover:bg-accent hover:text-accent-foreground text-left cursor-pointer disabled:pointer-events-none disabled:opacity-50';
+
+export function AddressBar({ path, onNavigate, editSignal, onError }: AddressBarProps) {
   const { t } = useLanguage();
+  const { settings, updateSettings } = useSettings();
+  const altHeld = useAltHeld();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(path);
+  const [segMenu, setSegMenu] = useState<{ x: number; y: number; target: string } | null>(null);
   const segments = splitPath(path);
   const targets = buildTargets(path, segments);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -68,6 +80,42 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
       el.scrollLeft = el.scrollWidth;
     }
   }, [path]);
+
+  // P13-01: Alt+D 신호가 오면 직접 입력 상태로 전환한다.
+  const firstSignal = useRef(true);
+  useEffect(() => {
+    if (firstSignal.current) {
+      firstSignal.current = false;
+      return;
+    }
+    setDraft(path);
+    setEditing(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editSignal]);
+
+  // 메뉴가 열려 있을 때 바깥 클릭·Escape로 닫는다.
+  useEffect(() => {
+    if (!segMenu) return;
+    const close = () => setSegMenu(null);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSegMenu(null);
+    };
+    window.addEventListener('click', close);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('click', close);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [segMenu]);
+
+  const fail = (err: unknown) => {
+    onError?.(err instanceof Error ? err.message : String(err));
+  };
+
+  const addFavorite = (target: string) => {
+    if (!target || settings.favorites.includes(target)) return;
+    void updateSettings({ favorites: [...settings.favorites, target] }).catch(fail);
+  };
 
   const commit = () => {
     const next = draft.trim();
@@ -113,9 +161,19 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
               {idx > 0 && <span className="text-muted-foreground/50 px-0.5">/</span>}
               <button
                 type="button"
+                title={target}
                 onClick={() => {
                   // 현재 탭에서 이동한다. 새 탭을 열지 않는다.
                   if (!last) onNavigate(target);
+                }}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setSegMenu({
+                    x: Math.min(e.clientX, window.innerWidth - 230),
+                    y: Math.min(e.clientY, window.innerHeight - 260),
+                    target,
+                  });
                 }}
                 className={cn(
                   'px-1 py-0.5 rounded truncate max-w-48',
@@ -130,17 +188,98 @@ export function AddressBar({ path, onNavigate }: AddressBarProps) {
           );
         })
       )}
-      <button
-        type="button"
-        aria-label={t('explorer.addressPlaceholder')}
-        onClick={() => {
-          setDraft(path);
-          setEditing(true);
-        }}
-        className="ml-1 p-1 rounded text-muted-foreground hover:text-foreground hover:bg-accent/40 shrink-0"
-      >
-        <Pencil className="h-3 w-3" />
-      </button>
+      <span className="relative ml-1 shrink-0">
+        <button
+          type="button"
+          aria-label={t('explorer.addressPlaceholder')}
+          title={`${t('explorer.addressEdit')} (Alt+D)`}
+          onClick={() => {
+            setDraft(path);
+            setEditing(true);
+          }}
+          className="p-1 rounded text-muted-foreground hover:text-foreground hover:bg-accent/40"
+        >
+          <Pencil className="h-3 w-3" />
+        </button>
+        {altHeld && (
+          <kbd className="absolute -top-2 -right-2 rounded border border-primary/50 bg-primary/10 px-1 text-[9px] font-mono text-primary pointer-events-none">
+            D
+          </kbd>
+        )}
+      </span>
+      {segMenu && (
+        <div
+          role="menu"
+          className="fixed z-50 w-56 rounded-md border border-border bg-popover/95 p-1 text-popover-foreground shadow-md backdrop-blur-sm text-xs select-none"
+          style={{ left: segMenu.x, top: segMenu.y }}
+          onClick={(e) => e.stopPropagation()}
+          onContextMenu={(e) => e.preventDefault()}
+        >
+          <div className="px-2 py-1.5 truncate text-muted-foreground font-mono text-[11px]" title={segMenu.target}>
+            {segMenu.target}
+          </div>
+          <div className="-mx-1 my-1 h-px bg-border" />
+          <button
+            type="button"
+            role="menuitem"
+            className={menuItem}
+            onClick={() => {
+              setSegMenu(null);
+              onNavigate(segMenu.target);
+            }}
+          >
+            {t('explorer.ctxOpen')}
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={menuItem}
+            onClick={() => {
+              const target = segMenu.target;
+              setSegMenu(null);
+              void fcOpenTerminal(target).catch(fail);
+            }}
+          >
+            {t('explorer.ctxOpenTerminal')}
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={menuItem}
+            onClick={() => {
+              const target = segMenu.target;
+              setSegMenu(null);
+              void fcReveal(target).catch(fail);
+            }}
+          >
+            {t('explorer.ctxReveal')}
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={menuItem}
+            onClick={() => {
+              const target = segMenu.target;
+              setSegMenu(null);
+              void navigator.clipboard?.writeText(target).catch(() => {});
+            }}
+          >
+            {t('explorer.ctxCopyPath')}
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className={menuItem}
+            onClick={() => {
+              const target = segMenu.target;
+              setSegMenu(null);
+              addFavorite(target);
+            }}
+          >
+            {t('explorer.ctxFavorite')}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
