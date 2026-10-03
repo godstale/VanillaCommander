@@ -65,6 +65,8 @@ export interface ExplorerPaneHandle {
   toggleSearch: () => void;
   /** P13-01: 주소창을 직접 입력 상태로 전환한다 (Alt+D). */
   focusAddress: () => void;
+  /** P13-05: 창 컨테이너에 DOM 포커스를 준다 (분할 후·Tab 창 전환용). */
+  focus: () => void;
 }
 
 export interface ExplorerPaneProps {
@@ -137,6 +139,7 @@ export function ExplorerPane({
   const [lastRefresh, setLastRefresh] = useState(() => Date.now());
   const anchorRef = useRef<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   // P13-03: Alt를 누른 동안 찾기 버튼에 단축키 배지를 표시한다 (배지는 버튼 안쪽 우하단).
   const altHeld = useAltHeld();
 
@@ -379,7 +382,18 @@ export function ExplorerPane({
   }, [emit, path, back, fwd, sortKey, sortDir, showHidden]);
 
   useEffect(() => {
-    handleRef.current = { navigate, goBack, goForward, goUp, refresh, newFolder, toggleHidden, toggleSearch, focusAddress: () => setAddressEditSignal((s) => s + 1) };
+    handleRef.current = {
+      navigate,
+      goBack,
+      goForward,
+      goUp,
+      refresh,
+      newFolder,
+      toggleHidden,
+      toggleSearch,
+      focusAddress: () => setAddressEditSignal((s) => s + 1),
+      focus: () => containerRef.current?.focus({ preventScroll: true }),
+    };
     return () => {
       handleRef.current = null;
     };
@@ -639,10 +653,6 @@ export function ExplorerPane({
             setEditing({ path: activePath, value: baseNameOf(activePath) });
           }
           break;
-        case 'F5':
-          e.preventDefault();
-          doCopyMove(false);
-          break;
         case 'F6':
           e.preventDefault();
           doCopyMove(true);
@@ -764,6 +774,7 @@ export function ExplorerPane({
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         'flex flex-col h-full w-full min-h-0 bg-editor min-w-0',
         active && 'ring-1 ring-inset ring-primary/40',

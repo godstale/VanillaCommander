@@ -243,7 +243,7 @@ describe('FileExplorerTab', () => {
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
   });
 
-  it('refreshes with Alt+R and shows new shortcut titles', async () => {
+  it('refreshes with F5 and shows new shortcut titles', async () => {
     // 활성 탭으로 등록해야 탐색기 전역 단축키(window 리스너)가 동작한다.
     function Opener({ children }: { children: React.ReactNode }) {
       const { openTab } = useWorkspaceTabs();
@@ -273,14 +273,68 @@ describe('FileExplorerTab', () => {
     );
     expect(await screen.findByText('a.txt')).toBeInTheDocument();
     const before = calls.filter((c) => c.cmd === 'fc_list_dir').length;
-    fireEvent.keyDown(window, { key: 'r', altKey: true });
+    fireEvent.keyDown(window, { key: 'F5' });
     await waitFor(() => {
       expect(calls.filter((c) => c.cmd === 'fc_list_dir').length).toBeGreaterThan(before);
     });
     // 새로고침·숨김·트리 버튼 타이틀에 단축키가 표시된다.
-    expect(screen.getByTitle('새로고침 (Alt+R)')).toBeInTheDocument();
+    expect(screen.getByTitle('새로고침 (F5)')).toBeInTheDocument();
     expect(screen.getByTitle('숨김 파일 표시 (Alt+H)')).toBeInTheDocument();
     expect(screen.getByTitle('폴더 트리 표시 (Alt+B)')).toBeInTheDocument();
+  });
+
+  it('switches split panes with Tab and focuses the chat input when the dock opens', async () => {
+    function Opener({ children }: { children: React.ReactNode }) {
+      const { openTab } = useWorkspaceTabs();
+      useEffect(() => {
+        openTab({ id: TAB.id, type: TAB.type, title: TAB.title, meta: TAB.meta });
+      }, [openTab]);
+      return <>{children}</>;
+    }
+    render(
+      <MemoryRouter>
+        <SettingsProvider>
+          <WorkspaceProvider>
+            <AgentsProvider>
+              <ChatSessionsProvider>
+                <MacrosProvider>
+                  <JobsProvider>
+                    <WorkspaceTabsProvider>
+                      <StatusBarProvider>
+                        <Opener>
+                          <FileExplorerTab tab={TAB} />
+                        </Opener>
+                      </StatusBarProvider>
+                    </WorkspaceTabsProvider>
+                  </JobsProvider>
+                </MacrosProvider>
+              </ChatSessionsProvider>
+            </AgentsProvider>
+          </WorkspaceProvider>
+        </SettingsProvider>
+      </MemoryRouter>,
+    );
+    expect(await screen.findByText('a.txt')).toBeInTheDocument();
+    fireEvent.click(screen.getByTitle('2분할 세로 (좌·우) (Alt+3)'));
+    await waitFor(() => {
+      expect(screen.getAllByText('a.txt').length).toBe(2);
+    });
+    // 분할 후 활성 창 컨테이너로 포커스가 옮겨진다 (주소 입력창이 아님).
+    await waitFor(() => {
+      expect((document.activeElement as HTMLElement | null)?.className ?? '').toMatch(/ring-primary/);
+    });
+    expect((document.activeElement as HTMLElement | null)?.tagName).not.toBe('INPUT');
+    const first = document.activeElement;
+    // Tab으로 분할 창을 전환하면 포커스도 함께 옮겨진다.
+    fireEvent.keyDown(window, { key: 'Tab' });
+    await waitFor(() => {
+      expect(document.activeElement).not.toBe(first);
+    });
+    expect((document.activeElement as HTMLElement | null)?.className ?? '').toMatch(/ring-primary/);
+    // 채팅 도크를 열면 채팅 입력창에 포커스가 간다.
+    fireEvent.click(screen.getByRole('button', { name: /에이전트 채팅/ }));
+    expect(await screen.findByText(/위치:/)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/메시지를 입력/)).toHaveFocus();
   });
 
   it('does not show folder path in tab status bar', async () => {

@@ -119,8 +119,8 @@ export function ExplorerToolbar(props: ExplorerToolbarProps) {
           <ArrowUp className="h-4 w-4" />
         </Button>
       ))}
-      {wrapBtn('refresh', 'R', (
-        <Button variant="ghost" size="icon" className={iconBtn} onClick={onRefresh} title={`${t('explorer.refresh')} (Alt+R)`}>
+      {wrapBtn('refresh', 'F5', (
+        <Button variant="ghost" size="icon" className={iconBtn} onClick={onRefresh} title={`${t('explorer.refresh')} (F5)`}>
           <RefreshCw className="h-4 w-4" />
         </Button>
       ))}

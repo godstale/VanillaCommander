@@ -126,6 +126,8 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   const [systemFolders, setSystemFolders] = useState<FcSystemFolder[]>([]);
   const [statsByPane, setStatsByPane] = useState<Record<number, PaneStats>>({});
   const paneRefs = useRef<(ExplorerPaneHandle | null)[]>([]);
+  // P13-05: 분할 변경 직후 1회에 한해 활성 창 컨테이너로 포커스를 옮긴다.
+  const justSplitRef = useRef(false);
 
   const visibleCount = split === 'single' ? 1 : 2;
   const visiblePanes = useMemo(() => {
@@ -240,6 +242,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
 
   const handleSplitChange = useCallback(
     (next: ExplorerSplit) => {
+      justSplitRef.current = true;
       setSplit(next);
       setActivePane((prev) => Math.min(prev, next === 'single' ? 0 : 1));
       persist({ panes, activePane: Math.min(activePane, next === 'single' ? 0 : 1), split: next, treeOpen, chatOpen });
@@ -261,15 +264,32 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
 
   // P13-03: 탐색기 단축키 (활성 탭에서만, 입력 요소에 포커스가 있을 때는 가로채지 않는다).
   // P13-04: 앱 전용 단축키는 Alt 조합으로 통일한다 (브라우저 공통 키와 충돌 방지).
+  // P13-05: 새로고침은 F5, 분할 창 전환은 Tab (분할 상태에서만 가로챈다).
   // - Alt+D: 활성 창의 주소창 직접 입력 / Alt+C: 에이전트 채팅 도크 토글
-  // - Alt+R: 새로고침 / Alt+H: 숨김 표시 / Alt+B: 폴더 트리 / Alt+1·2·3: 1·가로2·세로2 분할
+  // - Alt+H: 숨김 표시 / Alt+B: 폴더 트리 / Alt+1·2·3: 1·가로2·세로2 분할
   // Alt를 누른 채로 조합 키를 누르면 그대로 실행된다 (배지=가이드, Alt 홀드 상태).
   useEffect(() => {
     if (!isActive) return;
     const onKey = (e: KeyboardEvent) => {
-      if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      // F5: 새로고침 (Tauri 웹뷰 기본 새로고침 대신 활성 창 목록을 다시 읽는다).
+      if (e.key === 'F5' && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        paneRefs.current[activePane]?.refresh();
+        return;
+      }
+      // Tab: 분할 창 전환 (단일 창에서는 기본 포커스 이동을 유지한다).
+      if (e.key === 'Tab' && !e.altKey && !e.ctrlKey && !e.metaKey && visibleCount > 1) {
+        e.preventDefault();
+        const next = e.shiftKey
+          ? (activePane + visibleCount - 1) % visibleCount
+          : (activePane + 1) % visibleCount;
+        setActivePane(next);
+        paneRefs.current[next]?.focus();
+        return;
+      }
+      if (!e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
       const k = e.key.toLowerCase();
       if (k === 'd') {
         e.preventDefault();
@@ -281,10 +301,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
         toggleChat();
         return;
       }
-      if (k === 'r') {
-        e.preventDefault();
-        paneRefs.current[activePane]?.refresh();
-      } else if (k === 'h') {
+      if (k === 'h') {
         e.preventDefault();
         paneRefs.current[activePane]?.toggleHidden();
       } else if (k === 'b') {
@@ -303,7 +320,19 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [isActive, activePane, toggleChat, toggleTree, handleSplitChange]);
+  }, [isActive, activePane, visibleCount, toggleChat, toggleTree, handleSplitChange]);
+
+  // P13-05: 분할이 바뀌면 활성 창 컨테이너로 포커스를 옮긴다.
+  // 새로 생긴 창의 주소 입력창 등에 포커스가 가 있어 단축키가 먹지 않게 되는 것을 방지한다.
+  // 입력 중(검색·이름바꾸기 등)에는 포커스를 뺏지 않는다.
+  useEffect(() => {
+    if (!justSplitRef.current) return;
+    justSplitRef.current = false;
+    if (!isActive) return;
+    const tag = (document.activeElement as HTMLElement | null)?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    paneRefs.current[activePane]?.focus();
+  }, [split, isActive, activePane]);
 
   const handleAddFavorite = useCallback(() => {
     if (!activePath) return;

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -28,6 +29,7 @@ export function ExplorerChatDock({
   onOpenInChatTab,
 }: ExplorerChatDockProps) {
   const { t } = useLanguage();
+  const dockRef = useRef<HTMLDivElement>(null);
   const chatTab: WorkspaceTab = {
     id: `chat:${sessionId}`,
     type: 'chat',
@@ -35,8 +37,14 @@ export function ExplorerChatDock({
     meta: { sessionId },
   };
 
+  // P13-05: 도크가 열리면 채팅 입력창에 자동으로 포커스를 준다 (커서 표시).
+  useEffect(() => {
+    dockRef.current?.querySelector('textarea')?.focus({ preventScroll: true });
+  }, []);
+
   return (
     <div
+      ref={dockRef}
       className={cn(
         'flex flex-col min-h-0 min-w-0 bg-editor overflow-hidden',
         orientation === 'row' ? 'flex-1 border-l border-border' : 'flex-1 border-t border-border',
