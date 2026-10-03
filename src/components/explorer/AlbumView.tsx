@@ -24,6 +24,50 @@ const thumbCache = new Map<string, string>();
 /** 경로 → 진행 중 생성 작업 (같은 파일을 여러 타일이 동시에 요청해도 1회만 수행). */
 const thumbFlight = new Map<string, Promise<string>>();
 
+/** 동시에 처리하는 썸네일 작업 수. 수십 장을 한꺼번에 내려받고 디코드하면
+    asset 프로토콜·디코더가 밀려 빈 칸·부분 렌더로 보인다. */
+const MAX_THUMB_JOBS = 4;
+/** 썸네일 단일 작업 타임아웃(ms). 멈춘 요청이 풀 슬롯을 영원히 물지 않도록 폴백으로 넘긴다. */
+const THUMB_TIMEOUT_MS = 30_000;
+
+let thumbActiveJobs = 0;
+const thumbQueue: Array<() => void> = [];
+
+function pumpThumbQueue(): void {
+  while (thumbActiveJobs < MAX_THUMB_JOBS && thumbQueue.length > 0) {
+    const run = thumbQueue.shift();
+    if (!run) break;
+    thumbActiveJobs += 1;
+    run();
+  }
+}
+
+function runThumbJob<T>(work: () => Promise<T>): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    thumbQueue.push(() => {
+      work().then(
+        (value) => {
+          thumbActiveJobs -= 1;
+          pumpThumbQueue();
+          resolve(value);
+        },
+        (err: unknown) => {
+          thumbActiveJobs -= 1;
+          pumpThumbQueue();
+          reject(err instanceof Error ? err : new Error(String(err)));
+        },
+      );
+    });
+    pumpThumbQueue();
+  });
+}
+
+function fetchWithTimeout(url: string): Promise<Response> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), THUMB_TIMEOUT_MS);
+  return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(timer));
+}
+
 function canvasToJpeg(canvas: HTMLCanvasElement): Promise<Blob> {
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
@@ -41,9 +85,9 @@ async function makeThumb(assetUrl: string): Promise<string> {
   if (cached) return cached;
   const flight = thumbFlight.get(assetUrl);
   if (flight) return flight;
-  const job = (async () => {
+  const job = runThumbJob(async () => {
     try {
-      const res = await fetch(assetUrl);
+      const res = await fetchWithTimeout(assetUrl);
       if (!res.ok) throw new Error(`thumb fetch ${res.status}`);
       const blob = await res.blob();
       const bmp = await createImageBitmap(blob, {
@@ -68,7 +112,7 @@ async function makeThumb(assetUrl: string): Promise<string> {
     } finally {
       thumbFlight.delete(assetUrl);
     }
-  })();
+  });
   thumbFlight.set(assetUrl, job);
   return job;
 }
@@ -219,7 +263,7 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
                 <AlbumThumb entry={entry} />
               )}
             </div>
-            <span className="truncate px-2 py-3 text-[11px] leading-5 text-foreground/90" title={entry.name}>
+            <span className="truncate px-2 py-1.5 text-[11px] leading-5 text-foreground/90" title={entry.name}>
               {entry.name}
             </span>
           </div>

@@ -95,4 +95,20 @@ describe('AlbumView thumbnails', () => {
       expect(thumb.src).toContain('asset://');
     });
   });
+
+  it('shows placeholder and filename without requesting an image far from the viewport', () => {
+    // 교차하지 않는 옵저버: 썸네일을 요청하지 않아도 파일명·플레이스홀더 UI는 온전해야 한다.
+    vi.stubGlobal(
+      'IntersectionObserver',
+      class {
+        observe(): void {}
+        unobserve(): void {}
+        disconnect(): void {}
+      },
+    );
+
+    renderAlbum(['pending.png']);
+    expect(screen.queryByAltText('pending.png')).not.toBeInTheDocument();
+    expect(screen.getByText('pending.png')).toBeInTheDocument();
+  });
 });
