@@ -35,6 +35,8 @@ export const MIGRATION_STATEMENTS: string[] = [
     llm_provider TEXT NOT NULL DEFAULT 'ollama',
     llm_base_url TEXT,
     llm_api_key TEXT,
+    external_agent_id TEXT,
+    vision TEXT NOT NULL DEFAULT 'auto',
     auto_monitor INTEGER NOT NULL DEFAULT 1,
     is_default INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL,
@@ -44,6 +46,7 @@ export const MIGRATION_STATEMENTS: string[] = [
     id TEXT PRIMARY KEY,
     agent_id TEXT NOT NULL,
     workspace_root TEXT,
+    origin TEXT NOT NULL DEFAULT 'chat',
     title TEXT NOT NULL,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
@@ -72,7 +75,13 @@ export const MIGRATION_STATEMENTS: string[] = [
     default_approval_mode TEXT NOT NULL DEFAULT 'dangerous-only',
     trusted_workspaces TEXT NOT NULL DEFAULT '[]',
     last_workspace_root TEXT,
-    monitoring_interval_ms INTEGER NOT NULL DEFAULT 1000
+    monitoring_interval_ms INTEGER NOT NULL DEFAULT 1000,
+    setup_completed_at TEXT,
+    work_folder TEXT,
+    favorites TEXT NOT NULL DEFAULT '[]',
+    agent_allowed_roots TEXT NOT NULL DEFAULT '[]',
+    wiki_settings TEXT NOT NULL DEFAULT '{}',
+    parser_settings TEXT NOT NULL DEFAULT '{}'
   )`,
   `CREATE TABLE IF NOT EXISTS execution_logs (
     id TEXT PRIMARY KEY,
@@ -268,6 +277,44 @@ export const MIGRATION_STATEMENTS: string[] = [
     created_at TEXT NOT NULL
   )`,
   `CREATE INDEX IF NOT EXISTS idx_integration_audit_created ON integration_audit_log(created_at)`,
+  // P11-31: 위키 처리 이력. 패널/탭 표시 + P11-32 파이프라인 큐.
+  `CREATE TABLE IF NOT EXISTS wiki_jobs (
+    id TEXT PRIMARY KEY,
+    source_path TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'queued',
+    reason TEXT,
+    title TEXT,
+    slug TEXT,
+    folder TEXT,
+    agent_id TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_wiki_jobs_status ON wiki_jobs(status)`,
+  `CREATE INDEX IF NOT EXISTS idx_wiki_jobs_created ON wiki_jobs(created_at)`,
+  // P11-40: 매크로 저장소.
+  `CREATE TABLE IF NOT EXISTS macros (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    prompts_json TEXT NOT NULL DEFAULT '[]',
+    agent_id TEXT,
+    run_root TEXT NOT NULL DEFAULT '',
+    schedule_json TEXT NOT NULL DEFAULT '{"kind":"none"}',
+    last_result TEXT,
+    last_run_at TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS idx_macros_updated ON macros(updated_at)`,
+  // P11-03: 평가 테이블 폐기. 외부 연동 3종(external_integrations/integration_settings/
+  // integration_audit_log)은 유지한다. 기존 CREATE는 이력으로 남기고 DROP을 뒤에 둔다.
+  `DROP TABLE IF EXISTS eval_scores`,
+  `DROP TABLE IF EXISTS eval_trials`,
+  `DROP TABLE IF EXISTS eval_candidates`,
+  `DROP TABLE IF EXISTS arena_votes`,
+  `DROP TABLE IF EXISTS eval_aggregates`,
+  `DROP TABLE IF EXISTS eval_profiles`,
+  `DROP TABLE IF EXISTS eval_runs`,
 ];
 
 export class MemorySqlFallback implements SqlDatabase {
@@ -281,6 +328,8 @@ export class MemorySqlFallback implements SqlDatabase {
     this.tables.set('execution_logs', new Map());
     this.tables.set('agent_monitoring_snapshots', new Map());
     this.tables.set('conversation_token_summaries', new Map());
+    this.tables.set('wiki_jobs', new Map());
+    this.tables.set('macros', new Map());
     this.tables.set('eval_runs', new Map());
     this.tables.set('eval_candidates', new Map());
     this.tables.set('eval_trials', new Map());
@@ -337,9 +386,12 @@ export class MemorySqlFallback implements SqlDatabase {
         reasoning_effort,
         ...rest
       ] = bindValues;
-      // 신규 스키마(29개 바인드): [..., top_p, top_k, repeat_penalty, frequency_penalty,
+      // 신규 스키마(31개 바인드): [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, auto_monitor, is_default, created_at, updated_at]
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id, vision,
+      //   auto_monitor, is_default, created_at, updated_at]
+      // 이전 스키마(30개 바인드): vision 없음 → auto로 해석
+      // 이전 스키마(29개 바인드): external_agent_id 없음
       // 이전 스키마(28개 바인드): auto_monitor 없음 → 켜짐(1)으로 해석
       // 과도기 스키마(20개 바인드): [..., llm_provider, llm_base_url, llm_api_key, is_default, created_at, updated_at]
       // 구 스키마(17개 바인드): [..., is_default, created_at, updated_at]
@@ -354,11 +406,52 @@ export class MemorySqlFallback implements SqlDatabase {
       let llm_provider: unknown = 'ollama';
       let llm_base_url: unknown = null;
       let llm_api_key: unknown = null;
+      let external_agent_id: unknown = null;
+      let vision: unknown = 'auto';
       let auto_monitor: unknown = 1;
       let is_default: unknown;
       let created_at: unknown;
       let updated_at: unknown;
-      if (rest.length >= 15) {
+      if (rest.length >= 17) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          vision,
+          auto_monitor,
+          is_default,
+          created_at,
+          updated_at,
+        ] = rest;
+      } else if (rest.length >= 16) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          auto_monitor,
+          is_default,
+          created_at,
+          updated_at,
+        ] = rest;
+      } else if (rest.length >= 15) {
         [
           top_p,
           top_k,
@@ -424,6 +517,8 @@ export class MemorySqlFallback implements SqlDatabase {
         llm_provider,
         llm_base_url,
         llm_api_key,
+        external_agent_id,
+        vision,
         auto_monitor,
         is_default,
         created_at,
@@ -473,8 +568,9 @@ export class MemorySqlFallback implements SqlDatabase {
       ] = bindValues;
       // 신규 스키마: [..., top_p, top_k, repeat_penalty, frequency_penalty,
       //   presence_penalty, seed, stop_sequences, max_output_tokens,
-      //   llm_provider, llm_base_url, llm_api_key, auto_monitor, is_default, updated_at, id]
-      // 이전 스키마: auto_monitor 없음
+      //   llm_provider, llm_base_url, llm_api_key, external_agent_id, vision,
+      //   auto_monitor, is_default, updated_at, id]
+      // 이전 스키마: vision 없음
       // 과도기 스키마: [..., llm_provider, llm_base_url, llm_api_key, is_default, updated_at, id]
       // 구 스키마: [..., is_default, updated_at, id]
       let top_p: unknown;
@@ -488,11 +584,52 @@ export class MemorySqlFallback implements SqlDatabase {
       let llm_provider: unknown;
       let llm_base_url: unknown;
       let llm_api_key: unknown;
+      let external_agent_id: unknown;
+      let vision: unknown;
       let auto_monitor: unknown;
       let is_default: unknown;
       let updated_at: unknown;
       let id: unknown;
-      if (rest.length >= 15) {
+      if (rest.length >= 17) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          vision,
+          auto_monitor,
+          is_default,
+          updated_at,
+          id,
+        ] = rest;
+      } else if (rest.length >= 16) {
+        [
+          top_p,
+          top_k,
+          repeat_penalty,
+          frequency_penalty,
+          presence_penalty,
+          seed,
+          stop_sequences,
+          max_output_tokens,
+          llm_provider,
+          llm_base_url,
+          llm_api_key,
+          external_agent_id,
+          auto_monitor,
+          is_default,
+          updated_at,
+          id,
+        ] = rest;
+      } else if (rest.length >= 15) {
         [
           top_p,
           top_k,
@@ -559,6 +696,8 @@ export class MemorySqlFallback implements SqlDatabase {
           ...(llm_provider !== undefined ? { llm_provider } : {}),
           ...(llm_base_url !== undefined ? { llm_base_url } : {}),
           ...(llm_api_key !== undefined ? { llm_api_key } : {}),
+          ...(external_agent_id !== undefined ? { external_agent_id } : {}),
+          ...(vision !== undefined ? { vision } : {}),
           ...(auto_monitor !== undefined ? { auto_monitor } : {}),
           is_default,
           updated_at,
@@ -574,12 +713,17 @@ export class MemorySqlFallback implements SqlDatabase {
     }
 
     if (q.startsWith('INSERT INTO sessions')) {
-      const [id, agent_id, workspace_root, title, created_at, updated_at] =
-        bindValues;
+      const [id, agent_id, workspace_root, ...rest] = bindValues;
+      // 신규 7컬럼(origin 포함) 또는 구 6컬럼.
+      const [origin, title, created_at, updated_at] =
+        rest.length === 4
+          ? (rest as [unknown, unknown, unknown, unknown])
+          : [ 'chat', ...(rest as [unknown, unknown, unknown]) ];
       this.tables.get('sessions')?.set(id as string, {
         id,
         agent_id,
         workspace_root,
+        origin,
         title,
         created_at,
         updated_at,
@@ -679,6 +823,12 @@ export class MemorySqlFallback implements SqlDatabase {
         trusted_workspaces,
         last_workspace_root,
         monitoring_interval_ms,
+        setup_completed_at,
+        work_folder,
+        favorites,
+        agent_allowed_roots,
+        wiki_settings,
+        parser_settings,
       ] = bindValues;
       this.tables.get('app_settings')?.set(id as string, {
         id,
@@ -695,11 +845,22 @@ export class MemorySqlFallback implements SqlDatabase {
         trusted_workspaces,
         last_workspace_root,
         monitoring_interval_ms: (monitoring_interval_ms as number) ?? 1000,
+        setup_completed_at: (setup_completed_at as string | null) ?? null,
+        work_folder: (work_folder as string | null) ?? null,
+        favorites: (favorites as string | null) ?? '[]',
+        agent_allowed_roots: (agent_allowed_roots as string | null) ?? '[]',
+        wiki_settings: (wiki_settings as string | null) ?? '{}',
+        parser_settings: (parser_settings as string | null) ?? '{}',
       });
       return { rowsAffected: 1 };
     }
 
-    if (q.startsWith('UPDATE app_settings SET open_tabs = ?, active_tab_id = ?')) {
+    // P11-04: 바인드 2개일 때만 탭 전용 갱신이다. 전체 갱신(13/19개)도 같은
+    // prefix로 시작하므로 길이 검사가 없으면 전체 값이 유실된다.
+    if (
+      q.startsWith('UPDATE app_settings SET open_tabs = ?, active_tab_id = ?') &&
+      bindValues.length === 2
+    ) {
       const [open_tabs, active_tab_id] = bindValues;
       const settings = this.tables.get('app_settings')?.get('singleton');
       if (settings) {
@@ -755,6 +916,12 @@ export class MemorySqlFallback implements SqlDatabase {
           trusted_workspaces,
           last_workspace_root,
           monitoring_interval_ms,
+          setup_completed_at,
+          work_folder,
+          favorites,
+          agent_allowed_roots,
+          wiki_settings,
+          parser_settings,
         ] = bindValues;
         Object.assign(settings, {
           open_tabs,
@@ -772,6 +939,12 @@ export class MemorySqlFallback implements SqlDatabase {
           ...(monitoring_interval_ms !== undefined
             ? { monitoring_interval_ms }
             : {}),
+          ...(setup_completed_at !== undefined ? { setup_completed_at } : {}),
+          ...(work_folder !== undefined ? { work_folder } : {}),
+          ...(favorites !== undefined ? { favorites } : {}),
+          ...(agent_allowed_roots !== undefined ? { agent_allowed_roots } : {}),
+          ...(wiki_settings !== undefined ? { wiki_settings } : {}),
+          ...(parser_settings !== undefined ? { parser_settings } : {}),
         });
       }
       return { rowsAffected: 1 };
@@ -955,6 +1128,93 @@ export class MemorySqlFallback implements SqlDatabase {
         created_at,
       });
       return { rowsAffected: 1 };
+    }
+
+    // P11-31: 위키 처리 이력.
+    if (q.startsWith('INSERT INTO wiki_jobs')) {
+      const [
+        id,
+        source_path,
+        status,
+        reason,
+        title,
+        slug,
+        folder,
+        agent_id,
+        created_at,
+        updated_at,
+      ] = bindValues;
+      this.tables.get('wiki_jobs')?.set(id as string, {
+        id,
+        source_path,
+        status,
+        reason,
+        title,
+        slug,
+        folder,
+        agent_id,
+        created_at,
+        updated_at,
+      });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('UPDATE wiki_jobs SET')) {
+      const [status, reason, title, slug, folder, agent_id, updated_at, id] = bindValues;
+      const row = this.tables.get('wiki_jobs')?.get(id as string);
+      if (!row) return { rowsAffected: 0 };
+      Object.assign(row, { status, reason, title, slug, folder, agent_id, updated_at });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('DELETE FROM wiki_jobs WHERE id = ?')) {
+      const [id] = bindValues;
+      const removed = this.tables.get('wiki_jobs')?.delete(id as string) ?? false;
+      return { rowsAffected: removed ? 1 : 0 };
+    }
+
+    // P11-40: 매크로 저장소.
+    if (q.startsWith('INSERT INTO macros')) {
+      const [
+        id,
+        name,
+        prompts_json,
+        agent_id,
+        run_root,
+        schedule_json,
+        last_result,
+        last_run_at,
+        created_at,
+        updated_at,
+      ] = bindValues;
+      this.tables.get('macros')?.set(id as string, {
+        id,
+        name,
+        prompts_json,
+        agent_id,
+        run_root,
+        schedule_json,
+        last_result,
+        last_run_at,
+        created_at,
+        updated_at,
+      });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('UPDATE macros SET')) {
+      const [name, prompts_json, agent_id, run_root, schedule_json, last_result, last_run_at, updated_at, id] =
+        bindValues;
+      const row = this.tables.get('macros')?.get(id as string);
+      if (!row) return { rowsAffected: 0 };
+      Object.assign(row, { name, prompts_json, agent_id, run_root, schedule_json, last_result, last_run_at, updated_at });
+      return { rowsAffected: 1 };
+    }
+
+    if (q.startsWith('DELETE FROM macros WHERE id = ?')) {
+      const [id] = bindValues;
+      const removed = this.tables.get('macros')?.delete(id as string) ?? false;
+      return { rowsAffected: removed ? 1 : 0 };
     }
 
     if (q.startsWith('DELETE FROM agent_monitoring_snapshots WHERE agent_id = ? AND timestamp < ?')) {
@@ -1542,6 +1802,42 @@ export class MemorySqlFallback implements SqlDatabase {
       return rows as unknown as T;
     }
 
+    // P11-31: 위키 처리 이력.
+    if (q.includes('FROM wiki_jobs WHERE id = ?')) {
+      const [id] = bindValues;
+      const row = this.tables.get('wiki_jobs')?.get(id as string);
+      return (row ? [row] : []) as unknown as T;
+    }
+
+    if (q.includes('FROM wiki_jobs WHERE status = ?')) {
+      const [status] = bindValues;
+      const rows = Array.from(this.tables.get('wiki_jobs')?.values() ?? [])
+        .filter((r) => r.status === status)
+        .sort((a, b) => (a.created_at as string).localeCompare(b.created_at as string));
+      return rows as unknown as T;
+    }
+
+    if (q.includes('FROM wiki_jobs')) {
+      const rows = Array.from(this.tables.get('wiki_jobs')?.values() ?? [])
+        .sort((a, b) => (b.created_at as string).localeCompare(a.created_at as string));
+      const [limit] = bindValues;
+      const capped = typeof limit === 'number' ? rows.slice(0, limit) : rows;
+      return capped as unknown as T;
+    }
+
+    // P11-40: 매크로 저장소.
+    if (q.includes('FROM macros WHERE id = ?')) {
+      const [id] = bindValues;
+      const row = this.tables.get('macros')?.get(id as string);
+      return (row ? [row] : []) as unknown as T;
+    }
+
+    if (q.includes('FROM macros')) {
+      const rows = Array.from(this.tables.get('macros')?.values() ?? [])
+        .sort((a, b) => (b.updated_at as string).localeCompare(a.updated_at as string));
+      return rows as unknown as T;
+    }
+
     // -- Phase 10 evaluation tables (global DB) --
     if (q.startsWith('SELECT * FROM eval_runs WHERE id = ?')) {
       const [id] = bindValues;
@@ -1688,6 +1984,15 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     'ALTER TABLE agents ADD COLUMN llm_base_url TEXT',
     'ALTER TABLE agents ADD COLUMN llm_api_key TEXT',
     'ALTER TABLE agents ADD COLUMN auto_monitor INTEGER NOT NULL DEFAULT 1',
+    'ALTER TABLE agents ADD COLUMN external_agent_id TEXT',
+    "ALTER TABLE agents ADD COLUMN vision TEXT NOT NULL DEFAULT 'auto'",
+    'ALTER TABLE app_settings ADD COLUMN setup_completed_at TEXT',
+    'ALTER TABLE app_settings ADD COLUMN work_folder TEXT',
+    "ALTER TABLE app_settings ADD COLUMN favorites TEXT NOT NULL DEFAULT '[]'",
+    "ALTER TABLE app_settings ADD COLUMN agent_allowed_roots TEXT NOT NULL DEFAULT '[]'",
+    "ALTER TABLE app_settings ADD COLUMN wiki_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE sessions ADD COLUMN origin TEXT NOT NULL DEFAULT 'chat'",
   ];
   for (const alter of alterColumns) {
     try {

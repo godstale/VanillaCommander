@@ -3,7 +3,6 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithProviders as render } from '@/test-utils';
 import '@testing-library/jest-dom/vitest';
 import { ChatInput } from './ChatInput';
-import { evalLock } from '@/lib/eval/evalLock';
 import { chatQueueManager } from '@/lib/agent/chatQueueManager';
 import type { SkillManifest } from '@/lib/types/skill';
 
@@ -18,6 +17,17 @@ vi.mock('@tauri-apps/api/core', () => ({
     throw new Error(`File not found: ${args.path}`);
   }),
 }));
+
+vi.mock('@/lib/commander/ipc', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/commander/ipc')>();
+  return {
+    ...actual,
+    fcListDir: vi.fn(async () => [
+      { name: 'notes.txt', path: 'C:/work/notes.txt', kind: 'file', size: 11, modified_ms: 1, hidden: false, readonly: false, symlink: false, warning: false },
+    ]),
+    fcReadTextHead: vi.fn(async () => ({ text: 'hello notes', size: 11, truncated: false })),
+  };
+});
 
 describe('ChatInput component', () => {
   const mockSkills: SkillManifest[] = [
@@ -154,8 +164,7 @@ describe('ChatInput component', () => {
     });
   });
 
-  it('shows error banner when skill is not found', async () => {
-    const onSend = vi.fn();
+  it('shows error banner when skill is not found', async () => {    const onSend = vi.fn();
     render(
       <ChatInput
         onSend={onSend}
@@ -249,40 +258,32 @@ describe('ChatInput component', () => {
     expect(selects[0]).not.toBeDisabled();
   });
 
-  it('disables input, send, and selects while evaluation lock is held (P10-03)', () => {
+  it('keeps input, send, and selects enabled without any lock', () => {
     chatQueueManager.resetAll();
-    expect(evalLock.acquire('run-1', 'Test run')).toBe(true);
-    try {
-      const onSend = vi.fn();
-      const onQueue = vi.fn();
-      const { container } = render(
-        <ChatInput
-          onSend={onSend}
-          onSteer={vi.fn()}
-          onStop={vi.fn()}
-          onQueue={onQueue}
-          isStreaming={false}
-        />,
-      );
+    const onSend = vi.fn();
+    const onQueue = vi.fn();
+    const { container } = render(
+      <ChatInput
+        onSend={onSend}
+        onSteer={vi.fn()}
+        onStop={vi.fn()}
+        onQueue={onQueue}
+        isStreaming={false}
+      />,
+    );
 
-      const textarea = screen.getByRole('textbox');
-      expect(textarea).toBeDisabled();
-      expect(textarea.getAttribute('placeholder')).toContain('평가 실행 중');
+    const textarea = screen.getByRole('textbox');
+    expect(textarea).toBeEnabled();
 
-      // Enter is ignored: neither send nor queue fires
-      fireEvent.change(textarea, { target: { value: 'hello' } });
-      fireEvent.keyDown(textarea, { key: 'Enter', shiftKey: false });
-      expect(onSend).not.toHaveBeenCalled();
-      expect(onQueue).not.toHaveBeenCalled();
+    fireEvent.change(textarea, { target: { value: 'hello' } });
+    fireEvent.keyDown(textarea, { key: 'Enter', shiftKey: false });
+    expect(onSend).toHaveBeenCalledTimes(1);
 
-      const selects = container.querySelectorAll('select');
-      expect(selects.length).toBe(2);
-      selects.forEach((select) => {
-        expect(select).toBeDisabled();
-      });
-    } finally {
-      evalLock.release('run-1');
-    }
+    const selects = container.querySelectorAll('select');
+    expect(selects.length).toBe(2);
+    selects.forEach((select) => {
+      expect(select).toBeEnabled();
+    });
   });
 
   it('recalls the previous prompt with ArrowUp and restores draft with ArrowDown', () => {
@@ -408,6 +409,35 @@ describe('ChatInput component', () => {
 
     window.localStorage.removeItem('vanilla-commander:prompt-history:session-a');
     window.localStorage.removeItem('vanilla-commander:prompt-history:session-b');
+  });
+
+  it('completes @ file references and inlines content on send', async () => {
+    const onSend = vi.fn();
+    render(
+      <ChatInput
+        onSend={onSend}
+        onSteer={vi.fn()}
+        onStop={vi.fn()}
+        isStreaming={false}
+        cwd="C:/work"
+      />,
+    );
+
+    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+    fireEvent.change(textarea, { target: { value: '요약 @note' } });
+    textarea.selectionStart = textarea.selectionEnd = '요약 @note'.length;
+
+    expect(await screen.findByText('notes.txt')).toBeInTheDocument();
+    fireEvent.keyDown(textarea, { key: 'Enter' });
+    expect(textarea).toHaveValue('요약 @C:/work/notes.txt ');
+
+    fireEvent.keyDown(textarea, { key: 'Enter' });
+    await waitFor(() => {
+      expect(onSend).toHaveBeenCalledTimes(1);
+    });
+    const sent = onSend.mock.calls[0]?.[0] as unknown as string;
+    expect(sent).toContain('@C:/work/notes.txt (파일 내용)');
+    expect(sent).toContain('hello notes');
   });
 });
 

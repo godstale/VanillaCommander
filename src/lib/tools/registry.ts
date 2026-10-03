@@ -12,9 +12,22 @@ import { createShellTool, shellTool } from './shell';
 import { createWikiTool, wikiTool } from './wiki';
 import { webSearchTool } from './webSearch';
 import { webFetchTool } from './webFetch';
+import { createFsCopyTool, fsCopyTool } from './commander/fsCopy';
+import { createFsMoveTool, fsMoveTool } from './commander/fsMove';
+import { createFsRenameTool, fsRenameTool } from './commander/fsRename';
+import { createFsMkdirTool, fsMkdirTool } from './commander/fsMkdir';
+import { createFsTrashTool, fsTrashTool } from './commander/fsTrash';
+import { createFsZipTool, fsZipTool } from './commander/fsZip';
+import { createFsUnzipTool, fsUnzipTool } from './commander/fsUnzip';
+import { createFsInfoTool, fsInfoTool } from './commander/fsInfo';
+import { createFsSearchTool, fsSearchTool } from './commander/fsSearch';
+import { createExplorerTool, explorerTool } from './commander/explorerTool';
+import { createDocReadTool, docReadTool } from './commander/docRead';
 
 export interface ToolContext {
   workspaceRoot?: string;
+  /** D10 백업 위치 기준 (미지정 시 백업 생략). */
+  workFolder?: string;
 }
 
 export const DEFAULT_ACTIVE_TOOLS: BuiltinToolId[] = [
@@ -46,6 +59,17 @@ registerToolFactory('write', (ctx) => createWriteTool(ctx));
 registerToolFactory('edit', (ctx) => createEditTool(ctx));
 registerToolFactory('shell', (ctx) => createShellTool(ctx));
 registerToolFactory('wiki', (ctx) => createWikiTool(ctx));
+registerToolFactory('fs_copy', (ctx) => createFsCopyTool(ctx));
+registerToolFactory('fs_move', (ctx) => createFsMoveTool(ctx));
+registerToolFactory('fs_rename', (ctx) => createFsRenameTool(ctx));
+registerToolFactory('fs_mkdir', () => createFsMkdirTool());
+registerToolFactory('fs_trash', (ctx) => createFsTrashTool(ctx));
+registerToolFactory('fs_zip', (ctx) => createFsZipTool(ctx));
+registerToolFactory('fs_unzip', (ctx) => createFsUnzipTool(ctx));
+registerToolFactory('fs_info', () => createFsInfoTool());
+registerToolFactory('fs_search', () => createFsSearchTool());
+registerToolFactory('explorer', () => createExplorerTool());
+registerToolFactory('doc_read', () => createDocReadTool());
 registerToolFactory('web_search', () => webSearchTool);
 registerToolFactory('web_fetch', () => webFetchTool);
 
@@ -78,3 +102,16 @@ registerHooks('builtin:truncate', {
 });
 
 export { readTool, lsTool, grepTool, findTool, writeTool, editTool, shellTool, wikiTool, webSearchTool };
+export {
+  fsCopyTool,
+  fsMoveTool,
+  fsRenameTool,
+  fsMkdirTool,
+  fsTrashTool,
+  fsZipTool,
+  fsUnzipTool,
+  fsInfoTool,
+  fsSearchTool,
+  explorerTool,
+  docReadTool,
+};

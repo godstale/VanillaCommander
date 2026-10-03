@@ -252,3 +252,34 @@ CREATE TABLE IF NOT EXISTS integration_audit_log (
   created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_integration_audit_created ON integration_audit_log(created_at);
+
+-- P11-31: 위키 처리 이력 (0002_wiki_jobs.sql과 동일).
+CREATE TABLE IF NOT EXISTS wiki_jobs (
+  id TEXT PRIMARY KEY,
+  source_path TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'queued',
+  reason TEXT,
+  title TEXT,
+  slug TEXT,
+  folder TEXT,
+  agent_id TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_wiki_jobs_status ON wiki_jobs(status);
+CREATE INDEX IF NOT EXISTS idx_wiki_jobs_created ON wiki_jobs(created_at);
+
+-- P11-40: 매크로 저장소 (0003_macros.sql과 동일).
+CREATE TABLE IF NOT EXISTS macros (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  prompts_json TEXT NOT NULL DEFAULT '[]',
+  agent_id TEXT,
+  run_root TEXT NOT NULL DEFAULT '',
+  schedule_json TEXT NOT NULL DEFAULT '{"kind":"none"}',
+  last_result TEXT,
+  last_run_at TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_macros_updated ON macros(updated_at);

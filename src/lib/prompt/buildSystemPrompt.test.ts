@@ -75,8 +75,7 @@ describe('buildSystemPromptSections and diffSections', () => {
     expect(fullText).toContain('</cwd>');
   });
 
-  it('filters out disabled skills', () => {
-    const sections = buildSystemPromptSections({
+  it('filters out disabled skills', () => {    const sections = buildSystemPromptSections({
       agent: { systemPrompt: 'Test' },
       skills: [
         { name: 'enabled-skill', description: 'Visible' },
@@ -88,8 +87,7 @@ describe('buildSystemPromptSections and diffSections', () => {
     expect(sections['skills']).not.toContain('hidden-skill');
   });
 
-  it('handles diffSections correctly for addition, modification, and deletion', () => {
-    const prev: Record<string, string> = {
+  it('handles diffSections correctly for addition, modification, and deletion', () => {    const prev: Record<string, string> = {
       preamble: 'Original preamble',
       rules: '<rules>Original rules</rules>',
       skills: '<skills>Skill A</skills>',
@@ -115,5 +113,25 @@ describe('buildSystemPromptSections and diffSections', () => {
 
     // Deleted should show null
     expect(diff['skills']).toBeNull();
+  });
+
+  it('adds a commander section with location, selection, and roots (P11-24)', () => {
+    const withCommander = buildSystemPromptSections({
+      agent: { systemPrompt: 'Test' },
+      commander: {
+        location: 'C:/work/docs',
+        selection: ['C:/work/docs/a.txt', 'C:/work/docs/b.txt'],
+        workFolder: 'C:/work',
+        allowedRoots: ['C:/work', 'D:/data'],
+      },
+    });
+    expect(withCommander['commander']).toContain('<commander>');
+    expect(withCommander['commander']).toContain('C:/work/docs');
+    expect(withCommander['commander']).toContain('a.txt');
+    expect(withCommander['commander']).toContain('작업 폴더: C:/work');
+    expect(withCommander['commander']).toContain('D:/data');
+
+    const withoutCommander = buildSystemPromptSections({ agent: { systemPrompt: 'Test' } });
+    expect(withoutCommander['commander']).toBeUndefined();
   });
 });

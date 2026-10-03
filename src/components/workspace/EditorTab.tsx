@@ -309,6 +309,8 @@ export function EditorTab({ tab }: EditorTabProps) {
     (tab.meta?.filePath as string) || tab.id.replace(/^editor:/, '');
   const fileName = filePath.split(/[\\/]/).pop() ?? filePath;
   const isMarkdown = filePath.endsWith('.md') || filePath.endsWith('.markdown');
+  // P11-14: 대용량 파일은 앞부분만 읽기 전용으로 연다.
+  const readOnlyHead = tab.meta?.readOnlyHead === true;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
@@ -352,6 +354,7 @@ export function EditorTab({ tab }: EditorTabProps) {
 
   const onDocChange = useCallback(
     (newDoc: string) => {
+      if (readOnlyHead) return;
       setContent(newDoc);
       contentRef.current = newDoc;
 
@@ -363,14 +366,17 @@ export function EditorTab({ tab }: EditorTabProps) {
         void saveFile(newDoc);
       }, 500);
     },
-    [saveFile],
+    [saveFile, readOnlyHead],
   );
 
-  // Load file content from disk
+  // Load file content from disk (P11-14: readOnlyHead면 앞부분만).
   useEffect(() => {
     let cancelled = false;
 
-    invoke<string>('read_text_file', { path: filePath })
+    const load = readOnlyHead
+      ? invoke<{ text: string }>('fc_read_text_head', { path: filePath }).then((r) => r.text)
+      : invoke<string>('read_text_file', { path: filePath });
+    load
       .then((data) => {
         if (cancelled) return;
         setContent(data);
@@ -391,7 +397,7 @@ export function EditorTab({ tab }: EditorTabProps) {
         clearTimeout(saveTimeoutRef.current);
       }
     };
-  }, [filePath]);
+  }, [filePath, readOnlyHead]);
 
   // Mount CodeMirror editor
   useEffect(() => {
@@ -413,6 +419,7 @@ export function EditorTab({ tab }: EditorTabProps) {
         langExtension,
         syntaxHighlighting(isDark ? darkHighlightStyle : lightHighlightStyle),
         isDark ? darkEditorTheme : lightEditorTheme,
+        EditorView.editable.of(!readOnlyHead),
         EditorView.theme({
           '&': {
             '--editor-font-size': `${fontSize}px`,
@@ -453,7 +460,7 @@ export function EditorTab({ tab }: EditorTabProps) {
         viewRef.current = null;
       }
     };
-  }, [loading, filePath, onDocChange, fontSize, isDark]);
+  }, [loading, filePath, onDocChange, fontSize, isDark, readOnlyHead]);
 
   const lineCount = content.split('\n').length;
   const charCount = content.length;
@@ -477,6 +484,11 @@ export function EditorTab({ tab }: EditorTabProps) {
           <span className="text-[11px] text-muted-foreground font-mono hidden sm:inline opacity-70">
             {t('editor.meta', { lines: lineCount, chars: charCount })}
           </span>
+          {readOnlyHead && (
+            <span className="text-[11px] text-warning font-medium hidden sm:inline">
+              {t('editor.largeFileNotice')}
+            </span>
+          )}
         </div>
 
         {/* Right: Controls (Font size, Markdown toggles, Save status) */}

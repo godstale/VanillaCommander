@@ -1,0 +1,32 @@
+import type { Dict } from './ko';
+
+// P11-34 document parser settings strings.
+export const parsersEn: Dict = {
+  'parsers.title': 'Document parsers',
+  'parsers.desc': 'Choose how PDF/Office text is extracted per extension. External parsers run locally, so no extra consent is needed.',
+  'parsers.tableTitle': 'Parser per extension',
+  'parsers.tableExt': 'Extension',
+  'parsers.tableParser': 'Parser',
+  'parsers.tableStatus': 'Status',
+  'parsers.builtin': 'Built-in',
+  'parsers.installed': 'Available',
+  'parsers.missing': 'Not installed',
+  'parsers.addTitle': 'Register external parser',
+  'parsers.extLabel': 'Extension',
+  'parsers.extPlaceholder': 'pdf',
+  'parsers.commandLabel': 'Command template',
+  'parsers.commandPlaceholder': 'markitdown "{input}"',
+  'parsers.modeLabel': 'Output mode',
+  'parsers.modeStdout': 'stdout',
+  'parsers.modeFile': 'file',
+  'parsers.addButton': 'Add',
+  'parsers.deleteTitle': 'Remove external parser',
+  'parsers.saved': 'Saved. Applies from the next parse.',
+  'parsers.testTitle': 'Test parser',
+  'parsers.recheck': 'Re-check installations',
+  'parsers.sampleLabel': 'Sample file path',
+  'parsers.samplePlaceholder': 'C:/path/to/sample.pdf',
+  'parsers.runTest': 'Run',
+  'parsers.testing': 'Running...',
+  'parsers.testMethod': '{method} · {n} chars',
+};

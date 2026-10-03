@@ -15,6 +15,8 @@ import {
   listModels as listOpenAiModels,
   streamChat as streamOpenAiChat,
 } from '@/lib/llm/openAiCompatibleClient';
+import { getExternalAgentStreamFn } from '@/lib/llm/externalAgentClient';
+import type { LlmProviderKind } from '@/lib/types/agent';
 
 export type { ResolvedLlmRuntime };
 export { getProviderPreset, resolveAgentLlmRuntime };
@@ -76,12 +78,23 @@ export type LlmStreamChatFn = (
 /**
  * 런타임에 맞는 스트리밍 함수를 반환한다.
  * 테스트에서 주입한 custom 함수가 있으면 그것을 우선한다.
+ * P11-23: 외부 에이전트는 CLI 1회 실행 클라이언트로 분기한다.
  */
 export function getStreamChatFn(
-  runtime: Pick<ResolvedLlmRuntime, 'openAiCompatible'>,
+  runtime: Pick<ResolvedLlmRuntime, 'openAiCompatible'> & {
+    kind?: LlmProviderKind;
+    externalAgentId?: string;
+    cwd?: string;
+  },
   custom?: LlmStreamChatFn,
 ): LlmStreamChatFn {
   if (custom) return custom;
+  if (runtime.kind === 'external-agent' && runtime.externalAgentId) {
+    return getExternalAgentStreamFn({
+      integrationId: runtime.externalAgentId,
+      cwd: runtime.cwd,
+    });
+  }
   return (runtime.openAiCompatible
     ? (streamOpenAiChat as unknown as LlmStreamChatFn)
     : (streamOllamaChat as unknown as LlmStreamChatFn));

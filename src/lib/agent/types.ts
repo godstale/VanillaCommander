@@ -20,7 +20,7 @@ export interface AgentToolCall {
 
 export type AgentMessage =
   | { role: 'system'; content: string; sections?: Record<string, string>; config?: ChatConfigSnapshot }
-  | { role: 'user'; content: string; config?: ChatConfigSnapshot }
+  | { role: 'user'; content: string; config?: ChatConfigSnapshot; images?: string[] }
   | {
       role: 'assistant';
       content: string;

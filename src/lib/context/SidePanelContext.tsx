@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import type { SidePanelView } from '@/lib/types/workspaceTab';
-import { useSafeWorkspace } from './WorkspaceContext';
 
 export interface SidePanelContextValue {
   activeView: SidePanelView;
@@ -17,39 +16,18 @@ export function SidePanelProvider({
   children: React.ReactNode;
   initialView?: SidePanelView;
 }) {
-  const workspace = useSafeWorkspace();
-  const hasWorkspaceContext = workspace !== null;
-  const workspaceRoot = workspace?.workspaceRoot ?? null;
+  // P11-01(D2): 폴더 미선택 상태에서도 전부 선택 가능. 워크스페이스 개념은 P11-04에서 작업 폴더로 대체한다.
+  const [internalView, setInternalView] = useState<SidePanelView>(() => initialView);
 
-  const [internalView, setInternalView] = useState<SidePanelView>(() => {
-    if (hasWorkspaceContext && !workspaceRoot) {
-      return 'explorer';
-    }
-    return initialView;
-  });
+  const activeView: SidePanelView = internalView;
 
-  const activeView: SidePanelView =
-    hasWorkspaceContext && !workspaceRoot ? 'explorer' : internalView;
+  const handleSetActiveView = useCallback((view: SidePanelView) => {
+    setInternalView(view);
+  }, []);
 
-  const handleSetActiveView = useCallback(
-    (view: SidePanelView) => {
-      if (hasWorkspaceContext && !workspaceRoot) {
-        return;
-      }
-      setInternalView(view);
-    },
-    [hasWorkspaceContext, workspaceRoot],
-  );
-
-  const toggleView = useCallback(
-    (view: Exclude<SidePanelView, null>) => {
-      if (hasWorkspaceContext && !workspaceRoot) {
-        return;
-      }
-      setInternalView((prev) => (prev === view ? null : view));
-    },
-    [hasWorkspaceContext, workspaceRoot],
-  );
+  const toggleView = useCallback((view: Exclude<SidePanelView, null>) => {
+    setInternalView((prev) => (prev === view ? null : view));
+  }, []);
 
   return (
     <SidePanelContext.Provider

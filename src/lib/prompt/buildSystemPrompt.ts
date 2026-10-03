@@ -24,6 +24,13 @@ export interface BuildSystemPromptOptions {
   skills?: SkillItem[];
   visualization?: string;
   cwd?: string;
+  /** P11-24: 파일 커맨더 동적 위치 (탐색기·선택·작업 폴더·허용 루트). */
+  commander?: {
+    location?: string;
+    selection?: string[];
+    workFolder?: string;
+    allowedRoots?: string[];
+  };
 }
 
 function wrapTag(name: string, content: string): string {
@@ -137,6 +144,23 @@ export function buildSystemPromptSections(
       'cwd',
       `Workspace Root: ${trimmed}\n(Current project workspace root. All relative file paths like "./", "wiki", "src", "docs" resolve relative to this directory. All project files, data folders, and target outputs reside under this workspace root. Always operate inside this project directory.)`,
     );
+  }
+
+  // 9. commander (P11-24: 현재 탐색기 위치·선택·작업 폴더·허용 루트)
+  if (options.commander) {
+    const c = options.commander;
+    const lines: string[] = [];
+    if (c.location) lines.push(`현재 탐색기 위치: ${c.location}`);
+    if (c.selection && c.selection.length > 0) {
+      lines.push(`선택 항목 (${c.selection.length}개): ${c.selection.slice(0, 20).join(', ')}`);
+    }
+    if (c.workFolder) lines.push(`작업 폴더: ${c.workFolder}`);
+    if (c.allowedRoots && c.allowedRoots.length > 0) {
+      lines.push(`허용 루트: ${c.allowedRoots.join(', ')} (이 목록 밖의 경로에는 도구가 닿지 않는다)`);
+    }
+    if (lines.length > 0) {
+      sections['commander'] = wrapTag('commander', lines.join('\n'));
+    }
   }
 
   return sections;

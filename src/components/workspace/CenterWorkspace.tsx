@@ -7,7 +7,11 @@ import {
   Bot,
   Puzzle,
   Activity,
-  FlaskConical,
+  Files,
+  FileText,
+  Archive,
+  BookOpen,
+  Zap,
   X,
   Plus,
   Columns2,
@@ -28,9 +32,12 @@ import { EditorTab } from '@/components/workspace/EditorTab';
 import { ImageViewerTab } from '@/components/workspace/ImageViewerTab';
 import { SkillViewerTab } from '@/components/workspace/SkillViewerTab';
 import { AgentEditorTab } from '@/components/workspace/AgentEditorTab';
-import { AgentStatsTab } from '@/components/workspace/AgentStatsTab';
 import { AgentMonitorTab } from '@/components/workspace/AgentMonitorTab';
-import { EvalTab } from '@/components/workspace/EvalTab';
+import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
+import { DocumentViewerTab } from '@/components/viewers/DocumentViewerTab';
+import { ArchiveViewerTab } from '@/components/viewers/ArchiveViewerTab';
+import { WikiTab } from '@/components/wiki/WikiTab';
+import { MacroEditorTab } from '@/components/macros/MacroEditorTab';
 import { WelcomeGuide } from '@/components/workspace/WelcomeGuide';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -43,10 +50,13 @@ const TAB_ICONS: Record<WorkspaceTabType, LucideIcon> = {
   editor: FileCode,
   'image-viewer': ImageIcon,
   'agent-editor': Bot,
-  'agent-stats': Activity,
   'agent-monitor': Activity,
   'skill-viewer': Puzzle,
-  eval: FlaskConical,
+  'file-explorer': Files,
+  'document-viewer': FileText,
+  'archive-viewer': Archive,
+  wiki: BookOpen,
+  'macro-editor': Zap,
 };
 
 function renderTabContent(tab: WorkspaceTab) {
@@ -59,14 +69,20 @@ function renderTabContent(tab: WorkspaceTab) {
       return <ImageViewerTab tab={tab} />;
     case 'agent-editor':
       return <AgentEditorTab tab={tab} />;
-    case 'agent-stats':
-      return <AgentStatsTab tab={tab} />;
     case 'agent-monitor':
       return <AgentMonitorTab tab={tab} />;
     case 'skill-viewer':
       return <SkillViewerTab tab={tab} />;
-    case 'eval':
-      return <EvalTab tab={tab} />;
+    case 'file-explorer':
+      return <FileExplorerTab tab={tab} />;
+    case 'document-viewer':
+      return <DocumentViewerTab tab={tab} />;
+    case 'archive-viewer':
+      return <ArchiveViewerTab tab={tab} />;
+    case 'wiki':
+      return <WikiTab />;
+    case 'macro-editor':
+      return <MacroEditorTab tab={tab} />;
     default:
       return null;
   }
@@ -401,7 +417,9 @@ function WorkspacePane({
 
 export function CenterWorkspace() {
   const { t } = useLanguage();
-  const { workspaceRoot } = useWorkspace();
+  // P11-11(V7·D2): 작업 폴더가 있으면 폴더로 취급한다.
+  const { workspaceRoot: wsRoot, workFolder } = useWorkspace();
+  const workspaceRoot = workFolder ?? wsRoot;
   const {
     tabs,
     activeTabId,

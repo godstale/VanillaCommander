@@ -1,11 +1,10 @@
 import { useState, memo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Bot, User, Copy, Check, ChevronDown, ChevronRight, Brain, Clock, AlertCircle, Info, Settings2, BookmarkPlus } from 'lucide-react';
+import { Bot, User, Copy, Check, ChevronDown, ChevronRight, Brain, Clock, AlertCircle, Info, Settings2, BookPlus } from 'lucide-react';
 import { invoke } from '@tauri-apps/api/core';
 import type { AgentMessage } from '@/lib/agent/types';
 import { SYSTEM_AUTO_GUIDE_PREFIX } from '@/lib/agent/types';
-import { dispatchSaveEvalCase } from '@/lib/eval/personal/caseBuilder';
 import type { ChatConfigSnapshot } from '@/lib/types/agent';
 import { DEFAULT_TEMPERATURE } from '@/lib/types/agent';
 import { getProviderPreset } from '@/lib/llm/providers';
@@ -21,6 +20,9 @@ export interface MessageBubbleProps {
   isStreaming?: boolean;
   /** 스냅샷이 없는 구 히스토리용 폴백 (현재 설정을 표시). */
   fallbackConfig?: ChatConfigSnapshot;
+  /** P11-26: 어시스턴트 응답을 위키에 저장한다. 미지정 시 버튼을 숨긴다. */
+  onSaveToWiki?: (message: AgentMessage) => void;
+  isSavingToWiki?: boolean;
 }
 
 function ConfigSnapshotRows({ snapshot }: { snapshot: ChatConfigSnapshot }) {
@@ -57,7 +59,7 @@ function ConfigSnapshotRows({ snapshot }: { snapshot: ChatConfigSnapshot }) {
   );
 }
 
-export const MessageBubble = memo(function MessageBubble({ message, isStreaming, fallbackConfig }: MessageBubbleProps) {
+export const MessageBubble = memo(function MessageBubble({ message, isStreaming, fallbackConfig, onSaveToWiki, isSavingToWiki = false }: MessageBubbleProps) {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
   const [showThinking, setShowThinking] = useState(false);
@@ -139,6 +141,18 @@ export const MessageBubble = memo(function MessageBubble({ message, isStreaming,
         <div className="flex items-start gap-2.5 max-w-[85%] md:max-w-2xl">
           <div className="flex flex-col items-end gap-1 min-w-0">
             <div className="p-3.5 rounded-2xl bg-primary text-primary-foreground text-sm leading-relaxed shadow-xs">
+              {message.images && message.images.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {message.images.map((src, i) => (
+                    <img
+                      key={`${i}-${src.slice(0, 32)}`}
+                      src={src}
+                      alt={t('chat.imageAlt', { n: i + 1 })}
+                      className="h-20 w-20 rounded-lg object-cover border border-primary-foreground/30"
+                    />
+                  ))}
+                </div>
+              )}
               <p className="whitespace-pre-wrap select-text">{message.content}</p>
             </div>
             {/* Bubble Footer: Time & Copy & Config outside */}
@@ -391,21 +405,24 @@ export const MessageBubble = memo(function MessageBubble({ message, isStreaming,
               <div className="flex items-center gap-1">
                 <button
                   type="button"
-                  onClick={() => dispatchSaveEvalCase({ sessionId: null, content: 'content' in message ? message.content : '', role: message.role })}
-                  className="flex items-center gap-1 text-xs hover:text-foreground transition-colors px-2 py-0.5 rounded hover:bg-muted/70 cursor-pointer"
-                  title={t('eval.personal.saveAsCase')}
-                >
-                  <BookmarkPlus className="h-3 w-3" />
-                  <span>{t('eval.personal.saveAsCase')}</span>
-                </button>
-                <button
-                  type="button"
                   onClick={handleCopy}
                   className="flex items-center gap-1 text-xs hover:text-foreground transition-colors px-2 py-0.5 rounded hover:bg-muted/70 cursor-pointer"
                 >
                   {copied ? <Check className="h-3 w-3 text-success" /> : <Copy className="h-3 w-3" />}
                   <span>{copied ? t('chat.copied') : t('chat.copy')}</span>
                 </button>
+                {onSaveToWiki && hasContent && !hasError && (
+                  <button
+                    type="button"
+                    onClick={() => onSaveToWiki(message)}
+                    disabled={isSavingToWiki}
+                    className="flex items-center gap-1 text-xs hover:text-foreground transition-colors px-2 py-0.5 rounded hover:bg-muted/70 cursor-pointer disabled:opacity-40"
+                    title={t('chat.saveToWikiTitle')}
+                  >
+                    <BookPlus className="h-3 w-3" />
+                    <span>{t('chat.saveToWiki')}</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>

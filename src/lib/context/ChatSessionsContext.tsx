@@ -7,7 +7,7 @@ import {
   useMemo,
   type ReactNode,
 } from 'react';
-import type { ChatSession } from '@/lib/types/chat';
+import type { ChatSession, ChatSessionOrigin } from '@/lib/types/chat';
 import * as sessionsRepo from '@/lib/db/repositories/sessionsRepo';
 import * as entriesRepo from '@/lib/db/repositories/entriesRepo';
 import * as agentsRepo from '@/lib/db/repositories/agentsRepo';
@@ -23,6 +23,7 @@ export interface ChatSessionsContextValue {
     title?: string;
     workspaceRoot?: string;
     agentId?: string;
+    origin?: ChatSessionOrigin;
   }) => Promise<ChatSession>;
   deleteSession: (id: string) => Promise<void>;
   clearSessions: () => Promise<void>;
@@ -42,12 +43,14 @@ export function ChatSessionsProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const list = await sessionsRepo.listSessions();
-      let filtered = workspaceRoot
+      // P11-15: 탐색기·매크로 등 숨은 세션은 대화 목록에 노출하지 않는다.
+      let filtered = list.filter((s) => (s.origin ?? 'chat') === 'chat');
+      filtered = workspaceRoot
         ? // Show sessions matching this workspace root, or global sessions
-          list.filter(
+          filtered.filter(
             (s) => s.workspaceRoot === workspaceRoot || !s.workspaceRoot,
           )
-        : list;
+        : filtered;
       // Empty sessions (no entries, i.e. chat tab opened but no message sent yet)
       // must not appear in the conversation list. Prune stale ones (>60s old to
       // avoid racing an in-flight first send) and hide the rest.
@@ -112,6 +115,7 @@ export function ChatSessionsProvider({ children }: { children: ReactNode }) {
       title?: string;
       workspaceRoot?: string;
       agentId?: string;
+      origin?: ChatSessionOrigin;
     }): Promise<ChatSession> => {
       let agentId = opts?.agentId;
       if (!agentId) {
@@ -128,6 +132,7 @@ export function ChatSessionsProvider({ children }: { children: ReactNode }) {
         id,
         agentId,
         workspaceRoot: opts?.workspaceRoot ?? workspaceRoot ?? null,
+        origin: opts?.origin ?? 'chat',
         title: opts?.title || '새로운 대화',
       });
 

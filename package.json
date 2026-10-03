@@ -12,7 +12,8 @@
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "test": "vitest run",
-    "check:ollama": "node scripts/check-ollama.mjs"
+    "check:ollama": "node scripts/check-ollama.mjs",
+    "check:tauri-blank": "node scripts/check-tauri-blank.mjs"
   },
   "dependencies": {
     "@codemirror/commands": "^6.11.1",
@@ -40,8 +41,11 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "codemirror": "^6.0.2",
+    "jszip": "^3.10.2",
     "lucide-react": "^1.47.0",
+    "mammoth": "^1.13.0",
     "mermaid": "^12.0.0",
+    "pdfjs-dist": "^6.3.289",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-markdown": "^10.1.0",
@@ -50,6 +54,7 @@
     "recharts": "^3.10.1",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.7.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
     "zod": "^3.25.76",
     "zod-to-json-schema": "^3.25.2"
   },

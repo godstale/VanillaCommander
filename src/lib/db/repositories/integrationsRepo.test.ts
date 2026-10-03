@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 import { setDatabase, MemorySqlFallback } from '@/lib/db/client';
-import type { ExternalIntegration } from '@/lib/eval/types';
+import type { ExternalIntegration } from '@/lib/integrations/types';
 import {
   appendAudit,
   clearAudit,
@@ -20,12 +20,12 @@ function makeIntegration(overrides: Partial<ExternalIntegration> = {}): External
     kind: 'llm-api',
     enabled: true,
     llm: { provider: 'openai', baseUrl: 'https://api.openai.com/v1', model: 'gpt-4o-mini' },
-    allowedPurposes: ['judge'],
+    allowedPurposes: ['chat-agent'],
     allowedDataClasses: ['public-bundled'],
     consent: {
-      version: 'consent-v1',
+      version: 'consent-v2',
       grantedAt: now,
-      purposes: ['judge'],
+      purposes: ['chat-agent'],
       dataClasses: ['public-bundled'],
     },
     createdAt: now,
@@ -71,7 +71,7 @@ describe('integrationsRepo', () => {
   it('appends and lists audit entries with filter', async () => {
     await appendAudit({
       integrationId: 'int-1',
-      purpose: 'judge',
+      purpose: 'chat-agent',
       dataClasses: ['public-bundled'],
       runId: null,
       requestCount: 3,
@@ -81,7 +81,7 @@ describe('integrationsRepo', () => {
     });
     await appendAudit({
       integrationId: 'int-2',
-      purpose: 'candidate',
+      purpose: 'wiki-ingest',
       dataClasses: ['personal'],
       runId: 'run-1',
       requestCount: 1,

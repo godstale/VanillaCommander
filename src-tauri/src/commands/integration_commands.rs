@@ -1,9 +1,12 @@
-//! 외부 에이전트 CLI 실행 (평가 D3 외부 연동용).
+//! 외부 에이전트 CLI 실행 (외부 연동용).
 //!
 //! - 셸을 거치지 않고 `Command::new`로 직접 실행한다.
-//! - 실행 파일은 절대 경로·존재 필수, cwd는 매번 새로 만드는 임시 디렉터리.
-//! - 인자의 `{promptFile}` 토큰은 임시 `prompt.txt` 경로로 치환된다.
+//! - 실행 파일은 절대 경로·존재 필수.
+//! - cwd 미지정 시 매번 새로 만드는 임시 디렉터리에서 실행한다.
+//! - cwd 지정 시 활성 워크스페이스 안의 실존 디렉터리여야 한다 (D3, P11-02).
+//!   허용 루트 목록 검사는 P11-04(`set_agent_allowed_roots`)에서 일반화한다.
 
+use super::fs_commands::resolve_and_verify_workspace_path;
 use serde::{Deserialize, Serialize};
 use std::io::Write;
 use std::path::PathBuf;
@@ -96,6 +99,54 @@ fn cap_output(text: String) -> String {
     format!("{}…[truncated at 2MB]", &text[..end])
 }
 
+/// CLI 실행 디렉터리 결정. cwd 지정 시 워크스페이스 containment 검사 후
+/// 사용하고, 미지정이면 프롬프트용 임시 디렉터리에서 실행한다.
+pub fn resolve_cwd_for_cli(cwd: &Option<String>, fallback: &PathBuf) -> Result<PathBuf, String> {
+    match cwd {
+        Some(dir) if !dir.trim().is_empty() => resolve_and_verify_workspace_path(dir, None, true)
+            .map_err(|e| format!("INTEGRATION_CLI invalid cwd: {}", e)),
+        _ => Ok(fallback.clone()),
+    }
+}
+
+/// PATH에서 실행 파일을 찾아 절대 경로로 반환한다 (P11-22 외부 에이전트 자동 탐지).
+#[tauri::command]
+pub fn find_executable(name: String) -> Result<String, String> {
+    let trimmed = name.trim();
+    if trimmed.is_empty() {
+        return Err("Empty executable name".to_string());
+    }
+    // 절대/상대 경로 지정은 그대로 검증한다.
+    if trimmed.contains('/') || trimmed.contains('\\') {
+        return Ok(validate_executable(trimmed)?.to_string_lossy().into_owned());
+    }
+    let path_var = std::env::var_os("PATH").unwrap_or_default();
+    let mut dirs: Vec<PathBuf> = std::env::split_paths(&path_var).collect();
+    // Windows 흔한 설치 경로를 뒤에 붙인다.
+    #[cfg(target_os = "windows")]
+    {
+        if let Ok(local) = std::env::var("LOCALAPPDATA") {
+            dirs.push(PathBuf::from(local).join("Programs"));
+        }
+        if let Ok(home) = std::env::var("USERPROFILE") {
+            dirs.push(PathBuf::from(home).join(".local").join("bin"));
+        }
+    }
+    #[cfg(target_os = "windows")]
+    let exts = ["", ".exe", ".cmd", ".bat"];
+    #[cfg(not(target_os = "windows"))]
+    let exts = [""];
+    for dir in &dirs {
+        for ext in exts {
+            let candidate = dir.join(format!("{}{}", trimmed, ext));
+            if candidate.is_file() {
+                return Ok(candidate.to_string_lossy().into_owned());
+            }
+        }
+    }
+    Err(format!("Executable not found in PATH: {}", trimmed))
+}
+
 #[tauri::command]
 pub async fn integration_run_cli(
     executable_path: String,
@@ -103,12 +154,14 @@ pub async fn integration_run_cli(
     stdin_text: Option<String>,
     prompt_file_text: Option<String>,
     timeout_ms: Option<u64>,
+    cwd: Option<String>,
 ) -> Result<CliRunOutput, String> {
     let exe = validate_executable(&executable_path)?;
     let (work_dir, resolved_args) = prepare_work_dir(&args, prompt_file_text.as_deref())?;
+    let run_dir = resolve_cwd_for_cli(&cwd, &work_dir)?;
     let timeout_duration = Duration::from_millis(timeout_ms.unwrap_or(180_000).max(1));
 
-    let work_dir_for_cmd = work_dir.clone();
+    let work_dir_for_cmd = run_dir.clone();
     let result = tauri::async_runtime::spawn_blocking(move || {
         let mut cmd = Command::new(&exe);
         cmd.args(&resolved_args)
@@ -189,6 +242,12 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_find_executable_missing() {
+        assert!(find_executable("definitely-not-a-real-binary-xyz".to_string()).is_err());
+        assert!(find_executable("  ".to_string()).is_err());
+    }
+
+    #[test]
     fn test_relative_path_rejected() {
         assert!(validate_executable("agent-cli").is_err());
         assert!(validate_executable("relative/dir/agent").is_err());
@@ -238,5 +297,40 @@ mod tests {
         assert!(capped.len() <= OUTPUT_CAP_BYTES + 64);
         assert!(capped.contains("truncated"));
         assert_eq!(cap_output("small".to_string()), "small");
+    }
+
+    #[test]
+    fn test_cwd_resolution() {
+        use crate::commands::fs_commands::{scope_test_lock, set_allowed_roots_internal};
+        let _guard = scope_test_lock();
+
+        let stamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0);
+        let base =
+            std::env::temp_dir().join(format!("vc-cli-cwd-test-{}-{}", std::process::id(), stamp));
+        let ws = base.join("ws");
+        let outside = base.join("outside");
+        std::fs::create_dir_all(&ws).unwrap();
+        std::fs::create_dir_all(&outside).unwrap();
+        let fallback = base.join("fallback");
+        std::fs::create_dir_all(&fallback).unwrap();
+
+        set_allowed_roots_internal(vec![ws.to_string_lossy().into_owned()]);
+        let sub = ws.join("sub");
+        std::fs::create_dir_all(&sub).unwrap();
+        assert!(resolve_cwd_for_cli(&Some(sub.to_string_lossy().into_owned()), &fallback).is_ok());
+        assert!(
+            resolve_cwd_for_cli(&Some(outside.to_string_lossy().into_owned()), &fallback).is_err()
+        );
+        assert!(
+            resolve_cwd_for_cli(&Some(base.join("nope").to_string_lossy().into_owned()), &fallback)
+                .is_err()
+        );
+        assert_eq!(resolve_cwd_for_cli(&None, &fallback).unwrap(), fallback);
+
+        set_allowed_roots_internal(Vec::new());
+        let _ = std::fs::remove_dir_all(&base);
     }
 }

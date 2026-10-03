@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Bot, Cpu, Sparkles, MessageSquare, Terminal, Zap, Layers, Activity } from 'lucide-react';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import type { ReasoningEffort, ReasoningMode } from '@/lib/types/agent';
+import type { Agent } from '@/lib/types/agent';
 import { chatConfigSignature, DEFAULT_TEMPERATURE } from '@/lib/types/agent';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useChatSessions } from '@/lib/context/ChatSessionsContext';
+import { useStatusBar } from '@/lib/context/StatusBarContext';
 import { useSafeSkills } from '@/lib/context/SkillsContext';
 import { useChat } from '@/hooks/useChat';
 import { useChatQueue, chatQueueManager } from '@/lib/agent/chatQueueManager';
@@ -15,17 +17,13 @@ import { ChatQueueFloatingDock } from '@/components/chat/ChatQueueFloatingDock';
 import { MessageList } from '@/components/chat/MessageList';
 import { ChatInput } from '@/components/chat/ChatInput';
 import { ChatMacroDialog } from '@/components/chat/ChatMacroDialog';
+import { useMacros } from '@/lib/macros/useMacros';
 import {
-  deleteChatMacro,
-  loadChatMacros,
   migrateLegacySessionLog,
-  saveChatMacro,
-  type ChatMacro,
-} from '@/lib/chat/chatMacros';
+} from '@/lib/macros/chatMacros';
+import { buildMacroName, type Macro } from '@/lib/macros/types';
 import { ChatExecutionLog } from '@/components/chat/ChatExecutionLog';
 import { ErrorBanner } from '@/components/chat/ErrorBanner';
-import { EvalLockBanner } from '@/components/eval/EvalLockBanner';
-import { evalLock } from '@/lib/eval/evalLock';
 import {
   Dialog,
   DialogContent,
@@ -40,6 +38,18 @@ import { setActiveApprovalMode } from '@/lib/approval/register';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { getProviderPreset } from '@/lib/llm/providers';
 import { monitoringCollector } from '@/lib/monitoring/monitoringCollector';
+import { AgentFallbackDialog } from '@/components/agents/AgentFallbackDialog';
+import {
+  buildCandidates,
+  checkCandidatesHealth,
+  getStoredFallbackAgentId,
+  storeFallbackAgentId,
+  type FallbackCandidate,
+} from '@/lib/agent/resolveAgent';
+import { checkAgentConnection } from '@/lib/llm/agentStatus';
+import { resolveVisionSupport, type VisionVerdict } from '@/lib/llm/vision';
+import { createWikiTool } from '@/lib/tools/wiki';
+import type { AgentMessage } from '@/lib/agent/types';
 import { cn } from '@/lib/utils';
 
 export interface ChatTabProps {
@@ -48,7 +58,7 @@ export interface ChatTabProps {
 
 export function ChatTab({ tab }: ChatTabProps) {
   const { t } = useLanguage();
-  const { getAgent, defaultAgent, loading: agentsLoading } = useAgents();
+  const { getAgent, defaultAgent, agents, loading: agentsLoading } = useAgents();
   const { settings } = useSettings();
   const { updateTab, openTab } = useWorkspaceTabs();
   const { workspaceRoot } = useWorkspace();
@@ -141,6 +151,81 @@ export function ChatTab({ tab }: ChatTabProps) {
 
   const activeAgent = getAgent(effectiveAgentId) || defaultAgent;
   const providerPreset = getProviderPreset(activeAgent.llmProvider);
+  const { notify } = useStatusBar();
+
+  // P11-25: 전송 직전 폴백 결정. 선택은 tab meta에 이번 세션 한정으로 기록한다.
+  const [fallbackOpen, setFallbackOpen] = useState(false);
+  const [fallbackCandidates, setFallbackCandidates] = useState<FallbackCandidate[]>([]);
+  const [fallbackAgentName, setFallbackAgentName] = useState('');
+  const fallbackResolveRef = useRef<((proceed: boolean) => void) | null>(null);
+
+  // P11-26: 귀속 에이전트의 비전 판정. 이미지 첨부 시 전송 게이트로 쓴다.
+  const [visionVerdict, setVisionVerdict] = useState<VisionVerdict>('unknown');
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 비동기 판정 전 로딩 상태로 초기화
+    setVisionVerdict('unknown');
+    void resolveVisionSupport(activeAgent).then((v) => {
+      if (!cancelled) setVisionVerdict(v);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeAgent]);
+
+  const applySessionAgent = useCallback((agentId: string) => {
+    updateTab(tab.id, { meta: { ...(tab.meta ?? {}), agentId } });
+  }, [updateTab, tab.id, tab.meta]);
+
+  const finishFallback = useCallback((proceed: boolean) => {
+    setFallbackOpen(false);
+    const resolve = fallbackResolveRef.current;
+    fallbackResolveRef.current = null;
+    resolve?.(proceed);
+  }, []);
+
+  const handleFallbackPick = useCallback((agent: Agent, opts: { dontAsk: boolean }) => {
+    if (opts.dontAsk) {
+      storeFallbackAgentId(agent.id);
+    }
+    applySessionAgent(agent.id);
+    notify(t('agentFallback.switched', { name: agent.name }));
+    finishFallback(false);
+  }, [applySessionAgent, notify, t, finishFallback]);
+
+  const handleFallbackCancel = useCallback(() => {
+    finishFallback(false);
+  }, [finishFallback]);
+
+  const resolveSendAgent = useCallback(async (agent: Agent): Promise<boolean> => {
+    try {
+      if ((await checkAgentConnection(agent)) === 'connected') return true;
+    } catch {
+      return false;
+    }
+    // 저장된 폴백(로컬만)이 살아 있으면 조용히 적용한다.
+    try {
+      const storedId = getStoredFallbackAgentId();
+      const stored = storedId ? getAgent(storedId) : undefined;
+      if (stored) {
+        const storedStatus = await checkAgentConnection(stored);
+        if (storedStatus === 'connected') {
+          applySessionAgent(stored.id);
+          notify(t('agentFallback.switched', { name: stored.name }));
+          return false;
+        }
+      }
+    } catch {
+      // fall through to dialog
+    }
+    const statuses = await checkCandidatesHealth(agents, checkAgentConnection);
+    setFallbackCandidates(buildCandidates(agents, statuses, agent.id));
+    setFallbackAgentName(agent.name);
+    setFallbackOpen(true);
+    return new Promise<boolean>((resolve) => {
+      fallbackResolveRef.current = resolve;
+    });
+  }, [agents, getAgent, applySessionAgent, notify, t]);
 
   const [isMonitoringActive, setIsMonitoringActive] = useState<boolean>(() =>
     monitoringCollector.isRunning(activeAgent.id),
@@ -241,6 +326,7 @@ export function ChatTab({ tab }: ChatTabProps) {
   } = useChat(sessionId, activeAgent, {
     cwd: effectiveCwd,
     thinkOverride,
+    onResolveSendAgent: resolveSendAgent,
     // 구 Agent(Provider 미설정)는 전역 Ollama 주소를 그대로 사용한다.
     // Agent 고유 llmBaseUrl이 있으면 useChat 내부에서 그쪽이 우선한다.
     baseUrl: settings.ollamaBaseUrl,
@@ -269,10 +355,22 @@ export function ChatTab({ tab }: ChatTabProps) {
   }, [configSnapshot, messages.length, isAgentDeleted, isStreaming, injectConfigNotice, t]);
 
   const handleSendMessage = useCallback(
-    async (text: string) => {
+    async (text: string, images?: string[]) => {
       // 삭제된 에이전트 설정의 채팅은 대화를 지속할 수 없다.
-      // 평가 실행 중에는 전송·큐잉 모두 금지된다(D5).
-      if (isAgentDeleted || evalLock.get()) return;
+      if (isAgentDeleted) return;
+      // P11-26: 비전 미지원 에이전트에 이미지를 보내면 폴백 다이얼로그로
+      // 비전 에이전트를 제안한다. 이번 전송은 중단하고 사용자가 다시 보낸다.
+      if (images && images.length > 0 && visionVerdict === 'no') {
+        try {
+          const statuses = await checkCandidatesHealth(agents, checkAgentConnection);
+          setFallbackCandidates(buildCandidates(agents, statuses, activeAgent.id));
+          setFallbackAgentName(activeAgent.name);
+          setFallbackOpen(true);
+        } catch (err) {
+          console.error('Failed to open vision fallback dialog:', err);
+        }
+        return;
+      }
       chatQueueManager.setSessionBusy(sessionId);
       const isFirstUserMessage = messages.filter((m) => m.role === 'user').length === 0;
 
@@ -284,6 +382,7 @@ export function ChatTab({ tab }: ChatTabProps) {
             id: sessionId,
             agentId: activeAgent.id,
             workspaceRoot: workspaceRoot ?? null,
+            origin: 'chat',
             title: tab.title || t('chatTab.newChat'),
           });
           await refreshSessions();
@@ -292,7 +391,7 @@ export function ChatTab({ tab }: ChatTabProps) {
         console.error('Failed to ensure session before sending message:', err);
       }
 
-      await sendMessage(text);
+      await sendMessage(text, images && images.length > 0 ? { images } : undefined);
 
       // If this is the first message, extract title and sync to tab & sessions list
       if (isFirstUserMessage) {
@@ -309,7 +408,7 @@ export function ChatTab({ tab }: ChatTabProps) {
         }
       }
     },
-    [messages, sessionId, activeAgent.id, workspaceRoot, tab.title, tab.id, sendMessage, updateSessionTitle, updateTab, refreshSessions, t, isAgentDeleted],
+    [messages, sessionId, activeAgent.id, activeAgent.name, agents, visionVerdict, workspaceRoot, tab.title, tab.id, sendMessage, updateSessionTitle, updateTab, refreshSessions, t, isAgentDeleted],
   );
 
   const handleSlashCommand = useCallback(
@@ -468,7 +567,7 @@ export function ChatTab({ tab }: ChatTabProps) {
       if (item.type === 'slash_command' && item.commandName) {
         await handleSlashCommand(item.commandName, item.commandArgs);
       } else {
-        await handleSendMessage(item.text);
+        await handleSendMessage(item.text, item.images);
       }
     } catch (err) {
       console.error('Error executing queued item:', err);
@@ -535,7 +634,7 @@ export function ChatTab({ tab }: ChatTabProps) {
         if (item.type === 'slash_command' && item.commandName) {
           await handleSlashCommand(item.commandName, item.commandArgs);
         } else {
-          await handleSendMessage(item.text);
+          await handleSendMessage(item.text, item.images);
         }
       } catch (err) {
         console.error('Error running selected queued item:', err);
@@ -544,16 +643,37 @@ export function ChatTab({ tab }: ChatTabProps) {
     [resumeQueue, dequeueItem, handleSlashCommand, handleSendMessage, isAgentDeleted],
   );
 
+  // P11-26: 어시스턴트 응답을 위키에 저장한다 (이미지 원본 경로는 출처 기록 불가 —
+  // 입력 단계 data URL이므로 본문만 저장하고 출처는 세션 제목으로 남긴다).
+  const [isSavingToWiki, setIsSavingToWiki] = useState(false);
+  const handleSaveToWiki = useCallback(async (message: AgentMessage) => {
+    if (message.role !== 'assistant' || !message.content.trim()) return;
+    setIsSavingToWiki(true);
+    try {
+      const tool = createWikiTool({ workspaceRoot: effectiveCwd });
+      const firstLine = message.content.trim().split('\n')[0].replace(/^#+\s*/, '').slice(0, 60);
+      const result = await tool.execute(
+        crypto.randomUUID(),
+        { action: 'ingest', title: firstLine || t('chat.wikiUntitled'), content: message.content },
+        new AbortController().signal,
+      );
+      injectInfoMessage(t('chat.wikiSaved', { detail: result.content }));
+    } catch (err) {
+      injectInfoMessage(t('chat.wikiSaveFailed', { error: err instanceof Error ? err.message : String(err) }));
+    } finally {
+      setIsSavingToWiki(false);
+    }
+  }, [effectiveCwd, injectInfoMessage, t]);
+
   // Conversation macros: user prompts bundled into one auto-input unit.
   // Load enqueues everything paused so the user reviews/runs via the queue dock.
+  // P11-40: DB 저장소를 쓴다 (localStorage는 최초 1회 이관 후 미사용).
   const userPromptCount = messages.filter((m) => m.role === 'user').length;
-  const [macros, setMacros] = useState<ChatMacro[]>([]);
+  const { macros, create: createMacro, remove: removeMacro } = useMacros();
   const [macroDialogOpen, setMacroDialogOpen] = useState(false);
 
   useEffect(() => {
     migrateLegacySessionLog(sessionId);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate macro list on session switch
-    setMacros(loadChatMacros());
   }, [sessionId]);
 
   const handleSaveLog = useCallback(() => {
@@ -565,21 +685,26 @@ export function ChatTab({ tab }: ChatTabProps) {
     if (items.length === 0) return;
     // 시스템 자동 안내 등은 role이 system이라 위 필터에서 이미 제외된다.
     // 저장된 매크로는 프롬프트 히스토리(↑/↓)의 대상이 아니다.
-    const macro = saveChatMacro(items, { agentId: effectiveAgentId });
-    if (!macro) return;
-    setMacros(loadChatMacros());
-    injectInfoMessage(t('chatInput.macroSaved', { name: macro.name, n: items.length }));
-  }, [messages, effectiveAgentId, injectInfoMessage, t, isAgentDeleted]);
+    void (async () => {
+      const macro = await createMacro({
+        name: buildMacroName(items, macros.map((m) => m.name)),
+        prompts: items,
+        agentId: effectiveAgentId,
+        runRoot: '',
+        schedule: { kind: 'none' },
+      });
+      injectInfoMessage(t('chatInput.macroSaved', { name: macro.name, n: items.length }));
+    })();
+  }, [messages, effectiveAgentId, injectInfoMessage, t, isAgentDeleted, createMacro, macros]);
 
   const handleLoadLog = useCallback(() => {
-    if (isAgentDeleted || evalLock.get()) return;
-    setMacros(loadChatMacros());
+    if (isAgentDeleted) return;
     setMacroDialogOpen(true);
   }, [isAgentDeleted]);
 
-  const handleSelectMacro = useCallback((macro: ChatMacro) => {
-    if (isAgentDeleted || evalLock.get()) return;
-    const items = macro.items.filter((s) => s.trim().length > 0);
+  const handleSelectMacro = useCallback((macro: Macro) => {
+    if (isAgentDeleted) return;
+    const items = macro.prompts.filter((s) => s.trim().length > 0);
     if (items.length === 0) {
       injectInfoMessage(t('chatInput.noSavedLog'));
       return;
@@ -603,8 +728,8 @@ export function ChatTab({ tab }: ChatTabProps) {
   }, [enqueue, pauseQueue, injectInfoMessage, t, isAgentDeleted]);
 
   const handleDeleteMacro = useCallback((id: string) => {
-    setMacros(deleteChatMacro(id));
-  }, []);
+    void removeMacro(id);
+  }, [removeMacro]);
 
   useEffect(() => {
     return () => {
@@ -673,9 +798,6 @@ export function ChatTab({ tab }: ChatTabProps) {
       {/* Error banner if present */}
       <ErrorBanner error={error} onRetry={() => { if (!isAgentDeleted) void retry(); }} />
 
-      {/* 평가 실행 중 배너: 전송·큐잉 차단 안내 (P10-03, D5) */}
-      <EvalLockBanner />
-
       {/* Deleted-agent notice: 기록은 읽을 수 있지만 대화를 지속할 수 없다 */}
       {isAgentDeleted && (
         <div className="flex items-center gap-2 px-4 py-2 text-xs text-destructive bg-destructive/10 border-b border-destructive/20 font-medium shrink-0 select-none">
@@ -712,7 +834,13 @@ export function ChatTab({ tab }: ChatTabProps) {
           <span>{isMonitoringActive ? t('chatTab.monitoringActive') : t('chatTab.monitoringIdle')}</span>
         </button>
         {viewMode === 'chat' ? (
-          <MessageList messages={messages} isStreaming={isStreaming} fallbackConfig={configSnapshot} />
+          <MessageList
+            messages={messages}
+            isStreaming={isStreaming}
+            fallbackConfig={configSnapshot}
+            onSaveToWiki={handleSaveToWiki}
+            isSavingToWiki={isSavingToWiki}
+          />
         ) : (
           <ChatExecutionLog sessionId={tab.id} messages={messages} />
         )}
@@ -776,6 +904,8 @@ export function ChatTab({ tab }: ChatTabProps) {
           customHeight={customInputHeight ? Math.max(60, customInputHeight - 24) : null}
           isAgentDeleted={isAgentDeleted}
           sessionId={sessionId}
+          cwd={effectiveCwd}
+          vision={visionVerdict}
         />
       </div>
 
@@ -857,6 +987,15 @@ export function ChatTab({ tab }: ChatTabProps) {
         macros={macros}
         onSelect={handleSelectMacro}
         onDelete={handleDeleteMacro}
+      />
+
+      {/* P11-25: 기본 에이전트 장애 시 폴백 선택 */}
+      <AgentFallbackDialog
+        open={fallbackOpen}
+        candidates={fallbackCandidates}
+        failedAgentName={fallbackAgentName}
+        onPick={handleFallbackPick}
+        onCancel={handleFallbackCancel}
       />
     </div>
   );

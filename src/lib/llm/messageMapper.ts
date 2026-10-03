@@ -2,6 +2,7 @@ import { zodToJsonSchema } from 'zod-to-json-schema';
 import type { AgentMessage, AgentTool } from '@/lib/agent/types';
 import type { OllamaChatRequest, OllamaToolCall } from '@/lib/llm/ollamaClient';
 import type { OpenAiChatRequest } from '@/lib/llm/openAiCompatibleClient';
+import { fcReadFileBytes } from '@/lib/commander/ipc';
 
 export function cleanThinkingText(text: string): string {
   return text
@@ -70,6 +71,7 @@ export function mapAgentMessagesToOllama(
         return {
           role: 'user',
           content: msg.content,
+          images: msg.images && msg.images.length > 0 ? [...msg.images] : undefined,
         };
       case 'assistant': {
         const ollamaToolCalls: OllamaToolCall[] | undefined = msg.toolCalls?.map((tc) => ({
@@ -122,6 +124,65 @@ export function mapAgentMessagesToOllama(
 
 export function mapAgentToolsToOllama(tools: AgentTool[]): unknown[] {
   return mapAgentToolsToOpenAi(tools);
+}
+
+/** 메시지 images 배열(경로 또는 data URL)을 LLM 전송용 data URL로 변환한다. */
+export async function resolveImageDataUrls(images: string[]): Promise<string[]> {
+  const out: string[] = [];
+  for (const img of images) {
+    if (img.startsWith('data:')) {
+      out.push(img);
+      continue;
+    }
+    const bytes = await fcReadFileBytes(img);
+    const lower = img.toLowerCase();
+    const mime = lower.endsWith('.png')
+      ? 'image/png'
+      : lower.endsWith('.gif')
+        ? 'image/gif'
+        : lower.endsWith('.webp')
+          ? 'image/webp'
+          : 'image/jpeg';
+    out.push(`data:${mime};base64,${bytes.base64}`);
+  }
+  return out;
+}
+
+/**
+ * 전송 직전 사용자 메시지의 이미지 경로를 data URL로 바꾼다.
+ * 읽기에 실패한 이미지는 빼고 진행한다 (전체 전송을 막지 않는다).
+ */
+export async function resolveMessageImages(messages: AgentMessage[]): Promise<AgentMessage[]> {
+  return Promise.all(
+    messages.map(async (msg) => {
+      if (msg.role !== 'user' || !msg.images || msg.images.length === 0) return msg;
+      try {
+        const urls = await resolveImageDataUrls(msg.images);
+        return { ...msg, images: urls };
+      } catch {
+        const rest = { ...msg };
+        delete rest.images;
+        return rest;
+      }
+    }),
+  );
+}
+
+/** 요청 메시지(매핑済)의 images를 data URL로 바꾼다. 클라이언트 전송 직전용. */
+export async function resolveRequestImages<T>(messages: T[]): Promise<T[]> {
+  return Promise.all(
+    messages.map(async (m) => {
+      const maybeImages = (m as { images?: unknown }).images;
+      if (!Array.isArray(maybeImages) || maybeImages.length === 0) return m;
+      try {
+        return { ...m, images: await resolveImageDataUrls(maybeImages as string[]) };
+      } catch {
+        const rest = { ...(m as Record<string, unknown>) };
+        delete rest.images;
+        return rest as T;
+      }
+    }),
+  );
 }
 
 /**
@@ -186,8 +247,21 @@ export function mapAgentMessagesToOpenAi(
     switch (msg.role) {
       case 'system':
         return { role: 'system', content: msg.content };
-      case 'user':
+      case 'user': {
+        if (msg.images && msg.images.length > 0) {
+          return {
+            role: 'user',
+            content: [
+              ...(msg.content ? [{ type: 'text' as const, text: msg.content }] : []),
+              ...msg.images.map((url) => ({
+                type: 'image_url' as const,
+                image_url: { url },
+              })),
+            ],
+          };
+        }
         return { role: 'user', content: msg.content };
+      }
       case 'assistant': {
         let content = msg.content ?? '';
         if (stripThinking) {

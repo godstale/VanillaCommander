@@ -16,7 +16,7 @@ export function clamp(val: number, min: number, max: number): number {
  * reserve는 트리거 여유분(-management overhead + 도구 호출 버스트 + 응답 길이)으로
  * 전 구간 25%를 유지하고, keep은 요약 후 verbatim으로 남길 최근 대화량이다.
  * 작은 컨텍스트의 keep(8K→1K)은 도구형 작업에 빠듯할 수 있어 요약 품질에
- * 의존한다 — 도구 위주면 SettingsModel에서 상향 조정할 것.
+ * 의존한다 — 도구 위주면 앱 기본값(defaults.ts)이나 에이전트별 설정에서 상향 조정할 것.
  */
 export function defaultReserveForContext(contextSize: number): number {
   if (contextSize <= 8192) return 2048;

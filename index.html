@@ -9,7 +9,28 @@
     <title>Vanilla Commander</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- TAURI-BLANK 재발 방지용 정적 부트 폴백 (CSP 안전: 인라인 스크립트 없음).
+        React가 마운트되면 createRoot가 이 내용을 치우고, src/main.tsx의
+        워치독이 타임아웃 시 data-boot-timed-out으로 원인을 노출한다.
+        pre-React 정적 HTML이라 i18n 사전(t키)을 쓸 수 없어 한/영 병기한다. -->
+      <div
+        id="vc-boot-fallback"
+        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: #f4f4f4; color: #111; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.7;"
+      >
+        <div style="max-width: 460px; text-align: center;">
+          <p style="font-weight: 700;">Vanilla Commander를 불러오는 중…</p>
+          <p style="opacity: 0.7;">Loading Vanilla Commander…</p>
+          <p data-boot-hint hidden style="margin-top: 12px; text-align: left; opacity: 0.85;">
+            이 화면이 계속 흰 화면으로 멈춰 있으면: ① dev 서버 동작 확인
+            (<code>pnpm dev</code> → http://127.0.0.1:14200) ② Tauri 창 새로고침(Ctrl+R)
+            ③ <code>pnpm check:tauri-blank</code> 실행.
+            <br />If this stays blank: ① ensure the dev server is up ② reload the Tauri
+            window (Ctrl+R) ③ run <code>pnpm check:tauri-blank</code>.
+          </p>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

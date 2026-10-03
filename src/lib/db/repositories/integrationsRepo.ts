@@ -7,7 +7,7 @@ import {
   type IntegrationAuditRow,
   type IntegrationPurpose,
   type IntegrationSettings,
-} from '@/lib/eval/types';
+} from '@/lib/integrations/types';
 
 const DEFAULT_SETTINGS: IntegrationSettings = {
   masterEnabled: false,

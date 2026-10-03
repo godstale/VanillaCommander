@@ -81,3 +81,7 @@ export function useSettings(): SettingsContextValue {
   }
   return ctx;
 }
+
+export function useSafeSettings(): SettingsContextValue | null {
+  return useContext(SettingsContext) ?? null;
+}

@@ -1,4 +1,5 @@
 import type { TokenUsage } from '@/lib/agent/types';
+import { resolveRequestImages } from '@/lib/llm/messageMapper';
 import type { AttentionKind, LlmPerformanceMetrics } from '@/lib/types/monitoring';
 import {
   TauriHttpStatusError,
@@ -61,6 +62,7 @@ export interface OllamaChatRequest {
   messages: Array<{
     role: string;
     content: string;
+    images?: string[];
     tool_calls?: OllamaToolCall[];
   }>;
   tools?: unknown[];
@@ -110,9 +112,12 @@ export async function* streamChat(
   const baseUrl = (req.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, '');
   const url = `${baseUrl}/api/chat`;
 
+  // P11-26: 이미지 경로를 data URL로 바꾼 뒤 전송한다.
+  const messages = await resolveRequestImages(req.messages);
+
   const payload = {
     model: req.model,
-    messages: req.messages,
+    messages,
     tools: req.tools && req.tools.length > 0 ? req.tools : undefined,
     stream: true,
     ...(req.think !== undefined ? { think: req.think } : {}),
@@ -417,7 +422,7 @@ export interface OllamaThinkingInfo {
 export async function showModel(
   baseUrl: string | undefined,
   model: string,
-): Promise<{ contextLength: number; supportsTools: boolean; thinking?: OllamaThinkingInfo }> {
+): Promise<{ contextLength: number; supportsTools: boolean; supportsVision: boolean; thinking?: OllamaThinkingInfo }> {
   const host = (baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, '');
   try {
     const data = await fetchShowPayload(host, model);
@@ -433,8 +438,10 @@ export async function showModel(
     }
 
     let supportsTools = true;
+    let supportsVision = false;
     if (Array.isArray(data.capabilities)) {
       supportsTools = data.capabilities.includes('tools');
+      supportsVision = data.capabilities.includes('vision');
     }
 
     // thinking 메타가 없으면 reasoning 미지원 구형 Ollama/모델로 간주 (undefined 유지).
@@ -447,7 +454,7 @@ export async function showModel(
           }
         : undefined;
 
-    return { contextLength, supportsTools, thinking };
+    return { contextLength, supportsTools, supportsVision, thinking };
   } catch (err) {
     if (err instanceof OllamaRequestError || err instanceof OllamaModelNotFoundError) {
       throw err;

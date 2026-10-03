@@ -91,33 +91,6 @@ export function AgentListPanel() {
     });
   };
 
-  const handleOpenMonitor = (agent: Agent) => {
-    openTab({
-      id: `agent-monitor:${agent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.monitor', { name: agent.name }),
-      meta: { agentId: agent.id },
-    });
-  };
-
-  const handleShowStats = (agent: Agent) => {
-    openTab({
-      id: `agent-stats:${agent.id}`,
-      type: 'agent-stats',
-      title: t('agentList.stats', { name: agent.name }),
-      meta: { agentId: agent.id, view: 'stats' },
-    });
-  };
-
-  const handleShowLogs = (agent: Agent) => {
-    openTab({
-      id: `agent-logs:${agent.id}`,
-      type: 'agent-stats',
-      title: t('agentList.log', { name: agent.name }),
-      meta: { agentId: agent.id, view: 'logs' },
-    });
-  };
-
   const handleEditAgent = (agent: Agent) => {
     openTab({
       id: `agent-editor:${agent.id}`,
@@ -233,11 +206,8 @@ export function AgentListPanel() {
               status={statuses[agent.id] ?? 'unknown'}
               isChecking={!!checkingMap[agent.id] || isCheckingAll}
               onCheckConnection={handleCheckSingle}
-              onOpenMonitor={handleOpenMonitor}
               isOnlyAgent={agents.length <= 1}
               onStartChat={handleStartChat}
-              onShowStats={handleShowStats}
-              onShowLogs={handleShowLogs}
               onEdit={handleEditAgent}
               onDuplicate={handleDuplicate}
               onSetDefault={handleSetDefault}

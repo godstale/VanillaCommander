@@ -34,7 +34,6 @@ import { appLogger } from '@/lib/logger/logger';
 import { bindSessionToAgent } from '@/lib/monitoring/agentPhaseTracker';
 import { monitoringCollector } from '@/lib/monitoring/monitoringCollector';
 import { isAutoMonitorEnabled } from '@/lib/types/agent';
-import { evalLock } from '@/lib/eval/evalLock';
 
 export type { ChatPersistence };
 
@@ -45,9 +44,23 @@ export interface UseChatOptions {
   apiKey?: string;
   streamChatFn?: LlmStreamChatFn;
   cwd?: string;
+  /** D10 백업 위치. 미지정 시 워크스페이스 작업 폴더를 쓴다. */
+  workFolder?: string;
+  /**
+   * P11-25: 전송 직전 에이전트 폴백 결정. true를 반환해야 전송이 진행된다.
+   * 세션 한정 변경(기본 에이전트 교체 아님)은 호출자가 tab meta 등으로 적용한다.
+   */
+  onResolveSendAgent?: (agent: Agent) => Promise<boolean>;
+  /** P11-24: 탐색기 위치·선택·작업 폴더를 프롬프트에 전달한다. */
+  commanderContext?: {
+    location?: string;
+    selection?: string[];
+    workFolder?: string;
+    allowedRoots?: string[];
+  };
   skills?: SkillManifest[];
   contextFiles?: ContextFileItem[];
-  /** 전역 압축 기본값 (SettingsModel). 0=auto 항목의 단계표 해석에 쓴다. */
+  /** 전역 압축 기본값 (defaults.ts). 0=auto 항목의 단계표 해석에 쓴다. */
   globalCompactionDefaults?: {
     defaultContextSize?: number;
     defaultReserveTokens?: number;
@@ -72,7 +85,7 @@ export interface UseChatReturn {
   effectiveThink: boolean | string | undefined;
   /** 전송 시점에 캡처한 유효 실행 설정 (말풍선 [i]·변경 안내의 기준) */
   configSnapshot: ChatConfigSnapshot;
-  sendMessage: (text: string) => Promise<void>;
+  sendMessage: (text: string, opts?: { images?: string[] }) => Promise<void>;
   steer: (text: string) => void;
   stop: () => void;
   error: Error | null;
@@ -135,12 +148,17 @@ export function useChat(
     });
   }, [sessionId, agentConfig.model, llmRuntime, compactionSettings]);
 
-  // Build tools from agent's enabledBuiltinTools
+  // Build tools from agent's enabledBuiltinTools.
+  // P11-23: 외부 에이전트는 자체 도구를 쓰므로 우리 루프 도구를 제공하지 않는다.
+  // P11-24: workFolder를 함께 넘겨 D10 백업 위치로 쓴다.
+  const isExternalAgent = agentConfig.llmProvider === 'external-agent';
+  const workFolderForTools = options.workFolder ?? workspaceCtx?.workFolder ?? undefined;
   const tools = useMemo(() => {
-    return getBuiltinTools(agentConfig.enabledBuiltinTools, {
+    return getBuiltinTools(isExternalAgent ? [] : agentConfig.enabledBuiltinTools, {
       workspaceRoot: effectiveCwd,
+      workFolder: workFolderForTools,
     });
-  }, [agentConfig.enabledBuiltinTools, effectiveCwd]);
+  }, [isExternalAgent, agentConfig.enabledBuiltinTools, effectiveCwd, workFolderForTools]);
 
   // Read skills and context files from options or context
   const rawSkills = useMemo(() => {
@@ -171,8 +189,9 @@ export function useChat(
       skills: filteredSkills,
       visualization: getVisualizationPromptSection(),
       cwd: effectiveCwd,
+      commander: options.commanderContext,
     });
-  }, [agentConfig.systemPrompt, tools, rawContextFiles, filteredSkills, effectiveCwd]);
+  }, [agentConfig.systemPrompt, tools, rawContextFiles, filteredSkills, effectiveCwd, options.commanderContext]);
 
   const systemPrompt = useMemo(() => {
     return formatSystemPrompt(currentSections);
@@ -192,6 +211,14 @@ export function useChat(
     toolsRef.current = tools;
     optionsRef.current = options;
   });
+
+  // D1: 세션 cwd(현재 탐색기 탭 경로 등)를 에이전트 허용 루트에 올린다.
+  useEffect(() => {
+    if (effectiveCwd) {
+      workspaceCtx?.addSessionRoots([effectiveCwd]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId, effectiveCwd]);
 
   // Agent instance ref
   const agentRef = useRef<VanillaAgent | null>(null);
@@ -410,7 +437,14 @@ export function useChat(
         baseUrl: runtime.baseUrl,
         apiKey: runtime.apiKey,
         initialMessages: initial,
-        streamChatFn: getStreamChatFn(runtime, opts.streamChatFn),
+        streamChatFn: getStreamChatFn(
+          {
+            ...runtime,
+            externalAgentId: cfg.externalAgentId,
+            cwd: cwdRef.current,
+          },
+          opts.streamChatFn,
+        ),
       });
 
       newAgent.subscribe((e) => eventHandlerRef.current(e));
@@ -476,12 +510,13 @@ export function useChat(
   }, [currentSections, messages.length]);
 
   const sendMessage = useCallback(
-    async (text: string): Promise<void> => {
+    async (text: string, opts?: { images?: string[] }): Promise<void> => {
       if (!text.trim()) return;
-      // 평가 실행 중에는 어떤 채팅도 LLM으로 전송·큐잉하지 않는다(D5).
-      // UI(입력 비활성화·배너)가 1차 방어선이며, 이 가드는 최후 방어선이다.
-      // useChat에는 번역 컨텍스트가 없으므로 조용히 복귀한다(알림은 UI 층이 담당).
-      if (evalLock.get()) return;
+      // P11-25: 전송 직전 폴백 결정 (기본 에이전트 장애 시 대체 선택).
+      if (optionsRef.current.onResolveSendAgent) {
+        const proceed = await optionsRef.current.onResolveSendAgent(agentConfigRef.current);
+        if (!proceed) return;
+      }
       lastPromptRef.current = text;
       setError(null);
       bindSessionToAgent(sessionId, agentConfigRef.current.id);
@@ -500,7 +535,12 @@ export function useChat(
           optionsRef.current.thinkOverride?.effort ?? agentConfigRef.current.reasoningEffort,
         ),
       );
-      const userMsg: AgentMessage = { role: 'user', content: text, config: snapshot };
+      const userMsg: AgentMessage = {
+        role: 'user',
+        content: text,
+        config: snapshot,
+        ...(opts?.images && opts.images.length > 0 ? { images: [...opts.images] } : {}),
+      };
       setMessages((prev) => [...prev, userMsg]);
       persistedCountRef.current += 1;
       await persistence.saveUserMessage?.(sessionId, userMsg);

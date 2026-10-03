@@ -7,6 +7,7 @@ import React, {
   useRef,
 } from 'react';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
+import { isSupportedTabType } from '@/lib/types/workspaceTab';
 import * as settingsRepo from '@/lib/db/repositories/settingsRepo';
 import { useSafeWorkspace } from './WorkspaceContext';
 
@@ -59,7 +60,8 @@ export function WorkspaceTabsProvider({
 }) {
   const workspace = useSafeWorkspace();
   const hasWorkspaceContext = workspace !== null;
-  const workspaceRoot = workspace?.workspaceRoot ?? null;
+  // P11-11(V7·D2): 작업 폴더가 있으면 폴더로 취급한다.
+  const workspaceRoot = workspace?.workFolder ?? workspace?.workspaceRoot ?? null;
 
   const [internalTabs, setInternalTabs] = useState<WorkspaceTab[]>([]);
   const [internalActiveTabId, setInternalActiveTabId] = useState<string | null>(null);
@@ -73,10 +75,10 @@ export function WorkspaceTabsProvider({
   const activeTabSnapshotRef = useRef<string | null>(null);
   const isLoadedRef = useRef(false);
 
-  const isWithoutWorkspace = hasWorkspaceContext && !workspaceRoot;
-  const tabs = isWithoutWorkspace ? [] : internalTabs;
-  const activeTabId = isWithoutWorkspace ? null : internalActiveTabId;
-  const secondaryActiveTabId = isWithoutWorkspace ? null : internalSecondaryActiveTabId;
+  // P11-11(D2): 탭은 폴더 없이도 열린다. 세션·탭은 전역 DB에 저장된다.
+  const tabs = internalTabs;
+  const activeTabId = internalActiveTabId;
+  const secondaryActiveTabId = internalSecondaryActiveTabId;
 
   const primaryTabs = tabs.filter((t) => (t.pane ?? 'primary') === 'primary');
   const secondaryTabs = tabs.filter((t) => t.pane === 'secondary');
@@ -107,11 +109,16 @@ export function WorkspaceTabsProvider({
     void (async () => {
       try {
         const settings = await settingsRepo.getSettings();
-        if (active && (!hasWorkspaceContext || workspaceRoot)) {
-          if (settings.openTabs && settings.openTabs.length > 0) {
-            setInternalTabs(settings.openTabs);
-            const savedPrimary = settings.openTabs.filter((t) => (t.pane ?? 'primary') === 'primary');
-            const savedSecondary = settings.openTabs.filter((t) => t.pane === 'secondary');
+        // P11-11(D2): 탭은 전역 DB에서 항상 복원한다.
+        if (active) {
+          // P11-01: 삭제된 탭 타입('eval', 'agent-stats')은 복원 시 조용히 버린다.
+          const supportedTabs = settings.openTabs.filter((t) =>
+            isSupportedTabType(t.type),
+          );
+          if (supportedTabs.length > 0) {
+            setInternalTabs(supportedTabs);
+            const savedPrimary = supportedTabs.filter((t) => (t.pane ?? 'primary') === 'primary');
+            const savedSecondary = supportedTabs.filter((t) => t.pane === 'secondary');
             setInternalActiveTabId(
               settings.activeTabId && savedPrimary.some((t) => t.id === settings.activeTabId)
                 ? settings.activeTabId
@@ -141,7 +148,7 @@ export function WorkspaceTabsProvider({
 
   // 500ms debounced persistence to app_settings
   useEffect(() => {
-    if (!isLoaded || isWithoutWorkspace) return;
+    if (!isLoaded) return;
 
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
@@ -159,7 +166,7 @@ export function WorkspaceTabsProvider({
         clearTimeout(debounceTimerRef.current);
       }
     };
-  }, [internalTabs, internalActiveTabId, isLoaded, isWithoutWorkspace]);
+  }, [internalTabs, internalActiveTabId, isLoaded]);
 
   // 전환 시 플러시용 스냅샷을 최신으로 유지한다.
   useEffect(() => {
@@ -172,9 +179,7 @@ export function WorkspaceTabsProvider({
       tab: Omit<WorkspaceTab, 'id'> & { id?: string },
       pane: 'primary' | 'secondary' = 'primary',
     ) => {
-      if (hasWorkspaceContext && !workspaceRoot) {
-        return '';
-      }
+      // P11-11(D2): 폴더 없이도 탭을 연다.
       const targetId = tab.id ?? generateTabId(tab.type);
 
       setInternalTabs((prev) => {
@@ -192,7 +197,7 @@ export function WorkspaceTabsProvider({
       }
       return targetId;
     },
-    [hasWorkspaceContext, workspaceRoot],
+    [],
   );
 
   const closeTab = useCallback((id: string) => {

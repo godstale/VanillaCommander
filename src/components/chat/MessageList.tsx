@@ -12,9 +12,12 @@ export interface MessageListProps {
   isStreaming: boolean;
   /** 스냅샷이 없는 구 메시지에 표시할 현재 설정 폴백. */
   fallbackConfig?: ChatConfigSnapshot;
+  /** P11-26: 어시스턴트 응답 위키 저장. 미지정 시 버튼 숨김. */
+  onSaveToWiki?: (message: AgentMessage) => void;
+  isSavingToWiki?: boolean;
 }
 
-export function MessageList({ messages, isStreaming, fallbackConfig }: MessageListProps) {
+export function MessageList({ messages, isStreaming, fallbackConfig, onSaveToWiki, isSavingToWiki = false }: MessageListProps) {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
@@ -104,6 +107,8 @@ export function MessageList({ messages, isStreaming, fallbackConfig }: MessageLi
               message={msg}
               isStreaming={isStreaming && index === messages.length - 1}
               fallbackConfig={fallbackConfig}
+              onSaveToWiki={onSaveToWiki}
+              isSavingToWiki={isSavingToWiki}
             />
           );
         })}

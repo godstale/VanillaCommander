@@ -15,6 +15,13 @@ import { chatQueueManager } from '@/lib/agent/chatQueueManager';
 
 const TRUST_STORAGE_KEY = 'vanilla-commander_trusted_workspaces';
 
+/** 마지막으로 Rust에 동기화한 허용 루트 (D1, 프롬프트 표시용). */
+let lastAllowedRoots: string[] = [];
+
+export function getLastAllowedRoots(): string[] {
+  return [...lastAllowedRoots];
+}
+
 function getStoredTrustMap(): Record<string, boolean> {
   try {
     const raw = localStorage.getItem(TRUST_STORAGE_KEY);
@@ -51,6 +58,15 @@ function saveRecentWorkspaces(list: string[]): void {
   }
 }
 
+export interface WorkFolderLayout {
+  workFolder: string;
+  wikiDir: string;
+  inboxDir: string;
+  backupDir: string;
+  configDir: string;
+  skillsDir: string;
+}
+
 export interface WorkspaceContextValue {
   workspaceRoot: string | null;
   /**
@@ -64,6 +80,17 @@ export interface WorkspaceContextValue {
   setTrustModalOpen: (open: boolean) => void;
   trustCurrentWorkspace: () => void;
   rejectCurrentWorkspace: () => void;
+  /** 작업 폴더 (D2, P11-04). null이면 workspaceRoot를 그대로 쓴다. */
+  workFolder: string | null;
+  /** 작업 폴더 변경 + 레이아웃 생성 + 허용 루트 동기화. busy면 false. */
+  setWorkFolder: (folder: string | null) => Promise<boolean>;
+  /** 현재 작업 폴더에 wiki/wiki-inbox/backup/config/skills를 만든다. */
+  ensureWorkFolderLayout: () => Promise<WorkFolderLayout | null>;
+  /**
+   * `@` 참조 경로를 허용 루트에 세션 한정으로 추가한다 (D1, P11-16).
+   * 폴더 변경 시 초기화된다.
+   */
+  addSessionRoots: (paths: string[]) => void;
 }
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -78,6 +105,46 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   }, [workspaceRoot]);
 
   const [recentWorkspaces, setRecentWorkspaces] = useState<string[]>(getStoredRecentWorkspaces);
+
+  const [workFolder, setWorkFolderState] = useState<string | null>(null);
+  const workFolderRef = useRef<string | null>(null);
+  useEffect(() => {
+    workFolderRef.current = workFolder;
+  }, [workFolder]);
+
+  const sessionRootsRef = useRef<string[]>([]);
+
+  /** 에이전트 허용 루트(작업 폴더 + 등록 폴더)를 Rust에 동기화한다 (D1). */
+  const pushAllowedRoots = useCallback(async (extraRoots: string[]) => {
+    try {
+      const settings = await settingsRepo.getSettings();
+      const roots = Array.from(
+        new Set(
+          [...extraRoots, ...(settings.agentAllowedRoots ?? []), ...sessionRootsRef.current].filter(
+            (r): r is string => typeof r === 'string' && r.length > 0,
+          ),
+        ),
+      );
+      if (roots.length > 0) {
+        await invoke('set_agent_allowed_roots', { roots });
+        lastAllowedRoots = roots;
+      }
+    } catch {
+      // ignore in non-Tauri
+    }
+  }, []);
+
+  const addSessionRoots = useCallback((paths: string[]) => {
+    const next = Array.from(
+      new Set(
+        [...sessionRootsRef.current, ...paths].filter(
+          (p): p is string => typeof p === 'string' && p.length > 0,
+        ),
+      ),
+    );
+    sessionRootsRef.current = next;
+    void pushAllowedRoots(next);
+  }, [pushAllowedRoots]);
 
   const [trustModalOpen, setTrustModalOpen] = useState<boolean>(() => {
     const initialRoot = localStorage.getItem('vanilla-commander_current_workspace_root');
@@ -106,19 +173,17 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
           setActiveWorkspaceRoot(settings.lastWorkspaceRoot);
           setWorkspaceRootState(settings.lastWorkspaceRoot);
           localStorage.setItem('vanilla-commander_current_workspace_root', settings.lastWorkspaceRoot);
-          try {
-            await invoke('set_active_workspace', { path: settings.lastWorkspaceRoot });
-          } catch {
-            // ignore in non-Tauri
-          }
         } else if (workspaceRoot) {
           setActiveWorkspaceRoot(workspaceRoot);
-          try {
-            await invoke('set_active_workspace', { path: workspaceRoot });
-          } catch {
-            // ignore in non-Tauri
-          }
         }
+        if (settings.workFolder) {
+          setWorkFolderState(settings.workFolder);
+        }
+        void pushAllowedRoots(
+          [settings.workFolder, workspaceRoot, settings.lastWorkspaceRoot].filter(
+            (r): r is string => typeof r === 'string' && r.length > 0,
+          ),
+        );
 
         if (settings.trustedWorkspaces) {
           const map = getStoredTrustMap();
@@ -145,20 +210,22 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     return () => {
       active = false;
     };
-  }, [workspaceRoot]);
+  }, [workspaceRoot, pushAllowedRoots]);
 
   const setWorkspaceRoot = useCallback((root: string | null) => {
     if (root !== workspaceRootRef.current && chatQueueManager.getBusySessionId() !== null) {
       console.warn('Workspace change blocked: LLM session is running.');
       return false;
     }
+    // 폴더가 바뀌면 세션 한정 루트를 초기화한다.
+    sessionRootsRef.current = [];
     setActiveWorkspaceRoot(root);
     setWorkspaceRootState(root);
-    try {
-      void invoke('set_active_workspace', { path: root });
-    } catch {
-      // ignore in non-Tauri
-    }
+    void pushAllowedRoots(
+      [workFolderRef.current, root].filter(
+        (r): r is string => typeof r === 'string' && r.length > 0,
+      ),
+    );
     if (root) {
       localStorage.setItem('vanilla-commander_current_workspace_root', root);
       setRecentWorkspaces((prev) => {
@@ -183,7 +250,55 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       void settingsRepo.updateSettings({ lastWorkspaceRoot: null });
     }
     return true;
+  }, [pushAllowedRoots]);
+
+  const ensureWorkFolderLayout = useCallback(async (): Promise<WorkFolderLayout | null> => {
+    const folder = workFolderRef.current ?? workspaceRootRef.current;
+    if (!folder) return null;
+    try {
+      return await invoke<WorkFolderLayout>('ensure_work_folder_layout', {
+        workFolder: folder,
+      });
+    } catch {
+      // ignore in non-Tauri
+      return null;
+    }
   }, []);
+
+  const setWorkFolder = useCallback(async (folder: string | null): Promise<boolean> => {
+    if (folder !== workFolderRef.current && chatQueueManager.getBusySessionId() !== null) {
+      console.warn('Work folder change blocked: LLM session is running.');
+      return false;
+    }
+    // 폴더가 바뀌면 세션 한정 루트를 초기화한다.
+    sessionRootsRef.current = [];
+    if (folder) {
+      try {
+        await invoke('ensure_work_folder_layout', { workFolder: folder });
+      } catch {
+        // ignore in non-Tauri (DB 저장은 계속한다)
+      }
+      setWorkFolderState(folder);
+      workFolderRef.current = folder;
+      try {
+        await settingsRepo.updateSettings({ workFolder: folder });
+      } catch {
+        // ignore
+      }
+    } else {
+      setWorkFolderState(null);
+      workFolderRef.current = null;
+      try {
+        await settingsRepo.updateSettings({ workFolder: null });
+      } catch {
+        // ignore
+      }
+    }
+    void pushAllowedRoots(
+      [folder].filter((r): r is string => typeof r === 'string' && r.length > 0),
+    );
+    return true;
+  }, [pushAllowedRoots]);
 
   const trustCurrentWorkspace = useCallback(() => {
     if (!workspaceRoot) return;
@@ -235,6 +350,10 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       setTrustModalOpen,
       trustCurrentWorkspace,
       rejectCurrentWorkspace,
+      workFolder,
+      setWorkFolder,
+      ensureWorkFolderLayout,
+      addSessionRoots,
     }),
     [
       workspaceRoot,
@@ -244,6 +363,10 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       trustModalOpen,
       trustCurrentWorkspace,
       rejectCurrentWorkspace,
+      workFolder,
+      setWorkFolder,
+      ensureWorkFolderLayout,
+      addSessionRoots,
     ],
   );
 

@@ -18,16 +18,22 @@ import {
   Lock,
   Brain,
   Save,
+  ImagePlus,
+  X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { SkillManifest } from '@/lib/types/skill';
 import type { ReasoningEffort, ReasoningMode } from '@/lib/types/agent';
+import type { VisionVerdict } from '@/lib/llm/vision';
 import { useSafeSkills } from '@/lib/context/SkillsContext';
+import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { resolveSkillInvocation, parseSkillCommand } from '@/lib/skills/invokeSkill';
+import { resolveMentions } from '@/lib/chat/mentions';
+import { MentionPopup } from './MentionPopup';
+import { useMention } from '@/hooks/useMention';
 
 import { ContextGauge } from './ContextGauge';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
-import { useEvalLock } from '@/lib/eval/evalLock';
 import { cn } from '@/lib/utils';
 
 export interface SlashCommandOption {
@@ -52,8 +58,8 @@ const BUILTIN_SLASH_COMMANDS: SlashCommandOption[] = [
 ];
 
 export interface ChatInputProps {
-  onSend: (text: string) => void;
-  onSteer: (text: string) => void;
+  onSend: (text: string, images?: string[]) => void;
+  onSteer: (text: string, images?: string[]) => void;
   onStop: () => void;
   onCompact?: (instructions?: string) => Promise<void> | void;
   onOpenCompactDialog?: () => void;
@@ -63,6 +69,7 @@ export interface ChatInputProps {
     type: 'message' | 'slash_command' | 'skill';
     commandName?: string;
     commandArgs?: string;
+    images?: string[];
   }) => void;
   isStreaming: boolean;
   isLockedByOtherSession?: boolean;
@@ -97,6 +104,13 @@ export interface ChatInputProps {
    * 전역 키를 사용한다(테스트/레거시 호환).
    */
   sessionId?: string;
+  /** `@` 참조 해석 기준 폴더. 미지정 시 상대 `@`는 텍스트 그대로 남는다. */
+  cwd?: string | null;
+  /**
+   * P11-26: 귀속 에이전트의 비전 판정. 'no'면 이미지 첨부 시 전송 단계에서
+   * 폴백 다이얼로그가 열린다(첨부 자체는 막지 않는다).
+   */
+  vision?: VisionVerdict;
 }
 
 export function ChatInput({
@@ -128,9 +142,12 @@ export function ChatInput({
   canSaveLog = false,
   hasSavedLog = false,
   sessionId,
+  cwd = null,
+  vision = 'unknown',
 }: ChatInputProps) {
   const { t } = useLanguage();
-  const evalLocked = useEvalLock() !== null;
+  const workspace = useSafeWorkspace();
+  const mention = useMention(cwd);
   const safeSkillsCtx = useSafeSkills();
   const availableSkills = useMemo(() => {
     return skillsProp ?? safeSkillsCtx?.skills ?? [];
@@ -140,6 +157,58 @@ export function ChatInput({
   const [autocompleteDismissed, setAutocompleteDismissed] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // P11-26: 첨부 이미지(data URL). DB에는 경로 저장이 원칙이나, 입력 단계의
+  // 클립보드·드래그·파일 선택은 브라우저 File 객체이므로 data URL로 들고
+  // 전송 직전 messageMapper가 Ollama images/OpenAI image_url로 변환한다.
+  const MAX_IMAGES = 4;
+  const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+  const [images, setImages] = useState<string[]>([]);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const readFileAsDataUrl = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result ?? ''));
+      reader.onerror = () => reject(new Error('read failed'));
+      reader.readAsDataURL(file);
+    });
+
+  const addImageFiles = async (files: FileList | File[]) => {
+    const list = Array.from(files).filter((f) => f.type.startsWith('image/'));
+    if (list.length === 0) return;
+    const room = MAX_IMAGES - images.length;
+    if (room <= 0) {
+      setErrorMessage(t('chatInput.imageLimit', { n: MAX_IMAGES }));
+      return;
+    }
+    const accepted = list.slice(0, room);
+    if (list.length > room) {
+      setErrorMessage(t('chatInput.imageLimit', { n: MAX_IMAGES }));
+    }
+    const next: string[] = [];
+    for (const file of accepted) {
+      if (file.size > MAX_IMAGE_BYTES) {
+        setErrorMessage(t('chatInput.imageTooBig'));
+        continue;
+      }
+      try {
+        const url = await readFileAsDataUrl(file);
+        if (url.startsWith('data:image/')) next.push(url);
+      } catch {
+        setErrorMessage(t('chatInput.imageReadFailed'));
+      }
+    }
+    if (next.length > 0) {
+      setImages((prev) => [...prev, ...next].slice(0, MAX_IMAGES));
+      setErrorMessage(null);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -255,7 +324,7 @@ export function ChatInput({
   }, [autocompleteQuery, availableSkills]);
 
   const isAutocompleteOpen =
-    autocompleteQuery !== null && filteredOptions.length > 0 && !evalLocked;
+    autocompleteQuery !== null && filteredOptions.length > 0;
 
   // Derive clamped selected index without setting state in effect
   const activeIndex =
@@ -294,44 +363,66 @@ export function ChatInput({
   };
 
   const handleSubmit = async () => {
-    if (isLockedByOtherSession || isAgentDeleted || evalLocked) return;
+    if (isLockedByOtherSession || isAgentDeleted) return;
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed && images.length === 0) return;
 
     setErrorMessage(null);
+
+    // P11-16: `@` 참조를 먼저 해석한다 (파일 인라인 + 허용 루트 등록).
+    // `@`가 없으면 동기 경로를 유지한다 (기존 테스트·동작 호환).
+    let sendText = trimmed;
+    if (trimmed.includes('@')) {
+      try {
+        const resolved = await resolveMentions(trimmed, { cwd: cwd ?? undefined });
+        if (resolved.refs.length > 0) {
+          workspace?.addSessionRoots(resolved.refs.map((r) => r.path));
+        }
+        sendText = resolved.text;
+      } catch {
+        // 해석 실패는 원문 전송으로 폴백한다.
+      }
+    }
 
     const resetAfterSend = () => {
       pushHistory(trimmed);
       setText('');
+      setImages([]);
       setAutocompleteDismissed(false);
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
     };
 
+    // 첨부 이미지는 텍스트와 함께 전달한다. 텍스트가 비어 있으면
+    // 이미지 설명 요청으로 취급하되 빈 전송은 막는다.
+    const attachedImages = images.length > 0 ? [...images] : undefined;
+
     // If this session is busy (running LLM or has pending queue items) and onQueue is available,
     // enqueue the request instead of executing immediately or overwriting
     if ((isThisSessionBusy || isStreaming) && onQueue) {
       // 1. Check if slash command
-      const slashMatch = trimmed.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
+      const slashMatch = sendText.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
       if (slashMatch) {
         const commandName = slashMatch[1].toLowerCase();
         const args = slashMatch[2]?.trim();
         onQueue({
-          text: trimmed,
+          text: sendText,
           type: 'slash_command',
           commandName,
           commandArgs: args,
+          images: attachedImages,
         });
         resetAfterSend();
         return;
       }
 
       // 2. Check if skill command
-      if (parseSkillCommand(trimmed)) {
+      if (parseSkillCommand(sendText)) {
         onQueue({
-          text: trimmed,
+          text: sendText,
           type: 'skill',
+          images: attachedImages,
         });
         resetAfterSend();
         return;
@@ -339,15 +430,16 @@ export function ChatInput({
 
       // 3. Normal user message
       onQueue({
-        text: trimmed,
+        text: sendText,
         type: 'message',
+        images: attachedImages,
       });
       resetAfterSend();
       return;
     }
 
     // Check built-in slash commands
-    const slashMatch = trimmed.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
+    const slashMatch = sendText.match(/^\/(\w+)(?:\s+([\s\S]*))?$/);
     if (slashMatch) {
       const commandName = slashMatch[1].toLowerCase();
       const args = slashMatch[2]?.trim();
@@ -376,11 +468,11 @@ export function ChatInput({
       }
     }
 
-    let messageToSend = trimmed;
+    let messageToSend = sendText;
 
-    if (parseSkillCommand(trimmed)) {
+    if (parseSkillCommand(sendText)) {
       try {
-        const resolved = await resolveSkillInvocation(trimmed, availableSkills);
+        const resolved = await resolveSkillInvocation(sendText, availableSkills);
         if (resolved) {
           messageToSend = resolved;
         }
@@ -393,9 +485,11 @@ export function ChatInput({
     }
 
     if (isStreaming) {
-      onSteer(messageToSend);
+      if (attachedImages) onSteer(messageToSend, attachedImages);
+      else onSteer(messageToSend);
     } else {
-      onSend(messageToSend);
+      if (attachedImages) onSend(messageToSend, attachedImages);
+      else onSend(messageToSend);
     }
 
     resetAfterSend();
@@ -405,6 +499,39 @@ export function ChatInput({
     // Prevent sending during IME composition (e.g. Korean / Japanese / Chinese typing)
     if (e.nativeEvent.isComposing) {
       return;
+    }
+
+    // P11-16: `@` 참조 팝업이 열려 있으면 슬래시 자동완성보다 우선한다.
+    if (mention.open) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        mention.move(1);
+        return;
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        mention.move(-1);
+        return;
+      }
+      if (e.key === 'Enter' || e.key === 'Tab') {
+        e.preventDefault();
+        mention.pickCurrent(text, (next, cursor) => {
+          setText(next);
+          requestAnimationFrame(() => {
+            const el = textareaRef.current;
+            if (el) {
+              el.focus();
+              el.setSelectionRange(cursor, cursor);
+            }
+          });
+        });
+        return;
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        mention.close();
+        return;
+      }
     }
 
     if (isAutocompleteOpen) {
@@ -464,8 +591,9 @@ export function ChatInput({
     }
   };
 
-  const handleTextChange = (val: string) => {
+  const handleTextChange = (val: string, cursor: number) => {
     setText(val);
+    mention.sync(val, cursor);
     setAutocompleteDismissed(false);
     if (histIndex !== null) setHistIndex(null);
     if (errorMessage) {
@@ -473,9 +601,30 @@ export function ChatInput({
     }
   };
 
-  const defaultPlaceholder = evalLocked
-    ? t('eval.lock.inputPlaceholder')
-    : isAgentDeleted
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const files = e.clipboardData?.files;
+    if (files && files.length > 0) {
+      const imgs = Array.from(files).filter((f) => f.type.startsWith('image/'));
+      if (imgs.length > 0) {
+        e.preventDefault();
+        void addImageFiles(imgs);
+      }
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) {
+      const imgs = Array.from(files).filter((f) => f.type.startsWith('image/'));
+      if (imgs.length > 0) {
+        e.preventDefault();
+        setIsDragOver(false);
+        void addImageFiles(imgs);
+      }
+    }
+  };
+
+  const defaultPlaceholder = isAgentDeleted
     ? t('chatInput.agentDeletedPlaceholder')
     : isLockedByOtherSession
     ? t('chatInput.lockedOther')
@@ -485,19 +634,47 @@ export function ChatInput({
 
   // LLM 동작 중에는 다음 턴에 적용되는 실행 설정도 변경할 수 없다.
   // (입력 텍스트의 대기 큐 추가는 허용하되 reasoning/effort 셀렉터만 잠근다.)
-  // 평가 잠금 중에는 입력·전송·큐·슬래시·셀렉터가 모두 막힌다(D5).
   const settingsLocked =
-    isAgentDeleted || isStreaming || isThisSessionBusy || isLockedByOtherSession || evalLocked;
+    isAgentDeleted || isStreaming || isThisSessionBusy || isLockedByOtherSession;
   const settingsLockTitle = settingsLocked && !isAgentDeleted ? t('chatInput.settingsLocked') : undefined;
 
   return (
     <div
       style={customHeight ? { height: `${customHeight}px` } : undefined}
+      onDragOver={(e) => {
+        if (e.dataTransfer?.types.includes('Files')) {
+          e.preventDefault();
+          setIsDragOver(true);
+        }
+      }}
+      onDragLeave={() => setIsDragOver(false)}
+      onDrop={handleDrop}
       className={cn(
         'relative border border-border rounded-xl bg-background shadow-xs focus-within:ring-1 focus-within:ring-primary focus-within:border-primary transition-all',
         customHeight ? 'flex flex-col overflow-hidden' : '',
+        isDragOver && 'ring-1 ring-primary border-primary',
       )}
     >
+      {/* Mention popup (@ 파일 참조) */}
+      {mention.open && !isAutocompleteOpen && (
+        <MentionPopup
+          items={mention.items}
+          index={mention.index}
+          onPick={() => {
+            mention.pickCurrent(text, (next, cursor) => {
+              setText(next);
+              requestAnimationFrame(() => {
+                const el = textareaRef.current;
+                if (el) {
+                  el.focus();
+                  el.setSelectionRange(cursor, cursor);
+                }
+              });
+            });
+          }}
+          onHover={(i) => mention.move(i - mention.index)}
+        />
+      )}
       {/* Autocomplete popup */}
       {isAutocompleteOpen && (
         <div
@@ -694,18 +871,47 @@ export function ChatInput({
       </div>
 
       <div className={cn('relative', customHeight ? 'flex-1 min-h-0 flex flex-col' : '')}>
+        {/* P11-26: 첨부 이미지 썸네일 */}
+        {images.length > 0 && (
+          <div className="flex items-center gap-2 px-3.5 pt-2 overflow-x-auto">
+            {images.map((src, i) => (
+              <div key={`${i}-${src.slice(0, 32)}`} className="relative shrink-0 group/thumb">
+                <img
+                  src={src}
+                  alt={t('chatInput.imageAlt', { n: i + 1 })}
+                  className="h-14 w-14 rounded-lg object-cover border border-border"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeImage(i)}
+                  aria-label={t('chatInput.imageRemove', { n: i + 1 })}
+                  className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center opacity-0 group-hover/thumb:opacity-100 focus:opacity-100 transition-opacity cursor-pointer"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {vision === 'no' && images.length > 0 && (
+          <p className="px-3.5 pt-1 text-[11px] text-warning">
+            {t('chatInput.noVisionHint')}
+          </p>
+        )}
         <textarea
           ref={textareaRef}
           rows={1}
           value={text}
-          onChange={(e) => handleTextChange(e.target.value)}
+          onChange={(e) => handleTextChange(e.target.value, e.target.selectionStart ?? e.target.value.length)}
+          onSelect={(e) => mention.sync(text, e.currentTarget.selectionStart ?? text.length)}
           onKeyDown={handleKeyDown}
-          disabled={isLockedByOtherSession || isAgentDeleted || evalLocked}
+          onPaste={handlePaste}
+          disabled={isLockedByOtherSession || isAgentDeleted}
           placeholder={placeholder || defaultPlaceholder}
           style={customHeight ? undefined : { maxHeight: `${maxHeight}px` }}
           className={cn(
             'w-full resize-none bg-transparent px-3.5 py-2.5 pr-20 text-sm text-foreground placeholder:text-muted-foreground/60 border-0 outline-none focus:outline-none focus:ring-0 shadow-none leading-normal font-sans',
-            (isLockedByOtherSession || isAgentDeleted || evalLocked) && 'opacity-60 cursor-not-allowed',
+            (isLockedByOtherSession || isAgentDeleted) && 'opacity-60 cursor-not-allowed',
             customHeight
               ? 'flex-1 min-h-0 h-full overflow-y-auto'
               : 'min-h-[38px] overflow-y-auto',
@@ -713,6 +919,30 @@ export function ChatInput({
         />
 
         <div className="absolute right-2.5 bottom-2 flex items-center gap-1.5">
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+            aria-hidden
+            tabIndex={-1}
+            onChange={(e) => {
+              if (e.target.files) void addImageFiles(e.target.files);
+              e.target.value = '';
+            }}
+          />
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isLockedByOtherSession || isAgentDeleted}
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors disabled:opacity-30"
+            title={vision === 'no' ? t('chatInput.attachNoVision') : t('chatInput.attach')}
+          >
+            <ImagePlus className="h-4 w-4" />
+          </Button>
           {isStreaming && (
             <Button
               type="button"
@@ -730,12 +960,10 @@ export function ChatInput({
             type="button"
             size="icon"
             onClick={() => void handleSubmit()}
-            disabled={isLockedByOtherSession || isAgentDeleted || evalLocked || !text.trim()}
+            disabled={isLockedByOtherSession || isAgentDeleted || (!text.trim() && images.length === 0)}
             className="h-8 w-8 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-30 disabled:pointer-events-none"
             title={
-              evalLocked
-                ? t('eval.lock.chatBlocked')
-                : isAgentDeleted
+              isAgentDeleted
                 ? t('chatInput.agentDeletedBanner')
                 : isLockedByOtherSession
                 ? t('chatInput.sendLocked')

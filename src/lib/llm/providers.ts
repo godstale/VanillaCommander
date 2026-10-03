@@ -8,8 +8,8 @@ export interface LlmProviderPreset {
   defaultBaseUrl: string;
   /** 해당 Provider 선택 시 제안하는 대표 모델 ID (사용자 수정 가능) */
   defaultModel?: string;
-  /** Provider 선택 드롭다운 그룹 (로컬 직접연동 / 클라우드 / 게이트웨이) */
-  category: 'local' | 'cloud' | 'gateway';
+  /** Provider 선택 드롭다운 그룹 (로컬 직접연동 / 클라우드 / 게이트웨이 / 외부 에이전트) */
+  category: 'local' | 'cloud' | 'gateway' | 'external';
   /** OpenAI 호환 규격 여부 (ollama만 false) */
   openAiCompatible: boolean;
   /** apiKey 입력란을 노출할지 여부 */
@@ -236,6 +236,18 @@ export const LLM_PROVIDER_PRESETS: Record<LlmProviderKind, LlmProviderPreset> = 
     supportsModelList: true,
     supportsAutoContextSize: false,
     hint: '다중 모델 게이트웨이 (Claude·Gemini·Hermes 등 통합 연동, API 키 필수)',
+  },
+  'external-agent': {
+    kind: 'external-agent',
+    label: '외부 에이전트',
+    defaultBaseUrl: '',
+    category: 'external',
+    openAiCompatible: false,
+    supportsApiKey: false,
+    requiresApiKey: false,
+    supportsModelList: false,
+    supportsAutoContextSize: false,
+    hint: 'Claude Code·Codex 등 외부 에이전트 CLI로 매 턴 1회 실행한다 (P11-22)',
   },
 };
 

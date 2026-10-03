@@ -1,9 +1,0 @@
-features:
-  evals:
-    enabled: true
-    maxCandidates: 24
-  arena:
-    enabled: false
-    minVotes: 30
-  agents:
-    maxSteps: 40

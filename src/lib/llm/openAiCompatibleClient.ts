@@ -1,4 +1,5 @@
 import type { TokenUsage } from '@/lib/agent/types';
+import { resolveRequestImages } from '@/lib/llm/messageMapper';
 import type { LlmPerformanceMetrics } from '@/lib/types/monitoring';
 import {
   TauriHttpStatusError,
@@ -66,7 +67,13 @@ export interface OpenAiChatRequest {
   model: string;
   messages: Array<{
     role: string;
-    content: string | null;
+    content:
+      | string
+      | null
+      | Array<
+          | { type: 'text'; text: string }
+          | { type: 'image_url'; image_url: { url: string } }
+        >;
     tool_calls?: Array<{
       id: string;
       type: 'function';
@@ -184,12 +191,15 @@ export async function* streamChat(
   const url = joinUrl(baseUrl, '/chat/completions');
   const startedAt = performance.now();
 
+  // P11-26: 이미지 경로를 data URL로 바꾼 뒤 전송한다.
+  const messages = await resolveRequestImages(req.messages);
+
   const reasoningEffort =
     req.think === true ? 'medium' : typeof req.think === 'string' ? req.think : undefined;
 
   const body: Record<string, unknown> = {
     model: req.model,
-    messages: req.messages,
+    messages,
     stream: true,
     ...(req.temperature !== undefined ? { temperature: req.temperature } : {}),
     ...(req.topP !== undefined ? { top_p: req.topP } : {}),

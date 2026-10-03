@@ -1,9 +1,9 @@
 import type { SidePanelView } from '@/lib/types/workspaceTab';
 import { ChatSessionList } from '@/components/chatsessions/ChatSessionList';
 import { AgentListPanel } from '@/components/agents/AgentListPanel';
-import { MonitoringListPanel } from '@/components/monitoring/MonitoringListPanel';
-import { EvalListPanel } from '@/components/eval/EvalListPanel';
-import { FileTree } from '@/components/explorer/FileTree';
+import { ExplorerPanel } from '@/components/explorer/ExplorerPanel';
+import { WikiPanel } from '@/components/wiki/WikiPanel';
+import { MacroPanel } from '@/components/macros/MacroPanel';
 
 export interface SidePanelProps {
   activeView: SidePanelView;
@@ -19,12 +19,12 @@ export function SidePanel({ activeView }: SidePanelProps) {
       return <ChatSessionList />;
     case 'agents':
       return <AgentListPanel />;
-    case 'monitoring':
-      return <MonitoringListPanel />;
-    case 'evaluation':
-      return <EvalListPanel />;
     case 'explorer':
-      return <FileTree />;
+      return <ExplorerPanel />;
+    case 'wiki':
+      return <WikiPanel />;
+    case 'macros':
+      return <MacroPanel />;
     default:
       return null;
   }

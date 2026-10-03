@@ -35,6 +35,7 @@ function makeSession(
     id,
     agentId,
     workspaceRoot: null,
+    origin: 'chat',
     title: id,
     createdAt: updatedAt,
     updatedAt,

@@ -4,9 +4,70 @@ import {
   getActiveWorkspaceRoot,
   type SqlDatabase,
 } from '@/lib/db/client';
+import { z } from 'zod';
 import type { AppSettings } from '@/lib/types/chat';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import type { ApprovalMode } from '@/lib/types/agent';
+
+// P11-04: 위키·파서 설정 블록. 화면(P11-31/P11-34)과 파이프라인(W3)은 각 작업이 소유하고,
+// 저장소 스키마만 여기서 둔다.
+export const WikiSettingsSchema = z.object({
+  watchEnabled: z.boolean().default(false),
+  watchFolders: z.array(z.string()).default([]),
+  moveAfterIngest: z.boolean().default(true),
+  /** ''이면 <WorkFolder>/wiki-inbox. */
+  inboxDir: z.string().default(''),
+  classification: z.enum(['auto', 'date', 'serial', 'frequency']).default('auto'),
+  allowedExtensions: z.array(z.string()).default([
+    'pdf', 'docx', 'xlsx', 'xls', 'csv', 'md', 'txt', 'png', 'jpg', 'jpeg',
+  ]),
+  maxFileMb: z.number().default(20),
+  excludeGlobs: z.array(z.string()).default([]),
+  /** ''이면 내장 기본 프롬프트. */
+  prompt: z.string().default(''),
+  /** null이면 기본 에이전트. */
+  agentId: z.string().nullable().default(null),
+});
+export type WikiSettings = z.infer<typeof WikiSettingsSchema>;
+
+export const ParserSettingsSchema = z.object({
+  overrides: z.record(
+    z.string(),
+    z.object({
+      command: z.string(),
+      outputMode: z.enum(['stdout', 'file']).default('stdout'),
+    }),
+  ).default({}),
+});
+export type ParserSettings = z.infer<typeof ParserSettingsSchema>;
+
+export const DEFAULT_WIKI_SETTINGS: WikiSettings = WikiSettingsSchema.parse({});
+export const DEFAULT_PARSER_SETTINGS: ParserSettings = ParserSettingsSchema.parse({});
+
+function safeJsonParse(raw: string | null | undefined): unknown {
+  if (raw == null) return null;
+  try {
+    return JSON.parse(raw) as unknown;
+  } catch {
+    return undefined;
+  }
+}
+
+/** 손상된 저장값은 기본값으로 복원한다 (테스트용 export). */
+export function parseWikiSettings(raw: unknown): WikiSettings {
+  const parsed = WikiSettingsSchema.safeParse(
+    typeof raw === 'string' ? safeJsonParse(raw) : raw,
+  );
+  return parsed.success ? parsed.data : { ...DEFAULT_WIKI_SETTINGS };
+}
+
+/** 손상된 저장값은 기본값으로 복원한다 (테스트용 export). */
+export function parseParserSettings(raw: unknown): ParserSettings {
+  const parsed = ParserSettingsSchema.safeParse(
+    typeof raw === 'string' ? safeJsonParse(raw) : raw,
+  );
+  return parsed.success ? parsed.data : { ...DEFAULT_PARSER_SETTINGS };
+}
 
 interface SettingsRow {
   id: string;
@@ -23,6 +84,12 @@ interface SettingsRow {
   trusted_workspaces: string;
   last_workspace_root: string | null;
   monitoring_interval_ms?: number | null;
+  setup_completed_at?: string | null;
+  work_folder?: string | null;
+  favorites?: string | null;
+  agent_allowed_roots?: string | null;
+  wiki_settings?: string | null;
+  parser_settings?: string | null;
 }
 
 export const DEFAULT_MONITORING_INTERVAL_MS = 1000;
@@ -42,7 +109,22 @@ export const DEFAULT_APP_SETTINGS: AppSettings = {
   trustedWorkspaces: [],
   lastWorkspaceRoot: null,
   monitoringIntervalMs: DEFAULT_MONITORING_INTERVAL_MS,
+  setupCompletedAt: null,
+  workFolder: null,
+  favorites: [],
+  agentAllowedRoots: [],
+  wiki: DEFAULT_WIKI_SETTINGS,
+  parsers: DEFAULT_PARSER_SETTINGS,
 };
+
+function parseStringArray(raw: string | null | undefined): string[] {
+  try {
+    const parsed: unknown = JSON.parse(raw || '[]');
+    return Array.isArray(parsed) ? parsed.filter((s): s is string => typeof s === 'string') : [];
+  } catch {
+    return [];
+  }
+}
 
 function parseSettingsRow(row: SettingsRow): AppSettings {
   return {
@@ -72,6 +154,12 @@ function parseSettingsRow(row: SettingsRow): AppSettings {
       typeof row.monitoring_interval_ms === 'number' && row.monitoring_interval_ms > 0
         ? row.monitoring_interval_ms
         : DEFAULT_MONITORING_INTERVAL_MS,
+    setupCompletedAt: row.setup_completed_at ?? null,
+    workFolder: row.work_folder ?? null,
+    favorites: parseStringArray(row.favorites),
+    agentAllowedRoots: parseStringArray(row.agent_allowed_roots),
+    wiki: parseWikiSettings(row.wiki_settings),
+    parsers: parseParserSettings(row.parser_settings),
   };
 }
 
@@ -100,9 +188,28 @@ async function ensureModelDefaultColumns(db: SqlDatabase): Promise<void> {
   }
 }
 
+async function ensureAppV11Columns(db: SqlDatabase): Promise<void> {
+  const alters = [
+    'ALTER TABLE app_settings ADD COLUMN setup_completed_at TEXT',
+    'ALTER TABLE app_settings ADD COLUMN work_folder TEXT',
+    "ALTER TABLE app_settings ADD COLUMN favorites TEXT NOT NULL DEFAULT '[]'",
+    "ALTER TABLE app_settings ADD COLUMN agent_allowed_roots TEXT NOT NULL DEFAULT '[]'",
+    "ALTER TABLE app_settings ADD COLUMN wiki_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
+  ];
+  for (const alter of alters) {
+    try {
+      await db.execute(alter);
+    } catch {
+      // Column already exists on fresh DBs; safe to ignore.
+    }
+  }
+}
+
 async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
   await ensureMonitoringIntervalColumn(db);
   await ensureModelDefaultColumns(db);
+  await ensureAppV11Columns(db);
   const rows = await db.select<SettingsRow[]>(
     "SELECT * FROM app_settings WHERE id = 'singleton'",
   );
@@ -116,8 +223,10 @@ async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
       ollama_base_url, default_context_size, default_temperature,
       default_reserve_tokens, default_keep_recent_tokens,
       default_approval_mode,
-      trusted_workspaces, last_workspace_root, monitoring_interval_ms
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      trusted_workspaces, last_workspace_root, monitoring_interval_ms,
+      setup_completed_at, work_folder, favorites,
+      agent_allowed_roots, wiki_settings, parser_settings
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       DEFAULT_APP_SETTINGS.id,
       JSON.stringify(DEFAULT_APP_SETTINGS.openTabs),
@@ -133,6 +242,12 @@ async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
       JSON.stringify(DEFAULT_APP_SETTINGS.trustedWorkspaces),
       DEFAULT_APP_SETTINGS.lastWorkspaceRoot,
       DEFAULT_APP_SETTINGS.monitoringIntervalMs,
+      DEFAULT_APP_SETTINGS.setupCompletedAt,
+      DEFAULT_APP_SETTINGS.workFolder,
+      JSON.stringify(DEFAULT_APP_SETTINGS.favorites),
+      JSON.stringify(DEFAULT_APP_SETTINGS.agentAllowedRoots),
+      JSON.stringify(DEFAULT_APP_SETTINGS.wiki),
+      JSON.stringify(DEFAULT_APP_SETTINGS.parsers),
     ],
   );
 
@@ -151,6 +266,12 @@ async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
     trusted_workspaces: JSON.stringify(DEFAULT_APP_SETTINGS.trustedWorkspaces),
     last_workspace_root: DEFAULT_APP_SETTINGS.lastWorkspaceRoot,
     monitoring_interval_ms: DEFAULT_APP_SETTINGS.monitoringIntervalMs,
+    setup_completed_at: DEFAULT_APP_SETTINGS.setupCompletedAt,
+    work_folder: DEFAULT_APP_SETTINGS.workFolder,
+    favorites: JSON.stringify(DEFAULT_APP_SETTINGS.favorites),
+    agent_allowed_roots: JSON.stringify(DEFAULT_APP_SETTINGS.agentAllowedRoots),
+    wiki_settings: JSON.stringify(DEFAULT_APP_SETTINGS.wiki),
+    parser_settings: JSON.stringify(DEFAULT_APP_SETTINGS.parsers),
   };
 }
 
@@ -193,13 +314,16 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
     const merged: AppSettings = { ...current, ...updates };
     await ensureMonitoringIntervalColumn(dbOverride);
     await ensureModelDefaultColumns(dbOverride);
+    await ensureAppV11Columns(dbOverride);
     await dbOverride.execute(
       `UPDATE app_settings SET
         open_tabs = ?, active_tab_id = ?, theme = ?, language = ?,
         ollama_base_url = ?, default_context_size = ?, default_temperature = ?,
         default_reserve_tokens = ?, default_keep_recent_tokens = ?,
         default_approval_mode = ?,
-        trusted_workspaces = ?, last_workspace_root = ?, monitoring_interval_ms = ?
+        trusted_workspaces = ?, last_workspace_root = ?, monitoring_interval_ms = ?,
+        setup_completed_at = ?, work_folder = ?, favorites = ?,
+        agent_allowed_roots = ?, wiki_settings = ?, parser_settings = ?
       WHERE id = 'singleton'`,
       [
         JSON.stringify(merged.openTabs),
@@ -215,6 +339,12 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
         JSON.stringify(merged.trustedWorkspaces),
         merged.lastWorkspaceRoot,
         merged.monitoringIntervalMs,
+        merged.setupCompletedAt,
+        merged.workFolder,
+        JSON.stringify(merged.favorites),
+        JSON.stringify(merged.agentAllowedRoots),
+        JSON.stringify(merged.wiki),
+        JSON.stringify(merged.parsers),
       ],
     );
     return merged;
@@ -247,7 +377,9 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
       ollama_base_url = ?, default_context_size = ?, default_temperature = ?,
       default_reserve_tokens = ?, default_keep_recent_tokens = ?,
       default_approval_mode = ?,
-      trusted_workspaces = ?, last_workspace_root = ?, monitoring_interval_ms = ?
+      trusted_workspaces = ?, last_workspace_root = ?, monitoring_interval_ms = ?,
+      setup_completed_at = ?, work_folder = ?, favorites = ?,
+      agent_allowed_roots = ?, wiki_settings = ?, parser_settings = ?
     WHERE id = 'singleton'`,
     [
       JSON.stringify(activeWs ? [] : merged.openTabs),
@@ -263,6 +395,12 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
       JSON.stringify(merged.trustedWorkspaces),
       merged.lastWorkspaceRoot,
       merged.monitoringIntervalMs,
+      merged.setupCompletedAt,
+      merged.workFolder,
+      JSON.stringify(merged.favorites),
+      JSON.stringify(merged.agentAllowedRoots),
+      JSON.stringify(merged.wiki),
+      JSON.stringify(merged.parsers),
     ],
   );
 

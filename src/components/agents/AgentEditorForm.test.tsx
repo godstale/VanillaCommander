@@ -22,6 +22,47 @@ vi.mock('@/lib/llm/ollamaClient', async (importOriginal) => {
   };
 });
 
+vi.mock('@/lib/db/repositories/integrationsRepo', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/db/repositories/integrationsRepo')>();
+  return {
+    ...actual,
+    listIntegrations: vi.fn(async () => [
+      {
+        id: 'cli-1',
+        name: 'Claude Code',
+        kind: 'agent-cli',
+        enabled: true,
+        cli: {
+          executablePath: '/usr/bin/claude',
+          args: ['-p', '{promptFile}'],
+          promptVia: 'stdin',
+          outputFormat: 'text',
+          timeoutMs: 180000,
+        },
+        allowedPurposes: ['chat-agent'],
+        allowedDataClasses: ['personal'],
+        consent: null,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+    ]),
+    saveIntegration: vi.fn(async () => {}),
+  };
+});
+
+vi.mock('@/lib/integrations/cliRunner', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/lib/integrations/cliRunner')>();
+  return {
+    ...actual,
+    runIntegrationCli: vi.fn(async () => ({
+      exitCode: 0,
+      stdout: '2.0.0',
+      stderr: '',
+      timedOut: false,
+    })),
+  };
+});
+
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <LanguageProvider>
     <WorkspaceProvider>
@@ -44,6 +85,8 @@ describe('AgentEditorForm', () => {
 
     expect(screen.getByText('기본 정보')).toBeInTheDocument();
     expect(screen.getByText('LLM Provider')).toBeInTheDocument();
+    // 고급 항목은 접혀 있으므로 먼저 펼친다 (P11-21).
+    fireEvent.click(screen.getByRole('button', { name: '고급' }));
     expect(screen.getByText('LLM 생성 옵션')).toBeInTheDocument();
     expect(screen.getByText('도구 승인 정책')).toBeInTheDocument();
     expect(screen.getByText('자동 모니터링')).toBeInTheDocument();
@@ -200,6 +243,55 @@ describe('AgentEditorForm', () => {
       expect(saved.name).toBe('ForkMe (v2)');
       expect(saved.model).toBe('llama3.2:3b');
       expect(saved.isDefault).toBe(false);
+    });
+  });
+
+  it('collapses advanced settings by default (P11-21)', async () => {    render(
+      <TestWrapper>
+        <AgentEditorForm mode="create" onSave={vi.fn()} />
+      </TestWrapper>,
+    );
+
+    await screen.findByText(/Provider·모델 변경 시/);
+    // 기본 정보·프로바이더는 보이고, 시스템 프롬프트는 접혀 있다.
+    expect(screen.getByPlaceholderText(/예: 문서 분석 전문가/)).toBeInTheDocument();
+    expect(screen.queryByText('시스템 프롬프트 (페르소나 / 지침)')).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: '고급' }));
+    expect(await screen.findByText('시스템 프롬프트 (페르소나 / 지침)')).toBeInTheDocument();
+  });
+
+  it('registers an external agent with consent gate (P11-22)', async () => {
+    const handleSave = vi.fn();
+    render(
+      <TestWrapper>
+        <AgentEditorForm mode="create" onSave={handleSave} />
+      </TestWrapper>,
+    );
+    await screen.findByText(/Provider·모델 변경 시/);
+
+    const providerSelect = screen.getByLabelText('Provider 종류');
+    fireEvent.change(providerSelect, { target: { value: 'external:cli-1' } });
+    expect(await screen.findByText('/usr/bin/claude')).toBeInTheDocument();
+
+    const nameInput = screen.getByPlaceholderText(/예: 문서 분석 전문가/);
+    fireEvent.change(nameInput, { target: { value: 'External Buddy' } });
+
+    fireEvent.click(screen.getByRole('button', { name: /연결 테스트/ }));
+    await waitFor(() => {
+      expect(screen.getByText('연결됨')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /에이전트 생성/i }));
+    // 저장 전 외부 전송 동의를 구한다.
+    expect(await screen.findByText('데이터 전송 동의')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /동의하고 저장/ }));
+
+    await waitFor(() => {
+      expect(handleSave).toHaveBeenCalled();
+      const saved = handleSave.mock.calls[0][0];
+      expect(saved.llmProvider).toBe('external-agent');
+      expect(saved.externalAgentId).toBe('cli-1');
     });
   });
 });

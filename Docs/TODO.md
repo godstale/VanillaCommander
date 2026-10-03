@@ -161,42 +161,42 @@
 > 구현 계획: `Docs/phases/Phase11-VanillaCommander.md`. **§1.2 D1~D10은 사용자 확인 전까지 "제안" 상태** — 확인된 항목만 착수.
 
 - **W0 — 정리·기반**
-  - [ ] P11-01 정보 구조 재편(ActivityBar·패널·탭 타입)
-  - [ ] P11-02 외부 연동 모듈 이관(`src/lib/integrations`)
-  - [ ] P11-03 평가 기능 제거
-  - [ ] P11-04 앱 설정 모델 + 작업 폴더 + 기본값 상수 + 허용 루트
-  - [ ] P11-05 StatusBar
-  - [ ] P11-06 셋업 위저드
+  - [x] P11-01 정보 구조 재편(ActivityBar·패널·탭 타입)
+  - [x] P11-02 외부 연동 모듈 이관(`src/lib/integrations`)
+  - [x] P11-03 평가 기능 제거
+  - [x] P11-04 앱 설정 모델 + 작업 폴더 + 기본값 상수 + 허용 루트
+  - [x] P11-05 StatusBar
+  - [x] P11-06 셋업 위저드
 - **W1 — 파일 탐색기**
-  - [ ] P11-10 Rust 파일 커맨더 커맨드
-  - [ ] P11-11 FileExplorerTab
-  - [ ] P11-12 탐색기 사이드 패널(탭 목록·즐겨찾기·시스템 폴더)
-  - [ ] P11-13 파일 작업 큐·충돌 처리·정보
-  - [ ] P11-14 파일 뷰어(PDF/DOCX/XLSX/PPTX/ZIP + 외부 앱)
-  - [ ] P11-15 탐색기 1줄 채팅 입력
-  - [ ] P11-16 `@` 파일/폴더 참조
+  - [x] P11-10 Rust 파일 커맨더 커맨드
+  - [x] P11-11 FileExplorerTab
+  - [x] P11-12 탐색기 사이드 패널(탭 목록·즐겨찾기·시스템 폴더)
+  - [x] P11-13 파일 작업 큐·충돌 처리·정보
+  - [x] P11-14 파일 뷰어(PDF/DOCX/XLSX/PPTX/ZIP + 외부 앱)
+  - [x] P11-15 탐색기 1줄 채팅 입력
+  - [x] P11-16 `@` 파일/폴더 참조
 - **W2 — 에이전트**
-  - [ ] P11-20 에이전트 카드 단순화
-  - [ ] P11-21 에이전트 편집 화면 단순화(Advanced 접기)
-  - [ ] P11-22 프로바이더 3분류 + 외부 연동 등록 통합
-  - [ ] P11-23 외부 에이전트 런타임
-  - [ ] P11-24 파일 커맨더 시스템 프롬프트 + 도구
-  - [ ] P11-25 기본 에이전트 폴백 동의
-  - [ ] P11-26 이미지 첨부 + 비전
-  - [ ] P11-27 모니터링 메뉴 정리
+  - [x] P11-20 에이전트 카드 단순화
+  - [x] P11-21 에이전트 편집 화면 단순화(Advanced 접기)
+  - [x] P11-22 프로바이더 3분류 + 외부 연동 등록 통합
+  - [x] P11-23 외부 에이전트 런타임
+  - [x] P11-24 파일 커맨더 시스템 프롬프트 + 도구
+  - [x] P11-25 기본 에이전트 폴백 동의
+  - [x] P11-26 이미지 첨부 + 비전
+  - [x] P11-27 모니터링 메뉴 정리
 - **W3 — 위키**
-  - [ ] P11-30 폴더 감시(Rust)
-  - [ ] P11-31 위키 설정 + 위키 패널/탭
-  - [ ] P11-32 위키 처리 파이프라인
-  - [ ] P11-33 문서 파서 계층
-  - [ ] P11-34 설정 > 문서 파싱 연동
+  - [x] P11-30 폴더 감시(Rust)
+  - [x] P11-31 위키 설정 + 위키 패널/탭
+  - [x] P11-32 위키 처리 파이프라인
+  - [x] P11-33 문서 파서 계층
+  - [x] P11-34 설정 > 문서 파싱 연동
 - **W4 — 매크로**
-  - [ ] P11-40 매크로 저장소 + 화면
-  - [ ] P11-41 매크로 스케줄러
+  - [x] P11-40 매크로 저장소 + 화면
+  - [x] P11-41 매크로 스케줄러
 - **W5 — 마무리**
-  - [ ] P11-50 설정 재구성
-  - [ ] P11-51 문서·브랜딩 정리
-  - [ ] P11-52 통합 QA
+  - [x] P11-50 설정 재구성
+  - [x] P11-51 문서·브랜딩 정리
+  - [x] P11-52 통합 QA
 
 ---
 
@@ -239,6 +239,40 @@
 | 2026-09-29 | CHAT-MONITOR-MD-UX | 채팅·모니터링·설정 UX 10건 일괄. ① 빈 새 채팅 lazy 생성(대화 목록 5개 진입점의 즉시 `createSession` 제거, 첫 전송 시에만 DB 등록 + `ChatSessionsContext.refreshSessions`에서 빈 세션 숨김·60초 경과분 정리 + `ChatTab` 언마운트 정리). ② macOS 통합 메모리(`system_commands.rs`에 sysctl/vm_stat RAM 조회 + Apple GPU면 전체 풀을 VRAM으로 미러, Linux는 `/proc/meminfo` 추가) + 모니터링 수집기 통합 메모리 판정(가중치·KV 전량 VRAM 귀속, 모델 매칭 exact 우선으로 `qwen3.5:*` 오귀속 방지, KV는 모델 contextLimit 클램프+양자화별 원자 크기+`head_dim` 지원, dims 누락 시 0 반환으로 허수 GB 차단). ③ `/api/show` 별칭 파싱(`hidden_size`·`num_layers`·`num_attention_heads`·`num_key_value_heads`·`intermediate_size`·`max_position_embeddings` 등, MLX 키 대응) + 아키텍처 카드 `Q4_K` 하드코딩 제거 + 통합 메모리 배지(`monitor.unified` ko/en). ④ 채팅 MD(`.chat-markdown` CSS: bold/표/리스트/인용/제목) + `MessageBubble` memo + `language-[\w+#-]+` 수정 + 스트리밍 중 mermaid 렌더 보류·디바운스 250ms·테마 초기화 1회·`securityLevel strict`·안정 id. ⑤ 입력창 프롬프트 히스토리(↑/↓, 전역 최근 100, 초안 보존, 한 줄 입력에서만) + 대화 로그 저장/불러오기(세션별 localStorage, 불러오면 전량 일시정지 큐로). ⑥ temperature 기본 0.2(`DEFAULT_TEMPERATURE`, 슬라이더 상한 2.0으로 정정) + 압축 단계표(8K→2K/1K·16K→4K/2K·24K→6K/4K·32K±→8K/8K, `Architecture.md` §4.2·§9.1 동기화). ⑦ 전역 기본값 3종(`defaultTemperature`·`defaultReserveTokens`·`defaultKeepRecentTokens`, `app_settings` 마이그레이션+메모리 폴백+`SettingsModel` 전면 개편·항목별 [?]·적용값 미리보기). ⑧ 내장 `wiki` 도구 에디터 UI 제거(런타임 등록은 기존값 호환 유지, `basic-llm-wiki` 스킬로 대체). `lint`·`typecheck` 통과, `test` 990/994(실패 4건은 기존 bundledSkills·fab-b·public-packs). **신규 의존성 없음**. | 해결됨 |
 | 2026-09-30 | TAURI-BLANK | `pnpm tauri dev`에서 Tauri 창이 완전 빈 화면(브라우저 `localhost:14200`은 정상). 원인 확정: `tauri.conf.json` CSP의 `connect-src`에 Tauri IPC(`ipc: http://ipc.localhost`) 누락 — 공식 예제(`v2.tauri.app/security/csp`)는 포함. `img-src`에 `http://asset.localhost` 추가. 프록시 없음·WebView2 154 확인. CSP 수정 후 `tauri dev` 정상 표시 확인. | 해결됨 |
 | 2026-10-02 | RENAME | 앱 내 Fortress 명칭 → Vanilla Commander 일괄 변경: 화면 문구·프롬프트·창 제목(productName `Vanilla Commander`)·로그 파일명·localStorage 키(`fortress*` → `vanilla-commander*`)·DB(`fortress.db` → `vanilla-commander.db`)·워크스페이스 폴더(`.fortress` → `.vanilla-commander`)·`FortressAgent` → `VanillaAgent`·`ensure_fortress_dir` → `ensure_app_data_dir`. 구 데이터는 첫 실행 시 자동 이관(`legacyStorageMigration.ts`, Rust `rename_legacy_db_files`, DB의 `Fortress Default` 에이전트명 갱신). 평가 모듈 내부 포맷 식별자(`fortress-default` 등)와 Docs/ 과거 기록 문서는 유지(P11-03 삭제·P11-51 문서 정리에서 처리). 참고: `core.autocrlf=true` 체크아웃으로 SKILL.md·평가 팩이 CRLF가 되어 테스트 4건 실패(기존 문제, `.gitattributes`로 `eol=lf` 지정 필요) | 해결됨 |
+| 2026-10-02 | P11-00 | Phase 11 설계 결정 D1~D10 사용자 확인 완료 — 전부 제안대로 확정. 이에 따라 P11-01 착수(브랜치 `feat/phase11-w0-foundation`). | 해결됨 |
+| 2026-10-02 | P11-01 | 소유 파일 밖 최소 수정(빌드 유지 목적, 원 소유 작업에서 인수 예정): `WorkspaceTabsContext.tsx`(복원 시 삭제된 탭 타입 필터 5줄, 확인 기준 요구) · `Workspace.tsx`(폴더 미선택 게이팅 해제, D2) · `SidePanelContext.tsx`(폴더 미선택 강제 explorer 해제, D2 — ActivityBar 게이팅 제거와 세트) · `EvalTab.tsx`(EvalTabView import 제거, P11-03 인수) · `openEvalTab.ts`+test(단일 캐스트 상수, P11-03 인수) · `AgentListPanel.tsx`(통계/로그 버튼 → agent-monitor 임시 연결, P11-20 인수) · `WorkspaceNoFolder.test.tsx`(게이팅 제거 반영). CenterWorkspace의 eval/agent-stats case 삭제 + 신규 5종 placeholder. V7(기본 탭=파일 탐색기)은 FileExplorerTab이 나오는 P11-11에서 전환(지금은 채팅 유지). 검증: `lint`·`typecheck`·`build` 통과, `test` 1003/1007(실패 4건은 기존 bundledSkills·fab-b·public-packs CRLF 문제와 동일). | 해결됨 |
+| 2026-10-02 | P11-02 | 외부 연동 이관 완료(git mv로 히스토리 유지): `lib/eval/integrations` 4모듈+테스트 → `lib/integrations/`, 다이얼로그 3종 → `components/integrations/`, 연동 i18n → 신규 `integrations.{ko,en}.ts`(평가 문구 개정·신규 목적 키). `integrations/types.ts` 신설(목적 chat-agent/wiki-ingest/doc-parse, consent-v2로 기존 동의 무효화). `integration_run_cli`에 `cwd` 선택 인자 + 워크스페이스 containment 검사(Rust 테스트 포함). 소유 밖 최소 수정(P11-03 인수): judgePass·runner·preflight·StepReview·StepCandidates·arenaUtils의 구 목적 캐스트/경로. 검증: `lint`·`typecheck` 통과, `cargo test integration_commands` 7건 통과, `test` 1003/1007(실패 4건은 기존 CRLF 문제와 동일). | 해결됨 |
+| 2026-10-02 | P11-03 | 평가 기능 제거 완료(약 200파일): `components/eval`·`lib/eval`·`EvalContext`·`evalRepo`·`EvalTab`·eval i18n·`eval_commands.rs`(핸들러 15종 제거)·`resources/evals`(번들 해제)·채팅 evalLock 차단 코드·메시지 저장 버튼. DB는 append-only 원칙대로 CREATE 유지 + DROP 7종 추가(연동 3종 유지). `EvaluationGuide`·Phase10 문서에 폐기 헤더. 검증: `lint`·`typecheck`·`build`·`cargo check/test`(18건) 통과, 잔여 eval import 0건(Ollama `prompt_eval_*` 제외), `test` 383/384(유일 실패는 기존 bundledSkills CRLF — fab-b·public-packs 실패는 테스트 파일 삭제로 해소). | 해결됨 |
+| 2026-10-02 | P11-05 | StatusBar 완료: `StatusBarContext`(슬롯 publish/clear + 5초 일시 메시지 notify), 하단 `StatusBar`(좌측 슬롯 + 우측 메시지), 기본 퍼블리셔(기본 에이전트명·모델·연결 상태·실행 중, 60초 재확인), `statusBar` 사전, 컨텍스트 테스트 3건. 나머지 슬롯은 각 기능 작업이 퍼블리시한다. 검증: `lint`·`typecheck` 통과, `test` 389/390(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-04 | 설정 모델 + 작업 폴더 + 허용 루트 완료: `agent/defaults.ts` 신설(V4·V6: 승인 dangerous-only·셸 제외 전체 도구·basic-llm-wiki·temperature 0.2) + `DEFAULT_AGENT` 연결. settings에 setupCompletedAt·workFolder·favorites·agentAllowedRoots·wiki·parsers 블록 추가(6 컬럼, zod 검증, 메모리 폴백·ALTER 동기화, round-trip 테스트 3건). `WorkspaceContext`에 workFolder/setWorkFolder/ensureWorkFolderLayout + Rust 허용 루트 동기화. Rust: `set_active_workspace` → `set_agent_allowed_roots`(정규화 저장), 검증은 허용 루트 기준(명시 루트 우회 차단), 사용자 명령은 canonicalize만(`resolve_user_path`, reveal 적용), `ensure_work_folder_layout` 신설(Rust 테스트 3건). 부수 수정: 메모리 폴백의 전체 UPDATE 유실 버그(탭 전용 prefix 오매칭) 수정 + projectDb 테스트 기대값 정정. fc_* 분할(P11-10)이 D1 사용자/에이전트 분리를 완성한다. 검증: `lint`·`typecheck`·`build`·`cargo test`(21건) 통과, `test` 386/387(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-06 | 셋업 위저드 완료: 6단계(언어·작업 폴더·에이전트·위키·매크로·완료) + 단계별 적용/건너뛰기, 재실행은 현재값 프리필, 완료 시 기본 에이전트 편집 탭 자동 오픈(D9). `LanguageSelectDialog`는 위저드 1단계로 흡수(파일 삭제). 진입점 `/?setup=1`(설정 > 일반에 재실행 버튼 — P11-50 화면 소유이나 최소 버튼 1개 추가). 첫 실행 판정은 `setupCompletedAt == null`. 검증: `lint`·`typecheck`·`build` 통과, 위저드 테스트 1건(6단계 완주·setupCompletedAt·에이전트 생성) 통과, `test` 390/391(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-13 | 파일 작업 큐·충돌·정보 완료(W1 순서 조정: 11보다 먼저 infra 구축): `lib/commander`(types·ipc·jobs/useJobs·clipboard·format), `ConflictDialog`·`PropertiesDialog`·`SearchResultsView`, StatusBar 작업/클립보드 슬롯, `JobsProvider` 배선. lint 규칙상 JobsContext/useJobs 분리. 검증: `lint`·`typecheck` 통과, `test` 394/395(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-11 | 탐색기 탭 완료: `FileExplorerTab`(툴바·주소창·목록·정렬·히스토리·다중 선택·단축키·컨텍스트 메뉴·검색 모드·정보·즐겨찾기) + 탭 메타 영속 + StatusBar 탭 슬롯. D2 완성(폴더 없이 탭 열림·복원·저장) + V7(기본 탭=탐색기). "에이전트에게 묻기"는 P11-15까지 비활성, 파일 열기 라우팅은 P11-14 `openFile`로 교체 예정. 검증: `lint`·`typecheck`·`build` 통과, 탭 테스트 4건, `test` 398/399(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-12 | 탐색기 패널 완료: `ExplorerPanel`(탭 없으면 자동 생성·열린 탭 목록·즐겨찾기 추가/삭제/순서/드롭·시스템 폴더), `FileTree` 삭제. 검증: `lint`·`typecheck` 통과, 패널 테스트 3건, `test` 398/399(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-14 | 파일 뷰어 완료: `openFile` 라우팅(이미지·문서·아카이브·에디터·외부앱, 대용량 텍스트 읽기전용), `DocumentViewerTab`(PDF 렌더·DOCX·XLSX/CSV 표·PPTX 아웃라인)·`ArchiveViewerTab`(목록·전체 해제), `fc_read_file_bytes`·`fc_read_text_head` + `EditorTab` 읽기전용 지원. 신규 의존성 `pdfjs-dist`·`mammoth`·`jszip`·`xlsx`(공식 tarball) — TODO 기록. `FileExplorerTab`이 신 라우팅 사용. 검증: `lint`·`typecheck`·`build` 통과, `cargo test` 28건, `test` 406/407(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-15 | 탐색기 1줄 채팅 완료: `ExplorerChatBar`(위치·선택 자동 첨부, 접이식 결과 드로어 + 채팅탭 열기, 도구 결과 시 목록 새로고침), 탭별 숨은 세션(`origin='explorer'`, 대화 목록 제외). sessions `origin` 컬럼 추가(ALTER·폴백·리포 동기화). 검증: `lint`·`typecheck` 통과, 채팅바 테스트 1건, `test` 407/408(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-16 | `@` 참조 완료: `mentions.ts`(쿼리·선택·해석: 32KB 이하 인라인/폴더 1단계/이미지·바이너리 경로만), `MentionPopup`+`useMention`(현재 폴더+즐겨찾기), `ChatInput`·탐색기 입력창 연동(전송 시 해석 + 세션 허용 루트). 팝업은 폴더 직접 나열 방식(심층 fc_search 연동은 후속). 이미지 첨부는 P11-26에서 전환. "에이전트에게 묻기" 메뉴 삽입은 미구현으로 남음. 검증: `lint`·`typecheck` 통과, mentions 7건·ChatInput 통합 1건, `test` 415/416(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-20 | 에이전트 카드 단순화 완료: 이름·배지·상태·설명·모델·ctx만 표시, 대화 시작·수정 버튼만. 모니터링·통계·로그 버튼 삭제, `AgentStatsTab`·`AgentStatsPanel` 삭제(진입점은 상단 메뉴 유지). 검증: `lint`·`typecheck` 통과, 카드 테스트 7건, `test` 413/414(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-21 | 편집 화면 단순화 완료: 기본 정보·프로바이더만 노출, 시스템 프롬프트·생성 옵션·승인·모니터링·도구·스킬은 `고급 설정` 1개로 접기. 파일 분할은 생략(단일 순차 실행, 충돌 회피 목적 달성 불가 — P11-22/26이 재작업하는 카드만 분리 예정, TODO 기록). 검증: `lint`·`typecheck` 통과, 편집 폼 8건, `test` 414/415(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-22 | 프로바이더 3분류 + 외부 연동 등록 완료: `external-agent` 종류·`externalAgentId` 컬럼, 4번째 연동 그룹(agent-cli 선택 + 인라인 등록/CLI 프리셋/PATH 탐지), llm-api→클라우드 에이전트 1회 변환, 저장 시 동의 게이트, `find_executable` 명령. 테스트 모크의 위치 기반 파싱도 30컬럼 대응. 검증: `lint`·`typecheck`·`build` 통과, `cargo test` 29건, `test` 416/417(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-23 | 외부 에이전트 런타임 완료: `externalAgentClient`(게이트웨이 경유 CLI 1회 실행·단일 청크·cwd 전달), `providerRuntime` 분기, `useChat` 연결(자체 도구 없음), 연결 확인(`find_executable`), 편집 화면 도구/스킬 비활성 표시. 검증: `lint`·`typecheck` 통과, 런타임 테스트 4건, `test` 420/421(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-24 | 파일 커맨더 프롬프트·도구 완료: 11종 도구(복사·이동·이름변경·폴더·휴지통·압축·해제·정보·검색·탐색기·문서읽기, zod 별칭 흡수·위험도 분류·D10 백업), 기본 프롬프트 재작성 + `<commander>` 동적 섹션, 탐색기 브리지, 내장 파서(`parsers/builtin`, P11-33 인계), 새 에이전트 기본값 포함. 검증: `lint`·`typecheck`·`build` 통과, 도구 테스트 8건, `test` 429/430(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-25 | 폴백 동의 완료: `resolveAgent`(외부 판정·후보·백그라운드 선택·저장), `AgentFallbackDialog`(외부 별도 체크·로컬만 다시 묻지 않기), `useChat` 전송 게이트 1곳, 채팅탭 세션 한정 적용 + 전환 안내, 탐색기는 차단·안내. 검증: `lint`·`typecheck` 통과, 폴백 5건, `test` 434/435(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-26 | 이미지 첨부 + 비전 완료: `Agent.vision`(auto/yes/no, DB 컬럼·리포·기본값) + `resolveVisionSupport`(auto는 Ollama capabilities, OpenAI 호환은 unknown) + `ensureChatImage`(작업 폴더 밖은 chat-images 복사) + 매퍼(Ollama images/OpenAI image_url, 전송 직전 data URL 해석) + `ChatInput` 첨부 UI(버튼·붙여넣기·드래그·썸네일, 최대 4개·5MB) + `ChatTab` 비전 게이트(미지원 시 폴백 다이얼로그로 전환 제안)·응답 위키 저장 버튼 + 편집 화면 비전 라디오 + `useChatQueue` enqueue images 전달. 부수 수정: `resolveRequestImages` 제네릭 완화(OpenAI 메시지 합집합 대응)·`vision.ts` 중복 구현을 매퍼 재export로 통합·showModel 목 2건에 supportsVision 추가. 검증: `lint`·`typecheck`·`build` 통과, 신규 `vision.test.ts` 10건, 전체 `test` 444/445(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-03 | P11-27 | 모니터링 메뉴 정리 완료: `MonitoringListPanel`·`monitoringGroups(.test)` 삭제(이미 참조 없음, groups는 테스트만 사용), 미사용 i18n 키 제거(`monitoringList` 16종·`activityBar/topMenu.monitoring`·`agentStats` 7종·`agentList.stats/log`). `AgentMonitorTab`·수집기·TopMenuBar 진입 유지. 검증: `lint`·`typecheck` 통과, 관련 21건 통과. | 해결됨 |
+| 2026-10-03 | P11-52 | 통합 QA(정적) 완료: `lint`·`typecheck` 통과, `pnpm test` 481/482(유일 실패는 기존 bundledSkills CRLF), `cargo test` 34건 통과(1 ignore), `pnpm build` 성공. VC-01~11 배선 정적 확인(위저드·분할/F5·zip/뷰어·탐색기채팅·이미지·파이프라인·폴백·외부등록·스케줄·재실행 모두 코드·테스트 존재). `tauri dev` 실동작 + Ollama E2E는 실머신에서 수행 필요 → QA-Checklist VC 항목 UNVERIFIED 유지. | 해결됨 |
+| 2026-10-03 | P11-51 | 문서·브랜딩 정리 완료: `Architecture.md`(§0·§2 트리·§3 레이아웃·§4.2 Agent·§4.5 작업 폴더·§5.5 commander 섹션·§5.8 멀티프로바이더·§5.9 외부 런타임·§7 D1·§8.4 폐기·§12 IPC·§13·§14 폐기·§15~17 신설) + README(기능·사용법·평가 삭제)·UserGuide·QA-Checklist(P11-52 VC-01~11 편입)·삭제 화면 잔여 주석 정리. 구 `.fortress` 경로·`fortress:` 키는 첫 실행 자동 이관으로만 유지, 신규 기록은 vanilla-commander 사용 (결정 기록). 검증: `lint`·`typecheck` 통과. | 해결됨 |
+| 2026-10-03 | P11-50 | 설정 재구성 완료: 라우트 일반·parsers·update로 축소 + `SettingsModel`·`SettingsApproval`·`SettingsIntegrations`(테스트 포함) 삭제 + 사용 없던 `settingsModel/settingsApproval/navModel/navApproval` 키 제거 + 일반에 작업 폴더 변경(2단계 확인)·허용 폴더·감사 로그(50건) 추가 + `SettingsUpdate`(버전 + 준비 중). 검증: `lint`·`typecheck` 통과, 관련 12건 통과. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-03 | P11-41 | 매크로 스케줄러 완료: `lib/macros/scheduler.ts`(1분 틱·interval/daily/weekly 만기 판정·catchUp 보충/소진·동시 1개·채팅 busy 대기·승인 요청 감시) + MacroPanel 바인딩(실행 이력 표시·세션 열기 유지·승인 대기 StatusBar 알림, 승인은 대화상자에서만 처리). 검증: `lint`·`typecheck` 통과, 신규 9건·매크로 전체 18건 통과. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-03 | P11-40 | 매크로 저장소 + 화면 완료: `macros` 테이블(`0003_macros.sql` 신규 + `0001_init.sql`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화) + `lib/macros/`(types·macrosRepo·이관·실행·컨텍스트, `chatMacros` 이동·래퍼 유지) + `MacroPanel`(목록·실행·스케줄·세션 열기) + `MacroEditorTab`(프롬프트 순서·`@` 참조·에이전트·위치·스케줄·테스트 실행) + 채팅 저장 다이얼로그 신 저장소 전환 + SidePanel/CenterWorkspace/Workspace 배선. 검증: `lint`·`typecheck` 통과, 신규 13건·관련 36건 통과. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-03 | P11-34 | 문서 파싱 연동 화면 완료: `SettingsParsers`(확장자별 파서 표·외부 파서 등록/삭제·프리셋 4종·`find_executable` 설치 감지·샘플 파일 실행 미리보기) + parsers 사전 + 라우트·내비 1줄씩(App·Layout은 P11-50 소유, 재구성 예정 명시). 검증: `lint`·`typecheck` 통과, 신규 2건 통과. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-03 | P11-32 | 위키 처리 파이프라인 완료: `lib/wiki/pipeline.ts`(이벤트→필터→직렬 1건·채팅 busy 시 10초 대기→추출(P11-33 파서·이미지/스캔PDF는 비전 기술)→LLM 1회 분류(zod·1회 재시도·날짜 폴백)→이동(fc_move rename + 완료 대기)→wiki ingest→jobs 행 갱신). 외부 처리 에이전트는 wiki-ingest 동의·목적 확인, 미충족 시 로컬 폴백·스킵. StatusBar 위키 슬롯은 패널 브리지로 퍼블리시. 파이프라인 시작은 WikiPanel 마운트에서 멱등 실행(앱 전역 자동시작은 후속). 검증: `lint`·`typecheck` 통과, 신규 8건·관련 24건 통과. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-03 | P11-31 | 위키 설정 + 패널/탭 완료: `wiki_jobs` 테이블(`0002_wiki_jobs.sql` 신규 + `0001_init.sql`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화 — P10-02 선례) + `wikiJobsRepo`(생성·갱신·이력·상태별) + `lib/wiki/settings.ts`(기본 프롬프트·inbox 해석·glob·필터 판정) + `WikiPanel`(감시 토글·대기열·최근·페이지 목록·MD 열기) + `WikiTab`(감시·이동·분류·필터·프롬프트·처리 에이전트 + 이력 표·재처리·원본 열기) + wiki 사전 + SidePanel/CenterWorkspace 배선. 검증: `lint`·`typecheck` 통과, 신규 7건·관련 42건 통과. | 해결됨 |
+| 2026-10-03 | P11-33 | 문서 파서 계층 완료: `parsers/index.ts`(외부 오버라이드→내장→실패 디스패치, `ParseError` 사유 4종, 스캔 PDF 판정) + `parsers/external.ts`(4 프리셋·토큰 치환·`find_executable`+`runIntegrationCli` 재사용, file 모드는 유지 cwd 필수) + `builtin`은 `parseBuiltinDocument`로 개명(pdf `pages` 추가·pptx/docx Rust 우선+JS 폴백) + `doc_read`가 신 디스패치 사용(실패 사유 반환). Rust `fc_office_text`(pptx 슬라이드 `<a:t>`/docx `<w:t>` 추출, 200K 캡, 테스트용 zip 생성). 검증: `lint`·`typecheck`·`cargo test` 34건·신규 파서 9건 통과. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-03 | P11-30 | 폴더 감시 완료: `watch_commands.rs` 신설(`wiki_watch_set`/`wiki_watch_stop`/`wiki_watch_status`/`wiki_default_watch_folder`, `wiki://file-event {path,kind}` 발행). `notify` 8 + `notify-debouncer-full` 0.5 (신규 의존성 — 표준 크로스플랫폼 감시, Phase 문서 §3.2 승인분). 임시 다운로드 파일 제외 + 크기 안정화(1초 간격 2회 동일) 후 발행 + 5초 중복 쿨다운. 검증: `cargo check`·`cargo test watch_commands` 4건 통과. JS 구독 래퍼는 P11-31에서. | 해결됨 |
+| 2026-10-03 | EXPLORER-PATH | 탐색기 경로 이동 2건 수정. 원인 확정: ① `AddressBar`가 드라이브 뒤를 항상 `/`로 이어붙여 `C:\/Workspace...` 무효 경로를 만들어 `fc_list_dir`가 os error 123을 반환. `\\?\` verbatim이 섞이면 `?/C:/...` 형태로 망가짐. 구분자·드라이브·UNC·verbatim을 정규화하고 원본 구분자 스타일을 유지하도록 재작성. ② 사이드바 즐겨찾기/시스템 폴더 클릭이 무조건 새 탭을 열어 현재 탭 이동 기대와 불일치. 동일 경로 탭이 없으면 활성 탐색기 탭에서 이동하도록 변경 + `FileExplorerTab`이 외부 `meta.path` 변경을 현재 탭 이동으로 반영 + 경로 비교를 verbatim/구분자/대소문자 정규화. Rust는 `entry_of`·검색 결과 경로의 verbatim 접두를 벗겨 반환(`display_path_string`). 검증: `lint`·`typecheck` 통과, `AddressBar` 신규 4건·탐색기 11건 통과, `cargo test commander_commands` 9건 통과, 전체 `pnpm test` 485/486(유일 실패는 기존 bundledSkills CRLF). | 해결됨 |
+| 2026-10-02 | P11-10 | Rust 파일 커맨더 완료: `commander_commands.rs` 신설(목록·시스템 폴더·정보·복사/이동·휴지통/영구삭제·이름변경·새폴더/파일·검색·zip/해제/목록·열기/보기, job+`fc://progress` 이벤트·충돌 질의·취소). 신규 의존성 `trash`·`zip`·`dirs`(opener·clipboard은 P11-11/14로 연기, TODO 기록). 시스템 폴더 쓰기 경고, ZipSlip 방지, 이동 fast-path. 검증: `cargo test` 27건 통과(신규 6건). JS 호출층은 P11-13(`jobs.ts`)에서 담당. | 해결됨 |
+| 2026-10-03 | TAURI-BLANK-2 | `pnpm tauri dev` 흰 화면 고질 문제 영구 수정(브라우저 정상·앱 창만 백지). 원인 3종을 동시 차단: ① CSP가 Vite dev 스크립트/HMR을 막음(브라우저엔 Tauri CSP가 적용 안 돼 증상이 갈림) → `script-src`·dev http/ws·`font-src`·`worker-src` 명시, IPC/Ollama 항목 유지 ② `localhost`의 Windows IPv6(::1) 해석 엇갈림 → `host: 127.0.0.1` 고정 + `devUrl http://127.0.0.1:14200` + HMR 포트 14201 고정 + `strictPort` 유지 ③ 백지 시 진단 불가 → `index.html` 정적 부트 폴백 + `src/main.tsx` 8초 워치독. 재발 방지: `scripts/check-tauri-blank.mjs`(+`pnpm check:tauri-blank`)와 `check-tauri-blank.test.mjs`가 devUrl/호스트/CSP/폴백을 `pnpm test`에서 감시. `Architecture.md` §5.8 CSP 항목 갱신. **신규 의존성 없음**. | 해결됨 |
 
 ---
 

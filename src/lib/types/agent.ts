@@ -167,7 +167,18 @@ export type BuiltinToolId =
   | 'shell'
   | 'web_search'
   | 'web_fetch'
-  | 'wiki';
+  | 'wiki'
+  | 'fs_copy'
+  | 'fs_move'
+  | 'fs_rename'
+  | 'fs_mkdir'
+  | 'fs_trash'
+  | 'fs_zip'
+  | 'fs_unzip'
+  | 'fs_info'
+  | 'fs_search'
+  | 'explorer'
+  | 'doc_read';
 
 /**
  * LLM Provider 종류. Ollama 네이티브 규격(/api/chat, NDJSON)과
@@ -193,9 +204,15 @@ export type LlmProviderKind =
   | 'mistral'
   | 'moonshot'
   | 'together'
-  | 'opencode';
+  | 'opencode'
+  | 'external-agent';
 
 export const DEFAULT_LLM_PROVIDER: LlmProviderKind = 'ollama';
+
+/** 이미지 입력(비전) 지원 여부. 'auto'는 Ollama capabilities로 판정, 판정 불가면 수동 선택 안내. */
+export type VisionSupport = 'auto' | 'yes' | 'no';
+
+export const DEFAULT_VISION_SUPPORT: VisionSupport = 'auto';
 
 export function isOpenAiCompatibleProvider(kind?: LlmProviderKind): boolean {
   return (kind ?? DEFAULT_LLM_PROVIDER) !== 'ollama';
@@ -239,10 +256,16 @@ export interface Agent {
   maxOutputTokens?: number;
   /** LLM Provider 종류. 미지정(구 DB 행) 시 'ollama'로 해석 */
   llmProvider?: LlmProviderKind;
-  /** Provider Base URL. 미지정 시 프리셋 기본값(또는 Ollama는 전역 설정) 사용 */
+  /** 이미지 입력(비전) 지원. 미지정(구 DB 행) 시 'auto'로 해석 (P11-26). */
+  vision?: VisionSupport;  /** Provider Base URL. 미지정 시 프리셋 기본값(또는 Ollama는 전역 설정) 사용 */
   llmBaseUrl?: string;
   /** 클라우드/인증 필요 서버용 API 키. 로컬 런타임은 보통 불필요(Jan은 임의 문자열 가능) */
   llmApiKey?: string;
+  /**
+   * 외부 에이전트 연동 ID (`llmProvider === 'external-agent'`일 때 사용, P11-22).
+   * `external_integrations`의 agent-cli 레코드를 가리킨다.
+   */
+  externalAgentId?: string;
   /**
    * 대화 시작 시 모니터링 자동 시작 여부. 미지정(구 DB 행) 시 true(켜짐)로 해석.
    * on이면 대화 시작 시 자동으로 모니터링 상태로 전환하고,
