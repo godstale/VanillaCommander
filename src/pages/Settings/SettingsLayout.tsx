@@ -1,13 +1,14 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Sliders, FileText, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Sliders, FileText, Image as ImageIcon, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
-// P11-50: 일반 · 문서 파싱 연동 · 업데이트만 둔다.
+// P11-50: 일반 · 문서 파싱 연동 · 이미지 · 업데이트.
 const NAV_ITEMS = [
   { path: '/settings', labelKey: 'settings.navGeneral', icon: Sliders, end: true },
   { path: '/settings/parsers', labelKey: 'settings.navParsers', icon: FileText, end: false },
+  { path: '/settings/image', labelKey: 'settings.navImage', icon: ImageIcon, end: false },
   { path: '/settings/update', labelKey: 'settings.navUpdate', icon: RefreshCw, end: false },
 ];
 

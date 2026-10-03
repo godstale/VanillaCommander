@@ -81,7 +81,8 @@ export const MIGRATION_STATEMENTS: string[] = [
     favorites TEXT NOT NULL DEFAULT '[]',
     agent_allowed_roots TEXT NOT NULL DEFAULT '[]',
     wiki_settings TEXT NOT NULL DEFAULT '{}',
-    parser_settings TEXT NOT NULL DEFAULT '{}'
+    parser_settings TEXT NOT NULL DEFAULT '{}',
+    image_settings TEXT NOT NULL DEFAULT '{}'
   )`,
   `CREATE TABLE IF NOT EXISTS execution_logs (
     id TEXT PRIMARY KEY,
@@ -829,6 +830,7 @@ export class MemorySqlFallback implements SqlDatabase {
         agent_allowed_roots,
         wiki_settings,
         parser_settings,
+        image_settings,
       ] = bindValues;
       this.tables.get('app_settings')?.set(id as string, {
         id,
@@ -851,6 +853,7 @@ export class MemorySqlFallback implements SqlDatabase {
         agent_allowed_roots: (agent_allowed_roots as string | null) ?? '[]',
         wiki_settings: (wiki_settings as string | null) ?? '{}',
         parser_settings: (parser_settings as string | null) ?? '{}',
+        image_settings: (image_settings as string | null) ?? '{}',
       });
       return { rowsAffected: 1 };
     }
@@ -922,6 +925,7 @@ export class MemorySqlFallback implements SqlDatabase {
           agent_allowed_roots,
           wiki_settings,
           parser_settings,
+          image_settings,
         ] = bindValues;
         Object.assign(settings, {
           open_tabs,
@@ -945,6 +949,7 @@ export class MemorySqlFallback implements SqlDatabase {
           ...(agent_allowed_roots !== undefined ? { agent_allowed_roots } : {}),
           ...(wiki_settings !== undefined ? { wiki_settings } : {}),
           ...(parser_settings !== undefined ? { parser_settings } : {}),
+          ...(image_settings !== undefined ? { image_settings } : {}),
         });
       }
       return { rowsAffected: 1 };
@@ -1992,6 +1997,7 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     "ALTER TABLE app_settings ADD COLUMN agent_allowed_roots TEXT NOT NULL DEFAULT '[]'",
     "ALTER TABLE app_settings ADD COLUMN wiki_settings TEXT NOT NULL DEFAULT '{}'",
     "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE app_settings ADD COLUMN image_settings TEXT NOT NULL DEFAULT '{}'",
     "ALTER TABLE sessions ADD COLUMN origin TEXT NOT NULL DEFAULT 'chat'",
   ];
   for (const alter of alterColumns) {

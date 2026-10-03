@@ -3,6 +3,8 @@ import { convertFileSrc } from '@tauri-apps/api/core';
 import type { FcEntry } from '@/lib/commander/types';
 import { isAlbumEntry } from '@/lib/commander/openFile';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { useSafeSettings } from '@/lib/context/SettingsContext';
+import { DEFAULT_IMAGE_SETTINGS } from '@/lib/types/imageSettings';
 import { FileKindIcon } from './FileIcon';
 import { cn } from '@/lib/utils';
 
@@ -16,8 +18,6 @@ export interface AlbumViewProps {
   onContextMenu: (e: React.MouseEvent, entry: FcEntry | null) => void;
 }
 
-/** 썸네일 표시 너비(px). 120px 타일의 레티나 대응으로 320px로 다운스케일한다. */
-const THUMB_WIDTH = 320;
 
 /** 경로 → 다운스케일 썸네일 blob URL (세션 캐시, 타일 재마운트 시 재요청 방지). */
 const thumbCache = new Map<string, string>();
@@ -26,7 +26,8 @@ const thumbFlight = new Map<string, Promise<string>>();
 
 /** 동시에 처리하는 썸네일 작업 수. 수십 장을 한꺼번에 내려받고 디코드하면
     asset 프로토콜·디코더가 밀려 빈 칸·부분 렌더로 보인다. */
-const MAX_THUMB_JOBS = 4;
+/** 동시 작업 한도. 설정(이미지)에서 바꾸며 makeThumb 호출 때 최신값으로 갱신된다. */
+let maxThumbJobs = DEFAULT_IMAGE_SETTINGS.albumMaxJobs;
 /** 썸네일 단일 작업 타임아웃(ms). 멈춘 요청이 풀 슬롯을 영원히 물지 않도록 폴백으로 넘긴다. */
 const THUMB_TIMEOUT_MS = 30_000;
 
@@ -34,7 +35,7 @@ let thumbActiveJobs = 0;
 const thumbQueue: Array<() => void> = [];
 
 function pumpThumbQueue(): void {
-  while (thumbActiveJobs < MAX_THUMB_JOBS && thumbQueue.length > 0) {
+  while (thumbActiveJobs < maxThumbJobs && thumbQueue.length > 0) {
     const run = thumbQueue.shift();
     if (!run) break;
     thumbActiveJobs += 1;
@@ -80,10 +81,12 @@ function canvasToJpeg(canvas: HTMLCanvasElement): Promise<Blob> {
 // 20MP급 원본(장당 디코드 80MB)을 <img>에 직접 물리면 디코더가 밀려
 // 빈 칸·부분 렌더로 보인다. 원본을 내려받아 디코드 단계에서 320px로
 // 축소한 blob URL을 썸네일로 쓴다 (EXIF 방향은 fromImage으로 반영).
-async function makeThumb(assetUrl: string): Promise<string> {
-  const cached = thumbCache.get(assetUrl);
+async function makeThumb(assetUrl: string, width: number, maxJobs: number): Promise<string> {
+  maxThumbJobs = maxJobs;
+  const key = `${width}|${assetUrl}`;
+  const cached = thumbCache.get(key);
   if (cached) return cached;
-  const flight = thumbFlight.get(assetUrl);
+  const flight = thumbFlight.get(key);
   if (flight) return flight;
   const job = runThumbJob(async () => {
     try {
@@ -92,7 +95,7 @@ async function makeThumb(assetUrl: string): Promise<string> {
       const blob = await res.blob();
       const bmp = await createImageBitmap(blob, {
         imageOrientation: 'from-image',
-        resizeWidth: THUMB_WIDTH,
+        resizeWidth: width,
         resizeQuality: 'high',
       });
       try {
@@ -104,20 +107,20 @@ async function makeThumb(assetUrl: string): Promise<string> {
         ctx.drawImage(bmp, 0, 0);
         const out = await canvasToJpeg(canvas);
         const url = URL.createObjectURL(out);
-        thumbCache.set(assetUrl, url);
+        thumbCache.set(key, url);
         return url;
       } finally {
         bmp.close();
       }
     } finally {
-      thumbFlight.delete(assetUrl);
+      thumbFlight.delete(key);
     }
   });
-  thumbFlight.set(assetUrl, job);
+  thumbFlight.set(key, job);
   return job;
 }
 
-function AlbumThumb({ entry }: { entry: FcEntry }) {
+function AlbumThumb({ entry, width, maxJobs }: { entry: FcEntry; width: number; maxJobs: number }) {
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
   // 다운스케일 썸네일 URL. null이면 아직 준비 전, 'direct'면 구형 경로(원본 직결)로 폴백한다.
@@ -149,7 +152,7 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
   useEffect(() => {
     if (!nearby || direct || thumb) return;
     let cancelled = false;
-    void makeThumb(convertFileSrc(entry.path))
+    void makeThumb(convertFileSrc(entry.path), width, maxJobs)
       .then((url) => {
         if (!cancelled) {
           setThumb(url);
@@ -162,7 +165,7 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
     return () => {
       cancelled = true;
     };
-  }, [nearby, direct, thumb, entry.path]);
+  }, [nearby, direct, thumb, entry.path, width, maxJobs]);
 
   if (failed) {
     return (
@@ -211,6 +214,7 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
 // P13-09: 방향키는 격자 방향대로 이동한다 (상·하는 한 행씩, 좌·우는 한 칸씩).
 export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onContextMenu }: AlbumViewProps) {
   const { t } = useLanguage();
+  const image = useSafeSettings()?.settings.image ?? DEFAULT_IMAGE_SETTINGS;
   const shown = entries.filter(isAlbumEntry);
 
   if (shown.length === 0) {
@@ -227,7 +231,9 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
   return (
     <div
       data-album-grid
-      className="flex-1 min-h-0 overflow-auto p-2 grid gap-2 content-start grid-cols-[repeat(auto-fill,minmax(120px,1fr))]"
+      // auto-rows-max: 타일이 overflow-hidden이라 최소 높이 기여가 0이므로, 기본 auto 행은
+      // 컨테이너 높이에 맞춰 눌려 찌그러진다(분할 화면일수록 심함). 행을 내용 높이로 고정한다.
+      className="flex-1 min-h-0 overflow-auto p-2 grid gap-2 content-start auto-rows-max grid-cols-[repeat(auto-fill,minmax(120px,1fr))]"
       onContextMenu={(e) => onContextMenu(e, null)}
     >
       {shown.map((entry) => {
@@ -257,13 +263,13 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
             {/* 썸네일 박스는 고정 높이(h-32)로 둔다. aspect-ratio + %높이 체인은
                 엔진·상태에 따라 높이가 0으로 붕괴해 카드가 납작한 띠로 보일 수 있어,
                 박스·플레이스홀더·파일명이 항상 렌더되도록 확정 높이로 고정한다. */}
-            <div className="relative h-32 w-full overflow-hidden bg-muted/20">
+            <div className="relative h-32 w-full shrink-0 overflow-hidden bg-muted/20">
               {isDir ? (
                 <span className="flex h-full w-full items-center justify-center">
                   <FileKindIcon name={entry.name} kind={entry.kind} className="h-10 w-10" />
                 </span>
               ) : (
-                <AlbumThumb entry={entry} />
+                <AlbumThumb entry={entry} width={image.albumThumbWidth} maxJobs={image.albumMaxJobs} />
               )}
             </div>
             <span className="truncate px-2 py-1.5 text-[11px] leading-5 text-foreground/90" title={entry.name}>

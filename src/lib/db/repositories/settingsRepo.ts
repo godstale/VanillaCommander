@@ -5,6 +5,11 @@ import {
   type SqlDatabase,
 } from '@/lib/db/client';
 import { z } from 'zod';
+import {
+  DEFAULT_IMAGE_SETTINGS,
+  ImageSettingsSchema,
+  type ImageSettings,
+} from '@/lib/types/imageSettings';
 import type { AppSettings } from '@/lib/types/chat';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import type { ApprovalMode } from '@/lib/types/agent';
@@ -69,6 +74,14 @@ export function parseParserSettings(raw: unknown): ParserSettings {
   return parsed.success ? parsed.data : { ...DEFAULT_PARSER_SETTINGS };
 }
 
+/** 손상된 저장값은 기본값으로 복원한다 (테스트용 export). */
+export function parseImageSettings(raw: unknown): ImageSettings {
+  const parsed = ImageSettingsSchema.safeParse(
+    typeof raw === 'string' ? safeJsonParse(raw) : raw,
+  );
+  return parsed.success ? parsed.data : { ...DEFAULT_IMAGE_SETTINGS };
+}
+
 interface SettingsRow {
   id: string;
   open_tabs: string;
@@ -90,7 +103,10 @@ interface SettingsRow {
   agent_allowed_roots?: string | null;
   wiki_settings?: string | null;
   parser_settings?: string | null;
+  image_settings?: string | null;
 }
+
+export { DEFAULT_IMAGE_SETTINGS, ImageSettingsSchema, type ImageSettings };
 
 export const DEFAULT_MONITORING_INTERVAL_MS = 1000;
 
@@ -115,6 +131,7 @@ export const DEFAULT_APP_SETTINGS: AppSettings = {
   agentAllowedRoots: [],
   wiki: DEFAULT_WIKI_SETTINGS,
   parsers: DEFAULT_PARSER_SETTINGS,
+  image: DEFAULT_IMAGE_SETTINGS,
 };
 
 function parseStringArray(raw: string | null | undefined): string[] {
@@ -160,6 +177,7 @@ function parseSettingsRow(row: SettingsRow): AppSettings {
     agentAllowedRoots: parseStringArray(row.agent_allowed_roots),
     wiki: parseWikiSettings(row.wiki_settings),
     parsers: parseParserSettings(row.parser_settings),
+    image: parseImageSettings(row.image_settings),
   };
 }
 
@@ -196,6 +214,7 @@ async function ensureAppV11Columns(db: SqlDatabase): Promise<void> {
     "ALTER TABLE app_settings ADD COLUMN agent_allowed_roots TEXT NOT NULL DEFAULT '[]'",
     "ALTER TABLE app_settings ADD COLUMN wiki_settings TEXT NOT NULL DEFAULT '{}'",
     "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
+    "ALTER TABLE app_settings ADD COLUMN image_settings TEXT NOT NULL DEFAULT '{}'",
   ];
   for (const alter of alters) {
     try {
@@ -225,8 +244,8 @@ async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
       default_approval_mode,
       trusted_workspaces, last_workspace_root, monitoring_interval_ms,
       setup_completed_at, work_folder, favorites,
-      agent_allowed_roots, wiki_settings, parser_settings
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      agent_allowed_roots, wiki_settings, parser_settings, image_settings
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       DEFAULT_APP_SETTINGS.id,
       JSON.stringify(DEFAULT_APP_SETTINGS.openTabs),
@@ -248,6 +267,7 @@ async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
       JSON.stringify(DEFAULT_APP_SETTINGS.agentAllowedRoots),
       JSON.stringify(DEFAULT_APP_SETTINGS.wiki),
       JSON.stringify(DEFAULT_APP_SETTINGS.parsers),
+      JSON.stringify(DEFAULT_APP_SETTINGS.image),
     ],
   );
 
@@ -272,6 +292,7 @@ async function fetchOrInitRow(db: SqlDatabase): Promise<SettingsRow> {
     agent_allowed_roots: JSON.stringify(DEFAULT_APP_SETTINGS.agentAllowedRoots),
     wiki_settings: JSON.stringify(DEFAULT_APP_SETTINGS.wiki),
     parser_settings: JSON.stringify(DEFAULT_APP_SETTINGS.parsers),
+    image_settings: JSON.stringify(DEFAULT_APP_SETTINGS.image),
   };
 }
 
@@ -323,7 +344,7 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
         default_approval_mode = ?,
         trusted_workspaces = ?, last_workspace_root = ?, monitoring_interval_ms = ?,
         setup_completed_at = ?, work_folder = ?, favorites = ?,
-        agent_allowed_roots = ?, wiki_settings = ?, parser_settings = ?
+        agent_allowed_roots = ?, wiki_settings = ?, parser_settings = ?, image_settings = ?
       WHERE id = 'singleton'`,
       [
         JSON.stringify(merged.openTabs),
@@ -345,6 +366,7 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
         JSON.stringify(merged.agentAllowedRoots),
         JSON.stringify(merged.wiki),
         JSON.stringify(merged.parsers),
+        JSON.stringify(merged.image),
       ],
     );
     return merged;
@@ -379,7 +401,7 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
       default_approval_mode = ?,
       trusted_workspaces = ?, last_workspace_root = ?, monitoring_interval_ms = ?,
       setup_completed_at = ?, work_folder = ?, favorites = ?,
-      agent_allowed_roots = ?, wiki_settings = ?, parser_settings = ?
+      agent_allowed_roots = ?, wiki_settings = ?, parser_settings = ?, image_settings = ?
     WHERE id = 'singleton'`,
     [
       JSON.stringify(activeWs ? [] : merged.openTabs),
@@ -401,6 +423,7 @@ export async function updateSettings(  updates: Partial<Omit<AppSettings, 'id'>>
       JSON.stringify(merged.agentAllowedRoots),
       JSON.stringify(merged.wiki),
       JSON.stringify(merged.parsers),
+      JSON.stringify(merged.image),
     ],
   );
 

@@ -1,7 +1,7 @@
 import type { AgentMessage, TokenUsage } from '@/lib/agent/types';
 import type { WorkspaceTab } from '@/lib/types/workspaceTab';
 import type { ApprovalMode } from '@/lib/types/agent';
-import type { ParserSettings, WikiSettings } from '@/lib/db/repositories/settingsRepo';
+import type { ImageSettings, ParserSettings, WikiSettings } from '@/lib/db/repositories/settingsRepo';
 
 export type ChatSessionOrigin = 'chat' | 'explorer' | 'macro' | 'wiki';
 
@@ -78,4 +78,6 @@ export interface AppSettings {
   wiki: WikiSettings;
   /** 문서 파서 설정 블록 (P11-04에 저장소만, 화면은 P11-34). */
   parsers: ParserSettings;
+  /** 이미지 앨범·뷰어 설정 블록. */
+  image: ImageSettings;
 }

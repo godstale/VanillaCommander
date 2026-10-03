@@ -4,6 +4,7 @@ import {
   DEFAULT_APP_SETTINGS,
   getSettings,
   parseParserSettings,
+  parseImageSettings,
   parseWikiSettings,
   updateSettings,
 } from './settingsRepo';
@@ -57,5 +58,14 @@ describe('settingsRepo P11-04 fields', () => {
     });
     expect(parseParserSettings('42')).toEqual(DEFAULT_APP_SETTINGS.parsers);
     expect(parseParserSettings(undefined)).toEqual(DEFAULT_APP_SETTINGS.parsers);
+  });
+
+  it('falls back to defaults on corrupt image JSON and fills missing fields', () => {
+    expect(parseImageSettings('not-json')).toEqual(DEFAULT_APP_SETTINGS.image);
+    expect(parseImageSettings('{"viewerZoomStep":0}')).toEqual(DEFAULT_APP_SETTINGS.image);
+    expect(parseImageSettings('{"viewerFitOnOpen":false}')).toEqual({
+      ...DEFAULT_APP_SETTINGS.image,
+      viewerFitOnOpen: false,
+    });
   });
 });
