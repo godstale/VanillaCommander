@@ -29,11 +29,9 @@ export function SearchResultsView({ matches, searching, onOpenPath, onCancel, on
             {t('search.cancelSearch')}
           </Button>
         ) : (
-          matches.length > 0 && (
-            <Button variant="ghost" size="sm" onClick={onClear} className="text-xs h-7">
-              {t('workspace.close')}
-            </Button>
-          )
+          <Button variant="ghost" size="sm" onClick={onClear} className="text-xs h-7">
+            {t('workspace.close')}
+          </Button>
         )}
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto">

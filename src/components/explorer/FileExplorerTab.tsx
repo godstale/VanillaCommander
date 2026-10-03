@@ -91,6 +91,14 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
   const [lastRefresh, setLastRefresh] = useState(() => Date.now());
   const anchorRef = useRef<string | null>(null);
 
+  // P12-01: 찾기 모드 종료 = job 정리 + 결과 화면 닫기 + 원래 목록 복원.
+  const clearSearch = useCallback(() => {
+    if (searchJobId) {
+      dismissJob(searchJobId);
+    }
+    setSearchJobId(null);
+  }, [searchJobId, dismissJob]);
+
   const isActive = activeTabId === tab.id;
   const myPane = tab.pane ?? 'primary';
   const oppositeExplorer = useMemo(
@@ -112,7 +120,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
       setPath(metaPath);
       setSelected([]);
       setActivePath(null);
-      setSearchJobId(null);
+      clearSearch();
       setSearchText('');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -237,10 +245,11 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
       setPath(next);
       setSelected([]);
       setActivePath(null);
-      setSearchJobId(null);
+      // P12-01: 폴더 이동 시 찾기 모드를 종료하고 원래 목록으로 복원한다.
+      clearSearch();
       setSearchText('');
     },
-    [persist, t, back, path],
+    [persist, t, back, path, clearSearch],
   );
 
   const goBack = useCallback(() => {
@@ -254,8 +263,9 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     persist({ back: nb, fwd: nf, path: prev }, baseNameOf(prev) || t('activityBar.explorer'));
     setPath(prev);
     setSelected([]);
-    setSearchJobId(null);
-  }, [back, fwd, path, persist, t]);
+    // P12-01: 백 버튼은 찾기 결과에서도 원래 폴더로 복원한다.
+    clearSearch();
+  }, [back, fwd, path, persist, t, clearSearch]);
 
   const goForward = useCallback(() => {
     const next = fwd[0];
@@ -268,8 +278,8 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
     persist({ back: nb, fwd: nf, path: next }, baseNameOf(next) || t('activityBar.explorer'));
     setPath(next);
     setSelected([]);
-    setSearchJobId(null);
-  }, [back, fwd, path, persist, t]);
+    clearSearch();
+  }, [back, fwd, path, persist, t, clearSearch]);
 
   const goUp = useCallback(() => {
     const parent = parentOf(path);
@@ -460,15 +470,22 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
 
   const startSearch = useCallback(async () => {
     const q = searchText.trim();
-    if (!q || !path) return;
+    // P12-01: 빈 검색어로 찾기를 실행하면 원래 폴더 보기로 복원한다.
+    if (!q || !path) {
+      clearSearch();
+      return;
+    }
     try {
-      const id = await fcSearch({ root: path, namePattern: q, contentQuery: q });
+      // 내용 쿼리는 정규식으로 해석되므로 리터럴로 이스케이프한다.
+      // 이름 패턴은 Rust에서 glob 메타문자 없으면 부분 일치로 처리된다.
+      const literal = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const id = await fcSearch({ root: path, namePattern: q, contentQuery: literal });
       registerJob(id, 'search', q);
       setSearchJobId(id);
     } catch (err) {
       setError(t('explorer.opFailed', { err: err instanceof Error ? err.message : String(err) }));
     }
-  }, [searchText, path, registerJob, t]);
+  }, [searchText, path, registerJob, clearSearch, t]);
 
   const searchJob = searchJobId ? jobs.find((j) => j.id === searchJobId) : undefined;
 
@@ -622,7 +639,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
             if (isDir) {
               navigate(p);
             } else {
-              setSearchJobId(null);
+              clearSearch();
               openPath(p, false);
             }
           }}
@@ -630,8 +647,7 @@ export function FileExplorerTab({ tab }: { tab: WorkspaceTab }) {
             void cancelJob(searchJobId);
           }}
           onClear={() => {
-            setSearchJobId(null);
-            dismissJob(searchJobId);
+            clearSearch();
           }}
         />
       ) : loading && entries.length === 0 ? (
