@@ -40,8 +40,8 @@ export function AgentEditorTab({ tab }: AgentEditorTabProps) {
 
   const handleSave = (saved: Agent) => {
     updateTab(tab.id, {
-      title: t('agentList.edit', { name: saved.name }),
-      meta: { agentId: saved.id },
+      title: t('agentWorkbench.tabTitle', { name: saved.name }),
+      meta: { ...tab.meta, agentId: saved.id },
     });
     setSaveFeedback(true);
     setTimeout(() => setSaveFeedback(false), 3000);

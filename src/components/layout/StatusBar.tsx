@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Bot } from 'lucide-react';
+import { useOpenAgentWorkbench } from '@/lib/agent/agentWorkbench';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useStatusBar, type StatusBarItem, type StatusBarSlot } from '@/lib/context/StatusBarContext';
 import { useGlobalLlmBusy } from '@/lib/agent/chatQueueManager';
@@ -46,6 +47,7 @@ function AgentStatusPublisher() {
   const { t } = useLanguage();
   const { defaultAgent, agents } = useAgents();
   const { publish, clear } = useStatusBar();
+  const openAgentWorkbench = useOpenAgentWorkbench();
   const busySessionId = useGlobalLlmBusy();
   const [connByAgent, setConnByAgent] = useState<Record<string, boolean>>({});
   const connected = agents.length === 0 ? null : (connByAgent[defaultAgent.id] ?? null);
@@ -102,10 +104,11 @@ function AgentStatusPublisher() {
           )}
         </>
       ),
-      title: `${t('statusBar.agent')}: ${stateLabel}`,
+      title: `${t('statusBar.openAgentEdit')} — ${stateLabel}`,
+      onClick: () => openAgentWorkbench(defaultAgent, 'edit'),
     });
     return () => clear('agent', 'default-agent');
-  }, [publish, clear, t, agents.length, defaultAgent, connected, busySessionId]);
+  }, [publish, clear, t, agents.length, defaultAgent, connected, busySessionId, openAgentWorkbench]);
 
   return null;
 }

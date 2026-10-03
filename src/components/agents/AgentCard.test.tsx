@@ -74,12 +74,12 @@ describe('AgentCard connection status', () => {
     expect(statusButton.className).toContain('text-destructive');
   });
 
-  it('triggers onCheckConnection when clicking the status icon button', () => {
-    const onCheckConnection = vi.fn();
+  it('opens live monitoring when clicking the agent icon', () => {
+    const onOpenMonitor = vi.fn();
     render(
       <AgentCard
         agent={mockAgent}
-        onCheckConnection={onCheckConnection}
+        onOpenMonitor={onOpenMonitor}
         onStartChat={vi.fn()}
         onEdit={vi.fn()}
         onSetDefault={vi.fn()}
@@ -90,7 +90,7 @@ describe('AgentCard connection status', () => {
     const statusButton = screen.getByRole('button', { name: /에이전트 연결 상태/i });
     fireEvent.click(statusButton);
 
-    expect(onCheckConnection).toHaveBeenCalledWith(mockAgent);
+    expect(onOpenMonitor).toHaveBeenCalledWith(mockAgent);
   });
 
   it('shows only model and context badges plus chat/edit buttons (P11-20)', () => {
@@ -144,7 +144,6 @@ describe('AgentCard connection status', () => {
     );
 
     const statusButton = screen.getByRole('button', { name: /에이전트 연결 상태/i });
-    expect(statusButton).toBeDisabled();
-    expect(statusButton.getAttribute('title')).toBe('연결 상태 확인');
+    expect(statusButton.getAttribute('title')).toBe('실시간 모니터링 열기');
   });
 });

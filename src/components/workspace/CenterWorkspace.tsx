@@ -32,8 +32,7 @@ import { ChatTab } from '@/components/workspace/ChatTab';
 import { EditorTab } from '@/components/workspace/EditorTab';
 import { ImageViewerTab } from '@/components/workspace/ImageViewerTab';
 import { SkillViewerTab } from '@/components/workspace/SkillViewerTab';
-import { AgentEditorTab } from '@/components/workspace/AgentEditorTab';
-import { AgentMonitorTab } from '@/components/workspace/AgentMonitorTab';
+import { AgentWorkbenchTab } from '@/components/workspace/AgentWorkbenchTab';
 import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
 import { DocumentViewerTab } from '@/components/viewers/DocumentViewerTab';
 import { ArchiveViewerTab } from '@/components/viewers/ArchiveViewerTab';
@@ -69,9 +68,8 @@ function renderTabContent(tab: WorkspaceTab) {
     case 'image-viewer':
       return <ImageViewerTab tab={tab} />;
     case 'agent-editor':
-      return <AgentEditorTab tab={tab} />;
     case 'agent-monitor':
-      return <AgentMonitorTab tab={tab} />;
+      return <AgentWorkbenchTab tab={tab} />;
     case 'skill-viewer':
       return <SkillViewerTab tab={tab} />;
     case 'file-explorer':

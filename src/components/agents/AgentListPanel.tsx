@@ -3,6 +3,7 @@ import { Bot, Plus, Sparkles, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
+import { useOpenAgentWorkbench } from '@/lib/agent/agentWorkbench';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { AgentCard } from './AgentCard';
@@ -12,6 +13,7 @@ import { checkAllAgentsConnection, checkAgentConnection } from '@/lib/llm/agentS
 export function AgentListPanel() {
   const { agents, loading, createAgent, setDefaultAgent, deleteAgent } = useAgents();
   const { openTab } = useWorkspaceTabs();
+  const openAgentWorkbench = useOpenAgentWorkbench();
   const { settings } = useSettings();
   const { t } = useLanguage();
 
@@ -92,12 +94,11 @@ export function AgentListPanel() {
   };
 
   const handleEditAgent = (agent: Agent) => {
-    openTab({
-      id: `agent-editor:${agent.id}`,
-      type: 'agent-editor',
-      title: t('agentList.edit', { name: agent.name }),
-      meta: { agentId: agent.id },
-    });
+    openAgentWorkbench(agent, 'edit');
+  };
+
+  const handleOpenMonitor = (agent: Agent) => {
+    openAgentWorkbench(agent, 'monitor');
   };
 
   const handleSetDefault = async (agent: Agent) => {
@@ -206,6 +207,7 @@ export function AgentListPanel() {
               status={statuses[agent.id] ?? 'unknown'}
               isChecking={!!checkingMap[agent.id] || isCheckingAll}
               onCheckConnection={handleCheckSingle}
+              onOpenMonitor={handleOpenMonitor}
               isOnlyAgent={agents.length <= 1}
               onStartChat={handleStartChat}
               onEdit={handleEditAgent}

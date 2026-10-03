@@ -6,6 +6,7 @@ import type { Agent } from '@/lib/types/agent';
 import { chatConfigSignature, DEFAULT_TEMPERATURE } from '@/lib/types/agent';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useSettings } from '@/lib/context/SettingsContext';
+import { useOpenAgentWorkbench } from '@/lib/agent/agentWorkbench';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useChatSessions } from '@/lib/context/ChatSessionsContext';
@@ -62,7 +63,8 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
   const { t } = useLanguage();
   const { getAgent, defaultAgent, agents, loading: agentsLoading } = useAgents();
   const { settings } = useSettings();
-  const { updateTab, openTab } = useWorkspaceTabs();
+  const { updateTab } = useWorkspaceTabs();
+  const openAgentWorkbench = useOpenAgentWorkbench();
   const { workspaceRoot } = useWorkspace();
   const { sessions, refreshSessions, updateSessionTitle } = useChatSessions();
   const skillsCtx = useSafeSkills();
@@ -249,13 +251,8 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
   }, [activeAgent.id]);
 
   const handleOpenMonitor = useCallback(() => {
-    openTab({
-      id: `agent-monitor:${activeAgent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.monitor', { name: activeAgent.name }),
-      meta: { agentId: activeAgent.id },
-    });
-  }, [openTab, activeAgent.id, activeAgent.name, t]);
+    openAgentWorkbench(activeAgent, 'monitor');
+  }, [openAgentWorkbench, activeAgent]);
 
   // Session row is created lazily on first send (handleSendMessage), so opening
   // a chat tab never registers it in the conversation list. Here we only
@@ -465,12 +462,7 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
         }
 
         case 'settings':
-          openTab({
-            id: `agent-editor:${activeAgent.id}`,
-            type: 'agent-editor',
-            title: t('chatTab.editAgent', { name: activeAgent.name }),
-            meta: { agentId: activeAgent.id },
-          });
+          openAgentWorkbench(activeAgent, 'edit');
           return true;
 
         case 'skills': {
@@ -514,6 +506,7 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
       }
     },
     [
+      openAgentWorkbench,
       clearChat,
       injectInfoMessage,
       contextUsage,
@@ -522,7 +515,6 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
       messages,
       yoloMode,
       effectiveThink,
-      openTab,
       skillsCtx?.skills,
       workspaceRoot,
       t,

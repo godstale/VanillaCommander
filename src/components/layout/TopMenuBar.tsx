@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useWorkspace } from '@/lib/context/WorkspaceContext';
 import { useSidePanel } from '@/lib/context/SidePanelContext';
+import { useOpenAgentWorkbench } from '@/lib/agent/agentWorkbench';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
 import { useAgents } from '@/lib/context/AgentsContext';
 import { useGlobalLlmBusy } from '@/lib/agent/chatQueueManager';
@@ -39,6 +40,7 @@ export function TopMenuBar() {
   const { workspaceRoot, workFolder, setWorkspaceRoot, recentWorkspaces = [] } = useWorkspace();
   const { setActiveView } = useSidePanel();
   const { openTab } = useWorkspaceTabs();
+  const openAgentWorkbench = useOpenAgentWorkbench();
   const { agents, defaultAgent } = useAgents();
   const navigate = useNavigate();
   const hasWorkspace = Boolean(workspaceRoot);
@@ -108,12 +110,7 @@ export function TopMenuBar() {
       setActiveView('agents');
       return;
     }
-    openTab({
-      id: `agent-monitor:${defaultAgent.id}`,
-      type: 'agent-monitor',
-      title: t('agentList.monitor', { name: defaultAgent.name }),
-      meta: { agentId: defaultAgent.id },
-    });
+    openAgentWorkbench(defaultAgent, 'monitor');
   };
 
   const [isMaximized, setIsMaximized] = useState(false);
