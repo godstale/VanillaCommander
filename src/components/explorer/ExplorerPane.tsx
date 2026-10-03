@@ -656,6 +656,13 @@ export function ExplorerPane({
 
   const searchJob = searchJobId ? jobs.find((j) => j.id === searchJobId) : undefined;
 
+  // P13-09: 앨범 격자 열 개수 (grid minmax(120px) + gap-2 8px 기준).
+  const albumCols = useCallback(() => {
+    const grid = containerRef.current?.querySelector('[data-album-grid]');
+    const w = grid instanceof HTMLElement ? grid.clientWidth : 0;
+    return Math.max(1, Math.floor((w + 8) / 128));
+  }, []);
+
   const handleKey = useCallback(
     (e: React.KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -752,17 +759,22 @@ export function ExplorerPane({
         const targets = effectivePaths();
         if (targets.length > 0) setPropsPaths(targets);
       }
-      // P13-08: 앨범 보기에서는 좌·우도 이동한다 (격자 탐색). 목록에서는 상·하만.
+      // P13-08: 목록에서는 상·하만 이동한다.
+      // P13-09: 앨범에서는 격자 방향대로 (상·하는 한 행씩, 좌·우는 한 칸씩).
       const arrowDown = e.key === 'ArrowDown';
       const arrowUp = e.key === 'ArrowUp';
       const arrowLeft = e.key === 'ArrowLeft';
       const arrowRight = e.key === 'ArrowRight';
       if (arrowDown || arrowUp || ((arrowLeft || arrowRight) && view === 'album')) {
         e.preventDefault();
-        moveActive(arrowDown || arrowRight ? 1 : -1, e.shiftKey);
+        let delta = arrowDown || arrowRight ? 1 : -1;
+        if (view === 'album' && (arrowDown || arrowUp)) {
+          delta *= albumCols();
+        }
+        moveActive(delta, e.shiftKey);
       }
     },
-    [activePath, displayEntries, openEntry, goUp, goBack, goForward, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, toggleSearch, view, t],
+    [activePath, displayEntries, openEntry, goUp, goBack, goForward, parentPath, doCopyMove, doDelete, doPaste, effectivePaths, opTargets, sorted, moveActive, toggleSearch, albumCols, view, t],
   );
 
   const openCtxMenu = useCallback(

@@ -39,6 +39,7 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
 
 // 이미지 브라우저: 폴더와 이미지만 앨범(썸네일 격자)으로 보여준다.
 // 선택·열기·우클릭 동작은 텍스트 목록과 동일하다.
+// P13-09: 방향키는 격자 방향대로 이동한다 (상·하는 한 행씩, 좌·우는 한 칸씩).
 export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onContextMenu }: AlbumViewProps) {
   const { t } = useLanguage();
   const shown = entries.filter(isAlbumEntry);
@@ -56,6 +57,7 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
 
   return (
     <div
+      data-album-grid
       className="flex-1 min-h-0 overflow-auto p-2 grid gap-2 content-start grid-cols-[repeat(auto-fill,minmax(120px,1fr))]"
       onContextMenu={(e) => onContextMenu(e, null)}
     >
@@ -92,7 +94,7 @@ export function AlbumView({ entries, selected, activePath, onSelect, onOpen, onC
                 <AlbumThumb entry={entry} />
               )}
             </span>
-            <span className="truncate px-2 py-2 text-[11px] leading-5 text-foreground/90" title={entry.name}>
+            <span className="truncate px-2 py-3 text-[11px] leading-5 text-foreground/90" title={entry.name}>
               {entry.name}
             </span>
           </div>
