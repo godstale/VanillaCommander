@@ -16,10 +16,72 @@ export interface AlbumViewProps {
   onContextMenu: (e: React.MouseEvent, entry: FcEntry | null) => void;
 }
 
+/** 썸네일 표시 너비(px). 120px 타일의 레티나 대응으로 320px로 다운스케일한다. */
+const THUMB_WIDTH = 320;
+
+/** 경로 → 다운스케일 썸네일 blob URL (세션 캐시, 타일 재마운트 시 재요청 방지). */
+const thumbCache = new Map<string, string>();
+/** 경로 → 진행 중 생성 작업 (같은 파일을 여러 타일이 동시에 요청해도 1회만 수행). */
+const thumbFlight = new Map<string, Promise<string>>();
+
+function canvasToJpeg(canvas: HTMLCanvasElement): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) resolve(blob);
+      else reject(new Error('toBlob failed'));
+    }, 'image/jpeg', 0.82);
+  });
+}
+
+// 20MP급 원본(장당 디코드 80MB)을 <img>에 직접 물리면 디코더가 밀려
+// 빈 칸·부분 렌더로 보인다. 원본을 내려받아 디코드 단계에서 320px로
+// 축소한 blob URL을 썸네일로 쓴다 (EXIF 방향은 fromImage으로 반영).
+async function makeThumb(assetUrl: string): Promise<string> {
+  const cached = thumbCache.get(assetUrl);
+  if (cached) return cached;
+  const flight = thumbFlight.get(assetUrl);
+  if (flight) return flight;
+  const job = (async () => {
+    try {
+      const res = await fetch(assetUrl);
+      if (!res.ok) throw new Error(`thumb fetch ${res.status}`);
+      const blob = await res.blob();
+      const bmp = await createImageBitmap(blob, {
+        imageOrientation: 'from-image',
+        resizeWidth: THUMB_WIDTH,
+        resizeQuality: 'high',
+      });
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = bmp.width;
+        canvas.height = bmp.height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('no 2d context');
+        ctx.drawImage(bmp, 0, 0);
+        const out = await canvasToJpeg(canvas);
+        const url = URL.createObjectURL(out);
+        thumbCache.set(assetUrl, url);
+        return url;
+      } finally {
+        bmp.close();
+      }
+    } finally {
+      thumbFlight.delete(assetUrl);
+    }
+  })();
+  thumbFlight.set(assetUrl, job);
+  return job;
+}
+
 function AlbumThumb({ entry }: { entry: FcEntry }) {
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  // 뷰포트 근처 타일만 원본을 요청한다. 100개가 넘는 고해상도 원본을
+  // 다운스케일 썸네일 URL. null이면 아직 준비 전, 'direct'면 구형 경로(원본 직결)로 폴백한다.
+  const [thumb, setThumb] = useState<string | null>(null);
+  const [direct, setDirect] = useState(
+    () => typeof createImageBitmap === 'undefined' || typeof fetch === 'undefined',
+  );
+  // 뷰포트 근처 타일만 썸네일을 요청한다. 100개가 넘는 원본을
   // 동시에 로드·디코드하면 asset 프로토콜·디코더가 밀려 빈 칸으로 보인다.
   const [nearby, setNearby] = useState(() => typeof IntersectionObserver === 'undefined');
   const boxRef = useRef<HTMLDivElement>(null);
@@ -40,6 +102,24 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
     return () => ob.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!nearby || direct || thumb) return;
+    let cancelled = false;
+    void makeThumb(convertFileSrc(entry.path))
+      .then((url) => {
+        if (!cancelled) {
+          setThumb(url);
+        }
+      })
+      .catch(() => {
+        // 다운스케일 실패(CSP·CORS·미지원 포맷 등)하면 원본 직결로 폴백한다.
+        if (!cancelled) setDirect(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [nearby, direct, thumb, entry.path]);
+
   if (failed) {
     return (
       <span className="flex h-full w-full items-center justify-center">
@@ -47,6 +127,7 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
       </span>
     );
   }
+  const src = thumb ?? (direct ? convertFileSrc(entry.path) : null);
   return (
     <div ref={boxRef} className="relative h-full w-full">
       {!loaded && (
@@ -58,15 +139,19 @@ function AlbumThumb({ entry }: { entry: FcEntry }) {
           />
         </span>
       )}
-      {nearby && (
+      {nearby && src && (
         <img
-          src={convertFileSrc(entry.path)}
+          src={src}
           alt={entry.name}
           loading="lazy"
           decoding="async"
           draggable={false}
           onLoad={() => setLoaded(true)}
-          onError={() => setFailed(true)}
+          onError={() => {
+            // 썸네일 blob이 깨졌으면 원본 직결을 한 번 시도하고, 그것도 실패하면 아이콘으로.
+            if (thumb && !direct) setDirect(true);
+            else setFailed(true);
+          }}
           className={cn(
             'h-full w-full object-cover transition-opacity',
             loaded ? 'opacity-100' : 'opacity-0',
