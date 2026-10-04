@@ -95,6 +95,8 @@ pub fn run() {
             wiki_watch_set,
             wiki_watch_stop,
             wiki_watch_status,
+            wiki_scan_folders,
+            wiki_file_hash,
             wiki_default_watch_folder,
         ])
         .run(tauri::generate_context!())
