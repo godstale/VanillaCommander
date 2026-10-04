@@ -198,6 +198,18 @@
   - [x] P11-51 문서·브랜딩 정리
   - [x] P11-52 통합 QA
 
+## Phase 12 — 위키 완성 `[~]`
+
+> 구현 계획: `Docs/phases/Phase12-Wiki.md`. laya 미도입(W-D1).
+
+- [~] P12-01 감시·파이프라인 상시 구동(`WikiRuntime`)
+- [ ] P12-02 주기 스캔(reconcile) + content_hash 중복 방지
+- [ ] P12-03 카테고리 체계 기반 계층 분류(구조화 출력)
+- [ ] P12-04 위키 저장 구조 개선(frontmatter·slug 충돌·index)
+- [ ] P12-05 검색(SQLite FTS5)
+- [ ] P12-06 위키 UI(검색·카테고리 트리·설정)
+- [ ] P12-07 문서·테스트
+
 ## Phase 12 — Explorer UX 개편 `[x]`
 
 - [x] P12-01 탐색기 찾기 수정 (이름 부분일치 OR 내용 검색·백/초기화 복원)
