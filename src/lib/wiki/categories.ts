@@ -9,8 +9,8 @@ const FORBIDDEN_CHARS = /[\\:*?"<>|\u0000-\u001f]/g;
 export const DEFAULT_CATEGORIES: string[] = [
   '문서/업무',
   '문서/학습',
-  '문서/계약·법률',
-  '재무/영수증·청구서',
+  '문서/계약-법률',
+  '재무/영수증-청구서',
   '재무/보고서',
   '이미지/사진',
   '이미지/스크린샷',
@@ -22,7 +22,9 @@ export const DEFAULT_CATEGORIES: string[] = [
  * 빈 값·`.`/`..` 세그먼트가 섞이거나 깊이를 넘으면 null (폴더 탈출·난립 방지).
  */
 export function normalizeCategoryPath(raw: string): string | null {
+  // 구 설정값 호환: '·' 구분자는 '-'로 읽는다.
   const segments = raw
+    .replace(/·/g, '-')
     .replace(/\\/g, '/')
     .split('/')
     .map((s) => s.replace(FORBIDDEN_CHARS, '').trim());

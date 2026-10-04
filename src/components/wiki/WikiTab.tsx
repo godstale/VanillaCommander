@@ -1,13 +1,14 @@
 // P11-31: 위키 설정 탭. 감시·이동·분류·필터·프롬프트·처리 에이전트 + 처리 이력.
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { BookOpen, Plus, Trash2, RotateCcw, FolderSearch } from 'lucide-react';
+import { open as openFolderDialog } from '@tauri-apps/plugin-dialog';
+import { BookOpen, Plus, Trash2, RotateCcw, FolderSearch, FolderOpen } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { useAgents } from '@/lib/context/AgentsContext';
 import type { WikiSettings } from '@/lib/db/repositories/settingsRepo';
-import { DEFAULT_WIKI_PROMPT } from '@/lib/wiki/settings';
+import { DEFAULT_WIKI_PROMPT, isSystemWatchFolder } from '@/lib/wiki/settings';
 import {
   listWikiJobs,
   updateWikiJob,
@@ -24,13 +25,20 @@ export function WikiTab() {
   const workspaceRoot = workspace?.workspaceRoot ?? null;
 
   const [form, setForm] = useState<WikiSettings>(settings.wiki);
-  const [folderInput, setFolderInput] = useState('');
+  const [folderError, setFolderError] = useState<string | null>(null);
   const [jobs, setJobs] = useState<WikiJob[]>([]);
   const [saved, setSaved] = useState(false);
 
+  // 편집 중(미저장) 값이 있으면 저장 결과가 되돌아와 입력을 덮어쓰지 않도록 동기화를 막는다.
+  const dirtyRef = useRef(false);
+  const formRef = useRef(form);
+  useEffect(() => {
+    formRef.current = form;
+  }, [form]);
+
   // 다른 화면에서 바뀐 설정을 열 때마다 반영한다.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- 설정 변경 시 폼 동기화
+    if (dirtyRef.current) return;
     setForm(settings.wiki);
   }, [settings.wiki]);
 
@@ -49,50 +57,99 @@ export function WikiTab() {
 
   const set = useCallback(
     <K extends keyof WikiSettings>(key: K, value: WikiSettings[K]) => {
+      dirtyRef.current = true;
       setForm((prev) => ({ ...prev, [key]: value }));
       setSaved(false);
     },
     [],
   );
 
-  const addFolder = useCallback(() => {
-    const folder = folderInput.trim();
-    if (!folder || form.watchFolders.includes(folder)) return;
-    set('watchFolders', [...form.watchFolders, folder]);
-    setFolderInput('');
-  }, [folderInput, form.watchFolders, set]);
-
-  const removeFolder = useCallback((folder: string) => {
-    set('watchFolders', form.watchFolders.filter((f) => f !== folder));
-  }, [form.watchFolders, set]);
-
-  const addDefaultFolder = useCallback(async () => {
+  const addFoldersViaDialog = useCallback(async () => {
+    setFolderError(null);
+    let picked: string | string[] | null;
     try {
-      const dir = await invoke<string>('wiki_default_watch_folder');
-      if (dir && !form.watchFolders.includes(dir)) {
-        set('watchFolders', [...form.watchFolders, dir]);
-      }
-    } catch (err) {
-      console.error('Failed to locate download folder:', err);
+      picked = await openFolderDialog({ directory: true, multiple: true });
+    } catch {
+      setFolderError(t('wiki.watchApplyFailed'));
+      return;
     }
+    if (!picked) return;
+    const dirs = Array.isArray(picked) ? picked : [picked];
+    if (dirs.some((d) => isSystemWatchFolder(d))) {
+      setFolderError(t('wiki.systemFolderBlocked'));
+    }
+    const paths = new Set(form.watchFolders.map((f) => f.path));
+    const fresh = dirs.filter((d) => !isSystemWatchFolder(d) && !paths.has(d));
+    if (fresh.length > 0) {
+      set('watchFolders', [...form.watchFolders, ...fresh.map((path) => ({ path, recursive: false }))]);
+    }
+  }, [form.watchFolders, set, t]);
+
+  const removeFolder = useCallback((path: string) => {
+    set('watchFolders', form.watchFolders.filter((f) => f.path !== path));
   }, [form.watchFolders, set]);
 
-  const handleSave = useCallback(async () => {
-    await updateSettings({ wiki: form });
+  const pickInboxDirViaDialog = useCallback(async () => {
+    let picked: string | string[] | null;
     try {
-      if (form.watchEnabled) {
+      picked = await openFolderDialog({ directory: true, multiple: false });
+    } catch {
+      return;
+    }
+    if (!picked) return;
+    const dir = Array.isArray(picked) ? picked[0] : picked;
+    if (!dir) return;
+    set('inboxDir', dir);
+  }, [set]);
+
+  const toggleFolderRecursive = useCallback((path: string, value: boolean) => {
+    set(
+      'watchFolders',
+      form.watchFolders.map((f) => (f.path === path ? { ...f, recursive: value } : f)),
+    );
+  }, [form.watchFolders, set]);
+
+  // 변경 즉시 저장 (입력이 멈춘 뒤 잠시 후). 저장 버튼은 없다.
+  const persist = useCallback(async (snapshot: WikiSettings) => {
+    if (snapshot.watchFolders.some((f) => isSystemWatchFolder(f.path))) {
+      setFolderError(t('wiki.systemFolderBlocked'));
+      return;
+    }
+    setFolderError(null);
+    // 구 백엔드·구 저장값 호환: 전역 recursive는 폴더별 값의 OR로 함께 저장한다.
+    const payload: WikiSettings = {
+      ...snapshot,
+      recursive: snapshot.watchFolders.some((f) => f.recursive),
+    };
+    await updateSettings({ wiki: payload });
+    // 저장하는 사이 추가 편집이 없었을 때만 동기화를 다시 허용한다.
+    if (JSON.stringify(formRef.current) === JSON.stringify(snapshot)) {
+      dirtyRef.current = false;
+    }
+    try {
+      if (payload.watchEnabled) {
         await invoke('wiki_watch_set', {
-          folders: form.watchFolders,
-          recursive: form.recursive,
+          folders: payload.watchFolders,
+          recursive: payload.recursive,
         });
       } else {
         await invoke('wiki_watch_stop');
       }
     } catch (err) {
       console.error('Failed to apply wiki watch:', err);
+      setFolderError(t('wiki.watchApplyFailed'));
+      return;
     }
     setSaved(true);
-  }, [form, updateSettings]);
+  }, [t, updateSettings]);
+
+  useEffect(() => {
+    if (!dirtyRef.current) return;
+    const timer = setTimeout(() => {
+      void persist(form);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [form, persist]);
 
   const handleReprocess = useCallback(async (job: WikiJob) => {
     await updateWikiJob(job.id, { status: 'queued', reason: null }, workspaceRoot);
@@ -108,6 +165,11 @@ export function WikiTab() {
   }, []);
 
   const selectedAgent = form.agentId ? agents.find((a) => a.id === form.agentId) : undefined;
+  // 첫 번째 선택지가 이미 "기본 에이전트(따라가기)"이므로 목록에서는 기본을 빼고
+  // 나머지 에이전트만 고정 선택지로 보여준다. 에이전트가 1개면 선택지는 1개가 된다.
+  const pinnableAgents = agents.filter((a) => a.id !== defaultAgent?.id);
+  const agentSelectValue =
+    form.agentId && form.agentId !== defaultAgent?.id ? form.agentId : '';
 
   return (
     <div className="h-full overflow-y-auto">
@@ -132,18 +194,6 @@ export function WikiTab() {
               <span className="text-muted-foreground">{t('wiki.watchEnabledDesc')}</span>
             </span>
           </label>
-          <label className="flex items-start gap-2 text-xs cursor-pointer">
-            <input
-              type="checkbox"
-              checked={form.recursive}
-              onChange={(e) => set('recursive', e.target.checked)}
-              className="mt-0.5 accent-primary"
-            />
-            <span>
-              <span className="font-medium block">{t('wiki.recursive')}</span>
-              <span className="text-muted-foreground">{t('wiki.recursiveDesc')}</span>
-            </span>
-          </label>
           <div>
             <label className="block text-xs font-medium text-muted-foreground mb-1">
               {t('wiki.scanInterval')}
@@ -165,44 +215,44 @@ export function WikiTab() {
             <ul className="space-y-1 mb-2">
               {form.watchFolders.map((folder) => (
                 <li
-                  key={folder}
-                  className="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-md border border-border bg-background text-xs font-mono"
+                  key={folder.path}
+                  className="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-md border border-border bg-background text-xs"
                 >
-                  <span className="truncate">{folder}</span>
-                  <button
-                    type="button"
-                    onClick={() => removeFolder(folder)}
-                    aria-label={folder}
-                    className="text-muted-foreground hover:text-destructive transition-colors cursor-pointer shrink-0"
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
+                  <span className="truncate font-mono" title={folder.path}>{folder.path}</span>
+                  <span className="flex items-center gap-2 shrink-0">
+                    <label
+                      className="flex items-center gap-1 text-[11px] text-muted-foreground cursor-pointer"
+                      title={t('wiki.recursiveDesc')}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={folder.recursive}
+                        onChange={(e) => toggleFolderRecursive(folder.path, e.target.checked)}
+                        className="accent-primary"
+                      />
+                      <span>{t('wiki.recursiveFolder')}</span>
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => removeFolder(folder.path)}
+                      aria-label={folder.path}
+                      className="text-muted-foreground hover:text-destructive transition-colors cursor-pointer shrink-0"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </span>
                 </li>
               ))}
             </ul>
             <div className="flex gap-1.5">
-              <input
-                type="text"
-                value={folderInput}
-                onChange={(e) => setFolderInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') addFolder();
-                }}
-                placeholder={t('wiki.folderPlaceholder')}
-                className="flex-1 px-3 py-1.5 text-xs rounded-md border border-border bg-background font-mono focus:outline-none focus:ring-1 focus:ring-primary"
-              />
-              <Button type="button" size="sm" variant="outline" onClick={addFolder}>
+              <Button type="button" size="sm" variant="outline" onClick={() => void addFoldersViaDialog()}>
                 <Plus className="h-3.5 w-3.5" />
                 <span>{t('wiki.addFolder')}</span>
               </Button>
             </div>
-            <button
-              type="button"
-              onClick={() => void addDefaultFolder()}
-              className="mt-1.5 text-[11px] text-primary hover:underline cursor-pointer"
-            >
-              {t('wiki.useDefaultFolder')}
-            </button>
+            {folderError && (
+              <p className="mt-1.5 text-[11px] text-destructive">{folderError}</p>
+            )}
           </div>
         </section>
 
@@ -226,13 +276,19 @@ export function WikiTab() {
               <label className="block text-xs font-medium text-muted-foreground mb-1">
                 {t('wiki.inboxDir')}
               </label>
-              <input
-                type="text"
-                value={form.inboxDir}
-                onChange={(e) => set('inboxDir', e.target.value)}
-                placeholder={t('wiki.inboxPlaceholder')}
-                className="w-full px-3 py-1.5 text-xs rounded-md border border-border bg-background font-mono focus:outline-none focus:ring-1 focus:ring-primary"
-              />
+              <div className="flex gap-1.5">
+                <input
+                  type="text"
+                  value={form.inboxDir}
+                  onChange={(e) => set('inboxDir', e.target.value)}
+                  placeholder={t('wiki.inboxPlaceholder')}
+                  className="flex-1 min-w-0 px-3 py-1.5 text-xs rounded-md border border-border bg-background font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+                <Button type="button" size="sm" variant="outline" onClick={() => void pickInboxDirViaDialog()}>
+                  <FolderOpen className="h-3.5 w-3.5" />
+                  <span>{t('wiki.browseFolder')}</span>
+                </Button>
+              </div>
             </div>
             <label className="flex items-start gap-2 text-xs cursor-pointer">
               <input
@@ -343,7 +399,7 @@ export function WikiTab() {
         <section className="border border-border rounded-xl p-5 bg-card/40 space-y-3">
           <h3 className="text-sm font-semibold">{t('wiki.sectionAgent')}</h3>
           <select
-            value={form.agentId ?? ''}
+            value={agentSelectValue}
             onChange={(e) => set('agentId', e.target.value || null)}
             disabled={agentsLoading}
             className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
@@ -352,7 +408,7 @@ export function WikiTab() {
               {t('wiki.agentDefault')}
               {defaultAgent ? ` (${defaultAgent.name})` : ''}
             </option>
-            {agents.map((agent) => (
+            {pinnableAgents.map((agent) => (
               <option key={agent.id} value={agent.id}>
                 {agent.name} • {agent.model}
                 {selectedAgent?.id === agent.id && agent.vision === 'no' ? ' ⚠' : ''}
@@ -364,12 +420,9 @@ export function WikiTab() {
           </p>
         </section>
 
-        <div className="flex items-center gap-2">
-          <Button type="button" size="sm" onClick={() => void handleSave()}>
-            {t('wiki.save')}
-          </Button>
-          {saved && <span className="text-[11px] text-success">{t('wiki.saved')}</span>}
-        </div>
+        <p className="text-[11px] text-muted-foreground h-4" aria-live="polite">
+          {saved ? t('wiki.saved') : t('wiki.autoSaveHint')}
+        </p>
 
         {/* 처리 이력 */}
         <section className="border border-border rounded-xl p-5 bg-card/40 space-y-3">

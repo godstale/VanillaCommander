@@ -3,11 +3,10 @@ import { setDatabase, MemorySqlFallback } from '@/lib/db/client';
 import type { Agent } from '@/lib/types/agent';
 import type { WikiSettings } from '@/lib/db/repositories/settingsRepo';
 import type { LlmStreamChatFn } from '@/lib/llm/providerRuntime';
-import { chatQueueManager } from '@/lib/agent/chatQueueManager';
+import { llmQueue } from '@/lib/agent/llmQueue';
 import {
   configureWikiPipeline,
   reconcileWikiFolders,
-  pumpWikiQueue,
   stopWikiPipeline,
   handleWikiFileEvent,
   dateFolderName,
@@ -90,7 +89,7 @@ function makeAgent(overrides: Partial<Agent> = {}): Agent {
 function makeSettings(overrides: Partial<WikiSettings> = {}): WikiSettings {
   return {
     watchEnabled: true,
-    watchFolders: ['C:/dl'],
+    watchFolders: [{ path: 'C:/dl', recursive: false }],
     recursive: false,
     scanIntervalMin: 10,
     moveAfterIngest: true,
@@ -141,7 +140,7 @@ describe('wiki pipeline', () => {
     invokeMock.mockRejectedValue(new Error('no ipc'));
     ingestExecute.mockResolvedValue({ content: 'ok', details: {} });
     setDatabase(new MemorySqlFallback());
-    chatQueueManager.resetAll();
+    llmQueue.resetAll();
     stopWikiPipeline();
     eventHandler = null;
     mockedVision.mockResolvedValue('yes');
@@ -153,7 +152,7 @@ describe('wiki pipeline', () => {
 
   afterEach(() => {
     stopWikiPipeline();
-    chatQueueManager.resetAll();
+    llmQueue.resetAll();
   });
 
   function configure(
@@ -216,6 +215,87 @@ describe('wiki pipeline', () => {
     );
   });
 
+  it('completes the move even when done fires before the job id is known', async () => {
+    mockedParse.mockResolvedValueOnce({
+      text: 'fast move contents '.repeat(50),
+      truncated: false,
+      method: 'text',
+    });
+    // 실제 환경의 레이스: rename fast-path라 done이 invoke 반환 전에 먼저 도착한다.
+    mockedMove.mockImplementationOnce(async () => {
+      // @ts-expect-error 테스트용 페이로드 주입
+      eventHandler?.({ payload: { kind: 'done', job_id: 'job-1', result: {} } });
+      return 'job-1';
+    });
+    configure(
+      makeSettings(),
+      [localAgent],
+      stubClassify({
+        categoryPath: '재무/보고서',
+        title: '빠른 이동',
+        slug: 'fast-move',
+        summary: 's',
+        tags: [],
+      }),
+    );
+    await handleWikiFileEvent('C:/dl/fast.md');
+    await flush(15);
+    const jobs = await listWikiJobs(10);
+    expect(jobs).toHaveLength(1);
+    expect(jobs[0].status).toBe('done');
+    expect(jobs[0].title).toBe('빠른 이동');
+  });
+
+  it('does not move the file when wiki registration fails', async () => {
+    mockedParse.mockResolvedValueOnce({ text: 'body '.repeat(50), truncated: false, method: 'text' });
+    ingestExecute.mockRejectedValueOnce(new Error('disk full'));
+    configure(
+      makeSettings(),
+      [localAgent],
+      stubClassify({ categoryPath: '재무/보고서', title: 't', slug: 'fail-ingest', summary: 's', tags: [] }),
+    );
+    await handleWikiFileEvent('C:/dl/fail.md');
+    await flush(15);
+    const jobs = await listWikiJobs(10);
+    expect(jobs[0].status).toBe('failed');
+    expect(jobs[0].reason).toContain('위키 저장 실패');
+    expect(mockedMove).not.toHaveBeenCalled();
+  });
+
+  it('keeps the registration when only the move fails', async () => {
+    mockedParse.mockResolvedValueOnce({ text: 'body '.repeat(50), truncated: false, method: 'text' });
+    mockedMove.mockRejectedValueOnce(new Error('locked'));
+    configure(
+      makeSettings(),
+      [localAgent],
+      stubClassify({ categoryPath: '재무/보고서', title: 't', slug: 'move-fail', summary: 's', tags: [] }),
+    );
+    await handleWikiFileEvent('C:/dl/locked.md');
+    await flush(15);
+    const jobs = await listWikiJobs(10);
+    expect(jobs[0].status).toBe('done');
+    expect(jobs[0].reason).toContain('이동 실패');
+    // 이동하지 못했으므로 출처를 원본 경로로 되돌려 다시 기록한다.
+    expect(ingestExecute).toHaveBeenCalledTimes(2);
+  });
+
+  it('treats verbatim and plain Windows paths as the same file', async () => {
+    mockedParse.mockResolvedValue({ text: 'body '.repeat(50), truncated: false, method: 'text' });
+    invokeMock.mockImplementation(async (cmd: string) => {
+      if (cmd === 'wiki_scan_folders') return [{ path: 'C:\\dl\\same.md', size: 100, modified_ms: 1 }];
+      throw new Error('no hash');
+    });
+    configure(
+      makeSettings({ moveAfterIngest: false }),
+      [localAgent],
+      stubClassify({ categoryPath: '', title: 'n', slug: 'same', summary: 's', tags: [] }),
+    );
+    await handleWikiFileEvent('\\\\?\\C:\\dl\\same.md');
+    await flush(15);
+    expect(await reconcileWikiFolders()).toBe(0);
+    expect(await listWikiJobs(10)).toHaveLength(1);
+  });
+
   it('skips files rejected by the filter', async () => {
     configure(makeSettings());
     await handleWikiFileEvent('C:/dl/setup.exe');
@@ -243,13 +323,13 @@ describe('wiki pipeline', () => {
         tags: [],
       }),
     );
-    chatQueueManager.setSessionBusy('chat-1');
+    const chatLease = await llmQueue.acquire('chat', 'chat-1');
     await handleWikiFileEvent('C:/dl/a.md');
     await flush();
     expect((await getWikiJobsByStatus('queued'))).toHaveLength(1);
     expect(mockedParse).not.toHaveBeenCalled();
-    chatQueueManager.setSessionIdle('chat-1');
-    await pumpWikiQueue();
+    expect(llmQueue.getSnapshot().map((t) => t.kind)).toEqual(['chat', 'wiki']);
+    chatLease.release();
     await flush();
     const jobs = await listWikiJobs(10);
     expect(jobs[0].status).toBe('done');
@@ -365,6 +445,33 @@ describe('wiki pipeline', () => {
     expect(jobs).toHaveLength(2);
     expect(jobs.find((j) => j.sourcePath === 'C:/dl/new.md')?.status).toBe('done');
     expect(jobs.find((j) => j.sourcePath === 'C:/dl/tool.exe')?.status).toBe('skipped');
+  });
+
+  it('retries failed files only on manual reconcile (retry option)', async () => {
+    mockedParse.mockRejectedValueOnce(new Error('parse boom'));
+    invokeMock.mockImplementation(async (cmd: string) => {
+      if (cmd === 'wiki_scan_folders') return [{ path: 'C:/dl/again.md', size: 100, modified_ms: 1 }];
+      throw new Error('no hash');
+    });
+    configure(
+      makeSettings({ moveAfterIngest: false }),
+      [localAgent],
+      stubClassify({ categoryPath: '', title: 'a', slug: 'a', summary: 's', tags: [] }),
+    );
+    expect(await reconcileWikiFolders()).toBe(1);
+    await flush(15);
+    expect((await listWikiJobs(10))[0].status).toBe('failed');
+
+    // 주기 스캔은 실패 건을 다시 넣지 않는다.
+    expect(await reconcileWikiFolders()).toBe(0);
+
+    // 수동 처리는 다시 시도한다.
+    mockedParse.mockResolvedValue({ text: 'retry content '.repeat(20), truncated: false, method: 'text' });
+    expect(await reconcileWikiFolders({ retry: true })).toBe(1);
+    await flush(15);
+    const jobs = await listWikiJobs(10);
+    expect(jobs).toHaveLength(1);
+    expect(jobs[0].status).toBe('done');
   });
 
   it('sends categories and a JSON schema, then files under the resolved category', async () => {

@@ -34,6 +34,8 @@ import { appLogger } from '@/lib/logger/logger';
 import { bindSessionToAgent } from '@/lib/monitoring/agentPhaseTracker';
 import { monitoringCollector } from '@/lib/monitoring/monitoringCollector';
 import { isAutoMonitorEnabled } from '@/lib/types/agent';
+import { getProviderPreset } from '@/lib/llm/providers';
+import { llmQueue, LlmQueueCancelledError, type LlmLease } from '@/lib/agent/llmQueue';
 
 export type { ChatPersistence };
 
@@ -58,6 +60,8 @@ export interface UseChatOptions {
     workFolder?: string;
     allowedRoots?: string[];
   };
+  /** 시스템 프롬프트 <addendum> 보충 (위키 질의 채팅 등). */
+  promptAddendum?: string;
   skills?: SkillManifest[];
   contextFiles?: ContextFileItem[];
   /** 전역 압축 기본값 (defaults.ts). 0=auto 항목의 단계표 해석에 쓴다. */
@@ -80,6 +84,8 @@ export interface UseChatOptions {
 export interface UseChatReturn {
   messages: AgentMessage[];
   isStreaming: boolean;
+  /** 로컬 LLM 큐에서 앞선 트랜잭션이 끝나기를 기다리는 중. */
+  isQueued: boolean;
   contextUsage: { tokens: number; limit: number };
   /** 현재 턴에 적용되는 Ollama think 값 (Agent 기본값 + 세션 오버라이드 해석 결과) */
   effectiveThink: boolean | string | undefined;
@@ -109,6 +115,7 @@ export function useChat(
 
   const [messages, setMessages] = useState<AgentMessage[]>([]);
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const [isQueued, setIsQueued] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const [contextTokens, setContextTokens] = useState<number>(0);
   const lastPromptRef = useRef<string>('');
@@ -183,6 +190,7 @@ export function useChat(
     return buildSystemPromptSections({
       agent: {
         systemPrompt: agentConfig.systemPrompt,
+        addendum: options.promptAddendum,
       },
       tools,
       contextFiles: rawContextFiles,
@@ -191,7 +199,7 @@ export function useChat(
       cwd: effectiveCwd,
       commander: options.commanderContext,
     });
-  }, [agentConfig.systemPrompt, tools, rawContextFiles, filteredSkills, effectiveCwd, options.commanderContext]);
+  }, [agentConfig.systemPrompt, tools, rawContextFiles, filteredSkills, effectiveCwd, options.commanderContext, options.promptAddendum]);
 
   const systemPrompt = useMemo(() => {
     return formatSystemPrompt(currentSections);
@@ -557,9 +565,22 @@ export function useChat(
         agentRef.current = createAgentInstance(messages);
       }
 
+      // 로컬 LLM은 위키 처리 등 다른 작업과 동시에 돌리면 충돌하므로 한 턴을 하나의 트랜잭션으로 큐에 올린다.
+      let lease: LlmLease | null = null;
       try {
+        if (getProviderPreset(agentConfigRef.current.llmProvider).category === 'local') {
+          setIsQueued(true);
+          try {
+            lease = await llmQueue.acquire('chat', text.slice(0, 80), sessionId);
+          } finally {
+            setIsQueued(false);
+          }
+          lease.signal.addEventListener('abort', () => agentRef.current?.abort(), { once: true });
+        }
         await agentRef.current.prompt(text);
       } catch (err) {
+        // 대기 중 사용자가 취소했거나 큐에서 삭제된 경우는 오류가 아니다.
+        if (err instanceof LlmQueueCancelledError) return;
         const errObj = err instanceof Error ? err : new Error(String(err));
         setError(errObj);
         stopAutoMonitoring();
@@ -570,6 +591,8 @@ export function useChat(
           sessionId,
           agentConfigRef.current.id,
         );
+      } finally {
+        lease?.release();
       }
     },
     [createAgentInstance, messages, persistence, sessionId, startAutoMonitoring, stopAutoMonitoring],
@@ -582,6 +605,7 @@ export function useChat(
   }, []);
 
   const stop = useCallback(() => {
+    llmQueue.removeQueuedByOwner(sessionId);
     approvalBus.abortAll();
     if (agentRef.current) {
       agentRef.current.abort();
@@ -589,7 +613,7 @@ export function useChat(
     setIsStreaming(false);
     // 사용자 중단도 LLM 작업 완료로 보고 자동 모니터링을 중단한다.
     stopAutoMonitoring();
-  }, [stopAutoMonitoring]);
+  }, [sessionId, stopAutoMonitoring]);
 
   const retry = useCallback(async () => {
     if (lastPromptRef.current) {
@@ -683,6 +707,7 @@ export function useChat(
   return {
     messages,
     isStreaming,
+    isQueued,
     contextUsage: { tokens: contextTokens, limit: contextLimit },
     effectiveThink,
     configSnapshot,

@@ -68,4 +68,25 @@ describe('settingsRepo P11-04 fields', () => {
       viewerFitOnOpen: false,
     });
   });
+
+  it('migrates legacy middle-dot categories to hyphens', () => {
+    const parsed = parseWikiSettings({ categories: ['문서/계약·법률', '재무/영수증·청구서'] });
+    expect(parsed.categories).toEqual(['문서/계약-법률', '재무/영수증-청구서']);
+    expect(DEFAULT_APP_SETTINGS.wiki.categories).not.toContain('문서/계약·법률');
+  });
+
+  it('migrates legacy string watch folders with global recursive', () => {
+    const parsed = parseWikiSettings({ watchFolders: ['C:/a', 'C:/b'], recursive: true });
+    expect(parsed.watchFolders).toEqual([
+      { path: 'C:/a', recursive: true },
+      { path: 'C:/b', recursive: true },
+    ]);
+    const flat = parseWikiSettings({ watchFolders: ['C:/a'], recursive: false });
+    expect(flat.watchFolders).toEqual([{ path: 'C:/a', recursive: false }]);
+    const kept = parseWikiSettings({
+      watchFolders: [{ path: 'C:/a', recursive: true }],
+      recursive: false,
+    });
+    expect(kept.watchFolders).toEqual([{ path: 'C:/a', recursive: true }]);
+  });
 });

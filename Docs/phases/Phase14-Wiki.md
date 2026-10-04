@@ -31,9 +31,9 @@
 - 소유 파일: `src/components/wiki/WikiRuntime.tsx`(신규), `WikiPanel.tsx`, `lib/wiki/pipeline.ts`(pending), 앱 루트 마운트 지점.
 
 ### P14-02. 주기 스캔(reconcile) + 중복 방지
-- Rust `wiki_scan_folders(folders, recursive)` → path·size·mtime 목록. 앱 시작 시와 `scanIntervalMin`(기본 10)마다 실행해 미처리 파일을 큐에 넣음. 감시 이벤트는 즉시 처리용으로 유지.
+- Rust `wiki_scan_folders(folders, recursive)` → path·size·mtime 목록. 앱 시작 시와 `scanIntervalMin`(기본 10)마다 실행해 미처리 파일을 큐에 넣음. 감시 이벤트는 즉시 처리용으로 유지. 하위 폴더 포함(`recursive`)은 감시 폴더별로 지정하며, 생략 시 전역 `recursive` 인자로 폴백한다.
 - `wiki_jobs.content_hash`(sha256) 추가(마이그레이션 `0004_wiki_job_hash.sql` 신규(0003은 macros가 사용) + `0001`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화). 같은 해시로 완료된 파일은 skip.
-- 설정: `recursive`, `scanIntervalMin`.
+- 설정: 폴더별 `recursive`, `scanIntervalMin`.
 
 ### P14-03. 카테고리 체계 기반 계층 분류
 - 설정: `categories: string[]`(경로 목록, 최대 깊이 3), `allowNewCategories`. 기존 `classification` 제거(마이그레이션 시 무시).
@@ -51,7 +51,8 @@
 - `wiki` 도구 `query`를 FTS로 교체(grep 폴백).
 
 ### P14-06. UI
-- `WikiPanel`: 검색창·스니펫·카테고리 트리·"지금 스캔". `WikiTab`: 재귀·스캔 주기·카테고리 편집기·새 카테고리 허용. ko/en 사전 동시 추가.
+- `WikiPanel`: 검색창·스니펫·카테고리 트리·"지금 스캔". `WikiTab`: 폴더별 재귀·스캔 주기·카테고리 편집기·새 카테고리 허용. ko/en 사전 동시 추가.
+- 구현 메모(2026-10-04): 패널은 대기열·최근 처리·페이지를 펼침 목록으로, "즉시 처리"는 감시 상태 위, 하단에 "위키 그래프"·"위키 검색"(= 위키 전용 새 채팅, tab meta `wikiChat` → `buildWikiChatAddendum`이 위키 폴더·탐색 절차를 시스템 프롬프트 addendum으로 주입) 버튼. 키워드 검색 탭(`wiki-search`)은 진입점만 제거. 설정 탭은 저장 버튼 없이 600ms 디바운스 자동 저장. 그래프 탭(`wiki-graph`, `WikiGraphTab` + `lib/wiki/graph.ts`)은 페이지·카테고리·태그 노드와 `[[링크]]` 간선을 canvas 힘 기반 배치로 그린다. 신규 ingest 페이지 프런트매터에 `category`·`tags`를 기록한다.
 
 ### P14-07. 문서·테스트
 - `Architecture.md` §16, `UserGuide.md` 갱신. 테스트: reconcile 중복 방지, 카테고리 경로 검증, slug 충돌, FTS 질의, 분류 mock 파이프라인.

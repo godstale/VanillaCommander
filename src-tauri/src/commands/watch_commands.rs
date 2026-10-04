@@ -14,8 +14,10 @@ use std::time::{Duration, Instant};
 use sha2::{Digest, Sha256};
 use notify::{EventKind, RecommendedWatcher, RecursiveMode};
 use notify_debouncer_full::{new_debouncer, DebounceEventResult, Debouncer, FileIdMap};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tauri::Emitter;
+
+use crate::commands::commander_commands::is_system_write_path;
 
 /// 프런트가 구독하는 감시 이벤트. `listen('wiki://file-event', ...)`로 수신한다.
 #[derive(Debug, Clone, Serialize)]
@@ -29,9 +31,39 @@ struct WatchHandle {
     stop_tx: mpsc::Sender<()>,
 }
 
+/// 감시 중인 폴더 1건 (경로 + 하위 폴더 포함 여부).
+/// `recursive`는 현재 직접 읽지 않지만 감시 상태의 일부로 유지한다(상태 조회 확장용).
+#[derive(Debug, Clone)]
+#[allow(dead_code)]
+struct WatchedFolder {
+    path: String,
+    recursive: bool,
+}
+
 struct WatchState {
-    folders: Vec<String>,
+    folders: Vec<WatchedFolder>,
     handle: Option<WatchHandle>,
+}
+
+/// 프런트가 넘기는 감시 폴더 지정. 구 형식(문자열 경로)과
+/// 신 형식(`{ path, recursive }`)을 모두 받는다. 명시되지 않은
+/// `recursive`는 전역 `recursive` 인자로 폴백한다.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(untagged)]
+pub enum FolderInput {
+    Path(String),
+    Detailed { path: String, recursive: Option<bool> },
+}
+
+impl FolderInput {
+    fn into_parts(self, default_recursive: bool) -> (String, bool) {
+        match self {
+            FolderInput::Path(path) => (path, default_recursive),
+            FolderInput::Detailed { path, recursive } => {
+                (path, recursive.unwrap_or(default_recursive))
+            }
+        }
+    }
 }
 
 fn watch_state() -> &'static Mutex<WatchState> {
@@ -109,8 +141,7 @@ impl Default for WatchConfig {
 
 fn spawn_watcher(
     app: tauri::AppHandle,
-    folders: Vec<PathBuf>,
-    recursive: bool,
+    folders: Vec<(PathBuf, bool)>,
     config: WatchConfig,
 ) -> Result<WatchHandle, String> {
     let (stop_tx, stop_rx) = mpsc::channel::<()>();
@@ -119,12 +150,12 @@ fn spawn_watcher(
     let mut debouncer: Debouncer<RecommendedWatcher, FileIdMap> =
         new_debouncer(config.debounce, None, event_tx)
             .map_err(|e| format!("Failed to start folder watcher: {}", e))?;
-    let mode = if recursive {
-        RecursiveMode::Recursive
-    } else {
-        RecursiveMode::NonRecursive
-    };
-    for folder in &folders {
+    for (folder, recursive) in &folders {
+        let mode = if *recursive {
+            RecursiveMode::Recursive
+        } else {
+            RecursiveMode::NonRecursive
+        };
         debouncer
             .watch(folder, mode)
             .map_err(|e| format!("Failed to watch '{}': {}", folder.display(), e))?;
@@ -203,23 +234,33 @@ fn stop_current(state: &mut WatchState) {
 }
 
 /// 감시 폴더 집합을 교체한다. 빈 배열이면 감시를 끈다.
+/// `folders`는 경로 문자열 또는 `{ path, recursive }` 배열이며,
+/// `recursive`가 생략된 폴더에는 전역 `recursive` 인자가 적용된다.
 /// 반환값은 canonicalize된 실제 감시 폴더 목록이다.
 #[tauri::command]
 pub fn wiki_watch_set(
     app: tauri::AppHandle,
-    folders: Vec<String>,
+    folders: Vec<FolderInput>,
     recursive: Option<bool>,
 ) -> Result<Vec<String>, String> {
-    let mut canonical: Vec<PathBuf> = Vec::new();
-    for f in &folders {
-        let p = Path::new(f)
+    let default_recursive = recursive.unwrap_or(false);
+    let mut canonical: Vec<(PathBuf, bool)> = Vec::new();
+    for f in folders {
+        let (raw, rec) = f.into_parts(default_recursive);
+        let p = Path::new(&raw)
             .canonicalize()
-            .map_err(|e| format!("Watch folder '{}' error: {}", f, e))?;
+            .map_err(|e| format!("Watch folder '{}' error: {}", raw, e))?;
         if !p.is_dir() {
-            return Err(format!("Watch folder is not a directory: {}", f));
+            return Err(format!("Watch folder is not a directory: {}", raw));
         }
-        if !canonical.contains(&p) {
-            canonical.push(p);
+        if is_system_write_path(&p) {
+            return Err(format!(
+                "Watch folder is a system folder and cannot be watched: {}",
+                raw
+            ));
+        }
+        if !canonical.iter().any(|(e, _)| e == &p) {
+            canonical.push((p, rec));
         }
     }
 
@@ -228,19 +269,17 @@ pub fn wiki_watch_set(
         .map_err(|e| format!("Watcher state poisoned: {}", e))?;
     stop_current(&mut state);
     if !canonical.is_empty() {
-        let handle = spawn_watcher(
-            app,
-            canonical.clone(),
-            recursive.unwrap_or(false),
-            WatchConfig::default(),
-        )?;
+        let handle = spawn_watcher(app, canonical.clone(), WatchConfig::default())?;
         state.handle = Some(handle);
         state.folders = canonical
             .iter()
-            .map(|p| p.to_string_lossy().into_owned())
+            .map(|(p, rec)| WatchedFolder {
+                path: p.to_string_lossy().into_owned(),
+                recursive: *rec,
+            })
             .collect();
     }
-    Ok(state.folders.clone())
+    Ok(state.folders.iter().map(|f| f.path.clone()).collect())
 }
 
 /// 감시를 끈다. `wiki_watch_set`에 빈 배열을 넘긴 것과 같다.
@@ -259,7 +298,7 @@ pub fn wiki_watch_status() -> Result<Vec<String>, String> {
     let state = watch_state()
         .lock()
         .map_err(|e| format!("Watcher state poisoned: {}", e))?;
-    Ok(state.folders.clone())
+    Ok(state.folders.iter().map(|f| f.path.clone()).collect())
 }
 
 /// 주기 스캔 결과 1건. 감시 이벤트를 놓친 파일(앱 종료 중 유입 등)을 따라잡는 데 쓴다.
@@ -303,21 +342,29 @@ fn scan_folder(root: &Path, recursive: bool, out: &mut Vec<WikiScanEntry>) {
 }
 
 /// 감시 폴더의 현재 파일 목록. 필터링·중복 판정은 프런트 파이프라인이 한다.
+/// `recursive`가 생략된 폴더에는 전역 `recursive` 인자가 적용된다.
 #[tauri::command]
 pub fn wiki_scan_folders(
-    folders: Vec<String>,
+    folders: Vec<FolderInput>,
     recursive: Option<bool>,
 ) -> Result<Vec<WikiScanEntry>, String> {
-    let recursive = recursive.unwrap_or(false);
+    let default_recursive = recursive.unwrap_or(false);
     let mut out = Vec::new();
-    for f in &folders {
-        let p = Path::new(f)
+    for f in folders {
+        let (raw, rec) = f.into_parts(default_recursive);
+        let p = Path::new(&raw)
             .canonicalize()
-            .map_err(|e| format!("Scan folder '{}' error: {}", f, e))?;
+            .map_err(|e| format!("Scan folder '{}' error: {}", raw, e))?;
         if !p.is_dir() {
-            return Err(format!("Scan folder is not a directory: {}", f));
+            return Err(format!("Scan folder is not a directory: {}", raw));
         }
-        scan_folder(&p, recursive, &mut out);
+        if is_system_write_path(&p) {
+            return Err(format!(
+                "Scan folder is a system folder and cannot be scanned: {}",
+                raw
+            ));
+        }
+        scan_folder(&p, rec, &mut out);
     }
     Ok(out)
 }
@@ -448,12 +495,45 @@ mod tests {
         std::fs::write(dir.join("b.crdownload"), b"b").unwrap();
         std::fs::write(sub.join("c.txt"), b"c").unwrap();
 
-        let flat = wiki_scan_folders(vec![dir.to_string_lossy().into_owned()], None).unwrap();
+        let path = || FolderInput::Path(dir.to_string_lossy().into_owned());
+        let flat = wiki_scan_folders(vec![path()], None).unwrap();
         assert_eq!(flat.len(), 1);
         assert!(flat[0].path.ends_with("a.txt"));
 
-        let deep =
-            wiki_scan_folders(vec![dir.to_string_lossy().into_owned()], Some(true)).unwrap();
+        let deep = wiki_scan_folders(vec![path()], Some(true)).unwrap();
+        assert_eq!(deep.len(), 2);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn scan_honors_per_folder_recursive_over_global() {
+        let dir = unique_temp_dir("scan-per-folder");
+        let sub = dir.join("sub");
+        std::fs::create_dir_all(&sub).unwrap();
+        std::fs::write(dir.join("a.txt"), b"a").unwrap();
+        std::fs::write(sub.join("c.txt"), b"c").unwrap();
+        let raw = dir.to_string_lossy().into_owned();
+
+        // 폴더별 false가 전역 true를 이긴다.
+        let flat = wiki_scan_folders(
+            vec![FolderInput::Detailed {
+                path: raw.clone(),
+                recursive: Some(false),
+            }],
+            Some(true),
+        )
+        .unwrap();
+        assert_eq!(flat.len(), 1);
+
+        // recursive 생략 시 전역값을 따른다.
+        let deep = wiki_scan_folders(
+            vec![FolderInput::Detailed {
+                path: raw,
+                recursive: None,
+            }],
+            Some(true),
+        )
+        .unwrap();
         assert_eq!(deep.len(), 2);
         let _ = std::fs::remove_dir_all(&dir);
     }
@@ -469,5 +549,24 @@ mod tests {
             "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
         );
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn system_folders_are_rejected_from_scan() {
+        #[cfg(target_os = "windows")]
+        let system = std::env::var("SystemRoot")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|_| std::path::PathBuf::from("C:\\Windows"));
+        #[cfg(not(target_os = "windows"))]
+        let system = std::path::PathBuf::from("/usr");
+        if !system.is_dir() {
+            return;
+        }
+        let err = wiki_scan_folders(
+            vec![FolderInput::Path(system.to_string_lossy().into_owned())],
+            None,
+        )
+        .unwrap_err();
+        assert!(err.contains("system folder"), "{}", err);
     }
 }

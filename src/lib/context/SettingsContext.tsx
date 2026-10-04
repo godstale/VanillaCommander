@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { llmQueue } from '@/lib/agent/llmQueue';
 import type { AppSettings } from '@/lib/types/chat';
 import type { ApprovalMode } from '@/lib/types/agent';
 import {
@@ -19,6 +20,11 @@ const SettingsContext = createContext<SettingsContextValue | undefined>(undefine
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<AppSettings>(DEFAULT_APP_SETTINGS);
   const [loading, setLoading] = useState(true);
+
+  // 로컬 LLM 큐 트랜잭션 제한 시간을 전역 큐에 반영한다.
+  useEffect(() => {
+    llmQueue.setTimeoutMinutes(settings.llmQueueTimeoutMin);
+  }, [settings.llmQueueTimeoutMin]);
 
   useEffect(() => {
     let cancelled = false;

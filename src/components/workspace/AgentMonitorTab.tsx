@@ -86,6 +86,7 @@ import {
   resolveRuntimeForAgent,
 } from '@/lib/llm/providerRuntime';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { LlmQueuePanel } from '@/components/workspace/LlmQueuePanel';
 
 const CHART_COLORS = {
   gpu: 'hsl(var(--chart-3))',
@@ -1062,6 +1063,9 @@ export function AgentMonitorTab({ tab }: { tab: WorkspaceTab }) {
           </Button>
         </div>
       </div>
+
+      {/* 로컬 LLM 트랜잭션 큐 (채팅·위키 처리 직렬화) */}
+      <LlmQueuePanel />
 
       {/* 8 Key Operational & Performance KPI Cards (max 4 per row) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">

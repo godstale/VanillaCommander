@@ -12,6 +12,11 @@ describe('normalizeCategoryPath', () => {
     expect(normalizeCategoryPath('a:b/c*')).toBe('ab/c');
   });
 
+  it('reads the legacy middle-dot separator as a hyphen', () => {
+    expect(normalizeCategoryPath('문서/계약·법률')).toBe('문서/계약-법률');
+    expect(normalizeCategoryPath('재무/영수증·청구서')).toBe('재무/영수증-청구서');
+  });
+
   it('rejects traversal, empty and too deep paths', () => {
     expect(normalizeCategoryPath('../etc')).toBeNull();
     expect(normalizeCategoryPath('a/./b')).toBeNull();

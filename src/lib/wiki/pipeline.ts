@@ -14,7 +14,7 @@ import { streamChat as streamOpenAiChat } from '@/lib/llm/openAiCompatibleClient
 import { resolveImageDataUrls } from '@/lib/llm/messageMapper';
 import { resolveVisionSupport } from '@/lib/llm/vision';
 import { getProviderPreset } from '@/lib/llm/providers';
-import { chatQueueManager } from '@/lib/agent/chatQueueManager';
+import { llmQueue, LlmQueueCancelledError, type LlmLease } from '@/lib/agent/llmQueue';
 import { parseDocument, ParseError } from '@/lib/parsers/index';
 import {
   DEFAULT_WIKI_PROMPT,
@@ -68,6 +68,7 @@ type StatusListener = (status: WikiPipelineStatus) => void;
 
 // 분류는 문서 앞부분만으로 충분하다. 입력을 줄여 지연과 토큰을 아낀다.
 const CLASSIFICATION_PROMPT_CHARS = 6_000;
+const QUEUE_ABORT_MESSAGE = 'LLM 큐에서 삭제되었거나 시간 제한을 넘겨 중단되었습니다.';
 // 보관 폴더에서 기존 카테고리로 읽어 들이는 최대 깊이.
 const CATEGORY_SCAN_DEPTH = 3;
 
@@ -87,6 +88,11 @@ function extOfPath(path: string): string {
   const name = path.split(/[\\/]/).pop() ?? path;
   const dot = name.lastIndexOf('.');
   return dot > 0 ? name.slice(dot + 1).toLowerCase() : '';
+}
+
+/** Windows verbatim 접두(`\\?\`)를 벗겨 감시 이벤트·스캔 경로를 같은 형태로 맞춘다. */
+export function normalizeWatchPath(path: string): string {
+  return path.replace(/^\\\\\?\\/, '');
 }
 
 function baseNameOf(path: string): string {
@@ -136,6 +142,7 @@ async function classifyContent(
   userPrompt: string,
   streamChatFn?: LlmStreamChatFn,
   jsonSchema?: Record<string, unknown>,
+  signal?: AbortSignal,
 ): Promise<Classification> {
   const runtime = resolveAgentLlmRuntime(
     {
@@ -166,17 +173,20 @@ async function classifyContent(
       ],
       temperature: 0.2,
       ...(schema ? { jsonSchema: schema } : {}),
-    });
+    }, signal);
     return ClassificationSchema.parse(extractJsonObject(raw));
   };
   try {
     return await run(userPrompt, jsonSchema);
   } catch {
+    // 큐에서 삭제·만료된 트랜잭션은 폴백 분류 없이 중단한다.
+    if (signal?.aborted) throw new Error(QUEUE_ABORT_MESSAGE);
     // 구조화 출력을 지원하지 않는 서버일 수 있어 재시도는 스키마 없이 프롬프트로만 강제한다.
     // 그래도 실패하면 날짜순 폴백 (P11-32 명세).
     try {
       return await run(`${userPrompt}\n\n반드시 위 JSON 형식으로만 답하라. 설명 문장을 붙이지 마라.`);
     } catch {
+      if (signal?.aborted) throw new Error(QUEUE_ABORT_MESSAGE);
       const fileName = userPrompt.match(/^파일: (.+?) \(/m)?.[1] ?? 'unfiled';
       return {
         categoryPath: '',
@@ -194,6 +204,7 @@ async function describeImage(
   agent: Agent,
   runtimeBaseUrl: string | undefined,
   imagePath: string,
+  signal?: AbortSignal,
 ): Promise<string> {
   const runtime = resolveAgentLlmRuntime(
     {
@@ -224,14 +235,14 @@ async function describeImage(
         },
       ],
       temperature: 0.2,
-    });
+    }, signal);
   }
   return collectChat(streamOllamaChat, {
     baseUrl: runtime.baseUrl,
     model: agent.model,
     messages: [{ role: 'user', content: prompt, images: [imagePath] }],
     temperature: 0.2,
-  });
+  }, signal);
 }
 
 async function resolveProcessor(
@@ -288,39 +299,95 @@ async function resolveVisionAgent(
   return null;
 }
 
-async function awaitMoveJob(jobId: string, timeoutMs = 120_000): Promise<void> {
-  return new Promise((resolve, reject) => {
-    let unlisten: (() => void) | null = null;
-    const timer = setTimeout(() => {
-      unlisten?.();
-      reject(new Error('파일 이동이 시간 초과되었습니다.'));
-    }, timeoutMs);
-    const cleanup = () => {
-      clearTimeout(timer);
-      unlisten?.();
-    };
-    listen<FcProgressEvent>('fc://progress', (event) => {
-      const payload = event.payload;
-      if (payload.job_id !== jobId) return;
-      if (payload.kind === 'done') {
-        cleanup();
-        resolve();
-      } else if (payload.kind === 'error') {
-        cleanup();
-        reject(new Error(payload.message));
-      } else if (payload.kind === 'cancelled') {
-        cleanup();
-        reject(new Error('파일 이동이 취소되었습니다.'));
-      }
-    })
-      .then((stop) => {
-        unlisten = stop;
-      })
-      .catch((err) => {
-        cleanup();
-        reject(err instanceof Error ? err : new Error(String(err)));
-      });
+/** 파일명 비교용 정규화 (한글 NFC/NFD 차이 흡수, 대소문자 무시). */
+function sameName(a: string, b: string): boolean {
+  return a.normalize('NFC').toLowerCase() === b.normalize('NFC').toLowerCase();
+}
+
+async function pathExists(path: string): Promise<boolean> {
+  try {
+    await fcReadFileBytes(path, 1);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function destHasBase(destDir: string, base: string): Promise<boolean> {
+  try {
+    const entries = await fcListDir(destDir);
+    return entries.some((e) => sameName(e.name, base));
+  } catch {
+    return false;
+  }
+}
+
+/** 원본이 사라지고 대상 폴더에 같은 이름이 있으면 이동이 끝난 것으로 본다. */
+async function moveLanded(source: string, destDir: string): Promise<boolean> {
+  return !(await pathExists(source)) && (await destHasBase(destDir, baseNameOf(source)));
+}
+
+/**
+ * fc_move 실행 + 완료 대기. 리스너를 invoke보다 먼저 붙여 빠른 done 유실을 막고,
+ * 이벤트를 놓쳐도 파일 시스템 상태(원본 소멸 + 대상 존재)를 폴링해 완료를 판정한다.
+ */
+async function fcMoveAndWait(sources: string[], destDir: string, timeoutMs = 120_000): Promise<void> {
+  const terminalByJob = new Map<string, FcProgressEvent>();
+  let jobId: string | null = null;
+  let settle: ((e: FcProgressEvent) => void) | null = null;
+  const unlisten = await listen<FcProgressEvent>('fc://progress', (event) => {
+    const payload = event.payload;
+    if (payload.kind !== 'done' && payload.kind !== 'error' && payload.kind !== 'cancelled') {
+      return;
+    }
+    terminalByJob.set(payload.job_id, payload);
+    if (jobId !== null && payload.job_id === jobId && settle) {
+      settle(payload);
+    }
   });
+  let poller: ReturnType<typeof setInterval> | null = null;
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  try {
+    jobId = await fcMove(sources, destDir, 'rename');
+    const early = terminalByJob.get(jobId);
+    const terminal: FcProgressEvent = early ?? await new Promise<FcProgressEvent>((resolve, reject) => {
+      let checking = false;
+      const finish = () => {
+        settle = null;
+        if (timer) clearTimeout(timer);
+        if (poller) clearInterval(poller);
+      };
+      timer = setTimeout(() => {
+        finish();
+        reject(new Error('파일 이동이 시간 초과되었습니다.'));
+      }, timeoutMs);
+      settle = (e) => {
+        finish();
+        resolve(e);
+      };
+      poller = setInterval(() => {
+        if (checking) return;
+        checking = true;
+        void (async () => {
+          try {
+            const landed = await Promise.all(sources.map((src) => moveLanded(src, destDir)));
+            if (landed.every(Boolean) && settle) {
+              settle({ kind: 'done', job_id: jobId ?? '', result: null });
+            }
+          } finally {
+            checking = false;
+          }
+        })();
+      }, 1_000);
+    });
+    if (terminal.kind === 'done') return;
+    if (terminal.kind === 'cancelled') throw new Error('파일 이동이 취소되었습니다.');
+    throw new Error(terminal.kind === 'error' ? terminal.message : '파일 이동에 실패했습니다.');
+  } finally {
+    if (poller) clearInterval(poller);
+    if (timer) clearTimeout(timer);
+    unlisten();
+  }
 }
 
 async function ensureDir(path: string): Promise<void> {
@@ -337,11 +404,12 @@ let ctx: WikiPipelineContext | null = null;
 let started = false;
 let stopListening: (() => void) | null = null;
 let processing = false;
-let pumpTimer: ReturnType<typeof setTimeout> | null = null;
 let lastDoneAt: string | null = null;
 let lastError: string | null = null;
 let pendingCount = 0;
 const recentPaths = new Map<string, number>();
+const enqueuing = new Set<string>();
+let reconciling = false;
 const listeners = new Set<StatusListener>();
 
 function emitStatus(): void {
@@ -399,15 +467,54 @@ async function processJob(job: WikiJob): Promise<void> {
   const settings = ctx.getWikiSettings();
   const agents = ctx.getAgents();
   const defaultAgent = ctx.getDefaultAgent();
-  const fail = async (reason: string, status: WikiJob['status'] = 'failed') => {
-    await updateWikiJob(job.id, { status, reason }, ctx?.workspaceRoot);
-  };
 
   const { agent, externalBlocked } = await resolveProcessor(settings, agents, defaultAgent);
   if (externalBlocked) {
-    await fail('외부 전송에 동의하지 않아 백그라운드 처리를 건너뜁니다 (위키 설정에서 로컬 에이전트를 지정하세요).', 'skipped');
+    await updateWikiJob(
+      job.id,
+      {
+        status: 'skipped',
+        reason: '외부 전송에 동의하지 않아 백그라운드 처리를 건너뜁니다 (위키 설정에서 로컬 에이전트를 지정하세요).',
+      },
+      ctx.workspaceRoot,
+    );
     return;
   }
+
+  // 로컬 LLM은 채팅과 동시에 돌리면 충돌하므로 파일 1건 처리 전체를 하나의 트랜잭션으로 큐에 올린다.
+  let lease: LlmLease | null = null;
+  if (getProviderPreset(agent.llmProvider).category === 'local') {
+    try {
+      lease = await llmQueue.acquire('wiki', baseNameOf(job.sourcePath));
+    } catch (err) {
+      if (err instanceof LlmQueueCancelledError) {
+        await updateWikiJob(
+          job.id,
+          { status: 'skipped', reason: 'LLM 큐에서 삭제되어 처리하지 않았습니다.' },
+          ctx.workspaceRoot,
+        );
+        return;
+      }
+      throw err;
+    }
+  }
+  try {
+    await runWikiJob(job, agent, lease?.signal);
+  } finally {
+    lease?.release();
+  }
+}
+
+async function runWikiJob(job: WikiJob, agent: Agent, signal?: AbortSignal): Promise<void> {
+  if (!ctx) return;
+  const settings = ctx.getWikiSettings();
+  const agents = ctx.getAgents();
+  const fail = async (reason: string, status: WikiJob['status'] = 'failed') => {
+    await updateWikiJob(job.id, { status, reason }, ctx?.workspaceRoot);
+  };
+  const throwIfAborted = () => {
+    if (signal?.aborted) throw new Error(QUEUE_ABORT_MESSAGE);
+  };
   await updateWikiJob(job.id, { status: 'processing', agentId: agent.id }, ctx.workspaceRoot);
 
   // 같은 내용이 이미 등록돼 있으면 LLM 호출 없이 건너뛴다 (복사본·재다운로드).
@@ -444,7 +551,7 @@ async function processJob(job: WikiJob): Promise<void> {
         await fail('이미지용 비전 에이전트가 없어 대기합니다.', 'waiting-vision');
         return;
       }
-      content = await describeImage(visionAgent, ctx.ollamaBaseUrl, job.sourcePath);
+      content = await describeImage(visionAgent, ctx.ollamaBaseUrl, job.sourcePath, signal);
     } else {
       const parsed = await parseDocument(job.sourcePath, {
         parsers: ctx.getParserSettings?.(),
@@ -460,7 +567,7 @@ async function processJob(job: WikiJob): Promise<void> {
         return;
       }
       try {
-        content = await describeImage(visionAgent, ctx.ollamaBaseUrl, job.sourcePath);
+        content = await describeImage(visionAgent, ctx.ollamaBaseUrl, job.sourcePath, signal);
       } catch (visionErr) {
         await fail(visionErr instanceof Error ? visionErr.message : String(visionErr));
         return;
@@ -470,6 +577,8 @@ async function processJob(job: WikiJob): Promise<void> {
       return;
     }
   }
+
+  throwIfAborted();
 
   // ② LLM 1회 분류 호출. 보관 폴더 아래 카테고리 체계(설정 + 기존 폴더)에서 경로를 고른다.
   // inbox는 작업 폴더 기준, 그래도 상대 경로면 워크스페이스를 앞에 둔다.
@@ -507,7 +616,9 @@ async function processJob(job: WikiJob): Promise<void> {
     prompt,
     ctx.streamChatFn,
     buildClassificationSchema(knownCategories, settings.allowNewCategories),
+    signal,
   );
+  throwIfAborted();
   // 목록 밖·잘못된 경로는 가까운 상위로 접고, 그것도 없으면 날짜 폴더에 보관한다.
   const category = resolveCategory(
     classification.categoryPath,
@@ -519,28 +630,17 @@ async function processJob(job: WikiJob): Promise<void> {
     ? classification.slug
     : slugifyWikiTitle(classification.slug || classification.title);
 
-  // ③ (옵션) 이동 + 원본 경로 기록.
-  let movedPath = job.sourcePath;
-  if (settings.moveAfterIngest) {
-    const destDir = joinPath(inbox, folderName);
-    try {
-      await ensureDir(destDir);
-      const jobId = await fcMove([job.sourcePath], destDir, 'rename');
-      await awaitMoveJob(jobId);
-      movedPath = joinPath(destDir, baseNameOf(job.sourcePath));
-    } catch (err) {
-      await fail(`이동 실패: ${err instanceof Error ? err.message : String(err)}`);
-      return;
-    }
-  }
-
-  // ④ wiki ingest (출처: 이동 후 경로).
-  try {
-    const tool = createWikiTool({ workspaceRoot: ctx.workspaceRoot });
+  // ③ wiki ingest. 등록이 성공한 파일만 이동하므로 실패 건은 감시 폴더에 그대로 남는다.
+  const destDir = joinPath(inbox, folderName);
+  const plannedPath = settings.moveAfterIngest
+    ? joinPath(destDir, baseNameOf(job.sourcePath))
+    : job.sourcePath;
+  const ingest = async (sourceRef: string): Promise<void> => {
+    const tool = createWikiTool({ workspaceRoot: ctx?.workspaceRoot });
     const body = [
       classification.summary,
       '',
-      `출처: ${movedPath}`,
+      `출처: ${sourceRef}`,
       `원본: ${job.sourcePath}`,
       '',
       '---',
@@ -549,17 +649,46 @@ async function processJob(job: WikiJob): Promise<void> {
     ].join('\n');
     await tool.execute(
       crypto.randomUUID(),
-      { action: 'ingest', title: classification.title, slug, content: body },
+      {
+        action: 'ingest',
+        title: classification.title,
+        slug,
+        content: body,
+        tags: classification.tags,
+        category: category?.path ?? '',
+      },
       new AbortController().signal,
     );
+  };
+  try {
+    await ingest(plannedPath);
   } catch (err) {
     await fail(`위키 저장 실패: ${err instanceof Error ? err.message : String(err)}`);
     return;
   }
 
+  // ④ (옵션) 등록 성공 후 이동. 이동만 실패하면 등록은 유지하고 출처를 원본 경로로 되돌린다.
+  let moveWarning: string | null = null;
+  if (settings.moveAfterIngest) {
+    try {
+      await ensureDir(destDir);
+      await fcMoveAndWait([job.sourcePath], destDir);
+    } catch (err) {
+      // done 이벤트를 놓쳐 타임아웃으로 보고됐는데 실제로는 이동된 경우 자가 치유한다.
+      if (!(await moveLanded(job.sourcePath, destDir))) {
+        moveWarning = `등록 완료, 이동 실패: ${err instanceof Error ? err.message : String(err)}`;
+        try {
+          await ingest(job.sourcePath);
+        } catch {
+          // 출처 표기만 틀어질 뿐이라 무시한다.
+        }
+      }
+    }
+  }
+
   await updateWikiJob(
     job.id,
-    { status: 'done', reason: null, title: classification.title, slug, folder: folderName },
+    { status: 'done', reason: moveWarning, title: classification.title, slug, folder: folderName },
     ctx.workspaceRoot,
   );
   lastDoneAt = new Date().toISOString();
@@ -569,15 +698,7 @@ async function processJob(job: WikiJob): Promise<void> {
 /** 대기열을 1건 처리한다. 재처리·테스트 진입점. */
 export async function pumpWikiQueue(): Promise<void> {
   if (!ctx || processing) return;
-  // 채팅 실행 중이면 대기한다 (chatQueueManager와 조정).
-  if (chatQueueManager.getBusySessionId() !== null) {
-    if (pumpTimer) clearTimeout(pumpTimer);
-    pumpTimer = setTimeout(() => {
-      pumpTimer = null;
-      void pumpWikiQueue();
-    }, 10_000);
-    return;
-  }
+  // 채팅과의 충돌은 processJob 안에서 LLM 트랜잭션 큐(llmQueue)가 조정한다.
   let next: WikiJob[];
   try {
     next = await getWikiJobsByStatus('queued', ctx.workspaceRoot);
@@ -612,21 +733,43 @@ export async function pumpWikiQueue(): Promise<void> {
 }
 
 /** 파일 1건을 대기열에 넣는다. 이미 작업이 있는 경로는 건너뛴다(재처리는 탭의 수동 버튼). */
-async function enqueueWikiPath(path: string, size: number): Promise<boolean> {
+async function enqueueWikiPath(rawPath: string, size: number, retry = false): Promise<boolean> {
   if (!ctx) return false;
-  if (await findWikiJobByPath(path, ctx.workspaceRoot)) return false;
-  const job = await createWikiJob({ sourcePath: path }, ctx.workspaceRoot);
-  const verdict = shouldProcessFile(path, size, ctx.getWikiSettings());
-  if (!verdict.ok) {
-    await updateWikiJob(job.id, { status: 'skipped', reason: verdict.reason }, ctx.workspaceRoot);
-    return false;
+  const path = normalizeWatchPath(rawPath);
+  const key = path.toLowerCase();
+  // 같은 경로를 동시에 등록하지 않도록 (이벤트·주기 스캔 경합) 메모리에서 먼저 막는다.
+  if (enqueuing.has(key)) return false;
+  enqueuing.add(key);
+  try {
+    const existing =
+      (await findWikiJobByPath(path, ctx.workspaceRoot)) ||
+      (await findWikiJobByPath(`\\\\?\\${path}`, ctx.workspaceRoot));
+    if (existing) {
+      // 수동 처리: 감시 폴더에 파일이 다시 들어왔는데 이전 시도가 실패·건너뜀이면 재시도한다.
+      // (주기 스캔은 재시도하지 않는다 — 계속 실패하는 파일이 무한 반복되지 않도록.)
+      if (retry && (existing.status === 'failed' || existing.status === 'skipped')) {
+        if (!shouldProcessFile(path, size, ctx.getWikiSettings()).ok) return false;
+        await updateWikiJob(existing.id, { status: 'queued', reason: null }, ctx.workspaceRoot);
+        return true;
+      }
+      return false;
+    }
+    const job = await createWikiJob({ sourcePath: path }, ctx.workspaceRoot);
+    const verdict = shouldProcessFile(path, size, ctx.getWikiSettings());
+    if (!verdict.ok) {
+      await updateWikiJob(job.id, { status: 'skipped', reason: verdict.reason }, ctx.workspaceRoot);
+      return false;
+    }
+    return true;
+  } finally {
+    enqueuing.delete(key);
   }
-  return true;
 }
 
 /** 감시 이벤트 1건을 받아 대기열에 넣는다. */
-export async function handleWikiFileEvent(path: string): Promise<void> {
+export async function handleWikiFileEvent(rawPath: string): Promise<void> {
   if (!ctx) return;
+  const path = normalizeWatchPath(rawPath);
   const now = Date.now();
   const last = recentPaths.get(path);
   if (last && now - last < 30_000) return;
@@ -656,15 +799,25 @@ function isInside(path: string, dir: string): boolean {
  * 감시 폴더를 훑어 이벤트로 놓친 파일(앱 종료 중 유입 등)을 대기열에 넣는다.
  * 보관 폴더(inbox) 안의 파일은 이미 정리된 것이라 제외한다.
  */
-export async function reconcileWikiFolders(): Promise<number> {
-  if (!ctx) return 0;
+export async function reconcileWikiFolders(options: { retry?: boolean } = {}): Promise<number> {
+  if (!ctx || reconciling) return 0;
   const settings = ctx.getWikiSettings();
   if (!settings.watchEnabled || settings.watchFolders.length === 0) return 0;
+  reconciling = true;
+  try {
+    return await reconcileFoldersOnce(settings, options.retry === true);
+  } finally {
+    reconciling = false;
+  }
+}
+
+async function reconcileFoldersOnce(settings: WikiSettings, retry: boolean): Promise<number> {
+  if (!ctx) return 0;
   let entries: WikiScanEntry[];
   try {
     entries = await invoke<WikiScanEntry[]>('wiki_scan_folders', {
-      folders: settings.watchFolders,
-      recursive: settings.recursive,
+      folders: settings.watchFolders.map((f) => ({ path: f.path, recursive: f.recursive })),
+      recursive: false,
     });
   } catch (err) {
     lastError = err instanceof Error ? err.message : String(err);
@@ -676,7 +829,7 @@ export async function reconcileWikiFolders(): Promise<number> {
   for (const entry of entries) {
     if (isInside(entry.path, inboxBase)) continue;
     try {
-      if (await enqueueWikiPath(entry.path, entry.size)) queued++;
+      if (await enqueueWikiPath(entry.path, entry.size, retry)) queued++;
     } catch (err) {
       lastError = err instanceof Error ? err.message : String(err);
     }
@@ -692,6 +845,16 @@ export async function startWikiPipeline(): Promise<void> {
     return;
   }
   started = true;
+  // 앱이 처리 중에 종료되면 'processing'으로 남는다. 직렬 처리라 기동 시점의 잔여분은 모두 정체 건이다.
+  try {
+    if (ctx) {
+      for (const stale of await getWikiJobsByStatus('processing', ctx.workspaceRoot)) {
+        await updateWikiJob(stale.id, { status: 'queued' }, ctx.workspaceRoot);
+      }
+    }
+  } catch (err) {
+    console.error('Failed to requeue stale wiki jobs:', err);
+  }
   try {
     stopListening = await listen<{ path: string; kind: string }>('wiki://file-event', (event) => {
       void handleWikiFileEvent(event.payload.path);
@@ -706,10 +869,6 @@ export async function startWikiPipeline(): Promise<void> {
 /** 파이프라인 중지 (테스트·종료용). */
 export function stopWikiPipeline(): void {
   started = false;
-  if (pumpTimer) {
-    clearTimeout(pumpTimer);
-    pumpTimer = null;
-  }
   stopListening?.();
   stopListening = null;
   recentPaths.clear();

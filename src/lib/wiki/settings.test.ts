@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
+  isSystemWatchFolder,
   matchesGlob,
   resolveInboxDir,
   shouldProcessFile,
@@ -49,5 +50,19 @@ describe('wiki settings helpers', () => {
   it('ships a default prompt that asks for a category choice', () => {
     expect(DEFAULT_WIKI_PROMPT).toContain('카테고리');
     expect(DEFAULT_WIKI_PROMPT).toContain('kebab-case');
+  });
+
+  it('blocks system folders from watch duty', () => {
+    expect(isSystemWatchFolder('C:\\Windows')).toBe(true);
+    expect(isSystemWatchFolder('C:\\Windows\\System32')).toBe(true);
+    expect(isSystemWatchFolder('C:\\Program Files\\App')).toBe(true);
+    expect(isSystemWatchFolder('C:\\Program Files (x86)\\App')).toBe(true);
+    expect(isSystemWatchFolder('D:\\ProgramData\\pkg')).toBe(true);
+    expect(isSystemWatchFolder('C:\\')).toBe(true);
+    expect(isSystemWatchFolder('C:\\Users\\me\\Downloads')).toBe(false);
+    expect(isSystemWatchFolder('D:\\data\\inbox')).toBe(false);
+    expect(isSystemWatchFolder('/usr/local/bin')).toBe(true);
+    expect(isSystemWatchFolder('/etc/ssl')).toBe(true);
+    expect(isSystemWatchFolder('/home/u/Downloads')).toBe(false);
   });
 });

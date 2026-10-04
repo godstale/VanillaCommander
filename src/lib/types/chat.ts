@@ -66,6 +66,8 @@ export interface AppSettings {
   trustedWorkspaces: string[];
   lastWorkspaceRoot: string | null;
   monitoringIntervalMs: number;
+  /** 로컬 LLM 큐 트랜잭션 1건의 최대 실행 시간(분). 넘기면 중단하고 다음으로 넘어간다. */
+  llmQueueTimeoutMin: number;
   /** 셋업 위저드 완료 시각 (null이면 미실행, P11-06). */
   setupCompletedAt: string | null;
   /** 작업 폴더 (D2, P11-04). null이면 workspaceRoot를 그대로 쓴다. */

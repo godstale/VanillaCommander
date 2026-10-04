@@ -350,7 +350,7 @@ VivoStudio의 탭 데이터 모델과 `openTab`/`closeTab` 멱등 로직을 그�
 ```ts
 type WorkspaceTabType =
   'file-explorer' | 'chat' | 'editor' | 'image-viewer' | 'document-viewer' | 'archive-viewer'
-  | 'agent-editor' | 'agent-monitor' | 'skill-viewer' | 'wiki' | 'macro-editor';
+  | 'agent-editor' | 'agent-monitor' | 'skill-viewer' | 'wiki' | 'wiki-search' | 'wiki-graph' | 'macro-editor';
 
 interface WorkspaceTab {
   id: string; // 예: "chat:${sessionId}", "editor:${filePath}", "agent-editor:${agentId}"
@@ -361,7 +361,7 @@ interface WorkspaceTab {
 ```
 
 - **앱 시작 시 기본 동작**: 저장된 탭을 복원하고, 탭이 하나도 없으면(최초 실행 또는 복원 실패 시) **파일 탐색기 탭**을 하나 연다(V7). 삭제된 탭 타입(`eval`·`agent-stats`)은 복원 시 조용히 버린다.
-- 탭 아이콘 매핑: `file-explorer`→`Files`, `chat`→`MessageSquare`, `editor`→`FileCode`, `image-viewer`→`Image`, `agent-editor`→`Bot`, `agent-monitor`→`Activity`, `skill-viewer`→`Puzzle`, `document-viewer`→`FileText`, `archive-viewer`→`Archive`, `wiki`→`BookOpen`, `macro-editor`→`Zap`.
+- 탭 아이콘 매핑: `file-explorer`→`Files`, `chat`→`MessageSquare`, `editor`→`FileCode`, `image-viewer`→`Image`, `agent-editor`→`Bot`, `agent-monitor`→`Activity`, `skill-viewer`→`Puzzle`, `document-viewer`→`FileText`, `archive-viewer`→`Archive`, `wiki`→`BookOpen`, `wiki-search`→`Search`, `wiki-graph`→`Network`, `macro-editor`→`Zap`.
 - 탭 콘텐츠는 VivoStudio처럼 **모두 마운트 유지 + `hidden` 클래스로 숨김 전환**(비활성 채팅 탭도 스트리밍 상태 유지).
 - 탭 목록/활성 탭 ID는 SQLite `app_settings` 테이블에 디바운스(500ms) 저장 후 재시작 시 복원(`chat` 탭은 세션 ID만 복원하면 메시지는 DB에서 다시 로드되므로 완전 복원 가능).
 - 분할 보기: `CenterWorkspace`의 primary/secondary 분할. F5/F6의 "반대 창" = 다른 pane의 활성 탐색기 탭.

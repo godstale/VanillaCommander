@@ -14,7 +14,7 @@ export function StepWiki({ onApply }: { onApply: (apply: () => Promise<void>) =>
       let folders = settings.wiki.watchFolders;
       if (watch && folders.length === 0) {
         try {
-          folders = [await downloadDir()];
+          folders = [{ path: await downloadDir(), recursive: false }];
         } catch {
           folders = [];
         }

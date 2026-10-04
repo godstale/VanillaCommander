@@ -9,6 +9,8 @@ export type WorkspaceTabType =
   | 'document-viewer'
   | 'archive-viewer'
   | 'wiki'
+  | 'wiki-search'
+  | 'wiki-graph'
   | 'macro-editor';
 
 export type SidePanelView =
@@ -38,6 +40,8 @@ const SUPPORTED_TAB_TYPES: ReadonlySet<string> = new Set<string>([
   'document-viewer',
   'archive-viewer',
   'wiki',
+  'wiki-search',
+  'wiki-graph',
   'macro-editor',
 ]);
 

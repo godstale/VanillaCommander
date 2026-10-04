@@ -50,6 +50,7 @@ import {
 import { checkAgentConnection } from '@/lib/llm/agentStatus';
 import { resolveVisionSupport, type VisionVerdict } from '@/lib/llm/vision';
 import { createWikiTool } from '@/lib/tools/wiki';
+import { buildWikiChatAddendum } from '@/lib/wiki/chatPrompt';
 import type { AgentMessage } from '@/lib/agent/types';
 import { cn } from '@/lib/utils';
 
@@ -302,6 +303,12 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
 
   const effectiveCwd = workspaceRoot ?? sessionWorkspaceRoot ?? undefined;
 
+  // P14-06: 위키 패널의 '위키 검색'으로 연 채팅은 위키 폴더 위치를 프롬프트로 알려 준다.
+  const wikiAddendum = useMemo(
+    () => (tab.meta?.wikiChat ? buildWikiChatAddendum(effectiveCwd) : undefined),
+    [tab.meta?.wikiChat, effectiveCwd],
+  );
+
   const thinkOverride = useMemo(() => ({
     reasoning: reasoningOverride === 'agent' ? undefined : reasoningOverride,
     effort: effortOverride === 'agent' ? undefined : effortOverride,
@@ -309,7 +316,8 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
 
   const {
     messages,
-    isStreaming,
+    isStreaming: isStreamingBase,
+    isQueued,
     contextUsage,
     effectiveThink,
     configSnapshot,
@@ -324,6 +332,7 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
     injectConfigNotice,
   } = useChat(sessionId, activeAgent, {
     cwd: effectiveCwd,
+    promptAddendum: wikiAddendum,
     thinkOverride,
     onResolveSendAgent: resolveSendAgent,
     // 구 Agent(Provider 미설정)는 전역 Ollama 주소를 그대로 사용한다.
@@ -335,6 +344,8 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
       defaultKeepRecentTokens: settings.defaultKeepRecentTokens,
     },
   });
+  // 큐 대기 중에도 입력 잠금·중단 버튼 등은 스트리밍과 같은 상태로 취급한다.
+  const isStreaming = isStreamingBase || isQueued;
 
   // 실행 설정이 바뀌면 채팅 중간에 안내를 표시한다.
   // 스냅샷이 각 사용자 말풍선에 이미 기록되므로 안내는 UI 전용(미저장)이다.
@@ -833,6 +844,11 @@ export function ChatTab({ tab, dense = false }: ChatTabProps) {
           <Activity className="h-3 w-3" />
           <span>{isMonitoringActive ? t('chatTab.monitoringActive') : t('chatTab.monitoringIdle')}</span>
         </button>
+        {isQueued && (
+          <div className="shrink-0 px-3 py-1 text-[11px] text-warning bg-warning/10 border-b border-border">
+            {t('chat.llmQueued')}
+          </div>
+        )}
         {viewMode === 'chat' ? (
           <MessageList
             messages={messages}

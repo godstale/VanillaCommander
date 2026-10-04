@@ -28,6 +28,8 @@ import { ConflictDialogHost, CommanderStatusPublishers } from '@/components/expl
 import { ExplorerBridgeHost } from '@/components/explorer/ExplorerBridgeHost';
 import { WikiRuntime } from '@/components/wiki/WikiRuntime';
 
+const AUTO_SETUP_WIZARD = false;
+
 function WorkspaceContent() {
   useKeyboardShortcuts();
   const { t } = useLanguage();
@@ -52,7 +54,8 @@ function WorkspaceContent() {
       setWizardOpen(true);
       return;
     }
-    if (settings.setupCompletedAt == null) {
+    // 위저드 자동 실행 비활성화: 앱 기능 구현/테스트 완료 후 재작성할 때까지 끈다 (?setup=1 수동 실행은 유지).
+    if (AUTO_SETUP_WIZARD && settings.setupCompletedAt == null) {
       wizardShownRef.current = true;
       setWizardOpen(true);
     }
@@ -129,6 +132,15 @@ function WorkspaceContent() {
         panel.expand();
       }
       setActiveView(view);
+    }
+    // 사이드바 위키 메뉴는 사이드 패널과 함께 탭 영역에 위키 설정 탭을 연다.
+    if (view === 'wiki') {
+      const existing = tabs.find((tb) => tb.type === 'wiki');
+      if (existing) {
+        setActiveTab(existing.id);
+      } else {
+        openTab({ id: 'wiki', type: 'wiki', title: t('wiki.tabTitle') });
+      }
     }
   };
 
