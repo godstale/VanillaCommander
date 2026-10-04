@@ -1,4 +1,4 @@
-# Phase 12 — 위키 완성 (상시 감시 · 카테고리 분류 · 검색)
+# Phase 14 — 위키 완성 (상시 감시 · 카테고리 분류 · 검색)
 
 **목표**: Phase 11 W3(P11-30~34)에서 만든 위키 뼈대를 "여러 폴더를 주기적으로 모니터링 → 내용 읽기 → 카테고리 계층 폴더로 이동 → 위키 기록 → 검색"까지 동작하는 기능으로 완성한다.
 
@@ -25,34 +25,34 @@
 
 ## 3. 작업 정의
 
-### P12-01. 감시·파이프라인 상시 구동
+### P14-01. 감시·파이프라인 상시 구동
 - 앱 루트에 `WikiRuntime`(렌더링 없음)을 마운트: `configureWikiPipeline` + `startWikiPipeline` + `watchEnabled`면 `wiki_watch_set`. 설정·에이전트 변경 시 재적용.
 - `WikiPanel`에서 구동 책임 제거(표시 전용), `pending` 실제 집계.
 - 소유 파일: `src/components/wiki/WikiRuntime.tsx`(신규), `WikiPanel.tsx`, `lib/wiki/pipeline.ts`(pending), 앱 루트 마운트 지점.
 
-### P12-02. 주기 스캔(reconcile) + 중복 방지
+### P14-02. 주기 스캔(reconcile) + 중복 방지
 - Rust `wiki_scan_folders(folders, recursive)` → path·size·mtime 목록. 앱 시작 시와 `scanIntervalMin`(기본 10)마다 실행해 미처리 파일을 큐에 넣음. 감시 이벤트는 즉시 처리용으로 유지.
 - `wiki_jobs.content_hash`(sha256) 추가(마이그레이션 `0003` 신규 + `0001`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화). 같은 해시로 완료된 파일은 skip.
 - 설정: `recursive`, `scanIntervalMin`.
 
-### P12-03. 카테고리 체계 기반 계층 분류
+### P14-03. 카테고리 체계 기반 계층 분류
 - 설정: `categories: string[]`(경로 목록, 최대 깊이 3), `allowNewCategories`. 기존 `classification` 제거(마이그레이션 시 무시).
 - 분류 호출은 1회 유지. 프롬프트에 카테고리 경로 목록 + 문서 앞 ~6k자 → `{categoryPath, isNew, title, summary, tags}`. 새 경로는 허용 + 기존 부모 아래일 때만 채택, 아니면 폴백.
 - 구조화 출력: `ollamaClient`에 `format`(JSON schema), OpenAI 호환 클라이언트에 `response_format`. 카테고리를 enum으로 제한.
 - 이동 위치 = `<inboxDir>/<categoryPath>/`. 폴백 = `YYYY/MM-DD`.
 
-### P12-04. 위키 저장 구조 개선
+### P14-04. 위키 저장 구조 개선
 - `wiki/sources/` 평면 유지. frontmatter에 `category`·`tags`·`source_path`·`original_path`·`hash`·`ingested_at`. slug 충돌 시 `-2` 접미. `index.md` 카테고리별 그룹.
 
-### P12-05. 검색 (SQLite FTS5)
+### P14-05. 검색 (SQLite FTS5)
 - `wiki_pages` + FTS5(trigram, 한국어 부분일치). 마이그레이션 `0004`. ingest/delete 시 갱신, `reindex`(MD → 인덱스) 제공.
 - **선결 검증**: tauri-plugin-sql 번들 SQLite의 FTS5/trigram 지원. 불가 시 `LIKE` 폴백.
 - `wiki` 도구 `query`를 FTS로 교체(grep 폴백).
 
-### P12-06. UI
+### P14-06. UI
 - `WikiPanel`: 검색창·스니펫·카테고리 트리·"지금 스캔". `WikiTab`: 재귀·스캔 주기·카테고리 편집기·새 카테고리 허용. ko/en 사전 동시 추가.
 
-### P12-07. 문서·테스트
+### P14-07. 문서·테스트
 - `Architecture.md` §16, `UserGuide.md` 갱신. 테스트: reconcile 중복 방지, 카테고리 경로 검증, slug 충돌, FTS 질의, 분류 mock 파이프라인.
 
 ## 4. 순서

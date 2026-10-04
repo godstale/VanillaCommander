@@ -1,4 +1,4 @@
-// P12-01: 위키 감시·파이프라인 상시 구동. 패널 표시 여부와 무관하게 앱이 떠 있는 동안 동작한다.
+// P14-01: 위키 감시·파이프라인 상시 구동. 패널 표시 여부와 무관하게 앱이 떠 있는 동안 동작한다.
 import { useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
