@@ -6,6 +6,7 @@ import type { LlmStreamChatFn } from '@/lib/llm/providerRuntime';
 import { chatQueueManager } from '@/lib/agent/chatQueueManager';
 import {
   configureWikiPipeline,
+  reconcileWikiFolders,
   pumpWikiQueue,
   stopWikiPipeline,
   handleWikiFileEvent,
@@ -32,6 +33,11 @@ vi.mock('@/lib/commander/ipc', () => ({
   fcMkdir: vi.fn(),
   fcMove: vi.fn(),
   fcReveal: vi.fn(),
+}));
+
+const invokeMock = vi.fn();
+vi.mock('@tauri-apps/api/core', () => ({
+  invoke: (cmd: string, args?: unknown) => invokeMock(cmd, args),
 }));
 
 type EventHandler = (event: { payload: { path: string; kind: string } }) => void;
@@ -85,6 +91,8 @@ function makeSettings(overrides: Partial<WikiSettings> = {}): WikiSettings {
   return {
     watchEnabled: true,
     watchFolders: ['C:/dl'],
+    recursive: false,
+    scanIntervalMin: 10,
     moveAfterIngest: true,
     inboxDir: 'C:/work/wiki-inbox',
     classification: 'auto',
@@ -129,6 +137,7 @@ describe('wiki pipeline', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    invokeMock.mockRejectedValue(new Error('no ipc'));
     ingestExecute.mockResolvedValue({ content: 'ok', details: {} });
     setDatabase(new MemorySqlFallback());
     chatQueueManager.resetAll();
@@ -299,5 +308,66 @@ describe('wiki pipeline', () => {
     const jobs = await listWikiJobs(10);
     expect(jobs[0].status).toBe('done');
     expect(jobs[0].folder).toBe(dateFolderName());
+  });
+
+  it('skips a file whose content hash is already registered', async () => {
+    mockedParse.mockResolvedValue({ text: 'same content '.repeat(20), truncated: false, method: 'text' });
+    invokeMock.mockImplementation(async (cmd: string) => {
+      if (cmd === 'wiki_file_hash') return 'hash-1';
+      throw new Error('unexpected');
+    });
+    configure(
+      makeSettings({ moveAfterIngest: false }),
+      [localAgent],
+      stubClassify({
+        classification: 'date',
+        folderName: dateFolderName(),
+        title: '첫 문서',
+        slug: 'first',
+        summary: 's',
+        tags: [],
+      }),
+    );
+    await handleWikiFileEvent('C:/dl/a.md');
+    await flush(15);
+    await handleWikiFileEvent('C:/dl/a-copy.md');
+    await flush(15);
+    const jobs = await listWikiJobs(10);
+    expect(jobs.map((j) => j.status).sort()).toEqual(['done', 'skipped']);
+    expect(jobs.find((j) => j.status === 'skipped')?.reason).toContain('첫 문서');
+    expect(ingestExecute).toHaveBeenCalledOnce();
+  });
+
+  it('reconcile queues new files once and ignores the inbox folder', async () => {
+    mockedParse.mockResolvedValue({ text: 'scan content '.repeat(20), truncated: false, method: 'text' });
+    invokeMock.mockImplementation(async (cmd: string) => {
+      if (cmd === 'wiki_scan_folders') {
+        return [
+          { path: 'C:/dl/new.md', size: 100, modified_ms: 1 },
+          { path: 'C:/work/wiki-inbox/2026/old.md', size: 100, modified_ms: 1 },
+          { path: 'C:/dl/tool.exe', size: 100, modified_ms: 1 },
+        ];
+      }
+      throw new Error('no hash');
+    });
+    configure(
+      makeSettings({ moveAfterIngest: false }),
+      [localAgent],
+      stubClassify({
+        classification: 'date',
+        folderName: dateFolderName(),
+        title: 'n',
+        slug: 'n',
+        summary: 's',
+        tags: [],
+      }),
+    );
+    expect(await reconcileWikiFolders()).toBe(1);
+    await flush(15);
+    expect(await reconcileWikiFolders()).toBe(0);
+    const jobs = await listWikiJobs(10);
+    expect(jobs).toHaveLength(2);
+    expect(jobs.find((j) => j.sourcePath === 'C:/dl/new.md')?.status).toBe('done');
+    expect(jobs.find((j) => j.sourcePath === 'C:/dl/tool.exe')?.status).toBe('skipped');
   });
 });

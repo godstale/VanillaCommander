@@ -288,6 +288,7 @@ export const MIGRATION_STATEMENTS: string[] = [
     slug TEXT,
     folder TEXT,
     agent_id TEXT,
+    content_hash TEXT,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
   )`,
@@ -1165,10 +1166,20 @@ export class MemorySqlFallback implements SqlDatabase {
     }
 
     if (q.startsWith('UPDATE wiki_jobs SET')) {
-      const [status, reason, title, slug, folder, agent_id, updated_at, id] = bindValues;
+      const [status, reason, title, slug, folder, agent_id, content_hash, updated_at, id] =
+        bindValues;
       const row = this.tables.get('wiki_jobs')?.get(id as string);
       if (!row) return { rowsAffected: 0 };
-      Object.assign(row, { status, reason, title, slug, folder, agent_id, updated_at });
+      Object.assign(row, {
+        status,
+        reason,
+        title,
+        slug,
+        folder,
+        agent_id,
+        content_hash,
+        updated_at,
+      });
       return { rowsAffected: 1 };
     }
 
@@ -1808,6 +1819,22 @@ export class MemorySqlFallback implements SqlDatabase {
     }
 
     // P11-31: 위키 처리 이력.
+    if (q.includes('FROM wiki_jobs WHERE source_path = ?')) {
+      const [path] = bindValues;
+      const row = Array.from(this.tables.get('wiki_jobs')?.values() ?? []).find(
+        (r) => r.source_path === path,
+      );
+      return (row ? [row] : []) as unknown as T;
+    }
+
+    if (q.includes('FROM wiki_jobs WHERE content_hash = ?')) {
+      const [hash] = bindValues;
+      const row = Array.from(this.tables.get('wiki_jobs')?.values() ?? []).find(
+        (r) => r.content_hash === hash && r.status === 'done',
+      );
+      return (row ? [row] : []) as unknown as T;
+    }
+
     if (q.includes('FROM wiki_jobs WHERE id = ?')) {
       const [id] = bindValues;
       const row = this.tables.get('wiki_jobs')?.get(id as string);
@@ -1999,6 +2026,7 @@ export async function runMigrations(db: SqlDatabase): Promise<void> {
     "ALTER TABLE app_settings ADD COLUMN parser_settings TEXT NOT NULL DEFAULT '{}'",
     "ALTER TABLE app_settings ADD COLUMN image_settings TEXT NOT NULL DEFAULT '{}'",
     "ALTER TABLE sessions ADD COLUMN origin TEXT NOT NULL DEFAULT 'chat'",
+    'ALTER TABLE wiki_jobs ADD COLUMN content_hash TEXT',
   ];
   for (const alter of alterColumns) {
     try {

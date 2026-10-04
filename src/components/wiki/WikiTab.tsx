@@ -85,7 +85,10 @@ export function WikiTab() {
     await updateSettings({ wiki: form });
     try {
       if (form.watchEnabled) {
-        await invoke('wiki_watch_set', { folders: form.watchFolders });
+        await invoke('wiki_watch_set', {
+          folders: form.watchFolders,
+          recursive: form.recursive,
+        });
       } else {
         await invoke('wiki_watch_stop');
       }
@@ -133,6 +136,32 @@ export function WikiTab() {
               <span className="text-muted-foreground">{t('wiki.watchEnabledDesc')}</span>
             </span>
           </label>
+          <label className="flex items-start gap-2 text-xs cursor-pointer">
+            <input
+              type="checkbox"
+              checked={form.recursive}
+              onChange={(e) => set('recursive', e.target.checked)}
+              className="mt-0.5 accent-primary"
+            />
+            <span>
+              <span className="font-medium block">{t('wiki.recursive')}</span>
+              <span className="text-muted-foreground">{t('wiki.recursiveDesc')}</span>
+            </span>
+          </label>
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
+              {t('wiki.scanInterval')}
+            </label>
+            <input
+              type="number"
+              min={0}
+              max={1440}
+              value={form.scanIntervalMin}
+              onChange={(e) => set('scanIntervalMin', Math.max(0, Number(e.target.value) || 0))}
+              className="w-32 px-3 py-1.5 text-xs rounded-md border border-border bg-background font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <p className="mt-1 text-[11px] text-muted-foreground">{t('wiki.scanIntervalDesc')}</p>
+          </div>
           <div>
             <span className="block text-xs font-medium text-muted-foreground mb-1">
               {t('wiki.watchFoldersLabel')}

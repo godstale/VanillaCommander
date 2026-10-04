@@ -203,7 +203,7 @@
 > 구현 계획: `Docs/phases/Phase14-Wiki.md`. laya 미도입(W-D1).
 
 - [x] P14-01 감시·파이프라인 상시 구동(`WikiRuntime`)
-- [ ] P14-02 주기 스캔(reconcile) + content_hash 중복 방지
+- [x] P14-02 주기 스캔(reconcile) + content_hash 중복 방지
 - [ ] P14-03 카테고리 체계 기반 계층 분류(구조화 출력)
 - [ ] P14-04 위키 저장 구조 개선(frontmatter·slug 충돌·index)
 - [ ] P14-05 검색(SQLite FTS5)

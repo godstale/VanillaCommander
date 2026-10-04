@@ -32,7 +32,7 @@
 
 ### P14-02. 주기 스캔(reconcile) + 중복 방지
 - Rust `wiki_scan_folders(folders, recursive)` → path·size·mtime 목록. 앱 시작 시와 `scanIntervalMin`(기본 10)마다 실행해 미처리 파일을 큐에 넣음. 감시 이벤트는 즉시 처리용으로 유지.
-- `wiki_jobs.content_hash`(sha256) 추가(마이그레이션 `0003` 신규 + `0001`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화). 같은 해시로 완료된 파일은 skip.
+- `wiki_jobs.content_hash`(sha256) 추가(마이그레이션 `0004_wiki_job_hash.sql` 신규(0003은 macros가 사용) + `0001`·`MIGRATION_STATEMENTS`·메모리 폴백 동기화). 같은 해시로 완료된 파일은 skip.
 - 설정: `recursive`, `scanIntervalMin`.
 
 ### P14-03. 카테고리 체계 기반 계층 분류
@@ -45,7 +45,7 @@
 - `wiki/sources/` 평면 유지. frontmatter에 `category`·`tags`·`source_path`·`original_path`·`hash`·`ingested_at`. slug 충돌 시 `-2` 접미. `index.md` 카테고리별 그룹.
 
 ### P14-05. 검색 (SQLite FTS5)
-- `wiki_pages` + FTS5(trigram, 한국어 부분일치). 마이그레이션 `0004`. ingest/delete 시 갱신, `reindex`(MD → 인덱스) 제공.
+- `wiki_pages` + FTS5(trigram, 한국어 부분일치). 마이그레이션 `0005`. ingest/delete 시 갱신, `reindex`(MD → 인덱스) 제공.
 - **선결 검증**: tauri-plugin-sql 번들 SQLite의 FTS5/trigram 지원. 불가 시 `LIKE` 폴백.
 - `wiki` 도구 `query`를 FTS로 교체(grep 폴백).
 

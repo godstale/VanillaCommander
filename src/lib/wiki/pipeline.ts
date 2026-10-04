@@ -2,6 +2,7 @@
 // ① 내용 추출 → ② LLM 1회 분류 호출 → ③ (옵션) 이동 → ④ wiki ingest.
 // 에이전트 루프 대신 단일 구조화 호출을 쓴다 (예측 가능·저비용).
 import { z } from 'zod';
+import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import type { Agent } from '@/lib/types/agent';
 import type { WikiSettings } from '@/lib/db/repositories/settingsRepo';
@@ -24,6 +25,8 @@ import {
   createWikiJob,
   updateWikiJob,
   getWikiJobsByStatus,
+  findWikiJobByPath,
+  findDoneWikiJobByHash,
   type WikiJob,
 } from '@/lib/db/repositories/wikiJobsRepo';
 import { createWikiTool, slugifyWikiTitle } from '@/lib/tools/wiki';
@@ -372,6 +375,30 @@ async function processJob(job: WikiJob): Promise<void> {
   }
   await updateWikiJob(job.id, { status: 'processing', agentId: agent.id }, ctx.workspaceRoot);
 
+  // 같은 내용이 이미 등록돼 있으면 LLM 호출 없이 건너뛴다 (복사본·재다운로드).
+  let contentHash: string | null = null;
+  try {
+    contentHash = await invoke<string>('wiki_file_hash', { path: job.sourcePath });
+  } catch {
+    // 해시 실패는 중복 검사만 건너뛴다 (파일 읽기 실패는 이후 추출 단계에서 보고).
+  }
+  if (contentHash) {
+    const dup = await findDoneWikiJobByHash(contentHash, ctx.workspaceRoot);
+    if (dup && dup.id !== job.id) {
+      await updateWikiJob(
+        job.id,
+        {
+          status: 'skipped',
+          reason: `이미 등록된 내용입니다: ${dup.title ?? baseNameOf(dup.sourcePath)}`,
+          contentHash,
+        },
+        ctx.workspaceRoot,
+      );
+      return;
+    }
+    await updateWikiJob(job.id, { contentHash }, ctx.workspaceRoot);
+  }
+
   // ① 내용 추출.
   const ext = extOfPath(job.sourcePath);
   let content: string;
@@ -529,6 +556,19 @@ export async function pumpWikiQueue(): Promise<void> {
   void pumpWikiQueue();
 }
 
+/** 파일 1건을 대기열에 넣는다. 이미 작업이 있는 경로는 건너뛴다(재처리는 탭의 수동 버튼). */
+async function enqueueWikiPath(path: string, size: number): Promise<boolean> {
+  if (!ctx) return false;
+  if (await findWikiJobByPath(path, ctx.workspaceRoot)) return false;
+  const job = await createWikiJob({ sourcePath: path }, ctx.workspaceRoot);
+  const verdict = shouldProcessFile(path, size, ctx.getWikiSettings());
+  if (!verdict.ok) {
+    await updateWikiJob(job.id, { status: 'skipped', reason: verdict.reason }, ctx.workspaceRoot);
+    return false;
+  }
+  return true;
+}
+
 /** 감시 이벤트 1건을 받아 대기열에 넣는다. */
 export async function handleWikiFileEvent(path: string): Promise<void> {
   if (!ctx) return;
@@ -543,13 +583,51 @@ export async function handleWikiFileEvent(path: string): Promise<void> {
   } catch {
     return;
   }
-  const job = await createWikiJob({ sourcePath: path }, ctx.workspaceRoot);
-  const verdict = shouldProcessFile(path, size, ctx.getWikiSettings());
-  if (!verdict.ok) {
-    await updateWikiJob(job.id, { status: 'skipped', reason: verdict.reason }, ctx.workspaceRoot);
-    return;
+  if (await enqueueWikiPath(path, size)) void pumpWikiQueue();
+}
+
+interface WikiScanEntry {
+  path: string;
+  size: number;
+  modified_ms: number;
+}
+
+function isInside(path: string, dir: string): boolean {
+  const norm = (p: string) => p.replace(/\\/g, '/').replace(/\/+$/, '').toLowerCase();
+  return norm(path).startsWith(`${norm(dir)}/`);
+}
+
+/**
+ * 감시 폴더를 훑어 이벤트로 놓친 파일(앱 종료 중 유입 등)을 대기열에 넣는다.
+ * 보관 폴더(inbox) 안의 파일은 이미 정리된 것이라 제외한다.
+ */
+export async function reconcileWikiFolders(): Promise<number> {
+  if (!ctx) return 0;
+  const settings = ctx.getWikiSettings();
+  if (!settings.watchEnabled || settings.watchFolders.length === 0) return 0;
+  let entries: WikiScanEntry[];
+  try {
+    entries = await invoke<WikiScanEntry[]>('wiki_scan_folders', {
+      folders: settings.watchFolders,
+      recursive: settings.recursive,
+    });
+  } catch (err) {
+    lastError = err instanceof Error ? err.message : String(err);
+    emitStatus();
+    return 0;
   }
-  void pumpWikiQueue();
+  const inboxBase = resolveInboxDir(ctx.workFolder ?? ctx.workspaceRoot, settings.inboxDir);
+  let queued = 0;
+  for (const entry of entries) {
+    if (isInside(entry.path, inboxBase)) continue;
+    try {
+      if (await enqueueWikiPath(entry.path, entry.size)) queued++;
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
+    }
+  }
+  if (queued > 0) void pumpWikiQueue();
+  return queued;
 }
 
 /** 파이프라인 시작 (멱등). 감시 이벤트를 구독하고 밀린 대기열을 처리한다. */

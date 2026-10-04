@@ -8,6 +8,7 @@ import { useAgents } from '@/lib/context/AgentsContext';
 import { useStatusBar } from '@/lib/context/StatusBarContext';
 import {
   configureWikiPipeline,
+  reconcileWikiFolders,
   startWikiPipeline,
   subscribeWikiPipeline,
 } from '@/lib/wiki/pipeline';
@@ -21,7 +22,7 @@ export function WikiRuntime() {
   const workspaceRoot = workspace?.workspaceRoot ?? null;
   const workFolder = workspace?.workFolder ?? undefined;
 
-  const { watchEnabled, watchFolders } = settings.wiki;
+  const { watchEnabled, watchFolders, recursive, scanIntervalMin } = settings.wiki;
   const watchKey = watchFolders.join('\n');
 
   // 파이프라인 컨텍스트: 설정·에이전트가 바뀌면 재설정 (리스너 등록은 멱등).
@@ -45,12 +46,26 @@ export function WikiRuntime() {
   useEffect(() => {
     const folders = watchKey ? watchKey.split('\n') : [];
     const apply = watchEnabled && folders.length > 0
-      ? invoke('wiki_watch_set', { folders })
+      ? invoke('wiki_watch_set', { folders, recursive })
       : invoke('wiki_watch_stop');
     apply.catch((err) => {
       console.error('Failed to apply wiki watch:', err);
     });
-  }, [watchEnabled, watchKey]);
+  }, [watchEnabled, watchKey, recursive]);
+
+  // 주기 스캔: 시작·설정 변경 시 즉시 1회, 이후 간격마다 (파이프라인 컨텍스트가 준비된 뒤).
+  useEffect(() => {
+    if (!workspaceRoot || !watchEnabled) return;
+    const run = () => {
+      void reconcileWikiFolders().catch((err) => {
+        console.error('Wiki reconcile failed:', err);
+      });
+    };
+    run();
+    if (scanIntervalMin <= 0) return;
+    const timer = setInterval(run, scanIntervalMin * 60_000);
+    return () => clearInterval(timer);
+  }, [workspaceRoot, watchEnabled, watchKey, recursive, scanIntervalMin]);
 
   useEffect(() => {
     const unsubscribe = subscribeWikiPipeline((status) => {

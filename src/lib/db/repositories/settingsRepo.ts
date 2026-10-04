@@ -19,6 +19,10 @@ import type { ApprovalMode } from '@/lib/types/agent';
 export const WikiSettingsSchema = z.object({
   watchEnabled: z.boolean().default(false),
   watchFolders: z.array(z.string()).default([]),
+  /** 하위 폴더까지 감시·스캔. */
+  recursive: z.boolean().default(false),
+  /** 주기 스캔 간격(분). 0이면 주기 스캔 끔(시작 시 1회는 수행). */
+  scanIntervalMin: z.number().min(0).default(10),
   moveAfterIngest: z.boolean().default(true),
   /** ''이면 <WorkFolder>/wiki-inbox. */
   inboxDir: z.string().default(''),
