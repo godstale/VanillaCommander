@@ -20,6 +20,14 @@ const RawWikiParametersSchema = z.object({
     .string()
     .optional()
     .describe("Markdown body to save. Required for 'ingest'."),
+  tags: z
+    .array(z.string())
+    .optional()
+    .describe("Optional tags for 'ingest' (shown in the wiki graph)."),
+  category: z
+    .string()
+    .optional()
+    .describe("Optional category path for 'ingest' (e.g. 'docs/work'), used to group pages in the wiki graph."),
   query: z
     .string()
     .optional()
@@ -59,6 +67,8 @@ const WikiParametersSchema = z.preprocess((val) => {
     slug: str(pick('slug', 'page', 'source', 'id', 'name')),
     title: str(pick('title', 'heading')),
     content: str(pick('content', 'body', 'text', 'markdown')),
+    tags: Array.isArray(v.tags) ? v.tags.map((x) => String(x)) : undefined,
+    category: str(pick('category', 'categoryPath', 'folder')),
     query: str(pick('query', 'question', 'q', 'pattern', 'keyword', 'keywords')),
     maxResults: num(pick('maxResults', 'max_results', 'limit', 'topK', 'top_k')),
   };
@@ -99,8 +109,19 @@ function escapeFrontmatterValue(value: string): string {
   return value.replace(/'/g, "''");
 }
 
-function buildSourceFile(title: string, body: string): string {
-  return `---\ntitle: '${escapeFrontmatterValue(title)}'\ntype: source\ntags: []\nsources: []\nlast_updated: ${todayString()}\n---\n\n${body.trim()}\n`;
+function buildSourceFile(
+  title: string,
+  body: string,
+  tags: string[] = [],
+  category?: string,
+): string {
+  const tagList = tags
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .map((t) => `'${escapeFrontmatterValue(t)}'`)
+    .join(', ');
+  const categoryLine = category?.trim() ? `category: '${escapeFrontmatterValue(category.trim())}'\n` : '';
+  return `---\ntitle: '${escapeFrontmatterValue(title)}'\ntype: source\n${categoryLine}tags: [${tagList}]\nsources: []\nlast_updated: ${todayString()}\n---\n\n${body.trim()}\n`;
 }
 
 interface DirEntryItem {
@@ -190,7 +211,7 @@ async function handleIngest(
   const filePath = `${SOURCES_DIR}/${slug}.md`;
   await invoke('write_text_file', {
     path: filePath,
-    contents: buildSourceFile(title, body),
+    contents: buildSourceFile(title, body, params.tags, params.category),
     workspaceRoot,
   });
   // 카탈로그/로그는 부가 기록이므로 실패해도 등록 자체는 성공으로 본다.

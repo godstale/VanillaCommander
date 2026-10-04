@@ -21,9 +21,12 @@ vi.mock('@/lib/db/repositories/settingsRepo', () => {
     wiki: {
       watchEnabled: false,
       watchFolders: [],
+      recursive: false,
+      scanIntervalMin: 10,
       moveAfterIngest: true,
       inboxDir: '',
-      classification: 'auto',
+      categories: [],
+      allowNewCategories: false,
       allowedExtensions: [],
       maxFileMb: 20,
       excludeGlobs: [],

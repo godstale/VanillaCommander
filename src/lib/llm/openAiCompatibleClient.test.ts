@@ -130,6 +130,28 @@ describe('openAiCompatibleClient', () => {
     expect(body['stream']).toBe(true);
   });
 
+  it('maps jsonSchema to response_format', async () => {
+    const stream = sseStream(['data: [DONE]\n\n']);
+    const fetchMock = vi.fn().mockResolvedValue(new Response(stream, { status: 200 }));
+    global.fetch = fetchMock;
+    const schema = { type: 'object', properties: { a: { type: 'string' } } };
+
+    for await (const _chunk of streamChat({
+      model: 'm',
+      messages: [{ role: 'user', content: 'Hi' }],
+      jsonSchema: schema,
+    })) {
+      void _chunk;
+    }
+
+    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
+    expect(body['response_format']).toEqual({
+      type: 'json_schema',
+      json_schema: { name: 'structured_output', strict: true, schema },
+    });
+  });
+
   it('maps think=true to reasoning_effort', async () => {
     const stream = sseStream(['data: [DONE]\n\n']);
     const fetchMock = vi.fn().mockResolvedValue(new Response(stream, { status: 200 }));

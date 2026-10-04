@@ -198,6 +198,18 @@
   - [x] P11-51 문서·브랜딩 정리
   - [x] P11-52 통합 QA
 
+## Phase 14 — 위키 완성 `[~]`
+
+> 구현 계획: `Docs/phases/Phase14-Wiki.md`. laya 미도입(W-D1).
+
+- [x] P14-01 감시·파이프라인 상시 구동(`WikiRuntime`)
+- [x] P14-02 주기 스캔(reconcile) + content_hash 중복 방지
+- [x] P14-03 카테고리 체계 기반 계층 분류(구조화 출력)
+- [ ] P14-04 위키 저장 구조 개선(frontmatter·slug 충돌·index)
+- [ ] P14-05 검색(SQLite FTS5)
+- [~] P14-06 위키 UI(검색·카테고리 트리·설정)
+- [ ] P14-07 문서·테스트
+
 ## Phase 12 — Explorer UX 개편 `[x]`
 
 - [x] P12-01 탐색기 찾기 수정 (이름 부분일치 OR 내용 검색·백/초기화 복원)
@@ -300,6 +312,11 @@
 | 2026-10-04        | FIX     | 이미지 뷰어: 열 때 창에 맞춤(최소 10%, Shift/Alt + `+`/`-`/`0` 단축키), 설정 > 이미지(`app_settings.image_settings` 컬럼) 추가. 탐색기에서 이미 열린 이미지 탭(다른 pane)을 다시 열 때 현재 pane이 흰 화면이 되던 `openTab` 버그 수정. 기존 실패 `bundledSkills.test.ts`(basic-llm-wiki frontmatter)는 이 변경과 무관. | 해결됨 |
 | 2026-10-04 | WINDOW-STATE | 앱 재실행 시 창 크기·위치·최대화 상태 복원: `tauri-plugin-window-state` 도입(`Cargo.toml`, `lib.rs` 플러그인 등록, `capabilities/default.json`에 `window-state:default`). 상태는 앱 설정 디렉터리 `.window-state.json`에 종료 시 저장. 검증: `cargo check` 통과(실제 창 복원은 `pnpm tauri dev`에서 수동 확인 필요). **신규 의존성**: `tauri-plugin-window-state`. | 해결됨 |
 | 2026-10-04 | AGENT-WORKBENCH | 에이전트 UX 개선: ① 에이전트 편집·실시간 모니터링을 한 탭(`AgentWorkbenchTab`, id `agent-editor:<id>`)의 서브탭으로 통합(기존 `agent-monitor` 탭은 모니터링 서브탭으로 열림, 모니터링은 한 번 열면 마운트 유지). ② 에이전트 카드의 아이콘 클릭 → 모니터링, 좌하단 상태바 에이전트/LLM 텍스트 클릭 → 편집(연결 확인은 호버 새로고침 버튼). ③ 컨텍스트 크기·압축 여유분·최근 보존량을 '고급' 밖 '컨텍스트 예산' 카드로 이동 + `gpuAutoTune.ts`(VRAM 구간표, VRAM 미감지 시 시스템 메모리 절반 가정)로 'GPU 기준 자동 설정' 버튼, 새 에이전트는 감지 직후 자동 적용. 검증: `tsc`·`eslint` 통과, `vitest` 520/521(유일 실패는 기존 bundledSkills CRLF). 실제 화면 확인은 `pnpm tauri dev` 수동 필요. **신규 의존성 없음**. | 해결됨 |
+| 2026-10-04 | P14-06 | 위키 하위 폴더 감시를 전역 토글에서 감시 폴더별 설정으로 변경(사용자 요청). 소유 범위 초과 변경이 있어 기록: `settingsRepo.ts`(P11-04 소유)의 `watchFolders: string[]` → `{ path, recursive }[]` + 구 문자열 배열·전역 `recursive` 마이그레이션(`recursive` 필드는 deprecated 폴백으로 유지), `watch_commands.rs`(P11-30/P14-02 소유)의 `wiki_watch_set`·`wiki_scan_folders`가 경로 문자열·`{path,recursive}` 혼합 입력(`FolderInput`)을 받고 폴더별로 감시·스캔(`wiki_watch_status` 반환은 경로 목록 유지). UI(P14-06 소유): `WikiTab` 폴더 감시 카드에서 전역 체크박스를 제거하고 폴더 행마다 "하위 포함" 토글, 저장 시 전역값은 폴더별 OR로 동기화. `Phase14-Wiki.md` P14-02/P14-06 문구 동기화. 검증: `lint`·`typecheck` 통과, `vitest` 541/542(유일 실패는 기존 bundledSkills CRLF — 본 변경 무관), `cargo test watch_commands` 8건 통과(신규 폴더별 우선순위 1건 포함). | 해결됨 |
+| 2026-10-04 | P14-06 | 위키 검색 탭 신설(사용자 요청: 에이전트 없이 키워드 검색 + 패널 상단 버튼). `WikiSearchTab` 신규 — wiki 도구 `query`(내부적으로 `grep_files` on `wiki/`, 정규식 이스케이프済)를 에이전트 없이 직접 실행, 결과 클릭 시 해당 파일 탭 오픈. 신규 탭 타입 `wiki-search`(`workspaceTab.ts` + `CenterWorkspace` 아이콘·라우팅, `Architecture.md` §3.3 동기화). `WikiPanel` 헤더에 검색 버튼 추가(설정 버튼 유지, 고정 id `wiki-search`로 싱글턴 오픈). ko/en `wiki.search*`·`openSearch`·`noWorkspace` 문구 추가. Phase14-Wiki.md P14-06에 소유 파일 목록이 없어 수정 파일 전체를 여기에 기록: 위 6종 + `WikiSearchTab.test.tsx`(신규 3건). 검증: `lint`·`typecheck` 통과, 신규 3건 통과, 전체 `test` 544/545(유일 실패는 기존 bundledSkills CRLF — 본 변경 무관). | 해결됨 |
+| 2026-10-04 | P14-06 | 위키 설정 보관 폴더에 찾아보기 버튼 추가(사용자 요청). 텍스트 직접 입력은 유지하고 옆에 폴더 선택 다이얼로그(`directory`, 단일 선택, 감시 폴더 추가와 동일 규격) 버튼을 배치 — 선택 시 입력값에 반영, 취소 시 유지. `wiki.browseFolder` 문구(찾아보기/Browse) 추가. 수정 파일: `WikiTab.tsx`·`wiki.ko/en.ts` + `WikiTab.test.tsx` 신규 3건(버튼 존재·선택 반영·취소 유지). 검증: `lint`·`typecheck` 통과, 위키 6건 통과. | 해결됨 |
+| 2026-10-04 | P14-06 | 실사용 테스트 피드백 반영. ①원인: `fc://progress` done을 놓쳐 120초 타임아웃 → 이미 이동된 파일이 '이동 실패'로 기록, 정상 등록 1건은 설정 변경 전 기본 보관 폴더(`<작업폴더>/wiki-inbox/문서/학습`)에 있었음. ②`pipeline.ts`: 순서를 분류 → **wiki ingest → 이동**으로 변경(등록 실패 파일은 감시 폴더에 그대로 남음), 이동만 실패하면 등록 유지+`reason`에 경고+출처를 원본 경로로 재기록, 이동 완료 판정에 파일 시스템 폴링(원본 소멸+대상 존재, NFC 정규화) 추가. ③중복 처리: 감시 이벤트(`\?\` verbatim)와 스캔 경로 형식 불일치로 `findWikiJobByPath`가 빗나가던 문제를 `normalizeWatchPath`로 정규화, 등록 중복 방지 Set·reconcile 재진입 가드, 기동 시 `processing` 잔여분 `queued` 복구. ④UI: 패널 펼침 목록·즉시 처리 위치 이동·하단 "위키 그래프"/"위키 검색(위키 전용 채팅)" 버튼, 설정 자동 저장(저장 버튼 제거), `WikiGraphTab` 신규(`wiki-graph`). 소유 범위 초과: `ChatTab.tsx`·`useChat.ts`(위키 채팅 addendum 주입), `wiki.ts`(ingest `tags`·`category` 프런트매터). 검증: `lint`·`typecheck` 통과, 위키 관련 신규 테스트 통과, 전체 `vitest` 중 유일 실패는 기존 bundledSkills CRLF. | 해결됨 |
+| 2026-10-04 | P14-06 | ①"즉시 처리"가 재투입 파일을 처리하지 않던 문제: 이전 `failed`/`skipped` 작업이 같은 경로로 남아 스캔이 건너뜀 → `reconcileWikiFolders({retry:true})`(수동 처리 전용)가 해당 작업을 `queued`로 되돌림(주기 스캔은 재시도 안 함). 테스트 1건 추가. ②설정 위저드 자동 실행 비활성화(사용자 요청): `Workspace.tsx`의 `AUTO_SETUP_WIZARD=false`, `?setup=1` 수동 실행은 유지. 기능 구현·테스트 완료 후 위저드 재작성 예정. | 해결됨 |
 
 ---
 

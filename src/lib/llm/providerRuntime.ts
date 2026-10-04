@@ -55,6 +55,8 @@ export interface LlmChatRequest {
   stopSequences?: string[];
   maxTokens?: number;
   options?: Record<string, unknown>;
+  /** 구조화 출력: 응답을 이 JSON Schema에 맞추도록 서버에 요청한다 (지원 서버만). */
+  jsonSchema?: Record<string, unknown>;
 }
 
 export interface LlmChunk {

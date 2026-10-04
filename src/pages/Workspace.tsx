@@ -26,6 +26,9 @@ import { useSearchParams } from 'react-router-dom';
 import { SetupWizard } from '@/components/setup/SetupWizard';
 import { ConflictDialogHost, CommanderStatusPublishers } from '@/components/explorer/CommanderOverlays';
 import { ExplorerBridgeHost } from '@/components/explorer/ExplorerBridgeHost';
+import { WikiRuntime } from '@/components/wiki/WikiRuntime';
+
+const AUTO_SETUP_WIZARD = false;
 
 function WorkspaceContent() {
   useKeyboardShortcuts();
@@ -51,7 +54,8 @@ function WorkspaceContent() {
       setWizardOpen(true);
       return;
     }
-    if (settings.setupCompletedAt == null) {
+    // 위저드 자동 실행 비활성화: 앱 기능 구현/테스트 완료 후 재작성할 때까지 끈다 (?setup=1 수동 실행은 유지).
+    if (AUTO_SETUP_WIZARD && settings.setupCompletedAt == null) {
       wizardShownRef.current = true;
       setWizardOpen(true);
     }
@@ -129,6 +133,15 @@ function WorkspaceContent() {
       }
       setActiveView(view);
     }
+    // 사이드바 위키 메뉴는 사이드 패널과 함께 탭 영역에 위키 설정 탭을 연다.
+    if (view === 'wiki') {
+      const existing = tabs.find((tb) => tb.type === 'wiki');
+      if (existing) {
+        setActiveTab(existing.id);
+      } else {
+        openTab({ id: 'wiki', type: 'wiki', title: t('wiki.tabTitle') });
+      }
+    }
   };
 
   // P13-04: 사이드 메뉴 전역 단축키 (Alt+A/S/G/F/M, 앱 전용은 Alt 조합).
@@ -181,6 +194,7 @@ function WorkspaceContent() {
       <ConflictDialogHost />
       <CommanderStatusPublishers />
       <ExplorerBridgeHost />
+      <WikiRuntime />
       {wizardOpen && <SetupWizard onClose={closeWizard} />}
     </div>
   );

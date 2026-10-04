@@ -160,6 +160,30 @@ describe('ollamaClient', () => {
     expect('think' in (seenBodies[0] as Record<string, unknown>)).toBe(false);
   });
 
+  it('passes jsonSchema as the format field', async () => {
+    const seenBodies: Array<Record<string, unknown>> = [];
+    global.fetch = vi.fn().mockImplementation((_url: unknown, init?: { body?: string }) => {
+      seenBodies.push(JSON.parse(init?.body ?? '{}'));
+      const stream = new ReadableStream({
+        start(controller) {
+          controller.enqueue(new TextEncoder().encode(JSON.stringify({ done: true }) + '\n'));
+          controller.close();
+        },
+      });
+      return Promise.resolve(new Response(stream, { status: 200 }));
+    });
+    const schema = { type: 'object', properties: { a: { type: 'string' } } };
+
+    for await (const chunk of streamChat({
+      model: 'test-model',
+      messages: [{ role: 'user', content: 'Hi' }],
+      jsonSchema: schema,
+    })) {
+      expect(chunk).toBeDefined();
+    }
+    expect(seenBodies[0].format).toEqual(schema);
+  });
+
   it('parses thinking metadata from /api/show', async () => {
     const { showModel } = await import('./ollamaClient');
     global.fetch = vi.fn().mockResolvedValue(

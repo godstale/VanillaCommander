@@ -4,7 +4,7 @@ import { Moon, Sun, Monitor, Activity, Wand2, FolderOpen, ShieldCheck, History }
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/lib/context/ThemeContext';
 import { useSettings } from '@/lib/context/SettingsContext';
-import { DEFAULT_MONITORING_INTERVAL_MS } from '@/lib/db/repositories/settingsRepo';
+import { DEFAULT_LLM_QUEUE_TIMEOUT_MIN, DEFAULT_MONITORING_INTERVAL_MS } from '@/lib/db/repositories/settingsRepo';
 import { listAudit } from '@/lib/db/repositories/integrationsRepo';
 import type { IntegrationAuditRow } from '@/lib/integrations/types';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const MONITORING_INTERVAL_OPTIONS = [1000, 2000, 3000, 5000, 10000];
+const LLM_QUEUE_TIMEOUT_OPTIONS = [5, 10, 20, 30, 60];
 
 export function SettingsGeneral() {
   const { theme, setTheme } = useTheme();
@@ -20,6 +21,7 @@ export function SettingsGeneral() {
   const navigate = useNavigate();
   const monitoringIntervalMs =
     settings.monitoringIntervalMs ?? DEFAULT_MONITORING_INTERVAL_MS;
+  const llmQueueTimeoutMin = settings.llmQueueTimeoutMin ?? DEFAULT_LLM_QUEUE_TIMEOUT_MIN;
 
   const pickLocale = (next: 'ko' | 'en') => {
     setLocale(next);
@@ -323,6 +325,25 @@ export function SettingsGeneral() {
                 className={cn('text-xs', monitoringIntervalMs !== ms && 'text-muted-foreground')}
               >
                 {t('settingsGeneral.monitoringIntervalSec', { n: String(ms / 1000) })}
+              </Button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="text-xs font-medium">{t('settingsGeneral.llmQueueTimeout')}</label>
+          <p className="text-[11px] text-muted-foreground mt-0.5">
+            {t('settingsGeneral.llmQueueTimeoutDesc')}
+          </p>
+          <div className="flex gap-2 mt-2 flex-wrap">
+            {LLM_QUEUE_TIMEOUT_OPTIONS.map((min) => (
+              <Button
+                key={min}
+                variant={llmQueueTimeoutMin === min ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => void updateSettings({ llmQueueTimeoutMin: min })}
+                className={cn('text-xs', llmQueueTimeoutMin !== min && 'text-muted-foreground')}
+              >
+                {t('settingsGeneral.llmQueueTimeoutMin', { n: String(min) })}
               </Button>
             ))}
           </div>

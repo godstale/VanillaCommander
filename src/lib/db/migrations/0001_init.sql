@@ -263,6 +263,7 @@ CREATE TABLE IF NOT EXISTS wiki_jobs (
   slug TEXT,
   folder TEXT,
   agent_id TEXT,
+  content_hash TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );

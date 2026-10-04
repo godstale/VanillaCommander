@@ -17,6 +17,7 @@ export interface WikiJob {
   slug: string | null;
   folder: string | null;
   agentId: string | null;
+  contentHash: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -30,6 +31,7 @@ interface DbWikiJobRow {
   slug: string | null;
   folder: string | null;
   agent_id: string | null;
+  content_hash?: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -55,6 +57,7 @@ function mapRowToJob(row: DbWikiJobRow): WikiJob {
     slug: row.slug ?? null,
     folder: row.folder ?? null,
     agentId: row.agent_id ?? null,
+    contentHash: row.content_hash ?? null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -80,6 +83,7 @@ export async function createWikiJob(
     slug: null,
     folder: null,
     agentId: input.agentId ?? null,
+    contentHash: null,
     createdAt: now,
     updatedAt: now,
   };
@@ -104,7 +108,7 @@ export async function createWikiJob(
 /** 파이프라인이 상태·결과를 갱신한다. */
 export async function updateWikiJob(
   id: string,
-  patch: Partial<Pick<WikiJob, 'status' | 'reason' | 'title' | 'slug' | 'folder' | 'agentId'>>,
+  patch: Partial<Pick<WikiJob, 'status' | 'reason' | 'title' | 'slug' | 'folder' | 'agentId' | 'contentHash'>>,
   workspaceRoot?: string | null,
 ): Promise<void> {
   const db = await getDatabase(workspaceRoot);
@@ -117,7 +121,7 @@ export async function updateWikiJob(
     updatedAt: nowIso(),
   };
   await db.execute(
-    'UPDATE wiki_jobs SET status = ?, reason = ?, title = ?, slug = ?, folder = ?, agent_id = ?, updated_at = ? WHERE id = ?',
+    'UPDATE wiki_jobs SET status = ?, reason = ?, title = ?, slug = ?, folder = ?, agent_id = ?, content_hash = ?, updated_at = ? WHERE id = ?',
     [
       next.status,
       next.reason,
@@ -125,6 +129,7 @@ export async function updateWikiJob(
       next.slug,
       next.folder,
       next.agentId,
+      next.contentHash,
       next.updatedAt,
       id,
     ],
@@ -167,6 +172,32 @@ export async function getWikiJobsByStatus(
     [status],
   );
   return rows.map(mapRowToJob);
+}
+
+/** 같은 경로로 만든 작업이 이미 있는지 (상태 무관 — 실패 건의 무한 재시도 방지). */
+export async function findWikiJobByPath(
+  sourcePath: string,
+  workspaceRoot?: string | null,
+): Promise<WikiJob | null> {
+  const db = await getDatabase(workspaceRoot);
+  const rows = await db.select<DbWikiJobRow[]>(
+    'SELECT * FROM wiki_jobs WHERE source_path = ? LIMIT 1',
+    [sourcePath],
+  );
+  return rows.length > 0 ? mapRowToJob(rows[0]) : null;
+}
+
+/** 같은 내용으로 이미 등록 완료된 작업. */
+export async function findDoneWikiJobByHash(
+  contentHash: string,
+  workspaceRoot?: string | null,
+): Promise<WikiJob | null> {
+  const db = await getDatabase(workspaceRoot);
+  const rows = await db.select<DbWikiJobRow[]>(
+    "SELECT * FROM wiki_jobs WHERE content_hash = ? AND status = 'done' LIMIT 1",
+    [contentHash],
+  );
+  return rows.length > 0 ? mapRowToJob(rows[0]) : null;
 }
 
 export async function deleteWikiJob(

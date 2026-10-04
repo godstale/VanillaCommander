@@ -11,6 +11,8 @@ import {
   FileText,
   Archive,
   BookOpen,
+  Search,
+  Network,
   Zap,
   X,
   Plus,
@@ -37,6 +39,8 @@ import { FileExplorerTab } from '@/components/explorer/FileExplorerTab';
 import { DocumentViewerTab } from '@/components/viewers/DocumentViewerTab';
 import { ArchiveViewerTab } from '@/components/viewers/ArchiveViewerTab';
 import { WikiTab } from '@/components/wiki/WikiTab';
+import { WikiSearchTab } from '@/components/wiki/WikiSearchTab';
+import { WikiGraphTab } from '@/components/wiki/WikiGraphTab';
 import { MacroEditorTab } from '@/components/macros/MacroEditorTab';
 import { WelcomeGuide } from '@/components/workspace/WelcomeGuide';
 import { cn } from '@/lib/utils';
@@ -56,6 +60,8 @@ const TAB_ICONS: Record<WorkspaceTabType, LucideIcon> = {
   'document-viewer': FileText,
   'archive-viewer': Archive,
   wiki: BookOpen,
+  'wiki-search': Search,
+  'wiki-graph': Network,
   'macro-editor': Zap,
 };
 
@@ -80,6 +86,10 @@ function renderTabContent(tab: WorkspaceTab) {
       return <ArchiveViewerTab tab={tab} />;
     case 'wiki':
       return <WikiTab />;
+    case 'wiki-search':
+      return <WikiSearchTab />;
+    case 'wiki-graph':
+      return <WikiGraphTab />;
     case 'macro-editor':
       return <MacroEditorTab tab={tab} />;
     default:

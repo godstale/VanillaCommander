@@ -2,25 +2,13 @@
 // 여기서는 기본 프롬프트·경로 해석·파일 필터 판정만 둔다.
 import type { WikiSettings } from '@/lib/db/repositories/settingsRepo';
 
-/** D6 분류 규칙 프리셋. auto는 LLM이 파일 내용을 보고 셋 중 하나를 고른다. */
-export type ClassificationRule = 'auto' | 'date' | 'serial' | 'frequency';
-
-export const CLASSIFICATION_RULES: Array<{ id: ClassificationRule; hint: string }> = [
-  { id: 'auto', hint: 'LLM이 내용에 맞게 자동 선택' },
-  { id: 'date', hint: '날짜순 YYYY/MM-DD/ (단발성 자료)' },
-  { id: 'serial', hint: '순번 NN-<주제>/ (연속 프로젝트, 0 패딩)' },
-  { id: 'frequency', hint: '빈도순 일일/주간/월간/분기/반기/연간/상시' },
-];
-
-/** 위키 처리 기본 프롬프트. 비우면 이 값으로 초기화한다. */
+/** 위키 처리 기본 프롬프트. 비우면 이 값으로 초기화한다. 카테고리 목록·출력 형식은 파이프라인이 덧붙인다. */
 export const DEFAULT_WIKI_PROMPT = [
   '감시 폴더에 들어온 파일을 위키에 등록하기 위한 분류 정보를 JSON으로 만든다.',
-  '파일 내용을 보고 세 가지 정리 규칙 중 하나를 고른다:',
-  '- 날짜순(date): 단발성 자료 → YYYY/MM-DD/ 폴더',
-  '- 순번(serial): 연속 프로젝트 → NN-<주제>/ 폴더 (0 패딩)',
-  '- 빈도순(frequency): 대분류 → 일일/주간/월간/분기/반기/연간/상시 중 하나',
-  '출력 JSON: { "classification": "date|serial|frequency", "folderName": "...", "title": "...", "slug": "...", "summary": "...", "tags": ["..."] }',
-  '제목은 파일 내용의 핵심을 한 줄로, slug는 kebab-case로 만든다.',
+  '파일 내용을 읽고 주어진 카테고리 목록에서 가장 알맞은 경로 하나를 고른다.',
+  '제목은 파일 내용의 핵심을 한 줄로, slug는 영문 소문자 kebab-case로 만든다.',
+  '요약은 3~5문장으로 핵심만 적고, 태그는 검색에 쓸 핵심 단어 3~6개로 한다.',
+  '이 결과의 제목·요약·태그는 위키 페이지 등록에 그대로 쓰이므로 파일 내용을 정확히 반영한다.',
 ].join('\n');
 
 /** 이동 대상 폴더. 미지정이면 `<WorkFolder>/wiki-inbox`. */
@@ -94,4 +82,28 @@ export function shouldProcessFile(
     }
   }
   return { ok: true };
+}
+
+/**
+ * 감시 폴더로 쓰면 안 되는 시스템 경로 판정 (Rust `is_system_write_path`와 같은 집합).
+ * 프런트 휴리스틱이라 최종 거부는 Rust `wiki_watch_set`이 담당한다.
+ */
+export function isSystemWatchFolder(path: string): boolean {
+  const lowered = path.replace(/\//g, '\\').toLowerCase();
+  // Windows: 어느 드라이브의 시스템 폴더라도 차단한다.
+  if (/^[a-z]:(\\|$)/.test(lowered)) {
+    const noTrail = lowered.replace(/[\\]+$/, '');
+    if (/^[a-z]:$/.test(noTrail)) return true; // 드라이브 루트 전체 감시는 막는다.
+    const rest = noTrail.slice(3);
+    for (const prefix of ['windows', 'program files (x86)', 'program files', 'programdata']) {
+      if (rest === prefix || rest.startsWith(`${prefix}\\`)) return true;
+    }
+    return false;
+  }
+  // POSIX: Rust `system_write_prefixes`와 같은 집합.
+  const posix = path.replace(/\\/g, '/').replace(/\/+$/, '').toLowerCase();
+  for (const prefix of ['/bin', '/sbin', '/usr', '/etc', '/system', '/library']) {
+    if (posix === prefix || posix.startsWith(`${prefix}/`)) return true;
+  }
+  return false;
 }

@@ -8,7 +8,7 @@ import { checkAgentConnection } from '@/lib/llm/agentStatus';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { cn } from '@/lib/utils';
 
-const LEFT_SLOTS: StatusBarSlot[] = ['agent', 'jobs', 'wiki', 'tab', 'clipboard'];
+const LEFT_SLOTS: StatusBarSlot[] = ['agent', 'wiki', 'jobs', 'tab', 'clipboard'];
 
 function SlotItems({ slotItems }: { slotItems: StatusBarItem[] }) {
   return (

@@ -311,13 +311,15 @@ fn system_write_prefixes() -> Vec<PathBuf> {
 }
 
 /// 시스템 폴더 아래면 true (쓰기 경고용, D1).
+/// `canonicalize()`의 `\\?\` verbatim 접두를 벗기고 비교한다.
 pub fn is_system_write_path(path: &Path) -> bool {
     #[cfg(target_os = "windows")]
     {
-        let lower = path.to_string_lossy().to_lowercase();
-        system_write_prefixes()
-            .iter()
-            .any(|p| lower.starts_with(&p.to_string_lossy().to_lowercase()))
+        let raw = path.to_string_lossy().to_lowercase();
+        let lower = raw.strip_prefix(r"\\?\").unwrap_or(&raw);
+        system_write_prefixes().iter().any(|p| {
+            lower.starts_with(&p.to_string_lossy().to_lowercase() as &str)
+        })
     }
     #[cfg(not(target_os = "windows"))]
     {
