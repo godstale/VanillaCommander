@@ -26,6 +26,7 @@ import { useSearchParams } from 'react-router-dom';
 import { SetupWizard } from '@/components/setup/SetupWizard';
 import { ConflictDialogHost, CommanderStatusPublishers } from '@/components/explorer/CommanderOverlays';
 import { ExplorerBridgeHost } from '@/components/explorer/ExplorerBridgeHost';
+import { WikiRuntime } from '@/components/wiki/WikiRuntime';
 
 function WorkspaceContent() {
   useKeyboardShortcuts();
@@ -181,6 +182,7 @@ function WorkspaceContent() {
       <ConflictDialogHost />
       <CommanderStatusPublishers />
       <ExplorerBridgeHost />
+      <WikiRuntime />
       {wizardOpen && <SetupWizard onClose={closeWizard} />}
     </div>
   );

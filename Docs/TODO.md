@@ -202,7 +202,7 @@
 
 > 구현 계획: `Docs/phases/Phase12-Wiki.md`. laya 미도입(W-D1).
 
-- [~] P12-01 감시·파이프라인 상시 구동(`WikiRuntime`)
+- [x] P12-01 감시·파이프라인 상시 구동(`WikiRuntime`)
 - [ ] P12-02 주기 스캔(reconcile) + content_hash 중복 방지
 - [ ] P12-03 카테고리 체계 기반 계층 분류(구조화 출력)
 - [ ] P12-04 위키 저장 구조 개선(frontmatter·slug 충돌·index)

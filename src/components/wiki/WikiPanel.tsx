@@ -1,21 +1,13 @@
 // P11-31: 위키 사이드 패널. 감시 상태·대기열·최근 처리·페이지 목록.
 import { useCallback, useEffect, useState } from 'react';
-import { invoke } from '@tauri-apps/api/core';
 import { BookOpen, RefreshCw, Settings2, Eye, EyeOff } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { useSettings } from '@/lib/context/SettingsContext';
 import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { useWorkspaceTabs } from '@/lib/context/WorkspaceTabsContext';
-import { useAgents } from '@/lib/context/AgentsContext';
-import { useStatusBar } from '@/lib/context/StatusBarContext';
 import { listWikiJobs, getWikiJobsByStatus, type WikiJob } from '@/lib/db/repositories/wikiJobsRepo';
 import { createWikiTool } from '@/lib/tools/wiki';
 import { buildFileTab, planOpenFile } from '@/lib/commander/openFile';
-import {
-  configureWikiPipeline,
-  startWikiPipeline,
-  subscribeWikiPipeline,
-} from '@/lib/wiki/pipeline';
 
 interface WikiPage {
   slug: string;
@@ -32,8 +24,6 @@ export function WikiPanel() {
   const { settings, updateSettings } = useSettings();
   const workspace = useSafeWorkspace();
   const { openTab } = useWorkspaceTabs();
-  const { agents, defaultAgent } = useAgents();
-  const { publish, clear } = useStatusBar();
   const workspaceRoot = workspace?.workspaceRoot ?? null;
 
   const [queue, setQueue] = useState<WikiJob[]>([]);
@@ -78,46 +68,11 @@ export function WikiPanel() {
     return () => clearInterval(timer);
   }, [refresh]);
 
-  // P11-32: 파이프라인 설정·시작. 설정·에이전트가 바뀌면 재설정한다
-  // (리스너는 startWikiPipeline 내부에서 멱등 처리).
-  useEffect(() => {
-    if (!workspaceRoot) return;
-    configureWikiPipeline({
-      workspaceRoot,
-      workFolder: workspace?.workFolder ?? undefined,
-      ollamaBaseUrl: settings.ollamaBaseUrl,
-      getWikiSettings: () => settings.wiki,
-      getParserSettings: () => settings.parsers,
-      getAgents: () => agents,
-      getDefaultAgent: () => defaultAgent,
-    });
-    void startWikiPipeline().catch((err) => {
-      console.error('Failed to start wiki pipeline:', err);
-    });
-    const unsubscribe = subscribeWikiPipeline((status) => {
-      if (status.active) {
-        publish('wiki', { id: 'wiki-pipeline', content: t('wiki.pipelineActive') });
-      } else {
-        clear('wiki', 'wiki-pipeline');
-      }
-    });
-    return unsubscribe;
-  }, [workspaceRoot, workspace?.workFolder, settings, agents, defaultAgent, publish, clear, t]);
-
   const toggleWatch = useCallback(async () => {
-    const next = !watchEnabled;
-    await updateSettings({ wiki: { ...settings.wiki, watchEnabled: next } });
-    try {
-      if (next) {
-        await invoke('wiki_watch_set', { folders: watchFolders });
-      } else {
-        await invoke('wiki_watch_stop');
-      }
-    } catch (err) {
-      console.error('Failed to toggle wiki watch:', err);
-    }
+    // 감시 반영은 WikiRuntime이 설정 변경에 맞춰 수행한다.
+    await updateSettings({ wiki: { ...settings.wiki, watchEnabled: !watchEnabled } });
     void refresh();
-  }, [watchEnabled, watchFolders, settings.wiki, updateSettings, refresh]);
+  }, [watchEnabled, settings.wiki, updateSettings, refresh]);
 
   const openSettings = useCallback(() => {
     openTab({ id: 'wiki', type: 'wiki', title: t('wiki.tabTitle') });

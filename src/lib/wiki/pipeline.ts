@@ -325,13 +325,14 @@ let processing = false;
 let pumpTimer: ReturnType<typeof setTimeout> | null = null;
 let lastDoneAt: string | null = null;
 let lastError: string | null = null;
+let pendingCount = 0;
 const recentPaths = new Map<string, number>();
 const listeners = new Set<StatusListener>();
 
 function emitStatus(): void {
   const snapshot: WikiPipelineStatus = {
     active: processing,
-    pending: 0,
+    pending: pendingCount,
     lastDoneAt,
     lastError,
   };
@@ -504,6 +505,7 @@ export async function pumpWikiQueue(): Promise<void> {
     return;
   }
   const job = next[0];
+  pendingCount = Math.max(0, next.length - 1);
   if (!job) {
     emitStatus();
     return;
