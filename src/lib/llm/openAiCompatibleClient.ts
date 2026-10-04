@@ -99,6 +99,8 @@ export interface OpenAiChatRequest {
   presencePenalty?: number;
   seed?: number;
   stopSequences?: string[];
+  /** 구조화 출력: `response_format: json_schema`로 전달한다 (미지원 서버는 4xx를 반환할 수 있다). */
+  jsonSchema?: Record<string, unknown>;
 }
 
 export interface OpenAiModel {
@@ -216,6 +218,14 @@ export async function* streamChat(
     ...(req.tools && req.tools.length > 0 ? { tools: req.tools } : {}),
     ...(req.maxTokens !== undefined ? { max_tokens: req.maxTokens } : {}),
     ...(reasoningEffort ? { reasoning_effort: reasoningEffort } : {}),
+    ...(req.jsonSchema
+      ? {
+          response_format: {
+            type: 'json_schema',
+            json_schema: { name: 'structured_output', strict: true, schema: req.jsonSchema },
+          },
+        }
+      : {}),
     stream_options: { include_usage: true },
     ...(req.options ?? {}),
   };

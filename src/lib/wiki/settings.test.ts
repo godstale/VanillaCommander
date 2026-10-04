@@ -46,9 +46,8 @@ describe('wiki settings helpers', () => {
     expect(verdict.ok).toBe(false);
   });
 
-  it('ships a default prompt mentioning the three rules', () => {
-    expect(DEFAULT_WIKI_PROMPT).toContain('date');
-    expect(DEFAULT_WIKI_PROMPT).toContain('serial');
-    expect(DEFAULT_WIKI_PROMPT).toContain('frequency');
+  it('ships a default prompt that asks for a category choice', () => {
+    expect(DEFAULT_WIKI_PROMPT).toContain('카테고리');
+    expect(DEFAULT_WIKI_PROMPT).toContain('kebab-case');
   });
 });

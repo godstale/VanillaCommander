@@ -83,6 +83,8 @@ export interface OllamaChatRequest {
   stopSequences?: string[];
   maxOutputTokens?: number;
   options?: Record<string, unknown>;
+  /** 구조화 출력: Ollama `format`에 JSON Schema를 전달한다. */
+  jsonSchema?: Record<string, unknown>;
 }
 
 export interface OllamaModel {
@@ -121,6 +123,7 @@ export async function* streamChat(
     tools: req.tools && req.tools.length > 0 ? req.tools : undefined,
     stream: true,
     ...(req.think !== undefined ? { think: req.think } : {}),
+    ...(req.jsonSchema ? { format: req.jsonSchema } : {}),
     options: {
       temperature: req.temperature,
       ...(req.topP !== undefined ? { top_p: req.topP } : {}),

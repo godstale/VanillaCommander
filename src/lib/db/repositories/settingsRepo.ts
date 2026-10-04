@@ -16,6 +16,17 @@ import type { ApprovalMode } from '@/lib/types/agent';
 
 // P11-04: 위키·파서 설정 블록. 화면(P11-31/P11-34)과 파이프라인(W3)은 각 작업이 소유하고,
 // 저장소 스키마만 여기서 둔다.
+const DEFAULT_WIKI_CATEGORIES = [
+  '문서/업무',
+  '문서/학습',
+  '문서/계약·법률',
+  '재무/영수증·청구서',
+  '재무/보고서',
+  '이미지/사진',
+  '이미지/스크린샷',
+  '기타',
+];
+
 export const WikiSettingsSchema = z.object({
   watchEnabled: z.boolean().default(false),
   watchFolders: z.array(z.string()).default([]),
@@ -26,7 +37,10 @@ export const WikiSettingsSchema = z.object({
   moveAfterIngest: z.boolean().default(true),
   /** ''이면 <WorkFolder>/wiki-inbox. */
   inboxDir: z.string().default(''),
-  classification: z.enum(['auto', 'date', 'serial', 'frequency']).default('auto'),
+  /** 분류 카테고리 체계: `A/B` 경로 목록(최대 깊이 3). 보관 폴더 하위 폴더가 된다. */
+  categories: z.array(z.string()).default(DEFAULT_WIKI_CATEGORIES),
+  /** LLM이 기존 부모 아래에 새 카테고리를 만들 수 있게 할지. */
+  allowNewCategories: z.boolean().default(false),
   allowedExtensions: z.array(z.string()).default([
     'pdf', 'docx', 'xlsx', 'xls', 'csv', 'md', 'txt', 'png', 'jpg', 'jpeg',
   ]),

@@ -22,6 +22,11 @@ import {
   shouldProcessFile,
 } from './settings';
 import {
+  buildClassificationSchema,
+  mergeCategories,
+  resolveCategory,
+} from './categories';
+import {
   createWikiJob,
   updateWikiJob,
   getWikiJobsByStatus,
@@ -61,11 +66,13 @@ export interface WikiPipelineStatus {
 
 type StatusListener = (status: WikiPipelineStatus) => void;
 
-const CLASSIFICATION_PROMPT_CHARS = 24_000;
+// 분류는 문서 앞부분만으로 충분하다. 입력을 줄여 지연과 토큰을 아낀다.
+const CLASSIFICATION_PROMPT_CHARS = 6_000;
+// 보관 폴더에서 기존 카테고리로 읽어 들이는 최대 깊이.
+const CATEGORY_SCAN_DEPTH = 3;
 
 const ClassificationSchema = z.object({
-  classification: z.enum(['date', 'serial', 'frequency']),
-  folderName: z.string().min(1).max(120),
+  categoryPath: z.string().max(200).default(''),
   title: z.string().min(1).max(200),
   slug: z.string().min(1).max(80),
   summary: z.string().min(1).max(2000),
@@ -128,6 +135,7 @@ async function classifyContent(
   systemPrompt: string,
   userPrompt: string,
   streamChatFn?: LlmStreamChatFn,
+  jsonSchema?: Record<string, unknown>,
 ): Promise<Classification> {
   const runtime = resolveAgentLlmRuntime(
     {
@@ -144,7 +152,10 @@ async function classifyContent(
     },
     streamChatFn,
   );
-  const run = async (prompt: string): Promise<Classification> => {
+  const run = async (
+    prompt: string,
+    schema?: Record<string, unknown>,
+  ): Promise<Classification> => {
     const raw = await collectChat(fn, {
       baseUrl: runtime.baseUrl,
       apiKey: runtime.apiKey,
@@ -154,20 +165,21 @@ async function classifyContent(
         { role: 'user', content: prompt },
       ],
       temperature: 0.2,
+      ...(schema ? { jsonSchema: schema } : {}),
     });
     return ClassificationSchema.parse(extractJsonObject(raw));
   };
   try {
-    return await run(userPrompt);
+    return await run(userPrompt, jsonSchema);
   } catch {
-    // 1회 재시도 후 날짜순 폴백 (P11-32 명세).
+    // 구조화 출력을 지원하지 않는 서버일 수 있어 재시도는 스키마 없이 프롬프트로만 강제한다.
+    // 그래도 실패하면 날짜순 폴백 (P11-32 명세).
     try {
-      return await run(`${userPrompt}\n\n반드시 위 JSON 스키마로만 답하라. 설명 문장을 붙이지 마라.`);
+      return await run(`${userPrompt}\n\n반드시 위 JSON 형식으로만 답하라. 설명 문장을 붙이지 마라.`);
     } catch {
       const fileName = userPrompt.match(/^파일: (.+?) \(/m)?.[1] ?? 'unfiled';
       return {
-        classification: 'date' as const,
-        folderName: dateFolderName(),
+        categoryPath: '',
         title: fileName,
         slug: `${slugifyWikiTitle(fileName)}-${Date.now().toString(36)}`.slice(0, 80),
         summary: '자동 분류에 실패해 날짜순으로 보관한다.',
@@ -359,6 +371,29 @@ export function configureWikiPipeline(next: WikiPipelineContext): void {
   ctx = next;
 }
 
+/** 보관 폴더의 기존 하위 폴더를 카테고리 후보로 읽는다 (날짜 폴백용 연도 폴더는 제외). */
+async function listExistingCategories(inbox: string): Promise<string[]> {
+  const found: string[] = [];
+  const walk = async (dir: string, prefix: string, depth: number): Promise<void> => {
+    if (depth > CATEGORY_SCAN_DEPTH) return;
+    let entries: Awaited<ReturnType<typeof fcListDir>>;
+    try {
+      entries = await fcListDir(dir);
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      if (entry.kind !== 'dir') continue;
+      if (depth === 1 && /^\d{4}$/.test(entry.name)) continue;
+      const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
+      found.push(rel);
+      await walk(entry.path, rel, depth + 1);
+    }
+  };
+  await walk(inbox, '', 1);
+  return found;
+}
+
 async function processJob(job: WikiJob): Promise<void> {
   if (!ctx) return;
   const settings = ctx.getWikiSettings();
@@ -436,35 +471,55 @@ async function processJob(job: WikiJob): Promise<void> {
     }
   }
 
-  // ② LLM 1회 분류 호출.
-  const rule = settings.classification ?? 'auto';
-  const prompt = [
-    settings.prompt.trim() || DEFAULT_WIKI_PROMPT,
-    '---',
-    `파일: ${baseNameOf(job.sourcePath)} (확장자 .${ext})`,
-    rule === 'auto'
-      ? '위 세 규칙 중 내용에 맞는 하나를 골라라.'
-      : `반드시 '${rule}' 방식으로 분류하라.`,
-    '내용:',
-    content.slice(0, CLASSIFICATION_PROMPT_CHARS),
-    '---',
-    '반드시 JSON만 출력하라: {"classification": "date|serial|frequency", "folderName": "...", "title": "...", "slug": "kebab-case", "summary": "...", "tags": ["..."]}',
-  ].join('\n');
-  const classification = await classifyContent(agent, ctx.ollamaBaseUrl, '위키 분류 도우미', prompt, ctx.streamChatFn);
-  const forcedRule = rule === 'auto' ? classification.classification : rule;
-  const folderName =
-    forcedRule === 'date' && rule !== 'auto' ? dateFolderName() : classification.folderName;
-  const slug = /^[a-z0-9-]+$/.test(classification.slug)
-    ? classification.slug
-    : slugifyWikiTitle(classification.slug || classification.title);
-
-  // ③ (옵션) 이동 + 원본 경로 기록.
+  // ② LLM 1회 분류 호출. 보관 폴더 아래 카테고리 체계(설정 + 기존 폴더)에서 경로를 고른다.
   // inbox는 작업 폴더 기준, 그래도 상대 경로면 워크스페이스를 앞에 둔다.
   const inboxBase = resolveInboxDir(ctx.workFolder ?? ctx.workspaceRoot, settings.inboxDir);
   const inbox = /^[a-zA-Z]:[\\/]|^\\\\|^\//.test(inboxBase)
     ? inboxBase
     : joinPath(ctx.workspaceRoot, inboxBase);
-  // inbox가 상대 경로면 워크스페이스 기준으로 둔다 (위키는 작업 폴더 산하).
+  const knownCategories = mergeCategories(
+    settings.categories,
+    await listExistingCategories(inbox),
+  );
+  const categoryLines =
+    knownCategories.length > 0
+      ? knownCategories.map((c) => `- ${c}`).join('\n')
+      : '(없음)';
+  const prompt = [
+    settings.prompt.trim() || DEFAULT_WIKI_PROMPT,
+    '---',
+    '카테고리 목록 (categoryPath는 반드시 여기서 고른다):',
+    categoryLines,
+    settings.allowNewCategories
+      ? '맞는 카테고리가 없으면 기존 카테고리 아래에 새 하위 카테고리를 제안해도 된다 (깊이 최대 3).'
+      : '목록에 없는 카테고리를 만들지 마라. 애매하면 가장 가까운 것을 고른다.',
+    '---',
+    `파일: ${baseNameOf(job.sourcePath)} (확장자 .${ext})`,
+    '내용:',
+    content.slice(0, CLASSIFICATION_PROMPT_CHARS),
+    '---',
+    '반드시 JSON만 출력하라: {"categoryPath": "A/B", "title": "...", "slug": "kebab-case", "summary": "...", "tags": ["..."]}',
+  ].join('\n');
+  const classification = await classifyContent(
+    agent,
+    ctx.ollamaBaseUrl,
+    '위키 분류 도우미',
+    prompt,
+    ctx.streamChatFn,
+    buildClassificationSchema(knownCategories, settings.allowNewCategories),
+  );
+  // 목록 밖·잘못된 경로는 가까운 상위로 접고, 그것도 없으면 날짜 폴더에 보관한다.
+  const category = resolveCategory(
+    classification.categoryPath,
+    knownCategories,
+    settings.allowNewCategories,
+  );
+  const folderName = category?.path ?? dateFolderName();
+  const slug = /^[a-z0-9-]+$/.test(classification.slug)
+    ? classification.slug
+    : slugifyWikiTitle(classification.slug || classification.title);
+
+  // ③ (옵션) 이동 + 원본 경로 기록.
   let movedPath = job.sourcePath;
   if (settings.moveAfterIngest) {
     const destDir = joinPath(inbox, folderName);

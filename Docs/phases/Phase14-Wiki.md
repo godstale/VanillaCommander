@@ -40,6 +40,7 @@
 - 분류 호출은 1회 유지. 프롬프트에 카테고리 경로 목록 + 문서 앞 ~6k자 → `{categoryPath, isNew, title, summary, tags}`. 새 경로는 허용 + 기존 부모 아래일 때만 채택, 아니면 폴백.
 - 구조화 출력: `ollamaClient`에 `format`(JSON schema), OpenAI 호환 클라이언트에 `response_format`. 카테고리를 enum으로 제한.
 - 이동 위치 = `<inboxDir>/<categoryPath>/`. 폴백 = `YYYY/MM-DD`.
+- 구현 메모(2026-10-04): 분류 후보 = 설정 `categories` ∪ 보관 폴더의 기존 하위 폴더(깊이 3, 연도 4자리 폴더 제외). 응답 경로는 `resolveCategory`가 검증 — 기존 경로 일치 → 허용 시 기존 부모 아래 새 경로 → 가장 가까운 기존 상위 → 날짜 폴백. 구조화 출력 실패(미지원 서버) 시 재시도는 스키마 없이 프롬프트로만 강제. 설정 UI의 카테고리 편집은 우선 줄 단위 텍스트 영역이며 트리 편집기는 P14-06. 기존 저장 설정의 `classification` 값은 zod가 무시한다.
 
 ### P14-04. 위키 저장 구조 개선
 - `wiki/sources/` 평면 유지. frontmatter에 `category`·`tags`·`source_path`·`original_path`·`hash`·`ingested_at`. slug 충돌 시 `-2` 접미. `index.md` 카테고리별 그룹.

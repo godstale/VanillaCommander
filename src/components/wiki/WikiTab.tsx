@@ -7,11 +7,7 @@ import { useSettings } from '@/lib/context/SettingsContext';
 import { useSafeWorkspace } from '@/lib/context/WorkspaceContext';
 import { useAgents } from '@/lib/context/AgentsContext';
 import type { WikiSettings } from '@/lib/db/repositories/settingsRepo';
-import {
-  CLASSIFICATION_RULES,
-  DEFAULT_WIKI_PROMPT,
-  type ClassificationRule,
-} from '@/lib/wiki/settings';
+import { DEFAULT_WIKI_PROMPT } from '@/lib/wiki/settings';
 import {
   listWikiJobs,
   updateWikiJob,
@@ -238,22 +234,35 @@ export function WikiTab() {
                 className="w-full px-3 py-1.5 text-xs rounded-md border border-border bg-background font-mono focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
-            <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-1">
-                {t('wiki.classification')}
-              </label>
-              <select
-                value={form.classification}
-                onChange={(e) => set('classification', e.target.value as ClassificationRule)}
-                className="w-full px-2.5 py-1.5 text-xs rounded-md border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary"
-              >
-                {CLASSIFICATION_RULES.map((rule) => (
-                  <option key={rule.id} value={rule.id}>
-                    {t(`wiki.rule.${rule.id}`)}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label className="flex items-start gap-2 text-xs cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.allowNewCategories}
+                onChange={(e) => set('allowNewCategories', e.target.checked)}
+                className="mt-0.5 accent-primary"
+              />
+              <span>
+                <span className="font-medium block">{t('wiki.allowNewCategories')}</span>
+                <span className="text-muted-foreground">{t('wiki.allowNewCategoriesDesc')}</span>
+              </span>
+            </label>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-muted-foreground mb-1">
+              {t('wiki.categories')}
+            </label>
+            <textarea
+              rows={6}
+              value={form.categories.join('\n')}
+              onChange={(e) =>
+                set(
+                  'categories',
+                  e.target.value.split('\n').map((s) => s.trim()).filter(Boolean),
+                )
+              }
+              className="w-full px-3 py-1.5 text-xs rounded-md border border-border bg-background font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+            <p className="mt-1 text-[11px] text-muted-foreground">{t('wiki.categoriesDesc')}</p>
           </div>
         </section>
 

@@ -95,7 +95,8 @@ function makeSettings(overrides: Partial<WikiSettings> = {}): WikiSettings {
     scanIntervalMin: 10,
     moveAfterIngest: true,
     inboxDir: 'C:/work/wiki-inbox',
-    classification: 'auto',
+    categories: ['문서/업무', '재무/보고서'],
+    allowNewCategories: false,
     allowedExtensions: ['pdf', 'md', 'txt', 'png'],
     maxFileMb: 20,
     excludeGlobs: [],
@@ -189,8 +190,7 @@ describe('wiki pipeline', () => {
       makeSettings(),
       [localAgent],
       stubClassify({
-        classification: 'frequency',
-        folderName: '분기',
+        categoryPath: '재무/보고서',
         title: '분기 보고',
         slug: 'quarterly-report',
         summary: '분기 실적 요약',
@@ -204,14 +204,14 @@ describe('wiki pipeline', () => {
     expect(jobs).toHaveLength(1);
     expect(jobs[0].status).toBe('done');
     expect(jobs[0].title).toBe('분기 보고');
-    expect(jobs[0].folder).toBe('분기');
+    expect(jobs[0].folder).toBe('재무/보고서');
     expect(ingestExecute).toHaveBeenCalledOnce();
     const ingestArgs = ingestExecute.mock.calls[0][1] as { title: string; slug: string };
     expect(ingestArgs.title).toBe('분기 보고');
     expect(ingestArgs.slug).toBe('quarterly-report');
     expect(mockedMove).toHaveBeenCalledWith(
       ['C:/dl/report.md'],
-      expect.stringContaining('분기'),
+      expect.stringContaining('재무/보고서'),
       'rename',
     );
   });
@@ -236,8 +236,7 @@ describe('wiki pipeline', () => {
       makeSettings({ moveAfterIngest: false }),
       [localAgent],
       stubClassify({
-        classification: 'date',
-        folderName: dateFolderName(),
+        categoryPath: '',
         title: 't',
         slug: 't',
         summary: 's',
@@ -281,8 +280,7 @@ describe('wiki pipeline', () => {
       makeSettings({ moveAfterIngest: false, agentId: 'agent-ext' }),
       [localAgent, external],
       stubClassify({
-        classification: 'date',
-        folderName: dateFolderName(),
+        categoryPath: '',
         title: 't',
         slug: 't',
         summary: 's',
@@ -320,8 +318,7 @@ describe('wiki pipeline', () => {
       makeSettings({ moveAfterIngest: false }),
       [localAgent],
       stubClassify({
-        classification: 'date',
-        folderName: dateFolderName(),
+        categoryPath: '',
         title: '첫 문서',
         slug: 'first',
         summary: 's',
@@ -354,8 +351,7 @@ describe('wiki pipeline', () => {
       makeSettings({ moveAfterIngest: false }),
       [localAgent],
       stubClassify({
-        classification: 'date',
-        folderName: dateFolderName(),
+        categoryPath: '',
         title: 'n',
         slug: 'n',
         summary: 's',
@@ -369,5 +365,62 @@ describe('wiki pipeline', () => {
     expect(jobs).toHaveLength(2);
     expect(jobs.find((j) => j.sourcePath === 'C:/dl/new.md')?.status).toBe('done');
     expect(jobs.find((j) => j.sourcePath === 'C:/dl/tool.exe')?.status).toBe('skipped');
+  });
+
+  it('sends categories and a JSON schema, then files under the resolved category', async () => {
+    mockedParse.mockResolvedValue({ text: 'monthly sales report '.repeat(20), truncated: false, method: 'text' });
+    vi.mocked(fcListDir).mockImplementation(async (path: string) => {
+      if (path === 'C:/work/wiki-inbox') {
+        return [
+          { name: '2026', path: 'C:/work/wiki-inbox/2026', kind: 'dir' },
+          { name: '여행', path: 'C:/work/wiki-inbox/여행', kind: 'dir' },
+        ] as never;
+      }
+      return [] as never;
+    });
+    const requests: Array<{ jsonSchema?: { properties: { categoryPath: { enum?: string[] } } }; messages: Array<{ content: string }> }> = [];
+    const fn = (async function* (req: never) {
+      requests.push(req);
+      yield {
+        content: JSON.stringify({
+          categoryPath: '재무/보고서/월간',
+          title: '월간 매출',
+          slug: 'monthly-sales',
+          summary: 's',
+          tags: [],
+        }),
+        done: true,
+      };
+    }) as unknown as LlmStreamChatFn;
+    configure(makeSettings({ moveAfterIngest: false }), [localAgent], fn);
+    await handleWikiFileEvent('C:/dl/sales.md');
+    await flush(15);
+    const userPrompt = requests[0].messages[1].content;
+    expect(userPrompt).toContain('- 재무/보고서');
+    expect(userPrompt).toContain('- 여행');
+    expect(userPrompt).not.toContain('- 2026');
+    expect(requests[0].jsonSchema?.properties.categoryPath.enum).toContain('여행');
+    const jobs = await listWikiJobs(10);
+    // 새 카테고리가 꺼져 있어 '재무/보고서/월간'은 가까운 상위로 접힌다.
+    expect(jobs[0].folder).toBe('재무/보고서');
+  });
+
+  it('creates a new subcategory under an existing parent when allowed', async () => {
+    mockedParse.mockResolvedValue({ text: 'meeting notes '.repeat(20), truncated: false, method: 'text' });
+    configure(
+      makeSettings({ moveAfterIngest: false, allowNewCategories: true }),
+      [localAgent],
+      stubClassify({
+        categoryPath: '문서/업무/회의록',
+        title: '회의',
+        slug: 'meeting',
+        summary: 's',
+        tags: [],
+      }),
+    );
+    await handleWikiFileEvent('C:/dl/meeting.md');
+    await flush(15);
+    const jobs = await listWikiJobs(10);
+    expect(jobs[0].folder).toBe('문서/업무/회의록');
   });
 });
